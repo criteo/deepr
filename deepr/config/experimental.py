@@ -14,7 +14,6 @@ LOGGER = logging.getLogger(__name__)
 
 def to_config(obj):
     """Experimental utility to generate config of objects"""
-    LOGGER.warning("to_config is deepr_experimental, use at your own risk.")
     if isinstance(obj, list):
         return [to_config(item) for item in obj]
     elif isinstance(obj, tuple):
@@ -99,10 +98,19 @@ def replace_values(item, values: Dict[str, Any]):
 
     Parameters
     ----------
-    config : Dict
-        Config dictionary
+    item : Any
+        Config item
     values : Dict[str, Any]
         New values
+
+    Returns
+    -------
+    item whose keys in values have a new value.
+
+    Raises
+    ------
+    ValueError
+        If one key is found whose value is a tuple, list or dict.
     """
     if isinstance(item, list):
         return [replace_values(it, values) for it in item]
@@ -122,3 +130,42 @@ def replace_values(item, values: Dict[str, Any]):
         return items
     else:
         return item
+
+
+def find_values(item, keys: List[str]) -> Dict:
+    """Find values for keys in item, if present.
+
+    Parameters
+    ----------
+    item : Any
+        Any item
+    keys : List[str]
+        Keys whose value to retrieve in item
+
+    Returns
+    -------
+    Dict
+        Mapping of key -> value for keys found in item.
+
+    Raises
+    ------
+    ValueError
+        If one key is found whose value is a tuple, list or dict.
+    """
+    if isinstance(item, (list, tuple)):
+        values = {}
+        for it in item:
+            values.update(find_values(it, keys))
+        return values
+    elif isinstance(item, dict):
+        values = dict()
+        for key, value in item.items():
+            if key in keys:
+                if isinstance(value, (list, tuple, dict)):
+                    raise ValueError(f"Cannot find value for '{key}'. Type must be literal but got {type(value)}")
+                values[key] = value
+            else:
+                values.update(find_values(value, keys))
+        return values
+    else:
+        return {}

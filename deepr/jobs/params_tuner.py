@@ -9,12 +9,11 @@ import itertools
 import time
 
 import numpy as np
-from mlflow.utils import env
-from mlflow.tracking import fluent
 
 from deepr.config.base import parse_config, from_config
 from deepr.config.macros import assert_no_macros
 from deepr.jobs import base
+from deepr.utils import mlflow
 
 
 LOGGER = logging.getLogger(__name__)
@@ -102,16 +101,9 @@ class ParamsTuner(base.Job):
             if not isinstance(job, base.Job):
                 raise TypeError(f"Expected type Job but got {type(job)}")
             job.run()
-            _mlflow_clear_run()
+            mlflow.clear_run()
 
             # New parameters based on time need to be different
             if idx + 1 < len(sampled):
                 LOGGER.info("Sleeping 2 seconds before next experiment\n")
                 time.sleep(2)
-
-
-def _mlflow_clear_run():
-    # pylint: disable=protected-access
-    if len(fluent._active_run_stack) > 0:
-        env.unset_variable("MLFLOW_RUN_ID")
-        fluent._active_run_stack.pop()

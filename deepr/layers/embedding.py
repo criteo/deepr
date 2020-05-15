@@ -5,6 +5,7 @@ from typing import Tuple
 import tensorflow as tf
 
 from deepr.layers import base
+from deepr.layers.core import Dense
 
 
 class Embedding(base.Layer):
@@ -45,3 +46,12 @@ class Embedding(base.Layer):
             return tf.nn.embedding_lookup(
                 embeddings_var, tf.maximum(tensors, 0), partition_strategy=self.partition_strategy
             )
+
+
+@base.layer(n_in=2, n_out=1)
+def CombineEmbeddings(tensors, mode, output_dim, project=True):
+    """Combine Embeddings Layers"""
+    embedding = tf.concat(tensors, axis=-1)
+    if project:
+        embedding = Dense(units=output_dim)(embedding, mode=mode)
+    return embedding

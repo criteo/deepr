@@ -126,11 +126,11 @@ def macros_eval_order(macros: Dict = None) -> List[str]:
     # Resolve dependencies between macros
     deps = dict()
     for name, params in macros.items():
-        parents = []
+        parents = set()
         for param in params.values():
             if ismacro(param):
                 macro, _ = get_macro_and_param(param)
-                parents.append(macro)
+                parents.add(macro)
         deps[name] = parents
 
     # Resolve evaluation order using dependencies
@@ -140,7 +140,8 @@ def macros_eval_order(macros: Dict = None) -> List[str]:
         if macro in order:
             return
         if macro in stack:
-            raise ValueError(f"Unable to resolve order of macro evaluation (cycle: {stack}, dependencies: {deps})")
+            cycle = " -> ".join(list(stack) + [macro])
+            raise ValueError(f"Unable to resolve order of macro evaluation (cycle: {cycle}, dependencies: {deps})")
         for parent in deps[macro]:
             _add(parent, (*stack, macro))
         order.append(macro)

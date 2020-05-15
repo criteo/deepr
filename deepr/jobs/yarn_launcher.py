@@ -1,7 +1,6 @@
 """Yarn Launcher Config Interface and Job"""
 
 from abc import ABC
-import atexit
 import json
 from dataclasses import dataclass
 import logging
@@ -9,12 +8,12 @@ import tempfile
 from typing import Dict, Optional, List
 
 import skein
-from mlflow import end_run
 import getpass
 from cluster_pack.skein import skein_config_builder
 
 from deepr.jobs import base
 from deepr.config.base import from_config
+from deepr.utils import mlflow
 
 
 EDITABLE_PACKAGES_INDEX = "editable_packages_index"
@@ -47,6 +46,7 @@ class YarnLauncher(base.Job):
 
     job: Dict
     config: YarnLauncherConfig
+    run_on_yarn: bool = True
 
     def __post_init__(self):
         job = from_config(self.job)
@@ -54,32 +54,34 @@ class YarnLauncher(base.Job):
             raise TypeError(f"Expected type {base.Job} but got {job}")
 
     def run(self):
-        # Dump job and base as local json files for yarn_launcher
-        job_name = f"job-{self.config.name}.json"
-        with open(job_name, "w") as file:
-            json.dump(self.job, file, indent=4)
+        if self.run_on_yarn:
+            # Dump job and base as local json files for yarn_launcher
+            job_name = f"job-{self.config.name}.json"
+            with open(job_name, "w") as file:
+                json.dump(self.job, file, indent=4)
 
-        # Remove auto-termination of active MLFlow runs because they
-        # are forwarded on yarn
-        atexit.unregister(end_run)
-
-        # Launch job on yarn
-        pex_path = self.config.upload_env()
-        with skein.Client() as skein_client:
-            LOGGER.info(f"Submitting job {self.config.name}")
-            app_id = submit(
-                skein_client=skein_client,
-                module_name="deepr.cli.main",
-                archive_hdfs=pex_path,
-                additional_files=[job_name],
-                args=["from_config_file", job_name, "-", "run"],
-                name=self.config.name,
-                num_cores=self.config.num_cores,
-                memory=self.config.memory,
-                env_vars=self.config.env_vars,
-            )
-            report = skein_client.application_report(app_id)
-            LOGGER.info(f"TRACKING_URL: {report.tracking_url}")
+            # Launch job on yarn
+            pex_path = self.config.upload_env()
+            with skein.Client() as skein_client:
+                LOGGER.info(f"Submitting job {self.config.name}")
+                app_id = submit(
+                    skein_client=skein_client,
+                    module_name="deepr.cli.main",
+                    archive_hdfs=pex_path,
+                    additional_files=[job_name],
+                    args=["from_config", job_name, "-", "run"],
+                    name=self.config.name,
+                    num_cores=self.config.num_cores,
+                    memory=self.config.memory,
+                    env_vars=self.config.env_vars,
+                )
+                report = skein_client.application_report(app_id)
+                LOGGER.info(f"TRACKING_URL: {report.tracking_url}")
+            mlflow.clear_run()
+        else:
+            LOGGER.info("Not running on yarn.")
+            job = from_config(self.job)
+            job.run()
 
 
 def submit(
@@ -103,6 +105,7 @@ def submit(
     max_restarts: int = 0,
 ) -> str:
     """submit"""
+    # TODO: cleanup Criteo specific paths
     if hadoop_file_systems is None:
         hadoop_file_systems = ["viewfs://root", "viewfs://prod-am6", "viewfs://prod-pa4", "viewfs://preprod-pa4"]
 

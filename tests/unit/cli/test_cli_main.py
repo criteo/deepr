@@ -1,4 +1,4 @@
-# pylint: disable=redefined-outer-name
+# pylint: disable=redefined-outer-name,missing-docstring
 """Tests for config.base"""
 
 import subprocess
@@ -23,8 +23,8 @@ def path_config(tmpdir_factory):
     return path
 
 
-def test_cli_from_config_file(path_config):
-    subprocess.check_call(["deepr", "from_config_file", path_config])
+def test_cli_from_config_and_macros(path_config):
+    subprocess.check_call(["deepr", "from_config_and_macros", path_config])
 
 
 def test_cli_run(path_config):

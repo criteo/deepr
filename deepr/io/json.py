@@ -24,7 +24,21 @@ def read_json(path: Union[str, Path]) -> Dict:
     return data
 
 
+def load_json(data: str):
+    """Load json from a json file or json string"""
+    return json.loads(data) if is_json(data) else read_json(data)
+
+
 def write_json(data: Dict, path: Union[str, Path]):
     """Write data to path"""
     with Path(path).open("w") as file:
         json.dump(data, file, indent=4)
+
+
+def is_json(data: str) -> bool:
+    """Return True if data is a valid json string else False"""
+    try:
+        json.loads(data)
+    except ValueError:
+        return False
+    return True

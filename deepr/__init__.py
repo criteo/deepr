@@ -1,4 +1,4 @@
-# pylint: disable=unused-import,missing-docstring
+# pylint: disable=unused-import,missing-docstring,wrong-import-position
 
 import tensorflow as tf
 

@@ -3,14 +3,10 @@
 from dataclasses import dataclass
 from typing import Dict, Optional, Callable, Tuple, Any
 import logging
-import json
-import tempfile
-
-import mlflow
 
 from deepr.config.base import fill_macros, KEY_TYPE
 from deepr.jobs import base
-from deepr.io.path import Path
+from deepr.utils import mlflow
 
 
 LOGGER = logging.getLogger(__name__)
@@ -39,27 +35,19 @@ class MLFlowSaveConfigs(base.Job):
             config_no_macros = fill_macros(config, macros_eval)
 
             # Save configs and macros
-            mlflow_log_dict(macros, "macros.json")
-            mlflow_log_dict(macros_eval, "macros_eval.json")
-            mlflow_log_dict(macros_static, "macros_static.json")
-            mlflow_log_dict(macros_no_static, "macros_no_static.json")
-            mlflow_log_dict(config, "config.json")
-            mlflow_log_dict(config_no_static, "config_no_static.json")
-            mlflow_log_dict(config_no_macros, "config_no_macros.json")
+            mlflow.log_dict(macros, "macros.json")
+            mlflow.log_dict(macros_eval, "macros_eval.json")
+            mlflow.log_dict(macros_static, "macros_static.json")
+            mlflow.log_dict(macros_no_static, "macros_no_static.json")
+            mlflow.log_dict(config, "config.json")
+            mlflow.log_dict(config_no_static, "config_no_static.json")
+            mlflow.log_dict(config_no_macros, "config_no_macros.json")
 
             # Log config and macros to MLFlow
             formatter = self.formatter if self.formatter else MLFlowFormatter()
             parameters = list(formatter({**macros_eval, **config_no_macros}).items())
             for idx in range(0, len(parameters), 100):
                 mlflow.log_params(dict(parameters[idx : idx + 100]))
-
-
-def mlflow_log_dict(data: Dict, filename: str):
-    """Log dictionary to MLFlow as an artifact under filename."""
-    path = Path(tempfile.mkdtemp(), filename)
-    with path.open("w") as file:
-        json.dump(data, file, indent=4)
-    mlflow.log_artifact(local_path=str(path), artifact_path="")
 
 
 class MLFlowFormatter:

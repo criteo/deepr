@@ -3,7 +3,7 @@
 import logging
 from typing import Dict, Any
 
-from deepr.config.macros import fill_macros, assert_no_macros, macros_eval_order
+from deepr.config.macros import fill_macros, find_macro_params, assert_no_macros, macros_eval_order
 from deepr.config.references import fill_references, default_references
 
 
@@ -62,7 +62,16 @@ def parse_config(config: Dict, macros: Dict = None) -> Dict:
     config_no_macro = fill_macros(config, macros_eval)
     assert_no_macros(config_no_macro)
     references = default_references(config=config, macros=macros, macros_eval=macros_eval)
-    return fill_references(config_no_macro, references)
+    parsed = fill_references(config_no_macro, references)
+
+    # Look for macro params that were not used
+    if macros_eval is not None:
+        for macro, params in macros_eval.items():
+            used = find_macro_params({"config": config, "macros": macros}, macro)
+            for param in set(params) - set(used):
+                LOGGER.warning(f"- MACRO PARAM NOT USED: macro = '{macro}', param = '{param}'")
+
+    return parsed
 
 
 def from_config(item: Any) -> Any:

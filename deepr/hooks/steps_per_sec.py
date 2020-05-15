@@ -4,8 +4,9 @@ import logging
 from typing import Dict
 
 import tensorflow as tf
-import mlflow
 import graphyte
+
+from deepr.utils import mlflow
 
 
 LOGGER = logging.getLogger(__name__)

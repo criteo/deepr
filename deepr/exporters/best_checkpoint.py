@@ -6,11 +6,11 @@ import re
 import logging
 from typing import Dict, Union
 
-import mlflow
 import tensorflow as tf
 
 from deepr.exporters import base
 from deepr.io.path import Path
+from deepr.utils import mlflow
 
 
 LOGGER = logging.getLogger(__name__)

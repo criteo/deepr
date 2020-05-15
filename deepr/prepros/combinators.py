@@ -115,7 +115,7 @@ class _FusedMap(Prepro):
     def apply(self, dataset: tf.data.Dataset, mode: str = None):
         """Apply preprocessors as one map operation"""
         # Filter preprocessors for this mode
-        active_prepros = []
+        active_prepros: List[core.Map] = []
         for prepro in self.preprocessors:
             if mode is not None and prepro.modes is not None and mode not in prepro.modes:
                 LOGGER.info(f"Not applying {prepro} (mode={mode})")
@@ -150,7 +150,7 @@ class _FusedFilter(Prepro):
     def apply(self, dataset: tf.data.Dataset, mode: str = None):
         """Apply preprocessors as one filter operation"""
         # Filter preprocessors for this mode
-        active_prepros = []
+        active_prepros: List[core.Filter] = []
         for prepro in self.preprocessors:
             if mode is not None and prepro.modes is not None and mode not in prepro.modes:
                 LOGGER.info(f"Not applying {prepro} (mode={mode})")

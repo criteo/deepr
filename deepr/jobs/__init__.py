@@ -3,6 +3,7 @@
 from deepr.jobs.base import Job
 from deepr.jobs.cleanup_checkpoints import CleanupCheckpoints
 from deepr.jobs.combinators import Pipeline
+from deepr.jobs.copy_dir import CopyDir
 from deepr.jobs.log_metric import LogMetric
 from deepr.jobs.mlflow_save_configs import MLFlowFormatter, MLFlowSaveConfigs
 from deepr.jobs.mlflow_save_info import MLFlowSaveInfo

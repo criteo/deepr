@@ -54,6 +54,7 @@ class YarnTrainer(base.Job):
 
     trainer: Dict
     config: YarnTrainerConfig
+    train_on_yarn: bool = True
 
     def __post_init__(self):
         trainer = from_config(self.trainer)
@@ -61,33 +62,38 @@ class YarnTrainer(base.Job):
             raise TypeError(f"Expected job of type {Trainer} but got {type(trainer)}")
 
     def run(self):
-        # Upload environment(s) to HDFS (CPU and / or GPU environments)
-        pyenv_zip_path = {NodeLabel.CPU: self.config.upload_cpu_env()}
-        if self.config.tf_yarn == "gpu":
-            pyenv_zip_path[NodeLabel.GPU] = self.config.upload_gpu_env()
+        if self.train_on_yarn:
+            # Upload environment(s) to HDFS (CPU and / or GPU environments)
+            pyenv_zip_path = {NodeLabel.CPU: self.config.upload_cpu_env()}
+            if self.config.tf_yarn == "gpu":
+                pyenv_zip_path[NodeLabel.GPU] = self.config.upload_gpu_env()
 
-        def _experiment_fn():
-            # Remove auto-termination of active MLFlow runs from inside
-            # the chief / evaluator
-            atexit.unregister(end_run)
-            return from_config(self.trainer).create_experiment()
+            def _experiment_fn():
+                # Remove auto-termination of active MLFlow runs from inside
+                # the chief / evaluator
+                atexit.unregister(end_run)
+                return from_config(self.trainer).create_experiment()
 
-        run_on_yarn(
-            pyenv_zip_path=pyenv_zip_path,
-            experiment_fn=_experiment_fn,
-            task_specs=self.config.task_specs,
-            files=get_editable_requirements(),
-            env=self.config.env_vars,
-            queue=self.config.queue,
-            pre_script_hook=self.config.pre_script_hook,
-            acls=skein.model.ACLs(enable=True, ui_users=["*"], view_users=["*"]),
-            nb_retries=self.config.nb_retries,
-            name=self.config.name,
-        )
+            run_on_yarn(
+                pyenv_zip_path=pyenv_zip_path,
+                experiment_fn=_experiment_fn,
+                task_specs=self.config.task_specs,
+                files=get_editable_requirements(),
+                env=self.config.env_vars,
+                queue=self.config.queue,
+                pre_script_hook=self.config.pre_script_hook,
+                acls=skein.model.ACLs(enable=True, ui_users=["*"], view_users=["*"]),
+                nb_retries=self.config.nb_retries,
+                name=self.config.name,
+            )
 
-        # Run exporters and final evaluation
-        trainer = from_config(self.trainer)
-        experiment = trainer.create_experiment()
-        for exporter in trainer.exporters:
-            exporter(experiment.estimator)
-        trainer.run_final_evaluation()
+            # Run exporters and final evaluation
+            trainer = from_config(self.trainer)
+            experiment = trainer.create_experiment()
+            for exporter in trainer.exporters:
+                exporter(experiment.estimator)
+            trainer.run_final_evaluation()
+        else:
+            LOGGER.info("Not training on yarn.")
+            trainer = from_config(self.trainer)
+            trainer.run()

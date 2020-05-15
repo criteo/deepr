@@ -14,6 +14,14 @@ Preprocessing, layers, metrics and learning jobs
 
 .. toctree::
    :maxdepth: 2
+   :caption: Developper documentation
+
+   README
+   CONTRIBUTING
+   CHANGELOG
+
+.. toctree::
+   :maxdepth: 2
    :caption: API documentation
 
    API/CORE_API

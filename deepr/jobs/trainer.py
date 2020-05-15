@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass, field
 import functools
-from typing import Callable, Dict, List, Tuple, Any, Iterable
+from typing import Callable, Dict, List, Tuple, Iterable
 import logging
 
 import tensorflow as tf

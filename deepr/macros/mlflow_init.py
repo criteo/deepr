@@ -3,7 +3,7 @@
 import logging
 import os
 
-import mlflow
+from deepr.utils import mlflow
 
 
 LOGGER = logging.getLogger(__name__)
@@ -33,10 +33,7 @@ class MLFlowInit(dict):
 
             # Start MLFlow run
             mlflow.set_tracking_uri(tracking_uri)
-            if mlflow.tracking.client.MlflowClient().get_experiment_by_name(experiment_name) is None:
-                mlflow.create_experiment(name=experiment_name, artifact_location=artifact_location)
-            else:
-                mlflow.set_experiment(experiment_name)
+            mlflow.set_experiment(experiment_name, artifact_location)
             run = mlflow.start_run(run_name=run_name)
 
             # Define new parameters

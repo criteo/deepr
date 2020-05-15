@@ -4,9 +4,9 @@ from dataclasses import dataclass
 import logging
 from typing import Any
 
-import mlflow
-
 from deepr.jobs import base
+
+from deepr.utils import mlflow
 
 
 LOGGER = logging.getLogger(__name__)

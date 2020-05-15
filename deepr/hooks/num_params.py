@@ -4,7 +4,8 @@ from typing import Tuple, List
 import logging
 
 import tensorflow as tf
-import mlflow
+
+from deepr.utils import mlflow
 
 
 LOGGER = logging.getLogger(__name__)

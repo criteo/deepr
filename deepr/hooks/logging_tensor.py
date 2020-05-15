@@ -5,10 +5,10 @@ import logging
 import psutil
 
 import tensorflow as tf
-import mlflow
 import graphyte
 
 from deepr.hooks.base import TensorHookFactory
+from deepr.utils import mlflow
 
 
 LOGGER = logging.getLogger(__name__)
