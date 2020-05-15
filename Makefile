@@ -1,5 +1,5 @@
 venv-lint-test: ## [Continuous integration] Install in venv and run lint and test
-	python3.6 -m venv .env && source .env/bin/activate && make install install-dev lint test && rm -rf .env
+	python3.6 -m venv .env && . .env/bin/activate && make install install-dev lint test && rm -rf .env
 
 install: ## [Local development] Upgrade pip, install requirements, install package.
 	python -m pip install -U pip setuptools

@@ -13,7 +13,7 @@ _GPU_SUFFIX = "_gpu" if "BUILD_GPU" in os.environ else ""
 
 
 _INSTALL_REQUIRES = [
-    f"tf-yarn{_GPU_SUFFIX}==0.4.19+criteo",
+    f"tf-yarn{_GPU_SUFFIX}==0.4.15",
     f"tensorflow{_GPU_SUFFIX}==1.15.2",
     "cluster-pack>=0.0.7",
     "fire>=0.3",
