@@ -1,9 +1,9 @@
-deepR
+DeepR
 =====
 
 DeepR is a library for Deep Learning on top of Tensorflow 1.x that focuses on production capabilities. It makes it easy to define pipelines (via the ``Job`` abstraction), preprocess data (via the ``Prepro`` abstraction), design models (via the ``Layer`` abstraction) and train them either locally or on a Yarn cluster. It also integrates nicely with MLFlow and Graphite, allowing for production ready logging capabilities.
 
-It can be seen as a collection of generic tools and abstractions to be extended for more specific use cases. See the `Use DeepR` section for more information.
+It can be seen as a collection of generic tools and abstractions to be extended for more specific use cases. See the ``Use DeepR`` section for more information.
 
 Submitting jobs and defining flexible pipelines is made possible thanks to a config system based off simple dictionaries and import strings. It is similar to `Thinc config system <https://thinc.ai/docs>`_ or `gin config <https://github.com/google/gin-config>`_ in a lot of ways.
 
@@ -11,7 +11,7 @@ Submitting jobs and defining flexible pipelines is made possible thanks to a con
 Why a Deep Learning Library based on TF1.x
 ------------------------------------------
 
-Tensorflow 1.x provides great production oriented capabilities, centered around the `tf.Estimator` API. It makes it possible to deploy models using a ``protobuf`` with no ``python`` code, and optimize computational graphs with XLA compilation.
+Tensorflow 1.x provides great production oriented capabilities, centered around the ``tf.Estimator`` API. It makes it possible to deploy models using a ``protobuf`` with no ``python`` code, and optimize computational graphs with XLA compilation.
 
 Although ``DeepR`` comes with a ``Layer`` interface (most similar to `google TRAX <https://github.com/google/trax>`_ and very close to most modern frameworks) that makes it easy to define models using a functional programming approach, most of its capabilities are orthogonal to it. Most of the building blocks expect generic ``python`` types (for example, a ``Layer`` is merely a function ``fn(tensors, mode)``).
 
@@ -36,14 +36,14 @@ Installation
 Prerequisites
 ~~~~~~~~~~~~~
 
-Make sure you use python >= 3.6 and an up-to-date version of ``pip`` and ``setuptools``
+Make sure you use ``python>=3.6`` and an up-to-date version of ``pip`` and ``setuptools``
 
 .. code-block::
 
     python --version
     pip install -U pip setuptools
 
-It is recommended to install `deepr` in a new virtual environment. For example
+It is recommended to install ``deepr`` in a new virtual environment. For example
 
 .. code-block::
 
@@ -56,7 +56,7 @@ It is recommended to install `deepr` in a new virtual environment. For example
 Using Pip
 ~~~~~~~~~
 
-If installing using pip and your own ``requirements.txt`` file, be aware that ``tensorflow`` is listed in ``extras_require`` in the ``setup.py``, which means that ``pip install deepr`` WON'T INSTALL Tensorflow. This is because the Tensorflow requirement is different depending on the platform (GPU or CPU-only).
+If installing using pip and your own ``requirements.txt`` file, be aware that ``Tensorflow`` is listed in ``extras_require`` in the ``setup.py``, which means that ``pip install deepr`` WON'T INSTALL Tensorflow. This is because the Tensorflow requirement is different depending on the platform (GPU or CPU-only).
 
 You can specify which extras to use using the ``[cpu]`` or ``[gpu]`` argument like in the following examples
 
@@ -79,7 +79,7 @@ Or alternatively, pre-install Tensorflow separately like so
 From Source
 ~~~~~~~~~~~
 
-First, clone the `deepr` repo on your local machine with
+First, clone the ``deepr`` repo on your local machine with
 
 .. code-block::
 
@@ -132,7 +132,7 @@ To run ``mypy``, ``pylint`` and ``black --check``:
 
     make lint
 
-To auto-format the code using `black`
+To auto-format the code using ``black``
 
 .. code-block::
 
