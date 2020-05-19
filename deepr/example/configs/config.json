@@ -1,0 +1,58 @@
+{
+    "config": {
+        "type": "deepr.jobs.YarnLauncherConfig"
+    },
+    "job": {
+        "eval": "skip",
+        "jobs": [
+            {
+                "num_examples": 1000,
+                "path_dataset": "$paths:path_dataset",
+                "type": "deepr.example.jobs.BuildDataset"
+            },
+            {
+                "config": {
+                    "type": "deepr.jobs.YarnTrainerConfig"
+                },
+                "trainer": {
+                    "eval": "skip",
+                    "eval_input_fn": {
+                        "num_parallel_calls": 8,
+                        "num_parallel_reads": 8,
+                        "path": "$paths:path_dataset",
+                        "shuffle": true,
+                        "type": "deepr.readers.TFRecordReader"
+                    },
+                    "loss_fn": {
+                        "type": "deepr.example.layers.SquaredL2"
+                    },
+                    "optimizer_fn": {
+                        "learning_rate": "$params:learning_rate",
+                        "optimizer": "Adam",
+                        "type": "deepr.optimizers.TensorflowOptimizer"
+                    },
+                    "path_model": "$paths:path_model",
+                    "pred_fn": {
+                        "type": "deepr.example.layers.Multiply"
+                    },
+                    "prepro_fn": {
+                        "batch_size": "$params:batch_size",
+                        "repeat_size": 10,
+                        "type": "deepr.example.prepros.DefaultPrepro"
+                    },
+                    "train_input_fn": {
+                        "num_parallel_calls": 8,
+                        "num_parallel_reads": 8,
+                        "path": "$paths:path_dataset",
+                        "shuffle": true,
+                        "type": "deepr.readers.TFRecordReader"
+                    },
+                    "type": "deepr.jobs.Trainer"
+                },
+                "type": "deepr.jobs.YarnTrainer"
+            }
+        ],
+        "type": "deepr.jobs.Pipeline"
+    },
+    "type": "deepr.jobs.YarnLauncher"
+}

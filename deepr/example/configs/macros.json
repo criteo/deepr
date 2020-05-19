@@ -1,0 +1,11 @@
+{
+    "paths": {
+        "type": "deepr.example.macros.Paths",
+        "path_model": null,
+        "path_dataset": null
+    },
+    "params": {
+        "learning_rate": 0.01,
+        "batch_size": 16
+    }
+}
