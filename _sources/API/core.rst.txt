@@ -1,8 +1,5 @@
-Core API
-========
-
-The core API is independent from criteo and from reco.
-It contains the basic building blocks of deepr-python and can be reused for anything.
+DeepR
+=====
 
 .. _config_module:
 Config

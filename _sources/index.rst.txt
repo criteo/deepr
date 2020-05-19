@@ -1,4 +1,4 @@
-deepr reference documentation
+DeepR reference documentation
 ====================================
 
 Preprocessing, layers, metrics and learning jobs
@@ -24,7 +24,7 @@ Preprocessing, layers, metrics and learning jobs
    :maxdepth: 2
    :caption: API documentation
 
-   API/CORE_API
+   API/core
    _source/modules
 
 

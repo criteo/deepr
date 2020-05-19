@@ -100,7 +100,7 @@
 </ul>
 <p class="caption"><span class="caption-text">API documentation</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../API/CORE_API.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/core.html">DeepR</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../_source/modules.html">deepr</a></li>
 </ul>
 
@@ -689,8 +689,8 @@ INFO:deepr.jobs.params_tuner:Sampled 5 parameters from a total of 40
 </pre></div></div>
 </div>
 <p>and use the sampler with our config and macros to launch hyper params tuning with</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -698,48 +698,6 @@ INFO:deepr.jobs.params_tuner:Sampled 5 parameters from a total of 40
 tuner.run()
 </pre></div>
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-INFO:deepr.jobs.params_tuner:Sampling with no replacement (parameter grid only has lists of values)
-INFO:deepr.jobs.params_tuner:Sampled 5 parameters from a total of 40
-INFO:deepr.jobs.params_tuner:Launching job with params: {&#39;batch_size&#39;: 64, &#39;learning_rate&#39;: 0.05994842503189409}
-WARNING:deepr.config.base:- MACRO PARAM NOT USED: macro = &#39;paths&#39;, param = &#39;path_dataset&#39;
-INFO:deepr.jobs.yarn_config:Uploading env to viewfs://root/user/deepr/dev/example/envs/cpu/yarn-launcher-2020-05-18-16-40-24.pex
-INFO:deepr.jobs.yarn_launcher:Submitting job yarn-launcher-2020-05-18-16-40-24
-INFO:deepr.jobs.yarn_launcher:TRACKING_URL: http://48-df-37-23-94-70.am6.hpc.criteo.prod:8088/proxy/application_1589799129448_25549/
-INFO:deepr.jobs.params_tuner:Sleeping 2 seconds before next experiment
-
-INFO:deepr.jobs.params_tuner:Launching job with params: {&#39;batch_size&#39;: 32, &#39;learning_rate&#39;: 0.05994842503189409}
-WARNING:deepr.config.base:- MACRO PARAM NOT USED: macro = &#39;paths&#39;, param = &#39;path_dataset&#39;
-INFO:deepr.jobs.yarn_config:Uploading env to viewfs://root/user/deepr/dev/example/envs/cpu/yarn-launcher-2020-05-18-16-40-24.pex
-INFO:deepr.jobs.yarn_launcher:Submitting job yarn-launcher-2020-05-18-16-40-24
-INFO:deepr.jobs.yarn_launcher:TRACKING_URL: http://48-df-37-23-94-70.am6.hpc.criteo.prod:8088/proxy/application_1589799129448_25550/
-INFO:deepr.jobs.params_tuner:Sleeping 2 seconds before next experiment
-
-INFO:deepr.jobs.params_tuner:Launching job with params: {&#39;batch_size&#39;: 16, &#39;learning_rate&#39;: 0.007742636826811269}
-WARNING:deepr.config.base:- MACRO PARAM NOT USED: macro = &#39;paths&#39;, param = &#39;path_dataset&#39;
-INFO:deepr.jobs.yarn_config:Uploading env to viewfs://root/user/deepr/dev/example/envs/cpu/yarn-launcher-2020-05-18-16-40-24.pex
-INFO:deepr.jobs.yarn_launcher:Submitting job yarn-launcher-2020-05-18-16-40-24
-INFO:deepr.jobs.yarn_launcher:TRACKING_URL: http://48-df-37-23-94-70.am6.hpc.criteo.prod:8088/proxy/application_1589799129448_25559/
-INFO:deepr.jobs.params_tuner:Sleeping 2 seconds before next experiment
-
-INFO:deepr.jobs.params_tuner:Launching job with params: {&#39;batch_size&#39;: 8, &#39;learning_rate&#39;: 0.03593813663804626}
-WARNING:deepr.config.base:- MACRO PARAM NOT USED: macro = &#39;paths&#39;, param = &#39;path_dataset&#39;
-INFO:deepr.jobs.yarn_config:Uploading env to viewfs://root/user/deepr/dev/example/envs/cpu/yarn-launcher-2020-05-18-16-40-24.pex
-INFO:deepr.jobs.yarn_launcher:Submitting job yarn-launcher-2020-05-18-16-40-24
-INFO:deepr.jobs.yarn_launcher:TRACKING_URL: http://48-df-37-23-94-70.am6.hpc.criteo.prod:8088/proxy/application_1589799129448_25581/
-INFO:deepr.jobs.params_tuner:Sleeping 2 seconds before next experiment
-
-INFO:deepr.jobs.params_tuner:Launching job with params: {&#39;batch_size&#39;: 32, &#39;learning_rate&#39;: 0.001}
-WARNING:deepr.config.base:- MACRO PARAM NOT USED: macro = &#39;paths&#39;, param = &#39;path_dataset&#39;
-INFO:deepr.jobs.yarn_config:Uploading env to viewfs://root/user/deepr/dev/example/envs/cpu/yarn-launcher-2020-05-18-16-40-24.pex
-INFO:deepr.jobs.yarn_launcher:Submitting job yarn-launcher-2020-05-18-16-40-24
-INFO:deepr.jobs.yarn_launcher:TRACKING_URL: http://48-df-37-23-94-70.am6.hpc.criteo.prod:8088/proxy/application_1589799129448_25587/
-</pre></div></div>
 </div>
 </div>
 </div>
