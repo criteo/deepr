@@ -33,6 +33,59 @@ Have a look at the submodule `example <../deepr/example>`_ of `deepr` that illus
 Installation
 ============
 
+Prerequisites
+~~~~~~~~~~~~~
+
+Make sure you use python >= 3.6 and an up-to-date version of `pip` and `setuptools`
+
+.. code-block::
+
+    python --version
+    pip install -U pip setuptools
+
+It is recommended to install `deepr` in a new virtual environment. For example
+
+.. code-block::
+
+    python -m venv deepr
+    source deepr/bin/activate
+    pip install -U pip setuptools
+    pip install deepr[cpu]
+
+
+Using Pip
+~~~~~~~~~
+
+If installing using pip and your own `requirements.txt` file, be aware that `tensorflow` is listed in `extras_require` in the `setup.py`, which means that `pip install deepr` WON'T INSTALL Tensorflow. This is because the Tensorflow requirement is different depending on the platform (GPU or CPU-only).
+
+You can specify which extras to use using the `[cpu]` or `[gpu]` argument like in the following examples
+
+.. code-block::
+
+    pip install deepr[cpu]
+    pip install deepr[gpu]
+    pip install -e ".[cpu]"
+    pip install -e ".[gpu]"
+
+Or alternatively, pre-install Tensorflow separately like so
+
+.. code-block::
+
+    pip install tensorflow==1.15.2
+    pip install deepr
+
+
+
+From Source
+~~~~~~~~~~~
+
+First, clone the `deepr` repo on your local machine with
+
+.. code-block::
+
+    git clone https://github.com/criteo/deepr.git
+    cd deepr
+
 To install from source in editable mode, run
 
 .. code-block::
@@ -51,7 +104,6 @@ To install development tools and test requirements, run
 .. code-block::
 
     make install-dev
-
 
 Test
 ====

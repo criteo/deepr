@@ -93,7 +93,12 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">deepR</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#why-a-deep-learning-library-based-on-tf1-x">Why a Deep Learning Library based on TF1.x</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#use-deepr">Use DeepR</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-pip">Using Pip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#from-source">From Source</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#test">Test</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lint">Lint</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#command-line-tools">Command Line Tools</a></li>
@@ -216,6 +221,44 @@
 </div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
+<p>Make sure you use python &gt;= 3.6 and an up-to-date version of <cite>pip</cite> and <cite>setuptools</cite></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">--</span><span class="n">version</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">pip</span> <span class="n">setuptools</span>
+</pre></div>
+</div>
+<p>It is recommended to install <cite>deepr</cite> in a new virtual environment. For example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="n">deepr</span>
+<span class="n">source</span> <span class="n">deepr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">pip</span> <span class="n">setuptools</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">deepr</span><span class="p">[</span><span class="n">cpu</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-pip">
+<h3>Using Pip<a class="headerlink" href="#using-pip" title="Permalink to this headline">¶</a></h3>
+<p>If installing using pip and your own <cite>requirements.txt</cite> file, be aware that <cite>tensorflow</cite> is listed in <cite>extras_require</cite> in the <cite>setup.py</cite>, which means that <cite>pip install deepr</cite> WON’T INSTALL Tensorflow. This is because the Tensorflow requirement is different depending on the platform (GPU or CPU-only).</p>
+<p>You can specify which extras to use using the <cite>[cpu]</cite> or <cite>[gpu]</cite> argument like in the following examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">deepr</span><span class="p">[</span><span class="n">cpu</span><span class="p">]</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">deepr</span><span class="p">[</span><span class="n">gpu</span><span class="p">]</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&quot;.[cpu]&quot;</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&quot;.[gpu]&quot;</span>
+</pre></div>
+</div>
+<p>Or alternatively, pre-install Tensorflow separately like so</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">tensorflow</span><span class="o">==</span><span class="mf">1.15</span><span class="o">.</span><span class="mi">2</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">deepr</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="from-source">
+<h3>From Source<a class="headerlink" href="#from-source" title="Permalink to this headline">¶</a></h3>
+<p>First, clone the <cite>deepr</cite> repo on your local machine with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">criteo</span><span class="o">/</span><span class="n">deepr</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">deepr</span>
+</pre></div>
+</div>
 <p>To install from source in editable mode, run</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">install</span><span class="o">-</span><span class="n">cpu</span>
 </pre></div>
@@ -227,6 +270,7 @@
 <p>To install development tools and test requirements, run</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">install</span><span class="o">-</span><span class="n">dev</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="test">
