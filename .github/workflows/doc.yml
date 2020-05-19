@@ -26,6 +26,7 @@ jobs:
         git fetch origin gh-pages && git checkout gh-pages
         rm -rf *
         cp -R ~/html/* .
+        touch .nojekyll
         git add .
         git commit --allow-empty -m "update doc"
         git push
