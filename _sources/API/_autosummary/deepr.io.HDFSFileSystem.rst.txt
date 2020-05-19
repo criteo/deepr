@@ -1,0 +1,22 @@
+deepr.io.HDFSFileSystem
+=======================
+
+.. currentmodule:: deepr.io
+
+.. autoclass:: HDFSFileSystem
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~HDFSFileSystem.__init__
+   
+   
+
+   
+   
+   

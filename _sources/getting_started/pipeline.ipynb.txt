@@ -1,0 +1,736 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Pipeline\n",
+    "\n",
+    "This notebook builds upon the model defined in the [quickstart](quickstart.ipynb).\n",
+    "\n",
+    "The goal of this notebook is to define a full pipeline that not only trains the model, but also builds the dataset, and run this pipeline on a yarn cluster.\n",
+    "\n",
+    "We'll see how to\n",
+    "\n",
+    "1. Define a custom job to build the dataset.\n",
+    "2. Define a pipeline that builds and trains the model.\n",
+    "3. Use configs to run the pipeline on yarn.\n",
+    "\n",
+    "First, some imports"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import logging\n",
+    "import sys\n",
+    "logging.basicConfig(level=logging.INFO, stream=sys.stdout)\n",
+    "logging.getLogger(\"tensorflow\").setLevel(logging.CRITICAL)\n",
+    "logging.getLogger(\"cluster_pack\").setLevel(logging.CRITICAL)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from dataclasses import dataclass\n",
+    "\n",
+    "import tensorflow as tf\n",
+    "import numpy as np\n",
+    "import deepr_python\n",
+    "import deepr as dpr"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 1. Custom Build Dataset Job\n",
+    "\n",
+    "The quickstart shortly introduced the concept of a job with the `Trainer` job.\n",
+    "\n",
+    "Real-life pipelines consist of multiple jobs. In our example, we want to define a special job that creates the dataset.\n",
+    "\n",
+    "Let's see how we would define a custom job that writes the dataset content in a tfrecord file."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Build Dataset Job"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "@dataclass\n",
+    "class BuildDataset(dpr.jobs.Job):\n",
+    "    \"\"\"Build a dummy dataset of random (x, 2*x) as a tfrecord file\"\"\"\n",
+    "    \n",
+    "    path_dataset: str\n",
+    "    num_examples: int = 1000\n",
+    "        \n",
+    "    def run(self):\n",
+    "        \n",
+    "        def _generator_fn():\n",
+    "            for _ in range(self.num_examples):\n",
+    "                x = np.random.random()\n",
+    "                yield {\"x\": x, \"y\": 2 * x}\n",
+    "                \n",
+    "        def _dict_to_example(data):\n",
+    "            features = {\n",
+    "                \"x\": dpr.readers.float_feature([data[\"x\"]]),\n",
+    "                \"y\": dpr.readers.float_feature([data[\"y\"]])\n",
+    "            }\n",
+    "            example = tf.train.Example(features=tf.train.Features(feature=features))\n",
+    "            return example\n",
+    "\n",
+    "        with tf.python_io.TFRecordWriter(self.path_dataset) as writer:\n",
+    "            for data in _generator_fn():\n",
+    "                example = _dict_to_example(data)\n",
+    "                writer.write(example.SerializeToString())\n",
+    "        \n",
+    "        print(f\"Wrote dataset to '{self.path_dataset}'\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "build_job = BuildDataset(path_dataset=\"data.tfrecord\", num_examples=1000)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Let's run the job"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Wrote dataset to 'data.tfrecord'\n"
+     ]
+    }
+   ],
+   "source": [
+    "build_job.run()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Prepro\n",
+    "\n",
+    "Because the data is now stored in tfrecord files, the `prepro_fn` needs to deserialize the file's content.\n",
+    "\n",
+    "Let's define a preprocessor and check that everything works correctly with the dataset created by the `BuildDataset` job."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "@dpr.prepros.prepro\n",
+    "def DefaultPrepro(batch_size, repeat_size):\n",
+    "    return dpr.prepros.Serial(\n",
+    "        dpr.prepros.TFRecordSequenceExample(fields=[\n",
+    "            dpr.Field(name=\"x\", shape=(), dtype=tf.float32),\n",
+    "            dpr.Field(name=\"y\", shape=(), dtype=tf.float32)\n",
+    "        ]),\n",
+    "        dpr.prepros.Batch(batch_size=batch_size),\n",
+    "        dpr.prepros.Repeat(repeat_size, modes=[tf.estimator.ModeKeys.TRAIN]),\n",
+    "    )"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The `@prepro` decorator creates a class from the function that would be equivalent to \n",
+    "\n",
+    "```python\n",
+    "class DefaultPrepro(dprp.Prepro):\n",
+    "\n",
+    "    def __init__(self, batch_size, repeat_size):\n",
+    "        super().__init__()\n",
+    "        self.batch_size = batch_size\n",
+    "        self.repeat_size = repeat_size\n",
+    "        \n",
+    "    def apply(self, dataset: tf.data.Dataset, mode: str = None) -> tf.data.Dataset:\n",
+    "        prepro_fn = dpr.prepros.Serial(\n",
+    "            dprp.TFRecordSequenceExample(fields=[\n",
+    "                dpr.Field(name=\"x\", shape=(), dtype=tf.float32),\n",
+    "                dpr.Field(name=\"y\", shape=(), dtype=tf.float32)\n",
+    "            ]),\n",
+    "            dpr.prepros.Batch(batch_size=batch_size),\n",
+    "            dpr.prepros.Repeat(repeat_size, modes=[tf.estimator.ModeKeys.TRAIN]),\n",
+    "        )\n",
+    "        return prepro_fn(dataset, mode)\n",
+    "```\n",
+    "\n",
+    "One of the advantages of the decorator is that the body of the function `DefaultPrepro` does not get executed until the preprocessor is actually applied to the dataset.\n",
+    "\n",
+    "This lazy behavior is convenient when resources are created in the function (like tables), resources that should only be defined at runtime.\n",
+    "\n",
+    "\n",
+    "Let's create an instance of `DefaultPrepro`"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "prepro_fn = DefaultPrepro(batch_size=32, repeat_size=10)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Reader\n",
+    "\n",
+    "In the quickstart we used a `GeneratorReader`. With tfrecords, let's use a `TFRecordReader`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "reader = dpr.readers.TFRecordReader(\"data.tfrecord\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "{'x': array([0.32337564, 0.50094163, 0.2441018 , 0.15789932, 0.60923856,\n",
+      "       0.8122508 , 0.94414985, 0.74952406, 0.2807497 , 0.588288  ,\n",
+      "       0.54501027, 0.29069403, 0.41932568, 0.34819102, 0.3383653 ,\n",
+      "       0.14353554, 0.27960363, 0.73993534, 0.7299636 , 0.5470599 ,\n",
+      "       0.31707385, 0.14296998, 0.28161713, 0.2063866 , 0.96695954,\n",
+      "       0.6501754 , 0.7693862 , 0.46509   , 0.01724341, 0.62549555,\n",
+      "       0.2915013 , 0.07535852], dtype=float32), 'y': array([0.6467513 , 1.0018833 , 0.4882036 , 0.31579864, 1.2184771 ,\n",
+      "       1.6245016 , 1.8882997 , 1.4990481 , 0.5614994 , 1.176576  ,\n",
+      "       1.0900205 , 0.58138806, 0.83865136, 0.69638205, 0.6767306 ,\n",
+      "       0.28707108, 0.55920726, 1.4798707 , 1.4599272 , 1.0941198 ,\n",
+      "       0.6341477 , 0.28593996, 0.56323427, 0.4127732 , 1.9339191 ,\n",
+      "       1.3003508 , 1.5387723 , 0.93018   , 0.03448683, 1.2509911 ,\n",
+      "       0.5830026 , 0.15071705], dtype=float32)}\n"
+     ]
+    }
+   ],
+   "source": [
+    "for batch in dpr.readers.base.from_dataset(prepro_fn(reader())):\n",
+    "    print(batch)\n",
+    "    break"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 2. Define a Pipeline\n",
+    "\n",
+    "So far, we have defined\n",
+    "\n",
+    "1. A custom `BuildDataset` job\n",
+    "2. Custom layers `Multiply` and `SquaredL2` (in the [quickstart](quickstart.ipynb))\n",
+    "3. A custom preprocessor `DefaultPrepro`\n",
+    "\n",
+    "\n",
+    "We will need to make these classes available on the `pex` that will be shipped to yarn, so let's add them to a module living alongside the core library.\n",
+    "\n",
+    "For example,\n",
+    "\n",
+    "```\n",
+    "deepr_python\n",
+    "├── __init__.py\n",
+    "├── core\n",
+    "├── example\n",
+    "│   ├── __init__.py\n",
+    "│   ├── jobs\n",
+    "│   │   ├── __init__.py\n",
+    "│   │   └── build_dataset.py  # BuildDataset\n",
+    "│   ├── layers\n",
+    "│   │   ├── __init__.py\n",
+    "│   │   ├── loss.py           # SquaredL2\n",
+    "│   │   └── model.py          # Multiply\n",
+    "│   └── prepros\n",
+    "│       ├── __init__.py\n",
+    "│       └── default.py        # DefaultPrepro\n",
+    "```\n",
+    "\n",
+    "Now, these classes can easily be imported from anywhere.\n",
+    "\n",
+    "Let's replicate the quickstart by defining and running a full pipeline that builds the dataset and then trains a model."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import deepr.example"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "build_job = deepr.example.jobs.BuildDataset(path_dataset=\"data.tfrecord\", num_examples=1000)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "trainer_job = dpr.jobs.Trainer(\n",
+    "    path_model=\"model\", \n",
+    "    pred_fn=deepr.example.layers.Multiply(), \n",
+    "    loss_fn=deepr.example.layers.SquaredL2(),\n",
+    "    optimizer_fn=dpr.optimizers.TensorflowOptimizer(\"Adam\", 0.1),\n",
+    "    train_input_fn=dpr.readers.TFRecordReader(\"data.tfrecord\"),\n",
+    "    eval_input_fn=dpr.readers.TFRecordReader(\"data.tfrecord\"),\n",
+    "    prepro_fn=deepr.example.prepros.DefaultPrepro(batch_size=32, repeat_size=10)\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "pipeline = dpr.jobs.Pipeline([build_job, trainer_job])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The pipeline is made of 2 jobs\n",
+    "\n",
+    "1. The `BuildDataset` that creates the `tfrecord` file\n",
+    "2. The `Trainer` that trains the model\n",
+    "\n",
+    "We can simply run it with"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "INFO:deepr.example.jobs.build_dataset:Wrote dataset to 'data.tfrecord'\n",
+      "INFO:deepr.prepros.core:Not applying Repeat(10) (mode=eval)\n",
+      "INFO:deepr.jobs.trainer:Running final evaluation, using global_step = 3840\n",
+      "INFO:deepr.prepros.core:Not applying Repeat(10) (mode=eval)\n",
+      "INFO:deepr.jobs.trainer:{'loss': 0.0, 'global_step': 3840}\n"
+     ]
+    }
+   ],
+   "source": [
+    "pipeline.run()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 3. Run on Yarn\n",
+    "\n",
+    "We can't just submit python objects on yarn.\n",
+    "\n",
+    "We need to parametrize the execution. Though this could be done in a ad-hoc manner using custom entry points, you can use the `config` capabilities.\n",
+    "\n",
+    "To read more about the config system, see the [config introduction](config.ipynb).\n",
+    "\n",
+    "\n",
+    "In short, you can define arbitrary trees of objects using dictionaries. The special key \"type\" contains the full import string of the object's class. Other keys will be given as keyword arguments at instantiation time."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Build Job"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "build_job_config = {\n",
+    "    \"type\": \"deepr.example.jobs.BuildDataset\",\n",
+    "    \"path_dataset\": \"viewfs://root/user/deepr/dev/example/data.tfrecord\",\n",
+    "    \"num_examples\": 1000\n",
+    "}"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Reader"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "reader_config = {\n",
+    "    \"type\": \"deepr.readers.TFRecordReader\",\n",
+    "    \"path\": \"viewfs://root/user/deepr/dev/example/data.tfrecord\",\n",
+    "    \"num_parallel_reads\": 8,\n",
+    "    \"num_parallel_calls\": 8,\n",
+    "    \"shuffle\": True\n",
+    "}"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Prepro"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "prepro_fn_config = {\n",
+    "    \"type\": \"deepr.example.prepros.DefaultPrepro\",\n",
+    "    \"batch_size\": 32,\n",
+    "    \"repeat_size\": 10\n",
+    "}"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Prediction Function"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "pred_fn_config = {\"type\": \"deepr.example.layers.Multiply\"}"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Loss Function"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "loss_fn_config = {\"type\": \"deepr.example.layers.SquaredL2\"}"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Trainer Job\n",
+    "\n",
+    "This is a good example of what a nested config looks like"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "trainer_job_config = {\n",
+    "    \"type\": \"deepr.jobs.Trainer\",\n",
+    "    \"path_model\": \"viewfs://root/user/deepr/dev/example/model\",\n",
+    "    \"pred_fn\": pred_fn_config,\n",
+    "    \"loss_fn\": loss_fn_config,\n",
+    "    \"optimizer_fn\": {\n",
+    "        \"type\": \"deepr.optimizers.TensorflowOptimizer\",\n",
+    "        \"optimizer\": \"Adam\",\n",
+    "        \"learning_rate\": 0.1\n",
+    "    },\n",
+    "    \"prepro_fn\": prepro_fn_config,\n",
+    "    \"train_input_fn\": reader_config,\n",
+    "    \"eval_input_fn\": reader_config\n",
+    "}"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Train Locally\n",
+    "\n",
+    "We can use these configs to re-instantiate the objects using the `from_config` function, which supports arbitrary nesting of configs.\n",
+    "\n",
+    "For example, we can re-create the build and trainer jobs with "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "build_job = dpr.from_config(build_job_config)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "trainer_job = dpr.from_config(trainer_job_config)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "and define a new pipeline, that we could then run like above"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "pipeline = dpr.jobs.Pipeline([build_job, trainer_job])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Instead of training locally (something we've already done twice), let's see how we can leverage the configs to execute the pipeline on yarn."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Train on Yarn\n",
+    "\n",
+    "Let's not run any code on the local machine, but instead submit the pipeline to a `yarn` machine.\n",
+    "\n",
+    "Also, instead of running the trainer job on the same machine as the build job, let's use `tf_yarn` distributed training capabilities and launch the trainer job on other yarn machines.\n",
+    "\n",
+    "To submit jobs on yarn, it's actually as simple as wrapping job configs into special jobs.\n",
+    "\n",
+    "- `YarnLauncher`: submits a job to yarn\n",
+    "- `YarnTrainer`: uses `tf_yarn` to run a `Trainer` job on multiple machines\n",
+    "\n",
+    "\n",
+    "Let's do it"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "yarn_launcher_config = deepr.jobs.YarnLauncherConfig(\n",
+    "    path_pex_prefix=\"viewfs://root/user/deepr/dev/example/envs\"\n",
+    ")\n",
+    "job_config = {\n",
+    "    \"type\": \"deepr.jobs.Pipeline\",\n",
+    "    \"jobs\": [\n",
+    "        build_job_config,\n",
+    "        {\n",
+    "            \"type\": \"deepr.jobs.YarnTrainer\",\n",
+    "            \"trainer\": {\n",
+    "                **trainer_job_config, \n",
+    "                \"eval\": \"skip\"  # from_config will not instantiate the trainer argument\n",
+    "            },\n",
+    "            \"config\": {\n",
+    "                \"type\": \"deepr.jobs.YarnTrainerConfig\"\n",
+    "            }\n",
+    "        }\n",
+    "    ]\n",
+    "}\n",
+    "pipeline_yarn = dpr.jobs.YarnLauncher(config=yarn_launcher_config, job=job_config)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Once the `YarnLauncher` job is defined, we can run it. \n",
+    "\n",
+    "It uploads the current environment as a `pex` to HDFS using the settings provided by the `DefaultYarnLauncherConfig`, and then executes the job from its config by simply doing something equivalent to what we did above, i.e. `from_config(job).run()`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "INFO:deepr.jobs.yarn_config:Uploading env to viewfs://root/user/deepr/dev/example/envs/cpu/yarn-launcher-2020-05-18-16-40-46.pex\n",
+      "INFO:deepr.jobs.yarn_launcher:Submitting job yarn-launcher-2020-05-18-16-40-46\n",
+      "INFO:deepr.jobs.yarn_launcher:TRACKING_URL: http://48-df-37-23-94-70.am6.hpc.criteo.prod:8088/proxy/application_1589799129448_25566/\n"
+     ]
+    }
+   ],
+   "source": [
+    "pipeline_yarn.run()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "When the job completes, it only means that the job was successfully submitted to yarn. We need to wait for the job to finish.\n",
+    "\n",
+    "After a few minutes, we can check that the build and training jobs ran successfully by looking at the files on the HDFS!"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[Path(viewfs://root/user/deepr/dev/example/envs)]"
+      ]
+     },
+     "execution_count": 26,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "list(dpr.io.Path(\"viewfs://root/user/deepr/dev/example\").glob(\"*\"))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Using config files\n",
+    "\n",
+    "Because it is sometimes convenient to commit config files for reproducibility and production, it is possible (and recommended) to store configs as `.json` files.\n",
+    "\n",
+    "\n",
+    "A convenient way to compose configs (similar to what we did by defining different dictionaries before putting them together) is to use [jsonnet](https://jsonnet.org/).\n",
+    "\n",
+    "For example, we can define a file `build.jsonnet` like so\n",
+    "\n",
+    "```json\n",
+    "{\n",
+    "    \"type\": \"deepr.example.jobs.BuildDataset\",\n",
+    "    \"path_dataset\": \"viewfs://root/user/deepr/dev/example/data.tfrecord\",\n",
+    "    \"num_examples\": 1000\n",
+    "}\n",
+    "```\n",
+    "\n",
+    "and import it into our pipline config file `config.jsonnet` with\n",
+    "\n",
+    "```json\n",
+    "local build = import 'build.jsonnet';\n",
+    "{\n",
+    "    \"type\": \"dpr.jobs.YarnLauncher\",\n",
+    "    \"config\": {\n",
+    "        \"type\": \"deepr.jobs.YarnLauncherConfig\",\n",
+    "    },\n",
+    "    \"job\": build\n",
+    "}\n",
+    "```\n",
+    "\n",
+    "You can run config files defining jobs with\n",
+    "\n",
+    "```bash\n",
+    "deepr run config.jsonnet\n",
+    "```"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.6"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>deepr.jobs.optimize_saved_model &mdash; deepr 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../README.html">deepR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../API/CORE_API.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_source/modules.html">deepr</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>deepr.jobs.optimize_saved_model</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for deepr.jobs.optimize_saved_model</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Converts SavedModel into an optimized protobuf for inference&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow.python.tools.freeze_graph</span> <span class="kn">import</span> <span class="n">freeze_graph_with_def_protos</span>
+<span class="kn">from</span> <span class="nn">tensorflow.python.framework.graph_util</span> <span class="kn">import</span> <span class="n">extract_sub_graph</span>
+
+<span class="kn">from</span> <span class="nn">deepr.io</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">deepr.jobs</span> <span class="kn">import</span> <span class="n">base</span>
+
+
+<span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="OptimizeSavedModel"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.OptimizeSavedModel">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">OptimizeSavedModel</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converts SavedModel into an optimized protobuf for inference</span>
+
+<span class="sd">    This job reads the input SavedModel, rename some nodes using the</span>
+<span class="sd">    `new_names` argument (raises an error if some renames cannot be</span>
+<span class="sd">    found), create placeholders given by `feeds` (and removes all</span>
+<span class="sd">    other placeholders not in this list), and finally freezes the sub</span>
+<span class="sd">    graph that produces the output tensor `fetch`.</span>
+
+<span class="sd">    When creating the original SavedModel, it is recommended to use</span>
+<span class="sd">    `tf.identity` operators to mark some tensors as future feeds or</span>
+<span class="sd">    fetches.</span>
+
+<span class="sd">    WARNING: successful completion of this job is no guarantee that the</span>
+<span class="sd">    exported Graph is correct. It is recommended to test the export in</span>
+<span class="sd">    a separate job.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path_saved_model : str</span>
+<span class="sd">        Path to directory containing SavedModel exports to convert</span>
+<span class="sd">    path_optimized_model : str</span>
+<span class="sd">        Path to directory that will contain the export</span>
+<span class="sd">    graph_name : str</span>
+<span class="sd">        Name of the output graph (name of the protobuf file)</span>
+<span class="sd">    new_names : Dict[str, str]</span>
+<span class="sd">        Mapping old names (SavedModel nodes) -&gt; new names (export)</span>
+<span class="sd">    blacklisted_variables : List[str]</span>
+<span class="sd">        List of variable names not to include in the export</span>
+<span class="sd">    feeds : List[str]</span>
+<span class="sd">        List of nodes to be converted / used as Placeholders (inputs)</span>
+<span class="sd">    fetch : str</span>
+<span class="sd">        Name of the node to use as output</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">path_saved_model</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">path_optimized_model</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">graph_name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">feeds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">fetch</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">new_names</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+    <span class="n">blacklisted_variables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+
+<div class="viewcode-block" id="OptimizeSavedModel.run"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.OptimizeSavedModel.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Find latest SavedModel export in path_saved_model</span>
+        <span class="n">subdirs</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_saved_model</span><span class="p">)</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span> <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span> <span class="ow">and</span> <span class="s2">&quot;temp&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="n">latest</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">subdirs</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using SavedModel </span><span class="si">{</span><span class="n">latest</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Reload SavedModel Graph, optimize and export</span>
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">())</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+            <span class="n">graph</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;serve&quot;</span><span class="p">],</span> <span class="n">latest</span><span class="p">)</span>
+            <span class="n">graph_def</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">graph_def</span>
+
+            <span class="c1"># Rename nodes</span>
+            <span class="n">graph_def</span> <span class="o">=</span> <span class="n">rename_nodes</span><span class="p">(</span><span class="n">graph_def</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_names</span><span class="p">)</span>
+
+            <span class="c1"># Setup (create / remove) placeholders</span>
+            <span class="n">graph_def</span> <span class="o">=</span> <span class="n">make_placeholders</span><span class="p">(</span><span class="n">graph_def</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">feeds</span><span class="p">)</span>
+
+            <span class="c1"># Keep only part of the graph that produces tensor &#39;fetch&#39;</span>
+            <span class="n">graph_def</span> <span class="o">=</span> <span class="n">extract_sub_graph</span><span class="p">(</span><span class="n">graph_def</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fetch</span><span class="p">])</span>
+
+            <span class="c1"># Replace variables by constants</span>
+            <span class="n">graph_def</span> <span class="o">=</span> <span class="n">freeze_graph_with_def_protos</span><span class="p">(</span>
+                <span class="n">input_graph_def</span><span class="o">=</span><span class="n">graph_def</span><span class="p">,</span>
+                <span class="n">input_saver_def</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">input_checkpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">output_node_names</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fetch</span><span class="p">,</span>
+                <span class="n">restore_op_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">filename_tensor_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">output_graph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">clear_devices</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">initializer_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">variable_names_blacklist</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blacklisted_variables</span><span class="p">),</span>
+                <span class="n">input_saved_model_dir</span><span class="o">=</span><span class="n">latest</span><span class="p">,</span>
+                <span class="n">saved_model_tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;serve&quot;</span><span class="p">],</span>
+            <span class="p">)</span>
+            <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write_graph</span><span class="p">(</span><span class="n">graph_def</span><span class="p">,</span> <span class="n">logdir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path_optimized_model</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">as_text</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Online KNN successfully exported to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path_optimized_model</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">graph_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="rename_nodes"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.rename_nodes">[docs]</a><span class="k">def</span> <span class="nf">rename_nodes</span><span class="p">(</span><span class="n">graph_def</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">GraphDef</span><span class="p">,</span> <span class="n">new_names</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">GraphDef</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Rename items in the graph to new ones defined in new_names</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    graph_def : tf.GraphDef</span>
+<span class="sd">        Graph Definition</span>
+<span class="sd">    new_names : Dict[str, str]</span>
+<span class="sd">        Mapping old name -&gt; new name</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tf.GraphDef</span>
+<span class="sd">        A copy of the input GraphDef with renamed nodes</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If new_names refers to an node not found in graph_def</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create copy of each node with a new name</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph_def</span><span class="o">.</span><span class="n">node</span><span class="p">:</span>
+        <span class="n">new_node</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">NodeDef</span><span class="p">()</span>
+        <span class="n">new_node</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_node</span><span class="p">)</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^(?:cond(?:_\d+)?/)?(.+?)(?:_\d+)?$&quot;</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">match</span> <span class="ow">and</span> <span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">new_names</span><span class="p">:</span>
+            <span class="n">new_name</span> <span class="o">=</span> <span class="n">new_names</span><span class="p">[</span><span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">new_node</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">new_name</span>
+            <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Node renamed: </span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">new_node</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Check that all new names were used</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="n">new_names</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">&lt;=</span> <span class="nb">set</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing renames: </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="n">new_names</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Update node references (inputs and location) to renamed nodes</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">input</span><span class="p">):</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_names</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">new_names</span> <span class="k">else</span> <span class="n">name</span>
+        <span class="k">if</span> <span class="s2">&quot;_class&quot;</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">attr</span><span class="p">:</span>
+            <span class="n">attr</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">attr</span><span class="p">[</span><span class="s2">&quot;_class&quot;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">s</span><span class="p">):</span>
+                <span class="n">loc_match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^loc:@(.+)$&quot;</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+                <span class="k">if</span> <span class="n">loc_match</span> <span class="ow">and</span> <span class="n">loc_match</span><span class="o">.</span><span class="n">groups</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">new_names</span><span class="p">:</span>
+                    <span class="n">new_name</span> <span class="o">=</span> <span class="n">new_names</span><span class="p">[</span><span class="n">loc_match</span><span class="o">.</span><span class="n">groups</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
+                    <span class="n">attr</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">s</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;loc:@</span><span class="si">{</span><span class="n">new_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+
+    <span class="c1"># Create Graph with renamed nodes</span>
+    <span class="n">new_graph</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">GraphDef</span><span class="p">()</span>
+    <span class="n">new_graph</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_graph</span></div>
+
+
+<div class="viewcode-block" id="make_placeholders"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.make_placeholders">[docs]</a><span class="k">def</span> <span class="nf">make_placeholders</span><span class="p">(</span><span class="n">graph_def</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">GraphDef</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">GraphDef</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Create placeholders for names and remove other placeholders</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    graph_def : tf.GraphDef</span>
+<span class="sd">        Graph definition</span>
+<span class="sd">    names : List[str]</span>
+<span class="sd">        Names of placeholders to keep / create for this graph</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tf.GraphDef</span>
+<span class="sd">        A copy of the input GraphDef with new placeholders</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If names refers to a node that is not present</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create copy of each node and change to Placeholder if in names</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph_def</span><span class="o">.</span><span class="n">node</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">names</span> <span class="ow">and</span> <span class="n">node</span><span class="o">.</span><span class="n">op</span> <span class="o">==</span> <span class="s2">&quot;Placeholder&quot;</span><span class="p">:</span>
+            <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Removing placeholder </span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="n">new_node</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">NodeDef</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">names</span> <span class="ow">and</span> <span class="n">node</span><span class="o">.</span><span class="n">op</span> <span class="o">!=</span> <span class="s2">&quot;Placeholder&quot;</span><span class="p">:</span>
+            <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating placeholder </span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">new_node</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">new_node</span><span class="o">.</span><span class="n">op</span> <span class="o">=</span> <span class="s2">&quot;Placeholder&quot;</span>
+            <span class="n">new_node</span><span class="o">.</span><span class="n">attr</span><span class="p">[</span><span class="s2">&quot;shape&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">AttrValue</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">attr</span><span class="p">[</span><span class="s2">&quot;_output_shapes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">new_node</span><span class="o">.</span><span class="n">attr</span><span class="p">[</span><span class="s2">&quot;dtype&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">attr</span><span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_node</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_node</span><span class="p">)</span>
+
+    <span class="c1"># Check that all expected placeholders have been found</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="n">names</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">set</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing placeholders: </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="n">names</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Create Graph with renamed nodes</span>
+    <span class="n">new_graph</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">GraphDef</span><span class="p">()</span>
+    <span class="n">new_graph</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_graph</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Reco.Consideration
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

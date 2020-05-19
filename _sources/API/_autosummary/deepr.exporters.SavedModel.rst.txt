@@ -1,0 +1,23 @@
+deepr.exporters.SavedModel
+==========================
+
+.. currentmodule:: deepr.exporters
+
+.. autoclass:: SavedModel
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SavedModel.__init__
+      ~SavedModel.export
+   
+   
+
+   
+   
+   

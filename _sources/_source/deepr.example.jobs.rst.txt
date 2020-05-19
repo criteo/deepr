@@ -1,0 +1,22 @@
+deepr.example.jobs package
+==========================
+
+Submodules
+----------
+
+deepr.example.jobs.build\_dataset module
+----------------------------------------
+
+.. automodule:: deepr.example.jobs.build_dataset
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.example.jobs
+   :members:
+   :undoc-members:
+   :show-inheritance:

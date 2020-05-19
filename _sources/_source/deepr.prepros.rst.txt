@@ -1,0 +1,46 @@
+deepr.prepros package
+=====================
+
+Submodules
+----------
+
+deepr.prepros.base module
+-------------------------
+
+.. automodule:: deepr.prepros.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.prepros.combinators module
+--------------------------------
+
+.. automodule:: deepr.prepros.combinators
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.prepros.core module
+-------------------------
+
+.. automodule:: deepr.prepros.core
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.prepros.record module
+---------------------------
+
+.. automodule:: deepr.prepros.record
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.prepros
+   :members:
+   :undoc-members:
+   :show-inheritance:

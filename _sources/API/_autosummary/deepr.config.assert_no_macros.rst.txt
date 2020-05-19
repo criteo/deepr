@@ -1,0 +1,6 @@
+deepr.config.assert\_no\_macros
+===============================
+
+.. currentmodule:: deepr.config
+
+.. autofunction:: assert_no_macros

@@ -1,0 +1,23 @@
+deepr.prepros.PaddedBatch
+=========================
+
+.. currentmodule:: deepr.prepros
+
+.. autoclass:: PaddedBatch
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~PaddedBatch.__init__
+      ~PaddedBatch.apply
+   
+   
+
+   
+   
+   

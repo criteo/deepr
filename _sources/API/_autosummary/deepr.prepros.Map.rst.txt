@@ -1,0 +1,29 @@
+deepr.prepros.Map
+=================
+
+.. currentmodule:: deepr.prepros
+
+.. autoclass:: Map
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Map.__init__
+      ~Map.apply
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Map.tf_map_func
+   
+   

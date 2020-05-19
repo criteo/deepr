@@ -1,0 +1,650 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>deepr.io package &mdash; deepr 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="deepr.jobs package" href="deepr.jobs.html" />
+    <link rel="prev" title="deepr.initializers package" href="deepr.initializers.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">deepR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../API/CORE_API.html">Core API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">deepr</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="deepr.html">deepr package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="deepr.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="deepr.cli.html">deepr.cli package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.config.html">deepr.config package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.example.html">deepr.example package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.exporters.html">deepr.exporters package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.hooks.html">deepr.hooks package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.initializers.html">deepr.initializers package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">deepr.io package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.jobs.html">deepr.jobs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.layers.html">deepr.layers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.macros.html">deepr.macros package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.metrics.html">deepr.metrics package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.optimizers.html">deepr.optimizers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.prepros.html">deepr.prepros package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.readers.html">deepr.readers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.utils.html">deepr.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.html#module-deepr.version">deepr.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.html#module-deepr">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">deepr</a> &raquo;</li>
+        
+          <li><a href="deepr.html">deepr package</a> &raquo;</li>
+        
+      <li>deepr.io package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_source/deepr.io.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="deepr-io-package">
+<h1>deepr.io package<a class="headerlink" href="#deepr-io-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-deepr.io.hdfs">
+<span id="deepr-io-hdfs-module"></span><h2>deepr.io.hdfs module<a class="headerlink" href="#module-deepr.io.hdfs" title="Permalink to this headline">¶</a></h2>
+<p>HDFS Utilities</p>
+<dl class="py class">
+<dt id="deepr.io.hdfs.HDFSFile">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.io.hdfs.</code><code class="sig-name descname">HDFSFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filesystem</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'rb'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/hdfs.html#HDFSFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.hdfs.HDFSFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>FileSystemFile, support of “r”, “w” modes, readlines and iter.</p>
+<p>Makes it easier to read or write file from any filesystem. For
+example, if you use HDFS you can do</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">HDFSFileSystem</span><span class="p">()</span> <span class="k">as</span> <span class="n">fs</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">with</span> <span class="n">HDFSFile</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="s2">&quot;viewfs://root/user/foo.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The use of context manager means that the connection to the
+filesystem is automatically opened / closed, as well as the file
+buffer.</p>
+<dl class="py attribute">
+<dt id="deepr.io.hdfs.HDFSFile.filesystem">
+<code class="sig-name descname">filesystem</code><a class="headerlink" href="#deepr.io.hdfs.HDFSFile.filesystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>FileSystem instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>FileSystem</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.io.hdfs.HDFSFile.path">
+<code class="sig-name descname">path</code><a class="headerlink" href="#deepr.io.hdfs.HDFSFile.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.io.hdfs.HDFSFile.mode">
+<code class="sig-name descname">mode</code><a class="headerlink" href="#deepr.io.hdfs.HDFSFile.mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write / read mode. Supported: “r”, “rb” (default), “w”, “wb”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, Optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.hdfs.HDFSFile.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/hdfs.html#HDFSFile.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.hdfs.HDFSFile.read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.hdfs.HDFSFile.readlines">
+<code class="sig-name descname">readlines</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/hdfs.html#HDFSFile.readlines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.hdfs.HDFSFile.readlines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.hdfs.HDFSFile.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/hdfs.html#HDFSFile.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.hdfs.HDFSFile.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.io.hdfs.HDFSFileSystem">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.io.hdfs.</code><code class="sig-name descname">HDFSFileSystem</code><a class="reference internal" href="../_modules/deepr/io/hdfs.html#HDFSFileSystem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.hdfs.HDFSFileSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Context aware HDFSFileSystem using pyarrow.hdfs.</p>
+<p>Open and closes connection to HDFS thanks to a context manager</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">HDFSFileSystem</span><span class="p">()</span> <span class="k">as</span> <span class="n">fs</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;path/to/file&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.io.json">
+<span id="deepr-io-json-module"></span><h2>deepr.io.json module<a class="headerlink" href="#module-deepr.io.json" title="Permalink to this headline">¶</a></h2>
+<p>Json IO</p>
+<dl class="py function">
+<dt id="deepr.io.json.is_json">
+<code class="sig-prename descclassname">deepr.io.json.</code><code class="sig-name descname">is_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/json.html#is_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.json.is_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if data is a valid json string else False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.io.json.load_json">
+<code class="sig-prename descclassname">deepr.io.json.</code><code class="sig-name descname">load_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/json.html#load_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.json.load_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load json from a json file or json string</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.io.json.read_json">
+<code class="sig-prename descclassname">deepr.io.json.</code><code class="sig-name descname">read_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/json.html#read_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.json.read_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read json or jsonnet file into dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.io.json.write_json">
+<code class="sig-prename descclassname">deepr.io.json.</code><code class="sig-name descname">write_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/json.html#write_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.json.write_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write data to path</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.io.parquet">
+<span id="deepr-io-parquet-module"></span><h2>deepr.io.parquet module<a class="headerlink" href="#module-deepr.io.parquet" title="Permalink to this headline">¶</a></h2>
+<p>Utilities for parquet</p>
+<dl class="py class">
+<dt id="deepr.io.parquet.ParquetDataset">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.io.parquet.</code><code class="sig-name descname">ParquetDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_or_paths</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Context aware ParquetDataset with support for chunk writing.</p>
+<p>Makes it easier to read / write <cite>ParquetDataset</cite>. For example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">ParquetDataset</span><span class="p">(</span><span class="s2">&quot;viewfs://root/foo.parquet.snappy&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">ds</span><span class="o">.</span><span class="n">write_pandas</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The use of context managers automatically opens / closes the dataset
+as well as the connection to the FileSystem.</p>
+<dl class="py attribute">
+<dt id="deepr.io.parquet.ParquetDataset.path_or_paths">
+<code class="sig-name descname">path_or_paths</code><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.path_or_paths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to parquet dataset (directory or file), or list of files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, <a class="reference internal" href="../API/_autosummary/deepr.io.Path.html#deepr.io.Path" title="deepr.io.Path">Path</a>, List[Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, <a class="reference internal" href="../API/_autosummary/deepr.io.Path.html#deepr.io.Path" title="deepr.io.Path">Path</a>]]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.io.parquet.ParquetDataset.filesystem">
+<code class="sig-name descname">filesystem</code><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.filesystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>FileSystem, if None, will be inferred automatically later.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>FileSystem, Optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.parquet.ParquetDataset.is_hdfs">
+<em class="property">property </em><code class="sig-name descname">is_hdfs</code><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.is_hdfs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.parquet.ParquetDataset.is_local">
+<em class="property">property </em><code class="sig-name descname">is_local</code><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.is_local" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.parquet.ParquetDataset.open">
+<code class="sig-name descname">open</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset.open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.open" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.parquet.ParquetDataset.pq_dataset">
+<em class="property">property </em><code class="sig-name descname">pq_dataset</code><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.pq_dataset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.parquet.ParquetDataset.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.parquet.ParquetDataset.read_pandas">
+<code class="sig-name descname">read_pandas</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset.read_pandas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.read_pandas" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.parquet.ParquetDataset.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table</span></em>, <em class="sig-param"><span class="n">compression</span><span class="o">=</span><span class="default_value">'snappy'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.parquet.ParquetDataset.write_pandas">
+<code class="sig-name descname">write_pandas</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">compression</span><span class="o">=</span><span class="default_value">'snappy'</span></em>, <em class="sig-param"><span class="n">num_chunks</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">chunk_size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">schema</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset.write_pandas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.write_pandas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write DataFrame as Parquet Dataset</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.io.path">
+<span id="deepr-io-path-module"></span><h2>deepr.io.path module<a class="headerlink" href="#module-deepr.io.path" title="Permalink to this headline">¶</a></h2>
+<p>Path Utilities</p>
+<dl class="py class">
+<dt id="deepr.io.path.Path">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.io.path.</code><code class="sig-name descname">Path</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Equivalent of pathlib.Path for local and HDFS FileSystem</p>
+<p>Automatically opens and closes an HDFS connection if the path is
+an HDFS path.</p>
+<p>Allows you to work with local / HDFS files in an agnostic manner.</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;viewfs://foo&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;baz&quot;</span>
+<span class="n">path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">path</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">is_file</span><span class="p">())</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt id="deepr.io.path.Path.copy_dir">
+<code class="sig-name descname">copy_dir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dest</span></em>, <em class="sig-param"><span class="n">recursive</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.copy_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.copy_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy current files and directories if recursive to dest.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.path.Path.copy_file">
+<code class="sig-name descname">copy_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dest</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.copy_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.copy_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy current file to dest (target directory must exist).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.path.Path.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete file from filesystem</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.path.Path.exists">
+<code class="sig-name descname">exists</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if the path points to an existing file or dir.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.path.Path.glob">
+<code class="sig-name descname">glob</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pattern</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.glob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.glob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve directory content matching pattern</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generator" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a>[<a class="reference internal" href="#deepr.io.path.Path" title="deepr.io.path.Path"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>, <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">None</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.path.Path.is_dir">
+<code class="sig-name descname">is_dir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.is_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.is_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if the path points to a regular directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.path.Path.is_file">
+<code class="sig-name descname">is_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.is_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.is_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if the path points to a regular file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.path.Path.is_hdfs">
+<em class="property">property </em><code class="sig-name descname">is_hdfs</code><a class="headerlink" href="#deepr.io.path.Path.is_hdfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if the path points to an HDFS location</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.path.Path.is_local">
+<em class="property">property </em><code class="sig-name descname">is_local</code><a class="headerlink" href="#deepr.io.path.Path.is_local" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if the path points to a local file or dir.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.path.Path.iterdir">
+<code class="sig-name descname">iterdir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.iterdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.iterdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve directory content.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generator" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a>[<a class="reference internal" href="#deepr.io.path.Path" title="deepr.io.path.Path"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>, <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">None</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.path.Path.mkdir">
+<code class="sig-name descname">mkdir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parents</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">exist_ok</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.mkdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.mkdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create directory</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.path.Path.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#deepr.io.path.Path.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Final path component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.path.Path.open">
+<code class="sig-name descname">open</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'r'</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open file on both HDFS and Local File Systems.</p>
+<p class="rubric">Example</p>
+<p>Use a context manager like so</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;viewfs://root/user/path/to/file.txt&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.path.Path.parent">
+<em class="property">property </em><code class="sig-name descname">parent</code><a class="headerlink" href="#deepr.io.path.Path.parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to the parent of the current path</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.io.path.Path.suffix">
+<em class="property">property </em><code class="sig-name descname">suffix</code><a class="headerlink" href="#deepr.io.path.Path.suffix" title="Permalink to this definition">¶</a></dt>
+<dd><p>File extension of the file if any.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.io">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-deepr.io" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="deepr.jobs.html" class="btn btn-neutral float-right" title="deepr.jobs package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="deepr.initializers.html" class="btn btn-neutral float-left" title="deepr.initializers package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Reco.Consideration
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

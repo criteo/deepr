@@ -1,0 +1,291 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>deepr.jobs.yarn_config &mdash; deepr 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../README.html">deepR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../API/CORE_API.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_source/modules.html">deepr</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>deepr.jobs.yarn_config</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for deepr.jobs.yarn_config</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Basic Yarn Config in charge of uploading environment.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">tf_yarn</span> <span class="kn">import</span> <span class="n">packaging</span>
+<span class="kn">import</span> <span class="nn">cluster_pack</span>
+
+<span class="kn">from</span> <span class="nn">deepr.io.path</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">deepr.utils.graphite</span> <span class="kn">import</span> <span class="n">HOST_ENV_VAR</span><span class="p">,</span> <span class="n">PORT_ENV_VAR</span><span class="p">,</span> <span class="n">PREFIX_ENV_VAR</span><span class="p">,</span> <span class="n">INTERVAL_ENV_VAR</span>
+<span class="kn">from</span> <span class="nn">deepr.utils.mlflow</span> <span class="kn">import</span> <span class="n">RUN_ID_ENV_VAR</span><span class="p">,</span> <span class="n">TRACKING_URI_ENV_VAR</span>
+
+
+<span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="YarnConfig"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.yarn_config.YarnConfig">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">YarnConfig</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Basic Yarn Config in charge of uploading environment.&quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">gpu_additional_packages</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;tensorflow-gpu==1.15.2&quot;</span><span class="p">,</span> <span class="s2">&quot;tf-yarn-gpu==0.4.19&quot;</span><span class="p">)</span>
+    <span class="n">gpu_ignored_packages</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;tensorflow&quot;</span><span class="p">,</span> <span class="s2">&quot;tf-yarn&quot;</span><span class="p">)</span>
+    <span class="n">gpu_to_use</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">jvm_memory_in_gb</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="n">path_pex_cpu</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">path_pex_gpu</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">path_pex_prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;viewfs://root/user/</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;USER&#39;</span><span class="p">,</span> <span class="s1">&#39;deepr&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">/envs&quot;</span>
+
+<div class="viewcode-block" id="YarnConfig.get_env_vars"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.yarn_config.YarnConfig.get_env_vars">[docs]</a>    <span class="k">def</span> <span class="nf">get_env_vars</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return Default Environment Variables&quot;&quot;&quot;</span>
+        <span class="c1"># JVM environment Variables</span>
+        <span class="n">env_vars</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;LIBHDFS_OPTS&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;-Xms</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">jvm_memory_in_gb</span><span class="si">}</span><span class="s2">g -Xmx</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">jvm_memory_in_gb</span><span class="si">}</span><span class="s2">g&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;MALLOC_ARENA_MAX&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="c1"># GPU Environment Variables</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gpu_to_use</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">env_vars</span><span class="p">[</span><span class="s2">&quot;CUDA_VISIBLE_DEVICES&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gpu_to_use</span><span class="p">)</span>
+        <span class="c1"># MLFlow Environment Variables</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">RUN_ID_ENV_VAR</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">env_vars</span><span class="p">[</span><span class="n">RUN_ID_ENV_VAR</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">RUN_ID_ENV_VAR</span><span class="p">)</span>
+            <span class="n">env_vars</span><span class="p">[</span><span class="n">TRACKING_URI_ENV_VAR</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">TRACKING_URI_ENV_VAR</span><span class="p">)</span>
+        <span class="c1"># Graphite Environment Variables</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">PREFIX_ENV_VAR</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">env_vars</span><span class="p">[</span><span class="n">HOST_ENV_VAR</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">HOST_ENV_VAR</span><span class="p">)</span>
+            <span class="n">env_vars</span><span class="p">[</span><span class="n">PORT_ENV_VAR</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">PORT_ENV_VAR</span><span class="p">)</span>
+            <span class="n">env_vars</span><span class="p">[</span><span class="n">PREFIX_ENV_VAR</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">PREFIX_ENV_VAR</span><span class="p">)</span>
+            <span class="n">env_vars</span><span class="p">[</span><span class="n">INTERVAL_ENV_VAR</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">INTERVAL_ENV_VAR</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">env_vars</span></div>
+
+<div class="viewcode-block" id="YarnConfig.upload_pex_cpu"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.yarn_config.YarnConfig.upload_pex_cpu">[docs]</a>    <span class="k">def</span> <span class="nf">upload_pex_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Upload Current Environment as PEX for CPU.&quot;&quot;&quot;</span>
+        <span class="n">path_pex</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path_pex_prefix</span><span class="si">}</span><span class="s2">/cpu/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.pex&quot;</span>
+        <span class="k">return</span> <span class="n">upload_pex</span><span class="p">(</span><span class="n">path_pex</span><span class="o">=</span><span class="n">path_pex</span><span class="p">,</span> <span class="n">path_pex_existing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path_pex_cpu</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="YarnConfig.upload_pex_gpu"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.yarn_config.YarnConfig.upload_pex_gpu">[docs]</a>    <span class="k">def</span> <span class="nf">upload_pex_gpu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Upload Current Environment as PEX for GPU.&quot;&quot;&quot;</span>
+        <span class="n">path_pex</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path_pex_prefix</span><span class="si">}</span><span class="s2">/gpu/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.pex&quot;</span>
+        <span class="k">return</span> <span class="n">upload_pex</span><span class="p">(</span>
+            <span class="n">path_pex</span><span class="o">=</span><span class="n">path_pex</span><span class="p">,</span>
+            <span class="n">path_pex_existing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path_pex_gpu</span><span class="p">,</span>
+            <span class="n">additional_packages</span><span class="o">=</span><span class="nb">dict</span><span class="p">((</span><span class="n">req</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;==&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">req</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;==&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">req</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gpu_additional_packages</span><span class="p">),</span>
+            <span class="n">ignored_packages</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gpu_ignored_packages</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gpu_ignored_packages</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="upload_pex"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.yarn_config.upload_pex">[docs]</a><span class="k">def</span> <span class="nf">upload_pex</span><span class="p">(</span>
+    <span class="n">path_pex</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path_pex_existing</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">additional_packages</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignored_packages</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Upload Current Environment and return path to PEX on HDFS&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">path_pex_existing</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Uploading env to </span><span class="si">{</span><span class="n">path_pex</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">packaging</span><span class="o">.</span><span class="n">upload_env_to_hdfs</span><span class="p">(</span>
+            <span class="n">archive_on_hdfs</span><span class="o">=</span><span class="n">path_pex</span><span class="p">,</span>
+            <span class="n">additional_packages</span><span class="o">=</span><span class="n">additional_packages</span> <span class="k">if</span> <span class="n">additional_packages</span> <span class="k">else</span> <span class="p">{},</span>
+            <span class="n">ignored_packages</span><span class="o">=</span><span class="n">ignored_packages</span> <span class="k">if</span> <span class="n">ignored_packages</span> <span class="k">else</span> <span class="p">[],</span>
+            <span class="n">packer</span><span class="o">=</span><span class="n">cluster_pack</span><span class="o">.</span><span class="n">packaging</span><span class="o">.</span><span class="n">PEX_PACKER</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">Path</span><span class="p">(</span><span class="n">path_pex_existing</span><span class="p">)</span><span class="o">.</span><span class="n">is_hdfs</span><span class="p">:</span>
+        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Uploading env to </span><span class="si">{</span><span class="n">path_pex</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">packaging</span><span class="o">.</span><span class="n">upload_zip_to_hdfs</span><span class="p">(</span><span class="n">path_pex</span><span class="p">,</span> <span class="n">archive_on_hdfs</span><span class="o">=</span><span class="n">path_pex_existing</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skipping upload, PEX </span><span class="si">{</span><span class="n">path_pex_existing</span><span class="si">}</span><span class="s2"> already exists&quot;</span><span class="p">)</span>
+        <span class="n">path_pex</span> <span class="o">=</span> <span class="n">path_pex_existing</span>
+    <span class="k">return</span> <span class="n">path_pex</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Reco.Consideration
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

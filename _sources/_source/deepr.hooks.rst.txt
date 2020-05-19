@@ -1,0 +1,70 @@
+deepr.hooks package
+===================
+
+Submodules
+----------
+
+deepr.hooks.base module
+-----------------------
+
+.. automodule:: deepr.hooks.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.hooks.early\_stopping module
+----------------------------------
+
+.. automodule:: deepr.hooks.early_stopping
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.hooks.log\_variables\_init module
+---------------------------------------
+
+.. automodule:: deepr.hooks.log_variables_init
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.hooks.logging\_tensor module
+----------------------------------
+
+.. automodule:: deepr.hooks.logging_tensor
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.hooks.num\_params module
+------------------------------
+
+.. automodule:: deepr.hooks.num_params
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.hooks.steps\_per\_sec module
+----------------------------------
+
+.. automodule:: deepr.hooks.steps_per_sec
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.hooks.summary module
+--------------------------
+
+.. automodule:: deepr.hooks.summary
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.hooks
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,46 @@
+deepr.io package
+================
+
+Submodules
+----------
+
+deepr.io.hdfs module
+--------------------
+
+.. automodule:: deepr.io.hdfs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.io.json module
+--------------------
+
+.. automodule:: deepr.io.json
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.io.parquet module
+-----------------------
+
+.. automodule:: deepr.io.parquet
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.io.path module
+--------------------
+
+.. automodule:: deepr.io.path
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.io
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,24 @@
+deepr.layers.MaskedBPR
+======================
+
+.. currentmodule:: deepr.layers
+
+.. autoclass:: MaskedBPR
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MaskedBPR.__init__
+      ~MaskedBPR.forward
+      ~MaskedBPR.forward_as_dict
+   
+   
+
+   
+   
+   

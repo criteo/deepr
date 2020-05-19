@@ -1,0 +1,30 @@
+deepr.readers.TFRecordReader
+============================
+
+.. currentmodule:: deepr.readers
+
+.. autoclass:: TFRecordReader
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TFRecordReader.__init__
+      ~TFRecordReader.as_dataset
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~TFRecordReader.compression_type
+      ~TFRecordReader.filenames
+   
+   

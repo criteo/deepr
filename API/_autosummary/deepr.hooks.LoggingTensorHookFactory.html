@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>deepr.hooks.LoggingTensorHookFactory &mdash; deepr 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="deepr.hooks.MaxResidentMemory" href="deepr.hooks.MaxResidentMemory.html" />
+    <link rel="prev" title="deepr.hooks.EstimatorHookFactory" href="deepr.hooks.EstimatorHookFactory.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">deepR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../CORE_API.html">Core API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#config">Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#exporter">Exporter</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../CORE_API.html#hook">Hook</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="deepr.hooks.EarlyStoppingHookFactory.html">deepr.hooks.EarlyStoppingHookFactory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.hooks.EstimatorHookFactory.html">deepr.hooks.EstimatorHookFactory</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">deepr.hooks.LoggingTensorHookFactory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.hooks.MaxResidentMemory.html">deepr.hooks.MaxResidentMemory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.hooks.ResidentMemory.html">deepr.hooks.ResidentMemory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.hooks.StepsPerSecHook.html">deepr.hooks.StepsPerSecHook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.hooks.SummarySaverHookFactory.html">deepr.hooks.SummarySaverHookFactory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.hooks.TensorHookFactory.html">deepr.hooks.TensorHookFactory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#initializer">Initializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#io">Io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#job">Job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#layer">Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#macros">Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#metrics">Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#optimizer">Optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#prepro">Prepro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#reader">Reader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#utils">Utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../_source/modules.html">deepr</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../CORE_API.html">Core API</a> &raquo;</li>
+        
+      <li>deepr.hooks.LoggingTensorHookFactory</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/API/_autosummary/deepr.hooks.LoggingTensorHookFactory.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="deepr-hooks-loggingtensorhookfactory">
+<h1>deepr.hooks.LoggingTensorHookFactory<a class="headerlink" href="#deepr-hooks-loggingtensorhookfactory" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="deepr.hooks.LoggingTensorHookFactory">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.hooks.</code><code class="sig-name descname">LoggingTensorHookFactory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/hooks/logging_tensor.html#LoggingTensorHookFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parametrize the creation of a LoggingTensorHook factory.</p>
+<p>Arguments for instantiation should be provided as keyword arguments.</p>
+<dl class="py attribute">
+<dt id="deepr.hooks.LoggingTensorHookFactory.tensors">
+<code class="sig-name descname">tensors</code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.tensors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the tensors to use at runtime. If None (default), log
+all scalars.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>], Optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.hooks.LoggingTensorHookFactory.functions">
+<code class="sig-name descname">functions</code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.functions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Additional “python” metrics. Each function should return a float</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, Callable[[], <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a>]], Optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.hooks.LoggingTensorHookFactory.prefix">
+<code class="sig-name descname">prefix</code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prefix of tags when sending to MLFlow / Graphite</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, Optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.hooks.LoggingTensorHookFactory.use_mlflow">
+<code class="sig-name descname">use_mlflow</code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.use_mlflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, send metrics to MLFlow. Default is False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a>, Optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.hooks.LoggingTensorHookFactory.use_graphite">
+<code class="sig-name descname">use_graphite</code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.use_graphite" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, send metrics to Graphite. Default is False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a>, Optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.hooks.LoggingTensorHookFactory.skip_after_step">
+<code class="sig-name descname">skip_after_step</code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.skip_after_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>If not None, do not run the hooks after this step.</p>
+<p>Prevents outliers when used in conjunction with an early
+stopping hook that overrides the global_step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a>, Optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.hooks.LoggingTensorHookFactory.formatter">
+<code class="sig-name descname">formatter</code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.formatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Formatter for logging, default uses 7 digits precision.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Callable[[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, Any], <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>], Optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.hooks.LoggingTensorHookFactory.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/hooks/logging_tensor.html#LoggingTensorHookFactory.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.hooks.LoggingTensorHookFactory.__init__" title="deepr.hooks.LoggingTensorHookFactory.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([tensors])</p></td>
+<td><p>Initialize self.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="deepr.hooks.MaxResidentMemory.html" class="btn btn-neutral float-right" title="deepr.hooks.MaxResidentMemory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="deepr.hooks.EstimatorHookFactory.html" class="btn btn-neutral float-left" title="deepr.hooks.EstimatorHookFactory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Reco.Consideration
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

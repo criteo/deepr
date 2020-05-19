@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>deepR &mdash; deepr 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributing" href="CONTRIBUTING.html" />
+    <link rel="prev" title="Hyper Parameter Tuning" href="getting_started/tuning.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">deepR</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#why-a-deep-learning-library-based-on-tf1-x">Why a Deep Learning Library based on TF1.x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#use-deepr">Use DeepR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test">Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lint">Lint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command-line-tools">Command Line Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributing">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#change-log">Change log</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="API/CORE_API.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_source/modules.html">deepr</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>deepR</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/README.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="deepr">
+<h1>deepR<a class="headerlink" href="#deepr" title="Permalink to this headline">¶</a></h1>
+<p>DeepR is a library for Deep Learning on top of Tensorflow 1.x that focuses on production capabilities. It makes it easy to define pipelines (via the <cite>Job</cite> abstraction), preprocess data (via the <cite>Prepro</cite> abstraction), design models (via the <cite>Layer</cite> abstraction) and train them either locally or on a Yarn cluster. It also integrates nicely with MLFlow and Graphite, allowing for production ready logging capabilities.</p>
+<p>It can be seen as a collection of generic tools and abstractions to be extended for more specific use cases. See the <cite>Use DeepR</cite> section for more information.</p>
+<p>Submitting jobs and defining flexible pipelines is made possible thanks to a config system based off simple dictionaries and import strings. It is similar to <a class="reference external" href="https://thinc.ai/docs">Thinc config system</a> or <a class="reference external" href="https://github.com/google/gin-config">gin config</a> in a lot of ways.</p>
+<div class="section" id="why-a-deep-learning-library-based-on-tf1-x">
+<h2>Why a Deep Learning Library based on TF1.x<a class="headerlink" href="#why-a-deep-learning-library-based-on-tf1-x" title="Permalink to this headline">¶</a></h2>
+<p>Tensorflow 1.x provides great production oriented capabilities, centered around the <cite>tf.Estimator</cite> API. It makes it possible to deploy models using a <cite>protobuf</cite> with no <cite>python</cite> code, and optimize computational graphs with XLA compilation.</p>
+<p>Although <cite>DeepR</cite> comes with a <cite>Layer</cite> interface (most similar to <a class="reference external" href="https://github.com/google/trax">google TRAX</a> and very close to most modern frameworks) that makes it easy to define models using a functional programming approach, most of its capabilities are orthogonal to it. Most of the building blocks expect generic <cite>python</cite> types (for example, a <cite>Layer</cite> is merely a function <cite>fn(tensors, mode)</cite>).</p>
+</div>
+<div class="section" id="use-deepr">
+<h2>Use DeepR<a class="headerlink" href="#use-deepr" title="Permalink to this headline">¶</a></h2>
+<p>You can use <cite>DeepR</cite> as a simple python library, reusing only a subset of the concepts (the config system is generic for example) or build your own extension as a standalone python package that depends on <cite>deepr</cite>.</p>
+<p>Have a look at the submodule <a class="reference external" href="../deepr/example">example</a> of <cite>deepr</cite> that illustrates what a package built on top of deepr would look like. It defines custom jobs, layers, preprocessors, macros as well as <a class="reference external" href="../deepr/example/configs">configs</a>. Once your custom components are packaged in a library, it is easy to run configs with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">deepr</span> <span class="n">run</span> <span class="n">config</span><span class="o">.</span><span class="n">json</span> <span class="n">macros</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>To install from source in editable mode, run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">install</span><span class="o">-</span><span class="n">cpu</span>
+</pre></div>
+</div>
+<p>Or to install on a GPU enabled machine</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">install</span><span class="o">-</span><span class="n">gpu</span>
+</pre></div>
+</div>
+<p>To install development tools and test requirements, run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">install</span><span class="o">-</span><span class="n">dev</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test">
+<h2>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h2>
+<p>To run unit tests in your current environment, run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">test</span>
+</pre></div>
+</div>
+<p>To run unit tests + lint in a fresh virtual environment, run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">venv</span><span class="o">-</span><span class="n">lint</span><span class="o">-</span><span class="n">test</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="lint">
+<h2>Lint<a class="headerlink" href="#lint" title="Permalink to this headline">¶</a></h2>
+<p>To run <cite>mypy</cite>, <cite>pylint</cite> and <cite>black –check</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">lint</span>
+</pre></div>
+</div>
+<p>To auto-format the code using <cite>black</cite></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">black</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="command-line-tools">
+<h2>Command Line Tools<a class="headerlink" href="#command-line-tools" title="Permalink to this headline">¶</a></h2>
+<p>To get a list of available commands, run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">deepr</span> <span class="o">--</span><span class="n">help</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference external" href="CONTRIBUTING">CONTRIBUTING</a></p>
+</div>
+<div class="section" id="change-log">
+<h2>Change log<a class="headerlink" href="#change-log" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference external" href="CHANGELOG">CHANGELOG</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="CONTRIBUTING.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="getting_started/tuning.html" class="btn btn-neutral float-left" title="Hyper Parameter Tuning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Reco.Consideration
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

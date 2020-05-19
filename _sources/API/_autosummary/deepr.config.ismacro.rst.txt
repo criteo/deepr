@@ -1,0 +1,6 @@
+deepr.config.ismacro
+====================
+
+.. currentmodule:: deepr.config
+
+.. autofunction:: ismacro

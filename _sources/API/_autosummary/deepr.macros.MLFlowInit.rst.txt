@@ -1,0 +1,33 @@
+deepr.macros.MLFlowInit
+=======================
+
+.. currentmodule:: deepr.macros
+
+.. autoclass:: MLFlowInit
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MLFlowInit.__init__
+      ~MLFlowInit.clear
+      ~MLFlowInit.copy
+      ~MLFlowInit.fromkeys
+      ~MLFlowInit.get
+      ~MLFlowInit.items
+      ~MLFlowInit.keys
+      ~MLFlowInit.pop
+      ~MLFlowInit.popitem
+      ~MLFlowInit.setdefault
+      ~MLFlowInit.update
+      ~MLFlowInit.values
+   
+   
+
+   
+   
+   

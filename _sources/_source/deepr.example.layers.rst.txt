@@ -1,0 +1,30 @@
+deepr.example.layers package
+============================
+
+Submodules
+----------
+
+deepr.example.layers.loss module
+--------------------------------
+
+.. automodule:: deepr.example.layers.loss
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.example.layers.model module
+---------------------------------
+
+.. automodule:: deepr.example.layers.model
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.example.layers
+   :members:
+   :undoc-members:
+   :show-inheritance:

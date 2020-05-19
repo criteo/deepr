@@ -1,0 +1,27 @@
+deepr.hooks.StepsPerSecHook
+===========================
+
+.. currentmodule:: deepr.hooks
+
+.. autoclass:: StepsPerSecHook
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~StepsPerSecHook.__init__
+      ~StepsPerSecHook.after_create_session
+      ~StepsPerSecHook.after_run
+      ~StepsPerSecHook.before_run
+      ~StepsPerSecHook.begin
+      ~StepsPerSecHook.end
+   
+   
+
+   
+   
+   

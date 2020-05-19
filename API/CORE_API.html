@@ -1,0 +1,814 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Core API &mdash; deepr 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="deepr.config.assert_no_macros" href="_autosummary/deepr.config.assert_no_macros.html" />
+    <link rel="prev" title="Changelog" href="../CHANGELOG.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">deepR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Core API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#config">Config</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.config.assert_no_macros.html">deepr.config.assert_no_macros</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.config.fill_macros.html">deepr.config.fill_macros</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.config.fill_references.html">deepr.config.fill_references</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.config.from_config.html">deepr.config.from_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.config.ismacro.html">deepr.config.ismacro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.config.isreference.html">deepr.config.isreference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.config.parse_config.html">deepr.config.parse_config</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#exporter">Exporter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.exporters.Exporter.html">deepr.exporters.Exporter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.exporters.BestCheckpoint.html">deepr.exporters.BestCheckpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.exporters.SaveVariables.html">deepr.exporters.SaveVariables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.exporters.SavedModel.html">deepr.exporters.SavedModel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#hook">Hook</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.hooks.EarlyStoppingHookFactory.html">deepr.hooks.EarlyStoppingHookFactory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.hooks.EstimatorHookFactory.html">deepr.hooks.EstimatorHookFactory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.hooks.LoggingTensorHookFactory.html">deepr.hooks.LoggingTensorHookFactory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.hooks.MaxResidentMemory.html">deepr.hooks.MaxResidentMemory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.hooks.ResidentMemory.html">deepr.hooks.ResidentMemory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.hooks.StepsPerSecHook.html">deepr.hooks.StepsPerSecHook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.hooks.SummarySaverHookFactory.html">deepr.hooks.SummarySaverHookFactory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.hooks.TensorHookFactory.html">deepr.hooks.TensorHookFactory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#initializer">Initializer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.initializers.CheckpointInitializer.html">deepr.initializers.CheckpointInitializer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#io">Io</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.io.HDFSFileSystem.html">deepr.io.HDFSFileSystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.io.ParquetDataset.html">deepr.io.ParquetDataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.io.Path.html">deepr.io.Path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.io.read_json.html">deepr.io.read_json</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#job">Job</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.jobs.Job.html">deepr.jobs.Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.jobs.LogMetric.html">deepr.jobs.LogMetric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.jobs.MLFlowSaveConfigs.html">deepr.jobs.MLFlowSaveConfigs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.jobs.MLFlowSaveInfo.html">deepr.jobs.MLFlowSaveInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.jobs.OptimizeSavedModel.html">deepr.jobs.OptimizeSavedModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.jobs.Pipeline.html">deepr.jobs.Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.jobs.Trainer.html">deepr.jobs.Trainer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.jobs.YarnLauncher.html">deepr.jobs.YarnLauncher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.jobs.YarnTrainer.html">deepr.jobs.YarnTrainer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#layer">Layer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Add.html">deepr.layers.Add</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Average.html">deepr.layers.Average</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.BPR.html">deepr.layers.BPR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.BooleanMask.html">deepr.layers.BooleanMask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.ClickRank.html">deepr.layers.ClickRank</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Concat.html">deepr.layers.Concat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Dense.html">deepr.layers.Dense</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.DotProduct.html">deepr.layers.DotProduct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Embedding.html">deepr.layers.Embedding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Equal.html">deepr.layers.Equal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Identity.html">deepr.layers.Identity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.IsMinSize.html">deepr.layers.IsMinSize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Layer.html">deepr.layers.Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.LogicalAnd.html">deepr.layers.LogicalAnd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Lookup.html">deepr.layers.Lookup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.LookupFromFile.html">deepr.layers.LookupFromFile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.LookupFromMapping.html">deepr.layers.LookupFromMapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.MaskedBPR.html">deepr.layers.MaskedBPR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.NotEqual.html">deepr.layers.NotEqual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Parallel.html">deepr.layers.Parallel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Product.html">deepr.layers.Product</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Rename.html">deepr.layers.Rename</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Select.html">deepr.layers.Select</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Sequential.html">deepr.layers.Sequential</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Slice.html">deepr.layers.Slice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.SliceFirst.html">deepr.layers.SliceFirst</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.SliceLast.html">deepr.layers.SliceLast</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.StringJoin.html">deepr.layers.StringJoin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Sum.html">deepr.layers.Sum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.ToDense.html">deepr.layers.ToDense</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.WeightedAverage.html">deepr.layers.WeightedAverage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#macros">Macros</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.macros.MLFlowInit.html">deepr.macros.MLFlowInit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#metrics">Metrics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.metrics.DecayMean.html">deepr.metrics.DecayMean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.metrics.FiniteMean.html">deepr.metrics.FiniteMean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.metrics.LastValue.html">deepr.metrics.LastValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.metrics.MaxValue.html">deepr.metrics.MaxValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.metrics.Mean.html">deepr.metrics.Mean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.metrics.Metric.html">deepr.metrics.Metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.metrics.StepCounter.html">deepr.metrics.StepCounter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#optimizer">Optimizer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.optimizers.Optimizer.html">deepr.optimizers.Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.optimizers.TensorflowOptimizer.html">deepr.optimizers.TensorflowOptimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#prepro">Prepro</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.prepros.Batch.html">deepr.prepros.Batch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.prepros.Filter.html">deepr.prepros.Filter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.prepros.Map.html">deepr.prepros.Map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.prepros.PaddedBatch.html">deepr.prepros.PaddedBatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.prepros.Prefetch.html">deepr.prepros.Prefetch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.prepros.Prepro.html">deepr.prepros.Prepro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.prepros.Repeat.html">deepr.prepros.Repeat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.prepros.Serial.html">deepr.prepros.Serial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.prepros.Shuffle.html">deepr.prepros.Shuffle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.prepros.TFRecordSequenceExample.html">deepr.prepros.TFRecordSequenceExample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.prepros.Take.html">deepr.prepros.Take</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#reader">Reader</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.readers.GeneratorReader.html">deepr.readers.GeneratorReader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.readers.Reader.html">deepr.readers.Reader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.readers.TFRecordReader.html">deepr.readers.TFRecordReader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#utils">Utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.utils.Field.html">deepr.utils.Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.utils.TensorType.html">deepr.utils.TensorType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.utils.make_same_shape.html">deepr.utils.make_same_shape</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.utils.to_flat_tuple.html">deepr.utils.to_flat_tuple</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../_source/modules.html">deepr</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Core API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/API/CORE_API.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="core-api">
+<h1>Core API<a class="headerlink" href="#core-api" title="Permalink to this headline">¶</a></h1>
+<p>The core API is independent from criteo and from reco.
+It contains the basic building blocks of deepr-python and can be reused for anything.</p>
+<div class="section" id="config">
+<h2>Config<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h2>
+<p>The configuration module makes it possible to configure any object.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.config.assert_no_macros.html#deepr.config.assert_no_macros" title="deepr.config.assert_no_macros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assert_no_macros</span></code></a>(item)</p></td>
+<td><p>Raises a ValueError if item has macro parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.config.fill_macros.html#deepr.config.fill_macros" title="deepr.config.fill_macros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fill_macros</span></code></a>(item[, macros])</p></td>
+<td><p>Create item whose macro params present in macros are filled.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.config.fill_references.html#deepr.config.fill_references" title="deepr.config.fill_references"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fill_references</span></code></a>(item[, references])</p></td>
+<td><p>Fill all params that are references, fail if not found.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.config.from_config.html#deepr.config.from_config" title="deepr.config.from_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_config</span></code></a>(item)</p></td>
+<td><p>Instantiate item from config.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.config.ismacro.html#deepr.config.ismacro" title="deepr.config.ismacro"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ismacro</span></code></a>(item)</p></td>
+<td><p>True if item is a string that looks like ‘$macro:param’.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.config.isreference.html#deepr.config.isreference" title="deepr.config.isreference"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isreference</span></code></a>(item)</p></td>
+<td><p>True if item is a string that looks like <a class="reference external" href="mailto:'&#37;&#52;&#48;reference">‘<span>&#64;</span>reference</a>’.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.config.parse_config.html#deepr.config.parse_config" title="deepr.config.parse_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_config</span></code></a>(config[, macros])</p></td>
+<td><p>Fill macro parameters and references in config from macros.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="exporter">
+<h2>Exporter<a class="headerlink" href="#exporter" title="Permalink to this headline">¶</a></h2>
+<p>Exporters run at the end of training.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.exporters.Exporter.html#deepr.exporters.Exporter" title="deepr.exporters.Exporter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Exporter</span></code></a></p></td>
+<td><p>Base class for Exporters</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.exporters.BestCheckpoint.html#deepr.exporters.BestCheckpoint" title="deepr.exporters.BestCheckpoint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BestCheckpoint</span></code></a>(metric[, mode, use_mlflow, tag])</p></td>
+<td><p>Overrides Checkpoint Information to point to the best checkpoint.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.exporters.SaveVariables.html#deepr.exporters.SaveVariables" title="deepr.exporters.SaveVariables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SaveVariables</span></code></a>(path_variables, variable_names)</p></td>
+<td><p>Save Variables as Parquet, supports chunking.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.exporters.SavedModel.html#deepr.exporters.SavedModel" title="deepr.exporters.SavedModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SavedModel</span></code></a>(path_saved_model, fields)</p></td>
+<td><p>Saved Model Exporter</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hook">
+<h2>Hook<a class="headerlink" href="#hook" title="Permalink to this headline">¶</a></h2>
+<p>Hooks are called regularly during training to send some information to another service.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.hooks.EarlyStoppingHookFactory.html#deepr.hooks.EarlyStoppingHookFactory" title="deepr.hooks.EarlyStoppingHookFactory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EarlyStoppingHookFactory</span></code></a>(metric, …[, …])</p></td>
+<td><p>Early Stopping Hook Factory</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.hooks.EstimatorHookFactory.html#deepr.hooks.EstimatorHookFactory" title="deepr.hooks.EstimatorHookFactory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EstimatorHookFactory</span></code></a></p></td>
+<td><p>Estimator Hook Factory</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.hooks.LoggingTensorHookFactory.html#deepr.hooks.LoggingTensorHookFactory" title="deepr.hooks.LoggingTensorHookFactory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LoggingTensorHookFactory</span></code></a>([tensors])</p></td>
+<td><p>Parametrize the creation of a LoggingTensorHook factory.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.hooks.MaxResidentMemory.html#deepr.hooks.MaxResidentMemory" title="deepr.hooks.MaxResidentMemory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MaxResidentMemory</span></code></a>(**kwargs)</p></td>
+<td><p>Measure maximum resident memory of the current process</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.hooks.ResidentMemory.html#deepr.hooks.ResidentMemory" title="deepr.hooks.ResidentMemory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ResidentMemory</span></code></a>([unit])</p></td>
+<td><p>Measure resident memory of the current process</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.hooks.StepsPerSecHook.html#deepr.hooks.StepsPerSecHook" title="deepr.hooks.StepsPerSecHook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StepsPerSecHook</span></code></a>(batch_size[, name, …])</p></td>
+<td><p>Logs steps per seconds and num_examples_per_sec.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.hooks.SummarySaverHookFactory.html#deepr.hooks.SummarySaverHookFactory" title="deepr.hooks.SummarySaverHookFactory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SummarySaverHookFactory</span></code></a>([tensors])</p></td>
+<td><p>Summary Saver Hook</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.hooks.TensorHookFactory.html#deepr.hooks.TensorHookFactory" title="deepr.hooks.TensorHookFactory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TensorHookFactory</span></code></a></p></td>
+<td><p>Tensor Hook Factory</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="initializer">
+<h2>Initializer<a class="headerlink" href="#initializer" title="Permalink to this headline">¶</a></h2>
+<p>Initializers run before training.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.initializers.CheckpointInitializer.html#deepr.initializers.CheckpointInitializer" title="deepr.initializers.CheckpointInitializer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointInitializer</span></code></a>(path_init_ckpt, …)</p></td>
+<td><p>Checkpoint Initializer</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="io">
+<h2>Io<a class="headerlink" href="#io" title="Permalink to this headline">¶</a></h2>
+<p>Io provides helpers to read/write from file systems.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.io.HDFSFileSystem.html#deepr.io.HDFSFileSystem" title="deepr.io.HDFSFileSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HDFSFileSystem</span></code></a>()</p></td>
+<td><p>Context aware HDFSFileSystem using pyarrow.hdfs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.io.ParquetDataset.html#deepr.io.ParquetDataset" title="deepr.io.ParquetDataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ParquetDataset</span></code></a>(path_or_paths[, filesystem])</p></td>
+<td><p>Context aware ParquetDataset with support for chunk writing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.io.Path.html#deepr.io.Path" title="deepr.io.Path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Path</span></code></a>(*args)</p></td>
+<td><p>Equivalent of pathlib.Path for local and HDFS FileSystem</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.io.read_json.html#deepr.io.read_json" title="deepr.io.read_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_json</span></code></a>(path)</p></td>
+<td><p>Read json or jsonnet file into dictionary</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="job">
+<h2>Job<a class="headerlink" href="#job" title="Permalink to this headline">¶</a></h2>
+<p>Jobs are the programs that will actually run, they are composable through the pipeline job, the yarn launcher and trainer job.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.Job.html#deepr.jobs.Job" title="deepr.jobs.Job"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Job</span></code></a></p></td>
+<td><p>Interface for jobs</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.LogMetric.html#deepr.jobs.LogMetric" title="deepr.jobs.LogMetric"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LogMetric</span></code></a>(key, value[, use_mlflow])</p></td>
+<td><p>Log Metric job</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.MLFlowSaveConfigs.html#deepr.jobs.MLFlowSaveConfigs" title="deepr.jobs.MLFlowSaveConfigs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MLFlowSaveConfigs</span></code></a>([use_mlflow, config, …])</p></td>
+<td><p>Upload Configs to MLFlow</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.MLFlowSaveInfo.html#deepr.jobs.MLFlowSaveInfo" title="deepr.jobs.MLFlowSaveInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MLFlowSaveInfo</span></code></a>([use_mlflow, path_mlflow, …])</p></td>
+<td><p>Save MLFlow info to path</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.OptimizeSavedModel.html#deepr.jobs.OptimizeSavedModel" title="deepr.jobs.OptimizeSavedModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OptimizeSavedModel</span></code></a>(path_saved_model, …[, …])</p></td>
+<td><p>Converts SavedModel into an optimized protobuf for inference</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.Pipeline.html#deepr.jobs.Pipeline" title="deepr.jobs.Pipeline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Pipeline</span></code></a>(jobs)</p></td>
+<td><p>Pipeline, executes list of jobs in order</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.Trainer.html#deepr.jobs.Trainer" title="deepr.jobs.Trainer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Trainer</span></code></a>(path_model, pred_fn, loss_fn, …[, …])</p></td>
+<td><p>Train and evaluate a tf.Estimator on the current machine.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.YarnLauncher.html#deepr.jobs.YarnLauncher" title="deepr.jobs.YarnLauncher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">YarnLauncher</span></code></a>(job, config[, run_on_yarn])</p></td>
+<td><p>Packages current environment, upload <cite>.pex</cite> and run yarn job.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.YarnTrainer.html#deepr.jobs.YarnTrainer" title="deepr.jobs.YarnTrainer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">YarnTrainer</span></code></a>(trainer, config[, train_on_yarn])</p></td>
+<td><p>Run a <cite>Trainer</cite> job on yarn using distributed settings.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="layer">
+<h2>Layer<a class="headerlink" href="#layer" title="Permalink to this headline">¶</a></h2>
+<p>Tensorflow logic is preferably defined in a <cite>Layer</cite> for re-usability and composability. It is the equivalent of <cite>Keras</cite>, <cite>Trax</cite>, etc. layers.
+It takes as input / returns a dictionary of <cite>tf.Tensor</cite>. This means that the <cite>__init__</cite> method of a <cite>Layer</cite> must define which keys are used for inputs / outputs.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Add.html#deepr.layers.Add" title="deepr.layers.Add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Add</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Add two tensors of any compatible shape</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Average.html#deepr.layers.Average" title="deepr.layers.Average"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Average</span></code></a>(**kwargs)</p></td>
+<td><p>Average Layer</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.BPR.html#deepr.layers.BPR" title="deepr.layers.BPR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BPR</span></code></a>(**kwargs)</p></td>
+<td><p>Vanilla BPR Loss Layer</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.BooleanMask.html#deepr.layers.BooleanMask" title="deepr.layers.BooleanMask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BooleanMask</span></code></a>(**kwargs)</p></td>
+<td><p>Boolean Mask Layer</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.ClickRank.html#deepr.layers.ClickRank" title="deepr.layers.ClickRank"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ClickRank</span></code></a>(**kwargs)</p></td>
+<td><p>Click Rank Layer</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Concat.html#deepr.layers.Concat" title="deepr.layers.Concat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Concat</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Concatenate tensors on axis</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Dense.html#deepr.layers.Dense" title="deepr.layers.Dense"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Dense</span></code></a>(units[, inputs, outputs, name])</p></td>
+<td><p>Dense Layer</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.DotProduct.html#deepr.layers.DotProduct" title="deepr.layers.DotProduct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DotProduct</span></code></a>([n_in])</p></td>
+<td><p>Dot Product on the last dimension of the input vectors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Embedding.html#deepr.layers.Embedding" title="deepr.layers.Embedding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Embedding</span></code></a>(variable_name, shape[, trainable, …])</p></td>
+<td><p>Partitioned Embedding Layer</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Equal.html#deepr.layers.Equal" title="deepr.layers.Equal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Equal</span></code></a>(values[, reduce_mode])</p></td>
+<td><p>Equal Layer</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Identity.html#deepr.layers.Identity" title="deepr.layers.Identity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Identity</span></code></a>([inputs, name])</p></td>
+<td><p>Identity Layer</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.IsMinSize.html#deepr.layers.IsMinSize" title="deepr.layers.IsMinSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IsMinSize</span></code></a>(size, **kwargs)</p></td>
+<td><p>Compare size of inputs to minimum</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Layer.html#deepr.layers.Layer" title="deepr.layers.Layer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Layer</span></code></a>([n_in, n_out, inputs, outputs, name])</p></td>
+<td><p>Base class for composable layers in a deep learning network.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.LogicalAnd.html#deepr.layers.LogicalAnd" title="deepr.layers.LogicalAnd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LogicalAnd</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Perform logical_and on two tensors of compatible shape</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Lookup.html#deepr.layers.Lookup" title="deepr.layers.Lookup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Lookup</span></code></a>(table_initializer_fn, **kwargs)</p></td>
+<td><p>Lookup Layer</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.LookupFromFile.html#deepr.layers.LookupFromFile" title="deepr.layers.LookupFromFile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LookupFromFile</span></code></a>(table_name, path[, key_dtype])</p></td>
+<td><p>Lookup From File Layer</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.LookupFromMapping.html#deepr.layers.LookupFromMapping" title="deepr.layers.LookupFromMapping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LookupFromMapping</span></code></a>(table_name, mapping[, …])</p></td>
+<td><p>Lookup From Mapping Layer</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.MaskedBPR.html#deepr.layers.MaskedBPR" title="deepr.layers.MaskedBPR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MaskedBPR</span></code></a>(**kwargs)</p></td>
+<td><p>Masked BPR Loss Layer</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.NotEqual.html#deepr.layers.NotEqual" title="deepr.layers.NotEqual"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NotEqual</span></code></a>(values[, reduce_mode])</p></td>
+<td><p>Not Equal Layer</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Parallel.html#deepr.layers.Parallel" title="deepr.layers.Parallel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Parallel</span></code></a>(*layers)</p></td>
+<td><p>Apply layers in parallel on consecutive inputs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Product.html#deepr.layers.Product" title="deepr.layers.Product"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Product</span></code></a>([n_in])</p></td>
+<td><p>Product Layer</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Rename.html#deepr.layers.Rename" title="deepr.layers.Rename"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Rename</span></code></a>(layer[, inputs, outputs])</p></td>
+<td><p>Wrap Layer in a Node to rename inputs / outputs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Select.html#deepr.layers.Select" title="deepr.layers.Select"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Select</span></code></a>([inputs, outputs, indices, n_in])</p></td>
+<td><p>Layer to extract inputs / outputs from previous layers</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Sequential.html#deepr.layers.Sequential" title="deepr.layers.Sequential"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sequential</span></code></a>(*layers)</p></td>
+<td><p>Class to easily compose layers in a deep learning network.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Slice.html#deepr.layers.Slice" title="deepr.layers.Slice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Slice</span></code></a>(begin, end, **kwargs)</p></td>
+<td><p>Slice Layer</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.SliceFirst.html#deepr.layers.SliceFirst" title="deepr.layers.SliceFirst"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SliceFirst</span></code></a>(size, **kwargs)</p></td>
+<td><p>Slice First Layer</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.SliceLast.html#deepr.layers.SliceLast" title="deepr.layers.SliceLast"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SliceLast</span></code></a>(size, **kwargs)</p></td>
+<td><p>Slice First Layer</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.StringJoin.html#deepr.layers.StringJoin" title="deepr.layers.StringJoin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StringJoin</span></code></a>([n_in, separator])</p></td>
+<td><p>String Join Layer</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Sum.html#deepr.layers.Sum" title="deepr.layers.Sum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sum</span></code></a>([n_in])</p></td>
+<td><p>Sum Layer</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.ToDense.html#deepr.layers.ToDense" title="deepr.layers.ToDense"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ToDense</span></code></a>(default_value, **kwargs)</p></td>
+<td><p>Sparse to Dense Layer</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.WeightedAverage.html#deepr.layers.WeightedAverage" title="deepr.layers.WeightedAverage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WeightedAverage</span></code></a>([default])</p></td>
+<td><p>Weighted Average Layer</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="macros">
+<h2>Macros<a class="headerlink" href="#macros" title="Permalink to this headline">¶</a></h2>
+<p>Macros are subclasses of dictionaries that dynamically create params for configs.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.macros.MLFlowInit.html#deepr.macros.MLFlowInit" title="deepr.macros.MLFlowInit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MLFlowInit</span></code></a>([use_mlflow, run_name, …])</p></td>
+<td><p>MLFlow Macro initializes MLFlow run and sets MLFlow parameters</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="metrics">
+<h2>Metrics<a class="headerlink" href="#metrics" title="Permalink to this headline">¶</a></h2>
+<p>Metrics compute training and validation information during training.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.metrics.DecayMean.html#deepr.metrics.DecayMean" title="deepr.metrics.DecayMean"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DecayMean</span></code></a>([decay, tensors])</p></td>
+<td><p>Decay Mean Metric</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.metrics.FiniteMean.html#deepr.metrics.FiniteMean" title="deepr.metrics.FiniteMean"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FiniteMean</span></code></a>([tensors])</p></td>
+<td><p>Finite Mean Metric</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.metrics.LastValue.html#deepr.metrics.LastValue" title="deepr.metrics.LastValue"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LastValue</span></code></a>([tensors])</p></td>
+<td><p>Last value Metric</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.metrics.MaxValue.html#deepr.metrics.MaxValue" title="deepr.metrics.MaxValue"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MaxValue</span></code></a>([tensors])</p></td>
+<td><p>Max value Metric</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.metrics.Mean.html#deepr.metrics.Mean" title="deepr.metrics.Mean"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Mean</span></code></a>([tensors])</p></td>
+<td><p>Finite Mean Metric</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.metrics.Metric.html#deepr.metrics.Metric" title="deepr.metrics.Metric"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Metric</span></code></a></p></td>
+<td><p>Base class for Metrics</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.metrics.StepCounter.html#deepr.metrics.StepCounter" title="deepr.metrics.StepCounter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StepCounter</span></code></a>(name)</p></td>
+<td><p>StepCounter Metric</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="optimizer">
+<h2>Optimizer<a class="headerlink" href="#optimizer" title="Permalink to this headline">¶</a></h2>
+<p>Optimizer is the way to optimize your graph.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.optimizers.Optimizer.html#deepr.optimizers.Optimizer" title="deepr.optimizers.Optimizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Optimizer</span></code></a></p></td>
+<td><p>Interface for Optimizers</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.optimizers.TensorflowOptimizer.html#deepr.optimizers.TensorflowOptimizer" title="deepr.optimizers.TensorflowOptimizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TensorflowOptimizer</span></code></a>(optimizer, learning_rate)</p></td>
+<td><p>Default Tensorflow Optimizers</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="prepro">
+<h2>Prepro<a class="headerlink" href="#prepro" title="Permalink to this headline">¶</a></h2>
+<p>The <cite>Prepro</cite> classes are utilities to transform <cite>tf.data.Dataset</cite>.</p>
+<p>The most common way to define a <cite>Prepro</cite> is to wrap a <cite>Layer</cite> with a <cite>MapLayer</cite> or <cite>FilterLayer</cite> transform.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.prepros.Batch.html#deepr.prepros.Batch" title="deepr.prepros.Batch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Batch</span></code></a>(batch_size[, drop_remainder])</p></td>
+<td><p>Combines consecutive elements of a dataset into batches.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.prepros.Filter.html#deepr.prepros.Filter" title="deepr.prepros.Filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Filter</span></code></a>(predicate[, on_dict, modes])</p></td>
+<td><p>Filter a dataset keeping only elements on which predicate is True</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.prepros.Map.html#deepr.prepros.Map" title="deepr.prepros.Map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Map</span></code></a>(map_func[, on_dict, update, modes, …])</p></td>
+<td><p>Map a function on each element of a tf.data.Dataset.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.prepros.PaddedBatch.html#deepr.prepros.PaddedBatch" title="deepr.prepros.PaddedBatch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PaddedBatch</span></code></a>(batch_size, fields[, drop_remainder])</p></td>
+<td><p>Combines consecutive elements of a dataset into padded batches.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.prepros.Prefetch.html#deepr.prepros.Prefetch" title="deepr.prepros.Prefetch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Prefetch</span></code></a>(buffer_size)</p></td>
+<td><p>Creates a dataset that prefetch element on CPU / GPU.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Prepro</span></code></a></p></td>
+<td><p>Base class for composable preprocessing functions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.prepros.Repeat.html#deepr.prepros.Repeat" title="deepr.prepros.Repeat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Repeat</span></code></a>([count, modes])</p></td>
+<td><p>Repeats a dataset so each original value is seen count times.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.prepros.Serial.html#deepr.prepros.Serial" title="deepr.prepros.Serial"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Serial</span></code></a>(*preprocessors[, fuse, …])</p></td>
+<td><p>Chain preprocessors to define complex preprocessing pipelines.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.prepros.Shuffle.html#deepr.prepros.Shuffle" title="deepr.prepros.Shuffle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Shuffle</span></code></a>(buffer_size[, modes])</p></td>
+<td><p>Randomly shuffles the elements of a dataset.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.prepros.TFRecordSequenceExample.html#deepr.prepros.TFRecordSequenceExample" title="deepr.prepros.TFRecordSequenceExample"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TFRecordSequenceExample</span></code></a>(fields, **kwargs)</p></td>
+<td><p>Parse TF Record Sequence Example</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.prepros.Take.html#deepr.prepros.Take" title="deepr.prepros.Take"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Take</span></code></a>([count])</p></td>
+<td><p>Creates a dataset with at most count elements.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="reader">
+<h2>Reader<a class="headerlink" href="#reader" title="Permalink to this headline">¶</a></h2>
+<p>A <cite>Reader</cite> is the equivalent of <cite>tensorflow_dataset</cite> readers. Their <cite>__init__</cite> method defines all the parameters necessary to create a <cite>tf.data.Dataset</cite>.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.readers.GeneratorReader.html#deepr.readers.GeneratorReader" title="deepr.readers.GeneratorReader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GeneratorReader</span></code></a>(generator_fn, output_types)</p></td>
+<td><p>Reader Class for datasets using generator functions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.readers.Reader.html#deepr.readers.Reader" title="deepr.readers.Reader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Reader</span></code></a></p></td>
+<td><p>Interface for readers, similar to tensorflow_datasets</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.readers.TFRecordReader.html#deepr.readers.TFRecordReader" title="deepr.readers.TFRecordReader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TFRecordReader</span></code></a>(path[, num_parallel_reads, …])</p></td>
+<td><p>Class for TFRecord Reader of tf.train.Example</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="utils">
+<h2>Utils<a class="headerlink" href="#utils" title="Permalink to this headline">¶</a></h2>
+<p>Various functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.utils.Field.html#deepr.utils.Field" title="deepr.utils.Field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Field</span></code></a>(name, shape, dtype[, default])</p></td>
+<td><p>Convenient way to define fields for features.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">GraphiteClient</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.utils.TensorType.html#deepr.utils.TensorType" title="deepr.utils.TensorType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TensorType</span></code></a>(dtype)</p></td>
+<td><p>Return TensorType from Python, TensorFlow or NumPy type</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.utils.make_same_shape.html#deepr.utils.make_same_shape" title="deepr.utils.make_same_shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_same_shape</span></code></a>(tensors[, broadcast])</p></td>
+<td><p>Make list of tensors the same shape</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.utils.to_flat_tuple.html#deepr.utils.to_flat_tuple" title="deepr.utils.to_flat_tuple"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_flat_tuple</span></code></a>(items)</p></td>
+<td><p>Convert nested list, tuples and generators to a flat tuple.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="_autosummary/deepr.config.assert_no_macros.html" class="btn btn-neutral float-right" title="deepr.config.assert_no_macros" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../CHANGELOG.html" class="btn btn-neutral float-left" title="Changelog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Reco.Consideration
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

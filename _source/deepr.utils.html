@@ -1,0 +1,541 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>deepr.utils package &mdash; deepr 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="deepr.readers package" href="deepr.readers.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">deepR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../API/CORE_API.html">Core API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">deepr</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="deepr.html">deepr package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="deepr.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="deepr.cli.html">deepr.cli package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.config.html">deepr.config package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.example.html">deepr.example package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.exporters.html">deepr.exporters package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.hooks.html">deepr.hooks package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.initializers.html">deepr.initializers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.io.html">deepr.io package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.jobs.html">deepr.jobs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.layers.html">deepr.layers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.macros.html">deepr.macros package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.metrics.html">deepr.metrics package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.optimizers.html">deepr.optimizers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.prepros.html">deepr.prepros package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.readers.html">deepr.readers package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">deepr.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.html#module-deepr.version">deepr.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.html#module-deepr">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">deepr</a> &raquo;</li>
+        
+          <li><a href="deepr.html">deepr package</a> &raquo;</li>
+        
+      <li>deepr.utils package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_source/deepr.utils.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="deepr-utils-package">
+<h1>deepr.utils package<a class="headerlink" href="#deepr-utils-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-deepr.utils.broadcasting">
+<span id="deepr-utils-broadcasting-module"></span><h2>deepr.utils.broadcasting module<a class="headerlink" href="#module-deepr.utils.broadcasting" title="Permalink to this headline">¶</a></h2>
+<p>Tensorflow Broadcasting utilities</p>
+<dl class="py function">
+<dt id="deepr.utils.broadcasting.make_same_shape">
+<code class="sig-prename descclassname">deepr.utils.broadcasting.</code><code class="sig-name descname">make_same_shape</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">broadcast</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/broadcasting.html#make_same_shape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.broadcasting.make_same_shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make list of tensors the same shape</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>List</em><em>[</em><em>tf.Tensor</em><em>]</em>) – List of tensors</p></li>
+<li><p><strong>broadcast</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, not only add missing dims, also broadcast</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[tf.Tensor]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.utils.checkpoint">
+<span id="deepr-utils-checkpoint-module"></span><h2>deepr.utils.checkpoint module<a class="headerlink" href="#module-deepr.utils.checkpoint" title="Permalink to this headline">¶</a></h2>
+<p>Checkpoint utilities</p>
+<dl class="py function">
+<dt id="deepr.utils.checkpoint.save_variables_in_ckpt">
+<code class="sig-prename descclassname">deepr.utils.checkpoint.</code><code class="sig-name descname">save_variables_in_ckpt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">variables</span></em>, <em class="sig-param"><span class="n">num_shards_embeddings</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/checkpoint.html#save_variables_in_ckpt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.checkpoint.save_variables_in_ckpt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save variables in checkpoint</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.utils.datastruct">
+<span id="deepr-utils-datastruct-module"></span><h2>deepr.utils.datastruct module<a class="headerlink" href="#module-deepr.utils.datastruct" title="Permalink to this headline">¶</a></h2>
+<p>Generic Iter Utilities</p>
+<dl class="py function">
+<dt id="deepr.utils.datastruct.dict_to_item">
+<code class="sig-prename descclassname">deepr.utils.datastruct.</code><code class="sig-name descname">dict_to_item</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">keys</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/datastruct.html#dict_to_item"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.datastruct.dict_to_item" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="deepr.utils.datastruct.item_to_dict">
+<code class="sig-prename descclassname">deepr.utils.datastruct.</code><code class="sig-name descname">item_to_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">items</span></em>, <em class="sig-param"><span class="n">keys</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/datastruct.html#item_to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.datastruct.item_to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.utils.datastruct.to_flat_tuple">
+<code class="sig-prename descclassname">deepr.utils.datastruct.</code><code class="sig-name descname">to_flat_tuple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">items</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/datastruct.html#to_flat_tuple"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.datastruct.to_flat_tuple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert nested list, tuples and generators to a flat tuple.</p>
+<p>Flatten any nested structure of items. Will unpack lists, tuple and
+generators. Any other type will not be unpacked, meaning that you
+can safely use this function on other iterable types like strings
+or <cite>tf.Tensor</cite>. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">to_flat_tuple</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># (1,)</span>
+<span class="n">to_flat_tuple</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>  <span class="c1"># (&quot;hello&quot;,)</span>
+<span class="n">to_flat_tuple</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>  <span class="c1"># (tf.ones([2, 2]),)</span>
+<span class="n">to_flat_tuple</span><span class="p">((</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>  <span class="c1"># (0, 1)</span>
+<span class="n">to_flat_tuple</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># (1, 2)</span>
+<span class="n">to_flat_tuple</span><span class="p">(((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># (0, 1, 2)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>items</strong> (<em>Item</em><em>, </em><em>Tuple</em><em>, </em><em>List</em><em> or </em><em>Generator</em><em> (</em><em>nested</em><em>)</em>) – Items to transform to a flat tuple</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.utils.exceptions">
+<span id="deepr-utils-exceptions-module"></span><h2>deepr.utils.exceptions module<a class="headerlink" href="#module-deepr.utils.exceptions" title="Permalink to this headline">¶</a></h2>
+<p>Utilities for dealing with exceptions.</p>
+<dl class="py function">
+<dt id="deepr.utils.exceptions.handle_exceptions">
+<code class="sig-prename descclassname">deepr.utils.exceptions.</code><code class="sig-name descname">handle_exceptions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fn</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/exceptions.html#handle_exceptions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.exceptions.handle_exceptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle Exceptions Decorator.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.utils.field">
+<span id="deepr-utils-field-module"></span><h2>deepr.utils.field module<a class="headerlink" href="#module-deepr.utils.field" title="Permalink to this headline">¶</a></h2>
+<p>Field</p>
+<dl class="py class">
+<dt id="deepr.utils.field.Field">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.utils.field.</code><code class="sig-name descname">Field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">shape</span></em>, <em class="sig-param"><span class="n">dtype</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/field.html#Field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.field.Field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Convenient way to define fields for features.</p>
+<dl class="py attribute">
+<dt id="deepr.utils.field.Field.default">
+<code class="sig-name descname">default</code><a class="headerlink" href="#deepr.utils.field.Field.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default value of the field for padding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.utils.field.Field.dtype">
+<code class="sig-name descname">dtype</code><a class="headerlink" href="#deepr.utils.field.Field.dtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tensorflow type of the field (automatically inferred if string)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tf.DType</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.utils.field.Field.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#deepr.utils.field.Field.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the fields</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.utils.field.Field.shape">
+<code class="sig-name descname">shape</code><a class="headerlink" href="#deepr.utils.field.Field.shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shape of the field</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.utils.field.Field.as_feature">
+<code class="sig-name descname">as_feature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/field.html#Field.as_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.field.Field.as_feature" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="deepr.utils.field.Field.as_placeholder">
+<code class="sig-name descname">as_placeholder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">batch</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/field.html#Field.as_placeholder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.field.Field.as_placeholder" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">placeholder</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.utils.field.Field.has_fixed_len">
+<code class="sig-name descname">has_fixed_len</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/field.html#Field.has_fixed_len"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.field.Field.has_fixed_len" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.utils.field.Field.has_var_len">
+<code class="sig-name descname">has_var_len</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/field.html#Field.has_var_len"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.field.Field.has_var_len" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.utils.field.Field.startswith">
+<code class="sig-name descname">startswith</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">prefix</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/field.html#Field.startswith"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.field.Field.startswith" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.utils.field.TensorType">
+<code class="sig-prename descclassname">deepr.utils.field.</code><code class="sig-name descname">TensorType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dtype</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/field.html#TensorType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.field.TensorType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return TensorType from Python, TensorFlow or NumPy type</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.utils.graphite">
+<span id="deepr-utils-graphite-module"></span><h2>deepr.utils.graphite module<a class="headerlink" href="#module-deepr.utils.graphite" title="Permalink to this headline">¶</a></h2>
+<p>Graphite Utilities</p>
+<dl class="py function">
+<dt id="deepr.utils.graphite.get_sender">
+<code class="sig-prename descclassname">deepr.utils.graphite.</code><code class="sig-name descname">get_sender</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">host</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">port</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">prefix</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">postfix</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">interval</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/graphite.html#get_sender"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.graphite.get_sender" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Graphite Sender.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.utils.graphite.log_metric">
+<code class="sig-prename descclassname">deepr.utils.graphite.</code><code class="sig-name descname">log_metric</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">metric</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">postfix</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/graphite.html#log_metric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.graphite.log_metric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log metric to graphite.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.utils.graphite.log_metrics">
+<code class="sig-prename descclassname">deepr.utils.graphite.</code><code class="sig-name descname">log_metrics</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">metrics</span></em>, <em class="sig-param"><span class="n">postfix</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/graphite.html#log_metrics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.graphite.log_metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log metrics to graphite</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.utils.mlflow">
+<span id="deepr-utils-mlflow-module"></span><h2>deepr.utils.mlflow module<a class="headerlink" href="#module-deepr.utils.mlflow" title="Permalink to this headline">¶</a></h2>
+<p>MLFlow utilities.</p>
+<dl class="py function">
+<dt id="deepr.utils.mlflow.clear_run">
+<code class="sig-prename descclassname">deepr.utils.mlflow.</code><code class="sig-name descname">clear_run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/mlflow.html#clear_run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.mlflow.clear_run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear run (remove from MLFlow stack and unset ENV variable).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.utils.mlflow.download_artifacts">
+<code class="sig-prename descclassname">deepr.utils.mlflow.</code><code class="sig-name descname">download_artifacts</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">run_id</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">dst_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tracking_uri</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/mlflow.html#download_artifacts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.mlflow.download_artifacts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download artifacts from MLFlow over HTTP if possible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>run_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – MLFlow Run Id</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Path of the artifact</p></li>
+<li><p><strong>dst_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Path on the local system</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.utils.mlflow.log_dict">
+<code class="sig-prename descclassname">deepr.utils.mlflow.</code><code class="sig-name descname">log_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/mlflow.html#log_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.mlflow.log_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log dictionary to MLFlow as an artifact under filename.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.utils.mlflow.set_experiment">
+<code class="sig-prename descclassname">deepr.utils.mlflow.</code><code class="sig-name descname">set_experiment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">artifact_location</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/mlflow.html#set_experiment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.mlflow.set_experiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set Experiment with specific artifact_location.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.utils.uuid">
+<span id="deepr-utils-uuid-module"></span><h2>deepr.utils.uuid module<a class="headerlink" href="#module-deepr.utils.uuid" title="Permalink to this headline">¶</a></h2>
+<p>Uuid</p>
+<dl class="py function">
+<dt id="deepr.utils.uuid.msb_lsb_to_str">
+<code class="sig-prename descclassname">deepr.utils.uuid.</code><code class="sig-name descname">msb_lsb_to_str</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msb</span></em>, <em class="sig-param"><span class="n">lsb</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/uuid.html#msb_lsb_to_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.uuid.msb_lsb_to_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="deepr.utils.uuid.str_to_msb_lsb">
+<code class="sig-prename descclassname">deepr.utils.uuid.</code><code class="sig-name descname">str_to_msb_lsb</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">el</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/uuid.html#str_to_msb_lsb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.uuid.str_to_msb_lsb" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-deepr.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-deepr.utils" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="deepr.readers.html" class="btn btn-neutral float-left" title="deepr.readers package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Reco.Consideration
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

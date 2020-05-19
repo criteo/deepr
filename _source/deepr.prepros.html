@@ -1,0 +1,927 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>deepr.prepros package &mdash; deepr 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="deepr.readers package" href="deepr.readers.html" />
+    <link rel="prev" title="deepr.optimizers package" href="deepr.optimizers.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">deepR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../API/CORE_API.html">Core API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">deepr</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="deepr.html">deepr package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="deepr.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="deepr.cli.html">deepr.cli package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.config.html">deepr.config package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.example.html">deepr.example package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.exporters.html">deepr.exporters package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.hooks.html">deepr.hooks package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.initializers.html">deepr.initializers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.io.html">deepr.io package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.jobs.html">deepr.jobs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.layers.html">deepr.layers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.macros.html">deepr.macros package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.metrics.html">deepr.metrics package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.optimizers.html">deepr.optimizers package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">deepr.prepros package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.readers.html">deepr.readers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.utils.html">deepr.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.html#module-deepr.version">deepr.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.html#module-deepr">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">deepr</a> &raquo;</li>
+        
+          <li><a href="deepr.html">deepr package</a> &raquo;</li>
+        
+      <li>deepr.prepros package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_source/deepr.prepros.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="deepr-prepros-package">
+<h1>deepr.prepros package<a class="headerlink" href="#deepr-prepros-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-deepr.prepros.base">
+<span id="deepr-prepros-base-module"></span><h2>deepr.prepros.base module<a class="headerlink" href="#module-deepr.prepros.base" title="Permalink to this headline">¶</a></h2>
+<p>Abstract Base Class for preprocessing</p>
+<dl class="py class">
+<dt id="deepr.prepros.base.Prepro">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.base.</code><code class="sig-name descname">Prepro</code><a class="reference internal" href="../_modules/deepr/prepros/base.html#Prepro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.base.Prepro" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<p>Base class for composable preprocessing functions.</p>
+<p><cite>Prepro</cite> are the basic building blocks of a preprocessing pipeline.
+A <cite>Prepro</cite> defines a function on a tf.data.Dataset.</p>
+<p>The basic usage of a <cite>Prepro</cite> is to apply it on a Dataset. For
+example:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_generator</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="go">[0, 1, 2]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">element</span><span class="p">:</span> <span class="n">element</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+<span class="go">[1, 2, 3]</span>
+</pre></div>
+</div>
+<p>Because some preprocessing pipelines behave differently depending
+on the mode (TRAIN, EVAL, PREDICT), an optional argument can be
+provided:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">map_func</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="mi">0</span>
+<span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">element</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">map_func</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">)</span>
+<span class="go">[0, 1, 2]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">)</span>
+<span class="go">[0, 0, 0]</span>
+</pre></div>
+</div>
+<p><cite>Map</cite>, <cite>Filter</cite>, <cite>Shuffle</cite> and <cite>Repeat</cite> have a special attribute
+<cite>modes</cite> that you can use to specify the modes on which the
+preprocessing should be applied. For example:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">map_func</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">map_func</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">)</span>
+<span class="go">[0, 1, 2]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">)</span>
+<span class="go">[0, 0, 0]</span>
+</pre></div>
+</div>
+<p>Authors of new <cite>Prepro</cite> subclasses typically override the <cite>apply</cite>
+method of the base <cite>Prepro</cite> class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">dataset</span>
+</pre></div>
+</div>
+<p>The easiest way to define custom preprocessors is to use the
+<cite>prepro</cite> decorator (see documentation).</p>
+<dl class="py method">
+<dt id="deepr.prepros.base.Prepro.apply">
+<em class="property">abstract </em><code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/base.html#Prepro.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.base.Prepro.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pre-process a dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DatasetV1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.prepros.base.prepro">
+<code class="sig-prename descclassname">deepr.prepros.base.</code><code class="sig-name descname">prepro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fn</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/base.html#prepro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.base.prepro" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that creates a <cite>Prepro</cite> class from a function</p>
+<p>This decorator can be used to define <cite>Prepro</cite> classes in a non
+verbose way.</p>
+<p>For example, the following snippet defines a subclass of <cite>Prepro</cite>
+whose <cite>apply</cite> offsets each element of the dataset by <cite>offset</cite>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@prepro</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">AddOffset</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">element</span><span class="p">:</span> <span class="n">element</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">AddOffset</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+<span class="go">[1, 2, 3]</span>
+</pre></div>
+</div>
+<p>The class created by the decorator is roughly equivalent to</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AddOffset</span><span class="p">(</span><span class="n">Prepro</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">)</span>
+        <span class="n">Prepro</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="n">offset</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">element</span><span class="p">:</span> <span class="n">element</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also add a ‘mode’ argument to your preprocessor like so</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@prepro</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">AddOffset</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">element</span><span class="p">:</span> <span class="n">element</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">dataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">AddOffset</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">)</span>
+<span class="go">[1, 2, 3]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">)</span>
+<span class="go">[0, 1, 2]</span>
+</pre></div>
+</div>
+<p>Note that ‘dataset’ and ‘mode’ need to be the the first arguments
+of the function IN THIS ORDER.</p>
+<p>Another way of using the decorator is on functions that create
+<cite>Prepro</cite> instances. This allows you to create factories of
+preprocessors and make them <cite>Prepro</cite> classes.</p>
+<p>For example, the following snippet defines a subclass of <cite>Prepro</cite>
+whose <cite>apply</cite> method is the same as the prepro returned by the
+function.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@prepro</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">AddOne</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Prepro</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">AddOffset</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">AddOne</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+<span class="go">[1, 2, 3]</span>
+</pre></div>
+</div>
+<p>A nice feature of the <cite>prepro</cite> decorator is laziness: the code
+inside the function is not executed until a call on a dataset. In
+other words:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@prepro</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">MyLookup</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">table</span> <span class="o">=</span> <span class="n">create_table_from_file</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">Map</span><span class="p">(</span><span class="n">Lookup</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;ids&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;indices&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">MyLookup</span><span class="p">()</span>
+<span class="go">The `table` object is not created</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+<span class="go">The body of `MyLookup` gets executed</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.prepros.combinators">
+<span id="deepr-prepros-combinators-module"></span><h2>deepr.prepros.combinators module<a class="headerlink" href="#module-deepr.prepros.combinators" title="Permalink to this headline">¶</a></h2>
+<p>Combine Preprocessors</p>
+<dl class="py class">
+<dt id="deepr.prepros.combinators.Serial">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.combinators.</code><code class="sig-name descname">Serial</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">preprocessors</span></em>, <em class="sig-param"><span class="n">fuse</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">num_parallel_calls</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/combinators.html#Serial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.combinators.Serial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
+<p>Chain preprocessors to define complex preprocessing pipelines.</p>
+<p>It will apply each preprocessing step one after the other on each
+element. For performance reasons, it fuses <cite>Map</cite> and <cite>Filter</cite>
+operations into single <cite>tf.data</cite> calls.</p>
+<p>For an example, see the following snippet:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">deepr.layers</span> <span class="k">as</span> <span class="nn">dprl</span>
+<span class="kn">import</span> <span class="nn">deepr.prepros</span> <span class="k">as</span> <span class="nn">dprp</span>
+
+<span class="k">def</span> <span class="nf">gen</span><span class="p">():</span>
+    <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]}</span>
+    <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
+    <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]}</span>
+
+<span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">dprp</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span>
+    <span class="n">dprp</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">dprl</span><span class="o">.</span><span class="n">Sum</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">)),</span>
+    <span class="n">dprp</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="n">dprl</span><span class="o">.</span><span class="n">IsMinSize</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;a_size&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">)),</span>
+    <span class="n">dprp</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="n">dprl</span><span class="o">.</span><span class="n">IsMinSize</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;b_size&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">)),</span>
+<span class="p">)</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_generator</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">(</span><span class="kc">None</span><span class="p">,),</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">(</span><span class="kc">None</span><span class="p">,)})</span>
+<span class="n">reader</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">from_dataset</span><span class="p">(</span><span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">))</span>
+<span class="n">expected</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]}]</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="deepr.prepros.combinators.Serial.fuse">
+<code class="sig-name descname">fuse</code><a class="headerlink" href="#deepr.prepros.combinators.Serial.fuse" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True (default), will fuse <cite>Map</cite> and <cite>Filter</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a>, Optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.prepros.combinators.Serial.preprocessors">
+<code class="sig-name descname">preprocessors</code><a class="headerlink" href="#deepr.prepros.combinators.Serial.preprocessors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Positional arguments of <cite>Prepro</cite> instance or Tuple / List /
+Generator of prepro instances</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Union[<a class="reference internal" href="../API/_autosummary/deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro">Prepro</a>, Tuple[<a class="reference internal" href="../API/_autosummary/deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro">Prepro</a>], List[<a class="reference internal" href="../API/_autosummary/deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro">Prepro</a>], Generator[<a class="reference internal" href="../API/_autosummary/deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro">Prepro</a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.prepros.combinators.Serial.apply">
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/combinators.html#Serial.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.combinators.Serial.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pre-process a dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DatasetV1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.prepros.core">
+<span id="deepr-prepros-core-module"></span><h2>deepr.prepros.core module<a class="headerlink" href="#module-deepr.prepros.core" title="Permalink to this headline">¶</a></h2>
+<p>Core Classes for preprocessing</p>
+<dl class="py class">
+<dt id="deepr.prepros.core.Batch">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">Batch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">batch_size</span></em>, <em class="sig-param"><span class="n">drop_remainder</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Batch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Batch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
+<p>Combines consecutive elements of a dataset into batches.</p>
+<dl class="py attribute">
+<dt id="deepr.prepros.core.Batch.count">
+<code class="sig-name descname">count</code><a class="headerlink" href="#deepr.prepros.core.Batch.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of dataset repeat</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.prepros.core.Batch.modes">
+<code class="sig-name descname">modes</code><a class="headerlink" href="#deepr.prepros.core.Batch.modes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Active modes for the map (will skip modes not in modes).
+Default is None (all modes are considered active modes).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>], Optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.prepros.core.Batch.apply">
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Batch.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Batch.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pre-process a dataset</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.prepros.core.Filter">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">Filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">predicate</span></em>, <em class="sig-param"><span class="n">on_dict</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">modes</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
+<p>Filter a dataset keeping only elements on which predicate is True</p>
+<p>A <cite>Filter</cite> instance applies a <cite>predicate</cite> to all elements of a
+dataset and keeps only element for which predicate returns True.</p>
+<p>By default, elements are expected to be dictionaries. You can set
+<cite>on_dict=False</cite> if your dataset does not yield dictionaries.</p>
+<p>Because some preprocessing pipelines behave differently depending
+on the mode (TRAIN, EVAL, PREDICT), an optional argument can be
+provided. By setting modes, you select the modes on which the map
+transformation should apply. For example:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">gen</span><span class="p">():</span>
+<span class="gp">... </span><span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
+<span class="gp">... </span><span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_generator</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">(</span><span class="kc">None</span><span class="p">,))</span>
+<span class="go">{&quot;a&quot;: 0}, {&quot;a&quot;: 1}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">predicate</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Filter</span><span class="p">(</span><span class="n">predicate</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">predicate</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">)</span>
+<span class="go">{&quot;a&quot;: 0}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">predicate</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">)</span>
+<span class="go">{&quot;a&quot;: 0}, {&quot;a&quot;: 1}</span>
+</pre></div>
+</div>
+<p>If the mode is not given at runtime, the preprocessing is applied.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+<span class="go">{&quot;a&quot;: 0}, {&quot;a&quot;: 1}</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="deepr.prepros.core.Filter.predicate">
+<code class="sig-name descname">predicate</code><a class="headerlink" href="#deepr.prepros.core.Filter.predicate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predicate function, returns either a tf.bool or a dictionary
+with one key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.prepros.core.Filter.on_dict">
+<code class="sig-name descname">on_dict</code><a class="headerlink" href="#deepr.prepros.core.Filter.on_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True (default), assumes dataset yields dictionaries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a>, Optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.prepros.core.Filter.modes">
+<code class="sig-name descname">modes</code><a class="headerlink" href="#deepr.prepros.core.Filter.modes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Active modes for the map (will skip modes not in modes).
+Default is None (all modes are considered active modes).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>], Optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.prepros.core.Filter.apply">
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Filter.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Filter.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pre-process a dataset</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.prepros.core.Filter.tf_predicate">
+<em class="property">property </em><code class="sig-name descname">tf_predicate</code><a class="headerlink" href="#deepr.prepros.core.Filter.tf_predicate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return final predicate function</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.prepros.core.Map">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">Map</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">map_func</span></em>, <em class="sig-param"><span class="n">on_dict</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">update</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">modes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_parallel_calls</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
+<p>Map a function on each element of a tf.data.Dataset.</p>
+<p>A <cite>Map</cite> instance applies a <cite>map_func</cite> to all elements of a dataset.
+By default, elements are expected to be dictionaries. You can set
+<cite>on_dict=False</cite> if your dataset does not yield dictionaries.</p>
+<p>If elements are dictionaries, you can use the additional argument
+<cite>update</cite> to choose to update dictionaries instead of overriding
+them.</p>
+<p>For example, by setting <cite>update=True</cite> (DEFAULT behavior)</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">gen</span><span class="p">():</span>
+<span class="gp">... </span><span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_generator</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">(</span><span class="kc">None</span><span class="p">,))</span>
+<span class="go">{&quot;a&quot;: 0}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">map_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">map_func</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+<span class="go">{&quot;a&quot;: 0, &quot;b&quot;: 1}</span>
+</pre></div>
+</div>
+<p>On the other hand, <cite>update=False</cite> yields the output of the map_func</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">map_func</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+<span class="go">{&quot;b&quot;: 1}</span>
+</pre></div>
+</div>
+<p>Because some preprocessing pipelines behave differently depending
+on the mode (TRAIN, EVAL, PREDICT), an optional argument can be
+provided. By setting modes, you select the modes on which the map
+transformation should apply. For example:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">map_func</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">)</span>
+<span class="go">{&quot;a&quot;: 0, &quot;b&quot;: 1}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">)</span>
+<span class="go">{&quot;a&quot;: 0}</span>
+</pre></div>
+</div>
+<p>If the mode is not given at runtime, the preprocessing is applied.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+<span class="go">{&quot;a&quot;: 0, &quot;b&quot;: 1}</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="deepr.prepros.core.Map.map_func">
+<code class="sig-name descname">map_func</code><a class="headerlink" href="#deepr.prepros.core.Map.map_func" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to map to each element</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Callable[[Any], Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.prepros.core.Map.on_dict">
+<code class="sig-name descname">on_dict</code><a class="headerlink" href="#deepr.prepros.core.Map.on_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True (default), assumes dataset yields dictionaries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.prepros.core.Map.update">
+<code class="sig-name descname">update</code><a class="headerlink" href="#deepr.prepros.core.Map.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True (default), combine element and map_func(element)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.prepros.core.Map.modes">
+<code class="sig-name descname">modes</code><a class="headerlink" href="#deepr.prepros.core.Map.modes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Active modes for the map (will skip modes not in modes).
+Default is None (all modes are considered active modes).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>], Optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname">\*\*kwargs</code></dt>
+<dd><p>Optional keyword arguments to pass to tf.data.Dataset.map</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.prepros.core.Map.apply">
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Map.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Map.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pre-process a dataset</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.prepros.core.Map.tf_map_func">
+<em class="property">property </em><code class="sig-name descname">tf_map_func</code><a class="headerlink" href="#deepr.prepros.core.Map.tf_map_func" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return final map function</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.prepros.core.PaddedBatch">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">PaddedBatch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">batch_size</span></em>, <em class="sig-param"><span class="n">fields</span></em>, <em class="sig-param"><span class="n">drop_remainder</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#PaddedBatch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.PaddedBatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
+<p>Combines consecutive elements of a dataset into padded batches.</p>
+<p>NOTE: this applies on dataset yielding dictionaries ONLY.</p>
+<p>If you want to create padded batches from other structures, you
+need to create your own padded batch prepro wrapping the tensorflow
+implementation. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">prepro</span>
+<span class="k">def</span> <span class="nf">PaddedBatchDefault</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">padded_shapes</span><span class="p">,</span> <span class="n">padding_values</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">padded_batch</span><span class="p">(</span><span class="n">bath_size</span><span class="p">,</span> <span class="n">padded_shapes</span><span class="p">,</span> <span class="n">padding_values</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="deepr.prepros.core.PaddedBatch.batch_size">
+<code class="sig-name descname">batch_size</code><a class="headerlink" href="#deepr.prepros.core.PaddedBatch.batch_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Size of batches</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.prepros.core.PaddedBatch.fields">
+<code class="sig-name descname">fields</code><a class="headerlink" href="#deepr.prepros.core.PaddedBatch.fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field information for each key of yielded dictionaries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Iterable[<a class="reference internal" href="../API/_autosummary/deepr.utils.Field.html#deepr.utils.Field" title="deepr.utils.Field">Field</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.prepros.core.PaddedBatch.modes">
+<code class="sig-name descname">modes</code><a class="headerlink" href="#deepr.prepros.core.PaddedBatch.modes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Active modes for the map (will skip modes not in modes).
+Default is None (all modes are considered active modes).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>], Optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.prepros.core.PaddedBatch.apply">
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#PaddedBatch.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.PaddedBatch.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pre-process a dataset</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.prepros.core.Prefetch">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">Prefetch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buffer_size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Prefetch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Prefetch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
+<p>Creates a dataset that prefetch element on CPU / GPU.</p>
+<dl class="py attribute">
+<dt id="deepr.prepros.core.Prefetch.buffer_size">
+<code class="sig-name descname">buffer_size</code><a class="headerlink" href="#deepr.prepros.core.Prefetch.buffer_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of element to prefetch.
+High values may lead to high memory consumption, it is
+recommended to use a buffer_size of 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.prepros.core.Prefetch.apply">
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Prefetch.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Prefetch.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pre-process a dataset</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.prepros.core.Repeat">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">Repeat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">count</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">modes</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Repeat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Repeat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
+<p>Repeats a dataset so each original value is seen count times.</p>
+<dl class="py attribute">
+<dt id="deepr.prepros.core.Repeat.count">
+<code class="sig-name descname">count</code><a class="headerlink" href="#deepr.prepros.core.Repeat.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of dataset repeat</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.prepros.core.Repeat.modes">
+<code class="sig-name descname">modes</code><a class="headerlink" href="#deepr.prepros.core.Repeat.modes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Active modes for the map (will skip modes not in modes).
+Default is None (all modes are considered active modes).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>], Optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.prepros.core.Repeat.apply">
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Repeat.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Repeat.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pre-process a dataset</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.prepros.core.Shuffle">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">Shuffle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buffer_size</span></em>, <em class="sig-param"><span class="n">modes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Shuffle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Shuffle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
+<p>Randomly shuffles the elements of a dataset.</p>
+<dl class="py attribute">
+<dt id="deepr.prepros.core.Shuffle.buffer_size">
+<code class="sig-name descname">buffer_size</code><a class="headerlink" href="#deepr.prepros.core.Shuffle.buffer_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Buffer size for the shuffle buffer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.prepros.core.Shuffle.modes">
+<code class="sig-name descname">modes</code><a class="headerlink" href="#deepr.prepros.core.Shuffle.modes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Active modes for the map (will skip modes not in modes).
+Default is None (all modes are considered active modes).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>], Optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.prepros.core.Shuffle.apply">
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Shuffle.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Shuffle.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pre-process a dataset</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.prepros.core.Take">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">Take</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">count</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Take"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Take" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
+<p>Creates a dataset with at most count elements.</p>
+<dl class="py attribute">
+<dt id="deepr.prepros.core.Take.count">
+<code class="sig-name descname">count</code><a class="headerlink" href="#deepr.prepros.core.Take.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cap the number of elements of a dataset to this number. Using
+None means no capping (will not apply the take transformation).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.prepros.core.Take.apply">
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Take.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Take.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pre-process a dataset</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.prepros.record">
+<span id="deepr-prepros-record-module"></span><h2>deepr.prepros.record module<a class="headerlink" href="#module-deepr.prepros.record" title="Permalink to this headline">¶</a></h2>
+<p>Parse TF Records</p>
+<dl class="py class">
+<dt id="deepr.prepros.record.TFRecordSequenceExample">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.record.</code><code class="sig-name descname">TFRecordSequenceExample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fields</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/record.html#TFRecordSequenceExample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.record.TFRecordSequenceExample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
+<p>Parse TF Record Sequence Example</p>
+<dl class="py method">
+<dt id="deepr.prepros.record.TFRecordSequenceExample.apply">
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/record.html#TFRecordSequenceExample.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.record.TFRecordSequenceExample.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pre-process a dataset</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.prepros.record.TFRecordSequenceExample.parse_fn">
+<em class="property">property </em><code class="sig-name descname">parse_fn</code><a class="headerlink" href="#deepr.prepros.record.TFRecordSequenceExample.parse_fn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return parse function</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.prepros">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-deepr.prepros" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="deepr.readers.html" class="btn btn-neutral float-right" title="deepr.readers package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="deepr.optimizers.html" class="btn btn-neutral float-left" title="deepr.optimizers package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Reco.Consideration
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

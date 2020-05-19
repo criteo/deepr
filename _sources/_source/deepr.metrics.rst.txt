@@ -1,0 +1,46 @@
+deepr.metrics package
+=====================
+
+Submodules
+----------
+
+deepr.metrics.base module
+-------------------------
+
+.. automodule:: deepr.metrics.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.metrics.core module
+-------------------------
+
+.. automodule:: deepr.metrics.core
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.metrics.mean module
+-------------------------
+
+.. automodule:: deepr.metrics.mean
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.metrics.step module
+-------------------------
+
+.. automodule:: deepr.metrics.step
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.metrics
+   :members:
+   :undoc-members:
+   :show-inheritance:

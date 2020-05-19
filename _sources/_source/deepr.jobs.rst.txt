@@ -1,0 +1,118 @@
+deepr.jobs package
+==================
+
+Submodules
+----------
+
+deepr.jobs.base module
+----------------------
+
+.. automodule:: deepr.jobs.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.jobs.cleanup\_checkpoints module
+--------------------------------------
+
+.. automodule:: deepr.jobs.cleanup_checkpoints
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.jobs.combinators module
+-----------------------------
+
+.. automodule:: deepr.jobs.combinators
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.jobs.copy\_dir module
+---------------------------
+
+.. automodule:: deepr.jobs.copy_dir
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.jobs.log\_metric module
+-----------------------------
+
+.. automodule:: deepr.jobs.log_metric
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.jobs.mlflow\_save\_configs module
+---------------------------------------
+
+.. automodule:: deepr.jobs.mlflow_save_configs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.jobs.mlflow\_save\_info module
+------------------------------------
+
+.. automodule:: deepr.jobs.mlflow_save_info
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.jobs.optimize\_saved\_model module
+----------------------------------------
+
+.. automodule:: deepr.jobs.optimize_saved_model
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.jobs.params\_tuner module
+-------------------------------
+
+.. automodule:: deepr.jobs.params_tuner
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.jobs.trainer module
+-------------------------
+
+.. automodule:: deepr.jobs.trainer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.jobs.yarn\_config module
+------------------------------
+
+.. automodule:: deepr.jobs.yarn_config
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.jobs.yarn\_launcher module
+--------------------------------
+
+.. automodule:: deepr.jobs.yarn_launcher
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.jobs.yarn\_trainer module
+-------------------------------
+
+.. automodule:: deepr.jobs.yarn_trainer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.jobs
+   :members:
+   :undoc-members:
+   :show-inheritance:

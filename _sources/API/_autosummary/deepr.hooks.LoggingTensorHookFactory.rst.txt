@@ -1,0 +1,22 @@
+deepr.hooks.LoggingTensorHookFactory
+====================================
+
+.. currentmodule:: deepr.hooks
+
+.. autoclass:: LoggingTensorHookFactory
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~LoggingTensorHookFactory.__init__
+   
+   
+
+   
+   
+   

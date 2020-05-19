@@ -1,0 +1,29 @@
+deepr.jobs.YarnLauncher
+=======================
+
+.. currentmodule:: deepr.jobs
+
+.. autoclass:: YarnLauncher
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~YarnLauncher.__init__
+      ~YarnLauncher.run
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~YarnLauncher.run_on_yarn
+   
+   

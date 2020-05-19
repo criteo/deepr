@@ -1,0 +1,561 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>deepr.prepros.core &mdash; deepr 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../README.html">deepR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../API/CORE_API.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_source/modules.html">deepr</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>deepr.prepros.core</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for deepr.prepros.core</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Core Classes for preprocessing&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterable</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="kn">from</span> <span class="nn">deepr.utils.field</span> <span class="kn">import</span> <span class="n">Field</span>
+<span class="kn">from</span> <span class="nn">deepr.prepros</span> <span class="kn">import</span> <span class="n">base</span>
+<span class="kn">from</span> <span class="nn">deepr.layers</span> <span class="kn">import</span> <span class="n">Layer</span>
+
+
+<span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Map"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Map">[docs]</a><span class="k">class</span> <span class="nc">Map</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Prepro</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Map a function on each element of a tf.data.Dataset.</span>
+
+<span class="sd">    A `Map` instance applies a `map_func` to all elements of a dataset.</span>
+<span class="sd">    By default, elements are expected to be dictionaries. You can set</span>
+<span class="sd">    `on_dict=False` if your dataset does not yield dictionaries.</span>
+
+<span class="sd">    If elements are dictionaries, you can use the additional argument</span>
+<span class="sd">    `update` to choose to update dictionaries instead of overriding</span>
+<span class="sd">    them.</span>
+
+<span class="sd">    For example, by setting `update=True` (DEFAULT behavior)</span>
+
+<span class="sd">    &gt;&gt;&gt; def gen():</span>
+<span class="sd">    ... yield {&quot;a&quot;: [0]}</span>
+<span class="sd">    &gt;&gt;&gt; dataset = tf.data.Dataset.from_generator(gen, {&quot;a&quot;: tf.int32}, {&quot;a&quot;: (None,))</span>
+<span class="sd">    {&quot;a&quot;: 0}</span>
+<span class="sd">    &gt;&gt;&gt; def map_func(x):</span>
+<span class="sd">    ...     return {&quot;b&quot;: x[&quot;a&quot;] + 1}</span>
+<span class="sd">    &gt;&gt;&gt; prepro_fn = Map(map_func, update=True)</span>
+<span class="sd">    &gt;&gt;&gt; prepro_fn(dataset)</span>
+<span class="sd">    {&quot;a&quot;: 0, &quot;b&quot;: 1}</span>
+
+<span class="sd">    On the other hand, `update=False` yields the output of the map_func</span>
+
+<span class="sd">    &gt;&gt;&gt; prepro_fn = Map(map_func, update=False)</span>
+<span class="sd">    &gt;&gt;&gt; prepro_fn(dataset)</span>
+<span class="sd">    {&quot;b&quot;: 1}</span>
+
+<span class="sd">    Because some preprocessing pipelines behave differently depending</span>
+<span class="sd">    on the mode (TRAIN, EVAL, PREDICT), an optional argument can be</span>
+<span class="sd">    provided. By setting modes, you select the modes on which the map</span>
+<span class="sd">    transformation should apply. For example:</span>
+
+<span class="sd">    &gt;&gt;&gt; prepro_fn = Map(map_func, modes=[tf.estimator.TRAIN])</span>
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset, tf.estimator.ModeKeys.TRAIN)</span>
+<span class="sd">    {&quot;a&quot;: 0, &quot;b&quot;: 1}</span>
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset, tf.estimator.ModeKeys.PREDICT)</span>
+<span class="sd">    {&quot;a&quot;: 0}</span>
+
+<span class="sd">    If the mode is not given at runtime, the preprocessing is applied.</span>
+
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset)</span>
+<span class="sd">    {&quot;a&quot;: 0, &quot;b&quot;: 1}</span>
+
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    map_func : Callable[[Any], Any]</span>
+<span class="sd">        Function to map to each element</span>
+<span class="sd">    on_dict : bool</span>
+<span class="sd">        If True (default), assumes dataset yields dictionaries</span>
+<span class="sd">    update : bool</span>
+<span class="sd">        If True (default), combine element and map_func(element)</span>
+<span class="sd">    modes : Iterable[str], Optional</span>
+<span class="sd">        Active modes for the map (will skip modes not in modes).</span>
+<span class="sd">        Default is None (all modes are considered active modes).</span>
+<span class="sd">    **kwargs :</span>
+<span class="sd">        Optional keyword arguments to pass to tf.data.Dataset.map</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Map.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.prepros.Map.html#deepr.prepros.Map.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">map_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+        <span class="n">on_dict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">update</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">modes</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_parallel_calls</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map_func</span> <span class="o">=</span> <span class="n">map_func</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_dict</span> <span class="o">=</span> <span class="n">on_dict</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span> <span class="o">=</span> <span class="n">update</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modes</span> <span class="o">=</span> <span class="n">modes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_parallel_calls</span> <span class="o">=</span> <span class="n">num_parallel_calls</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_dict</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;update=True but on_dict=False (incoherent)&quot;</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">map_func</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tf_map_func</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return final map function&quot;&quot;&quot;</span>
+        <span class="n">map_func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_func</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">map_func</span><span class="p">,</span> <span class="n">Layer</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_dict</span><span class="p">:</span>
+            <span class="n">map_func</span> <span class="o">=</span> <span class="n">map_func</span><span class="o">.</span><span class="n">forward_as_dict</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">{</span><span class="o">**</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">map_func</span><span class="p">(</span><span class="n">x</span><span class="p">)}</span>
+        <span class="k">return</span> <span class="n">map_func</span>
+
+<div class="viewcode-block" id="Map.apply"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Map.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes</span><span class="p">:</span>
+            <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Not applying </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2"> (mode=</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">dataset</span>
+        <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tf_map_func</span><span class="p">,</span> <span class="n">num_parallel_calls</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_parallel_calls</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Filter"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Filter">[docs]</a><span class="k">class</span> <span class="nc">Filter</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Prepro</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Filter a dataset keeping only elements on which predicate is True</span>
+
+<span class="sd">    A `Filter` instance applies a `predicate` to all elements of a</span>
+<span class="sd">    dataset and keeps only element for which predicate returns True.</span>
+
+<span class="sd">    By default, elements are expected to be dictionaries. You can set</span>
+<span class="sd">    `on_dict=False` if your dataset does not yield dictionaries.</span>
+
+<span class="sd">    Because some preprocessing pipelines behave differently depending</span>
+<span class="sd">    on the mode (TRAIN, EVAL, PREDICT), an optional argument can be</span>
+<span class="sd">    provided. By setting modes, you select the modes on which the map</span>
+<span class="sd">    transformation should apply. For example:</span>
+
+<span class="sd">    &gt;&gt;&gt; def gen():</span>
+<span class="sd">    ... yield {&quot;a&quot;: [0]}</span>
+<span class="sd">    ... yield {&quot;a&quot;: [1]}</span>
+<span class="sd">    &gt;&gt;&gt; dataset = tf.data.Dataset.from_generator(gen, {&quot;a&quot;: tf.int32}, {&quot;a&quot;: (None,))</span>
+<span class="sd">    {&quot;a&quot;: 0}, {&quot;a&quot;: 1}</span>
+<span class="sd">    &gt;&gt;&gt; def predicate(x):</span>
+<span class="sd">    ...     return {&quot;b&quot;: x[&quot;a&quot;] == 0}</span>
+<span class="sd">    &gt;&gt;&gt; prepro_fn = Filter(predicate, modes=[tf.estimator.TRAIN])</span>
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(predicate, tf.estimator.ModeKeys.TRAIN)</span>
+<span class="sd">    {&quot;a&quot;: 0}</span>
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(predicate, tf.estimator.ModeKeys.PREDICT)</span>
+<span class="sd">    {&quot;a&quot;: 0}, {&quot;a&quot;: 1}</span>
+
+<span class="sd">    If the mode is not given at runtime, the preprocessing is applied.</span>
+
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset)</span>
+<span class="sd">    {&quot;a&quot;: 0}, {&quot;a&quot;: 1}</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    predicate : Callable</span>
+<span class="sd">        Predicate function, returns either a tf.bool or a dictionary</span>
+<span class="sd">        with one key.</span>
+<span class="sd">    on_dict : bool, Optional</span>
+<span class="sd">        If True (default), assumes dataset yields dictionaries</span>
+<span class="sd">    modes : Iterable[str], Optional</span>
+<span class="sd">        Active modes for the map (will skip modes not in modes).</span>
+<span class="sd">        Default is None (all modes are considered active modes).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Filter.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.prepros.Filter.html#deepr.prepros.Filter.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predicate</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">on_dict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">modes</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">predicate</span> <span class="o">=</span> <span class="n">predicate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_dict</span> <span class="o">=</span> <span class="n">on_dict</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modes</span> <span class="o">=</span> <span class="n">modes</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">predicate</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tf_predicate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return final predicate function&quot;&quot;&quot;</span>
+        <span class="n">predicate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predicate</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">predicate</span><span class="p">,</span> <span class="n">Layer</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_dict</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">predicate</span><span class="o">.</span><span class="n">n_out</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">predicate</span><span class="si">}</span><span class="s2"> has n_out = </span><span class="si">{</span><span class="n">predicate</span><span class="o">.</span><span class="n">n_out</span><span class="si">}</span><span class="s2"> (unable to retrieve predicate from layer outputs)&quot;</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">predicate</span><span class="o">.</span><span class="n">forward_as_dict</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="n">predicate</span><span class="o">.</span><span class="n">outputs</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_dict</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">predicate</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">predicate</span>
+
+<div class="viewcode-block" id="Filter.apply"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Filter.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes</span><span class="p">:</span>
+            <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Not applying </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2"> (mode=</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">dataset</span>
+        <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tf_predicate</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Shuffle"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Shuffle">[docs]</a><span class="k">class</span> <span class="nc">Shuffle</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Prepro</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Randomly shuffles the elements of a dataset.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    buffer_size : int</span>
+<span class="sd">        Buffer size for the shuffle buffer</span>
+<span class="sd">    modes : Iterable[str], Optional</span>
+<span class="sd">        Active modes for the map (will skip modes not in modes).</span>
+<span class="sd">        Default is None (all modes are considered active modes).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Shuffle.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.prepros.Shuffle.html#deepr.prepros.Shuffle.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buffer_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">modes</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer_size</span> <span class="o">=</span> <span class="n">buffer_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modes</span> <span class="o">=</span> <span class="n">modes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer_size</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+<div class="viewcode-block" id="Shuffle.apply"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Shuffle.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes</span><span class="p">:</span>
+            <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Not applying </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2"> (mode=</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">dataset</span>
+        <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer_size</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Repeat"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Repeat">[docs]</a><span class="k">class</span> <span class="nc">Repeat</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Prepro</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Repeats a dataset so each original value is seen count times.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    count : int</span>
+<span class="sd">        Number of dataset repeat</span>
+<span class="sd">    modes : Iterable[str], Optional</span>
+<span class="sd">        Active modes for the map (will skip modes not in modes).</span>
+<span class="sd">        Default is None (all modes are considered active modes).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Repeat.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.prepros.Repeat.html#deepr.prepros.Repeat.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">modes</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">count</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modes</span> <span class="o">=</span> <span class="n">modes</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+<div class="viewcode-block" id="Repeat.apply"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Repeat.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modes</span><span class="p">:</span>
+            <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Not applying </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2"> (mode=</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">dataset</span>
+        <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="PaddedBatch"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.PaddedBatch">[docs]</a><span class="k">class</span> <span class="nc">PaddedBatch</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Prepro</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Combines consecutive elements of a dataset into padded batches.</span>
+
+<span class="sd">    NOTE: this applies on dataset yielding dictionaries ONLY.</span>
+
+<span class="sd">    If you want to create padded batches from other structures, you</span>
+<span class="sd">    need to create your own padded batch prepro wrapping the tensorflow</span>
+<span class="sd">    implementation. For example::</span>
+
+<span class="sd">        @dpr.prepros.prepro</span>
+<span class="sd">        def PaddedBatchDefault(dataset, batch_size, padded_shapes, padding_values):</span>
+<span class="sd">            return dataset.padded_batch(bath_size, padded_shapes, padding_values)</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    batch_size : int</span>
+<span class="sd">        Size of batches</span>
+<span class="sd">    fields : Iterable[Field]</span>
+<span class="sd">        Field information for each key of yielded dictionaries</span>
+<span class="sd">    modes : Iterable[str], Optional</span>
+<span class="sd">        Active modes for the map (will skip modes not in modes).</span>
+<span class="sd">        Default is None (all modes are considered active modes).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="PaddedBatch.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.prepros.PaddedBatch.html#deepr.prepros.PaddedBatch.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">fields</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Field</span><span class="p">],</span> <span class="n">drop_remainder</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drop_remainder</span> <span class="o">=</span> <span class="n">drop_remainder</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+<div class="viewcode-block" id="PaddedBatch.apply"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.PaddedBatch.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># pylint: disable=unused-argument</span>
+        <span class="n">padded_shapes</span> <span class="o">=</span> <span class="p">{</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">field</span><span class="o">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">}</span>
+        <span class="n">padding_values</span> <span class="o">=</span> <span class="p">{</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">default</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">padded_batch</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">padded_shapes</span><span class="o">=</span><span class="n">padded_shapes</span><span class="p">,</span>
+            <span class="n">padding_values</span><span class="o">=</span><span class="n">padding_values</span><span class="p">,</span>
+            <span class="n">drop_remainder</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">drop_remainder</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Batch"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Batch">[docs]</a><span class="k">class</span> <span class="nc">Batch</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Prepro</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Combines consecutive elements of a dataset into batches.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    count : int</span>
+<span class="sd">        Number of dataset repeat</span>
+<span class="sd">    modes : Iterable[str], Optional</span>
+<span class="sd">        Active modes for the map (will skip modes not in modes).</span>
+<span class="sd">        Default is None (all modes are considered active modes).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Batch.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.prepros.Batch.html#deepr.prepros.Batch.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">drop_remainder</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drop_remainder</span> <span class="o">=</span> <span class="n">drop_remainder</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+<div class="viewcode-block" id="Batch.apply"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Batch.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># pylint: disable=unused-argument</span>
+        <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">drop_remainder</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">drop_remainder</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Prefetch"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Prefetch">[docs]</a><span class="k">class</span> <span class="nc">Prefetch</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Prepro</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates a dataset that prefetch element on CPU / GPU.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    buffer_size : int</span>
+<span class="sd">        Number of element to prefetch.</span>
+<span class="sd">        High values may lead to high memory consumption, it is</span>
+<span class="sd">        recommended to use a buffer_size of 1.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Prefetch.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.prepros.Prefetch.html#deepr.prepros.Prefetch.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buffer_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer_size</span> <span class="o">=</span> <span class="n">buffer_size</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer_size</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+<div class="viewcode-block" id="Prefetch.apply"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Prefetch.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># pylint: disable=unused-argument</span>
+        <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">prefetch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer_size</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Take"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Take">[docs]</a><span class="k">class</span> <span class="nc">Take</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Prepro</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates a dataset with at most count elements.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    count : int</span>
+<span class="sd">        Cap the number of elements of a dataset to this number. Using</span>
+<span class="sd">        None means no capping (will not apply the take transformation).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Take.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.prepros.Take.html#deepr.prepros.Take.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">count</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+<div class="viewcode-block" id="Take.apply"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Take.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># pylint: disable=unused-argument</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">dataset</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Reco.Consideration
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

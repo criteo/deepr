@@ -1,0 +1,22 @@
+deepr.hooks.MaxResidentMemory
+=============================
+
+.. currentmodule:: deepr.hooks
+
+.. autoclass:: MaxResidentMemory
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MaxResidentMemory.__init__
+   
+   
+
+   
+   
+   

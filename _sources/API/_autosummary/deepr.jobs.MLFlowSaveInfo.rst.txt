@@ -1,0 +1,33 @@
+deepr.jobs.MLFlowSaveInfo
+=========================
+
+.. currentmodule:: deepr.jobs
+
+.. autoclass:: MLFlowSaveInfo
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MLFlowSaveInfo.__init__
+      ~MLFlowSaveInfo.run
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MLFlowSaveInfo.experiment_id
+      ~MLFlowSaveInfo.path_mlflow
+      ~MLFlowSaveInfo.run_id
+      ~MLFlowSaveInfo.run_uuid
+      ~MLFlowSaveInfo.use_mlflow
+   
+   

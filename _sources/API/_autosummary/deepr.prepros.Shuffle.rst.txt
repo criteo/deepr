@@ -1,0 +1,23 @@
+deepr.prepros.Shuffle
+=====================
+
+.. currentmodule:: deepr.prepros
+
+.. autoclass:: Shuffle
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Shuffle.__init__
+      ~Shuffle.apply
+   
+   
+
+   
+   
+   

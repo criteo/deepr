@@ -1,0 +1,33 @@
+deepr.jobs.Trainer
+==================
+
+.. currentmodule:: deepr.jobs
+
+.. autoclass:: Trainer
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Trainer.__init__
+      ~Trainer.create_experiment
+      ~Trainer.initializer_fn
+      ~Trainer.prepro_fn
+      ~Trainer.run
+      ~Trainer.run_final_evaluation
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Trainer.random_seed
+   
+   

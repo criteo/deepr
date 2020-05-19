@@ -1,0 +1,22 @@
+deepr.hooks.ResidentMemory
+==========================
+
+.. currentmodule:: deepr.hooks
+
+.. autoclass:: ResidentMemory
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ResidentMemory.__init__
+   
+   
+
+   
+   
+   

@@ -1,0 +1,1051 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Pipeline &mdash; deepr 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Config" href="config.html" />
+    <link rel="prev" title="Quickstart" href="quickstart.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#1.-Custom-Build-Dataset-Job">1. Custom Build Dataset Job</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Build-Dataset-Job">Build Dataset Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Prepro">Prepro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Reader">Reader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#2.-Define-a-Pipeline">2. Define a Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#3.-Run-on-Yarn">3. Run on Yarn</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Build-Job">Build Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Reader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Prepro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Prediction-Function">Prediction Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Loss-Function">Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Trainer-Job">Trainer Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Train-Locally">Train Locally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Train-on-Yarn">Train on Yarn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Using-config-files">Using config files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuning.html">Hyper Parameter Tuning</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">deepR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../API/CORE_API.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_source/modules.html">deepr</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Pipeline</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/getting_started/pipeline.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container,
+div.nbinput.container div.prompt,
+div.nbinput.container div.input_area,
+div.nbinput.container div[class*=highlight],
+div.nbinput.container div[class*=highlight] pre,
+div.nboutput.container,
+div.nboutput.container div.prompt,
+div.nboutput.container div.output_area,
+div.nboutput.container div[class*=highlight],
+div.nboutput.container div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="Pipeline">
+<h1>Pipeline<a class="headerlink" href="#Pipeline" title="Permalink to this headline">¶</a></h1>
+<p>This notebook builds upon the model defined in the <a class="reference internal" href="quickstart.html"><span class="doc">quickstart</span></a>.</p>
+<p>The goal of this notebook is to define a full pipeline that not only trains the model, but also builds the dataset, and run this pipeline on a yarn cluster.</p>
+<p>We’ll see how to</p>
+<ol class="arabic simple">
+<li><p>Define a custom job to build the dataset.</p></li>
+<li><p>Define a pipeline that builds and trains the model.</p></li>
+<li><p>Use configs to run the pipeline on yarn.</p></li>
+</ol>
+<p>First, some imports</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>import logging
+import sys
+logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+logging.getLogger(&quot;tensorflow&quot;).setLevel(logging.CRITICAL)
+logging.getLogger(&quot;cluster_pack&quot;).setLevel(logging.CRITICAL)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>from dataclasses import dataclass
+
+import tensorflow as tf
+import numpy as np
+import deepr_python
+import deepr as dpr
+</pre></div>
+</div>
+</div>
+<div class="section" id="1.-Custom-Build-Dataset-Job">
+<h2>1. Custom Build Dataset Job<a class="headerlink" href="#1.-Custom-Build-Dataset-Job" title="Permalink to this headline">¶</a></h2>
+<p>The quickstart shortly introduced the concept of a job with the <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> job.</p>
+<p>Real-life pipelines consist of multiple jobs. In our example, we want to define a special job that creates the dataset.</p>
+<p>Let’s see how we would define a custom job that writes the dataset content in a tfrecord file.</p>
+<div class="section" id="Build-Dataset-Job">
+<h3>Build Dataset Job<a class="headerlink" href="#Build-Dataset-Job" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>@dataclass
+class BuildDataset(dpr.jobs.Job):
+    &quot;&quot;&quot;Build a dummy dataset of random (x, 2*x) as a tfrecord file&quot;&quot;&quot;
+
+    path_dataset: str
+    num_examples: int = 1000
+
+    def run(self):
+
+        def _generator_fn():
+            for _ in range(self.num_examples):
+                x = np.random.random()
+                yield {&quot;x&quot;: x, &quot;y&quot;: 2 * x}
+
+        def _dict_to_example(data):
+            features = {
+                &quot;x&quot;: dpr.readers.float_feature([data[&quot;x&quot;]]),
+                &quot;y&quot;: dpr.readers.float_feature([data[&quot;y&quot;]])
+            }
+            example = tf.train.Example(features=tf.train.Features(feature=features))
+            return example
+
+        with tf.python_io.TFRecordWriter(self.path_dataset) as writer:
+            for data in _generator_fn():
+                example = _dict_to_example(data)
+                writer.write(example.SerializeToString())
+
+        print(f&quot;Wrote dataset to &#39;{self.path_dataset}&#39;&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>build_job = BuildDataset(path_dataset=&quot;data.tfrecord&quot;, num_examples=1000)
+</pre></div>
+</div>
+</div>
+<p>Let’s run the job</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>build_job.run()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Wrote dataset to &#39;data.tfrecord&#39;
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Prepro">
+<h3>Prepro<a class="headerlink" href="#Prepro" title="Permalink to this headline">¶</a></h3>
+<p>Because the data is now stored in tfrecord files, the <code class="docutils literal notranslate"><span class="pre">prepro_fn</span></code> needs to deserialize the file’s content.</p>
+<p>Let’s define a preprocessor and check that everything works correctly with the dataset created by the <code class="docutils literal notranslate"><span class="pre">BuildDataset</span></code> job.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>@dpr.prepros.prepro
+def DefaultPrepro(batch_size, repeat_size):
+    return dpr.prepros.Serial(
+        dpr.prepros.TFRecordSequenceExample(fields=[
+            dpr.Field(name=&quot;x&quot;, shape=(), dtype=tf.float32),
+            dpr.Field(name=&quot;y&quot;, shape=(), dtype=tf.float32)
+        ]),
+        dpr.prepros.Batch(batch_size=batch_size),
+        dpr.prepros.Repeat(repeat_size, modes=[tf.estimator.ModeKeys.TRAIN]),
+    )
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&#64;prepro</span></code> decorator creates a class from the function that would be equivalent to</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DefaultPrepro</span><span class="p">(</span><span class="n">dprp</span><span class="o">.</span><span class="n">Prepro</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">repeat_size</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repeat_size</span> <span class="o">=</span> <span class="n">repeat_size</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
+        <span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span>
+            <span class="n">dprp</span><span class="o">.</span><span class="n">TFRecordSequenceExample</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">dpr</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
+                <span class="n">dpr</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+            <span class="p">]),</span>
+            <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Batch</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">),</span>
+            <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Repeat</span><span class="p">(</span><span class="n">repeat_size</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">]),</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>One of the advantages of the decorator is that the body of the function <code class="docutils literal notranslate"><span class="pre">DefaultPrepro</span></code> does not get executed until the preprocessor is actually applied to the dataset.</p>
+<p>This lazy behavior is convenient when resources are created in the function (like tables), resources that should only be defined at runtime.</p>
+<p>Let’s create an instance of <code class="docutils literal notranslate"><span class="pre">DefaultPrepro</span></code></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>prepro_fn = DefaultPrepro(batch_size=32, repeat_size=10)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Reader">
+<h3>Reader<a class="headerlink" href="#Reader" title="Permalink to this headline">¶</a></h3>
+<p>In the quickstart we used a <code class="docutils literal notranslate"><span class="pre">GeneratorReader</span></code>. With tfrecords, let’s use a <code class="docutils literal notranslate"><span class="pre">TFRecordReader</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>reader = dpr.readers.TFRecordReader(&quot;data.tfrecord&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>for batch in dpr.readers.base.from_dataset(prepro_fn(reader())):
+    print(batch)
+    break
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;x&#39;: array([0.32337564, 0.50094163, 0.2441018 , 0.15789932, 0.60923856,
+       0.8122508 , 0.94414985, 0.74952406, 0.2807497 , 0.588288  ,
+       0.54501027, 0.29069403, 0.41932568, 0.34819102, 0.3383653 ,
+       0.14353554, 0.27960363, 0.73993534, 0.7299636 , 0.5470599 ,
+       0.31707385, 0.14296998, 0.28161713, 0.2063866 , 0.96695954,
+       0.6501754 , 0.7693862 , 0.46509   , 0.01724341, 0.62549555,
+       0.2915013 , 0.07535852], dtype=float32), &#39;y&#39;: array([0.6467513 , 1.0018833 , 0.4882036 , 0.31579864, 1.2184771 ,
+       1.6245016 , 1.8882997 , 1.4990481 , 0.5614994 , 1.176576  ,
+       1.0900205 , 0.58138806, 0.83865136, 0.69638205, 0.6767306 ,
+       0.28707108, 0.55920726, 1.4798707 , 1.4599272 , 1.0941198 ,
+       0.6341477 , 0.28593996, 0.56323427, 0.4127732 , 1.9339191 ,
+       1.3003508 , 1.5387723 , 0.93018   , 0.03448683, 1.2509911 ,
+       0.5830026 , 0.15071705], dtype=float32)}
+</pre></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="2.-Define-a-Pipeline">
+<h2>2. Define a Pipeline<a class="headerlink" href="#2.-Define-a-Pipeline" title="Permalink to this headline">¶</a></h2>
+<p>So far, we have defined</p>
+<ol class="arabic simple">
+<li><p>A custom <code class="docutils literal notranslate"><span class="pre">BuildDataset</span></code> job</p></li>
+<li><p>Custom layers <code class="docutils literal notranslate"><span class="pre">Multiply</span></code> and <code class="docutils literal notranslate"><span class="pre">SquaredL2</span></code> (in the <a class="reference internal" href="quickstart.html"><span class="doc">quickstart</span></a>)</p></li>
+<li><p>A custom preprocessor <code class="docutils literal notranslate"><span class="pre">DefaultPrepro</span></code></p></li>
+</ol>
+<p>We will need to make these classes available on the <code class="docutils literal notranslate"><span class="pre">pex</span></code> that will be shipped to yarn, so let’s add them to a module living alongside the core library.</p>
+<p>For example,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>deepr_python
+├── __init__.py
+├── core
+├── example
+│   ├── __init__.py
+│   ├── jobs
+│   │   ├── __init__.py
+│   │   └── build_dataset.py  # BuildDataset
+│   ├── layers
+│   │   ├── __init__.py
+│   │   ├── loss.py           # SquaredL2
+│   │   └── model.py          # Multiply
+│   └── prepros
+│       ├── __init__.py
+│       └── default.py        # DefaultPrepro
+</pre></div>
+</div>
+<p>Now, these classes can easily be imported from anywhere.</p>
+<p>Let’s replicate the quickstart by defining and running a full pipeline that builds the dataset and then trains a model.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>import deepr.example
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>build_job = deepr.example.jobs.BuildDataset(path_dataset=&quot;data.tfrecord&quot;, num_examples=1000)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>trainer_job = dpr.jobs.Trainer(
+    path_model=&quot;model&quot;,
+    pred_fn=deepr.example.layers.Multiply(),
+    loss_fn=deepr.example.layers.SquaredL2(),
+    optimizer_fn=dpr.optimizers.TensorflowOptimizer(&quot;Adam&quot;, 0.1),
+    train_input_fn=dpr.readers.TFRecordReader(&quot;data.tfrecord&quot;),
+    eval_input_fn=dpr.readers.TFRecordReader(&quot;data.tfrecord&quot;),
+    prepro_fn=deepr.example.prepros.DefaultPrepro(batch_size=32, repeat_size=10)
+)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>pipeline = dpr.jobs.Pipeline([build_job, trainer_job])
+</pre></div>
+</div>
+</div>
+<p>The pipeline is made of 2 jobs</p>
+<ol class="arabic simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">BuildDataset</span></code> that creates the <code class="docutils literal notranslate"><span class="pre">tfrecord</span></code> file</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> that trains the model</p></li>
+</ol>
+<p>We can simply run it with</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>pipeline.run()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+INFO:deepr.example.jobs.build_dataset:Wrote dataset to &#39;data.tfrecord&#39;
+INFO:deepr.prepros.core:Not applying Repeat(10) (mode=eval)
+INFO:deepr.jobs.trainer:Running final evaluation, using global_step = 3840
+INFO:deepr.prepros.core:Not applying Repeat(10) (mode=eval)
+INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="3.-Run-on-Yarn">
+<h2>3. Run on Yarn<a class="headerlink" href="#3.-Run-on-Yarn" title="Permalink to this headline">¶</a></h2>
+<p>We can’t just submit python objects on yarn.</p>
+<p>We need to parametrize the execution. Though this could be done in a ad-hoc manner using custom entry points, you can use the <code class="docutils literal notranslate"><span class="pre">config</span></code> capabilities.</p>
+<p>To read more about the config system, see the <a class="reference internal" href="config.html"><span class="doc">config introduction</span></a>.</p>
+<p>In short, you can define arbitrary trees of objects using dictionaries. The special key “type” contains the full import string of the object’s class. Other keys will be given as keyword arguments at instantiation time.</p>
+<div class="section" id="Build-Job">
+<h3>Build Job<a class="headerlink" href="#Build-Job" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>build_job_config = {
+    &quot;type&quot;: &quot;deepr.example.jobs.BuildDataset&quot;,
+    &quot;path_dataset&quot;: &quot;viewfs://root/user/deepr/dev/example/data.tfrecord&quot;,
+    &quot;num_examples&quot;: 1000
+}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Reader<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>reader_config = {
+    &quot;type&quot;: &quot;deepr.readers.TFRecordReader&quot;,
+    &quot;path&quot;: &quot;viewfs://root/user/deepr/dev/example/data.tfrecord&quot;,
+    &quot;num_parallel_reads&quot;: 8,
+    &quot;num_parallel_calls&quot;: 8,
+    &quot;shuffle&quot;: True
+}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Prepro<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>prepro_fn_config = {
+    &quot;type&quot;: &quot;deepr.example.prepros.DefaultPrepro&quot;,
+    &quot;batch_size&quot;: 32,
+    &quot;repeat_size&quot;: 10
+}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Prediction-Function">
+<h3>Prediction Function<a class="headerlink" href="#Prediction-Function" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>pred_fn_config = {&quot;type&quot;: &quot;deepr.example.layers.Multiply&quot;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Loss-Function">
+<h3>Loss Function<a class="headerlink" href="#Loss-Function" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>loss_fn_config = {&quot;type&quot;: &quot;deepr.example.layers.SquaredL2&quot;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Trainer-Job">
+<h3>Trainer Job<a class="headerlink" href="#Trainer-Job" title="Permalink to this headline">¶</a></h3>
+<p>This is a good example of what a nested config looks like</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>trainer_job_config = {
+    &quot;type&quot;: &quot;deepr.jobs.Trainer&quot;,
+    &quot;path_model&quot;: &quot;viewfs://root/user/deepr/dev/example/model&quot;,
+    &quot;pred_fn&quot;: pred_fn_config,
+    &quot;loss_fn&quot;: loss_fn_config,
+    &quot;optimizer_fn&quot;: {
+        &quot;type&quot;: &quot;deepr.optimizers.TensorflowOptimizer&quot;,
+        &quot;optimizer&quot;: &quot;Adam&quot;,
+        &quot;learning_rate&quot;: 0.1
+    },
+    &quot;prepro_fn&quot;: prepro_fn_config,
+    &quot;train_input_fn&quot;: reader_config,
+    &quot;eval_input_fn&quot;: reader_config
+}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Train-Locally">
+<h3>Train Locally<a class="headerlink" href="#Train-Locally" title="Permalink to this headline">¶</a></h3>
+<p>We can use these configs to re-instantiate the objects using the <code class="docutils literal notranslate"><span class="pre">from_config</span></code> function, which supports arbitrary nesting of configs.</p>
+<p>For example, we can re-create the build and trainer jobs with</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>build_job = dpr.from_config(build_job_config)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>trainer_job = dpr.from_config(trainer_job_config)
+</pre></div>
+</div>
+</div>
+<p>and define a new pipeline, that we could then run like above</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>pipeline = dpr.jobs.Pipeline([build_job, trainer_job])
+</pre></div>
+</div>
+</div>
+<p>Instead of training locally (something we’ve already done twice), let’s see how we can leverage the configs to execute the pipeline on yarn.</p>
+</div>
+<div class="section" id="Train-on-Yarn">
+<h3>Train on Yarn<a class="headerlink" href="#Train-on-Yarn" title="Permalink to this headline">¶</a></h3>
+<p>Let’s not run any code on the local machine, but instead submit the pipeline to a <code class="docutils literal notranslate"><span class="pre">yarn</span></code> machine.</p>
+<p>Also, instead of running the trainer job on the same machine as the build job, let’s use <code class="docutils literal notranslate"><span class="pre">tf_yarn</span></code> distributed training capabilities and launch the trainer job on other yarn machines.</p>
+<p>To submit jobs on yarn, it’s actually as simple as wrapping job configs into special jobs.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">YarnLauncher</span></code>: submits a job to yarn</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">YarnTrainer</span></code>: uses <code class="docutils literal notranslate"><span class="pre">tf_yarn</span></code> to run a <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> job on multiple machines</p></li>
+</ul>
+<p>Let’s do it</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>yarn_launcher_config = deepr.jobs.YarnLauncherConfig(
+    path_pex_prefix=&quot;viewfs://root/user/deepr/dev/example/envs&quot;
+)
+job_config = {
+    &quot;type&quot;: &quot;deepr.jobs.Pipeline&quot;,
+    &quot;jobs&quot;: [
+        build_job_config,
+        {
+            &quot;type&quot;: &quot;deepr.jobs.YarnTrainer&quot;,
+            &quot;trainer&quot;: {
+                **trainer_job_config,
+                &quot;eval&quot;: &quot;skip&quot;  # from_config will not instantiate the trainer argument
+            },
+            &quot;config&quot;: {
+                &quot;type&quot;: &quot;deepr.jobs.YarnTrainerConfig&quot;
+            }
+        }
+    ]
+}
+pipeline_yarn = dpr.jobs.YarnLauncher(config=yarn_launcher_config, job=job_config)
+</pre></div>
+</div>
+</div>
+<p>Once the <code class="docutils literal notranslate"><span class="pre">YarnLauncher</span></code> job is defined, we can run it.</p>
+<p>It uploads the current environment as a <code class="docutils literal notranslate"><span class="pre">pex</span></code> to HDFS using the settings provided by the <code class="docutils literal notranslate"><span class="pre">DefaultYarnLauncherConfig</span></code>, and then executes the job from its config by simply doing something equivalent to what we did above, i.e. <code class="docutils literal notranslate"><span class="pre">from_config(job).run()</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>pipeline_yarn.run()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+INFO:deepr.jobs.yarn_config:Uploading env to viewfs://root/user/deepr/dev/example/envs/cpu/yarn-launcher-2020-05-18-16-40-46.pex
+INFO:deepr.jobs.yarn_launcher:Submitting job yarn-launcher-2020-05-18-16-40-46
+INFO:deepr.jobs.yarn_launcher:TRACKING_URL: http://48-df-37-23-94-70.am6.hpc.criteo.prod:8088/proxy/application_1589799129448_25566/
+</pre></div></div>
+</div>
+<p>When the job completes, it only means that the job was successfully submitted to yarn. We need to wait for the job to finish.</p>
+<p>After a few minutes, we can check that the build and training jobs ran successfully by looking at the files on the HDFS!</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>list(dpr.io.Path(&quot;viewfs://root/user/deepr/dev/example&quot;).glob(&quot;*&quot;))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[Path(viewfs://root/user/deepr/dev/example/envs)]
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Using-config-files">
+<h3>Using config files<a class="headerlink" href="#Using-config-files" title="Permalink to this headline">¶</a></h3>
+<p>Because it is sometimes convenient to commit config files for reproducibility and production, it is possible (and recommended) to store configs as <code class="docutils literal notranslate"><span class="pre">.json</span></code> files.</p>
+<p>A convenient way to compose configs (similar to what we did by defining different dictionaries before putting them together) is to use <a class="reference external" href="https://jsonnet.org/">jsonnet</a>.</p>
+<p>For example, we can define a file <code class="docutils literal notranslate"><span class="pre">build.jsonnet</span></code> like so</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.example.jobs.BuildDataset&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;path_dataset&quot;</span><span class="p">:</span> <span class="s2">&quot;viewfs://root/user/deepr/dev/example/data.tfrecord&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;num_examples&quot;</span><span class="p">:</span> <span class="mi">1000</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and import it into our pipline config file <code class="docutils literal notranslate"><span class="pre">config.jsonnet</span></code> with</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>local build = import &#39;build.jsonnet&#39;;
+{
+    &quot;type&quot;: &quot;dpr.jobs.YarnLauncher&quot;,
+    &quot;config&quot;: {
+        &quot;type&quot;: &quot;deepr.jobs.YarnLauncherConfig&quot;,
+    },
+    &quot;job&quot;: build
+}
+</pre></div>
+</div>
+<p>You can run config files defining jobs with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>deepr run config.jsonnet
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="config.html" class="btn btn-neutral float-right" title="Config" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="quickstart.html" class="btn btn-neutral float-left" title="Quickstart" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Reco.Consideration
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+deepr.layers.NotEqual
+=====================
+
+.. currentmodule:: deepr.layers
+
+.. autoclass:: NotEqual
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~NotEqual.__init__
+      ~NotEqual.forward
+      ~NotEqual.forward_as_dict
+   
+   
+
+   
+   
+   

@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>deepr.jobs.OptimizeSavedModel &mdash; deepr 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="deepr.jobs.Pipeline" href="deepr.jobs.Pipeline.html" />
+    <link rel="prev" title="deepr.jobs.MLFlowSaveInfo" href="deepr.jobs.MLFlowSaveInfo.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">deepR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../CORE_API.html">Core API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#config">Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#exporter">Exporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#hook">Hook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#initializer">Initializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#io">Io</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../CORE_API.html#job">Job</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="deepr.jobs.Job.html">deepr.jobs.Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.jobs.LogMetric.html">deepr.jobs.LogMetric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.jobs.MLFlowSaveConfigs.html">deepr.jobs.MLFlowSaveConfigs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.jobs.MLFlowSaveInfo.html">deepr.jobs.MLFlowSaveInfo</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">deepr.jobs.OptimizeSavedModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.jobs.Pipeline.html">deepr.jobs.Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.jobs.Trainer.html">deepr.jobs.Trainer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.jobs.YarnLauncher.html">deepr.jobs.YarnLauncher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.jobs.YarnTrainer.html">deepr.jobs.YarnTrainer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#layer">Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#macros">Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#metrics">Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#optimizer">Optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#prepro">Prepro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#reader">Reader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CORE_API.html#utils">Utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../_source/modules.html">deepr</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../CORE_API.html">Core API</a> &raquo;</li>
+        
+      <li>deepr.jobs.OptimizeSavedModel</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/API/_autosummary/deepr.jobs.OptimizeSavedModel.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="deepr-jobs-optimizesavedmodel">
+<h1>deepr.jobs.OptimizeSavedModel<a class="headerlink" href="#deepr-jobs-optimizesavedmodel" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="deepr.jobs.OptimizeSavedModel">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.jobs.</code><code class="sig-name descname">OptimizeSavedModel</code><span class="sig-paren">(</span><em class="sig-param">path_saved_model</em>, <em class="sig-param">path_optimized_model</em>, <em class="sig-param">graph_name</em>, <em class="sig-param">feeds</em>, <em class="sig-param">fetch</em>, <em class="sig-param">new_names=&lt;factory&gt;</em>, <em class="sig-param">blacklisted_variables=&lt;factory&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/jobs/optimize_saved_model.html#OptimizeSavedModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts SavedModel into an optimized protobuf for inference</p>
+<p>This job reads the input SavedModel, rename some nodes using the
+<cite>new_names</cite> argument (raises an error if some renames cannot be
+found), create placeholders given by <cite>feeds</cite> (and removes all
+other placeholders not in this list), and finally freezes the sub
+graph that produces the output tensor <cite>fetch</cite>.</p>
+<p>When creating the original SavedModel, it is recommended to use
+<cite>tf.identity</cite> operators to mark some tensors as future feeds or
+fetches.</p>
+<p>WARNING: successful completion of this job is no guarantee that the
+exported Graph is correct. It is recommended to test the export in
+a separate job.</p>
+<dl class="py attribute">
+<dt id="deepr.jobs.OptimizeSavedModel.path_saved_model">
+<code class="sig-name descname">path_saved_model</code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.path_saved_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to directory containing SavedModel exports to convert</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.jobs.OptimizeSavedModel.path_optimized_model">
+<code class="sig-name descname">path_optimized_model</code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.path_optimized_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to directory that will contain the export</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.jobs.OptimizeSavedModel.graph_name">
+<code class="sig-name descname">graph_name</code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.graph_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the output graph (name of the protobuf file)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.jobs.OptimizeSavedModel.new_names">
+<code class="sig-name descname">new_names</code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.new_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mapping old names (SavedModel nodes) -&gt; new names (export)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.jobs.OptimizeSavedModel.blacklisted_variables">
+<code class="sig-name descname">blacklisted_variables</code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.blacklisted_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of variable names not to include in the export</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.jobs.OptimizeSavedModel.feeds">
+<code class="sig-name descname">feeds</code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.feeds" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of nodes to be converted / used as Placeholders (inputs)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.jobs.OptimizeSavedModel.fetch">
+<code class="sig-name descname">fetch</code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.fetch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the node to use as output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.jobs.OptimizeSavedModel.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">path_saved_model</em>, <em class="sig-param">path_optimized_model</em>, <em class="sig-param">graph_name</em>, <em class="sig-param">feeds</em>, <em class="sig-param">fetch</em>, <em class="sig-param">new_names=&lt;factory&gt;</em>, <em class="sig-param">blacklisted_variables=&lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.jobs.OptimizeSavedModel.__init__" title="deepr.jobs.OptimizeSavedModel.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(path_saved_model, …[, new_names, …])</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">rtype</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code>()</p></td>
+<td><p>Run Job</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="deepr.jobs.Pipeline.html" class="btn btn-neutral float-right" title="deepr.jobs.Pipeline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="deepr.jobs.MLFlowSaveInfo.html" class="btn btn-neutral float-left" title="deepr.jobs.MLFlowSaveInfo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Reco.Consideration
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

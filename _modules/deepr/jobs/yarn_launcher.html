@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>deepr.jobs.yarn_launcher &mdash; deepr 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../README.html">deepR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../API/CORE_API.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_source/modules.html">deepr</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>deepr.jobs.yarn_launcher</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for deepr.jobs.yarn_launcher</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Yarn Launcher Config Interface and Job&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+
+<span class="kn">from</span> <span class="nn">cluster_pack.skein</span> <span class="kn">import</span> <span class="n">skein_config_builder</span>
+<span class="kn">import</span> <span class="nn">getpass</span>
+<span class="kn">import</span> <span class="nn">skein</span>
+
+<span class="kn">from</span> <span class="nn">deepr.config.base</span> <span class="kn">import</span> <span class="n">from_config</span>
+<span class="kn">from</span> <span class="nn">deepr.jobs</span> <span class="kn">import</span> <span class="n">base</span>
+<span class="kn">from</span> <span class="nn">deepr.jobs.yarn_config</span> <span class="kn">import</span> <span class="n">YarnConfig</span>
+<span class="kn">from</span> <span class="nn">deepr.utils</span> <span class="kn">import</span> <span class="n">mlflow</span>
+
+
+<span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="n">EDITABLE_PACKAGES_INDEX</span> <span class="o">=</span> <span class="s2">&quot;editable_packages_index&quot;</span>
+
+
+<div class="viewcode-block" id="YarnLauncherConfig"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.YarnLauncherConfig">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">YarnLauncherConfig</span><span class="p">(</span><span class="n">YarnConfig</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Yarn Launcher Config.&quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;yarn-launcher-</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">-%H-%M-%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="n">hadoop_file_systems</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">()</span>
+    <span class="n">memory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;48 GiB&quot;</span>
+    <span class="n">num_cores</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">48</span></div>
+
+
+<div class="viewcode-block" id="YarnLauncher"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.YarnLauncher">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">YarnLauncher</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Packages current environment, upload `.pex` and run yarn job.&quot;&quot;&quot;</span>
+
+    <span class="n">job</span><span class="p">:</span> <span class="n">Dict</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">YarnLauncherConfig</span>
+    <span class="n">run_on_yarn</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">job</span> <span class="o">=</span> <span class="n">from_config</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">job</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">base</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected type </span><span class="si">{</span><span class="n">base</span><span class="o">.</span><span class="n">Job</span><span class="si">}</span><span class="s2"> but got </span><span class="si">{</span><span class="n">job</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="YarnLauncher.run"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.YarnLauncher.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_on_yarn</span><span class="p">:</span>
+            <span class="c1"># Dump job and base as local json files for yarn_launcher</span>
+            <span class="n">job_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;job-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.json&quot;</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">job_name</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">job</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+            <span class="c1"># Launch job on yarn</span>
+            <span class="n">pex_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">upload_pex_cpu</span><span class="p">()</span>
+            <span class="k">with</span> <span class="n">skein</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span> <span class="k">as</span> <span class="n">skein_client</span><span class="p">:</span>
+                <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Submitting job </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">app_id</span> <span class="o">=</span> <span class="n">submit</span><span class="p">(</span>
+                    <span class="n">skein_client</span><span class="o">=</span><span class="n">skein_client</span><span class="p">,</span>
+                    <span class="n">module_name</span><span class="o">=</span><span class="s2">&quot;deepr.cli.main&quot;</span><span class="p">,</span>
+                    <span class="n">additional_files</span><span class="o">=</span><span class="p">[</span><span class="n">job_name</span><span class="p">],</span>
+                    <span class="n">archive_hdfs</span><span class="o">=</span><span class="n">pex_path</span><span class="p">,</span>
+                    <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;from_config&quot;</span><span class="p">,</span> <span class="n">job_name</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">],</span>
+                    <span class="n">env_vars</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get_env_vars</span><span class="p">(),</span>
+                    <span class="n">hadoop_file_systems</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">hadoop_file_systems</span><span class="p">,</span>
+                    <span class="n">memory</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">memory</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                    <span class="n">num_cores</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">num_cores</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">report</span> <span class="o">=</span> <span class="n">skein_client</span><span class="o">.</span><span class="n">application_report</span><span class="p">(</span><span class="n">app_id</span><span class="p">)</span>
+                <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TRACKING_URL: </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">tracking_url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">mlflow</span><span class="o">.</span><span class="n">clear_run</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Not running on yarn.&quot;</span><span class="p">)</span>
+            <span class="n">job</span> <span class="o">=</span> <span class="n">from_config</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">job</span><span class="p">)</span>
+            <span class="n">job</span><span class="o">.</span><span class="n">run</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="submit"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.submit">[docs]</a><span class="k">def</span> <span class="nf">submit</span><span class="p">(</span>
+    <span class="n">skein_client</span><span class="p">:</span> <span class="n">skein</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span>
+    <span class="n">module_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">additional_files</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">archive_hdfs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">env_vars</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">hadoop_file_systems</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(),</span>
+    <span class="n">max_attempts</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">max_restarts</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">memory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1 GiB&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;yarn_launcher&quot;</span><span class="p">,</span>
+    <span class="n">node_label</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">num_containers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">num_cores</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">pre_script_hook</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">queue</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">user</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Submit application via skein.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmp_dir</span><span class="p">:</span>
+        <span class="c1"># Update Environment Variables and script hook</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">env_vars</span><span class="p">)</span> <span class="k">if</span> <span class="n">env_vars</span> <span class="k">else</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">pre_script_hook</span> <span class="o">=</span> <span class="n">pre_script_hook</span> <span class="k">if</span> <span class="n">pre_script_hook</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;SKEIN_CONFIG&quot;</span><span class="p">:</span> <span class="s2">&quot;./.skein&quot;</span><span class="p">,</span> <span class="s2">&quot;GIT_PYTHON_REFRESH&quot;</span><span class="p">:</span> <span class="s2">&quot;quiet&quot;</span><span class="p">})</span>
+
+        <span class="c1"># Create Skein Config, Service and Spec</span>
+        <span class="n">skein_config</span> <span class="o">=</span> <span class="n">skein_config_builder</span><span class="o">.</span><span class="n">build</span><span class="p">(</span>
+            <span class="n">module_name</span><span class="p">,</span>
+            <span class="n">args</span><span class="o">=</span><span class="n">args</span> <span class="k">if</span> <span class="n">args</span> <span class="k">else</span> <span class="p">[],</span>
+            <span class="n">package_path</span><span class="o">=</span><span class="n">archive_hdfs</span><span class="p">,</span>
+            <span class="n">additional_files</span><span class="o">=</span><span class="n">additional_files</span><span class="p">,</span>
+            <span class="n">tmp_dir</span><span class="o">=</span><span class="n">tmp_dir</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">skein_service</span> <span class="o">=</span> <span class="n">skein</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span>
+            <span class="n">resources</span><span class="o">=</span><span class="n">skein</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">Resources</span><span class="p">(</span><span class="n">memory</span><span class="p">,</span> <span class="n">num_cores</span><span class="p">),</span>
+            <span class="n">instances</span><span class="o">=</span><span class="n">num_containers</span><span class="p">,</span>
+            <span class="n">files</span><span class="o">=</span><span class="n">skein_config</span><span class="o">.</span><span class="n">files</span><span class="p">,</span>
+            <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
+            <span class="n">script</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                        set -x</span>
+<span class="s2">                        env</span>
+<span class="s2">                        </span><span class="si">{</span><span class="n">pre_script_hook</span><span class="si">}</span><span class="s2"></span>
+<span class="s2">                        </span><span class="si">{</span><span class="n">skein_config</span><span class="o">.</span><span class="n">script</span><span class="si">}</span><span class="s2"></span>
+<span class="s2">                    &quot;&quot;&quot;</span><span class="p">,</span>
+            <span class="n">max_restarts</span><span class="o">=</span><span class="n">max_restarts</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">skein_spec</span> <span class="o">=</span> <span class="n">skein</span><span class="o">.</span><span class="n">ApplicationSpec</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">file_systems</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">hadoop_file_systems</span><span class="p">),</span>
+            <span class="n">services</span><span class="o">=</span><span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">skein_service</span><span class="p">},</span>
+            <span class="n">acls</span><span class="o">=</span><span class="n">skein</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">ACLs</span><span class="p">(</span><span class="n">enable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ui_users</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">],</span> <span class="n">view_users</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">]),</span>
+            <span class="n">max_attempts</span><span class="o">=</span><span class="n">max_attempts</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Activate impersonation only if user to run the job is not</span>
+        <span class="c1"># the current user (yarn issue)</span>
+        <span class="k">if</span> <span class="n">user</span> <span class="ow">and</span> <span class="n">user</span> <span class="o">!=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">():</span>
+            <span class="n">skein_spec</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">user</span>
+        <span class="k">if</span> <span class="n">queue</span><span class="p">:</span>
+            <span class="n">skein_spec</span><span class="o">.</span><span class="n">queue</span> <span class="o">=</span> <span class="n">queue</span>
+        <span class="k">if</span> <span class="n">node_label</span><span class="p">:</span>
+            <span class="n">skein_service</span><span class="o">.</span><span class="n">node_label</span> <span class="o">=</span> <span class="n">node_label</span>
+        <span class="k">return</span> <span class="n">skein_client</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">skein_spec</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Reco.Consideration
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

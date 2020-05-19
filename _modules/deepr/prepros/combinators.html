@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>deepr.prepros.combinators &mdash; deepr 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../README.html">deepR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../API/CORE_API.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_source/modules.html">deepr</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>deepr.prepros.combinators</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for deepr.prepros.combinators</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Combine Preprocessors&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Generator</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="kn">from</span> <span class="nn">deepr.prepros.base</span> <span class="kn">import</span> <span class="n">Prepro</span>
+<span class="kn">from</span> <span class="nn">deepr.prepros</span> <span class="kn">import</span> <span class="n">core</span>
+<span class="kn">from</span> <span class="nn">deepr.utils.datastruct</span> <span class="kn">import</span> <span class="n">to_flat_tuple</span>
+
+
+<span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Serial"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Serial">[docs]</a><span class="k">class</span> <span class="nc">Serial</span><span class="p">(</span><span class="n">Prepro</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Chain preprocessors to define complex preprocessing pipelines.</span>
+
+<span class="sd">    It will apply each preprocessing step one after the other on each</span>
+<span class="sd">    element. For performance reasons, it fuses `Map` and `Filter`</span>
+<span class="sd">    operations into single `tf.data` calls.</span>
+
+<span class="sd">    For an example, see the following snippet::</span>
+
+<span class="sd">        import deepr.layers as dprl</span>
+<span class="sd">        import deepr.prepros as dprp</span>
+
+<span class="sd">        def gen():</span>
+<span class="sd">            yield {&quot;a&quot;: [0], &quot;b&quot;: [0, 1]}</span>
+<span class="sd">            yield {&quot;a&quot;: [0, 1], &quot;b&quot;: [0]}</span>
+<span class="sd">            yield {&quot;a&quot;: [0, 1], &quot;b&quot;: [0, 1]}</span>
+
+<span class="sd">        prepro_fn = dprp.Serial(</span>
+<span class="sd">            dprp.Map(dprl.Sum(inputs=(&quot;a&quot;, &quot;b&quot;), outputs=&quot;c&quot;)),</span>
+<span class="sd">            dprp.Filter(dprl.IsMinSize(inputs=&quot;a&quot;, outputs=&quot;a_size&quot;, size=2)),</span>
+<span class="sd">            dprp.Filter(dprl.IsMinSize(inputs=&quot;b&quot;, outputs=&quot;b_size&quot;, size=2)),</span>
+<span class="sd">        )</span>
+
+<span class="sd">        dataset = tf.data.Dataset.from_generator(gen, {&quot;a&quot;: tf.int32, &quot;b&quot;: tf.int32}, {&quot;a&quot;: (None,), &quot;b&quot;: (None,)})</span>
+<span class="sd">        reader = dpr.readers.from_dataset(prepro_fn(dataset))</span>
+<span class="sd">        expected = [{&quot;a&quot;: [0, 1], &quot;b&quot;: [0, 1], &quot;c&quot;: [0, 2]}]</span>
+
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fuse : bool, Optional</span>
+<span class="sd">        If True (default), will fuse `Map` and `Filter`.</span>
+<span class="sd">    preprocessors : Union[Prepro, Tuple[Prepro], List[Prepro], Generator[Prepro, None, None]]</span>
+<span class="sd">        Positional arguments of `Prepro` instance or Tuple / List /</span>
+<span class="sd">        Generator of prepro instances</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Serial.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.prepros.Serial.html#deepr.prepros.Serial.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">preprocessors</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Prepro</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Prepro</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">Prepro</span><span class="p">],</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Prepro</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]],</span>
+        <span class="n">fuse</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">num_parallel_calls</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">preprocessors</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">_fuse</span><span class="p">(</span><span class="o">*</span><span class="n">to_flat_tuple</span><span class="p">(</span><span class="n">preprocessors</span><span class="p">),</span> <span class="n">num_parallel_calls</span><span class="o">=</span><span class="n">num_parallel_calls</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">fuse</span>
+            <span class="k">else</span> <span class="n">to_flat_tuple</span><span class="p">(</span><span class="n">preprocessors</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fuse</span> <span class="o">=</span> <span class="n">fuse</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_parallel_calls</span> <span class="o">=</span> <span class="n">num_parallel_calls</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocessors</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+<div class="viewcode-block" id="Serial.apply"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Serial.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Pre-process a dataset&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">prepro</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessors</span><span class="p">:</span>
+            <span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dataset</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">_fuse</span><span class="p">(</span><span class="o">*</span><span class="n">preprocessors</span><span class="p">:</span> <span class="n">Prepro</span><span class="p">,</span> <span class="n">num_parallel_calls</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Prepro</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Group Map and Filter in _FusedMap and _FusedFilter&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_prepro_type</span><span class="p">(</span><span class="n">prepro</span><span class="p">:</span> <span class="n">Prepro</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prepro</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Map</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;map&quot;</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prepro</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Filter</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;filter&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;other&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_gen</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">prepro_type</span><span class="p">,</span> <span class="n">prepros</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">preprocessors</span><span class="p">,</span> <span class="n">_prepro_type</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">prepro_type</span> <span class="o">==</span> <span class="s2">&quot;map&quot;</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">_FusedMap</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">prepros</span><span class="p">),</span> <span class="n">num_parallel_calls</span><span class="o">=</span><span class="n">num_parallel_calls</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">prepro_type</span> <span class="o">==</span> <span class="s2">&quot;filter&quot;</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">_FusedFilter</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">prepros</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="nb">list</span><span class="p">(</span><span class="n">prepros</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">to_flat_tuple</span><span class="p">(</span><span class="n">_gen</span><span class="p">())</span>
+
+
+<span class="k">class</span> <span class="nc">_FusedMap</span><span class="p">(</span><span class="n">Prepro</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fused Map&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">preprocessors</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">Map</span><span class="p">,</span> <span class="n">num_parallel_calls</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">preprocessors</span> <span class="o">=</span> <span class="n">preprocessors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_parallel_calls</span> <span class="o">=</span> <span class="n">num_parallel_calls</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">prepro</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Map</span><span class="p">)</span> <span class="k">for</span> <span class="n">prepro</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessors</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;All processors must be `deepr.Map` but got </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocessors</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocessors</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Apply preprocessors as one map operation&quot;&quot;&quot;</span>
+        <span class="c1"># Filter preprocessors for this mode</span>
+        <span class="n">active_prepros</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">core</span><span class="o">.</span><span class="n">Map</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">prepro</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessors</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">prepro</span><span class="o">.</span><span class="n">modes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">prepro</span><span class="o">.</span><span class="n">modes</span><span class="p">:</span>
+                <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Not applying </span><span class="si">{</span><span class="n">prepro</span><span class="si">}</span><span class="s2"> (mode=</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="n">active_prepros</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prepro</span><span class="p">)</span>
+
+        <span class="c1"># Apply filtered preprocessors</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">active_prepros</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">dataset</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">def</span> <span class="nf">_fused_tf_map_func</span><span class="p">(</span><span class="n">element</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">prepro</span> <span class="ow">in</span> <span class="n">active_prepros</span><span class="p">:</span>
+                    <span class="n">element</span> <span class="o">=</span> <span class="n">prepro</span><span class="o">.</span><span class="n">tf_map_func</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">element</span>
+
+            <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">_fused_tf_map_func</span><span class="p">,</span> <span class="n">num_parallel_calls</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_parallel_calls</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">_FusedFilter</span><span class="p">(</span><span class="n">Prepro</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fused Filter&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">preprocessors</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">Filter</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">preprocessors</span> <span class="o">=</span> <span class="n">preprocessors</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">prepro</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Filter</span><span class="p">)</span> <span class="k">for</span> <span class="n">prepro</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessors</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;All processors must be `deepr.Filter` but got </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocessors</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocessors</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Apply preprocessors as one filter operation&quot;&quot;&quot;</span>
+        <span class="c1"># Filter preprocessors for this mode</span>
+        <span class="n">active_prepros</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">core</span><span class="o">.</span><span class="n">Filter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">prepro</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessors</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">prepro</span><span class="o">.</span><span class="n">modes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">prepro</span><span class="o">.</span><span class="n">modes</span><span class="p">:</span>
+                <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Not applying </span><span class="si">{</span><span class="n">prepro</span><span class="si">}</span><span class="s2"> (mode=</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="n">active_prepros</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prepro</span><span class="p">)</span>
+
+        <span class="c1"># Apply filtered preprocessors</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">active_prepros</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">dataset</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">def</span> <span class="nf">_fused_tf_predicate</span><span class="p">(</span><span class="n">element</span><span class="p">):</span>
+                <span class="n">pred</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">for</span> <span class="n">prepro</span> <span class="ow">in</span> <span class="n">active_prepros</span><span class="p">:</span>
+                    <span class="n">new_pred</span> <span class="o">=</span> <span class="n">prepro</span><span class="o">.</span><span class="n">tf_predicate</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+                    <span class="n">pred</span> <span class="o">=</span> <span class="n">new_pred</span> <span class="k">if</span> <span class="n">pred</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">tf</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">new_pred</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">pred</span>
+
+            <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">_fused_tf_predicate</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Reco.Consideration
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

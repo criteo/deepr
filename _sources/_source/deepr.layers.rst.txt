@@ -1,0 +1,126 @@
+deepr.layers package
+====================
+
+Submodules
+----------
+
+deepr.layers.base module
+------------------------
+
+.. automodule:: deepr.layers.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.layers.bpr module
+-----------------------
+
+.. automodule:: deepr.layers.bpr
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.layers.click\_rank module
+-------------------------------
+
+.. automodule:: deepr.layers.click_rank
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.layers.combinators module
+-------------------------------
+
+.. automodule:: deepr.layers.combinators
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.layers.core module
+------------------------
+
+.. automodule:: deepr.layers.core
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.layers.dropout module
+---------------------------
+
+.. automodule:: deepr.layers.dropout
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.layers.embedding module
+-----------------------------
+
+.. automodule:: deepr.layers.embedding
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.layers.lookup module
+--------------------------
+
+.. automodule:: deepr.layers.lookup
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.layers.mask module
+------------------------
+
+.. automodule:: deepr.layers.mask
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.layers.reduce module
+--------------------------
+
+.. automodule:: deepr.layers.reduce
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.layers.size module
+------------------------
+
+.. automodule:: deepr.layers.size
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.layers.slice module
+-------------------------
+
+.. automodule:: deepr.layers.slice
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.layers.sparse module
+--------------------------
+
+.. automodule:: deepr.layers.sparse
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.layers.string module
+--------------------------
+
+.. automodule:: deepr.layers.string
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.layers
+   :members:
+   :undoc-members:
+   :show-inheritance:

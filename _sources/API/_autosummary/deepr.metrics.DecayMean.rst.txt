@@ -1,0 +1,22 @@
+deepr.metrics.DecayMean
+=======================
+
+.. currentmodule:: deepr.metrics
+
+.. autoclass:: DecayMean
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DecayMean.__init__
+   
+   
+
+   
+   
+   

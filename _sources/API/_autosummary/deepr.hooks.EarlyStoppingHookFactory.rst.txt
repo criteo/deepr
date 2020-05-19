@@ -1,0 +1,22 @@
+deepr.hooks.EarlyStoppingHookFactory
+====================================
+
+.. currentmodule:: deepr.hooks
+
+.. autoclass:: EarlyStoppingHookFactory
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~EarlyStoppingHookFactory.__init__
+   
+   
+
+   
+   
+   

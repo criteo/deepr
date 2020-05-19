@@ -1,0 +1,27 @@
+deepr.utils.Field
+=================
+
+.. currentmodule:: deepr.utils
+
+.. autoclass:: Field
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Field.__init__
+      ~Field.as_feature
+      ~Field.as_placeholder
+      ~Field.has_fixed_len
+      ~Field.has_var_len
+      ~Field.startswith
+   
+   
+
+   
+   
+   

@@ -1,0 +1,29 @@
+deepr.prepros.Filter
+====================
+
+.. currentmodule:: deepr.prepros
+
+.. autoclass:: Filter
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Filter.__init__
+      ~Filter.apply
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Filter.tf_predicate
+   
+   

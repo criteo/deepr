@@ -1,0 +1,6 @@
+deepr.config.fill\_macros
+=========================
+
+.. currentmodule:: deepr.config
+
+.. autofunction:: fill_macros

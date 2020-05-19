@@ -1,0 +1,33 @@
+deepr.jobs.MLFlowSaveConfigs
+============================
+
+.. currentmodule:: deepr.jobs
+
+.. autoclass:: MLFlowSaveConfigs
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MLFlowSaveConfigs.__init__
+      ~MLFlowSaveConfigs.run
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MLFlowSaveConfigs.config
+      ~MLFlowSaveConfigs.formatter
+      ~MLFlowSaveConfigs.macros
+      ~MLFlowSaveConfigs.macros_eval
+      ~MLFlowSaveConfigs.use_mlflow
+   
+   

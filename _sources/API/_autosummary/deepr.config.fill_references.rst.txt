@@ -1,0 +1,6 @@
+deepr.config.fill\_references
+=============================
+
+.. currentmodule:: deepr.config
+
+.. autofunction:: fill_references

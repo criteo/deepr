@@ -1,0 +1,6 @@
+deepr.utils.to\_flat\_tuple
+===========================
+
+.. currentmodule:: deepr.utils
+
+.. autofunction:: to_flat_tuple

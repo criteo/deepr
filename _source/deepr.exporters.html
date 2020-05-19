@@ -1,0 +1,483 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>deepr.exporters package &mdash; deepr 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="deepr.hooks package" href="deepr.hooks.html" />
+    <link rel="prev" title="deepr.example.prepros package" href="deepr.example.prepros.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">deepR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../API/CORE_API.html">Core API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">deepr</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="deepr.html">deepr package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="deepr.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="deepr.cli.html">deepr.cli package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.config.html">deepr.config package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.example.html">deepr.example package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">deepr.exporters package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.hooks.html">deepr.hooks package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.initializers.html">deepr.initializers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.io.html">deepr.io package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.jobs.html">deepr.jobs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.layers.html">deepr.layers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.macros.html">deepr.macros package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.metrics.html">deepr.metrics package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.optimizers.html">deepr.optimizers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.prepros.html">deepr.prepros package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.readers.html">deepr.readers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.utils.html">deepr.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.html#module-deepr.version">deepr.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.html#module-deepr">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">deepr</a> &raquo;</li>
+        
+          <li><a href="deepr.html">deepr package</a> &raquo;</li>
+        
+      <li>deepr.exporters package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_source/deepr.exporters.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="deepr-exporters-package">
+<h1>deepr.exporters package<a class="headerlink" href="#deepr-exporters-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-deepr.exporters.base">
+<span id="deepr-exporters-base-module"></span><h2>deepr.exporters.base module<a class="headerlink" href="#module-deepr.exporters.base" title="Permalink to this headline">¶</a></h2>
+<p>Base class for Exporters</p>
+<dl class="py class">
+<dt id="deepr.exporters.base.Exporter">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.exporters.base.</code><code class="sig-name descname">Exporter</code><a class="reference internal" href="../_modules/deepr/exporters/base.html#Exporter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.exporters.base.Exporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<p>Base class for Exporters</p>
+<dl class="py method">
+<dt id="deepr.exporters.base.Exporter.export">
+<em class="property">abstract </em><code class="sig-name descname">export</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">estimator</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/base.html#Exporter.export"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.exporters.base.Exporter.export" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.exporters.best_checkpoint">
+<span id="deepr-exporters-best-checkpoint-module"></span><h2>deepr.exporters.best_checkpoint module<a class="headerlink" href="#module-deepr.exporters.best_checkpoint" title="Permalink to this headline">¶</a></h2>
+<p>Best Checkpoint Exporter</p>
+<dl class="py class">
+<dt id="deepr.exporters.best_checkpoint.BestCheckpoint">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.exporters.best_checkpoint.</code><code class="sig-name descname">BestCheckpoint</code><span class="sig-paren">(</span><em class="sig-param">metric</em>, <em class="sig-param">mode=&lt;BestMode.DECREASE: 'decrease'&gt;</em>, <em class="sig-param">use_mlflow=False</em>, <em class="sig-param">tag='training_best_step'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/best_checkpoint.html#BestCheckpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestCheckpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.exporters.base.Exporter" title="deepr.exporters.base.Exporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.exporters.base.Exporter</span></code></a></p>
+<p>Overrides Checkpoint Information to point to the best checkpoint.</p>
+<p>The best checkpoint is the one whose step is closest to the step of
+the best evaluation metric. The evaluation metrics are retrieved
+from the evaluation summaries (located in <cite>eval</cite>).</p>
+<dl class="py attribute">
+<dt id="deepr.exporters.best_checkpoint.BestCheckpoint.metric">
+<code class="sig-name descname">metric</code><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestCheckpoint.metric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the metric used to select the best checkpoint</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.exporters.best_checkpoint.BestCheckpoint.mode">
+<code class="sig-name descname">mode</code><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestCheckpoint.mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>If ‘decrease’, means lower is better.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.exporters.best_checkpoint.BestCheckpoint.tag">
+<code class="sig-name descname">tag</code><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestCheckpoint.tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tag for MLFlow</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.exporters.best_checkpoint.BestCheckpoint.use_mlflow">
+<code class="sig-name descname">use_mlflow</code><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestCheckpoint.use_mlflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, will log the best checkpoint step as tag to MLFlow</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.exporters.best_checkpoint.BestCheckpoint.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">estimator</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/best_checkpoint.html#BestCheckpoint.export"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestCheckpoint.export" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.exporters.best_checkpoint.BestMode">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.exporters.best_checkpoint.</code><code class="sig-name descname">BestMode</code><a class="reference internal" href="../_modules/deepr/exporters/best_checkpoint.html#BestMode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>Modes for early stopping</p>
+<dl class="py attribute">
+<dt id="deepr.exporters.best_checkpoint.BestMode.DECREASE">
+<code class="sig-name descname">DECREASE</code><em class="property">: str</em><em class="property"> = 'decrease'</em><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestMode.DECREASE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.exporters.best_checkpoint.BestMode.INCREASE">
+<code class="sig-name descname">INCREASE</code><em class="property">: str</em><em class="property"> = 'increase'</em><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestMode.INCREASE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.exporters.best_checkpoint.read_eval_metrics">
+<code class="sig-prename descclassname">deepr.exporters.best_checkpoint.</code><code class="sig-name descname">read_eval_metrics</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">eval_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/best_checkpoint.html#read_eval_metrics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.exporters.best_checkpoint.read_eval_metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reload summaries from model_dir</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.exporters.save_variables">
+<span id="deepr-exporters-save-variables-module"></span><h2>deepr.exporters.save_variables module<a class="headerlink" href="#module-deepr.exporters.save_variables" title="Permalink to this headline">¶</a></h2>
+<p>Save Variables Exporter</p>
+<dl class="py class">
+<dt id="deepr.exporters.save_variables.SaveVariables">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.exporters.save_variables.</code><code class="sig-name descname">SaveVariables</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_variables</span></em>, <em class="sig-param"><span class="n">variable_names</span></em>, <em class="sig-param"><span class="n">chunk_size</span><span class="o">=</span><span class="default_value">100000</span></em>, <em class="sig-param"><span class="n">compression</span><span class="o">=</span><span class="default_value">'snappy'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/save_variables.html#SaveVariables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.exporters.save_variables.SaveVariables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.exporters.base.Exporter" title="deepr.exporters.base.Exporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.exporters.base.Exporter</span></code></a></p>
+<p>Save Variables as Parquet, supports chunking.</p>
+<dl class="py attribute">
+<dt id="deepr.exporters.save_variables.SaveVariables.path_variables">
+<code class="sig-name descname">path_variables</code><a class="headerlink" href="#deepr.exporters.save_variables.SaveVariables.path_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to export directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.exporters.save_variables.SaveVariables.variable_names">
+<code class="sig-name descname">variable_names</code><a class="headerlink" href="#deepr.exporters.save_variables.SaveVariables.variable_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of variables from the Tensorflow Graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.exporters.save_variables.SaveVariables.chunk_size">
+<code class="sig-name descname">chunk_size</code><a class="headerlink" href="#deepr.exporters.save_variables.SaveVariables.chunk_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of elements per checkpoint</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.exporters.save_variables.SaveVariables.compression">
+<code class="sig-name descname">compression</code><a class="headerlink" href="#deepr.exporters.save_variables.SaveVariables.compression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of compression, default to “snappy”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.exporters.save_variables.SaveVariables.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">estimator</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/save_variables.html#SaveVariables.export"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.exporters.save_variables.SaveVariables.export" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.exporters.saved_model">
+<span id="deepr-exporters-saved-model-module"></span><h2>deepr.exporters.saved_model module<a class="headerlink" href="#module-deepr.exporters.saved_model" title="Permalink to this headline">¶</a></h2>
+<p>Saved Model Exporter</p>
+<dl class="py class">
+<dt id="deepr.exporters.saved_model.SavedModel">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.exporters.saved_model.</code><code class="sig-name descname">SavedModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_saved_model</span></em>, <em class="sig-param"><span class="n">fields</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/saved_model.html#SavedModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.exporters.saved_model.SavedModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.exporters.base.Exporter" title="deepr.exporters.base.Exporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.exporters.base.Exporter</span></code></a></p>
+<p>Saved Model Exporter</p>
+<dl class="py attribute">
+<dt id="deepr.exporters.saved_model.SavedModel.path_saved_model">
+<code class="sig-name descname">path_saved_model</code><a class="headerlink" href="#deepr.exporters.saved_model.SavedModel.path_saved_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to saved_model directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.exporters.saved_model.SavedModel.fields">
+<code class="sig-name descname">fields</code><a class="headerlink" href="#deepr.exporters.saved_model.SavedModel.fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of field to build the input_receiver_fn.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="../API/_autosummary/deepr.utils.Field.html#deepr.utils.Field" title="deepr.utils.Field">Field</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.exporters.saved_model.SavedModel.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">estimator</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/saved_model.html#SavedModel.export"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.exporters.saved_model.SavedModel.export" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.exporters">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-deepr.exporters" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="deepr.hooks.html" class="btn btn-neutral float-right" title="deepr.hooks package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="deepr.example.prepros.html" class="btn btn-neutral float-left" title="deepr.example.prepros package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Reco.Consideration
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

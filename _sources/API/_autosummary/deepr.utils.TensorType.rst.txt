@@ -1,0 +1,6 @@
+deepr.utils.TensorType
+======================
+
+.. currentmodule:: deepr.utils
+
+.. autofunction:: TensorType

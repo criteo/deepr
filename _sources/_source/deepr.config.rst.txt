@@ -1,0 +1,46 @@
+deepr.config package
+====================
+
+Submodules
+----------
+
+deepr.config.base module
+------------------------
+
+.. automodule:: deepr.config.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.config.experimental module
+--------------------------------
+
+.. automodule:: deepr.config.experimental
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.config.macros module
+--------------------------
+
+.. automodule:: deepr.config.macros
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.config.references module
+------------------------------
+
+.. automodule:: deepr.config.references
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.config
+   :members:
+   :undoc-members:
+   :show-inheritance:

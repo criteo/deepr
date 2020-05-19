@@ -1,0 +1,29 @@
+deepr.prepros.TFRecordSequenceExample
+=====================================
+
+.. currentmodule:: deepr.prepros
+
+.. autoclass:: TFRecordSequenceExample
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TFRecordSequenceExample.__init__
+      ~TFRecordSequenceExample.apply
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~TFRecordSequenceExample.parse_fn
+   
+   

@@ -1,0 +1,22 @@
+deepr.initializers package
+==========================
+
+Submodules
+----------
+
+deepr.initializers.checkpoint\_initializer module
+-------------------------------------------------
+
+.. automodule:: deepr.initializers.checkpoint_initializer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.initializers
+   :members:
+   :undoc-members:
+   :show-inheritance:

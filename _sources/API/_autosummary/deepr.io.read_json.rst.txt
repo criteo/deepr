@@ -1,0 +1,6 @@
+deepr.io.read\_json
+===================
+
+.. currentmodule:: deepr.io
+
+.. autofunction:: read_json

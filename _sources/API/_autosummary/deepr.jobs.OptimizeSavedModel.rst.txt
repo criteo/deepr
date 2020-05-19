@@ -1,0 +1,23 @@
+deepr.jobs.OptimizeSavedModel
+=============================
+
+.. currentmodule:: deepr.jobs
+
+.. autoclass:: OptimizeSavedModel
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~OptimizeSavedModel.__init__
+      ~OptimizeSavedModel.run
+   
+   
+
+   
+   
+   

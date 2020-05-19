@@ -1,0 +1,29 @@
+deepr.jobs.LogMetric
+====================
+
+.. currentmodule:: deepr.jobs
+
+.. autoclass:: LogMetric
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~LogMetric.__init__
+      ~LogMetric.run
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~LogMetric.use_mlflow
+   
+   

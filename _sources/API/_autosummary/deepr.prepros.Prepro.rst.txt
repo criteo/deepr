@@ -1,0 +1,23 @@
+deepr.prepros.Prepro
+====================
+
+.. currentmodule:: deepr.prepros
+
+.. autoclass:: Prepro
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Prepro.__init__
+      ~Prepro.apply
+   
+   
+
+   
+   
+   

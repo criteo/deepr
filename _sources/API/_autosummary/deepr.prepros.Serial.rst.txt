@@ -1,0 +1,23 @@
+deepr.prepros.Serial
+====================
+
+.. currentmodule:: deepr.prepros
+
+.. autoclass:: Serial
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Serial.__init__
+      ~Serial.apply
+   
+   
+
+   
+   
+   

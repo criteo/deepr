@@ -1,0 +1,23 @@
+deepr.prepros.Batch
+===================
+
+.. currentmodule:: deepr.prepros
+
+.. autoclass:: Batch
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Batch.__init__
+      ~Batch.apply
+   
+   
+
+   
+   
+   

@@ -1,0 +1,921 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Quickstart &mdash; deepr 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Pipeline" href="pipeline.html" />
+    <link rel="prev" title="deepr reference documentation" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Dataset">Dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Prepro">Prepro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Model">Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Pred-function">Pred function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Loss-function">Loss function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Optimizer">Optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Trainer-job">Trainer job</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuning.html">Hyper Parameter Tuning</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">deepR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../API/CORE_API.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_source/modules.html">deepr</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Quickstart</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/getting_started/quickstart.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container,
+div.nbinput.container div.prompt,
+div.nbinput.container div.input_area,
+div.nbinput.container div[class*=highlight],
+div.nbinput.container div[class*=highlight] pre,
+div.nboutput.container,
+div.nboutput.container div.prompt,
+div.nboutput.container div.output_area,
+div.nboutput.container div[class*=highlight],
+div.nboutput.container div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="Quickstart">
+<h1>Quickstart<a class="headerlink" href="#Quickstart" title="Permalink to this headline">¶</a></h1>
+<p>This notebook is a gentle introduction to the few concepts and abstractions of deepr_python.</p>
+<p>It demonstrates how to train a model that learns how to multiply a number by 2.</p>
+<p>The reference documentation can be found at <a class="reference external" href="http://go/nndoc">http://go/nndoc</a>.</p>
+<p>To train a model with deepr-python the main entry point is the <a class="reference external" href="http://mozart-rbeaumont-default.service.am6.consul.prod.crto.in:8000/_modules/deepr_python/core/jobs/trainer.html#Trainer">Trainer</a> job.</p>
+<p>It is important at this point to stress that <code class="docutils literal notranslate"><span class="pre">deepr_python</span></code> is not yet another library to build neural networks, but merely a utility to build functions that operate on basic Tensorflow types, i.e. <code class="docutils literal notranslate"><span class="pre">tf.Tensor</span></code> and <code class="docutils literal notranslate"><span class="pre">tf.data.Dataset</span></code>.</p>
+<p>Using functional programming makes it easy to lazily define graphs that will only be built at run time by the <code class="docutils literal notranslate"><span class="pre">tf.estimator</span></code> high-level API.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> job uses most of the <a class="reference external" href="http://mozart-rbeaumont-default.service.am6.consul.prod.crto.in:8000/CORE_API.html">important concepts</a> of deepr-python, while only expecting basic types (mainly functions operating on datasets, dictionaries of tensors, etc.).</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">path_model</span> <span class="pre">:</span> <span class="pre">str</span></code> Path to the model directory. Can be either local or HDFS.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pred_fn</span> <span class="pre">:</span> <span class="pre">Callable[[Dict[str,</span> <span class="pre">tf.Tensor],</span> <span class="pre">str],</span> <span class="pre">Dict[str,</span> <span class="pre">tf.Tensor]]</span></code> Typically a <code class="docutils literal notranslate"><span class="pre">Layer</span></code> instance, but in general, any callable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loss_fn</span> <span class="pre">:</span> <span class="pre">Callable[[Dict[str,</span> <span class="pre">tf.Tensor],</span> <span class="pre">str],</span> <span class="pre">Dict[str,</span> <span class="pre">tf.Tensor]]</span></code> Typically a <code class="docutils literal notranslate"><span class="pre">Layer</span></code> instance, but in general, any callable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optimizer_fn</span> <span class="pre">:</span> <span class="pre">Callable[[tf.Tensor],</span> <span class="pre">tf.Tensor]</span></code> Typically an <code class="docutils literal notranslate"><span class="pre">Optimizer</span></code> instance, but in general, any callable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">train_input_fn</span> <span class="pre">:</span> <span class="pre">Callable[[],</span> <span class="pre">tf.data.Dataset]</span></code> Typically a <code class="docutils literal notranslate"><span class="pre">Reader</span></code> instance, but in general, any callable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eval_input_fn</span> <span class="pre">:</span> <span class="pre">Callable[[],</span> <span class="pre">tf.data.Dataset]</span></code> Typically a <code class="docutils literal notranslate"><span class="pre">Reader</span></code> instance, but in general, any callable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prepro_fn:</span> <span class="pre">Callable[[tf.data.Dataset,</span> <span class="pre">str],</span> <span class="pre">tf.data.Dataset],</span> <span class="pre">Optional</span></code> Typically a <code class="docutils literal notranslate"><span class="pre">Prepro</span></code> instance, but in general, any callable.</p></li>
+</ul>
+<p>There are more parameters that use the other concepts (hooks, metrics, exporter, …) and this will be covered in another guide.</p>
+<p>So to train our model, we need to define all that, let’s start !</p>
+<div class="section" id="Dataset">
+<h2>Dataset<a class="headerlink" href="#Dataset" title="Permalink to this headline">¶</a></h2>
+<p>The first step is to build a dataset. For this we will build a synthetic dataset of numbers of (x, 2x).</p>
+<p>Also see other ways to build a dataset in the <a class="reference external" href="http://mozart-rbeaumont-default.service.am6.consul.prod.crto.in:8000/CORE_API.html#reader">reader reference</a></p>
+<p>Some imports first</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>import logging
+import sys
+logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+logging.getLogger(&quot;tensorflow&quot;).setLevel(logging.CRITICAL)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>import tensorflow as tf
+import deepr as dpr
+import numpy as np
+import deepr.layers as dprl
+</pre></div>
+</div>
+</div>
+<p>Let’s define a generator function and then use a <a class="reference external" href="http://mozart-rbeaumont-default.service.am6.consul.prod.crto.in:8000/_autosummary/deepr.readers.GeneratorReader.html?highlight=generatorreader">GeneratorReader</a> to create a <code class="docutils literal notranslate"><span class="pre">tf.data.Dataset</span></code></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>def generator_fn():
+    for _ in range(1000):
+        x = np.random.random()
+        yield {&quot;x&quot;: x, &quot;y&quot;: 2 * x}
+
+reader = dpr.readers.GeneratorReader(
+    generator_fn,
+    output_types={&quot;x&quot;:tf.float32, &quot;y&quot;:tf.float32},
+    output_shapes={&quot;x&quot;:(), &quot;y&quot;:()}
+)
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Reader</span></code> classes are simple helper functions to create <code class="docutils literal notranslate"><span class="pre">tf.data.Dataset</span></code>, heavily inspired by the <code class="docutils literal notranslate"><span class="pre">tensorflow_dataset</span></code> package.</p>
+<p>Once the reader is configured, you can create a new <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> with</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>dataset = reader.as_dataset()
+print(dataset)
+dataset = reader()  # Simply an alias for as_dataset
+print(dataset)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;DatasetV1Adapter shapes: {x: (), y: ()}, types: {x: tf.float32, y: tf.float32}&gt;
+&lt;DatasetV1Adapter shapes: {x: (), y: ()}, types: {x: tf.float32, y: tf.float32}&gt;
+</pre></div></div>
+</div>
+<p>Iterating over a <code class="docutils literal notranslate"><span class="pre">tf.data.Dataset</span></code> in “graph” mode is not possible.</p>
+<p>The base <code class="docutils literal notranslate"><span class="pre">Reader</span></code> class makes it possible to iterate over the dataset, faking eager-execution mode (under the hood it simply creates a session in the special <code class="docutils literal notranslate"><span class="pre">__iter__</span></code> method).</p>
+<p>Let’s have a look at the content of our dataset</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>for index, item in enumerate(reader):
+    print(item)
+    if index == 10:
+        break
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;x&#39;: 0.5050241, &#39;y&#39;: 1.0100482}
+{&#39;x&#39;: 0.74931484, &#39;y&#39;: 1.4986297}
+{&#39;x&#39;: 0.6693086, &#39;y&#39;: 1.3386172}
+{&#39;x&#39;: 0.713442, &#39;y&#39;: 1.426884}
+{&#39;x&#39;: 0.840372, &#39;y&#39;: 1.680744}
+{&#39;x&#39;: 0.7257865, &#39;y&#39;: 1.451573}
+{&#39;x&#39;: 0.7972316, &#39;y&#39;: 1.5944632}
+{&#39;x&#39;: 0.71821946, &#39;y&#39;: 1.4364389}
+{&#39;x&#39;: 0.90175074, &#39;y&#39;: 1.8035015}
+{&#39;x&#39;: 0.6040216, &#39;y&#39;: 1.2080432}
+{&#39;x&#39;: 0.6545429, &#39;y&#39;: 1.3090858}
+</pre></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> job expects 2 <code class="docutils literal notranslate"><span class="pre">input_fn</span></code> that are simple callables creating new <code class="docutils literal notranslate"><span class="pre">tf.data.Dataset</span></code>.</p>
+<p>Our <code class="docutils literal notranslate"><span class="pre">reader</span></code> does exactly that, so let’s set</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>train_input_fn = reader
+eval_input_fn = reader
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Prepro">
+<h2>Prepro<a class="headerlink" href="#Prepro" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have datasets, we need to preprocess them before feeding data to our model. In this example, we only need to create batches of data, and allow multiple iterations over the dataset to be able to perform multiple epochs.</p>
+<p>Let’s use the <code class="docutils literal notranslate"><span class="pre">prepro</span></code> module to functionally define a preprocessing function.</p>
+<p>See the <a class="reference external" href="http://mozart-rbeaumont-default.service.am6.consul.prod.crto.in:8000/CORE_API.html#prepro">prepro reference</a></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>prepro_fn = dpr.prepros.Serial(
+    dpr.prepros.Batch(batch_size=32),
+    dpr.prepros.Repeat(10, modes=[tf.estimator.ModeKeys.TRAIN])
+)
+</pre></div>
+</div>
+</div>
+<p>As expected, the output of this prepro function is a batched dataset</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>prepro_fn(reader())
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;DatasetV1Adapter shapes: {x: (?,), y: (?,)}, types: {x: tf.float32, y: tf.float32}&gt;
+</pre></div></div>
+</div>
+<p>Let’s check the result of our preprocessing by iterating over the dataset. We use the helper function <code class="docutils literal notranslate"><span class="pre">from_dataset</span></code> that creates a <code class="docutils literal notranslate"><span class="pre">reader</span></code> from any <code class="docutils literal notranslate"><span class="pre">tf.data.Dataset</span></code>, which gives us eager-like iteration over the underlying dataset.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>for item in dpr.readers.base.from_dataset(prepro_fn(reader())):
+    print(item)
+    break
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;x&#39;: array([0.2884208 , 0.6716708 , 0.60438156, 0.74616903, 0.60974383,
+       0.8843869 , 0.28427488, 0.744994  , 0.02057592, 0.3612376 ,
+       0.9891428 , 0.04443246, 0.98389417, 0.07303068, 0.46858358,
+       0.8129141 , 0.42637283, 0.68399006, 0.7564984 , 0.16813973,
+       0.30100608, 0.69422716, 0.1550892 , 0.995761  , 0.91428363,
+       0.909327  , 0.36975038, 0.74172604, 0.7243495 , 0.44936314,
+       0.4023981 , 0.8480999 ], dtype=float32), &#39;y&#39;: array([0.5768416 , 1.3433416 , 1.2087631 , 1.4923381 , 1.2194877 ,
+       1.7687738 , 0.56854975, 1.489988  , 0.04115184, 0.7224752 ,
+       1.9782856 , 0.08886492, 1.9677883 , 0.14606136, 0.93716717,
+       1.6258281 , 0.85274565, 1.3679801 , 1.5129968 , 0.33627945,
+       0.60201216, 1.3884543 , 0.3101784 , 1.991522  , 1.8285673 ,
+       1.818654  , 0.73950076, 1.4834521 , 1.448699  , 0.8987263 ,
+       0.8047962 , 1.6961998 ], dtype=float32)}
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Model">
+<h2>Model<a class="headerlink" href="#Model" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have a preprocessed dataset, let’s build the model.</p>
+<p>The dataset yields dictionaries of tensors.</p>
+<p>The model is made of 2 main components</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pred_fn(tensors:</span> <span class="pre">Dict,</span> <span class="pre">mode)</span> <span class="pre">-&gt;</span> <span class="pre">Dict</span></code> operates on the dataset dictionaries, creates new tensors (the predictions).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loss_fn(tensors:</span> <span class="pre">Dict,</span> <span class="pre">mode)</span> <span class="pre">-&gt;</span> <span class="pre">Dict</span></code> operates on the dataset and <code class="docutils literal notranslate"><span class="pre">pred_fn</span></code> results, creates at least one new tensor <code class="docutils literal notranslate"><span class="pre">loss</span></code>.</p></li>
+</ol>
+<p>We’re going to use the <code class="docutils literal notranslate"><span class="pre">layer</span></code> module to quickly define those functions.</p>
+<p>Make sure to check the <a class="reference external" href="http://mozart-rbeaumont-default.service.am6.consul.prod.crto.in:8000/CORE_API.html#layer">layer reference</a> for more information.</p>
+<div class="section" id="Pred-function">
+<h3>Pred function<a class="headerlink" href="#Pred-function" title="Permalink to this headline">¶</a></h3>
+<p>The first part of the model is the prediction function.</p>
+<p>Here it’s pretty simple : it will predict a <code class="docutils literal notranslate"><span class="pre">y_pred</span></code> with an <code class="docutils literal notranslate"><span class="pre">alpha</span></code> parameter such that <code class="docutils literal notranslate"><span class="pre">y_pred</span> <span class="pre">=</span> <span class="pre">alpha</span> <span class="pre">*</span> <span class="pre">x</span></code></p>
+<p>We first define this as a <code class="docutils literal notranslate"><span class="pre">Multiply</span></code> layer :</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>@dprl.layer(n_in=1, n_out=1)
+def Multiply(tensors):
+    alpha = tf.get_variable(name=&quot;alpha&quot;, shape=(), dtype=tf.float32)
+    return alpha * tensors
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">layer</span></code> decorator creates a <code class="docutils literal notranslate"><span class="pre">Layer</span></code> class from the function, roughly equivalent to</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Multiply</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_in</span> <span class="o">=</span> <span class="n">n_in</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_out</span> <span class="o">=</span> <span class="n">n_out</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span> <span class="o">=</span> <span class="n">inputs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span> <span class="o">=</span> <span class="n">outputs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward_as_dict</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;alpha&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">tensors</span>
+
+    <span class="k">def</span> <span class="nf">forward_as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">tensors</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">])}</span>
+</pre></div>
+</div>
+<p>We can instantiate our <code class="docutils literal notranslate"><span class="pre">Layer</span></code> with</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>pred_fn = Multiply(inputs=&quot;x&quot;, outputs=&quot;y_pred&quot;)
+</pre></div>
+</div>
+</div>
+<p>The power of the base <code class="docutils literal notranslate"><span class="pre">Layer</span></code> class is that layers are actually functions that can operate on both dictionaries and tuples of tensors.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">outputs</span></code> arguments, when given, specify the keys of the dictionaries to use for the layer.</p>
+<p>Let’s see how it works</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>tf.reset_default_graph()
+print(pred_fn(tf.constant(1.0)))
+tf.reset_default_graph()  # Remove alpha variable from the graph
+print(pred_fn({&quot;x&quot;: tf.constant(1.0)}))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Tensor(&#34;mul:0&#34;, shape=(), dtype=float32)
+{&#39;y_pred&#39;: &lt;tf.Tensor &#39;mul:0&#39; shape=() dtype=float32&gt;}
+</pre></div></div>
+</div>
+<p>Let’s check the output of this model (alpha is initialized randomly) :</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>tf.reset_default_graph()
+y_pred = pred_fn(tf.constant(1.0))
+with tf.Session() as sess:
+    sess.run(tf.global_variables_initializer())
+    print(sess.run(y_pred))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+-1.4690943
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Loss-function">
+<h3>Loss function<a class="headerlink" href="#Loss-function" title="Permalink to this headline">¶</a></h3>
+<p>Let’s then define the loss function. A squared l2 loss will work fine here, let’s create a layer for this :</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>@dprl.layer(n_in=2, n_out=1)
+def SquaredL2(tensors):
+    x, y = tensors
+    return tf.reduce_sum((x-y)**2)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>loss_fn = SquaredL2(inputs=(&quot;y_pred&quot;, &quot;y&quot;), outputs=&quot;loss&quot;)
+</pre></div>
+</div>
+</div>
+<p>Let’s see if it works :</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>with tf.Session() as sess:
+    print(sess.run(loss_fn((tf.constant(1.0), tf.constant(0.5)))))
+    print(sess.run(loss_fn({&quot;y_pred&quot;: tf.constant(1.0), &quot;y&quot;: tf.constant(0.5)})))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.25
+{&#39;loss&#39;: 0.25}
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Optimizer">
+<h3>Optimizer<a class="headerlink" href="#Optimizer" title="Permalink to this headline">¶</a></h3>
+<p>The last thing we need is the optimizer. See the <a class="reference external" href="http://mozart-rbeaumont-default.service.am6.consul.prod.crto.in:8000/CORE_API.html#optimizer">optimizer reference</a></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>optimizer_fn = dpr.optimizers.TensorflowOptimizer(&quot;Adam&quot;, 0.1)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Trainer-job">
+<h2>Trainer job<a class="headerlink" href="#Trainer-job" title="Permalink to this headline">¶</a></h2>
+<p>Since all these concepts are now defined, let’s create a <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> job.</p>
+<p>Make sure to check the <a class="reference external" href="http://mozart-rbeaumont-default.service.am6.consul.prod.crto.in:8000/_autosummary/deepr.jobs.Trainer.html">trainer reference</a></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>job = dpr.jobs.Trainer(
+    path_model=&quot;model&quot;,
+    pred_fn=pred_fn,
+    loss_fn=loss_fn,
+    optimizer_fn=optimizer_fn,
+    train_input_fn=train_input_fn,
+    eval_input_fn=eval_input_fn,
+    prepro_fn=prepro_fn
+)
+</pre></div>
+</div>
+</div>
+<p>Creating the job is lazy and doesn’t take any time. To run it, call the run method :</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>job.run()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+INFO:deepr.prepros.core:Not applying Repeat(10) (mode=eval)
+INFO:deepr.jobs.trainer:Running final evaluation, using global_step = 640
+INFO:deepr.prepros.core:Not applying Repeat(10) (mode=eval)
+INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 640}
+</pre></div></div>
+</div>
+<p>The loss is 0, great, we now know how to multiply by 2 :)</p>
+<p>Let’s check alpha is indeed equal to 2 :</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>experiment = job.create_experiment()
+estimator = experiment.estimator
+print(estimator.get_variable_value(&quot;alpha&quot;))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+2.0
+</pre></div></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pipeline.html" class="btn btn-neutral float-right" title="Pipeline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="deepr reference documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Reco.Consideration
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

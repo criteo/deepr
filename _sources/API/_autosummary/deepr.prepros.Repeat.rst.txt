@@ -1,0 +1,23 @@
+deepr.prepros.Repeat
+====================
+
+.. currentmodule:: deepr.prepros
+
+.. autoclass:: Repeat
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Repeat.__init__
+      ~Repeat.apply
+   
+   
+
+   
+   
+   

@@ -1,0 +1,23 @@
+deepr.prepros.Prefetch
+======================
+
+.. currentmodule:: deepr.prepros
+
+.. autoclass:: Prefetch
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Prefetch.__init__
+      ~Prefetch.apply
+   
+   
+
+   
+   
+   

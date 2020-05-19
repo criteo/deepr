@@ -1,0 +1,309 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>deepr.jobs.yarn_trainer &mdash; deepr 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../README.html">deepR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../API/CORE_API.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_source/modules.html">deepr</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>deepr.jobs.yarn_trainer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for deepr.jobs.yarn_trainer</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Yarn Trainer Config and Job&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">import</span> <span class="nn">atexit</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">cluster_pack.packaging</span> <span class="kn">import</span> <span class="n">get_editable_requirements</span>
+<span class="kn">import</span> <span class="nn">mlflow</span>
+<span class="kn">import</span> <span class="nn">skein</span>
+<span class="kn">import</span> <span class="nn">tf_yarn</span>
+
+<span class="kn">from</span> <span class="nn">deepr.config.base</span> <span class="kn">import</span> <span class="n">from_config</span>
+<span class="kn">from</span> <span class="nn">deepr.jobs</span> <span class="kn">import</span> <span class="n">base</span>
+<span class="kn">from</span> <span class="nn">deepr.jobs.trainer</span> <span class="kn">import</span> <span class="n">Trainer</span>
+<span class="kn">from</span> <span class="nn">deepr.jobs.yarn_config</span> <span class="kn">import</span> <span class="n">YarnConfig</span>
+
+
+<span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="YarnTrainerConfig"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.YarnTrainerConfig">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">YarnTrainerConfig</span><span class="p">(</span><span class="n">YarnConfig</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Default Yarn Trainer Config&quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;yarn-trainer-</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">-%H-%M-%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="n">nb_ps</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">nb_retries</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">nb_workers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">pre_script_hook</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;source /etc/profile.d/cuda.sh &amp;&amp; setupCUDA 10.1 &amp;&amp; &quot;</span> <span class="s2">&quot;setupCUDNN cuda10.1_v7.6.4.38&quot;</span>
+    <span class="n">queue</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;dev&quot;</span>
+
+    <span class="n">tf_yarn</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cpu&quot;</span>
+    <span class="n">tf_yarn_chief_cores</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">48</span>
+    <span class="n">tf_yarn_chief_memory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;48 GiB&quot;</span>
+    <span class="n">tf_yarn_evaluator_cores</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">48</span>
+    <span class="n">tf_yarn_evaluator_memory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;48 GiB&quot;</span>
+    <span class="n">tf_yarn_tensorboard_memory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;48 GiB&quot;</span>
+
+<div class="viewcode-block" id="YarnTrainerConfig.get_task_specs"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.YarnTrainerConfig.get_task_specs">[docs]</a>    <span class="k">def</span> <span class="nf">get_task_specs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return Task Specs from parameters&quot;&quot;&quot;</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">tf_yarn</span><span class="o">.</span><span class="n">NodeLabel</span><span class="o">.</span><span class="n">CPU</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tf_yarn</span> <span class="o">==</span> <span class="s2">&quot;cpu&quot;</span> <span class="k">else</span> <span class="n">tf_yarn</span><span class="o">.</span><span class="n">NodeLabel</span><span class="o">.</span><span class="n">GPU</span>
+        <span class="n">specs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;chief&quot;</span><span class="p">:</span> <span class="n">tf_yarn</span><span class="o">.</span><span class="n">TaskSpec</span><span class="p">(</span><span class="n">memory</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tf_yarn_chief_memory</span><span class="p">,</span> <span class="n">vcores</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tf_yarn_chief_cores</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">),</span>
+            <span class="s2">&quot;evaluator&quot;</span><span class="p">:</span> <span class="n">tf_yarn</span><span class="o">.</span><span class="n">TaskSpec</span><span class="p">(</span><span class="n">memory</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tf_yarn_evaluator_memory</span><span class="p">,</span> <span class="n">vcores</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tf_yarn_evaluator_cores</span><span class="p">),</span>
+            <span class="s2">&quot;tensorboard&quot;</span><span class="p">:</span> <span class="n">tf_yarn</span><span class="o">.</span><span class="n">TaskSpec</span><span class="p">(</span><span class="n">memory</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tf_yarn_tensorboard_memory</span><span class="p">,</span> <span class="n">vcores</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nb_workers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">specs</span><span class="p">[</span><span class="s2">&quot;worker&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tf_yarn</span><span class="o">.</span><span class="n">TaskSpec</span><span class="p">(</span><span class="n">memory</span><span class="o">=</span><span class="s2">&quot;32 GiB&quot;</span><span class="p">,</span> <span class="n">vcores</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">instances</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nb_workers</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nb_ps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">specs</span><span class="p">[</span><span class="s2">&quot;ps&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tf_yarn</span><span class="o">.</span><span class="n">TaskSpec</span><span class="p">(</span><span class="n">memory</span><span class="o">=</span><span class="s2">&quot;32 GiB&quot;</span><span class="p">,</span> <span class="n">vcores</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">instances</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nb_ps</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">specs</span></div></div>
+
+
+<div class="viewcode-block" id="YarnTrainer"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.YarnTrainer">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">YarnTrainer</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Run a `Trainer` job on yarn using distributed settings.&quot;&quot;&quot;</span>
+
+    <span class="n">trainer</span><span class="p">:</span> <span class="n">Dict</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">YarnTrainerConfig</span>
+    <span class="n">train_on_yarn</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">trainer</span> <span class="o">=</span> <span class="n">from_config</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">Trainer</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected job of type </span><span class="si">{</span><span class="n">Trainer</span><span class="si">}</span><span class="s2"> but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">trainer</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="YarnTrainer.run"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.YarnTrainer.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_on_yarn</span><span class="p">:</span>
+            <span class="c1"># Upload environment(s) to HDFS (CPU and / or GPU environments)</span>
+            <span class="n">pyenv_zip_path</span> <span class="o">=</span> <span class="p">{</span><span class="n">tf_yarn</span><span class="o">.</span><span class="n">NodeLabel</span><span class="o">.</span><span class="n">CPU</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">upload_pex_cpu</span><span class="p">()}</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">tf_yarn</span> <span class="o">==</span> <span class="s2">&quot;gpu&quot;</span><span class="p">:</span>
+                <span class="n">pyenv_zip_path</span><span class="p">[</span><span class="n">tf_yarn</span><span class="o">.</span><span class="n">NodeLabel</span><span class="o">.</span><span class="n">GPU</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">upload_pex_gpu</span><span class="p">()</span>
+
+            <span class="k">def</span> <span class="nf">_experiment_fn</span><span class="p">():</span>
+                <span class="c1"># Remove auto-termination of active MLFlow runs from</span>
+                <span class="c1"># inside the chief / evaluator</span>
+                <span class="n">atexit</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">mlflow</span><span class="o">.</span><span class="n">end_run</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">from_config</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="p">)</span><span class="o">.</span><span class="n">create_experiment</span><span class="p">()</span>
+
+            <span class="n">tf_yarn</span><span class="o">.</span><span class="n">run_on_yarn</span><span class="p">(</span>
+                <span class="n">acls</span><span class="o">=</span><span class="n">skein</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">ACLs</span><span class="p">(</span><span class="n">enable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ui_users</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">],</span> <span class="n">view_users</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">]),</span>
+                <span class="n">env</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get_env_vars</span><span class="p">(),</span>
+                <span class="n">experiment_fn</span><span class="o">=</span><span class="n">_experiment_fn</span><span class="p">,</span>
+                <span class="n">files</span><span class="o">=</span><span class="n">get_editable_requirements</span><span class="p">(),</span>
+                <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">nb_retries</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">nb_retries</span><span class="p">,</span>
+                <span class="n">pre_script_hook</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">pre_script_hook</span><span class="p">,</span>
+                <span class="n">pyenv_zip_path</span><span class="o">=</span><span class="n">pyenv_zip_path</span><span class="p">,</span>
+                <span class="n">queue</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">queue</span><span class="p">,</span>
+                <span class="n">task_specs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get_task_specs</span><span class="p">(),</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Run exporters and final evaluation</span>
+            <span class="n">trainer</span> <span class="o">=</span> <span class="n">from_config</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="p">)</span>
+            <span class="n">experiment</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">create_experiment</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">exporter</span> <span class="ow">in</span> <span class="n">trainer</span><span class="o">.</span><span class="n">exporters</span><span class="p">:</span>
+                <span class="n">exporter</span><span class="p">(</span><span class="n">experiment</span><span class="o">.</span><span class="n">estimator</span><span class="p">)</span>
+            <span class="n">trainer</span><span class="o">.</span><span class="n">run_final_evaluation</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Not training on yarn.&quot;</span><span class="p">)</span>
+            <span class="n">trainer</span> <span class="o">=</span> <span class="n">from_config</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="p">)</span>
+            <span class="n">trainer</span><span class="o">.</span><span class="n">run</span><span class="p">()</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Reco.Consideration
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

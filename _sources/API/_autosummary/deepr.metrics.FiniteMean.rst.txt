@@ -1,0 +1,22 @@
+deepr.metrics.FiniteMean
+========================
+
+.. currentmodule:: deepr.metrics
+
+.. autoclass:: FiniteMean
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~FiniteMean.__init__
+   
+   
+
+   
+   
+   

@@ -1,0 +1,22 @@
+deepr.hooks.TensorHookFactory
+=============================
+
+.. currentmodule:: deepr.hooks
+
+.. autoclass:: TensorHookFactory
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TensorHookFactory.__init__
+   
+   
+
+   
+   
+   

@@ -1,0 +1,23 @@
+deepr.readers.Reader
+====================
+
+.. currentmodule:: deepr.readers
+
+.. autoclass:: Reader
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Reader.__init__
+      ~Reader.as_dataset
+   
+   
+
+   
+   
+   

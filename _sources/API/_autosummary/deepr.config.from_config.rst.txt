@@ -1,0 +1,6 @@
+deepr.config.from\_config
+=========================
+
+.. currentmodule:: deepr.config
+
+.. autofunction:: from_config

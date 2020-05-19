@@ -1,0 +1,42 @@
+deepr.io.Path
+=============
+
+.. currentmodule:: deepr.io
+
+.. autoclass:: Path
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Path.__init__
+      ~Path.copy_dir
+      ~Path.copy_file
+      ~Path.delete
+      ~Path.exists
+      ~Path.glob
+      ~Path.is_dir
+      ~Path.is_file
+      ~Path.iterdir
+      ~Path.mkdir
+      ~Path.open
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Path.is_hdfs
+      ~Path.is_local
+      ~Path.name
+      ~Path.parent
+      ~Path.suffix
+   
+   

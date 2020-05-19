@@ -1,0 +1,30 @@
+deepr.optimizers package
+========================
+
+Submodules
+----------
+
+deepr.optimizers.base module
+----------------------------
+
+.. automodule:: deepr.optimizers.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.optimizers.core module
+----------------------------
+
+.. automodule:: deepr.optimizers.core
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.optimizers
+   :members:
+   :undoc-members:
+   :show-inheritance:

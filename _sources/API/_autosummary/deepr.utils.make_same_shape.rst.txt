@@ -1,0 +1,6 @@
+deepr.utils.make\_same\_shape
+=============================
+
+.. currentmodule:: deepr.utils
+
+.. autofunction:: make_same_shape

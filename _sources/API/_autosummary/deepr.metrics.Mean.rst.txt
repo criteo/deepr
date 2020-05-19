@@ -1,0 +1,22 @@
+deepr.metrics.Mean
+==================
+
+.. currentmodule:: deepr.metrics
+
+.. autoclass:: Mean
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Mean.__init__
+   
+   
+
+   
+   
+   

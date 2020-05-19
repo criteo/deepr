@@ -1,0 +1,38 @@
+deepr.readers package
+=====================
+
+Submodules
+----------
+
+deepr.readers.base module
+-------------------------
+
+.. automodule:: deepr.readers.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.readers.generator module
+------------------------------
+
+.. automodule:: deepr.readers.generator
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.readers.record module
+---------------------------
+
+.. automodule:: deepr.readers.record
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.readers
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,29 @@
+deepr.jobs.YarnTrainer
+======================
+
+.. currentmodule:: deepr.jobs
+
+.. autoclass:: YarnTrainer
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~YarnTrainer.__init__
+      ~YarnTrainer.run
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~YarnTrainer.train_on_yarn
+   
+   

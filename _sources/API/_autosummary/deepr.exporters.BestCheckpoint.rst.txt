@@ -1,0 +1,23 @@
+deepr.exporters.BestCheckpoint
+==============================
+
+.. currentmodule:: deepr.exporters
+
+.. autoclass:: BestCheckpoint
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BestCheckpoint.__init__
+      ~BestCheckpoint.export
+   
+   
+
+   
+   
+   

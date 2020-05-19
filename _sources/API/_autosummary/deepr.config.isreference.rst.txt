@@ -1,0 +1,6 @@
+deepr.config.isreference
+========================
+
+.. currentmodule:: deepr.config
+
+.. autofunction:: isreference

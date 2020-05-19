@@ -1,0 +1,35 @@
+deepr.io.ParquetDataset
+=======================
+
+.. currentmodule:: deepr.io
+
+.. autoclass:: ParquetDataset
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ParquetDataset.__init__
+      ~ParquetDataset.open
+      ~ParquetDataset.read
+      ~ParquetDataset.read_pandas
+      ~ParquetDataset.write
+      ~ParquetDataset.write_pandas
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ParquetDataset.is_hdfs
+      ~ParquetDataset.is_local
+      ~ParquetDataset.pq_dataset
+   
+   

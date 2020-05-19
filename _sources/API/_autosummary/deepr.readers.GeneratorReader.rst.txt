@@ -1,0 +1,23 @@
+deepr.readers.GeneratorReader
+=============================
+
+.. currentmodule:: deepr.readers
+
+.. autoclass:: GeneratorReader
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GeneratorReader.__init__
+      ~GeneratorReader.as_dataset
+   
+   
+
+   
+   
+   

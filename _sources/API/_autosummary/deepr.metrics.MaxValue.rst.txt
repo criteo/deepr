@@ -1,0 +1,22 @@
+deepr.metrics.MaxValue
+======================
+
+.. currentmodule:: deepr.metrics
+
+.. autoclass:: MaxValue
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MaxValue.__init__
+   
+   
+
+   
+   
+   

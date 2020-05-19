@@ -1,0 +1,6 @@
+deepr.config.parse\_config
+==========================
+
+.. currentmodule:: deepr.config
+
+.. autofunction:: parse_config

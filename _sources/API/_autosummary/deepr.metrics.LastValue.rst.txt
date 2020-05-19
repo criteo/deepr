@@ -1,0 +1,22 @@
+deepr.metrics.LastValue
+=======================
+
+.. currentmodule:: deepr.metrics
+
+.. autoclass:: LastValue
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~LastValue.__init__
+   
+   
+
+   
+   
+   

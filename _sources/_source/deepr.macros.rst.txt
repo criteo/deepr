@@ -1,0 +1,38 @@
+deepr.macros package
+====================
+
+Submodules
+----------
+
+deepr.macros.dynamic module
+---------------------------
+
+.. automodule:: deepr.macros.dynamic
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.macros.graphite\_init module
+----------------------------------
+
+.. automodule:: deepr.macros.graphite_init
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.macros.mlflow\_init module
+--------------------------------
+
+.. automodule:: deepr.macros.mlflow_init
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.macros
+   :members:
+   :undoc-members:
+   :show-inheritance:

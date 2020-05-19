@@ -1,0 +1,44 @@
+deepr package
+=============
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   deepr.cli
+   deepr.config
+   deepr.example
+   deepr.exporters
+   deepr.hooks
+   deepr.initializers
+   deepr.io
+   deepr.jobs
+   deepr.layers
+   deepr.macros
+   deepr.metrics
+   deepr.optimizers
+   deepr.prepros
+   deepr.readers
+   deepr.utils
+
+Submodules
+----------
+
+deepr.version module
+--------------------
+
+.. automodule:: deepr.version
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr
+   :members:
+   :undoc-members:
+   :show-inheritance:

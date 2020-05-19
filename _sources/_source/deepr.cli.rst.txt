@@ -1,0 +1,22 @@
+deepr.cli package
+=================
+
+Submodules
+----------
+
+deepr.cli.main module
+---------------------
+
+.. automodule:: deepr.cli.main
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:

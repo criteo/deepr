@@ -1,0 +1,22 @@
+deepr.metrics.StepCounter
+=========================
+
+.. currentmodule:: deepr.metrics
+
+.. autoclass:: StepCounter
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~StepCounter.__init__
+   
+   
+
+   
+   
+   

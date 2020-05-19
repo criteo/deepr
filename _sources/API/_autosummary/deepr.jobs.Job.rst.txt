@@ -1,0 +1,23 @@
+deepr.jobs.Job
+==============
+
+.. currentmodule:: deepr.jobs
+
+.. autoclass:: Job
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Job.__init__
+      ~Job.run
+   
+   
+
+   
+   
+   

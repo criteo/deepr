@@ -1,0 +1,24 @@
+deepr.layers.SliceLast
+======================
+
+.. currentmodule:: deepr.layers
+
+.. autoclass:: SliceLast
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SliceLast.__init__
+      ~SliceLast.forward
+      ~SliceLast.forward_as_dict
+   
+   
+
+   
+   
+   

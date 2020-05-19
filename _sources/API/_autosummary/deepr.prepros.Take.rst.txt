@@ -1,0 +1,23 @@
+deepr.prepros.Take
+==================
+
+.. currentmodule:: deepr.prepros
+
+.. autoclass:: Take
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Take.__init__
+      ~Take.apply
+   
+   
+
+   
+   
+   
