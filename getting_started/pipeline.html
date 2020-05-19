@@ -454,11 +454,11 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>import logging
-import sys
-logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-logging.getLogger(&quot;tensorflow&quot;).setLevel(logging.CRITICAL)
-logging.getLogger(&quot;cluster_pack&quot;).setLevel(logging.CRITICAL)
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;tensorflow&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;cluster_pack&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -467,12 +467,12 @@ logging.getLogger(&quot;cluster_pack&quot;).setLevel(logging.CRITICAL)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from dataclasses import dataclass
+<span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 
-import tensorflow as tf
-import numpy as np
-import deepr_python
-import deepr as dpr
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">deepr_python</span>
+<span class="kn">import</span> <span class="nn">deepr</span> <span class="k">as</span> <span class="nn">dpr</span>
 </pre></div>
 </div>
 </div>
@@ -488,34 +488,34 @@ import deepr as dpr
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>@dataclass
-class BuildDataset(dpr.jobs.Job):
-    &quot;&quot;&quot;Build a dummy dataset of random (x, 2*x) as a tfrecord file&quot;&quot;&quot;
+<span></span><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">BuildDataset</span><span class="p">(</span><span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Build a dummy dataset of random (x, 2*x) as a tfrecord file&quot;&quot;&quot;</span>
 
-    path_dataset: str
-    num_examples: int = 1000
+    <span class="n">path_dataset</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">num_examples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span>
 
-    def run(self):
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-        def _generator_fn():
-            for _ in range(self.num_examples):
-                x = np.random.random()
-                yield {&quot;x&quot;: x, &quot;y&quot;: 2 * x}
+        <span class="k">def</span> <span class="nf">_generator_fn</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_examples</span><span class="p">):</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+                <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">}</span>
 
-        def _dict_to_example(data):
-            features = {
-                &quot;x&quot;: dpr.readers.float_feature([data[&quot;x&quot;]]),
-                &quot;y&quot;: dpr.readers.float_feature([data[&quot;y&quot;]])
-            }
-            example = tf.train.Example(features=tf.train.Features(feature=features))
-            return example
+        <span class="k">def</span> <span class="nf">_dict_to_example</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+            <span class="n">features</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">float_feature</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]]),</span>
+                <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">float_feature</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]])</span>
+            <span class="p">}</span>
+            <span class="n">example</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Example</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Features</span><span class="p">(</span><span class="n">feature</span><span class="o">=</span><span class="n">features</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">example</span>
 
-        with tf.python_io.TFRecordWriter(self.path_dataset) as writer:
-            for data in _generator_fn():
-                example = _dict_to_example(data)
-                writer.write(example.SerializeToString())
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">python_io</span><span class="o">.</span><span class="n">TFRecordWriter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_dataset</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">_generator_fn</span><span class="p">():</span>
+                <span class="n">example</span> <span class="o">=</span> <span class="n">_dict_to_example</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">SerializeToString</span><span class="p">())</span>
 
-        print(f&quot;Wrote dataset to &#39;{self.path_dataset}&#39;&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wrote dataset to &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path_dataset</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -524,7 +524,7 @@ class BuildDataset(dpr.jobs.Job):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>build_job = BuildDataset(path_dataset=&quot;data.tfrecord&quot;, num_examples=1000)
+<span></span><span class="n">build_job</span> <span class="o">=</span> <span class="n">BuildDataset</span><span class="p">(</span><span class="n">path_dataset</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">,</span> <span class="n">num_examples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -534,7 +534,7 @@ class BuildDataset(dpr.jobs.Job):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>build_job.run()
+<span></span><span class="n">build_job</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -556,16 +556,16 @@ Wrote dataset to &#39;data.tfrecord&#39;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>@dpr.prepros.prepro
-def DefaultPrepro(batch_size, repeat_size):
-    return dpr.prepros.Serial(
-        dpr.prepros.TFRecordSequenceExample(fields=[
-            dpr.Field(name=&quot;x&quot;, shape=(), dtype=tf.float32),
-            dpr.Field(name=&quot;y&quot;, shape=(), dtype=tf.float32)
-        ]),
-        dpr.prepros.Batch(batch_size=batch_size),
-        dpr.prepros.Repeat(repeat_size, modes=[tf.estimator.ModeKeys.TRAIN]),
-    )
+<span></span><span class="nd">@dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">prepro</span>
+<span class="k">def</span> <span class="nf">DefaultPrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">repeat_size</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span>
+        <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">TFRecordSequenceExample</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">dpr</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
+            <span class="n">dpr</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="p">]),</span>
+        <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Batch</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">),</span>
+        <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Repeat</span><span class="p">(</span><span class="n">repeat_size</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">]),</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -597,7 +597,7 @@ def DefaultPrepro(batch_size, repeat_size):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>prepro_fn = DefaultPrepro(batch_size=32, repeat_size=10)
+<span></span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">DefaultPrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">repeat_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -610,7 +610,7 @@ def DefaultPrepro(batch_size, repeat_size):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>reader = dpr.readers.TFRecordReader(&quot;data.tfrecord&quot;)
+<span></span><span class="n">reader</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -619,9 +619,9 @@ def DefaultPrepro(batch_size, repeat_size):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>for batch in dpr.readers.base.from_dataset(prepro_fn(reader())):
-    print(batch)
-    break
+<span></span><span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">from_dataset</span><span class="p">(</span><span class="n">prepro_fn</span><span class="p">(</span><span class="n">reader</span><span class="p">())):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+    <span class="k">break</span>
 </pre></div>
 </div>
 </div>
@@ -681,7 +681,7 @@ def DefaultPrepro(batch_size, repeat_size):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>import deepr.example
+<span></span><span class="kn">import</span> <span class="nn">deepr.example</span>
 </pre></div>
 </div>
 </div>
@@ -690,7 +690,7 @@ def DefaultPrepro(batch_size, repeat_size):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>build_job = deepr.example.jobs.BuildDataset(path_dataset=&quot;data.tfrecord&quot;, num_examples=1000)
+<span></span><span class="n">build_job</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">BuildDataset</span><span class="p">(</span><span class="n">path_dataset</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">,</span> <span class="n">num_examples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -699,15 +699,15 @@ def DefaultPrepro(batch_size, repeat_size):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>trainer_job = dpr.jobs.Trainer(
-    path_model=&quot;model&quot;,
-    pred_fn=deepr.example.layers.Multiply(),
-    loss_fn=deepr.example.layers.SquaredL2(),
-    optimizer_fn=dpr.optimizers.TensorflowOptimizer(&quot;Adam&quot;, 0.1),
-    train_input_fn=dpr.readers.TFRecordReader(&quot;data.tfrecord&quot;),
-    eval_input_fn=dpr.readers.TFRecordReader(&quot;data.tfrecord&quot;),
-    prepro_fn=deepr.example.prepros.DefaultPrepro(batch_size=32, repeat_size=10)
-)
+<span></span><span class="n">trainer_job</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span>
+    <span class="n">path_model</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">,</span>
+    <span class="n">pred_fn</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Multiply</span><span class="p">(),</span>
+    <span class="n">loss_fn</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">SquaredL2</span><span class="p">(),</span>
+    <span class="n">optimizer_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">TensorflowOptimizer</span><span class="p">(</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
+    <span class="n">train_input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
+    <span class="n">eval_input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
+    <span class="n">prepro_fn</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">DefaultPrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">repeat_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -716,7 +716,7 @@ def DefaultPrepro(batch_size, repeat_size):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>pipeline = dpr.jobs.Pipeline([build_job, trainer_job])
+<span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">([</span><span class="n">build_job</span><span class="p">,</span> <span class="n">trainer_job</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -731,7 +731,7 @@ def DefaultPrepro(batch_size, repeat_size):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>pipeline.run()
+<span></span><span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -761,11 +761,11 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>build_job_config = {
-    &quot;type&quot;: &quot;deepr.example.jobs.BuildDataset&quot;,
-    &quot;path_dataset&quot;: &quot;viewfs://root/user/deepr/dev/example/data.tfrecord&quot;,
-    &quot;num_examples&quot;: 1000
-}
+<span></span><span class="n">build_job_config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.example.jobs.BuildDataset&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;path_dataset&quot;</span><span class="p">:</span> <span class="s2">&quot;viewfs://root/user/deepr/dev/example/data.tfrecord&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;num_examples&quot;</span><span class="p">:</span> <span class="mi">1000</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -777,13 +777,13 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>reader_config = {
-    &quot;type&quot;: &quot;deepr.readers.TFRecordReader&quot;,
-    &quot;path&quot;: &quot;viewfs://root/user/deepr/dev/example/data.tfrecord&quot;,
-    &quot;num_parallel_reads&quot;: 8,
-    &quot;num_parallel_calls&quot;: 8,
-    &quot;shuffle&quot;: True
-}
+<span></span><span class="n">reader_config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.readers.TFRecordReader&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;viewfs://root/user/deepr/dev/example/data.tfrecord&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;num_parallel_reads&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s2">&quot;num_parallel_calls&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s2">&quot;shuffle&quot;</span><span class="p">:</span> <span class="kc">True</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -795,11 +795,11 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>prepro_fn_config = {
-    &quot;type&quot;: &quot;deepr.example.prepros.DefaultPrepro&quot;,
-    &quot;batch_size&quot;: 32,
-    &quot;repeat_size&quot;: 10
-}
+<span></span><span class="n">prepro_fn_config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.example.prepros.DefaultPrepro&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;batch_size&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+    <span class="s2">&quot;repeat_size&quot;</span><span class="p">:</span> <span class="mi">10</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -811,7 +811,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>pred_fn_config = {&quot;type&quot;: &quot;deepr.example.layers.Multiply&quot;}
+<span></span><span class="n">pred_fn_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.example.layers.Multiply&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -823,7 +823,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>loss_fn_config = {&quot;type&quot;: &quot;deepr.example.layers.SquaredL2&quot;}
+<span></span><span class="n">loss_fn_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.example.layers.SquaredL2&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -836,20 +836,20 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>trainer_job_config = {
-    &quot;type&quot;: &quot;deepr.jobs.Trainer&quot;,
-    &quot;path_model&quot;: &quot;viewfs://root/user/deepr/dev/example/model&quot;,
-    &quot;pred_fn&quot;: pred_fn_config,
-    &quot;loss_fn&quot;: loss_fn_config,
-    &quot;optimizer_fn&quot;: {
-        &quot;type&quot;: &quot;deepr.optimizers.TensorflowOptimizer&quot;,
-        &quot;optimizer&quot;: &quot;Adam&quot;,
-        &quot;learning_rate&quot;: 0.1
-    },
-    &quot;prepro_fn&quot;: prepro_fn_config,
-    &quot;train_input_fn&quot;: reader_config,
-    &quot;eval_input_fn&quot;: reader_config
-}
+<span></span><span class="n">trainer_job_config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.jobs.Trainer&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;path_model&quot;</span><span class="p">:</span> <span class="s2">&quot;viewfs://root/user/deepr/dev/example/model&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pred_fn&quot;</span><span class="p">:</span> <span class="n">pred_fn_config</span><span class="p">,</span>
+    <span class="s2">&quot;loss_fn&quot;</span><span class="p">:</span> <span class="n">loss_fn_config</span><span class="p">,</span>
+    <span class="s2">&quot;optimizer_fn&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.optimizers.TensorflowOptimizer&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;optimizer&quot;</span><span class="p">:</span> <span class="s2">&quot;Adam&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="mf">0.1</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;prepro_fn&quot;</span><span class="p">:</span> <span class="n">prepro_fn_config</span><span class="p">,</span>
+    <span class="s2">&quot;train_input_fn&quot;</span><span class="p">:</span> <span class="n">reader_config</span><span class="p">,</span>
+    <span class="s2">&quot;eval_input_fn&quot;</span><span class="p">:</span> <span class="n">reader_config</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -863,7 +863,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>build_job = dpr.from_config(build_job_config)
+<span></span><span class="n">build_job</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">build_job_config</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -872,7 +872,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>trainer_job = dpr.from_config(trainer_job_config)
+<span></span><span class="n">trainer_job</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">trainer_job_config</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -882,7 +882,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>pipeline = dpr.jobs.Pipeline([build_job, trainer_job])
+<span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">([</span><span class="n">build_job</span><span class="p">,</span> <span class="n">trainer_job</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -903,26 +903,26 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>yarn_launcher_config = deepr.jobs.YarnLauncherConfig(
-    path_pex_prefix=&quot;viewfs://root/user/deepr/dev/example/envs&quot;
-)
-job_config = {
-    &quot;type&quot;: &quot;deepr.jobs.Pipeline&quot;,
-    &quot;jobs&quot;: [
-        build_job_config,
-        {
-            &quot;type&quot;: &quot;deepr.jobs.YarnTrainer&quot;,
-            &quot;trainer&quot;: {
-                **trainer_job_config,
-                &quot;eval&quot;: &quot;skip&quot;  # from_config will not instantiate the trainer argument
-            },
-            &quot;config&quot;: {
-                &quot;type&quot;: &quot;deepr.jobs.YarnTrainerConfig&quot;
-            }
-        }
-    ]
-}
-pipeline_yarn = dpr.jobs.YarnLauncher(config=yarn_launcher_config, job=job_config)
+<span></span><span class="n">yarn_launcher_config</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">YarnLauncherConfig</span><span class="p">(</span>
+    <span class="n">path_pex_prefix</span><span class="o">=</span><span class="s2">&quot;viewfs://root/user/deepr/dev/example/envs&quot;</span>
+<span class="p">)</span>
+<span class="n">job_config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.jobs.Pipeline&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;jobs&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="n">build_job_config</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.jobs.YarnTrainer&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;trainer&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="o">**</span><span class="n">trainer_job_config</span><span class="p">,</span>
+                <span class="s2">&quot;eval&quot;</span><span class="p">:</span> <span class="s2">&quot;skip&quot;</span>  <span class="c1"># from_config will not instantiate the trainer argument</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.jobs.YarnTrainerConfig&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+<span class="n">pipeline_yarn</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">YarnLauncher</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">yarn_launcher_config</span><span class="p">,</span> <span class="n">job</span><span class="o">=</span><span class="n">job_config</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -933,7 +933,7 @@ pipeline_yarn = dpr.jobs.YarnLauncher(config=yarn_launcher_config, job=job_confi
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>pipeline_yarn.run()
+<span></span><span class="n">pipeline_yarn</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -944,7 +944,7 @@ pipeline_yarn = dpr.jobs.YarnLauncher(config=yarn_launcher_config, job=job_confi
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>list(dpr.io.Path(&quot;viewfs://root/user/deepr/dev/example&quot;).glob(&quot;*&quot;))
+<span></span><span class="nb">list</span><span class="p">(</span><span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;viewfs://root/user/deepr/dev/example&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>

@@ -461,12 +461,12 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>import logging
-import sys
-logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-logging.getLogger(&quot;tensorflow&quot;).setLevel(logging.CRITICAL)
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;tensorflow&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">)</span>
 
-import deepr as dpr
+<span class="kn">import</span> <span class="nn">deepr</span> <span class="k">as</span> <span class="nn">dpr</span>
 </pre></div>
 </div>
 </div>
@@ -485,18 +485,18 @@ import deepr as dpr
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>class Model:
-    def __init__(self, learning_rate):
-        self.learning_rate = learning_rate
+<span></span><span class="k">class</span> <span class="nc">Model</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="n">learning_rate</span>
 
-config = {
-    &quot;type&quot;: &quot;__main__.Model&quot;,
-    &quot;learning_rate&quot;: 0.1
-}
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.Model&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="mf">0.1</span>
+<span class="p">}</span>
 
-parsed = dpr.parse_config(config)
-model = dpr.from_config(parsed)
-model.learning_rate
+<span class="n">parsed</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">learning_rate</span>
 </pre></div>
 </div>
 </div>
@@ -520,18 +520,18 @@ model.learning_rate
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>macros = {
-    &quot;params&quot;: {
-        &quot;learning_rate&quot;: 0.1
-    }
-}
+<span></span><span class="n">macros</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="mf">0.1</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-config = {
-    &quot;type&quot;: &quot;Model&quot;,
-    &quot;learning_rate&quot;: &quot;$params:learning_rate&quot;
-}
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Model&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="s2">&quot;$params:learning_rate&quot;</span>
+<span class="p">}</span>
 
-print(dpr.parse_config(config, macros))
+<span class="nb">print</span><span class="p">(</span><span class="n">dpr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">macros</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -553,31 +553,31 @@ print(dpr.parse_config(config, macros))
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from datetime import datetime
+<span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
 
-class DateMacro(dict):
-    def __init__(self):
-        super().__init__(year=datetime.now().strftime(&#39;%Y&#39;))
+<span class="k">class</span> <span class="nc">DateMacro</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y&#39;</span><span class="p">))</span>
 
 
-class Job:
-    def __init__(self, year):
-        self.year = year
+<span class="k">class</span> <span class="nc">Job</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">year</span>
 
-macros = {
-    &quot;date&quot;: {
-        &quot;type&quot;: &quot;__main__.DateMacro&quot;
-     }
-}
-config = {
-    &quot;type&quot;: &quot;__main__.Job&quot;,
-    &quot;year&quot;: &quot;$date:year&quot;
-}
-parsed = dpr.parse_config(config, macros)
-print(parsed)
-job = dpr.from_config(parsed)
-print(job.year)
+<span class="n">macros</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.DateMacro&quot;</span>
+     <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.Job&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;$date:year&quot;</span>
+<span class="p">}</span>
+<span class="n">parsed</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">macros</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -600,17 +600,17 @@ print(job.year)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>class Model:
-    def __init__(self, *layers):
-        self.layers = layers
+<span></span><span class="k">class</span> <span class="nc">Model</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">layers</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="n">layers</span>
 
-config = {
-    &quot;type&quot;: &quot;__main__.Model&quot;,
-    &quot;*&quot;: [1, 2, 3]
-}
-parsed = dpr.parse_config(config)
-model = dpr.from_config(parsed)
-print(model.layers)
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.Model&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;*&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">parsed</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">layers</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -635,26 +635,26 @@ print(model.layers)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>class Job:
-    def __init__(self, model_config):
-        self.model_config = model_config
+<span></span><span class="k">class</span> <span class="nc">Job</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_config</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_config</span> <span class="o">=</span> <span class="n">model_config</span>
 
-    def run(self):
-        # Job is responsible for instantiating the model from the config
-        model = from_config(self.model_config)
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Job is responsible for instantiating the model from the config</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">from_config</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_config</span><span class="p">)</span>
 
-config = {
-    &quot;type&quot;: &quot;__main__.Job&quot;,
-    &quot;model_config&quot;: {
-        &quot;type&quot;: &quot;__main__.Model&quot;,
-        &quot;eval&quot;: &quot;skip&quot;,
-        &quot;*&quot;: [1, 2, 3]
-     }
-}
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.Job&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;model_config&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.Model&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;eval&quot;</span><span class="p">:</span> <span class="s2">&quot;skip&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;*&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+     <span class="p">}</span>
+<span class="p">}</span>
 
-parsed = dpr.parse_config(config)
-job = dpr.from_config(parsed)
-print(job.model_config)
+<span class="n">parsed</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">model_config</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -681,25 +681,25 @@ print(job.model_config)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>macros = {
-    &quot;date&quot;: {
-        &quot;type&quot;: &quot;__main__.DateMacro&quot;
-     },
-    &quot;params&quot;: {
-        &quot;learning_rate&quot;: 0.1
-    }
-}
+<span></span><span class="n">macros</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.DateMacro&quot;</span>
+     <span class="p">},</span>
+    <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="mf">0.1</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-config = {
-    &quot;config&quot;: &quot;@self&quot;,
-    &quot;macros&quot;: &quot;@macros&quot;,
-    &quot;macros_eval&quot;: &quot;@macros_eval&quot;
-}
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="s2">&quot;@self&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;macros&quot;</span><span class="p">:</span> <span class="s2">&quot;@macros&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;macros_eval&quot;</span><span class="p">:</span> <span class="s2">&quot;@macros_eval&quot;</span>
+<span class="p">}</span>
 
-parsed = dpr.parse_config(config, macros)
-print(parsed[&quot;config&quot;])
-print(parsed[&quot;macros&quot;])
-print(parsed[&quot;macros_eval&quot;])
+<span class="n">parsed</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">macros</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">parsed</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">parsed</span><span class="p">[</span><span class="s2">&quot;macros&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">parsed</span><span class="p">[</span><span class="s2">&quot;macros_eval&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
