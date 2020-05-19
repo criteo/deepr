@@ -1,6 +1,12 @@
 venv-lint-test: ## [Continuous integration] Install in venv and run lint and test
 	python3.6 -m venv .env && . .env/bin/activate && make install install-dev lint test && rm -rf .env
 
+build-dist:
+	python3.6 -m venv .env
+	. .env/bin/activate && pip install -U pip setuptools wheel
+	. .env/bin/activate && python setup.py sdist
+	rm -rf .env
+
 install: install-cpu
 
 install-cpu: ## [Local development, CPU] Upgrade pip, install requirements, install package.
