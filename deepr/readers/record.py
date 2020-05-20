@@ -9,16 +9,18 @@ from deepr.io.path import Path
 
 
 class TFRecordReader(base.Reader):
-    """Class for TFRecord Reader of tf.train.Example
+    """Class for TFRecord Reader of tf.train.Example.
 
     Attributes
     ----------
-    buffer_size : int, Optional
-        If not None, shuffle filenames
-    path : List[Union[str, Path]]
-        List of filenames or path to directory
+    num_parallel_calls : TYPE
+        Description
     num_parallel_reads : int
         Number of parallel reads
+    path : List[Union[str, Path]]
+        List of filenames or path to directory
+    shuffle : bool
+        Shuffle files if True before reading.
     """
 
     def __init__(
@@ -27,14 +29,12 @@ class TFRecordReader(base.Reader):
         num_parallel_reads: int = 8,
         num_parallel_calls: int = 8,
         shuffle: bool = True,
-        **kwargs
     ):
         super().__init__()
         self.path = path
         self.num_parallel_reads = num_parallel_reads
         self.num_parallel_calls = num_parallel_calls
         self.shuffle = shuffle
-        self._kwargs = kwargs
 
     @property
     def filenames(self):

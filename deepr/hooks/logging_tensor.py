@@ -14,6 +14,16 @@ from deepr.utils import graphite
 LOGGER = logging.getLogger(__name__)
 
 
+def _default_formatter(tag, value):
+    try:
+        value = float(value)
+        if value == int(value):
+            value = int(value)
+    except ValueError:
+        pass
+    return f"{tag} = {value:.7f}" if isinstance(value, float) else f"{tag} = {value}"
+
+
 class LoggingTensorHookFactory(TensorHookFactory):
     """Parametrize the creation of a LoggingTensorHook factory.
 
@@ -41,26 +51,47 @@ class LoggingTensorHookFactory(TensorHookFactory):
         Formatter for logging, default uses 7 digits precision.
     """
 
-    def __init__(self, tensors: List[str] = None, **kwargs):
+    def __init__(
+        self,
+        tensors: List[str] = None,
+        functions: Dict[str, Callable[[], float]] = None,
+        name: str = None,
+        use_mlflow: bool = False,
+        use_graphite: bool = False,
+        skip_after_step: int = None,
+        every_n_iter: int = None,
+        every_n_secs: int = None,
+        at_end: bool = False,
+        formatter: Callable[[str, Any], str] = _default_formatter,
+    ):
         self.tensors = tensors
-        self._kwargs = kwargs
+        self.functions = functions
+        self.name = name
+        self.use_mlflow = use_mlflow
+        self.use_graphite = use_graphite
+        self.skip_after_step = skip_after_step
+        self.every_n_iter = every_n_iter
+        self.every_n_secs = every_n_secs
+        self.at_end = at_end
+        self.formatter = formatter
 
     def __call__(self, tensors: Dict[str, tf.Tensor]) -> tf.estimator.LoggingTensorHook:
         if self.tensors is None:
             tensors = {key: tensor for key, tensor in tensors.items() if len(tensor.shape) == 0}
         else:
             tensors = {name: tensors[name] for name in self.tensors}
-        return LoggingTensorHook(tensors=tensors, **self._kwargs)
-
-
-def _default_formatter(tag, value):
-    try:
-        value = float(value)
-        if value == int(value):
-            value = int(value)
-    except ValueError:
-        pass
-    return f"{tag} = {value:.7f}" if isinstance(value, float) else f"{tag} = {value}"
+        return LoggingTensorHook(
+            tensors=tensors,
+            functions=self.functions,
+            name=self.name,
+            use_mlflow=self.use_mlflow,
+            use_graphite=self.use_graphite,
+            skip_after_step=self.skip_after_step,
+            every_n_iter=self.every_n_iter,
+            every_n_secs=self.every_n_secs,
+            at_end=self.at_end,
+            formatter=self.formatter,
+        )
 
 
 class LoggingTensorHook(tf.train.LoggingTensorHook):
@@ -74,12 +105,14 @@ class LoggingTensorHook(tf.train.LoggingTensorHook):
         use_mlflow: bool = False,
         use_graphite: bool = False,
         skip_after_step: int = None,
+        every_n_iter: int = None,
+        every_n_secs: int = None,
+        at_end: bool = False,
         formatter: Callable[[str, Any], str] = _default_formatter,
-        **kwargs,
     ):
         if "global_step" not in tensors:
             tensors["global_step"] = tf.train.get_global_step()
-        super().__init__(tensors, **kwargs)
+        super().__init__(tensors=tensors, every_n_iter=every_n_iter, every_n_secs=every_n_secs, at_end=at_end)
         self.functions = functions
         self.name = name
         self.use_mlflow = use_mlflow
@@ -128,8 +161,8 @@ class ResidentMemory:
 class MaxResidentMemory(ResidentMemory):
     """Measure maximum resident memory of the current process"""
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, unit: str = "gb"):
+        super().__init__(unit=unit)
         self._max = None
 
     def __call__(self):

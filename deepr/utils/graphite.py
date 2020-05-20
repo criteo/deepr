@@ -22,7 +22,16 @@ INTERVAL_ENV_VAR = "GRAPHITE_INTERVAL"
 
 @handle_exceptions
 def get_sender(
-    host: str = None, port: int = None, prefix: str = None, postfix: str = None, interval: int = None, **kwargs
+    host: str = None,
+    port: int = None,
+    prefix: str = None,
+    postfix: str = None,
+    timeout: int = 5,
+    interval: int = None,
+    queue_size: int = None,
+    log_sends: bool = False,
+    protocol: str = "tcp",
+    batch_size: int = 1000,
 ):
     """Get Graphite Sender."""
     # Retrieve parameters from environment variables
@@ -33,7 +42,17 @@ def get_sender(
 
     # Return sender
     prefix = f"{prefix}.{postfix}" if postfix else prefix
-    return graphyte.Sender(host=host, port=port, prefix=prefix, interval=interval, **kwargs)
+    return graphyte.Sender(
+        host=host,
+        port=port,
+        prefix=prefix,
+        timeout=timeout,
+        interval=interval,
+        queue_size=queue_size,
+        log_sends=log_sends,
+        protocol=protocol,
+        batch_size=batch_size,
+    )
 
 
 @handle_exceptions
