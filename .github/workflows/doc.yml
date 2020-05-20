@@ -20,9 +20,12 @@ jobs:
       run: sudo apt-get install pandoc
     - name: Generate doc
       run: |
+        cd docs && make venv-doc && cp -R _build/html ~/html && cd ..
+    - name: Deploy doc
+      if: github.ref == 'refs/heads/master'
+      run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        cd docs && make venv-doc && cp -R _build/html ~/html && cd ..
         git fetch origin gh-pages && git checkout gh-pages
         rm -rf *
         cp -R ~/html/* .
