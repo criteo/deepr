@@ -1,5 +1,5 @@
-DeepR
-=====
+DeepR: Build and Train Deep Learning Pipelines for Production
+=============================================================
 
 DeepR is a library for Deep Learning on top of Tensorflow 1.x that focuses on production capabilities. It makes it easy to define pipelines (via the ``Job`` abstraction), preprocess data (via the ``Prepro`` abstraction), design models (via the ``Layer`` abstraction) and train them either locally or on a Yarn cluster. It also integrates nicely with MLFlow and Graphite, allowing for production ready logging capabilities.
 
