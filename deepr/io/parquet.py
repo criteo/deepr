@@ -3,7 +3,6 @@
 from contextlib import contextmanager
 import logging
 from typing import Union, List
-from urllib import parse
 
 import pandas as pd
 import numpy as np
@@ -39,28 +38,47 @@ class ParquetDataset:
     """
 
     def __init__(
-        self, path_or_paths: Union[str, Path, List[Union[str, Path]]], filesystem: FileSystem = None, **kwargs
+        self,
+        path_or_paths: Union[str, Path, List[Union[str, Path]]],
+        filesystem: FileSystem = None,
+        metadata: pq.FileMetaData = None,
+        schema: pyarrow.Schema = None,
+        split_row_groups: bool = False,
+        validate_schema: bool = True,
+        filters: List = None,
+        metadata_nthreads: int = 1,
+        memory_map: bool = False,
     ):
         self.path_or_paths = list(map(str, path_or_paths)) if isinstance(path_or_paths, list) else str(path_or_paths)
         self.filesystem = filesystem
-        self._kwargs = kwargs
-
-        # Lazy loaded
-        self._pq_dataset = None
+        self.schema = schema
+        self.metadata = metadata
+        self.split_row_groups = split_row_groups
+        self.validate_schema = validate_schema
+        self.filters = filters
+        self.metadata_nthreads = metadata_nthreads
+        self.memory_map = memory_map
 
     @property
     def pq_dataset(self):
-        if self._pq_dataset is None:
-            self._pq_dataset = pq.ParquetDataset(self.path_or_paths, filesystem=self.filesystem, **self._kwargs)
-        return self._pq_dataset
+        return pq.ParquetDataset(
+            path_or_paths=self.path_or_paths,
+            filesystem=self.filesystem,
+            metadata=self.metadata,
+            schema=self.schema,
+            split_row_groups=self.split_row_groups,
+            validate_schema=self.validate_schema,
+            filters=self.filters,
+            metadata_nthreads=self.metadata_nthreads,
+            memory_map=self.memory_map,
+        )
 
     @property
     def is_hdfs(self) -> bool:
-        if isinstance(self.path_or_paths, list):
-            scheme = parse.urlparse(self.path_or_paths[0]).scheme
+        if isinstance(self.path_or_paths, str):
+            return Path(self.path_or_paths).is_hdfs  # type: ignore
         else:
-            scheme = parse.urlparse(self.path_or_paths).scheme  # type: ignore
-        return scheme in {"hdfs", "viewfs"}
+            return Path(self.path_or_paths[0]).is_hdfs
 
     @property
     def is_local(self) -> bool:
@@ -68,17 +86,28 @@ class ParquetDataset:
 
     @contextmanager
     def open(self):
+        """Open HDFS Filesystem if dataset on HDFS"""
         if self.filesystem is None and self.is_hdfs:
             with HDFSFileSystem() as hdfs:
-                yield ParquetDataset(self.path_or_paths, filesystem=hdfs, **self._kwargs)
+                yield ParquetDataset(
+                    path_or_paths=self.path_or_paths,
+                    filesystem=hdfs,
+                    metadata=self.metadata,
+                    schema=self.schema,
+                    split_row_groups=self.split_row_groups,
+                    validate_schema=self.validate_schema,
+                    filters=self.filters,
+                    metadata_nthreads=self.metadata_nthreads,
+                    memory_map=self.memory_map,
+                )
         else:
             yield self
 
-    def read(self, **kwargs):
-        return self.pq_dataset.read(**kwargs)
+    def read(self, columns: List[str] = None, use_threads: bool = True, use_pandas_metadata: bool = False):
+        return self.pq_dataset.read(columns=columns, use_threads=use_threads, use_pandas_metadata=use_pandas_metadata)
 
-    def read_pandas(self, **kwargs):
-        return self.pq_dataset.read_pandas(**kwargs)
+    def read_pandas(self, columns: List[str] = None, use_threads: bool = True):
+        return self.pq_dataset.read_pandas(columns=columns, use_threads=use_threads)
 
     def write(self, table: pyarrow.Table, compression="snappy"):
         if not isinstance(self.path_or_paths, str):

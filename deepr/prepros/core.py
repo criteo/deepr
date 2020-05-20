@@ -63,15 +63,15 @@ class Map(base.Prepro):
     ----------
     map_func : Callable[[Any], Any]
         Function to map to each element
+    modes : Iterable[str], Optional
+        Active modes for the map (will skip modes not in modes).
+        Default is None (all modes are considered active modes).
+    num_parallel_calls : int
+        Number of threads.
     on_dict : bool
         If True (default), assumes dataset yields dictionaries
     update : bool
         If True (default), combine element and map_func(element)
-    modes : Iterable[str], Optional
-        Active modes for the map (will skip modes not in modes).
-        Default is None (all modes are considered active modes).
-    **kwargs :
-        Optional keyword arguments to pass to tf.data.Dataset.map
     """
 
     def __init__(
@@ -197,11 +197,18 @@ class Shuffle(base.Prepro):
         Default is None (all modes are considered active modes).
     """
 
-    def __init__(self, buffer_size: int, modes: Iterable[str] = None, **kwargs):
+    def __init__(
+        self,
+        buffer_size: int,
+        modes: Iterable[str] = None,
+        seed: tf.int64 = None,
+        reshuffle_each_iteration: bool = None,
+    ):
         super().__init__()
         self.buffer_size = buffer_size
         self.modes = modes
-        self._kwargs = kwargs
+        self.seed = seed
+        self.reshuffle_each_iteration = reshuffle_each_iteration
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.buffer_size})"
@@ -210,7 +217,7 @@ class Shuffle(base.Prepro):
         if mode is not None and self.modes is not None and mode not in self.modes:
             LOGGER.info(f"Not applying {self} (mode={mode})")
             return dataset
-        return dataset.shuffle(self.buffer_size, **self._kwargs)
+        return dataset.shuffle(self.buffer_size, seed=self.seed, reshuffle_each_iteration=self.reshuffle_each_iteration)
 
 
 class Repeat(base.Prepro):

@@ -25,8 +25,8 @@ class TrainSpec(dict):
 class EvalSpec(dict):
     """Named Dict for EvalSpec arguments with reasonable defaults."""
 
-    def __init__(self, steps: int = None, start_delay_secs: int = 120, throttle_secs: int = 100, **kwargs):
-        super().__init__(steps=steps, start_delay_secs=start_delay_secs, throttle_secs=throttle_secs, **kwargs)
+    def __init__(self, steps: int = None, name: str = None, start_delay_secs: int = 120, throttle_secs: int = 100):
+        super().__init__(steps=steps, name=name, start_delay_secs=start_delay_secs, throttle_secs=throttle_secs)
 
 
 class ConfigProto(dict):

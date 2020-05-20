@@ -22,10 +22,7 @@ _INSTALL_REQUIRES = [
     "skein>=0.8",
 ]
 
-_EXTRAS_REQUIRE = {
-    "cpu": ["tensorflow>=1.15,<2"],
-    "gpu": ["tensorflow-gpu>=1.15,<2"],
-}
+_EXTRAS_REQUIRE = {"cpu": ["tensorflow>=1.15,<2"], "gpu": ["tensorflow-gpu>=1.15,<2"]}
 
 _TEST_REQUIRE = ["pytest"]
 

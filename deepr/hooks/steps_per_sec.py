@@ -35,9 +35,14 @@ class StepsPerSecHook(tf.train.StepCounterHook):
         use_mlflow: bool = False,
         use_graphite: bool = False,
         skip_after_step: int = None,
-        **kwargs,
+        every_n_steps: int = 100,
+        every_n_secs: int = None,
+        output_dir: str = None,
+        summary_writer=None,
     ):
-        super().__init__(**kwargs)
+        super().__init__(
+            every_n_steps=every_n_steps, every_n_secs=every_n_secs, output_dir=output_dir, summary_writer=summary_writer
+        )
         self.batch_size = batch_size
         self.name = name
         self.use_mlflow = use_mlflow

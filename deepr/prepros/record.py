@@ -11,10 +11,10 @@ from deepr.prepros import base
 class TFRecordSequenceExample(base.Prepro):
     """Parse TF Record Sequence Example"""
 
-    def __init__(self, fields: List[Field], **kwargs):
+    def __init__(self, fields: List[Field], num_parallel_calls: int = None):
         super().__init__()
         self.fields = fields
-        self._kwargs = kwargs
+        self.num_parallel_calls = num_parallel_calls
 
     @property
     def parse_fn(self):
@@ -34,4 +34,4 @@ class TFRecordSequenceExample(base.Prepro):
         return _parse_func
 
     def apply(self, dataset: tf.data.Dataset, mode: str = None):
-        return dataset.map(self.parse_fn, **self._kwargs)
+        return dataset.map(self.parse_fn, num_parallel_calls=self.num_parallel_calls)
