@@ -36,8 +36,8 @@ class LoggingTensorHookFactory(TensorHookFactory):
         all scalars.
     functions : Dict[str, Callable[[], float]], Optional
         Additional "python" metrics. Each function should return a float
-    prefix: str, Optional
-        Prefix of tags when sending to MLFlow / Graphite
+    name: str, Optional
+        Name used as prefix of tags when sending to MLFlow / Graphite
     use_mlflow: bool, Optional
         If True, send metrics to MLFlow. Default is False.
     use_graphite: bool, Optional
