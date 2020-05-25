@@ -6,6 +6,13 @@
     },
     "params": {
         "learning_rate": 0.01,
-        "batch_size": 16
+        "batch_size": 16,
+        "train_on_yarn": false,
+        "run_on_yarn": false,
+        "use_mlflow": false,
+        "use_graphite": false,
+        "train_steps": 500,
+        "log_every_steps": 100,
+        "save_every_steps": 100
     }
 }

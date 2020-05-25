@@ -1,8 +1,11 @@
 {
+    "type": "deepr.jobs.YarnLauncher",
     "config": {
         "type": "deepr.jobs.YarnLauncherConfig"
     },
+    "run_on_yarn": "$params:run_on_yarn",
     "job": {
+        "type": "deepr.jobs.Pipeline",
         "eval": "skip",
         "jobs": [
             {
@@ -11,10 +14,13 @@
                 "type": "deepr.example.jobs.BuildDataset"
             },
             {
+                "type": "deepr.jobs.YarnTrainer",
                 "config": {
                     "type": "deepr.jobs.YarnTrainerConfig"
                 },
+                "train_on_yarn": "$params:train_on_yarn",
                 "trainer": {
+                    "type": "deepr.jobs.Trainer",
                     "eval": "skip",
                     "eval_input_fn": {
                         "num_parallel_calls": 8,
@@ -47,12 +53,142 @@
                         "shuffle": true,
                         "type": "deepr.readers.TFRecordReader"
                     },
-                    "type": "deepr.jobs.Trainer"
-                },
-                "type": "deepr.jobs.YarnTrainer"
+                    "train_spec": {
+                        "type": "deepr.jobs.TrainSpec",
+                        "max_steps": "$params:train_steps"
+                    },
+                    "eval_spec": {
+                        "type": "deepr.jobs.EvalSpec",
+                        "throttle_secs": 10,
+                        "start_delay_secs": 10,
+                        "steps": null
+                    },
+                    "train_metrics": [
+                        {
+                            "type": "deepr.metrics.StepCounter",
+                            "name": "num_steps"
+                        },
+                        {
+                            "type": "deepr.metrics.DecayMean",
+                            "tensors": ["loss"],
+                            "decay": 0.98
+                        }
+                    ],
+                    "eval_metrics": [
+                        {
+                            "type": "deepr.metrics.Mean",
+                            "tensors": ["loss"]
+                        }
+                    ],
+                    "final_metrics": [
+                        {
+                            "type": "deepr.metrics.Mean",
+                            "tensors": ["loss"]
+                        }
+                    ],
+                    "train_hooks": [
+                        {
+                            "type": "deepr.hooks.LoggingTensorHookFactory",
+                            "name": "training",
+                            "use_mlflow": "$params:use_mlflow",
+                            "use_graphite": "$params:use_graphite",
+                            "functions": {
+                                "memory_gb": {
+                                    "type": "deepr.hooks.ResidentMemory",
+                                    "unit": "gb"
+                                },
+                                "max_memory_gb": {
+                                    "type": "deepr.hooks.MaxResidentMemory",
+                                    "unit": "gb"
+                                }
+                            },
+                            "every_n_iter": "$params:log_every_steps",
+                            "at_end": true
+                        },
+                        {
+                            "type": "deepr.hooks.SummarySaverHookFactory",
+                            "save_steps": "$params:save_every_steps"
+                        },
+                        {
+                            "type": "deepr.hooks.NumParamsHook",
+                            "use_mlflow": "$params:use_mlflow"
+                        },
+                        {
+                            "type": "deepr.hooks.LogVariablesInitHook",
+                            "use_mlflow": "$params:use_mlflow"
+                        },
+                        {
+                            "type": "deepr.hooks.StepsPerSecHook",
+                            "name": "training",
+                            "use_mlflow": "$params:use_mlflow",
+                            "use_graphite": "$params:use_graphite",
+                            "batch_size": "$params:batch_size",
+                            "every_n_steps": "$params:log_every_steps",
+                            "skip_after_step": "$params:train_steps"
+                        },
+                        {
+                            "type": "deepr.hooks.EarlyStoppingHookFactory",
+                            "metric": "loss",
+                            "mode": "decrease",
+                            "max_steps_without_improvement": 100,
+                            "min_steps": 500,
+                            "run_every_steps": "$params:log_every_steps",
+                            "final_step": "$params:train_steps"
+                        }
+                    ],
+                    "eval_hooks": [
+                        {
+                            "type": "deepr.hooks.LoggingTensorHookFactory",
+                            "name": "validation",
+                            "use_mlflow": "$params:use_mlflow",
+                            "use_graphite": "$params:use_graphite",
+                            "every_n_iter": null,
+                            "at_end": true
+                        }
+                    ],
+                    "final_hooks": [
+                        {
+                            "type": "deepr.hooks.LoggingTensorHookFactory",
+                            "name": "validation_final",
+                            "use_mlflow": "$params:use_mlflow",
+                            "use_graphite": "$params:use_graphite",
+                            "every_n_iter": null,
+                            "at_end": true
+                        }
+                    ],
+                    "exporters": [
+                        {
+                            "type": "deepr.exporters.BestCheckpoint",
+                            "metric": "loss"
+                        },
+                        {
+                            "type": "deepr.exporters.SavedModel",
+                            "path_saved_model": "$paths:path_saved_model",
+                            "fields": [
+                                {
+                                    "type": "deepr.utils.Field",
+                                    "name": "x",
+                                    "shape": [],
+                                    "dtype": "float32"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "deepr.jobs.CleanupCheckpoints",
+                "path_model": "$paths:path_model"
+            },
+            {
+                "type": "deepr.jobs.OptimizeSavedModel",
+                "path_saved_model": "$paths:path_saved_model",
+                "path_optimized_model": "$paths:path_optimized_model",
+                "graph_name": "_model.pb",
+                "feeds": ["inputs/x"],
+                "fetch": "y_pred",
+                "new_names": {"x": "inputs/x"}
             }
-        ],
-        "type": "deepr.jobs.Pipeline"
-    },
-    "type": "deepr.jobs.YarnLauncher"
+        ]
+    }
 }
