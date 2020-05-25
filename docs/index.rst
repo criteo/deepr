@@ -11,6 +11,7 @@ Preprocessing, layers, metrics and learning jobs
    getting_started/pipeline
    getting_started/config
    getting_started/tuning
+   getting_started/advanced
 
 .. toctree::
    :maxdepth: 2
