@@ -19,7 +19,7 @@ class LogVariablesInitHook(tf.train.SessionRunHook):
 
     def __init__(
         self,
-        use_mlflow: bool,
+        use_mlflow: bool = False,
         whitelist: Tuple[str, ...] = None,
         blacklist: Tuple[str, ...] = ("adam", "beta", "stopping", "step"),
     ):

@@ -16,13 +16,28 @@ LOGGER = logging.getLogger(__name__)
 class Map(base.Prepro):
     """Map a function on each element of a tf.data.Dataset.
 
-    A `Map` instance applies a `map_func` to all elements of a dataset.
-    By default, elements are expected to be dictionaries. You can set
-    `on_dict=False` if your dataset does not yield dictionaries.
+    A `Map` instance applies a ``map_func`` to all elements of a
+    dataset. By default, elements are expected to be dictionaries. You
+    can set ``on_dict=False`` if your dataset does not yield
+    dictionaries.
 
     If elements are dictionaries, you can use the additional argument
-    `update` to choose to update dictionaries instead of overriding
+    ``update`` to choose to update dictionaries instead of overriding
     them.
+
+    NOTE: If ``map_func`` is a ``Layer``, it directly uses ``forward``
+    or ``forward_as_dict`` to avoid inspection overhead from the
+    ``Layer.__call__`` method.
+
+    WARNING: if ``map_func`` is a ``Layer``, the ``mode`` will not be
+    forwarded by the ``Map.apply()`` call, and the default ``None`` will
+    always be used. This is intended to keep the signature of the
+    generic ``map_func`` in line with the ``tf.Dataset.map`` method.
+
+    If you wish to use a ``Layer`` with a given ``mode``, you can do
+
+    >>> from functools import partial
+    >>> Map(partial(layer.forward_as_dict, mode=tf.estimator.ModeKeys.TRAIN))
 
     For example, by setting `update=True` (DEFAULT behavior)
 
@@ -36,7 +51,8 @@ class Map(base.Prepro):
     >>> prepro_fn(dataset)
     {"a": 0, "b": 1}
 
-    On the other hand, `update=False` yields the output of the map_func
+    On the other hand, ``update=False`` yields the output of the
+    ``map_func``
 
     >>> prepro_fn = Map(map_func, update=False)
     >>> prepro_fn(dataset)
@@ -97,10 +113,10 @@ class Map(base.Prepro):
 
     @property
     def tf_map_func(self):
-        """Return final map function"""
+        """Return final map function."""
         map_func = self.map_func
-        if isinstance(map_func, Layer) and self.on_dict:
-            map_func = map_func.forward_as_dict
+        if isinstance(map_func, Layer):
+            map_func = map_func.forward_as_dict if self.on_dict else map_func.forward
         if self.update:
             return lambda x: {**x, **map_func(x)}
         return map_func
@@ -115,11 +131,11 @@ class Map(base.Prepro):
 class Filter(base.Prepro):
     """Filter a dataset keeping only elements on which predicate is True
 
-    A `Filter` instance applies a `predicate` to all elements of a
+    A ``Filter`` instance applies a ``predicate`` to all elements of a
     dataset and keeps only element for which predicate returns True.
 
     By default, elements are expected to be dictionaries. You can set
-    `on_dict=False` if your dataset does not yield dictionaries.
+    ``on_dict=False`` if your dataset does not yield dictionaries.
 
     Because some preprocessing pipelines behave differently depending
     on the mode (TRAIN, EVAL, PREDICT), an optional argument can be
@@ -167,13 +183,13 @@ class Filter(base.Prepro):
 
     @property
     def tf_predicate(self):
-        """Return final predicate function"""
+        """Return final predicate function."""
         predicate = self.predicate
-        if isinstance(predicate, Layer) and self.on_dict:
+        if isinstance(predicate, Layer):
             if predicate.n_out != 1:
                 msg = f"{predicate} has n_out = {predicate.n_out} (unable to retrieve predicate from layer outputs)"
                 raise ValueError(msg)
-            return lambda x: predicate.forward_as_dict(x)[predicate.outputs]
+            return lambda x: predicate.forward_as_dict(x)[predicate.outputs] if self.on_dict else predicate.forward
         if self.on_dict:
             return lambda x: list(predicate(x).values())[0]
         return predicate

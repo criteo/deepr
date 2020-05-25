@@ -22,6 +22,35 @@ def test_config_fill_macros(item, macros, expected):
 
 
 @pytest.mark.parametrize(
+    "item, macro, expected",
+    [
+        ({"x": "$params:x"}, "params", ["x"]),
+        ([{"x": "$params:x"}], "params", ["x"]),
+        (({"x": "$params:x"},), "params", ["x"]),
+        ({"a": {"x": "$params:x"}}, "params", ["x"]),
+        ({"x": "$params:x", "y": "$prod:y"}, "params", ["x"]),
+    ],
+)
+def test_find_macro_params(item, macro, expected):
+    assert set(dpr.config.find_macro_params(item, macro)) == set(expected)
+
+
+@pytest.mark.parametrize(
+    "item, expected", [("param", False), ("macro:param", False), ("$macro:param", True), ("$macro:param:other", None)]
+)
+def test_ismacro(item, expected):
+    if expected is not None:
+        assert dpr.config.ismacro(item) == expected
+    else:
+        with pytest.raises(ValueError):
+            dpr.config.ismacro(item)
+
+
+def test_get_macro_and_param():
+    assert dpr.config.get_macro_and_param("$macro:param") == ("macro", "param")
+
+
+@pytest.mark.parametrize(
     "item, error",
     [
         (None, False),
@@ -42,3 +71,15 @@ def test_config_assert_no_macros(item, error: bool):
             dpr.config.assert_no_macros(item)
     else:
         dpr.config.assert_no_macros(item)
+
+
+@pytest.mark.parametrize(
+    "macros, expected",
+    [({"1": {"x": 1}, "2": {"x": "$1:x"}}, ["1", "2"]), ({"1": {"x": "$2:x"}, "2": {"x": "$1:x"}}, None)],
+)
+def test_macros_eval_order(macros, expected):
+    if expected is not None:
+        assert dpr.config.macros_eval_order(macros) == expected
+    else:
+        with pytest.raises(ValueError):
+            dpr.config.macros_eval_order(macros)

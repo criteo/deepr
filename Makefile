@@ -30,6 +30,9 @@ lint: ## [Local development] Run mypy, pylint and black
 test: ## [Local development] Run unit tests.
 	python -m pytest -n 4 -v tests/unit
 
+integration: ## [Local development] Run integration tests.
+	python -m pytest tests/integration
+
 black: ## [Local development] Auto-format python code using black
 	python -m black -l 120 .
 
