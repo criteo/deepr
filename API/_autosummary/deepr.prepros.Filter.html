@@ -222,10 +222,10 @@
 <dt id="deepr.prepros.Filter">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.</code><code class="sig-name descname">Filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">predicate</span></em>, <em class="sig-param"><span class="n">on_dict</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">modes</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/prepros/core.html#Filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.Filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filter a dataset keeping only elements on which predicate is True</p>
-<p>A <cite>Filter</cite> instance applies a <cite>predicate</cite> to all elements of a
+<p>A <code class="docutils literal notranslate"><span class="pre">Filter</span></code> instance applies a <code class="docutils literal notranslate"><span class="pre">predicate</span></code> to all elements of a
 dataset and keeps only element for which predicate returns True.</p>
 <p>By default, elements are expected to be dictionaries. You can set
-<cite>on_dict=False</cite> if your dataset does not yield dictionaries.</p>
+<code class="docutils literal notranslate"><span class="pre">on_dict=False</span></code> if your dataset does not yield dictionaries.</p>
 <p>Because some preprocessing pipelines behave differently depending
 on the mode (TRAIN, EVAL, PREDICT), an optional argument can be
 provided. By setting modes, you select the modes on which the map
@@ -313,7 +313,7 @@ Default is None (all modes are considered active modes).</p>
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tf_predicate</span></code></p></td>
-<td><p>Return final predicate function</p></td>
+<td><p>Return final predicate function.</p></td>
 </tr>
 </tbody>
 </table>

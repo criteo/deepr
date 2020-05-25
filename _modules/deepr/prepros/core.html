@@ -177,13 +177,28 @@
 <div class="viewcode-block" id="Map"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Map">[docs]</a><span class="k">class</span> <span class="nc">Map</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Prepro</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Map a function on each element of a tf.data.Dataset.</span>
 
-<span class="sd">    A `Map` instance applies a `map_func` to all elements of a dataset.</span>
-<span class="sd">    By default, elements are expected to be dictionaries. You can set</span>
-<span class="sd">    `on_dict=False` if your dataset does not yield dictionaries.</span>
+<span class="sd">    A `Map` instance applies a ``map_func`` to all elements of a</span>
+<span class="sd">    dataset. By default, elements are expected to be dictionaries. You</span>
+<span class="sd">    can set ``on_dict=False`` if your dataset does not yield</span>
+<span class="sd">    dictionaries.</span>
 
 <span class="sd">    If elements are dictionaries, you can use the additional argument</span>
-<span class="sd">    `update` to choose to update dictionaries instead of overriding</span>
+<span class="sd">    ``update`` to choose to update dictionaries instead of overriding</span>
 <span class="sd">    them.</span>
+
+<span class="sd">    NOTE: If ``map_func`` is a ``Layer``, it directly uses ``forward``</span>
+<span class="sd">    or ``forward_as_dict`` to avoid inspection overhead from the</span>
+<span class="sd">    ``Layer.__call__`` method.</span>
+
+<span class="sd">    WARNING: if ``map_func`` is a ``Layer``, the ``mode`` will not be</span>
+<span class="sd">    forwarded by the ``Map.apply()`` call, and the default ``None`` will</span>
+<span class="sd">    always be used. This is intended to keep the signature of the</span>
+<span class="sd">    generic ``map_func`` in line with the ``tf.Dataset.map`` method.</span>
+
+<span class="sd">    If you wish to use a ``Layer`` with a given ``mode``, you can do</span>
+
+<span class="sd">    &gt;&gt;&gt; from functools import partial</span>
+<span class="sd">    &gt;&gt;&gt; Map(partial(layer.forward_as_dict, mode=tf.estimator.ModeKeys.TRAIN))</span>
 
 <span class="sd">    For example, by setting `update=True` (DEFAULT behavior)</span>
 
@@ -197,7 +212,8 @@
 <span class="sd">    &gt;&gt;&gt; prepro_fn(dataset)</span>
 <span class="sd">    {&quot;a&quot;: 0, &quot;b&quot;: 1}</span>
 
-<span class="sd">    On the other hand, `update=False` yields the output of the map_func</span>
+<span class="sd">    On the other hand, ``update=False`` yields the output of the</span>
+<span class="sd">    ``map_func``</span>
 
 <span class="sd">    &gt;&gt;&gt; prepro_fn = Map(map_func, update=False)</span>
 <span class="sd">    &gt;&gt;&gt; prepro_fn(dataset)</span>
@@ -258,10 +274,10 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">tf_map_func</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return final map function&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return final map function.&quot;&quot;&quot;</span>
         <span class="n">map_func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_func</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">map_func</span><span class="p">,</span> <span class="n">Layer</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_dict</span><span class="p">:</span>
-            <span class="n">map_func</span> <span class="o">=</span> <span class="n">map_func</span><span class="o">.</span><span class="n">forward_as_dict</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">map_func</span><span class="p">,</span> <span class="n">Layer</span><span class="p">):</span>
+            <span class="n">map_func</span> <span class="o">=</span> <span class="n">map_func</span><span class="o">.</span><span class="n">forward_as_dict</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_dict</span> <span class="k">else</span> <span class="n">map_func</span><span class="o">.</span><span class="n">forward</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">:</span>
             <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">{</span><span class="o">**</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">map_func</span><span class="p">(</span><span class="n">x</span><span class="p">)}</span>
         <span class="k">return</span> <span class="n">map_func</span>
@@ -276,11 +292,11 @@
 <div class="viewcode-block" id="Filter"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Filter">[docs]</a><span class="k">class</span> <span class="nc">Filter</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Prepro</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Filter a dataset keeping only elements on which predicate is True</span>
 
-<span class="sd">    A `Filter` instance applies a `predicate` to all elements of a</span>
+<span class="sd">    A ``Filter`` instance applies a ``predicate`` to all elements of a</span>
 <span class="sd">    dataset and keeps only element for which predicate returns True.</span>
 
 <span class="sd">    By default, elements are expected to be dictionaries. You can set</span>
-<span class="sd">    `on_dict=False` if your dataset does not yield dictionaries.</span>
+<span class="sd">    ``on_dict=False`` if your dataset does not yield dictionaries.</span>
 
 <span class="sd">    Because some preprocessing pipelines behave differently depending</span>
 <span class="sd">    on the mode (TRAIN, EVAL, PREDICT), an optional argument can be</span>
@@ -328,13 +344,13 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">tf_predicate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return final predicate function&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return final predicate function.&quot;&quot;&quot;</span>
         <span class="n">predicate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predicate</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">predicate</span><span class="p">,</span> <span class="n">Layer</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_dict</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">predicate</span><span class="p">,</span> <span class="n">Layer</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">predicate</span><span class="o">.</span><span class="n">n_out</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">predicate</span><span class="si">}</span><span class="s2"> has n_out = </span><span class="si">{</span><span class="n">predicate</span><span class="o">.</span><span class="n">n_out</span><span class="si">}</span><span class="s2"> (unable to retrieve predicate from layer outputs)&quot;</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-            <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">predicate</span><span class="o">.</span><span class="n">forward_as_dict</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="n">predicate</span><span class="o">.</span><span class="n">outputs</span><span class="p">]</span>
+            <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">predicate</span><span class="o">.</span><span class="n">forward_as_dict</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="n">predicate</span><span class="o">.</span><span class="n">outputs</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_dict</span> <span class="k">else</span> <span class="n">predicate</span><span class="o">.</span><span class="n">forward</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_dict</span><span class="p">:</span>
             <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">predicate</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">predicate</span>

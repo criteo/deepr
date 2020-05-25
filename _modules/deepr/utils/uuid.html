@@ -166,10 +166,12 @@
 
 
 <div class="viewcode-block" id="msb_lsb_to_str"><a class="viewcode-back" href="../../../_source/deepr.utils.html#deepr.utils.uuid.msb_lsb_to_str">[docs]</a><span class="k">def</span> <span class="nf">msb_lsb_to_str</span><span class="p">(</span><span class="n">msb</span><span class="p">,</span> <span class="n">lsb</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert two 64 bit integers MSB and LSB to a 128 bit UUID.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">(</span><span class="nb">bytes</span><span class="o">=</span><span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;qq&quot;</span><span class="p">,</span> <span class="n">msb</span><span class="p">,</span> <span class="n">lsb</span><span class="p">)))</span></div>
 
 
 <div class="viewcode-block" id="str_to_msb_lsb"><a class="viewcode-back" href="../../../_source/deepr.utils.html#deepr.utils.uuid.str_to_msb_lsb">[docs]</a><span class="k">def</span> <span class="nf">str_to_msb_lsb</span><span class="p">(</span><span class="n">el</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert a 128 bit UUID to two 64 bit integers MSB and LSB.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;qq&quot;</span><span class="p">,</span> <span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">(</span><span class="n">el</span><span class="p">)</span><span class="o">.</span><span class="n">bytes</span><span class="p">)</span></div>
 </pre></div>
 

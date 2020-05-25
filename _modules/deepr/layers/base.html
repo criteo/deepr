@@ -334,24 +334,128 @@
         <span class="n">args</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_in</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_out</span><span class="si">}</span><span class="s2">, inputs=&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="si">}</span><span class="s2">&#39;, outputs=&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="si">}</span><span class="s2">&#39;, name=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">args</span><span class="si">}</span><span class="s2">)&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">reuse</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Forward as tuple or dictionary depending on tensors type&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">tensors</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="o">...</span><span class="p">]],</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">reuse</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="o">...</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Forward as tuple or dictionary depending on tensors type.</span>
+
+<span class="sd">        Wraps the layer call in a variable scope to be able to reuse</span>
+<span class="sd">        variable with the ``reuse`` argument, adds a tf.identity</span>
+<span class="sd">        operator to each output tensor using self.outputs.</span>
+
+<span class="sd">        If tensors is a Dict, it returns a dictionary whose keys are</span>
+<span class="sd">        defined by self.outputs.</span>
+
+<span class="sd">        Otherwise, input tensors type is expected to be, if</span>
+<span class="sd">            - n_in = 1: one tensor (NOT wrapped in a tuple)</span>
+<span class="sd">            - n_in &gt; 1: a tuple of tensors</span>
+<span class="sd">        In that case, output tensors type is expected to be, if</span>
+<span class="sd">            - n_out = 1: one tensor (NOT wrapped in a tuple)</span>
+<span class="sd">            - n_out &gt; 1: a tuple of tensors</span>
+
+<span class="sd">        NOTE: Each call to this method performs inspection on the inputs</span>
+<span class="sd">        and outputs type, which can be costly in terms of computation.</span>
+
+<span class="sd">        This is not an issue when building graphs with tf.estimator as</span>
+<span class="sd">        the graph is compiled once and for all.</span>
+
+<span class="sd">        However, when using a ``Layer`` to preprocess a tf.data.Dataset</span>
+<span class="sd">        (eg. with a ``map`` transformation), this method will be called</span>
+<span class="sd">        for each example and might cause slowdown. It is recommended to</span>
+<span class="sd">        explicitly use ``forward`` or ``forward_as_dict`` in that case.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        tensors : Union[tf.Tensor, Dict[str, tf.Tensor], Tuple[tf.Tensor, ...]]</span>
+<span class="sd">            Input tensors</span>
+<span class="sd">        mode : str, optional</span>
+<span class="sd">            One of tf.estimator.ModeKeys</span>
+<span class="sd">        reuse : bool, optional</span>
+<span class="sd">            Encapsulates layer call in a variable scope with reuse=reuse</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">variable_scope</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">get_variable_scope</span><span class="p">(),</span> <span class="n">reuse</span><span class="o">=</span><span class="n">reuse</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward_as_dict</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+                <span class="c1"># Check that tensors is coherent with self.inputs</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="n">to_flat_tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="nb">set</span><span class="p">(</span><span class="n">tensors</span><span class="p">):</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Missing inputs: </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="n">to_flat_tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">))</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">tensors</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Layer.forward"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.Layer.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Forward method of the layer on tuples&quot;&quot;&quot;</span>
+                <span class="c1"># Call forward_as_dict to get output tensors</span>
+                <span class="n">tensors_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward_as_dict</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+
+                <span class="c1"># Check that tensors_dict is coherent with self.outputs</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="n">to_flat_tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="nb">set</span><span class="p">(</span><span class="n">tensors_dict</span><span class="p">):</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Missing outputs: </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="n">to_flat_tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">))</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">tensors_dict</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+                <span class="k">return</span> <span class="n">tensors_dict</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Check that tensors is coherent with self.n_in</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_in</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Expected 1 input, but got </span><span class="si">{</span><span class="n">tensors</span><span class="si">}</span><span class="s2"> (should not be a tuple)&quot;</span>
+                    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_in</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">to_flat_tuple</span><span class="p">(</span><span class="n">tensors</span><span class="p">))</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_in</span><span class="p">:</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_in</span><span class="si">}</span><span class="s2"> inputs, but got </span><span class="si">{</span><span class="n">tensors</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+                <span class="c1"># Call forward and convert to tuple</span>
+                <span class="n">tensors_tuple</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+
+                <span class="c1"># Check that tensors_tuple is coherent with outputs</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">to_flat_tuple</span><span class="p">(</span><span class="n">tensors_tuple</span><span class="p">))</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_out</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_out</span><span class="si">}</span><span class="s2"> outputs but got </span><span class="si">{</span><span class="n">tensors_tuple</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                <span class="k">return</span> <span class="n">tensors_tuple</span>
+
+<div class="viewcode-block" id="Layer.forward"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.Layer.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="o">...</span><span class="p">]],</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="o">...</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Forward method on one Tensor or a tuple of Tensors.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        tensors : Union[tf.Tensor, Tuple[tf.Tensor, ...]]</span>
+<span class="sd">            - n_in = 1: one tensor (NOT wrapped in a tuple)</span>
+<span class="sd">            - n_in &gt; 1: a tuple of tensors</span>
+<span class="sd">        mode : str, optional</span>
+<span class="sd">            Description</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Union[tf.Tensor, Tuple[tf.Tensor, ...]]</span>
+<span class="sd">            - n_out = 1: one tensor (NOT wrapped in a tuple)</span>
+<span class="sd">            - n_out &gt; 1: a tuple of tensors</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">dict_to_item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">forward_as_dict</span><span class="p">(</span><span class="n">item_to_dict</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">),</span> <span class="n">mode</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">LOGGER</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2"> error on </span><span class="si">{</span><span class="n">tensors</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">raise</span> <span class="n">e</span></div>
 
-<div class="viewcode-block" id="Layer.forward_as_dict"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.Layer.forward_as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">forward_as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Forward method of the layer on dictionaries of self.inputs&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Layer.forward_as_dict"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.Layer.forward_as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">forward_as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">],</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Forward method on a dictionary of Tensors.</span>
+
+<span class="sd">        The input ``tensors`` should contain all keys defined in</span>
+<span class="sd">        ``self.inputs`` (but might contain more keys).</span>
+<span class="sd">        It returns a new dictionary (does not mutate the input</span>
+<span class="sd">        ``tensors`` dictionary in-place), whose keys are exactly</span>
+<span class="sd">        ``self.outputs``.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        tensors : Dict[str, tf.Tensor]</span>
+<span class="sd">            Dictionary mapping self.inputs to tf.Tensors.</span>
+<span class="sd">        mode : str, optional</span>
+<span class="sd">            One of tf.estimator.ModeKeys</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Dict[str, tf.Tensor]</span>
+<span class="sd">            Dictionary mapping self.outputs to tf.Tensors</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">item_to_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">dict_to_item</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">),</span> <span class="n">mode</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>

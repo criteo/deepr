@@ -164,7 +164,7 @@
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Iterable</span>
 
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">from</span> <span class="nn">tensorflow.python.tools.freeze_graph</span> <span class="kn">import</span> <span class="n">freeze_graph_with_def_protos</span>
@@ -175,6 +175,24 @@
 
 
 <span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="TensorsNotFoundError"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.TensorsNotFoundError">[docs]</a><span class="k">class</span> <span class="nc">TensorsNotFoundError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;No tensors found for those names.</span>
+
+<span class="sd">    Most Tensorflow operators take a ``name`` argument that should be</span>
+<span class="sd">    used if you want to use a custom name for a tensor, otherwise a</span>
+<span class="sd">    default will be used.</span>
+
+<span class="sd">    If accessing the operator creating a Tensor is not possible, you</span>
+<span class="sd">    can use ``tf.identity`` to name the Tensor. However, note that it</span>
+<span class="sd">    adds a new op to the graph that creates a copy of the input Tensor,</span>
+<span class="sd">    and thus should be limited to avoid overhead.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Tensors not found: </span><span class="si">{</span><span class="n">tensors</span><span class="si">}</span><span class="s2">. Use `tf.identity(t, name)` to name nodes in your graph.&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="OptimizeSavedModel"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.OptimizeSavedModel">[docs]</a><span class="nd">@dataclass</span>
@@ -259,7 +277,7 @@
                 <span class="n">saved_model_tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;serve&quot;</span><span class="p">],</span>
             <span class="p">)</span>
             <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write_graph</span><span class="p">(</span><span class="n">graph_def</span><span class="p">,</span> <span class="n">logdir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path_optimized_model</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">graph_name</span><span class="p">,</span> <span class="n">as_text</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-            <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Online KNN successfully exported to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path_optimized_model</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">graph_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div></div>
+            <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimized Model successfully exported to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path_optimized_model</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">graph_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="rename_nodes"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.rename_nodes">[docs]</a><span class="k">def</span> <span class="nf">rename_nodes</span><span class="p">(</span><span class="n">graph_def</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">GraphDef</span><span class="p">,</span> <span class="n">new_names</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">GraphDef</span><span class="p">:</span>
@@ -279,7 +297,7 @@
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
-<span class="sd">    ValueError</span>
+<span class="sd">    TensorsNotFoundError</span>
 <span class="sd">        If new_names refers to an node not found in graph_def</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Create copy of each node with a new name</span>
@@ -296,7 +314,8 @@
 
     <span class="c1"># Check that all new names were used</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="n">new_names</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">&lt;=</span> <span class="nb">set</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing renames: </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="n">new_names</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">missing</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">new_names</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">TensorsNotFoundError</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span>
 
     <span class="c1"># Update node references (inputs and location) to renamed nodes</span>
     <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
@@ -333,7 +352,7 @@
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
-<span class="sd">    ValueError</span>
+<span class="sd">    TensorsNotFoundError</span>
 <span class="sd">        If names refers to a node that is not present</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Create copy of each node and change to Placeholder if in names</span>
@@ -355,7 +374,8 @@
 
     <span class="c1"># Check that all expected placeholders have been found</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="n">names</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">set</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing placeholders: </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="n">names</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">missing</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">names</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">TensorsNotFoundError</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span>
 
     <span class="c1"># Create Graph with renamed nodes</span>
     <span class="n">new_graph</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">GraphDef</span><span class="p">()</span>

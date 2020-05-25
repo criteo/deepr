@@ -481,10 +481,10 @@ Default is None (all modes are considered active modes).</p>
 <em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">Filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">predicate</span></em>, <em class="sig-param"><span class="n">on_dict</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">modes</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
 <p>Filter a dataset keeping only elements on which predicate is True</p>
-<p>A <cite>Filter</cite> instance applies a <cite>predicate</cite> to all elements of a
+<p>A <code class="docutils literal notranslate"><span class="pre">Filter</span></code> instance applies a <code class="docutils literal notranslate"><span class="pre">predicate</span></code> to all elements of a
 dataset and keeps only element for which predicate returns True.</p>
 <p>By default, elements are expected to be dictionaries. You can set
-<cite>on_dict=False</cite> if your dataset does not yield dictionaries.</p>
+<code class="docutils literal notranslate"><span class="pre">on_dict=False</span></code> if your dataset does not yield dictionaries.</p>
 <p>Because some preprocessing pipelines behave differently depending
 on the mode (TRAIN, EVAL, PREDICT), an optional argument can be
 provided. By setting modes, you select the modes on which the map
@@ -552,7 +552,7 @@ Default is None (all modes are considered active modes).</p>
 <dl class="py method">
 <dt id="deepr.prepros.core.Filter.tf_predicate">
 <em class="property">property </em><code class="sig-name descname">tf_predicate</code><a class="headerlink" href="#deepr.prepros.core.Filter.tf_predicate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return final predicate function</p>
+<dd><p>Return final predicate function.</p>
 </dd></dl>
 
 </dd></dl>
@@ -562,12 +562,25 @@ Default is None (all modes are considered active modes).</p>
 <em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">Map</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">map_func</span></em>, <em class="sig-param"><span class="n">on_dict</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">update</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">modes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_parallel_calls</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
 <p>Map a function on each element of a tf.data.Dataset.</p>
-<p>A <cite>Map</cite> instance applies a <cite>map_func</cite> to all elements of a dataset.
-By default, elements are expected to be dictionaries. You can set
-<cite>on_dict=False</cite> if your dataset does not yield dictionaries.</p>
+<p>A <cite>Map</cite> instance applies a <code class="docutils literal notranslate"><span class="pre">map_func</span></code> to all elements of a
+dataset. By default, elements are expected to be dictionaries. You
+can set <code class="docutils literal notranslate"><span class="pre">on_dict=False</span></code> if your dataset does not yield
+dictionaries.</p>
 <p>If elements are dictionaries, you can use the additional argument
-<cite>update</cite> to choose to update dictionaries instead of overriding
+<code class="docutils literal notranslate"><span class="pre">update</span></code> to choose to update dictionaries instead of overriding
 them.</p>
+<p>NOTE: If <code class="docutils literal notranslate"><span class="pre">map_func</span></code> is a <code class="docutils literal notranslate"><span class="pre">Layer</span></code>, it directly uses <code class="docutils literal notranslate"><span class="pre">forward</span></code>
+or <code class="docutils literal notranslate"><span class="pre">forward_as_dict</span></code> to avoid inspection overhead from the
+<code class="docutils literal notranslate"><span class="pre">Layer.__call__</span></code> method.</p>
+<p>WARNING: if <code class="docutils literal notranslate"><span class="pre">map_func</span></code> is a <code class="docutils literal notranslate"><span class="pre">Layer</span></code>, the <code class="docutils literal notranslate"><span class="pre">mode</span></code> will not be
+forwarded by the <code class="docutils literal notranslate"><span class="pre">Map.apply()</span></code> call, and the default <code class="docutils literal notranslate"><span class="pre">None</span></code> will
+always be used. This is intended to keep the signature of the
+generic <code class="docutils literal notranslate"><span class="pre">map_func</span></code> in line with the <code class="docutils literal notranslate"><span class="pre">tf.Dataset.map</span></code> method.</p>
+<p>If you wish to use a <code class="docutils literal notranslate"><span class="pre">Layer</span></code> with a given <code class="docutils literal notranslate"><span class="pre">mode</span></code>, you can do</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Map</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">forward_as_dict</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">))</span>
+</pre></div>
+</div>
 <p>For example, by setting <cite>update=True</cite> (DEFAULT behavior)</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">gen</span><span class="p">():</span>
 <span class="gp">... </span><span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
@@ -580,7 +593,8 @@ them.</p>
 <span class="go">{&quot;a&quot;: 0, &quot;b&quot;: 1}</span>
 </pre></div>
 </div>
-<p>On the other hand, <cite>update=False</cite> yields the output of the map_func</p>
+<p>On the other hand, <code class="docutils literal notranslate"><span class="pre">update=False</span></code> yields the output of the
+<code class="docutils literal notranslate"><span class="pre">map_func</span></code></p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">map_func</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
 <span class="go">{&quot;b&quot;: 1}</span>
@@ -667,7 +681,7 @@ Default is None (all modes are considered active modes).</p>
 <dl class="py method">
 <dt id="deepr.prepros.core.Map.tf_map_func">
 <em class="property">property </em><code class="sig-name descname">tf_map_func</code><a class="headerlink" href="#deepr.prepros.core.Map.tf_map_func" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return final map function</p>
+<dd><p>Return final map function.</p>
 </dd></dl>
 
 </dd></dl>
