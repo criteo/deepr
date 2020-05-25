@@ -1,13 +1,13 @@
 """Base Hooks Factories
 
 Some TensorFlow hooks cannot be defined before runtime. For example, a
-`TensorLoggingHook` requires `tensors` to be initialized.
+:class:`~TensorLoggingHook` requires `tensors` to be initialized.
 
 To resolve this issue, we provide abstractions for Hooks factories, that
 allow you to parametrize the creation of hooks that will be created at
 runtime.
 
-See the `LoggingTensorHookFactory` for instance.
+See the :class:`~LoggingTensorHookFactory` for instance.
 """
 
 from abc import ABC, abstractmethod

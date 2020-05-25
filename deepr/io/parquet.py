@@ -20,7 +20,7 @@ LOGGER = logging.getLogger(__name__)
 class ParquetDataset:
     """Context aware ParquetDataset with support for chunk writing.
 
-    Makes it easier to read / write `ParquetDataset`. For example
+    Makes it easier to read / write :class:`~ParquetDataset`. For example
 
     >>> df = pd.DataFrame(...)
     >>> with ParquetDataset("viewfs://root/foo.parquet.snappy").open() as ds:

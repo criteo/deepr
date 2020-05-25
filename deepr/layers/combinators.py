@@ -28,7 +28,7 @@ class Sequential(Layer):
 
     Because in some cases your model is more complicated (branches etc.)
     you can exploit the inputs / outputs naming capability of the base
-    `Layer` class. For example:
+    :class:`~Layer` class. For example:
 
     .. code-block:: python
 
@@ -46,13 +46,13 @@ class Sequential(Layer):
         layer({"x": 1})  # {"total": 6}
 
     As always, the resulting layer can be operated on Tensors or
-    dictionaries of Tensors. The inputs / outputs of the `Sequential`
+    dictionaries of Tensors. The inputs / outputs of the :class:`~Sequential`
     layer corresponds to the inputs of the first layer and the outputs
     of the last layer in the stack (intermediary nodes that are not
     returned by the last layer will not be returned).
 
     An easy way to define arbitrary inputs / outputs nodes is to use the
-    `Select` class. For example:
+    :class:`~Select` class. For example:
 
     .. code-block:: python
 
@@ -106,7 +106,7 @@ class Sequential(Layer):
 class Select(Layer):
     """Layer to extract inputs / outputs from previous layers
 
-    The `Select` layer is particularly useful when defining arbitrary
+    The :class:`~Select` layer is particularly useful when defining arbitrary
     DAGs of layers : it is a convenient way to select which nodes should
     be inputs, and which should be outputs. For example:
 
@@ -116,7 +116,7 @@ class Select(Layer):
         layer((1, 2))  # 2
         layer({"x": 1, "y": 2})  # {"z": 2}
 
-    See `Sequential` documentation for more precisions.
+    See :class:`~Sequential` documentation for more precisions.
     """
 
     def __init__(
@@ -149,8 +149,8 @@ class Select(Layer):
 class Rename(Layer):
     """Wrap Layer in a Node to rename inputs / outputs.
 
-    Allows you to rename inputs / outputs nodes of a `Layer` instance.
-    This can be useful if you end up with a `Layer` instance with
+    Allows you to rename inputs / outputs nodes of a :class:`~Layer` instance.
+    This can be useful if you end up with a :class:`~Layer` instance with
     inputs and outputs name that are not suitable for your needs.
 
     For example:
@@ -167,8 +167,8 @@ class Rename(Layer):
         layer((1, 1))  # 2
         layer({"x": 1, "y": 1})  # {"z": 2}
 
-    Note that the same behavior can be achieved using `Select` and
-    `Sequential` as follows:
+    Note that the same behavior can be achieved using :class:`~Select` and
+    :class:`~Sequential` as follows:
 
     .. code-block:: python
 
