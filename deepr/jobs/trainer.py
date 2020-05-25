@@ -67,7 +67,7 @@ class Trainer(Job):
     path_model : str
         Path to the model directory. Can be either local or HDFS.
     pred_fn : Callable[[Dict[str, tf.Tensor], str], Dict[str, tf.Tensor]]
-        Typically a `Layer` instance, but in general, any callable.
+        Typically a :class:`~deepr.layers.Layer` instance, but in general, any callable.
 
         Its signature is the following:
           - features : Dict
@@ -76,7 +76,7 @@ class Trainer(Job):
                 Predictions
 
     loss_fn : Callable[[Dict[str, tf.Tensor], str], Dict[str, tf.Tensor]]
-        Typically a `Layer` instance, but in general, any callable.
+        Typically a :class:`~deepr.layers.Layer` instance, but in general, any callable.
 
         Its signature is the following:
           - features_and_predictions : Dict
@@ -88,7 +88,7 @@ class Trainer(Job):
         to the `optimizer_fn`.
 
     optimizer_fn : Callable[[Dict[str, tf.Tensor]], Dict[str, tf.Tensor]]
-        Typically an `Optimizer` instance, but in general, any callable.
+        Typically an :class:`~deepr.optimizers.Optimizer` instance, but in general, any callable.
 
         Its signature is the following:
           - inputs : Dict[str, tf.Tensor]
@@ -97,7 +97,7 @@ class Trainer(Job):
                 Need key "train_op"
 
     train_input_fn : Callable[[], tf.data.Dataset]
-        Typically a `Reader` instance, but in general, any callable.
+        Typically a :class:`~deepr.readers.Reader` instance, but in general, any callable.
 
         Used for training.
 
@@ -107,7 +107,7 @@ class Trainer(Job):
                 should create a new dataset and a new graph.
 
     eval_input_fn : Callable[[], tf.data.Dataset]
-        Typically a `Reader` instance, but in general, any callable.
+        Typically a :class:`~deepr.readers.Reader` instance, but in general, any callable.
 
         Used for evaluation.
 
@@ -117,7 +117,7 @@ class Trainer(Job):
                 should create a new dataset and a new graph.
 
     prepro_fn: Callable[[tf.data.Dataset, str], tf.data.Dataset], Optional
-        Typically a `Prepro` instance, but in general, any callable.
+        Typically a :class:`~deepr.prepros.Prepro` instance, but in general, any callable.
 
         Its signature is the following:
           - inputs :
@@ -133,7 +133,7 @@ class Trainer(Job):
         default Graph.
 
     train_metrics: List[Callable], Optional
-        Typically, `Metric` instances, but in general, any callables.
+        Typically, :class:`~deepr.metrics.Metric` instances, but in general, any callables.
 
         Used for training.
 
@@ -144,7 +144,7 @@ class Trainer(Job):
                 Dictionary of tuples of (tensor_value, update_op).
 
     eval_metrics: List[Callable], Optional
-        Typically, `Metric` instances, but in general, any callables.
+        Typically, :class:`~deepr.metrics.Metric` instances, but in general, any callables.
 
         Used for evaluation.
 
@@ -155,9 +155,9 @@ class Trainer(Job):
                 Dictionary of tuples of (tensor_value, update_op).
 
     exporters: List[Callable], Optional
-        Typically, `Exporter` instances, but in general, any callables.
+        Typically, :class:`~deepr.exporters.Exporter` instances, but in general, any callables.
 
-        Used at the end of training on the trained `tf.Estimator`.
+        Used at the end of training on the trained :mod:`~`tf.Estimator`.
 
         Each callable must have the following signature:
           - inputs : tf.estimator.Estimator
@@ -169,9 +169,9 @@ class Trainer(Job):
         Used for training.
 
         Some hook can be fully defined during instantiation of Trainer,
-        for example a `StepsPerSecHook`. However, other hooks requires
+        for example a :class:`~deepr.hooks.StepsPerSecHook`. However, other hooks requires
         objects to be instantiated that will only be created after
-        running the `Trainer`.
+        running the :class:`~deepr.jobs.Trainer`.
 
         The `hooks` module defines factories for more complicated hooks.
 
@@ -181,20 +181,20 @@ class Trainer(Job):
         Used for evaluation.
 
         Some hook can be fully defined during instantiation of Trainer,
-        for example a `StepsPerSecHook`. However, other hooks requires
+        for example a :class:`~deepr.hooks.StepsPerSecHook`. However, other hooks requires
         objects to be instantiated that will only be created after
-        running the `Trainer`.
+        running the :class:`~deepr.jobs.Trainer`.
 
         The `hooks` module defines factories for more complicated hooks.
 
     eval_spec: Dict, Optional
-        Optional parameters for `tf.estimator.EvalSpec`.
+        Optional parameters for :class:`~tf.estimator.EvalSpec`.
     train_spec: Dict, Optional
-        Optional parameters for `tf.estimator.TrainSpec`.
+        Optional parameters for :class:`~tf.estimator.TrainSpec`.
     run_config: Dict, Optional
-        Optional parameters for `tf.estimator.RunConfig`.
+        Optional parameters for :class:`~tf.estimator.RunConfig`.
     config_proto: Dict, Optional
-        Optional parameters for `tf.estimator.RunConfig`.
+        Optional parameters for :class:`~tf.estimator.RunConfig`.
     """
 
     path_model: str

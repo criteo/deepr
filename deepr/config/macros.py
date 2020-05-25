@@ -18,7 +18,7 @@ def fill_macros(item: Any, macros: Dict[str, Dict[str, Any]] = None) -> Any:
     ONLY IF FOUND.
 
     WARNING: No exception is raised if a macro value is not found in
-    `macros`. Use `assert_no_macros` to check that a config contains
+    `macros`. Use :func:`~assert_no_macros` to check that a config contains
     no macro parameters.
 
     Parameters

@@ -16,7 +16,7 @@ LOGGER = logging.getLogger(__name__)
 class Map(base.Prepro):
     """Map a function on each element of a tf.data.Dataset.
 
-    A `Map` instance applies a ``map_func`` to all elements of a
+    A :class:`~Map` instance applies a ``map_func`` to all elements of a
     dataset. By default, elements are expected to be dictionaries. You
     can set ``on_dict=False`` if your dataset does not yield
     dictionaries.
@@ -25,7 +25,7 @@ class Map(base.Prepro):
     ``update`` to choose to update dictionaries instead of overriding
     them.
 
-    NOTE: If ``map_func`` is a ``Layer``, it directly uses ``forward``
+    NOTE: If ``map_func`` is a :class:`~deepr.layers.Layer`, it directly uses ``forward``
     or ``forward_as_dict`` to avoid inspection overhead from the
     ``Layer.__call__`` method.
 
@@ -34,7 +34,7 @@ class Map(base.Prepro):
     always be used. This is intended to keep the signature of the
     generic ``map_func`` in line with the ``tf.Dataset.map`` method.
 
-    If you wish to use a ``Layer`` with a given ``mode``, you can do
+    If you wish to use a :class:`~deepr.layers.Layer` with a given ``mode``, you can do
 
     >>> from functools import partial
     >>> Map(partial(layer.forward_as_dict, mode=tf.estimator.ModeKeys.TRAIN))
@@ -131,7 +131,7 @@ class Map(base.Prepro):
 class Filter(base.Prepro):
     """Filter a dataset keeping only elements on which predicate is True
 
-    A ``Filter`` instance applies a ``predicate`` to all elements of a
+    A :class:`~Filter` instance applies a ``predicate`` to all elements of a
     dataset and keeps only element for which predicate returns True.
 
     By default, elements are expected to be dictionaries. You can set

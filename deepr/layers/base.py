@@ -18,18 +18,18 @@ class Layer(ABC):
 
     Heavily inspired by TRAX layers, adapted for TF1.X and tf.estimator.
 
-    Layers are the basic building block of models. A `Layer` is a
+    Layers are the basic building block of models. A :class:`~Layer` is a
     function from one or more inputs to one or more outputs.
 
-    The inputs of a `Layer` are tensors, packaged as follows
+    The inputs of a :class:`~Layer` are tensors, packaged as follows
       - n_in = 1: one tensor (NOT wrapped in a tuple)
       - n_in > 1: a tuple of tensors
 
-    The outputs of a `Layer` are tensors, packaged as follows
+    The outputs of a :class:`~Layer` are tensors, packaged as follows
       - n_out = 1: one tensor (NOT wrapped in a tuple)
       - n_out > 1: a tuple of tensors
 
-    The basic usage of a `Layer` is to build graphs as intuitively as
+    The basic usage of a :class:`~Layer` is to build graphs as intuitively as
     possible. For example:
 
     >>> input_tensor = tf.ones([32, 8])
@@ -38,7 +38,7 @@ class Layer(ABC):
     tf.Tensor(shape=[32, 16])
 
 
-    Because some layers (like `Dropout`) might behave differently
+    Because some layers (like :class:`~Dropout`) might behave differently
     depending on the mode (TRAIN, EVAL, PREDICT), an optional argument
     can be provided:
 
@@ -47,7 +47,7 @@ class Layer(ABC):
     >>> dropped = dropout(input_tensor, tf.estimator.ModeKeys.TRAIN)
     >>> not_dropped = dropout(input_tensor, tf.estimator.ModeKeys.EVAL)
 
-    Because in a lot of cases, a `Layer` needs to be applied on a
+    Because in a lot of cases, a :class:`~Layer` needs to be applied on a
     dictionary, yielded by a tf.data.Dataset for example, you can also
     do:
 
@@ -61,7 +61,7 @@ class Layer(ABC):
     tuples.
 
     Authors of new layer subclasses typically override one of the two
-    methods of the base `Layer` class::
+    methods of the base :class:`~Layer` class::
 
         def forward(self, tensors, mode: str = None):
             # tensors is either a Tensor (n_in=1) or a tuple of Tensors
@@ -73,10 +73,10 @@ class Layer(ABC):
     implementation of the other for free thanks to automatic tuple to
     dictionary conversion.
 
-    The easiest way to define custom layers is to use the `layer`
+    The easiest way to define custom layers is to use the :class:`~layer`
     decorator (see documentation).
 
-    Note that layers using parameters (a `Dense` layer for example)
+    Note that layers using parameters (a :class:`~Dense` layer for example)
     should not create variables at instantiation time nor store
     variables or any other graph references as attributes.
 
@@ -93,7 +93,7 @@ class Layer(ABC):
     If you want to define a layer and use it twice (effectively reusing
     its variables), you need to be explicit, and set the `reuse=True`
     arguments at call time. Behind the scene, it's simply wrapping the
-    TF1.X variable management into a `tf.variable_scope`.
+    TF1.X variable management into a :meth:`~tf.variable_scope`.
 
     >>> dense = Dense(16)
     >>> dense(tf.ones([32, 8])) == dense(tf.ones([32, 8]), reuse=True)
@@ -201,7 +201,7 @@ class Layer(ABC):
         This is not an issue when building graphs with tf.estimator as
         the graph is compiled once and for all.
 
-        However, when using a ``Layer`` to preprocess a tf.data.Dataset
+        However, when using a :class:`~Layer` to preprocess a :class:`~tf.data.Dataset`
         (eg. with a ``map`` transformation), this method will be called
         for each example and might cause slowdown. It is recommended to
         explicitly use ``forward`` or ``forward_as_dict`` in that case.
@@ -310,10 +310,10 @@ def layer(
 ):
     """Decorator that creates a layer from a function
 
-    This decorator can be used to define `Layer` classes in a non
+    This decorator can be used to define :class:`~Layer` classes in a non
     verbose way.
 
-    For example, the following snippet defines a subclass of `Layer`
+    For example, the following snippet defines a subclass of :class:`~Layer`
     whose `forward` method returns `tensors + offset`.
 
     >>> @layer(n_in=1, n_out=1)
@@ -355,9 +355,9 @@ def layer(
 
     Another way of using the decorator is on functions that create layer
     instances. This allows you to create factories of layers and make
-    them `Layer` classes.
+    them :class:`~Layer` classes.
 
-    For example, the following snippet defines a subclass of `Layer`
+    For example, the following snippet defines a subclass of :class:`~Layer`
     whose `forward` method is the same as the layer returned by the
     function.
 
@@ -368,7 +368,7 @@ def layer(
     >>> add_one(1)
     2
 
-    A nice feature of the `layer` decorator is laziness: the code
+    A nice feature of the :class:`~layer` decorator is laziness: the code
     inside the function is not executed until a call on a tensor. In
     other words:
 

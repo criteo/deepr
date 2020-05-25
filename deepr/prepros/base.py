@@ -17,7 +17,7 @@ class Prepro(ABC):
     `Prepro` are the basic building blocks of a preprocessing pipeline.
     A `Prepro` defines a function on a tf.data.Dataset.
 
-    The basic usage of a `Prepro` is to apply it on a Dataset. For
+    The basic usage of a :class:`~Prepro` is to apply it on a Dataset. For
     example:
 
     >>> dataset = tf.data.Dataset.from_generator(range(3))
@@ -41,7 +41,7 @@ class Prepro(ABC):
     >>> dataset = prepro_fn(dataset, tf.estimator.ModeKeys.PREDICT)
     [0, 0, 0]
 
-    `Map`, `Filter`, `Shuffle` and `Repeat` have a special attribute
+    :class:`~Map`, :class:`~Filter`, :class:`~Shuffle` and :class:`~Repeat` have a special attribute
     `modes` that you can use to specify the modes on which the
     preprocessing should be applied. For example:
 
@@ -53,8 +53,8 @@ class Prepro(ABC):
     >>> dataset = prepro_fn(dataset, tf.estimator.ModeKeys.PREDICT)
     [0, 0, 0]
 
-    Authors of new `Prepro` subclasses typically override the `apply`
-    method of the base `Prepro` class::
+    Authors of new :class:`~Prepro` subclasses typically override the `apply`
+    method of the base :class:`~Prepro` class::
 
         def apply(self, dataset: tf.data.Dataset, mode: str = None) -> tf.data.Dataset:
             return dataset
@@ -77,12 +77,12 @@ class Prepro(ABC):
 
 
 def prepro(fn: Callable) -> Type:
-    """Decorator that creates a `Prepro` class from a function
+    """Decorator that creates a :class:`~Prepro` class from a function
 
-    This decorator can be used to define `Prepro` classes in a non
+    This decorator can be used to define :class:`~Prepro` classes in a non
     verbose way.
 
-    For example, the following snippet defines a subclass of `Prepro`
+    For example, the following snippet defines a subclass of :class:`~Prepro`
     whose `apply` offsets each element of the dataset by `offset`:
 
     >>> @prepro
@@ -125,10 +125,10 @@ def prepro(fn: Callable) -> Type:
     of the function IN THIS ORDER.
 
     Another way of using the decorator is on functions that create
-    `Prepro` instances. This allows you to create factories of
-    preprocessors and make them `Prepro` classes.
+    :class:`~Prepro` instances. This allows you to create factories of
+    preprocessors and make them :class:`~Prepro` classes.
 
-    For example, the following snippet defines a subclass of `Prepro`
+    For example, the following snippet defines a subclass of :class:`~Prepro`
     whose `apply` method is the same as the prepro returned by the
     function.
 

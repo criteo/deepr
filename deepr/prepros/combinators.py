@@ -18,7 +18,7 @@ class Serial(Prepro):
     """Chain preprocessors to define complex preprocessing pipelines.
 
     It will apply each preprocessing step one after the other on each
-    element. For performance reasons, it fuses `Map` and `Filter`
+    element. For performance reasons, it fuses :class:`~Map` and :class:`~Filter`
     operations into single `tf.data` calls.
 
     For an example, see the following snippet::
@@ -45,9 +45,9 @@ class Serial(Prepro):
     Attributes
     ----------
     fuse : bool, Optional
-        If True (default), will fuse `Map` and `Filter`.
+        If True (default), will fuse :class:`~Map` and :class:`~Filter`.
     preprocessors : Union[Prepro, Tuple[Prepro], List[Prepro], Generator[Prepro, None, None]]
-        Positional arguments of `Prepro` instance or Tuple / List /
+        Positional arguments of :class:`~Prepro` instance or Tuple / List /
         Generator of prepro instances
     """
 
