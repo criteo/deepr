@@ -158,3 +158,12 @@ Change log
 ----------
 
 See `CHANGELOG <CHANGELOG.rst>`_
+
+Main contributors
+-----------------
+
+Main contributors and maintainers for deepr are
+`Guillaume Genthial <https://github.com/guillaumegenthial>`_,
+`Romain Beaumont <https://github.com/rom1504>`_,
+`Denis Kuzin <https://github.com/denkuzin>`_,
+`Amine Benhalloum <https://github.com/bamine>`_
