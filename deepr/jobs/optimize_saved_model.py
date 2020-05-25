@@ -3,7 +3,7 @@
 from dataclasses import dataclass, field
 import logging
 import re
-from typing import List, Dict
+from typing import List, Dict, Iterable
 
 import tensorflow as tf
 from tensorflow.python.tools.freeze_graph import freeze_graph_with_def_protos
@@ -14,6 +14,24 @@ from deepr.jobs import base
 
 
 LOGGER = logging.getLogger(__name__)
+
+
+class TensorsNotFoundError(ValueError):
+    """No tensors found for those names.
+
+    Most Tensorflow operators take a ``name`` argument that should be
+    used if you want to use a custom name for a tensor, otherwise a
+    default will be used.
+
+    If accessing the operator creating a Tensor is not possible, you
+    can use ``tf.identity`` to name the Tensor. However, note that it
+    adds a new op to the graph that creates a copy of the input Tensor,
+    and thus should be limited to avoid overhead.
+    """
+
+    def __init__(self, tensors: Iterable[str]):
+        msg = f"Tensors not found: {tensors}. Use `tf.identity(t, name)` to name nodes in your graph."
+        super().__init__(msg)
 
 
 @dataclass
@@ -98,7 +116,7 @@ class OptimizeSavedModel(base.Job):
                 saved_model_tags=["serve"],
             )
             tf.io.write_graph(graph_def, logdir=self.path_optimized_model, name=self.graph_name, as_text=False)
-            LOGGER.info(f"Online KNN successfully exported to {self.path_optimized_model}/{self.graph_name}")
+            LOGGER.info(f"Optimized Model successfully exported to {self.path_optimized_model}/{self.graph_name}")
 
 
 def rename_nodes(graph_def: tf.GraphDef, new_names: Dict[str, str]) -> tf.GraphDef:
@@ -118,7 +136,7 @@ def rename_nodes(graph_def: tf.GraphDef, new_names: Dict[str, str]) -> tf.GraphD
 
     Raises
     ------
-    ValueError
+    TensorsNotFoundError
         If new_names refers to an node not found in graph_def
     """
     # Create copy of each node with a new name
@@ -135,7 +153,8 @@ def rename_nodes(graph_def: tf.GraphDef, new_names: Dict[str, str]) -> tf.GraphD
 
     # Check that all new names were used
     if not set(new_names.values()) <= set(node.name for node in nodes):
-        raise ValueError(f"Missing renames: {set(new_names.values()) - set(node.name for node in nodes)}")
+        missing = set(new_names.values()) - set(node.name for node in nodes)
+        raise TensorsNotFoundError(missing)
 
     # Update node references (inputs and location) to renamed nodes
     for node in nodes:
@@ -172,7 +191,7 @@ def make_placeholders(graph_def: tf.GraphDef, names: List[str]) -> tf.GraphDef:
 
     Raises
     ------
-    ValueError
+    TensorsNotFoundError
         If names refers to a node that is not present
     """
     # Create copy of each node and change to Placeholder if in names
@@ -194,7 +213,8 @@ def make_placeholders(graph_def: tf.GraphDef, names: List[str]) -> tf.GraphDef:
 
     # Check that all expected placeholders have been found
     if not set(names) <= set(node.name for node in nodes):
-        raise ValueError(f"Missing placeholders: {set(names) - set(node.name for node in nodes)}")
+        missing = set(names) - set(node.name for node in nodes)
+        raise TensorsNotFoundError(missing)
 
     # Create Graph with renamed nodes
     new_graph = tf.GraphDef()

@@ -43,3 +43,63 @@ class C(A):
 def test_to_config(obj, cfg):
     """Test to_config"""
     assert dpr.config.experimental.to_config(obj) == cfg
+
+
+@pytest.mark.parametrize(
+    "config, params, expected",
+    [
+        ({"x": 1}, ["x"], {"x": "$params:x"}),
+        ([{"x": 1}], ["x"], [{"x": "$params:x"}]),
+        (({"x": 1},), ["x"], ({"x": "$params:x"},)),
+        ({"x": {"y": 1}}, ["y"], {"x": {"y": "$params:y"}}),
+        ({"x": "$other:x"}, ["x"], {"x": "$params:x"}),
+        ([{"x": 1}], ["y"], None),
+    ],
+)
+def test_add_macro_params(config, params, expected):
+    if expected is not None:
+        assert dpr.config.experimental.add_macro_params(config, macro="params", params=params) == expected
+    else:
+        with pytest.raises(ValueError):
+            dpr.config.experimental.add_macro_params(config, macro="params", params=params)
+
+
+@pytest.mark.parametrize(
+    "item, values, expected",
+    [
+        ({"x": 1}, {"x": "y"}, {"x": "y"}),
+        ([{"x": 1}], {"x": "y"}, [{"x": "y"}]),
+        (({"x": 1},), {"x": "y"}, ({"x": "y"},)),
+        ({"a": {"x": 1}}, {"x": "y"}, {"a": {"x": "y"}}),
+        ({"x": "y"}, {"y": "1"}, {"x": "y"}),
+        ({"x": (1, 2)}, {"x": (2, 3)}, None),
+        ({"x": {}}, {"x": {}}, None),
+        ({"x": []}, {"x": []}, None),
+    ],
+)
+def test_replace_values(item, values, expected):
+    if expected is not None:
+        assert dpr.config.experimental.replace_values(item, values=values) == expected
+    else:
+        with pytest.raises(ValueError):
+            dpr.config.experimental.replace_values(item, values=values)
+
+
+@pytest.mark.parametrize(
+    "item, keys, expected",
+    [
+        ({"x": 1}, ["x"], {"x": 1}),
+        ([{"x": 1}], ["x"], {"x": 1}),
+        (({"x": 1},), ["x"], {"x": 1}),
+        ({"a": {"x": 1}}, ["x"], {"x": 1}),
+        ({"x": (1, 2)}, ["x"], None),
+        ({"x": {}}, ["x"], None),
+        ({"x": []}, ["x"], None),
+    ],
+)
+def test_find_values(item, keys, expected):
+    if expected is not None:
+        assert dpr.config.experimental.find_values(item, keys=keys) == expected
+    else:
+        with pytest.raises(ValueError):
+            dpr.config.experimental.find_values(item, keys=keys)

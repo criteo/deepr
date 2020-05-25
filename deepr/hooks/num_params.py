@@ -14,7 +14,7 @@ LOGGER = logging.getLogger(__name__)
 class NumParamsHook(tf.train.SessionRunHook):
     """Log Number of Parameters after session creation"""
 
-    def __init__(self, use_mlflow: bool):
+    def __init__(self, use_mlflow: bool = False):
         self.use_mlflow = use_mlflow
 
     def after_create_session(self, session, coord):

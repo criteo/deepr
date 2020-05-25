@@ -173,24 +173,128 @@ class Layer(ABC):
         args = f"{self.n_in}, {self.n_out}, inputs='{self.inputs}', outputs='{self.outputs}', name={self.name}"
         return f"{self.__class__.__name__}({args})"
 
-    def __call__(self, tensors, mode: str = None, reuse: bool = False):
-        """Forward as tuple or dictionary depending on tensors type"""
+    def __call__(
+        self,
+        tensors: Union[tf.Tensor, Dict[str, tf.Tensor], Tuple[tf.Tensor, ...]],
+        mode: str = None,
+        reuse: bool = False,
+    ) -> Union[tf.Tensor, Dict[str, tf.Tensor], Tuple[tf.Tensor, ...]]:
+        """Forward as tuple or dictionary depending on tensors type.
+
+        Wraps the layer call in a variable scope to be able to reuse
+        variable with the ``reuse`` argument, adds a tf.identity
+        operator to each output tensor using self.outputs.
+
+        If tensors is a Dict, it returns a dictionary whose keys are
+        defined by self.outputs.
+
+        Otherwise, input tensors type is expected to be, if
+            - n_in = 1: one tensor (NOT wrapped in a tuple)
+            - n_in > 1: a tuple of tensors
+        In that case, output tensors type is expected to be, if
+            - n_out = 1: one tensor (NOT wrapped in a tuple)
+            - n_out > 1: a tuple of tensors
+
+        NOTE: Each call to this method performs inspection on the inputs
+        and outputs type, which can be costly in terms of computation.
+
+        This is not an issue when building graphs with tf.estimator as
+        the graph is compiled once and for all.
+
+        However, when using a ``Layer`` to preprocess a tf.data.Dataset
+        (eg. with a ``map`` transformation), this method will be called
+        for each example and might cause slowdown. It is recommended to
+        explicitly use ``forward`` or ``forward_as_dict`` in that case.
+
+        Parameters
+        ----------
+        tensors : Union[tf.Tensor, Dict[str, tf.Tensor], Tuple[tf.Tensor, ...]]
+            Input tensors
+        mode : str, optional
+            One of tf.estimator.ModeKeys
+        reuse : bool, optional
+            Encapsulates layer call in a variable scope with reuse=reuse
+        """
         with tf.variable_scope(tf.get_variable_scope(), reuse=reuse):
             if isinstance(tensors, dict):
-                return self.forward_as_dict(tensors, mode)
-            else:
-                return self.forward(tensors, mode)
+                # Check that tensors is coherent with self.inputs
+                if not set(to_flat_tuple(self.inputs)) <= set(tensors):
+                    msg = f"Missing inputs: {set(to_flat_tuple(self.inputs)) - set(tensors)}"
+                    raise KeyError(msg)
 
-    def forward(self, tensors, mode: str = None):
-        """Forward method of the layer on tuples"""
+                # Call forward_as_dict to get output tensors
+                tensors_dict = self.forward_as_dict(tensors, mode)
+
+                # Check that tensors_dict is coherent with self.outputs
+                if not set(to_flat_tuple(self.outputs)) <= set(tensors_dict):
+                    msg = f"Missing outputs: {set(to_flat_tuple(self.outputs)) - set(tensors_dict)}"
+                    raise KeyError(msg)
+
+                return tensors_dict
+            else:
+                # Check that tensors is coherent with self.n_in
+                if self.n_in == 1 and isinstance(tensors, tuple):
+                    msg = f"Expected 1 input, but got {tensors} (should not be a tuple)"
+                    raise KeyError(msg)
+                if self.n_in > 1 and len(to_flat_tuple(tensors)) != self.n_in:
+                    msg = f"Expected {self.n_in} inputs, but got {tensors}"
+                    raise KeyError(msg)
+
+                # Call forward and convert to tuple
+                tensors_tuple = self.forward(tensors, mode)
+
+                # Check that tensors_tuple is coherent with outputs
+                if len(to_flat_tuple(tensors_tuple)) != self.n_out:
+                    raise IndexError(f"Expected {self.n_out} outputs but got {tensors_tuple}")
+
+                return tensors_tuple
+
+    def forward(
+        self, tensors: Union[tf.Tensor, Tuple[tf.Tensor, ...]], mode: str = None
+    ) -> Union[tf.Tensor, Tuple[tf.Tensor, ...]]:
+        """Forward method on one Tensor or a tuple of Tensors.
+
+        Parameters
+        ----------
+        tensors : Union[tf.Tensor, Tuple[tf.Tensor, ...]]
+            - n_in = 1: one tensor (NOT wrapped in a tuple)
+            - n_in > 1: a tuple of tensors
+        mode : str, optional
+            Description
+
+        Returns
+        -------
+        Union[tf.Tensor, Tuple[tf.Tensor, ...]]
+            - n_out = 1: one tensor (NOT wrapped in a tuple)
+            - n_out > 1: a tuple of tensors
+        """
         try:
             return dict_to_item(self.forward_as_dict(item_to_dict(tensors, self.inputs), mode), self.outputs)
         except Exception as e:
             LOGGER.error(f"{self} error on {tensors}")
             raise e
 
-    def forward_as_dict(self, tensors: Dict, mode: str = None) -> Dict:
-        """Forward method of the layer on dictionaries of self.inputs"""
+    def forward_as_dict(self, tensors: Dict[str, tf.Tensor], mode: str = None) -> Dict[str, tf.Tensor]:
+        """Forward method on a dictionary of Tensors.
+
+        The input ``tensors`` should contain all keys defined in
+        ``self.inputs`` (but might contain more keys).
+        It returns a new dictionary (does not mutate the input
+        ``tensors`` dictionary in-place), whose keys are exactly
+        ``self.outputs``.
+
+        Parameters
+        ----------
+        tensors : Dict[str, tf.Tensor]
+            Dictionary mapping self.inputs to tf.Tensors.
+        mode : str, optional
+            One of tf.estimator.ModeKeys
+
+        Returns
+        -------
+        Dict[str, tf.Tensor]
+            Dictionary mapping self.outputs to tf.Tensors
+        """
         try:
             return item_to_dict(self.forward(dict_to_item(tensors, self.inputs), mode), self.outputs)
         except Exception as e:

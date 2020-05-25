@@ -148,7 +148,7 @@ class _StopOnPredicateHook(tf.estimator.SessionRunHook):
         self._global_step_tensor = tf.train.get_global_step()
         self._stop_var = _get_or_create_stop_var()
         self._stop_op = tf.assign(self._stop_var, True)
-        self._final_step_op = tf.assign(self._global_step_tensor, self._final_step)
+        self._final_step_op = tf.assign(self._global_step_tensor, self._final_step) if self._final_step else None
 
     def before_run(self, run_context):
         del run_context

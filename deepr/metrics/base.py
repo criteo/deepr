@@ -7,11 +7,7 @@ import tensorflow as tf
 
 
 class Metric(ABC):
-    """Base class for Metrics
-
-    DISCLAIMER : the interface for metrics is still relatively new and
-    is subject to change in future versions.
-    """
+    """Base class for Metrics"""
 
     def __call__(self, tensors: Dict[str, tf.Tensor]) -> Dict[str, Tuple]:
         raise NotImplementedError()
