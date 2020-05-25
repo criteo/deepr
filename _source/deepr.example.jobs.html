@@ -87,6 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/pipeline.html">Pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/config.html">Config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/advanced.html">Advanced</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developper documentation</span></p>
 <ul>
@@ -244,6 +245,48 @@
 <dl class="py method">
 <dt id="deepr.example.jobs.build_dataset.BuildDataset.run">
 <code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/example/jobs/build_dataset.html#BuildDataset.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.example.jobs.build_dataset.BuildDataset.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run Job</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.example.jobs.predict">
+<span id="deepr-example-jobs-predict-module"></span><h2>deepr.example.jobs.predict module<a class="headerlink" href="#module-deepr.example.jobs.predict" title="Permalink to this headline">¶</a></h2>
+<p>Compute prediction on a dataset and log result.</p>
+<dl class="py class">
+<dt id="deepr.example.jobs.predict.Predict">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.example.jobs.predict.</code><code class="sig-name descname">Predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_model_pb</span></em>, <em class="sig-param"><span class="n">feeds</span></em>, <em class="sig-param"><span class="n">fetches</span></em>, <em class="sig-param"><span class="n">input_fn</span></em>, <em class="sig-param"><span class="n">prepro_fn</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/example/jobs/predict.html#Predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.example.jobs.predict.Predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="deepr.jobs.html#deepr.jobs.base.Job" title="deepr.jobs.base.Job"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.jobs.base.Job</span></code></a></p>
+<p>Compute prediction on a dataset and log result.</p>
+<dl class="py attribute">
+<dt id="deepr.example.jobs.predict.Predict.feeds">
+<code class="sig-name descname">feeds</code><em class="property">: List[str]</em><em class="property"> = None</em><a class="headerlink" href="#deepr.example.jobs.predict.Predict.feeds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.example.jobs.predict.Predict.fetches">
+<code class="sig-name descname">fetches</code><em class="property">: List[str]</em><em class="property"> = None</em><a class="headerlink" href="#deepr.example.jobs.predict.Predict.fetches" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.example.jobs.predict.Predict.input_fn">
+<code class="sig-name descname">input_fn</code><em class="property">: Callable[[], tf.data.Dataset]</em><em class="property"> = None</em><a class="headerlink" href="#deepr.example.jobs.predict.Predict.input_fn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.example.jobs.predict.Predict.path_model_pb">
+<code class="sig-name descname">path_model_pb</code><em class="property">: str</em><em class="property"> = None</em><a class="headerlink" href="#deepr.example.jobs.predict.Predict.path_model_pb" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.example.jobs.predict.Predict.prepro_fn">
+<code class="sig-name descname">prepro_fn</code><em class="property">: Callable[[tf.data.Dataset, str], tf.data.Dataset]</em><em class="property"> = None</em><a class="headerlink" href="#deepr.example.jobs.predict.Predict.prepro_fn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="deepr.example.jobs.predict.Predict.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/example/jobs/predict.html#Predict.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.example.jobs.predict.Predict.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run Job</p>
 </dd></dl>
 

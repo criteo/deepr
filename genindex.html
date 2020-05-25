@@ -86,6 +86,7 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started/pipeline.html">Pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started/config.html">Config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/advanced.html">Advanced</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developper documentation</span></p>
 <ul>
@@ -384,6 +385,8 @@
       <li><a href="_source/deepr.example.prepros.html#deepr.example.prepros.default.DefaultPrepro.apply">apply() (deepr.example.prepros.default.DefaultPrepro method)</a>
 
       <ul>
+        <li><a href="_source/deepr.example.prepros.html#deepr.example.prepros.inference.InferencePrepro.apply">(deepr.example.prepros.inference.InferencePrepro method)</a>
+</li>
         <li><a href="_source/deepr.prepros.html#deepr.prepros.base.Prepro.apply">(deepr.prepros.base.Prepro method)</a>
 </li>
         <li><a href="_source/deepr.prepros.html#deepr.prepros.combinators.Serial.apply">(deepr.prepros.combinators.Serial method)</a>
@@ -683,6 +686,13 @@
 </li>
       </ul></li>
       <li>
+    deepr.example.jobs.predict
+
+      <ul>
+        <li><a href="_source/deepr.example.jobs.html#module-deepr.example.jobs.predict">module</a>
+</li>
+      </ul></li>
+      <li>
     deepr.example.layers
 
       <ul>
@@ -729,6 +739,13 @@
 
       <ul>
         <li><a href="_source/deepr.example.prepros.html#module-deepr.example.prepros.default">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.example.prepros.inference
+
+      <ul>
+        <li><a href="_source/deepr.example.prepros.html#module-deepr.example.prepros.inference">module</a>
 </li>
       </ul></li>
       <li>
@@ -962,6 +979,8 @@
         <li><a href="_source/deepr.jobs.html#module-deepr.jobs.yarn_launcher">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     deepr.jobs.yarn_trainer
 
@@ -969,8 +988,6 @@
         <li><a href="_source/deepr.jobs.html#module-deepr.jobs.yarn_trainer">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     deepr.layers
 
@@ -1429,9 +1446,11 @@
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_source/deepr.jobs.html#deepr.jobs.optimize_saved_model.OptimizeSavedModel.feeds">feeds (deepr.jobs.optimize_saved_model.OptimizeSavedModel attribute)</a>, <a href="_source/deepr.jobs.html#id1">[1]</a>
+      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.Predict.feeds">feeds (deepr.example.jobs.predict.Predict attribute)</a>
 
       <ul>
+        <li><a href="_source/deepr.jobs.html#deepr.jobs.optimize_saved_model.OptimizeSavedModel.feeds">(deepr.jobs.optimize_saved_model.OptimizeSavedModel attribute)</a>, <a href="_source/deepr.jobs.html#id1">[1]</a>
+</li>
         <li><a href="API/_autosummary/deepr.jobs.OptimizeSavedModel.html#deepr.jobs.OptimizeSavedModel.feeds">(deepr.jobs.OptimizeSavedModel attribute)</a>
 </li>
       </ul></li>
@@ -1441,6 +1460,8 @@
         <li><a href="API/_autosummary/deepr.jobs.OptimizeSavedModel.html#deepr.jobs.OptimizeSavedModel.fetch">(deepr.jobs.OptimizeSavedModel attribute)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.Predict.fetches">fetches (deepr.example.jobs.predict.Predict attribute)</a>
+</li>
       <li><a href="API/_autosummary/deepr.utils.Field.html#deepr.utils.Field">Field (class in deepr.utils)</a>
 
       <ul>
@@ -1719,6 +1740,8 @@
 </li>
       <li><a href="_source/deepr.exporters.html#deepr.exporters.best_checkpoint.BestMode.INCREASE">INCREASE (deepr.exporters.best_checkpoint.BestMode attribute)</a>
 </li>
+      <li><a href="_source/deepr.example.prepros.html#deepr.example.prepros.inference.InferencePrepro">InferencePrepro (class in deepr.example.prepros.inference)</a>
+</li>
       <li><a href="API/_autosummary/deepr.jobs.Trainer.html#deepr.jobs.Trainer.initializer_fn">initializer_fn (deepr.jobs.Trainer attribute)</a>
 
       <ul>
@@ -1726,6 +1749,8 @@
 </li>
       </ul></li>
       <li><a href="_source/deepr.jobs.html#id13">initializer_fn() (deepr.jobs.trainer.Trainer method)</a>
+</li>
+      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.Predict.input_fn">input_fn (deepr.example.jobs.predict.Predict attribute)</a>
 </li>
       <li><a href="_source/deepr.layers.html#deepr.layers.base.Layer.inputs">inputs (deepr.layers.base.Layer attribute)</a>
 
@@ -1739,10 +1764,10 @@
 </li>
       <li><a href="_source/deepr.io.html#deepr.io.path.Path.is_dir">is_dir() (deepr.io.path.Path method)</a>
 </li>
-      <li><a href="_source/deepr.io.html#deepr.io.path.Path.is_file">is_file() (deepr.io.path.Path method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_source/deepr.io.html#deepr.io.path.Path.is_file">is_file() (deepr.io.path.Path method)</a>
+</li>
       <li><a href="_source/deepr.io.html#deepr.io.parquet.ParquetDataset.is_hdfs">is_hdfs() (deepr.io.parquet.ParquetDataset property)</a>
 
       <ul>
@@ -2103,6 +2128,8 @@
 </li>
         <li><a href="_source/deepr.example.jobs.html#module-deepr.example.jobs.build_dataset">deepr.example.jobs.build_dataset</a>
 </li>
+        <li><a href="_source/deepr.example.jobs.html#module-deepr.example.jobs.predict">deepr.example.jobs.predict</a>
+</li>
         <li><a href="_source/deepr.example.layers.html#module-deepr.example.layers">deepr.example.layers</a>
 </li>
         <li><a href="_source/deepr.example.layers.html#module-deepr.example.layers.loss">deepr.example.layers.loss</a>
@@ -2116,6 +2143,8 @@
         <li><a href="_source/deepr.example.prepros.html#module-deepr.example.prepros">deepr.example.prepros</a>
 </li>
         <li><a href="_source/deepr.example.prepros.html#module-deepr.example.prepros.default">deepr.example.prepros.default</a>
+</li>
+        <li><a href="_source/deepr.example.prepros.html#module-deepr.example.prepros.inference">deepr.example.prepros.inference</a>
 </li>
         <li><a href="_source/deepr.exporters.html#module-deepr.exporters">deepr.exporters</a>
 </li>
@@ -2504,6 +2533,8 @@
         <li><a href="_source/deepr.jobs.html#deepr.jobs.trainer.Trainer.path_model">(deepr.jobs.trainer.Trainer attribute)</a>, <a href="_source/deepr.jobs.html#id16">[1]</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.Predict.path_model_pb">path_model_pb (deepr.example.jobs.predict.Predict attribute)</a>
+</li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.optimize_saved_model.OptimizeSavedModel.path_optimized_model">path_optimized_model (deepr.jobs.optimize_saved_model.OptimizeSavedModel attribute)</a>, <a href="_source/deepr.jobs.html#id5">[1]</a>
 
       <ul>
@@ -2564,6 +2595,8 @@
         <li><a href="API/_autosummary/deepr.prepros.Filter.html#deepr.prepros.Filter.predicate">(deepr.prepros.Filter attribute)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.Predict">Predict (class in deepr.example.jobs.predict)</a>
+</li>
       <li><a href="API/_autosummary/deepr.prepros.Prefetch.html#deepr.prepros.Prefetch">Prefetch (class in deepr.prepros)</a>
 
       <ul>
@@ -2588,9 +2621,11 @@
       </ul></li>
       <li><a href="_source/deepr.prepros.html#deepr.prepros.base.prepro">prepro() (in module deepr.prepros.base)</a>
 </li>
-      <li><a href="API/_autosummary/deepr.jobs.Trainer.html#deepr.jobs.Trainer.prepro_fn">prepro_fn (deepr.jobs.Trainer attribute)</a>
+      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.Predict.prepro_fn">prepro_fn (deepr.example.jobs.predict.Predict attribute)</a>
 
       <ul>
+        <li><a href="API/_autosummary/deepr.jobs.Trainer.html#deepr.jobs.Trainer.prepro_fn">(deepr.jobs.Trainer attribute)</a>
+</li>
         <li><a href="_source/deepr.jobs.html#deepr.jobs.trainer.Trainer.prepro_fn">(deepr.jobs.trainer.Trainer attribute)</a>
 </li>
       </ul></li>
@@ -2673,6 +2708,8 @@
       <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.build_dataset.BuildDataset.run">run() (deepr.example.jobs.build_dataset.BuildDataset method)</a>
 
       <ul>
+        <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.Predict.run">(deepr.example.jobs.predict.Predict method)</a>
+</li>
         <li><a href="_source/deepr.jobs.html#deepr.jobs.base.Job.run">(deepr.jobs.base.Job method)</a>
 </li>
         <li><a href="_source/deepr.jobs.html#deepr.jobs.cleanup_checkpoints.CleanupCheckpoints.run">(deepr.jobs.cleanup_checkpoints.CleanupCheckpoints method)</a>

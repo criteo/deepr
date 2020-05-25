@@ -12,6 +12,14 @@ deepr.example.jobs.build\_dataset module
    :undoc-members:
    :show-inheritance:
 
+deepr.example.jobs.predict module
+---------------------------------
+
+.. automodule:: deepr.example.jobs.predict
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 
 Module contents
 ---------------

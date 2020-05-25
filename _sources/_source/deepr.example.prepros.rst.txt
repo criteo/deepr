@@ -12,6 +12,14 @@ deepr.example.prepros.default module
    :undoc-members:
    :show-inheritance:
 
+deepr.example.prepros.inference module
+--------------------------------------
+
+.. automodule:: deepr.example.prepros.inference
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 
 Module contents
 ---------------

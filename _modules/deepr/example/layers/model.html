@@ -85,6 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/pipeline.html">Pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/config.html">Config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/advanced.html">Advanced</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developper documentation</span></p>
 <ul>
@@ -175,7 +176,7 @@
 <div class="viewcode-block" id="Multiply"><a class="viewcode-back" href="../../../../_source/deepr.example.layers.html#deepr.example.layers.model.Multiply">[docs]</a><span class="nd">@dprl</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;y_pred&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">Multiply</span><span class="p">(</span><span class="n">tensors</span><span class="p">):</span>
     <span class="n">alpha</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;alpha&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">tensors</span></div>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">tensors</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;y_pred&quot;</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

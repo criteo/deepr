@@ -1,0 +1,841 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Advanced &mdash; deepr 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="DeepR: Build and Train Deep Learning Pipelines for Production" href="../README.html" />
+    <link rel="prev" title="Hyper Parameter Tuning" href="tuning.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuning.html">Hyper Parameter Tuning</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Advanced</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Original-TrainerJob">Original TrainerJob</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#TrainSpec-and-EvalSpec">TrainSpec and EvalSpec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Metrics">Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Hooks">Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Exporters">Exporters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Full-TrainerJob">Full TrainerJob</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Cleanup-Job">Cleanup Job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#OptimizeSavedModel">OptimizeSavedModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Predict-Job">Predict Job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Full-Pipeline">Full Pipeline</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">DeepR: Build and Train Deep Learning Pipelines for Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../API/core.html">DeepR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_source/modules.html">deepr</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Advanced</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/getting_started/advanced.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container,
+div.nbinput.container div.prompt,
+div.nbinput.container div.input_area,
+div.nbinput.container div[class*=highlight],
+div.nbinput.container div[class*=highlight] pre,
+div.nboutput.container,
+div.nboutput.container div.prompt,
+div.nboutput.container div.output_area,
+div.nboutput.container div[class*=highlight],
+div.nboutput.container div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="Advanced">
+<h1>Advanced<a class="headerlink" href="#Advanced" title="Permalink to this headline">¶</a></h1>
+<p>In this notebook, we cover more advanced functionality of deepr, namely metrics, hooks and exporters.</p>
+<p>We train the same model (multiply a number by 2) as in the quickstart.</p>
+<p>First, some imports</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;tensorflow&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">deepr</span> <span class="k">as</span> <span class="nn">dpr</span>
+<span class="kn">import</span> <span class="nn">deepr.example</span> <span class="k">as</span> <span class="nn">example</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s reuse the same <code class="docutils literal notranslate"><span class="pre">build_job</span></code> to create a dataset of random pairs of (x, 2x)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">build_job</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">BuildDataset</span><span class="p">(</span><span class="n">path_dataset</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">,</span> <span class="n">num_examples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Original-TrainerJob">
+<h2>Original TrainerJob<a class="headerlink" href="#Original-TrainerJob" title="Permalink to this headline">¶</a></h2>
+<p>Before defining our more advanced <code class="docutils literal notranslate"><span class="pre">Trainer</span></code>, let’s remind what our original <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> looked like</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">original_trainer_job</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span>
+    <span class="n">path_model</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">,</span>
+    <span class="n">pred_fn</span><span class="o">=</span><span class="n">example</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Multiply</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;y_pred&quot;</span><span class="p">),</span>
+    <span class="n">loss_fn</span><span class="o">=</span><span class="n">example</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">SquaredL2</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;y_pred&quot;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;loss&quot;</span><span class="p">),</span>
+    <span class="n">optimizer_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">TensorflowOptimizer</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
+    <span class="n">train_input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
+    <span class="n">eval_input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
+    <span class="n">prepro_fn</span><span class="o">=</span><span class="n">example</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">DefaultPrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">repeat_size</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>All it did was train a model given a prediction function, a loss function, a dataset and a preprocessing function.</p>
+<p>In real-life scenarios, training is slightly more complicated.</p>
+</div>
+<div class="section" id="TrainSpec-and-EvalSpec">
+<h2>TrainSpec and EvalSpec<a class="headerlink" href="#TrainSpec-and-EvalSpec" title="Permalink to this headline">¶</a></h2>
+<p>For starters, the <code class="docutils literal notranslate"><span class="pre">tf.estimator</span></code> API uses the concepts of <code class="docutils literal notranslate"><span class="pre">TrainSpec</span></code> and <code class="docutils literal notranslate"><span class="pre">EvalSpec</span></code> to configure how often / how many batches of data the training and the evaluation should use. You can pass this information along as follows</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Train our model on 1000 batches of data</span>
+<span class="n">train_spec</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">TrainSpec</span><span class="p">(</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Run evaluation (in non-distributed mode), every 10 seconds if a new checkpoint is available.</span>
+<span class="n">eval_spec</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">EvalSpec</span><span class="p">(</span>
+    <span class="n">throttle_secs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">start_delay_secs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">steps</span><span class="o">=</span><span class="kc">None</span>  <span class="c1"># None means &quot;use all the validation set&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>This just defines two dictionaries whose arguments will be given to the actual <code class="docutils literal notranslate"><span class="pre">TrainSpec</span></code> and <code class="docutils literal notranslate"><span class="pre">EvalSpec</span></code> of the resulting <code class="docutils literal notranslate"><span class="pre">tf.estimator</span></code>.</p>
+</div>
+<div class="section" id="Metrics">
+<h2>Metrics<a class="headerlink" href="#Metrics" title="Permalink to this headline">¶</a></h2>
+<p>Now, we can also add some metrics to monitor training and evaluation. There are 3 types of metrics</p>
+<ul class="simple">
+<li><p>Training: during training, on the training set.</p></li>
+<li><p>Evaluation: during evaluation, on the evaluation set.</p></li>
+<li><p>Final: after the training is complete, re-evaluate on the whole validation set.</p></li>
+</ul>
+<p>Let’s add some to our model, by computing an exponential moving average of the loss during training, or computing the mean of the loss on the validation set (already done by <code class="docutils literal notranslate"><span class="pre">tf.estimator</span></code> but we do it for the sake of the example).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">train_metrics</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">dpr</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">StepCounter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;num_steps&quot;</span><span class="p">),</span>
+    <span class="n">dpr</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">DecayMean</span><span class="p">(</span><span class="n">tensors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">],</span> <span class="n">decay</span><span class="o">=</span><span class="mf">0.98</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">eval_metrics</span> <span class="o">=</span> <span class="p">[</span><span class="n">dpr</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">Mean</span><span class="p">(</span><span class="n">tensors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">])]</span>
+<span class="n">final_metrics</span> <span class="o">=</span> <span class="p">[</span><span class="n">dpr</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">Mean</span><span class="p">(</span><span class="n">tensors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">])]</span>
+</pre></div>
+</div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">deepr</span></code>, metrics implement the following base class</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Metric</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base class for Metrics&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">Tuple</span></code> is a tuple of <code class="docutils literal notranslate"><span class="pre">(last_value,</span> <span class="pre">update_op)</span></code> that is nothing else than the <code class="docutils literal notranslate"><span class="pre">tf.metrics</span></code> approach.</p>
+<p>In other words, metrics are just a way to build <code class="docutils literal notranslate"><span class="pre">tf.metrics</span></code> objects using the dictionaries produced by the model’s layers.</p>
+</div>
+<div class="section" id="Hooks">
+<h2>Hooks<a class="headerlink" href="#Hooks" title="Permalink to this headline">¶</a></h2>
+<p>Now we can configure some basic parameters of the training as well as add metrics.</p>
+<p>What about more advanced logic? For example, what if we want to stop the training if some metric on the validation set stops improving after a given number of steps (early stopping)?</p>
+<p><code class="docutils literal notranslate"><span class="pre">tf.estimator</span></code> uses the concept of hooks, that, as the name suggests, will be injected inside the <code class="docutils literal notranslate"><span class="pre">tf.estimator</span></code> training code and run once in while.</p>
+<p>Similar to the metrics, we can define hooks for all 3 modes : training, evaluation and final evaluation.</p>
+<p>For training, let’s add</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">LoggingTensorHookFactory</span></code> : log additional metrics, optionaly send to MLFlow / Graphite</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SummarySaverHookFactory</span></code> : save summaries for Tensorboard</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NumParamsHook</span></code> : log initial number of parameters in the model</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LogVariablesInitHook</span></code> : log some basic stats about initial parameters (number of zeros, average norm)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">StepsPerSecHook</span></code> : log training speed (number of batches and examples per second)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EarlyStoppingHookFactory</span></code> : stop training if the <code class="docutils literal notranslate"><span class="pre">loss</span></code> does not decrease on the validation set of 100 consecutive training steps.</p></li>
+</ul>
+<p>For evaluation and final evaluation, let’s just add a <code class="docutils literal notranslate"><span class="pre">LoggingTensorHookFactory</span></code> to log the metrics values and optionaly send them to MLFlow Graphite (with the <code class="docutils literal notranslate"><span class="pre">use_mlflow</span></code> and <code class="docutils literal notranslate"><span class="pre">use_graphite</span></code> arguments)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">train_hooks</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">LoggingTensorHookFactory</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;training&quot;</span><span class="p">,</span>
+        <span class="n">functions</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;memory_gb&quot;</span><span class="p">:</span> <span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">ResidentMemory</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s2">&quot;gb&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;max_memory_gb&quot;</span><span class="p">:</span> <span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">MaxResidentMemory</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s2">&quot;gb&quot;</span><span class="p">)</span>
+        <span class="p">},</span>
+        <span class="n">every_n_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">use_graphite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">use_mlflow</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">),</span>
+    <span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">SummarySaverHookFactory</span><span class="p">(</span><span class="n">save_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+    <span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">NumParamsHook</span><span class="p">(</span><span class="n">use_mlflow</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+    <span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">LogVariablesInitHook</span><span class="p">(</span><span class="n">use_mlflow</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+    <span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">StepsPerSecHook</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;training&quot;</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+        <span class="n">every_n_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">skip_after_step</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+        <span class="n">use_mlflow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">use_graphite</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">),</span>
+    <span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">EarlyStoppingHookFactory</span><span class="p">(</span>
+        <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;loss&quot;</span><span class="p">,</span>
+        <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;decrease&quot;</span><span class="p">,</span>
+        <span class="n">max_steps_without_improvement</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">min_steps</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+        <span class="n">run_every_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">final_step</span><span class="o">=</span><span class="mi">1000</span>
+    <span class="p">)</span>
+<span class="p">]</span>
+<span class="n">eval_hooks</span> <span class="o">=</span> <span class="p">[</span><span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">LoggingTensorHookFactory</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;validation&quot;</span><span class="p">,</span> <span class="n">at_end</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
+<span class="n">final_hooks</span> <span class="o">=</span> <span class="p">[</span><span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">LoggingTensorHookFactory</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;final_validation&quot;</span><span class="p">,</span> <span class="n">at_end</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<p>A note to more experienced users : most of those hooks are simple wrappers / factories for native <code class="docutils literal notranslate"><span class="pre">tf.estimator</span></code> hooks so that they can be configured here and not directly in the <code class="docutils literal notranslate"><span class="pre">model_fn</span></code> of the estimator (for example the native <code class="docutils literal notranslate"><span class="pre">LoggingTensorHook</span></code> needs to be initialized with actual <code class="docutils literal notranslate"><span class="pre">Tensors</span></code>, that we obviously can’t access at this level).</p>
+<p>However, the <code class="docutils literal notranslate"><span class="pre">EarlyStoppingHook</span></code>, though it reuses most of the official code, adds an important tweak: it allows you to set a <code class="docutils literal notranslate"><span class="pre">final_step</span></code>. If given, when early stopping, it will set the global step to that value. Why? Simply because this is currently the easiest way to signal the end of training in distributed settings mode, as other workers all know the maximum number of steps. When the chief broadcasts the final step, all know that it’s time to stop.</p>
+</div>
+<div class="section" id="Exporters">
+<h2>Exporters<a class="headerlink" href="#Exporters" title="Permalink to this headline">¶</a></h2>
+<p>The latest argument that comes in handy is the <code class="docutils literal notranslate"><span class="pre">exporters</span></code> one. Now that the <code class="docutils literal notranslate"><span class="pre">tf.estimator</span></code> is created behind the scenes, we might want to do some things with it at the end of the training.</p>
+<p>Here, we do two things</p>
+<ul class="simple">
+<li><p>use <code class="docutils literal notranslate"><span class="pre">BestCheckpoint</span></code> to select the best checkpoint based on the validation metrics, and change the <code class="docutils literal notranslate"><span class="pre">checkpoint</span></code> file of the <code class="docutils literal notranslate"><span class="pre">tf.estimator</span></code> to point to that specific checkpoint.</p></li>
+<li><p>use <code class="docutils literal notranslate"><span class="pre">SavedModel</span></code> to export the <code class="docutils literal notranslate"><span class="pre">tf.estimator</span></code> as a <code class="docutils literal notranslate"><span class="pre">SavedModel</span></code>. As it runs after the <code class="docutils literal notranslate"><span class="pre">BestCheckpoint</span></code>, it will use the best checkpoint. Note that you need to define the input fields of your model (they are not currently inferred from the other parameters of the trainer, though we might add this in the future).</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">exporters</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">dpr</span><span class="o">.</span><span class="n">exporters</span><span class="o">.</span><span class="n">BestCheckpoint</span><span class="p">(</span><span class="n">metric</span><span class="o">=</span><span class="s2">&quot;loss&quot;</span><span class="p">),</span>
+    <span class="n">dpr</span><span class="o">.</span><span class="n">exporters</span><span class="o">.</span><span class="n">SavedModel</span><span class="p">(</span>
+        <span class="n">path_saved_model</span><span class="o">=</span><span class="s2">&quot;model/saved_model&quot;</span><span class="p">,</span>
+        <span class="n">fields</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">dpr</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Full-TrainerJob">
+<h2>Full TrainerJob<a class="headerlink" href="#Full-TrainerJob" title="Permalink to this headline">¶</a></h2>
+<p>Now that we’ve defined the specs, metrics, hooks and exporters, we update our original <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> job into</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">trainer_job</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span>
+    <span class="n">path_model</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">,</span>
+    <span class="n">pred_fn</span><span class="o">=</span><span class="n">example</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Multiply</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;y_pred&quot;</span><span class="p">),</span>
+    <span class="n">loss_fn</span><span class="o">=</span><span class="n">example</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">SquaredL2</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;y_pred&quot;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;loss&quot;</span><span class="p">),</span>
+    <span class="n">optimizer_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">TensorflowOptimizer</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
+    <span class="n">train_input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
+    <span class="n">eval_input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
+    <span class="n">prepro_fn</span><span class="o">=</span><span class="n">example</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">DefaultPrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">repeat_size</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">train_spec</span><span class="o">=</span><span class="n">train_spec</span><span class="p">,</span>
+    <span class="n">eval_spec</span><span class="o">=</span><span class="n">eval_spec</span><span class="p">,</span>
+    <span class="n">train_metrics</span><span class="o">=</span><span class="n">train_metrics</span><span class="p">,</span>
+    <span class="n">eval_metrics</span><span class="o">=</span><span class="n">eval_metrics</span><span class="p">,</span>
+    <span class="n">final_metrics</span><span class="o">=</span><span class="n">final_metrics</span><span class="p">,</span>
+    <span class="n">train_hooks</span><span class="o">=</span><span class="n">train_hooks</span><span class="p">,</span>
+    <span class="n">eval_hooks</span><span class="o">=</span><span class="n">eval_hooks</span><span class="p">,</span>
+    <span class="n">final_hooks</span><span class="o">=</span><span class="n">final_hooks</span><span class="p">,</span>
+    <span class="n">exporters</span><span class="o">=</span><span class="n">exporters</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Cleanup-Job">
+<h2>Cleanup Job<a class="headerlink" href="#Cleanup-Job" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have a more powerful <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> job, let’s also review some additional jobs that might be added at the end of the training pipeline.</p>
+<p>One of them is the <code class="docutils literal notranslate"><span class="pre">CleanupCheckpoints</span></code> job : it does what it says it does, i.e. deleting the model’s checkpoints (which can save you a lot of disk usage if you run thousands of experiments and have no need to reuse the checkpoints). Because we exported our model as a <code class="docutils literal notranslate"><span class="pre">SavedModel</span></code>, we probably don’t need those.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">cleanup_checkpoints</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">CleanupCheckpoints</span><span class="p">(</span><span class="n">path_model</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="OptimizeSavedModel">
+<h2>OptimizeSavedModel<a class="headerlink" href="#OptimizeSavedModel" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">SavedModel</span></code> is by itself sufficient, but still has a few drawbacks</p>
+<ul class="simple">
+<li><p>it’s actually comprised of a few different files (the graph protobuffer, some files to store variable values)</p></li>
+<li><p>also, it might contain parts of the graph that are not actually useful for inference.</p></li>
+<li><p>finally, maybe the actual inputs of our graph will be intermediate nodes. For example, in NLP, if we have fine-tuned some embeddings and they are part of the graph, the <code class="docutils literal notranslate"><span class="pre">SavedModel</span></code> probably will expect the word indices. However, in a deployment scenario, the service producing embeddings might be independent from our model. In other words, during training, the graph inputs were the word indices. During inference, the graph inputs are the actual embeddings.</p></li>
+</ul>
+<p>We can do some of these optimizations using the <code class="docutils literal notranslate"><span class="pre">OptimizeSavedModel</span></code> job.</p>
+<p>It produces one self-contained file (a <code class="docutils literal notranslate"><span class="pre">.pb</span></code> file, like the <code class="docutils literal notranslate"><span class="pre">SavedModel</span></code>), that contains an updated version of the graph (only the part that produces some tensor <code class="docutils literal notranslate"><span class="pre">fetch</span></code> given some other tensors <code class="docutils literal notranslate"><span class="pre">feeds</span></code>), makes it possible to update the tensor’s names, and adds the variable values directly inside the graph definition (effectively making them constants).</p>
+<p>Note to more experienced users: the <code class="docutils literal notranslate"><span class="pre">.pb</span></code> format has a limit in size, which means that Tensorflow graphs cannot be bigger than 2GB. If your model has too many parameters, the <code class="docutils literal notranslate"><span class="pre">OptimizeSavedModel</span></code> won’t be able to produce one protobuffer file for your graph.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">optimize_saved_model</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">OptimizeSavedModel</span><span class="p">(</span>
+    <span class="n">path_saved_model</span><span class="o">=</span><span class="s2">&quot;model/saved_model&quot;</span><span class="p">,</span>
+    <span class="n">path_optimized_model</span><span class="o">=</span><span class="s2">&quot;model/optimized_saved_model&quot;</span><span class="p">,</span>
+    <span class="n">graph_name</span><span class="o">=</span><span class="s2">&quot;_model.pb&quot;</span><span class="p">,</span>
+    <span class="n">feeds</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;inputs/x&quot;</span><span class="p">],</span>
+    <span class="n">fetch</span><span class="o">=</span><span class="s2">&quot;y_pred&quot;</span><span class="p">,</span>
+    <span class="n">new_names</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="s2">&quot;inputs/x&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Predict-Job">
+<h2>Predict Job<a class="headerlink" href="#Predict-Job" title="Permalink to this headline">¶</a></h2>
+<p>Once the <code class="docutils literal notranslate"><span class="pre">OptimizeSavedModel</span></code> has run, how do we use it for inference? Usually, this file will be sent to some production service (probably not using python) in charge of using it to compute predictions. However, we might want to use it in python.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Predict</span></code> job in <code class="docutils literal notranslate"><span class="pre">example</span></code> illustrates how to reload the <code class="docutils literal notranslate"><span class="pre">_model.pb</span></code> file and use it to compute predictions. All it does is print the predictions given some <code class="docutils literal notranslate"><span class="pre">input_fn</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">predict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Predict</span><span class="p">(</span>
+    <span class="n">path_model_pb</span><span class="o">=</span><span class="s2">&quot;model/optimized_saved_model/_model.pb&quot;</span><span class="p">,</span>
+    <span class="n">feeds</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;inputs/x&quot;</span><span class="p">],</span>
+    <span class="n">fetches</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;y_pred&quot;</span><span class="p">],</span>
+    <span class="n">input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
+    <span class="n">prepro_fn</span><span class="o">=</span><span class="n">example</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">InferencePrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Full-Pipeline">
+<h2>Full Pipeline<a class="headerlink" href="#Full-Pipeline" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have a production-ready pipeline, let’s run it!</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">([</span><span class="n">build_job</span><span class="p">,</span> <span class="n">trainer_job</span><span class="p">,</span> <span class="n">cleanup_checkpoints</span><span class="p">,</span> <span class="n">optimize_saved_model</span><span class="p">,</span> <span class="n">predict</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+INFO:deepr.example.jobs.build_dataset:Wrote dataset to &#39;data.tfrecord&#39;
+INFO:deepr.hooks.num_params:Number of parameters (global) = 7
+INFO:deepr.hooks.num_params:Number of parameters (trainable) = 1
+INFO:deepr.hooks.log_variables_init:alpha_init_average_norm = 0.08621430397033691
+INFO:deepr.hooks.log_variables_init:alpha_init_num_zeros = 0
+INFO:deepr.hooks.logging_tensor:global_step = 1, loss = 45.5111465, num_steps = 1, max_memory_gb = 0.3164177, memory_gb = 0.3164177
+INFO:deepr.hooks.steps_per_sec:steps_per_sec = 384.90, examples_per_sec = 12316.80
+INFO:deepr.hooks.logging_tensor:global_step = 101, loss = 7.0613194, num_steps = 101, max_memory_gb = 0.3173447, memory_gb = 0.3173447
+INFO:deepr.hooks.steps_per_sec:steps_per_sec = 306.69, examples_per_sec = 9814.11
+INFO:deepr.hooks.logging_tensor:global_step = 201, loss = 0.9364977, num_steps = 201, max_memory_gb = 0.3173447, memory_gb = 0.3173447
+INFO:deepr.hooks.steps_per_sec:steps_per_sec = 380.00, examples_per_sec = 12160.05
+INFO:deepr.hooks.logging_tensor:global_step = 301, loss = 0.1241981, num_steps = 301, max_memory_gb = 0.3173447, memory_gb = 0.3173447
+INFO:deepr.prepros.core:Not applying Repeat(10) (mode=eval)
+INFO:deepr.hooks.logging_tensor:global_step = 320, loss = 0
+INFO:deepr.exporters.best_checkpoint:Reloading summaries from model/checkpoints
+INFO:deepr.exporters.best_checkpoint:- 320: {&#39;average_loss&#39;: 0.0, &#39;loss&#39;: 0.0}
+INFO:deepr.exporters.best_checkpoint:Best summary at step 320: {&#39;average_loss&#39;: 0.0, &#39;loss&#39;: 0.0}
+INFO:deepr.exporters.best_checkpoint:Selected checkpoint 320
+INFO:deepr.jobs.trainer:Running final evaluation, using global_step = 320
+INFO:deepr.prepros.core:Not applying Repeat(10) (mode=eval)
+INFO:deepr.hooks.logging_tensor:global_step = 320, loss = 0
+INFO:deepr.jobs.trainer:{&#39;average_loss&#39;: 0.0, &#39;loss&#39;: 0.0, &#39;global_step&#39;: 320}
+INFO:deepr.jobs.cleanup_checkpoints:Cleanup checkpoints in model/checkpoints
+INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-320.meta
+INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-0.data-00000-of-00001
+INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-0.index
+INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-320.index
+INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-320.data-00000-of-00001
+INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-0.meta
+INFO:deepr.jobs.optimize_saved_model:Using SavedModel model/saved_model/1590411103
+INFO:deepr.jobs.optimize_saved_model:Node renamed: x -&gt; inputs/x
+INFO:deepr.jobs.optimize_saved_model:Online KNN successfully exported to model/optimized_saved_model/_model.pb
+INFO:deepr.example.jobs.predict:{&#39;inputs/x&#39;: array([0.66115046], dtype=float32), &#39;y_pred&#39;: array([1.3223009], dtype=float32)}
+INFO:deepr.example.jobs.predict:Reached end of &lt;deepr.readers.record.TFRecordReader object at 0x140468f60&gt;
+</pre></div></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../README.html" class="btn btn-neutral float-right" title="DeepR: Build and Train Deep Learning Pipelines for Production" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tuning.html" class="btn btn-neutral float-left" title="Hyper Parameter Tuning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Reco.Consideration
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -85,6 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/pipeline.html">Pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/config.html">Config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/advanced.html">Advanced</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developper documentation</span></p>
 <ul>
@@ -173,7 +174,16 @@
             <span class="n">path_model</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;viewfs://root/user/deepr/dev/example/models/</span><span class="si">{</span><span class="n">now</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">if</span> <span class="n">path_dataset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">path_dataset</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;viewfs://root/user/deepr/dev/example/models/</span><span class="si">{</span><span class="n">now</span><span class="si">}</span><span class="s2">/data.tfrecord&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">path_model</span><span class="o">=</span><span class="n">path_model</span><span class="p">,</span> <span class="n">path_dataset</span><span class="o">=</span><span class="n">path_dataset</span><span class="p">)</span></div>
+        <span class="n">path_variables</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_model</span><span class="si">}</span><span class="s2">/variables&quot;</span>
+        <span class="n">path_saved_model</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_model</span><span class="si">}</span><span class="s2">/saved_model&quot;</span>
+        <span class="n">path_optimized_model</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_model</span><span class="si">}</span><span class="s2">/optimized_model&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">path_model</span><span class="o">=</span><span class="n">path_model</span><span class="p">,</span>
+            <span class="n">path_dataset</span><span class="o">=</span><span class="n">path_dataset</span><span class="p">,</span>
+            <span class="n">path_variables</span><span class="o">=</span><span class="n">path_variables</span><span class="p">,</span>
+            <span class="n">path_saved_model</span><span class="o">=</span><span class="n">path_saved_model</span><span class="p">,</span>
+            <span class="n">path_optimized_model</span><span class="o">=</span><span class="n">path_optimized_model</span><span class="p">,</span>
+        <span class="p">)</span></div>
 </pre></div>
 
            </div>
