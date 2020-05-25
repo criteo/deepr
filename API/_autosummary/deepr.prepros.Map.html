@@ -274,6 +274,29 @@ transformation should apply. For example:</p>
 </dd></dl>
 
 <dl class="py attribute">
+<dt id="deepr.prepros.Map.modes">
+<code class="sig-name descname">modes</code><a class="headerlink" href="#deepr.prepros.Map.modes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Active modes for the map (will skip modes not in modes).
+Default is None (all modes are considered active modes).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>], Optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.prepros.Map.num_parallel_calls">
+<code class="sig-name descname">num_parallel_calls</code><a class="headerlink" href="#deepr.prepros.Map.num_parallel_calls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of threads.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
 <dt id="deepr.prepros.Map.on_dict">
 <code class="sig-name descname">on_dict</code><a class="headerlink" href="#deepr.prepros.Map.on_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True (default), assumes dataset yields dictionaries</p>
@@ -293,24 +316,6 @@ transformation should apply. For example:</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="deepr.prepros.Map.modes">
-<code class="sig-name descname">modes</code><a class="headerlink" href="#deepr.prepros.Map.modes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Active modes for the map (will skip modes not in modes).
-Default is None (all modes are considered active modes).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>], Optional</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt>
-<code class="sig-name descname">\*\*kwargs</code></dt>
-<dd><p>Optional keyword arguments to pass to tf.data.Dataset.map</p>
 </dd></dl>
 
 <dl class="py method">

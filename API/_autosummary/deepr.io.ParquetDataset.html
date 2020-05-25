@@ -213,7 +213,7 @@
 <h1>deepr.io.ParquetDataset<a class="headerlink" href="#deepr-io-parquetdataset" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="deepr.io.ParquetDataset">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.io.</code><code class="sig-name descname">ParquetDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_or_paths</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/io/parquet.html#ParquetDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.ParquetDataset" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.io.</code><code class="sig-name descname">ParquetDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_or_paths</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metadata</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">schema</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">split_row_groups</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">validate_schema</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">filters</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metadata_nthreads</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">memory_map</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/io/parquet.html#ParquetDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.ParquetDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Context aware ParquetDataset with support for chunk writing.</p>
 <p>Makes it easier to read / write <cite>ParquetDataset</cite>. For example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
@@ -247,7 +247,7 @@ as well as the connection to the FileSystem.</p>
 
 <dl class="py method">
 <dt id="deepr.io.ParquetDataset.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_or_paths</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/io/parquet.html#ParquetDataset.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.ParquetDataset.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_or_paths</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metadata</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">schema</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">split_row_groups</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">validate_schema</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">filters</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metadata_nthreads</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">memory_map</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/io/parquet.html#ParquetDataset.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.ParquetDataset.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
@@ -258,16 +258,16 @@ as well as the connection to the FileSystem.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.io.ParquetDataset.__init__" title="deepr.io.ParquetDataset.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(path_or_paths[, filesystem])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.io.ParquetDataset.__init__" title="deepr.io.ParquetDataset.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(path_or_paths[, filesystem, …])</p></td>
 <td><p>Initialize self.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">open</span></code>()</p></td>
+<td><p>Open HDFS Filesystem if dataset on HDFS</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read</span></code>([columns, use_threads, use_pandas_metadata])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read</span></code>(**kwargs)</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_pandas</span></code>(**kwargs)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_pandas</span></code>([columns, use_threads])</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">write</span></code>(table[, compression])</p></td>

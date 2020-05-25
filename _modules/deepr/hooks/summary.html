@@ -171,9 +171,21 @@
 <div class="viewcode-block" id="SummarySaverHookFactory"><a class="viewcode-back" href="../../../_source/deepr.hooks.html#deepr.hooks.SummarySaverHookFactory">[docs]</a><span class="k">class</span> <span class="nc">SummarySaverHookFactory</span><span class="p">(</span><span class="n">TensorHookFactory</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Summary Saver Hook&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="SummarySaverHookFactory.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.hooks.SummarySaverHookFactory.html#deepr.hooks.SummarySaverHookFactory.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="SummarySaverHookFactory.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.hooks.SummarySaverHookFactory.html#deepr.hooks.SummarySaverHookFactory.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">tensors</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">save_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">save_secs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">summary_writer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">scaffold</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tensors</span> <span class="o">=</span> <span class="n">tensors</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_steps</span> <span class="o">=</span> <span class="n">save_steps</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_secs</span> <span class="o">=</span> <span class="n">save_secs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">=</span> <span class="n">output_dir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">summary_writer</span> <span class="o">=</span> <span class="n">summary_writer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scaffold</span> <span class="o">=</span> <span class="n">scaffold</span></div>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">SessionRunHook</span><span class="p">:</span>
         <span class="c1"># Extract relevant tensors</span>
@@ -186,7 +198,14 @@
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">tensor</span> <span class="ow">in</span> <span class="n">tensors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">scalar</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">tensor</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">SummarySaverHook</span><span class="p">(</span><span class="n">summary_op</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">merge_all</span><span class="p">(),</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">SummarySaverHook</span><span class="p">(</span>
+            <span class="n">save_steps</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">save_steps</span><span class="p">,</span>
+            <span class="n">save_secs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">save_secs</span><span class="p">,</span>
+            <span class="n">output_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span>
+            <span class="n">summary_writer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">summary_writer</span><span class="p">,</span>
+            <span class="n">scaffold</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">scaffold</span><span class="p">,</span>
+            <span class="n">summary_op</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">merge_all</span><span class="p">(),</span>
+        <span class="p">)</span></div>
 </pre></div>
 
            </div>

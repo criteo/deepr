@@ -170,16 +170,18 @@
 
 
 <div class="viewcode-block" id="TFRecordReader"><a class="viewcode-back" href="../../../_source/deepr.readers.html#deepr.readers.TFRecordReader">[docs]</a><span class="k">class</span> <span class="nc">TFRecordReader</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Reader</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class for TFRecord Reader of tf.train.Example</span>
+    <span class="sd">&quot;&quot;&quot;Class for TFRecord Reader of tf.train.Example.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
-<span class="sd">    buffer_size : int, Optional</span>
-<span class="sd">        If not None, shuffle filenames</span>
-<span class="sd">    path : List[Union[str, Path]]</span>
-<span class="sd">        List of filenames or path to directory</span>
+<span class="sd">    num_parallel_calls : TYPE</span>
+<span class="sd">        Description</span>
 <span class="sd">    num_parallel_reads : int</span>
 <span class="sd">        Number of parallel reads</span>
+<span class="sd">    path : List[Union[str, Path]]</span>
+<span class="sd">        List of filenames or path to directory</span>
+<span class="sd">    shuffle : bool</span>
+<span class="sd">        Shuffle files if True before reading.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="TFRecordReader.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.readers.TFRecordReader.html#deepr.readers.TFRecordReader.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -188,14 +190,12 @@
         <span class="n">num_parallel_reads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
         <span class="n">num_parallel_calls</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
         <span class="n">shuffle</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span>
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_parallel_reads</span> <span class="o">=</span> <span class="n">num_parallel_reads</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_parallel_calls</span> <span class="o">=</span> <span class="n">num_parallel_calls</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">shuffle</span> <span class="o">=</span> <span class="n">shuffle</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shuffle</span> <span class="o">=</span> <span class="n">shuffle</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">filenames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

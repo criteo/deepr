@@ -164,7 +164,6 @@
 <span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">urllib</span> <span class="kn">import</span> <span class="n">parse</span>
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -200,28 +199,47 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="ParquetDataset.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.io.ParquetDataset.html#deepr.io.ParquetDataset.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">path_or_paths</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]],</span> <span class="n">filesystem</span><span class="p">:</span> <span class="n">FileSystem</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">path_or_paths</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]],</span>
+        <span class="n">filesystem</span><span class="p">:</span> <span class="n">FileSystem</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="p">:</span> <span class="n">pq</span><span class="o">.</span><span class="n">FileMetaData</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">schema</span><span class="p">:</span> <span class="n">pyarrow</span><span class="o">.</span><span class="n">Schema</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">split_row_groups</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">validate_schema</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">filters</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">metadata_nthreads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">memory_map</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">path_or_paths</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">path_or_paths</span><span class="p">))</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path_or_paths</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">path_or_paths</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filesystem</span> <span class="o">=</span> <span class="n">filesystem</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
-
-        <span class="c1"># Lazy loaded</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_pq_dataset</span> <span class="o">=</span> <span class="kc">None</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schema</span> <span class="o">=</span> <span class="n">schema</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">split_row_groups</span> <span class="o">=</span> <span class="n">split_row_groups</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate_schema</span> <span class="o">=</span> <span class="n">validate_schema</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filters</span> <span class="o">=</span> <span class="n">filters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata_nthreads</span> <span class="o">=</span> <span class="n">metadata_nthreads</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory_map</span> <span class="o">=</span> <span class="n">memory_map</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">pq_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pq_dataset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_pq_dataset</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="n">ParquetDataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_or_paths</span><span class="p">,</span> <span class="n">filesystem</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filesystem</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pq_dataset</span>
+        <span class="k">return</span> <span class="n">pq</span><span class="o">.</span><span class="n">ParquetDataset</span><span class="p">(</span>
+            <span class="n">path_or_paths</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path_or_paths</span><span class="p">,</span>
+            <span class="n">filesystem</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filesystem</span><span class="p">,</span>
+            <span class="n">metadata</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span>
+            <span class="n">schema</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="p">,</span>
+            <span class="n">split_row_groups</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">split_row_groups</span><span class="p">,</span>
+            <span class="n">validate_schema</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validate_schema</span><span class="p">,</span>
+            <span class="n">filters</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">,</span>
+            <span class="n">metadata_nthreads</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata_nthreads</span><span class="p">,</span>
+            <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">memory_map</span><span class="p">,</span>
+        <span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_hdfs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_or_paths</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">scheme</span> <span class="o">=</span> <span class="n">parse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_or_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">scheme</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_or_paths</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_or_paths</span><span class="p">)</span><span class="o">.</span><span class="n">is_hdfs</span>  <span class="c1"># type: ignore</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">scheme</span> <span class="o">=</span> <span class="n">parse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_or_paths</span><span class="p">)</span><span class="o">.</span><span class="n">scheme</span>  <span class="c1"># type: ignore</span>
-        <span class="k">return</span> <span class="n">scheme</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;hdfs&quot;</span><span class="p">,</span> <span class="s2">&quot;viewfs&quot;</span><span class="p">}</span>
+            <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_or_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">is_hdfs</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_local</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -229,17 +247,28 @@
 
 <div class="viewcode-block" id="ParquetDataset.open"><a class="viewcode-back" href="../../../_source/deepr.io.html#deepr.io.ParquetDataset.open">[docs]</a>    <span class="nd">@contextmanager</span>
     <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Open HDFS Filesystem if dataset on HDFS&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filesystem</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_hdfs</span><span class="p">:</span>
             <span class="k">with</span> <span class="n">HDFSFileSystem</span><span class="p">()</span> <span class="k">as</span> <span class="n">hdfs</span><span class="p">:</span>
-                <span class="k">yield</span> <span class="n">ParquetDataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_or_paths</span><span class="p">,</span> <span class="n">filesystem</span><span class="o">=</span><span class="n">hdfs</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="p">)</span>
+                <span class="k">yield</span> <span class="n">ParquetDataset</span><span class="p">(</span>
+                    <span class="n">path_or_paths</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path_or_paths</span><span class="p">,</span>
+                    <span class="n">filesystem</span><span class="o">=</span><span class="n">hdfs</span><span class="p">,</span>
+                    <span class="n">metadata</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span>
+                    <span class="n">schema</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="p">,</span>
+                    <span class="n">split_row_groups</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">split_row_groups</span><span class="p">,</span>
+                    <span class="n">validate_schema</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validate_schema</span><span class="p">,</span>
+                    <span class="n">filters</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">,</span>
+                    <span class="n">metadata_nthreads</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata_nthreads</span><span class="p">,</span>
+                    <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">memory_map</span><span class="p">,</span>
+                <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">yield</span> <span class="bp">self</span></div>
 
-<div class="viewcode-block" id="ParquetDataset.read"><a class="viewcode-back" href="../../../_source/deepr.io.html#deepr.io.ParquetDataset.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pq_dataset</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+<div class="viewcode-block" id="ParquetDataset.read"><a class="viewcode-back" href="../../../_source/deepr.io.html#deepr.io.ParquetDataset.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">use_threads</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">use_pandas_metadata</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pq_dataset</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">use_threads</span><span class="o">=</span><span class="n">use_threads</span><span class="p">,</span> <span class="n">use_pandas_metadata</span><span class="o">=</span><span class="n">use_pandas_metadata</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ParquetDataset.read_pandas"><a class="viewcode-back" href="../../../_source/deepr.io.html#deepr.io.ParquetDataset.read_pandas">[docs]</a>    <span class="k">def</span> <span class="nf">read_pandas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pq_dataset</span><span class="o">.</span><span class="n">read_pandas</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+<div class="viewcode-block" id="ParquetDataset.read_pandas"><a class="viewcode-back" href="../../../_source/deepr.io.html#deepr.io.ParquetDataset.read_pandas">[docs]</a>    <span class="k">def</span> <span class="nf">read_pandas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">use_threads</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pq_dataset</span><span class="o">.</span><span class="n">read_pandas</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">use_threads</span><span class="o">=</span><span class="n">use_threads</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ParquetDataset.write"><a class="viewcode-back" href="../../../_source/deepr.io.html#deepr.io.ParquetDataset.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="n">pyarrow</span><span class="o">.</span><span class="n">Table</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;snappy&quot;</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_or_paths</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>

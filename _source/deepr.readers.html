@@ -331,16 +331,27 @@
 <p>Class for TFRecord Reader of tf.train.Example</p>
 <dl class="py class">
 <dt id="deepr.readers.record.TFRecordReader">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.readers.record.</code><code class="sig-name descname">TFRecordReader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">num_parallel_reads</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">num_parallel_calls</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">shuffle</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/record.html#TFRecordReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.readers.record.TFRecordReader" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.readers.record.</code><code class="sig-name descname">TFRecordReader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">num_parallel_reads</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">num_parallel_calls</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">shuffle</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/record.html#TFRecordReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.readers.record.TFRecordReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.readers.base.Reader" title="deepr.readers.base.Reader"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.readers.base.Reader</span></code></a></p>
-<p>Class for TFRecord Reader of tf.train.Example</p>
+<p>Class for TFRecord Reader of tf.train.Example.</p>
 <dl class="py attribute">
-<dt id="deepr.readers.record.TFRecordReader.buffer_size">
-<code class="sig-name descname">buffer_size</code><a class="headerlink" href="#deepr.readers.record.TFRecordReader.buffer_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>If not None, shuffle filenames</p>
+<dt id="deepr.readers.record.TFRecordReader.num_parallel_calls">
+<code class="sig-name descname">num_parallel_calls</code><a class="headerlink" href="#deepr.readers.record.TFRecordReader.num_parallel_calls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Description</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a>, Optional</p>
+<dd class="field-odd"><p>TYPE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.readers.record.TFRecordReader.num_parallel_reads">
+<code class="sig-name descname">num_parallel_reads</code><a class="headerlink" href="#deepr.readers.record.TFRecordReader.num_parallel_reads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of parallel reads</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -357,12 +368,12 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.readers.record.TFRecordReader.num_parallel_reads">
-<code class="sig-name descname">num_parallel_reads</code><a class="headerlink" href="#deepr.readers.record.TFRecordReader.num_parallel_reads" title="Permalink to this definition">¶</a></dt>
-<dd><p>Number of parallel reads</p>
+<dt id="deepr.readers.record.TFRecordReader.shuffle">
+<code class="sig-name descname">shuffle</code><a class="headerlink" href="#deepr.readers.record.TFRecordReader.shuffle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shuffle files if True before reading.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>

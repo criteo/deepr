@@ -393,10 +393,10 @@
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.hooks.EstimatorHookFactory.html#deepr.hooks.EstimatorHookFactory" title="deepr.hooks.EstimatorHookFactory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EstimatorHookFactory</span></code></a></p></td>
 <td><p>Estimator Hook Factory</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.hooks.LoggingTensorHookFactory.html#deepr.hooks.LoggingTensorHookFactory" title="deepr.hooks.LoggingTensorHookFactory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LoggingTensorHookFactory</span></code></a>([tensors])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.hooks.LoggingTensorHookFactory.html#deepr.hooks.LoggingTensorHookFactory" title="deepr.hooks.LoggingTensorHookFactory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LoggingTensorHookFactory</span></code></a>([tensors, …])</p></td>
 <td><p>Parametrize the creation of a LoggingTensorHook factory.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.hooks.MaxResidentMemory.html#deepr.hooks.MaxResidentMemory" title="deepr.hooks.MaxResidentMemory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MaxResidentMemory</span></code></a>(**kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.hooks.MaxResidentMemory.html#deepr.hooks.MaxResidentMemory" title="deepr.hooks.MaxResidentMemory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MaxResidentMemory</span></code></a>([unit])</p></td>
 <td><p>Measure maximum resident memory of the current process</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.hooks.ResidentMemory.html#deepr.hooks.ResidentMemory" title="deepr.hooks.ResidentMemory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ResidentMemory</span></code></a>([unit])</p></td>
@@ -405,7 +405,7 @@
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.hooks.StepsPerSecHook.html#deepr.hooks.StepsPerSecHook" title="deepr.hooks.StepsPerSecHook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StepsPerSecHook</span></code></a>(batch_size[, name, …])</p></td>
 <td><p>Logs steps per seconds and num_examples_per_sec.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.hooks.SummarySaverHookFactory.html#deepr.hooks.SummarySaverHookFactory" title="deepr.hooks.SummarySaverHookFactory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SummarySaverHookFactory</span></code></a>([tensors])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.hooks.SummarySaverHookFactory.html#deepr.hooks.SummarySaverHookFactory" title="deepr.hooks.SummarySaverHookFactory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SummarySaverHookFactory</span></code></a>([tensors, …])</p></td>
 <td><p>Summary Saver Hook</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.hooks.TensorHookFactory.html#deepr.hooks.TensorHookFactory" title="deepr.hooks.TensorHookFactory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TensorHookFactory</span></code></a></p></td>
@@ -441,7 +441,7 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.io.HDFSFileSystem.html#deepr.io.HDFSFileSystem" title="deepr.io.HDFSFileSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HDFSFileSystem</span></code></a>()</p></td>
 <td><p>Context aware HDFSFileSystem using pyarrow.hdfs.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.io.ParquetDataset.html#deepr.io.ParquetDataset" title="deepr.io.ParquetDataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ParquetDataset</span></code></a>(path_or_paths[, filesystem])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.io.ParquetDataset.html#deepr.io.ParquetDataset" title="deepr.io.ParquetDataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ParquetDataset</span></code></a>(path_or_paths[, filesystem, …])</p></td>
 <td><p>Context aware ParquetDataset with support for chunk writing.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.io.Path.html#deepr.io.Path" title="deepr.io.Path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Path</span></code></a>(*args)</p></td>
@@ -698,10 +698,10 @@ It takes as input / returns a dictionary of <cite>tf.Tensor</cite>. This means t
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.prepros.Serial.html#deepr.prepros.Serial" title="deepr.prepros.Serial"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Serial</span></code></a>(*preprocessors[, fuse, …])</p></td>
 <td><p>Chain preprocessors to define complex preprocessing pipelines.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.prepros.Shuffle.html#deepr.prepros.Shuffle" title="deepr.prepros.Shuffle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Shuffle</span></code></a>(buffer_size[, modes])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.prepros.Shuffle.html#deepr.prepros.Shuffle" title="deepr.prepros.Shuffle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Shuffle</span></code></a>(buffer_size[, modes, seed, …])</p></td>
 <td><p>Randomly shuffles the elements of a dataset.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.prepros.TFRecordSequenceExample.html#deepr.prepros.TFRecordSequenceExample" title="deepr.prepros.TFRecordSequenceExample"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TFRecordSequenceExample</span></code></a>(fields, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.prepros.TFRecordSequenceExample.html#deepr.prepros.TFRecordSequenceExample" title="deepr.prepros.TFRecordSequenceExample"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TFRecordSequenceExample</span></code></a>(fields[, …])</p></td>
 <td><p>Parse TF Record Sequence Example</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.prepros.Take.html#deepr.prepros.Take" title="deepr.prepros.Take"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Take</span></code></a>([count])</p></td>
@@ -726,7 +726,7 @@ It takes as input / returns a dictionary of <cite>tf.Tensor</cite>. This means t
 <td><p>Interface for readers, similar to tensorflow_datasets</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.readers.TFRecordReader.html#deepr.readers.TFRecordReader" title="deepr.readers.TFRecordReader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TFRecordReader</span></code></a>(path[, num_parallel_reads, …])</p></td>
-<td><p>Class for TFRecord Reader of tf.train.Example</p></td>
+<td><p>Class for TFRecord Reader of tf.train.Example.</p></td>
 </tr>
 </tbody>
 </table>
