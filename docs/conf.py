@@ -19,8 +19,8 @@ sys.path.insert(0, os.path.abspath(".."))
 # -- Project information -----------------------------------------------------
 
 project = "deepr"
-copyright = "2020, Reco.Consideration"
-author = "Reco.Consideration"
+copyright = "2020, Criteo"
+author = "Criteo"
 
 # The full version, including alpha/beta/rc tags
 release = "1.0.0"
