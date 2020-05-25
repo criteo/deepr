@@ -142,6 +142,8 @@ def macros_eval_order(macros: Dict = None) -> List[str]:
         if macro in stack:
             cycle = " -> ".join(list(stack) + [macro])
             raise ValueError(f"Unable to resolve order of macro evaluation (cycle: {cycle}, dependencies: {deps})")
+        if macro not in deps:
+            raise ValueError(f"Missing macro: {macro}, mentioned by : {' -> '.join(stack)})")
         for parent in deps[macro]:
             _add(parent, (*stack, macro))
         order.append(macro)
