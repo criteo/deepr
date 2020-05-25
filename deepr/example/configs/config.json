@@ -185,9 +185,28 @@
                 "path_saved_model": "$paths:path_saved_model",
                 "path_optimized_model": "$paths:path_optimized_model",
                 "graph_name": "_model.pb",
-                "feeds": ["inputs/x"],
+                "feeds": "inputs/x",
                 "fetch": "y_pred",
                 "new_names": {"x": "inputs/x"}
+            },
+            {
+                "type": "deepr.example.jobs.Predict",
+                "path_model": "$paths:path_optimized_model",
+                "graph_name": "_model.pb",
+                "feeds": "inputs/x",
+                "fetch": "y_pred",
+                "input_fn": {
+                        "num_parallel_calls": 8,
+                    "num_parallel_reads": 8,
+                    "path": "$paths:path_dataset",
+                    "shuffle": true,
+                    "type": "deepr.readers.TFRecordReader"
+                },
+                "prepro_fn": {
+                    "type": "deepr.example.prepros.InferencePrepro",
+                    "batch_size": 1,
+                    "count": 1
+                }
             }
         ]
     }
