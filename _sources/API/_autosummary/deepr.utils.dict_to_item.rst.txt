@@ -1,0 +1,6 @@
+deepr.utils.dict\_to\_item
+==========================
+
+.. currentmodule:: deepr.utils
+
+.. autofunction:: dict_to_item

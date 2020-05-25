@@ -225,7 +225,16 @@
 <li class="toctree-l2"><a class="reference internal" href="#utils">Utils</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.utils.Field.html">deepr.utils.Field</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.utils.TensorType.html">deepr.utils.TensorType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.utils.dict_to_item.html">deepr.utils.dict_to_item</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.utils.get_feedable_tensors.html">deepr.utils.get_feedable_tensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.utils.get_fetchable_tensors.html">deepr.utils.get_fetchable_tensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.utils.handle_exceptions.html">deepr.utils.handle_exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.utils.import_graph_def.html">deepr.utils.import_graph_def</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.utils.item_to_dict.html">deepr.utils.item_to_dict</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.utils.make_same_shape.html">deepr.utils.make_same_shape</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.utils.msb_lsb_to_str.html">deepr.utils.msb_lsb_to_str</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.utils.save_variables_in_ckpt.html">deepr.utils.save_variables_in_ckpt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.utils.str_to_msb_lsb.html">deepr.utils.str_to_msb_lsb</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.utils.to_flat_tuple.html">deepr.utils.to_flat_tuple</a></li>
 </ul>
 </li>
@@ -750,10 +759,42 @@ It takes as input / returns a dictionary of <cite>tf.Tensor</cite>. This means t
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.utils.TensorType.html#deepr.utils.TensorType" title="deepr.utils.TensorType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TensorType</span></code></a>(dtype)</p></td>
 <td><p>Return TensorType from Python, TensorFlow or NumPy type</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.utils.dict_to_item.html#deepr.utils.dict_to_item" title="deepr.utils.dict_to_item"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict_to_item</span></code></a>(data, keys)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.utils.get_feedable_tensors.html#deepr.utils.get_feedable_tensors" title="deepr.utils.get_feedable_tensors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_feedable_tensors</span></code></a>(graph, names)</p></td>
+<td><p>Retrieve feed tensors from graph.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.utils.get_fetchable_tensors.html#deepr.utils.get_fetchable_tensors" title="deepr.utils.get_fetchable_tensors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_fetchable_tensors</span></code></a>(graph, names)</p></td>
+<td><p>Retrieve fetch tensors from graph.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.utils.handle_exceptions.html#deepr.utils.handle_exceptions" title="deepr.utils.handle_exceptions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_exceptions</span></code></a>(fn)</p></td>
+<td><p>Handle Exceptions Decorator.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.utils.import_graph_def.html#deepr.utils.import_graph_def" title="deepr.utils.import_graph_def"><code class="xref py py-obj docutils literal notranslate"><span class="pre">import_graph_def</span></code></a>(path_pb)</p></td>
+<td><p>Import Graph Definition from protobuff into the current Graph.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.utils.item_to_dict.html#deepr.utils.item_to_dict" title="deepr.utils.item_to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">item_to_dict</span></code></a>(items, keys)</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">rtype</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+</dl>
+</p></td>
+</tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.utils.make_same_shape.html#deepr.utils.make_same_shape" title="deepr.utils.make_same_shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_same_shape</span></code></a>(tensors[, broadcast])</p></td>
 <td><p>Make list of tensors the same shape</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.utils.to_flat_tuple.html#deepr.utils.to_flat_tuple" title="deepr.utils.to_flat_tuple"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_flat_tuple</span></code></a>(items)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.utils.msb_lsb_to_str.html#deepr.utils.msb_lsb_to_str" title="deepr.utils.msb_lsb_to_str"><code class="xref py py-obj docutils literal notranslate"><span class="pre">msb_lsb_to_str</span></code></a>(msb, lsb)</p></td>
+<td><p>Convert two 64 bit integers MSB and LSB to a 128 bit UUID.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.utils.save_variables_in_ckpt.html#deepr.utils.save_variables_in_ckpt" title="deepr.utils.save_variables_in_ckpt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_variables_in_ckpt</span></code></a>(path, variables[, …])</p></td>
+<td><p>Save variables in checkpoint</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.utils.str_to_msb_lsb.html#deepr.utils.str_to_msb_lsb" title="deepr.utils.str_to_msb_lsb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str_to_msb_lsb</span></code></a>(el)</p></td>
+<td><p>Convert a 128 bit UUID to two 64 bit integers MSB and LSB.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.utils.to_flat_tuple.html#deepr.utils.to_flat_tuple" title="deepr.utils.to_flat_tuple"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_flat_tuple</span></code></a>(items)</p></td>
 <td><p>Convert nested list, tuples and generators to a flat tuple.</p></td>
 </tr>
 </tbody>

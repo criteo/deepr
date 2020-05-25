@@ -414,6 +414,61 @@ or <cite>tf.Tensor</cite>. For example:</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-deepr.utils.graph">
+<span id="deepr-utils-graph-module"></span><h2>deepr.utils.graph module<a class="headerlink" href="#module-deepr.utils.graph" title="Permalink to this headline">¶</a></h2>
+<p>Tensorflow Graph utilities.</p>
+<dl class="py function">
+<dt id="deepr.utils.graph.get_feedable_tensors">
+<code class="sig-prename descclassname">deepr.utils.graph.</code><code class="sig-name descname">get_feedable_tensors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">names</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/graph.html#get_feedable_tensors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.graph.get_feedable_tensors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve feed tensors from graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>tf.Graph</em>) – A Tensorflow Graph</p></li>
+<li><p><strong>names</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>]</em>) – List of operations or tensor names.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Mapping of names to tf.Tensor</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, tf.Tensor]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.utils.graph.get_fetchable_tensors">
+<code class="sig-prename descclassname">deepr.utils.graph.</code><code class="sig-name descname">get_fetchable_tensors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">names</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/graph.html#get_fetchable_tensors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.graph.get_fetchable_tensors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve fetch tensors from graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>tf.Graph</em>) – A Tensorflow Graph</p></li>
+<li><p><strong>names</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>]</em>) – List of operations or tensor names</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Mapping of names to tf.Tensor</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, tf.Tensor]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.utils.graph.import_graph_def">
+<code class="sig-prename descclassname">deepr.utils.graph.</code><code class="sig-name descname">import_graph_def</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_pb</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/graph.html#import_graph_def"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.graph.import_graph_def" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import Graph Definition from protobuff into the current Graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path_pb</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Path to .pb file</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 <div class="section" id="module-deepr.utils.graphite">
 <span id="deepr-utils-graphite-module"></span><h2>deepr.utils.graphite module<a class="headerlink" href="#module-deepr.utils.graphite" title="Permalink to this headline">¶</a></h2>
 <p>Graphite Utilities</p>

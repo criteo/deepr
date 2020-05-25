@@ -165,7 +165,7 @@
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Iterable</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">from</span> <span class="nn">tensorflow.python.tools.freeze_graph</span> <span class="kn">import</span> <span class="n">freeze_graph_with_def_protos</span>
@@ -201,13 +201,13 @@
     <span class="sd">&quot;&quot;&quot;Converts SavedModel into an optimized protobuf for inference</span>
 
 <span class="sd">    This job reads the input SavedModel, rename some nodes using the</span>
-<span class="sd">    `new_names` argument (raises an error if some renames cannot be</span>
-<span class="sd">    found), create placeholders given by `feeds` (and removes all</span>
+<span class="sd">    ``new_names`` argument (raises an error if some renames cannot be</span>
+<span class="sd">    found), create placeholders given by ``feeds`` (and removes all</span>
 <span class="sd">    other placeholders not in this list), and finally freezes the sub</span>
-<span class="sd">    graph that produces the output tensor `fetch`.</span>
+<span class="sd">    graph that produces the output tensor ``fetch``.</span>
 
 <span class="sd">    When creating the original SavedModel, it is recommended to use</span>
-<span class="sd">    `tf.identity` operators to mark some tensors as future feeds or</span>
+<span class="sd">    ``tf.identity`` operators to mark some tensors as future feeds or</span>
 <span class="sd">    fetches.</span>
 
 <span class="sd">    WARNING: successful completion of this job is no guarantee that the</span>
@@ -224,23 +224,27 @@
 <span class="sd">        Name of the output graph (name of the protobuf file)</span>
 <span class="sd">    new_names : Dict[str, str]</span>
 <span class="sd">        Mapping old names (SavedModel nodes) -&gt; new names (export)</span>
-<span class="sd">    blacklisted_variables : List[str]</span>
+<span class="sd">    blacklisted_variables : Union[str, List[str]]</span>
 <span class="sd">        List of variable names not to include in the export</span>
-<span class="sd">    feeds : List[str]</span>
-<span class="sd">        List of nodes to be converted / used as Placeholders (inputs)</span>
-<span class="sd">    fetch : str</span>
-<span class="sd">        Name of the node to use as output</span>
+<span class="sd">    feeds : Union[str, List[str]]</span>
+<span class="sd">        List of nodes to use as inputs, or comma separated string.</span>
+<span class="sd">    fetch : Union[str, List[str]]</span>
+<span class="sd">        List of nodes to use as output, or comma separated string.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">path_saved_model</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">path_optimized_model</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">graph_name</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">feeds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-    <span class="n">fetch</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">feeds</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
+    <span class="n">fetch</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
     <span class="n">new_names</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
     <span class="n">blacklisted_variables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
 
 <div class="viewcode-block" id="OptimizeSavedModel.run"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.OptimizeSavedModel.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Normalize feeds and fetch</span>
+        <span class="n">fetch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fetch</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch</span>
+        <span class="n">feeds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feeds</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">feeds</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">feeds</span>
+
         <span class="c1"># Find latest SavedModel export in path_saved_model</span>
         <span class="n">subdirs</span> <span class="o">=</span> <span class="p">[</span>
             <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_saved_model</span><span class="p">)</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span> <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span> <span class="ow">and</span> <span class="s2">&quot;temp&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
@@ -257,17 +261,17 @@
             <span class="n">graph_def</span> <span class="o">=</span> <span class="n">rename_nodes</span><span class="p">(</span><span class="n">graph_def</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_names</span><span class="p">)</span>
 
             <span class="c1"># Setup (create / remove) placeholders</span>
-            <span class="n">graph_def</span> <span class="o">=</span> <span class="n">make_placeholders</span><span class="p">(</span><span class="n">graph_def</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">feeds</span><span class="p">)</span>
+            <span class="n">graph_def</span> <span class="o">=</span> <span class="n">make_placeholders</span><span class="p">(</span><span class="n">graph_def</span><span class="p">,</span> <span class="n">feeds</span><span class="p">)</span>
 
             <span class="c1"># Keep only part of the graph that produces tensor &#39;fetch&#39;</span>
-            <span class="n">graph_def</span> <span class="o">=</span> <span class="n">extract_sub_graph</span><span class="p">(</span><span class="n">graph_def</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fetch</span><span class="p">])</span>
+            <span class="n">graph_def</span> <span class="o">=</span> <span class="n">extract_sub_graph</span><span class="p">(</span><span class="n">graph_def</span><span class="p">,</span> <span class="n">fetch</span><span class="p">)</span>
 
             <span class="c1"># Replace variables by constants</span>
             <span class="n">graph_def</span> <span class="o">=</span> <span class="n">freeze_graph_with_def_protos</span><span class="p">(</span>
                 <span class="n">input_graph_def</span><span class="o">=</span><span class="n">graph_def</span><span class="p">,</span>
                 <span class="n">input_saver_def</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">input_checkpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                <span class="n">output_node_names</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fetch</span><span class="p">,</span>
+                <span class="n">output_node_names</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fetch</span><span class="p">),</span>
                 <span class="n">restore_op_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">filename_tensor_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">output_graph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>

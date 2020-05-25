@@ -243,6 +243,14 @@ Various functions
    Field
    GraphiteClient
    TensorType
+   dict_to_item
+   get_feedable_tensors
+   get_fetchable_tensors
+   handle_exceptions
+   import_graph_def
+   item_to_dict
    make_same_shape
+   msb_lsb_to_str
+   save_variables_in_ckpt
+   str_to_msb_lsb
    to_flat_tuple
-

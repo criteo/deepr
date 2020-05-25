@@ -222,12 +222,12 @@
 <em class="property">class </em><code class="sig-prename descclassname">deepr.jobs.</code><code class="sig-name descname">OptimizeSavedModel</code><span class="sig-paren">(</span><em class="sig-param">path_saved_model</em>, <em class="sig-param">path_optimized_model</em>, <em class="sig-param">graph_name</em>, <em class="sig-param">feeds</em>, <em class="sig-param">fetch</em>, <em class="sig-param">new_names=&lt;factory&gt;</em>, <em class="sig-param">blacklisted_variables=&lt;factory&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/jobs/optimize_saved_model.html#OptimizeSavedModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts SavedModel into an optimized protobuf for inference</p>
 <p>This job reads the input SavedModel, rename some nodes using the
-<cite>new_names</cite> argument (raises an error if some renames cannot be
-found), create placeholders given by <cite>feeds</cite> (and removes all
+<code class="docutils literal notranslate"><span class="pre">new_names</span></code> argument (raises an error if some renames cannot be
+found), create placeholders given by <code class="docutils literal notranslate"><span class="pre">feeds</span></code> (and removes all
 other placeholders not in this list), and finally freezes the sub
-graph that produces the output tensor <cite>fetch</cite>.</p>
+graph that produces the output tensor <code class="docutils literal notranslate"><span class="pre">fetch</span></code>.</p>
 <p>When creating the original SavedModel, it is recommended to use
-<cite>tf.identity</cite> operators to mark some tensors as future feeds or
+<code class="docutils literal notranslate"><span class="pre">tf.identity</span></code> operators to mark some tensors as future feeds or
 fetches.</p>
 <p>WARNING: successful completion of this job is no guarantee that the
 exported Graph is correct. It is recommended to test the export in
@@ -282,7 +282,7 @@ a separate job.</p>
 <dd><p>List of variable names not to include in the export</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>]</p>
+<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -290,10 +290,10 @@ a separate job.</p>
 <dl class="py attribute">
 <dt id="deepr.jobs.OptimizeSavedModel.feeds">
 <code class="sig-name descname">feeds</code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.feeds" title="Permalink to this definition">¶</a></dt>
-<dd><p>List of nodes to be converted / used as Placeholders (inputs)</p>
+<dd><p>List of nodes to use as inputs, or comma separated string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>]</p>
+<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -301,10 +301,10 @@ a separate job.</p>
 <dl class="py attribute">
 <dt id="deepr.jobs.OptimizeSavedModel.fetch">
 <code class="sig-name descname">fetch</code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.fetch" title="Permalink to this definition">¶</a></dt>
-<dd><p>Name of the node to use as output</p>
+<dd><p>List of nodes to use as output, or comma separated string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>]]</p>
 </dd>
 </dl>
 </dd></dl>

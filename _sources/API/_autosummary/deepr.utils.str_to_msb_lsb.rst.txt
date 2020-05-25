@@ -1,0 +1,6 @@
+deepr.utils.str\_to\_msb\_lsb
+=============================
+
+.. currentmodule:: deepr.utils
+
+.. autofunction:: str_to_msb_lsb

@@ -1,0 +1,6 @@
+deepr.utils.handle\_exceptions
+==============================
+
+.. currentmodule:: deepr.utils
+
+.. autofunction:: handle_exceptions

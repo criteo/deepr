@@ -44,6 +44,14 @@ deepr.utils.field module
    :undoc-members:
    :show-inheritance:
 
+deepr.utils.graph module
+------------------------
+
+.. automodule:: deepr.utils.graph
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 deepr.utils.graphite module
 ---------------------------
 

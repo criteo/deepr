@@ -1,0 +1,6 @@
+deepr.utils.save\_variables\_in\_ckpt
+=====================================
+
+.. currentmodule:: deepr.utils
+
+.. autofunction:: save_variables_in_ckpt

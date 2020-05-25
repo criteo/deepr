@@ -1,0 +1,6 @@
+deepr.utils.get\_feedable\_tensors
+==================================
+
+.. currentmodule:: deepr.utils
+
+.. autofunction:: get_feedable_tensors

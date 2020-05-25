@@ -122,13 +122,17 @@ To run unit tests in your current environment, run
 
     make test
 
-
-To run unit tests + lint in a fresh virtual environment, run
-
+To run integration tests in your current environment, run
 
 .. code-block::
 
-    make venv-lint-test
+    make integration
+
+To run lint + unit and integration tests in a fresh virtual environment, run
+
+.. code-block::
+
+    make venv-lint-test-integration
 
 
 Lint

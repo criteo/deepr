@@ -1,0 +1,6 @@
+deepr.utils.import\_graph\_def
+==============================
+
+.. currentmodule:: deepr.utils
+
+.. autofunction:: import_graph_def

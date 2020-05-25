@@ -1,0 +1,6 @@
+deepr.utils.get\_fetchable\_tensors
+===================================
+
+.. currentmodule:: deepr.utils
+
+.. autofunction:: get_fetchable_tensors

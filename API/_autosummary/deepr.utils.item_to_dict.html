@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>deepr.utils.make_same_shape &mdash; deepr 1.0.0 documentation</title>
+  <title>deepr.utils.item_to_dict &mdash; deepr 1.0.0 documentation</title>
   
 
   
@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="deepr.utils.msb_lsb_to_str" href="deepr.utils.msb_lsb_to_str.html" />
-    <link rel="prev" title="deepr.utils.item_to_dict" href="deepr.utils.item_to_dict.html" /> 
+    <link rel="next" title="deepr.utils.make_same_shape" href="deepr.utils.make_same_shape.html" />
+    <link rel="prev" title="deepr.utils.import_graph_def" href="deepr.utils.import_graph_def.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -118,8 +118,8 @@
 <li class="toctree-l3"><a class="reference internal" href="deepr.utils.get_fetchable_tensors.html">deepr.utils.get_fetchable_tensors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.utils.handle_exceptions.html">deepr.utils.handle_exceptions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.utils.import_graph_def.html">deepr.utils.import_graph_def</a></li>
-<li class="toctree-l3"><a class="reference internal" href="deepr.utils.item_to_dict.html">deepr.utils.item_to_dict</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">deepr.utils.make_same_shape</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">deepr.utils.item_to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.utils.make_same_shape.html">deepr.utils.make_same_shape</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.utils.msb_lsb_to_str.html">deepr.utils.msb_lsb_to_str</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.utils.save_variables_in_ckpt.html">deepr.utils.save_variables_in_ckpt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.utils.str_to_msb_lsb.html">deepr.utils.str_to_msb_lsb</a></li>
@@ -176,13 +176,13 @@
         
           <li><a href="../core.html">DeepR</a> &raquo;</li>
         
-      <li>deepr.utils.make_same_shape</li>
+      <li>deepr.utils.item_to_dict</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/API/_autosummary/deepr.utils.make_same_shape.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/API/_autosummary/deepr.utils.item_to_dict.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -219,24 +219,14 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="deepr-utils-make-same-shape">
-<h1>deepr.utils.make_same_shape<a class="headerlink" href="#deepr-utils-make-same-shape" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="deepr-utils-item-to-dict">
+<h1>deepr.utils.item_to_dict<a class="headerlink" href="#deepr-utils-item-to-dict" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="deepr.utils.make_same_shape">
-<code class="sig-prename descclassname">deepr.utils.</code><code class="sig-name descname">make_same_shape</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">broadcast</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/utils/broadcasting.html#make_same_shape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.make_same_shape" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make list of tensors the same shape</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>tensors</strong> (<em>List</em><em>[</em><em>tf.Tensor</em><em>]</em>) – List of tensors</p></li>
-<li><p><strong>broadcast</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, not only add missing dims, also broadcast</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
+<dt id="deepr.utils.item_to_dict">
+<code class="sig-prename descclassname">deepr.utils.</code><code class="sig-name descname">item_to_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">items</span></em>, <em class="sig-param"><span class="n">keys</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/utils/datastruct.html#item_to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.item_to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>List[tf.Tensor]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -251,10 +241,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="deepr.utils.msb_lsb_to_str.html" class="btn btn-neutral float-right" title="deepr.utils.msb_lsb_to_str" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="deepr.utils.make_same_shape.html" class="btn btn-neutral float-right" title="deepr.utils.make_same_shape" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="deepr.utils.item_to_dict.html" class="btn btn-neutral float-left" title="deepr.utils.item_to_dict" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="deepr.utils.import_graph_def.html" class="btn btn-neutral float-left" title="deepr.utils.import_graph_def" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
