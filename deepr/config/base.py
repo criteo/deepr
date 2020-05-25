@@ -93,7 +93,10 @@ def from_config(item: Any) -> Any:
                 cls = _import(item[KEY_TYPE])
                 args = item.get(KEY_POSITIONAL_ARG)
                 kwargs = {key: value for key, value in item.items() if key not in {KEY_TYPE, KEY_POSITIONAL_ARG}}
-                return cls(*from_config(args), **from_config(kwargs)) if args else cls(**from_config(kwargs))
+                try:
+                    return cls(*from_config(args), **from_config(kwargs)) if args else cls(**from_config(kwargs))
+                except TypeError as e:
+                    raise TypeError(f"Error instantiating {cls})") from e
             else:
                 return {key: from_config(value) for key, value in item.items()}
 
