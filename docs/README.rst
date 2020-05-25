@@ -1,10 +1,13 @@
 DeepR: Build and Train Deep Learning Pipelines for Production
 =============================================================
 
-|pypi|_
+|pypi|_ |ci|_
 
 .. |pypi| image:: https://img.shields.io/pypi/v/deepr.svg
 .. _pypi: https://pypi.python.org/pypi/deepr
+
+.. |ci| image:: https://github.com/criteo/deepr/workflows/Continuous%20integration/badge.svg
+.. _ci: https://github.com/criteo/deepr/actions?query=workflow%3A%22Continuous+integration%22
 
 DeepR is a library for Deep Learning on top of Tensorflow 1.x that focuses on production capabilities. It makes it easy to define pipelines (via the ``Job`` abstraction), preprocess data (via the ``Prepro`` abstraction), design models (via the ``Layer`` abstraction) and train them either locally or on a Yarn cluster. It also integrates nicely with MLFlow and Graphite, allowing for production ready logging capabilities.
 
