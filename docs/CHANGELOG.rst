@@ -12,8 +12,13 @@ and this project adheres to `Semantic Versioning <http://semver.org/>`_.
 
 Added
 ~~~~~
+- ``OptimizeSavedModel`` now supports multiple fetches
+- new graph utils, ``import_graph_def``, ``get_feedable_tensors``, ``get_fetchable_tensors``
+
 Changed
 ~~~~~~~
+- ``example.jobs.Predict`` arguments (``path_model`` and ``graph_name`` instead of ``path_model_pb``, ``fetch`` instead of ``fetches`` for consistency with ``OptimizeSavedModel``).
+
 Deprecated
 ~~~~~~~~~~
 Removed

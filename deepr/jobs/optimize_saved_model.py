@@ -3,7 +3,7 @@
 from dataclasses import dataclass, field
 import logging
 import re
-from typing import List, Dict, Iterable
+from typing import List, Dict, Iterable, Union
 
 import tensorflow as tf
 from tensorflow.python.tools.freeze_graph import freeze_graph_with_def_protos
@@ -39,13 +39,13 @@ class OptimizeSavedModel(base.Job):
     """Converts SavedModel into an optimized protobuf for inference
 
     This job reads the input SavedModel, rename some nodes using the
-    `new_names` argument (raises an error if some renames cannot be
-    found), create placeholders given by `feeds` (and removes all
+    ``new_names`` argument (raises an error if some renames cannot be
+    found), create placeholders given by ``feeds`` (and removes all
     other placeholders not in this list), and finally freezes the sub
-    graph that produces the output tensor `fetch`.
+    graph that produces the output tensor ``fetch``.
 
     When creating the original SavedModel, it is recommended to use
-    `tf.identity` operators to mark some tensors as future feeds or
+    ``tf.identity`` operators to mark some tensors as future feeds or
     fetches.
 
     WARNING: successful completion of this job is no guarantee that the
@@ -62,23 +62,27 @@ class OptimizeSavedModel(base.Job):
         Name of the output graph (name of the protobuf file)
     new_names : Dict[str, str]
         Mapping old names (SavedModel nodes) -> new names (export)
-    blacklisted_variables : List[str]
+    blacklisted_variables : Union[str, List[str]]
         List of variable names not to include in the export
-    feeds : List[str]
-        List of nodes to be converted / used as Placeholders (inputs)
-    fetch : str
-        Name of the node to use as output
+    feeds : Union[str, List[str]]
+        List of nodes to use as inputs, or comma separated string.
+    fetch : Union[str, List[str]]
+        List of nodes to use as output, or comma separated string.
     """
 
     path_saved_model: str
     path_optimized_model: str
     graph_name: str
-    feeds: List[str]
-    fetch: str
+    feeds: Union[str, List[str]]
+    fetch: Union[str, List[str]]
     new_names: Dict[str, str] = field(default_factory=dict)
     blacklisted_variables: List[str] = field(default_factory=list)
 
     def run(self):
+        # Normalize feeds and fetch
+        fetch = self.fetch.split(",") if isinstance(self.fetch, str) else self.fetch
+        feeds = self.feeds.split(",") if isinstance(self.feeds, str) else self.feeds
+
         # Find latest SavedModel export in path_saved_model
         subdirs = [
             str(path) for path in Path(self.path_saved_model).iterdir() if path.is_dir() and "temp" not in str(path)
@@ -95,17 +99,17 @@ class OptimizeSavedModel(base.Job):
             graph_def = rename_nodes(graph_def, self.new_names)
 
             # Setup (create / remove) placeholders
-            graph_def = make_placeholders(graph_def, self.feeds)
+            graph_def = make_placeholders(graph_def, feeds)
 
             # Keep only part of the graph that produces tensor 'fetch'
-            graph_def = extract_sub_graph(graph_def, [self.fetch])
+            graph_def = extract_sub_graph(graph_def, fetch)
 
             # Replace variables by constants
             graph_def = freeze_graph_with_def_protos(
                 input_graph_def=graph_def,
                 input_saver_def=None,
                 input_checkpoint=None,
-                output_node_names=self.fetch,
+                output_node_names=",".join(fetch),
                 restore_op_name=None,
                 filename_tensor_name=None,
                 output_graph=None,

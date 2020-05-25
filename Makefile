@@ -1,12 +1,3 @@
-venv-lint-test: ## [Continuous integration] Install in venv and run lint and test
-	python3.6 -m venv .env && . .env/bin/activate && make install install-dev lint test && rm -rf .env
-
-build-dist:
-	python3.6 -m venv .env
-	. .env/bin/activate && pip install -U pip setuptools wheel
-	. .env/bin/activate && python setup.py sdist
-	rm -rf .env
-
 install: install-cpu
 
 install-cpu: ## [Local development, CPU] Upgrade pip, install requirements, install package.
@@ -27,14 +18,23 @@ lint: ## [Local development] Run mypy, pylint and black
 	python -m pylint deepr
 	python -m black --check -l 120 deepr
 
+black: ## [Local development] Auto-format python code using black
+	python -m black -l 120 .
+
 test: ## [Local development] Run unit tests.
 	python -m pytest -n 4 -v tests/unit
 
 integration: ## [Local development] Run integration tests.
 	python -m pytest tests/integration
 
-black: ## [Local development] Auto-format python code using black
-	python -m black -l 120 .
+venv-lint-test-integration: ## [Continuous integration] Install in venv and run lint and test
+	python3.6 -m venv .env && . .env/bin/activate && make install install-dev lint test integration && rm -rf .env
+
+build-dist: ## [Continuous integration] Build package for pypi
+	python3.6 -m venv .env
+	. .env/bin/activate && pip install -U pip setuptools wheel
+	. .env/bin/activate && python setup.py sdist
+	rm -rf .env
 
 .PHONY: help
 
