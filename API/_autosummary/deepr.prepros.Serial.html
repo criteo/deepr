@@ -224,7 +224,7 @@
 <em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.</code><code class="sig-name descname">Serial</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">preprocessors</span></em>, <em class="sig-param"><span class="n">fuse</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">num_parallel_calls</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/prepros/combinators.html#Serial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.Serial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Chain preprocessors to define complex preprocessing pipelines.</p>
 <p>It will apply each preprocessing step one after the other on each
-element. For performance reasons, it fuses <cite>Map</cite> and <cite>Filter</cite>
+element. For performance reasons, it fuses <a class="reference internal" href="deepr.prepros.Map.html#deepr.prepros.Map" title="deepr.prepros.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code></a> and <a class="reference internal" href="deepr.prepros.Filter.html#deepr.prepros.Filter" title="deepr.prepros.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a>
 operations into single <cite>tf.data</cite> calls.</p>
 <p>For an example, see the following snippet:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">deepr.layers</span> <span class="k">as</span> <span class="nn">dprl</span>
@@ -249,7 +249,7 @@ operations into single <cite>tf.data</cite> calls.</p>
 <dl class="py attribute">
 <dt id="deepr.prepros.Serial.fuse">
 <code class="sig-name descname">fuse</code><a class="headerlink" href="#deepr.prepros.Serial.fuse" title="Permalink to this definition">¶</a></dt>
-<dd><p>If True (default), will fuse <cite>Map</cite> and <cite>Filter</cite>.</p>
+<dd><p>If True (default), will fuse <a class="reference internal" href="deepr.prepros.Map.html#deepr.prepros.Map" title="deepr.prepros.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code></a> and <a class="reference internal" href="deepr.prepros.Filter.html#deepr.prepros.Filter" title="deepr.prepros.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a>, Optional</p>
@@ -260,7 +260,7 @@ operations into single <cite>tf.data</cite> calls.</p>
 <dl class="py attribute">
 <dt id="deepr.prepros.Serial.preprocessors">
 <code class="sig-name descname">preprocessors</code><a class="headerlink" href="#deepr.prepros.Serial.preprocessors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Positional arguments of <cite>Prepro</cite> instance or Tuple / List /
+<dd><p>Positional arguments of <a class="reference internal" href="deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a> instance or Tuple / List /
 Generator of prepro instances</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>

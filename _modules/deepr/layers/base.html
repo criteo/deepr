@@ -180,18 +180,18 @@
 
 <span class="sd">    Heavily inspired by TRAX layers, adapted for TF1.X and tf.estimator.</span>
 
-<span class="sd">    Layers are the basic building block of models. A `Layer` is a</span>
+<span class="sd">    Layers are the basic building block of models. A :class:`~Layer` is a</span>
 <span class="sd">    function from one or more inputs to one or more outputs.</span>
 
-<span class="sd">    The inputs of a `Layer` are tensors, packaged as follows</span>
+<span class="sd">    The inputs of a :class:`~Layer` are tensors, packaged as follows</span>
 <span class="sd">      - n_in = 1: one tensor (NOT wrapped in a tuple)</span>
 <span class="sd">      - n_in &gt; 1: a tuple of tensors</span>
 
-<span class="sd">    The outputs of a `Layer` are tensors, packaged as follows</span>
+<span class="sd">    The outputs of a :class:`~Layer` are tensors, packaged as follows</span>
 <span class="sd">      - n_out = 1: one tensor (NOT wrapped in a tuple)</span>
 <span class="sd">      - n_out &gt; 1: a tuple of tensors</span>
 
-<span class="sd">    The basic usage of a `Layer` is to build graphs as intuitively as</span>
+<span class="sd">    The basic usage of a :class:`~Layer` is to build graphs as intuitively as</span>
 <span class="sd">    possible. For example:</span>
 
 <span class="sd">    &gt;&gt;&gt; input_tensor = tf.ones([32, 8])</span>
@@ -200,7 +200,7 @@
 <span class="sd">    tf.Tensor(shape=[32, 16])</span>
 
 
-<span class="sd">    Because some layers (like `Dropout`) might behave differently</span>
+<span class="sd">    Because some layers (like :class:`~Dropout`) might behave differently</span>
 <span class="sd">    depending on the mode (TRAIN, EVAL, PREDICT), an optional argument</span>
 <span class="sd">    can be provided:</span>
 
@@ -209,7 +209,7 @@
 <span class="sd">    &gt;&gt;&gt; dropped = dropout(input_tensor, tf.estimator.ModeKeys.TRAIN)</span>
 <span class="sd">    &gt;&gt;&gt; not_dropped = dropout(input_tensor, tf.estimator.ModeKeys.EVAL)</span>
 
-<span class="sd">    Because in a lot of cases, a `Layer` needs to be applied on a</span>
+<span class="sd">    Because in a lot of cases, a :class:`~Layer` needs to be applied on a</span>
 <span class="sd">    dictionary, yielded by a tf.data.Dataset for example, you can also</span>
 <span class="sd">    do:</span>
 
@@ -223,7 +223,7 @@
 <span class="sd">    tuples.</span>
 
 <span class="sd">    Authors of new layer subclasses typically override one of the two</span>
-<span class="sd">    methods of the base `Layer` class::</span>
+<span class="sd">    methods of the base :class:`~Layer` class::</span>
 
 <span class="sd">        def forward(self, tensors, mode: str = None):</span>
 <span class="sd">            # tensors is either a Tensor (n_in=1) or a tuple of Tensors</span>
@@ -235,10 +235,10 @@
 <span class="sd">    implementation of the other for free thanks to automatic tuple to</span>
 <span class="sd">    dictionary conversion.</span>
 
-<span class="sd">    The easiest way to define custom layers is to use the `layer`</span>
+<span class="sd">    The easiest way to define custom layers is to use the :class:`~layer`</span>
 <span class="sd">    decorator (see documentation).</span>
 
-<span class="sd">    Note that layers using parameters (a `Dense` layer for example)</span>
+<span class="sd">    Note that layers using parameters (a :class:`~Dense` layer for example)</span>
 <span class="sd">    should not create variables at instantiation time nor store</span>
 <span class="sd">    variables or any other graph references as attributes.</span>
 
@@ -255,7 +255,7 @@
 <span class="sd">    If you want to define a layer and use it twice (effectively reusing</span>
 <span class="sd">    its variables), you need to be explicit, and set the `reuse=True`</span>
 <span class="sd">    arguments at call time. Behind the scene, it&#39;s simply wrapping the</span>
-<span class="sd">    TF1.X variable management into a `tf.variable_scope`.</span>
+<span class="sd">    TF1.X variable management into a :meth:`~tf.variable_scope`.</span>
 
 <span class="sd">    &gt;&gt;&gt; dense = Dense(16)</span>
 <span class="sd">    &gt;&gt;&gt; dense(tf.ones([32, 8])) == dense(tf.ones([32, 8]), reuse=True)</span>
@@ -363,7 +363,7 @@
 <span class="sd">        This is not an issue when building graphs with tf.estimator as</span>
 <span class="sd">        the graph is compiled once and for all.</span>
 
-<span class="sd">        However, when using a ``Layer`` to preprocess a tf.data.Dataset</span>
+<span class="sd">        However, when using a :class:`~Layer` to preprocess a :class:`~tf.data.Dataset`</span>
 <span class="sd">        (eg. with a ``map`` transformation), this method will be called</span>
 <span class="sd">        for each example and might cause slowdown. It is recommended to</span>
 <span class="sd">        explicitly use ``forward`` or ``forward_as_dict`` in that case.</span>
@@ -472,10 +472,10 @@
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Decorator that creates a layer from a function</span>
 
-<span class="sd">    This decorator can be used to define `Layer` classes in a non</span>
+<span class="sd">    This decorator can be used to define :class:`~Layer` classes in a non</span>
 <span class="sd">    verbose way.</span>
 
-<span class="sd">    For example, the following snippet defines a subclass of `Layer`</span>
+<span class="sd">    For example, the following snippet defines a subclass of :class:`~Layer`</span>
 <span class="sd">    whose `forward` method returns `tensors + offset`.</span>
 
 <span class="sd">    &gt;&gt;&gt; @layer(n_in=1, n_out=1)</span>
@@ -517,9 +517,9 @@
 
 <span class="sd">    Another way of using the decorator is on functions that create layer</span>
 <span class="sd">    instances. This allows you to create factories of layers and make</span>
-<span class="sd">    them `Layer` classes.</span>
+<span class="sd">    them :class:`~Layer` classes.</span>
 
-<span class="sd">    For example, the following snippet defines a subclass of `Layer`</span>
+<span class="sd">    For example, the following snippet defines a subclass of :class:`~Layer`</span>
 <span class="sd">    whose `forward` method is the same as the layer returned by the</span>
 <span class="sd">    function.</span>
 
@@ -530,7 +530,7 @@
 <span class="sd">    &gt;&gt;&gt; add_one(1)</span>
 <span class="sd">    2</span>
 
-<span class="sd">    A nice feature of the `layer` decorator is laziness: the code</span>
+<span class="sd">    A nice feature of the :class:`~layer` decorator is laziness: the code</span>
 <span class="sd">    inside the function is not executed until a call on a tensor. In</span>
 <span class="sd">    other words:</span>
 

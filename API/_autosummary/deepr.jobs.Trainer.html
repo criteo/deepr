@@ -235,7 +235,7 @@
 <dl class="py attribute">
 <dt id="deepr.jobs.Trainer.pred_fn">
 <code class="sig-name descname">pred_fn</code><a class="headerlink" href="#deepr.jobs.Trainer.pred_fn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Typically a <cite>Layer</cite> instance, but in general, any callable.</p>
+<dd><p>Typically a <a class="reference internal" href="deepr.layers.Layer.html#deepr.layers.Layer" title="deepr.layers.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> instance, but in general, any callable.</p>
 <dl class="simple">
 <dt>Its signature is the following:</dt><dd><ul class="simple">
 <li><dl class="simple">
@@ -261,7 +261,7 @@
 <dl class="py attribute">
 <dt id="deepr.jobs.Trainer.loss_fn">
 <code class="sig-name descname">loss_fn</code><a class="headerlink" href="#deepr.jobs.Trainer.loss_fn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Typically a <cite>Layer</cite> instance, but in general, any callable.</p>
+<dd><p>Typically a <a class="reference internal" href="deepr.layers.Layer.html#deepr.layers.Layer" title="deepr.layers.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> instance, but in general, any callable.</p>
 <dl class="simple">
 <dt>Its signature is the following:</dt><dd><ul class="simple">
 <li><dl class="simple">
@@ -289,7 +289,7 @@ to the <cite>optimizer_fn</cite>.</p>
 <dl class="py attribute">
 <dt id="deepr.jobs.Trainer.optimizer_fn">
 <code class="sig-name descname">optimizer_fn</code><a class="headerlink" href="#deepr.jobs.Trainer.optimizer_fn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Typically an <cite>Optimizer</cite> instance, but in general, any callable.</p>
+<dd><p>Typically an <a class="reference internal" href="deepr.optimizers.Optimizer.html#deepr.optimizers.Optimizer" title="deepr.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Optimizer</span></code></a> instance, but in general, any callable.</p>
 <dl class="simple">
 <dt>Its signature is the following:</dt><dd><ul class="simple">
 <li><dl class="simple">
@@ -315,7 +315,7 @@ to the <cite>optimizer_fn</cite>.</p>
 <dl class="py attribute">
 <dt id="deepr.jobs.Trainer.train_input_fn">
 <code class="sig-name descname">train_input_fn</code><a class="headerlink" href="#deepr.jobs.Trainer.train_input_fn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Typically a <cite>Reader</cite> instance, but in general, any callable.</p>
+<dd><p>Typically a <a class="reference internal" href="deepr.readers.Reader.html#deepr.readers.Reader" title="deepr.readers.Reader"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reader</span></code></a> instance, but in general, any callable.</p>
 <p>Used for training.</p>
 <dl class="simple">
 <dt>Its signature is the following:</dt><dd><ul class="simple">
@@ -338,7 +338,7 @@ should create a new dataset and a new graph.</p>
 <dl class="py attribute">
 <dt id="deepr.jobs.Trainer.eval_input_fn">
 <code class="sig-name descname">eval_input_fn</code><a class="headerlink" href="#deepr.jobs.Trainer.eval_input_fn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Typically a <cite>Reader</cite> instance, but in general, any callable.</p>
+<dd><p>Typically a <a class="reference internal" href="deepr.readers.Reader.html#deepr.readers.Reader" title="deepr.readers.Reader"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reader</span></code></a> instance, but in general, any callable.</p>
 <p>Used for evaluation.</p>
 <dl class="simple">
 <dt>Its signature is the following:</dt><dd><ul class="simple">
@@ -361,7 +361,7 @@ should create a new dataset and a new graph.</p>
 <dl class="py attribute">
 <dt id="deepr.jobs.Trainer.prepro_fn">
 <code class="sig-name descname">prepro_fn</code><a class="headerlink" href="#deepr.jobs.Trainer.prepro_fn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Typically a <cite>Prepro</cite> instance, but in general, any callable.</p>
+<dd><p>Typically a <a class="reference internal" href="deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a> instance, but in general, any callable.</p>
 <dl class="simple">
 <dt>Its signature is the following:</dt><dd><ul class="simple">
 <li><dl class="simple">
@@ -404,7 +404,7 @@ default Graph.</p>
 <dl class="py attribute">
 <dt id="deepr.jobs.Trainer.train_metrics">
 <code class="sig-name descname">train_metrics</code><a class="headerlink" href="#deepr.jobs.Trainer.train_metrics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Typically, <cite>Metric</cite> instances, but in general, any callables.</p>
+<dd><p>Typically, <a class="reference internal" href="deepr.metrics.Metric.html#deepr.metrics.Metric" title="deepr.metrics.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code></a> instances, but in general, any callables.</p>
 <p>Used for training.</p>
 <dl class="simple">
 <dt>Each callable must have the following signature:</dt><dd><ul class="simple">
@@ -431,7 +431,7 @@ default Graph.</p>
 <dl class="py attribute">
 <dt id="deepr.jobs.Trainer.eval_metrics">
 <code class="sig-name descname">eval_metrics</code><a class="headerlink" href="#deepr.jobs.Trainer.eval_metrics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Typically, <cite>Metric</cite> instances, but in general, any callables.</p>
+<dd><p>Typically, <a class="reference internal" href="deepr.metrics.Metric.html#deepr.metrics.Metric" title="deepr.metrics.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code></a> instances, but in general, any callables.</p>
 <p>Used for evaluation.</p>
 <dl class="simple">
 <dt>Each callable must have the following signature:</dt><dd><ul class="simple">
@@ -458,8 +458,8 @@ default Graph.</p>
 <dl class="py attribute">
 <dt id="deepr.jobs.Trainer.exporters">
 <code class="sig-name descname">exporters</code><a class="headerlink" href="#deepr.jobs.Trainer.exporters" title="Permalink to this definition">¶</a></dt>
-<dd><p>Typically, <cite>Exporter</cite> instances, but in general, any callables.</p>
-<p>Used at the end of training on the trained <cite>tf.Estimator</cite>.</p>
+<dd><p>Typically, <a class="reference internal" href="deepr.exporters.Exporter.html#deepr.exporters.Exporter" title="deepr.exporters.Exporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exporter</span></code></a> instances, but in general, any callables.</p>
+<p>Used at the end of training on the trained <code class="xref py py-mod docutils literal notranslate"><span class="pre">Estimator</span></code>.</p>
 <dl class="simple">
 <dt>Each callable must have the following signature:</dt><dd><ul class="simple">
 <li><dl class="simple">
@@ -483,9 +483,9 @@ default Graph.</p>
 <dd><p>List of <cite>Hooks</cite> or <cite>HookFactories</cite>.</p>
 <p>Used for training.</p>
 <p>Some hook can be fully defined during instantiation of Trainer,
-for example a <cite>StepsPerSecHook</cite>. However, other hooks requires
+for example a <a class="reference internal" href="deepr.hooks.StepsPerSecHook.html#deepr.hooks.StepsPerSecHook" title="deepr.hooks.StepsPerSecHook"><code class="xref py py-class docutils literal notranslate"><span class="pre">StepsPerSecHook</span></code></a>. However, other hooks requires
 objects to be instantiated that will only be created after
-running the <cite>Trainer</cite>.</p>
+running the <a class="reference internal" href="#deepr.jobs.Trainer" title="deepr.jobs.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trainer</span></code></a>.</p>
 <p>The <cite>hooks</cite> module defines factories for more complicated hooks.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -500,9 +500,9 @@ running the <cite>Trainer</cite>.</p>
 <dd><p>List of <cite>Hooks</cite> or <cite>HookFactories</cite>.</p>
 <p>Used for evaluation.</p>
 <p>Some hook can be fully defined during instantiation of Trainer,
-for example a <cite>StepsPerSecHook</cite>. However, other hooks requires
+for example a <a class="reference internal" href="deepr.hooks.StepsPerSecHook.html#deepr.hooks.StepsPerSecHook" title="deepr.hooks.StepsPerSecHook"><code class="xref py py-class docutils literal notranslate"><span class="pre">StepsPerSecHook</span></code></a>. However, other hooks requires
 objects to be instantiated that will only be created after
-running the <cite>Trainer</cite>.</p>
+running the <a class="reference internal" href="#deepr.jobs.Trainer" title="deepr.jobs.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trainer</span></code></a>.</p>
 <p>The <cite>hooks</cite> module defines factories for more complicated hooks.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -514,7 +514,7 @@ running the <cite>Trainer</cite>.</p>
 <dl class="py attribute">
 <dt id="deepr.jobs.Trainer.eval_spec">
 <code class="sig-name descname">eval_spec</code><a class="headerlink" href="#deepr.jobs.Trainer.eval_spec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Optional parameters for <cite>tf.estimator.EvalSpec</cite>.</p>
+<dd><p>Optional parameters for <code class="xref py py-class docutils literal notranslate"><span class="pre">EvalSpec</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>Dict, Optional</p>
@@ -525,7 +525,7 @@ running the <cite>Trainer</cite>.</p>
 <dl class="py attribute">
 <dt id="deepr.jobs.Trainer.train_spec">
 <code class="sig-name descname">train_spec</code><a class="headerlink" href="#deepr.jobs.Trainer.train_spec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Optional parameters for <cite>tf.estimator.TrainSpec</cite>.</p>
+<dd><p>Optional parameters for <code class="xref py py-class docutils literal notranslate"><span class="pre">TrainSpec</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>Dict, Optional</p>
@@ -536,7 +536,7 @@ running the <cite>Trainer</cite>.</p>
 <dl class="py attribute">
 <dt id="deepr.jobs.Trainer.run_config">
 <code class="sig-name descname">run_config</code><a class="headerlink" href="#deepr.jobs.Trainer.run_config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Optional parameters for <cite>tf.estimator.RunConfig</cite>.</p>
+<dd><p>Optional parameters for <code class="xref py py-class docutils literal notranslate"><span class="pre">RunConfig</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>Dict, Optional</p>
@@ -547,7 +547,7 @@ running the <cite>Trainer</cite>.</p>
 <dl class="py attribute">
 <dt id="deepr.jobs.Trainer.config_proto">
 <code class="sig-name descname">config_proto</code><a class="headerlink" href="#deepr.jobs.Trainer.config_proto" title="Permalink to this definition">¶</a></dt>
-<dd><p>Optional parameters for <cite>tf.estimator.RunConfig</cite>.</p>
+<dd><p>Optional parameters for <code class="xref py py-class docutils literal notranslate"><span class="pre">RunConfig</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>Dict, Optional</p>

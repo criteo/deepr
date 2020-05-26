@@ -497,15 +497,15 @@
 <td><p>Packages current environment, upload <cite>.pex</cite> and run yarn job.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.YarnTrainer.html#deepr.jobs.YarnTrainer" title="deepr.jobs.YarnTrainer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">YarnTrainer</span></code></a>(trainer, config[, train_on_yarn])</p></td>
-<td><p>Run a <cite>Trainer</cite> job on yarn using distributed settings.</p></td>
+<td><p>Run a <a class="reference internal" href="_autosummary/deepr.jobs.Trainer.html#deepr.jobs.Trainer" title="deepr.jobs.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trainer</span></code></a> job on yarn using distributed settings.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="layer">
 <h2>Layer<a class="headerlink" href="#layer" title="Permalink to this headline">¶</a></h2>
-<p>Tensorflow logic is preferably defined in a <cite>Layer</cite> for re-usability and composability. It is the equivalent of <cite>Keras</cite>, <cite>Trax</cite>, etc. layers.
-It takes as input / returns a dictionary of <cite>tf.Tensor</cite>. This means that the <cite>__init__</cite> method of a <cite>Layer</cite> must define which keys are used for inputs / outputs.</p>
+<p>Tensorflow logic is preferably defined in a <a class="reference internal" href="_autosummary/deepr.layers.Layer.html#deepr.layers.Layer" title="deepr.layers.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> for re-usability and composability. It is the equivalent of <cite>Keras</cite>, <cite>Trax</cite>, etc. layers.
+It takes as input / returns a dictionary of <code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code>. This means that the <cite>__init__</cite> method of a <cite>Layer</cite> must define which keys are used for inputs / outputs.</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -676,8 +676,8 @@ It takes as input / returns a dictionary of <cite>tf.Tensor</cite>. This means t
 </div>
 <div class="section" id="prepro">
 <h2>Prepro<a class="headerlink" href="#prepro" title="Permalink to this headline">¶</a></h2>
-<p>The <cite>Prepro</cite> classes are utilities to transform <cite>tf.data.Dataset</cite>.</p>
-<p>The most common way to define a <cite>Prepro</cite> is to wrap a <cite>Layer</cite> with a <cite>MapLayer</cite> or <cite>FilterLayer</cite> transform.</p>
+<p>The <a class="reference internal" href="_autosummary/deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a> classes are utilities to transform <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code>.</p>
+<p>The most common way to define a <a class="reference internal" href="_autosummary/deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a> is to wrap a <a class="reference internal" href="_autosummary/deepr.layers.Layer.html#deepr.layers.Layer" title="deepr.layers.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> with a <a class="reference internal" href="_autosummary/deepr.prepros.Map.html#deepr.prepros.Map" title="deepr.prepros.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code></a> or <a class="reference internal" href="_autosummary/deepr.prepros.Filter.html#deepr.prepros.Filter" title="deepr.prepros.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a> transform.</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -722,7 +722,7 @@ It takes as input / returns a dictionary of <cite>tf.Tensor</cite>. This means t
 </div>
 <div class="section" id="reader">
 <h2>Reader<a class="headerlink" href="#reader" title="Permalink to this headline">¶</a></h2>
-<p>A <cite>Reader</cite> is the equivalent of <cite>tensorflow_dataset</cite> readers. Their <cite>__init__</cite> method defines all the parameters necessary to create a <cite>tf.data.Dataset</cite>.</p>
+<p>A <a class="reference internal" href="_autosummary/deepr.readers.Reader.html#deepr.readers.Reader" title="deepr.readers.Reader"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reader</span></code></a> is the equivalent of <cite>tensorflow_dataset</cite> readers. Their <cite>__init__</cite> method defines all the parameters necessary to create a <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code>.</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />

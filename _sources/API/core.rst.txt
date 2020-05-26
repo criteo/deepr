@@ -106,8 +106,8 @@ Jobs are the programs that will actually run, they are composable through the pi
 Layer
 -----
 
-Tensorflow logic is preferably defined in a `Layer` for re-usability and composability. It is the equivalent of `Keras`, `Trax`, etc. layers.
-It takes as input / returns a dictionary of `tf.Tensor`. This means that the `__init__` method of a `Layer` must define which keys are used for inputs / outputs.
+Tensorflow logic is preferably defined in a :class:`~deepr.layers.Layer` for re-usability and composability. It is the equivalent of `Keras`, `Trax`, etc. layers.
+It takes as input / returns a dictionary of :class:`~tf.Tensor`. This means that the `__init__` method of a `Layer` must define which keys are used for inputs / outputs.
 
 .. currentmodule:: deepr.layers
 
@@ -193,9 +193,9 @@ Optimizer is the way to optimize your graph.
 Prepro
 ------
 
-The `Prepro` classes are utilities to transform `tf.data.Dataset`.
+The :class:`~deepr.prepros.Prepro` classes are utilities to transform :class:`~tf.data.Dataset`.
 
-The most common way to define a `Prepro` is to wrap a `Layer` with a `MapLayer` or `FilterLayer` transform.
+The most common way to define a :class:`~deepr.prepros.Prepro` is to wrap a :class:`~deepr.layers.Layer` with a :class:`~deepr.prepros.Map` or :class:`~deepr.prepros.Filter` transform.
 
 .. currentmodule:: deepr.prepros
 
@@ -219,7 +219,7 @@ The most common way to define a `Prepro` is to wrap a `Layer` with a `MapLayer` 
 Reader
 ------
 
-A `Reader` is the equivalent of `tensorflow_dataset` readers. Their `__init__` method defines all the parameters necessary to create a `tf.data.Dataset`.
+A :class:`~deepr.readers.Reader` is the equivalent of `tensorflow_dataset` readers. Their `__init__` method defines all the parameters necessary to create a :class:`~tf.data.Dataset`.
 
 .. currentmodule:: deepr.readers
 

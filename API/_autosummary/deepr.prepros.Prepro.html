@@ -225,7 +225,7 @@
 <dd><p>Base class for composable preprocessing functions.</p>
 <p><cite>Prepro</cite> are the basic building blocks of a preprocessing pipeline.
 A <cite>Prepro</cite> defines a function on a tf.data.Dataset.</p>
-<p>The basic usage of a <cite>Prepro</cite> is to apply it on a Dataset. For
+<p>The basic usage of a <a class="reference internal" href="#deepr.prepros.Prepro" title="deepr.prepros.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a> is to apply it on a Dataset. For
 example:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_generator</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 <span class="go">[0, 1, 2]</span>
@@ -249,7 +249,7 @@ provided:</p>
 <span class="go">[0, 0, 0]</span>
 </pre></div>
 </div>
-<p><cite>Map</cite>, <cite>Filter</cite>, <cite>Shuffle</cite> and <cite>Repeat</cite> have a special attribute
+<p><a class="reference internal" href="deepr.prepros.Map.html#deepr.prepros.Map" title="deepr.prepros.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code></a>, <a class="reference internal" href="deepr.prepros.Filter.html#deepr.prepros.Filter" title="deepr.prepros.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a>, <a class="reference internal" href="deepr.prepros.Shuffle.html#deepr.prepros.Shuffle" title="deepr.prepros.Shuffle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shuffle</span></code></a> and <a class="reference internal" href="deepr.prepros.Repeat.html#deepr.prepros.Repeat" title="deepr.prepros.Repeat"><code class="xref py py-class docutils literal notranslate"><span class="pre">Repeat</span></code></a> have a special attribute
 <cite>modes</cite> that you can use to specify the modes on which the
 preprocessing should be applied. For example:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">map_func</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
@@ -261,8 +261,8 @@ preprocessing should be applied. For example:</p>
 <span class="go">[0, 0, 0]</span>
 </pre></div>
 </div>
-<p>Authors of new <cite>Prepro</cite> subclasses typically override the <cite>apply</cite>
-method of the base <cite>Prepro</cite> class:</p>
+<p>Authors of new <a class="reference internal" href="#deepr.prepros.Prepro" title="deepr.prepros.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a> subclasses typically override the <cite>apply</cite>
+method of the base <a class="reference internal" href="#deepr.prepros.Prepro" title="deepr.prepros.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a> class:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">dataset</span>
 </pre></div>

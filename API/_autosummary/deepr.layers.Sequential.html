@@ -260,7 +260,7 @@ others. For example:</p>
 </div>
 <p>Because in some cases your model is more complicated (branches etc.)
 you can exploit the inputs / outputs naming capability of the base
-<cite>Layer</cite> class. For example:</p>
+<a class="reference internal" href="deepr.layers.Layer.html#deepr.layers.Layer" title="deepr.layers.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> class. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dprl</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">tensors</span><span class="p">):</span>
     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">tensors</span>
@@ -276,12 +276,12 @@ you can exploit the inputs / outputs naming capability of the base
 </pre></div>
 </div>
 <p>As always, the resulting layer can be operated on Tensors or
-dictionaries of Tensors. The inputs / outputs of the <cite>Sequential</cite>
+dictionaries of Tensors. The inputs / outputs of the <a class="reference internal" href="#deepr.layers.Sequential" title="deepr.layers.Sequential"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequential</span></code></a>
 layer corresponds to the inputs of the first layer and the outputs
 of the last layer in the stack (intermediary nodes that are not
 returned by the last layer will not be returned).</p>
 <p>An easy way to define arbitrary inputs / outputs nodes is to use the
-<cite>Select</cite> class. For example:</p>
+<a class="reference internal" href="deepr.layers.Select.html#deepr.layers.Select" title="deepr.layers.Select"><code class="xref py py-class docutils literal notranslate"><span class="pre">Select</span></code></a> class. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="n">dprl</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
     <span class="n">dprl</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="s2">&quot;x1, x2&quot;</span><span class="p">),</span>
     <span class="n">OffsetLayer</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;y1&quot;</span><span class="p">),</span>

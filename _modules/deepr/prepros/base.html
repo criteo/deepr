@@ -179,7 +179,7 @@
 <span class="sd">    `Prepro` are the basic building blocks of a preprocessing pipeline.</span>
 <span class="sd">    A `Prepro` defines a function on a tf.data.Dataset.</span>
 
-<span class="sd">    The basic usage of a `Prepro` is to apply it on a Dataset. For</span>
+<span class="sd">    The basic usage of a :class:`~Prepro` is to apply it on a Dataset. For</span>
 <span class="sd">    example:</span>
 
 <span class="sd">    &gt;&gt;&gt; dataset = tf.data.Dataset.from_generator(range(3))</span>
@@ -203,7 +203,7 @@
 <span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset, tf.estimator.ModeKeys.PREDICT)</span>
 <span class="sd">    [0, 0, 0]</span>
 
-<span class="sd">    `Map`, `Filter`, `Shuffle` and `Repeat` have a special attribute</span>
+<span class="sd">    :class:`~Map`, :class:`~Filter`, :class:`~Shuffle` and :class:`~Repeat` have a special attribute</span>
 <span class="sd">    `modes` that you can use to specify the modes on which the</span>
 <span class="sd">    preprocessing should be applied. For example:</span>
 
@@ -215,8 +215,8 @@
 <span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset, tf.estimator.ModeKeys.PREDICT)</span>
 <span class="sd">    [0, 0, 0]</span>
 
-<span class="sd">    Authors of new `Prepro` subclasses typically override the `apply`</span>
-<span class="sd">    method of the base `Prepro` class::</span>
+<span class="sd">    Authors of new :class:`~Prepro` subclasses typically override the `apply`</span>
+<span class="sd">    method of the base :class:`~Prepro` class::</span>
 
 <span class="sd">        def apply(self, dataset: tf.data.Dataset, mode: str = None) -&gt; tf.data.Dataset:</span>
 <span class="sd">            return dataset</span>
@@ -239,12 +239,12 @@
 
 
 <div class="viewcode-block" id="prepro"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.prepro">[docs]</a><span class="k">def</span> <span class="nf">prepro</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Type</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Decorator that creates a `Prepro` class from a function</span>
+    <span class="sd">&quot;&quot;&quot;Decorator that creates a :class:`~Prepro` class from a function</span>
 
-<span class="sd">    This decorator can be used to define `Prepro` classes in a non</span>
+<span class="sd">    This decorator can be used to define :class:`~Prepro` classes in a non</span>
 <span class="sd">    verbose way.</span>
 
-<span class="sd">    For example, the following snippet defines a subclass of `Prepro`</span>
+<span class="sd">    For example, the following snippet defines a subclass of :class:`~Prepro`</span>
 <span class="sd">    whose `apply` offsets each element of the dataset by `offset`:</span>
 
 <span class="sd">    &gt;&gt;&gt; @prepro</span>
@@ -287,10 +287,10 @@
 <span class="sd">    of the function IN THIS ORDER.</span>
 
 <span class="sd">    Another way of using the decorator is on functions that create</span>
-<span class="sd">    `Prepro` instances. This allows you to create factories of</span>
-<span class="sd">    preprocessors and make them `Prepro` classes.</span>
+<span class="sd">    :class:`~Prepro` instances. This allows you to create factories of</span>
+<span class="sd">    preprocessors and make them :class:`~Prepro` classes.</span>
 
-<span class="sd">    For example, the following snippet defines a subclass of `Prepro`</span>
+<span class="sd">    For example, the following snippet defines a subclass of :class:`~Prepro`</span>
 <span class="sd">    whose `apply` method is the same as the prepro returned by the</span>
 <span class="sd">    function.</span>
 

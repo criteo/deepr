@@ -180,7 +180,7 @@
     <span class="sd">&quot;&quot;&quot;Chain preprocessors to define complex preprocessing pipelines.</span>
 
 <span class="sd">    It will apply each preprocessing step one after the other on each</span>
-<span class="sd">    element. For performance reasons, it fuses `Map` and `Filter`</span>
+<span class="sd">    element. For performance reasons, it fuses :class:`~Map` and :class:`~Filter`</span>
 <span class="sd">    operations into single `tf.data` calls.</span>
 
 <span class="sd">    For an example, see the following snippet::</span>
@@ -207,9 +207,9 @@
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
 <span class="sd">    fuse : bool, Optional</span>
-<span class="sd">        If True (default), will fuse `Map` and `Filter`.</span>
+<span class="sd">        If True (default), will fuse :class:`~Map` and :class:`~Filter`.</span>
 <span class="sd">    preprocessors : Union[Prepro, Tuple[Prepro], List[Prepro], Generator[Prepro, None, None]]</span>
-<span class="sd">        Positional arguments of `Prepro` instance or Tuple / List /</span>
+<span class="sd">        Positional arguments of :class:`~Prepro` instance or Tuple / List /</span>
 <span class="sd">        Generator of prepro instances</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 

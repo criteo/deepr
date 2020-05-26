@@ -231,21 +231,21 @@
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
 <p>Base class for composable layers in a deep learning network.</p>
 <p>Heavily inspired by TRAX layers, adapted for TF1.X and tf.estimator.</p>
-<p>Layers are the basic building block of models. A <cite>Layer</cite> is a
+<p>Layers are the basic building block of models. A <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> is a
 function from one or more inputs to one or more outputs.</p>
 <dl class="simple">
-<dt>The inputs of a <cite>Layer</cite> are tensors, packaged as follows</dt><dd><ul class="simple">
+<dt>The inputs of a <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> are tensors, packaged as follows</dt><dd><ul class="simple">
 <li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
 <li><p>n_in &gt; 1: a tuple of tensors</p></li>
 </ul>
 </dd>
-<dt>The outputs of a <cite>Layer</cite> are tensors, packaged as follows</dt><dd><ul class="simple">
+<dt>The outputs of a <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> are tensors, packaged as follows</dt><dd><ul class="simple">
 <li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
 <li><p>n_out &gt; 1: a tuple of tensors</p></li>
 </ul>
 </dd>
 </dl>
-<p>The basic usage of a <cite>Layer</cite> is to build graphs as intuitively as
+<p>The basic usage of a <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> is to build graphs as intuitively as
 possible. For example:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_tensor</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dense</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
@@ -253,7 +253,7 @@ possible. For example:</p>
 <span class="go">tf.Tensor(shape=[32, 16])</span>
 </pre></div>
 </div>
-<p>Because some layers (like <cite>Dropout</cite>) might behave differently
+<p>Because some layers (like <code class="xref py py-class docutils literal notranslate"><span class="pre">Dropout</span></code>) might behave differently
 depending on the mode (TRAIN, EVAL, PREDICT), an optional argument
 can be provided:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tensor</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
@@ -262,7 +262,7 @@ can be provided:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">not_dropped</span> <span class="o">=</span> <span class="n">dropout</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">EVAL</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Because in a lot of cases, a <cite>Layer</cite> needs to be applied on a
+<p>Because in a lot of cases, a <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> needs to be applied on a
 dictionary, yielded by a tf.data.Dataset for example, you can also
 do:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tensors</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">])}</span>
@@ -275,7 +275,7 @@ do:</p>
 and their order needs to be coherent with the order of tensors in
 tuples.</p>
 <p>Authors of new layer subclasses typically override one of the two
-methods of the base <cite>Layer</cite> class:</p>
+methods of the base <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> class:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="c1"># tensors is either a Tensor (n_in=1) or a tuple of Tensors</span>
 
@@ -286,9 +286,9 @@ methods of the base <cite>Layer</cite> class:</p>
 <p>The implementation of either of these two methods gives the
 implementation of the other for free thanks to automatic tuple to
 dictionary conversion.</p>
-<p>The easiest way to define custom layers is to use the <cite>layer</cite>
+<p>The easiest way to define custom layers is to use the <a class="reference internal" href="#deepr.layers.base.layer" title="deepr.layers.base.layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">layer</span></code></a>
 decorator (see documentation).</p>
-<p>Note that layers using parameters (a <cite>Dense</cite> layer for example)
+<p>Note that layers using parameters (a <code class="xref py py-class docutils literal notranslate"><span class="pre">Dense</span></code> layer for example)
 should not create variables at instantiation time nor store
 variables or any other graph references as attributes.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dense</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
@@ -304,7 +304,7 @@ to define graphs with the tf.estimator API.</p>
 <p>If you want to define a layer and use it twice (effectively reusing
 its variables), you need to be explicit, and set the <cite>reuse=True</cite>
 arguments at call time. Behind the scene, it’s simply wrapping the
-TF1.X variable management into a <cite>tf.variable_scope</cite>.</p>
+TF1.X variable management into a <code class="xref py py-meth docutils literal notranslate"><span class="pre">variable_scope()</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dense</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dense</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">]))</span> <span class="o">==</span> <span class="n">dense</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">]),</span> <span class="n">reuse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">True</span>
@@ -428,9 +428,9 @@ It returns a new dictionary (does not mutate the input
 <dt id="deepr.layers.base.layer">
 <code class="sig-prename descclassname">deepr.layers.base.</code><code class="sig-name descname">layer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_in</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_out</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inputs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outputs</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/base.html#layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.base.layer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator that creates a layer from a function</p>
-<p>This decorator can be used to define <cite>Layer</cite> classes in a non
+<p>This decorator can be used to define <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> classes in a non
 verbose way.</p>
-<p>For example, the following snippet defines a subclass of <cite>Layer</cite>
+<p>For example, the following snippet defines a subclass of <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a>
 whose <cite>forward</cite> method returns <cite>tensors + offset</cite>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">... </span><span class="k">def</span> <span class="nf">AddOffset</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
@@ -469,8 +469,8 @@ whose <cite>forward</cite> method returns <cite>tensors + offset</cite>.</p>
 of the function IN THIS ORDER.</p>
 <p>Another way of using the decorator is on functions that create layer
 instances. This allows you to create factories of layers and make
-them <cite>Layer</cite> classes.</p>
-<p>For example, the following snippet defines a subclass of <cite>Layer</cite>
+them <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> classes.</p>
+<p>For example, the following snippet defines a subclass of <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a>
 whose <cite>forward</cite> method is the same as the layer returned by the
 function.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -481,7 +481,7 @@ function.</p>
 <span class="go">2</span>
 </pre></div>
 </div>
-<p>A nice feature of the <cite>layer</cite> decorator is laziness: the code
+<p>A nice feature of the <a class="reference internal" href="#deepr.layers.base.layer" title="deepr.layers.base.layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">layer</span></code></a> decorator is laziness: the code
 inside the function is not executed until a call on a tensor. In
 other words:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -621,8 +621,8 @@ layer H(a, b, c) -&gt; (x, y, z). For example:</p>
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.combinators.</code><code class="sig-name descname">Rename</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">layer</span></em>, <em class="sig-param"><span class="n">inputs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outputs</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/combinators.html#Rename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.combinators.Rename" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
 <p>Wrap Layer in a Node to rename inputs / outputs.</p>
-<p>Allows you to rename inputs / outputs nodes of a <cite>Layer</cite> instance.
-This can be useful if you end up with a <cite>Layer</cite> instance with
+<p>Allows you to rename inputs / outputs nodes of a <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code> instance.
+This can be useful if you end up with a <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code> instance with
 inputs and outputs name that are not suitable for your needs.</p>
 <p>For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dprl</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -636,8 +636,8 @@ inputs and outputs name that are not suitable for your needs.</p>
 <span class="n">layer</span><span class="p">({</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>  <span class="c1"># {&quot;z&quot;: 2}</span>
 </pre></div>
 </div>
-<p>Note that the same behavior can be achieved using <cite>Select</cite> and
-<cite>Sequential</cite> as follows:</p>
+<p>Note that the same behavior can be achieved using <a class="reference internal" href="#deepr.layers.combinators.Select" title="deepr.layers.combinators.Select"><code class="xref py py-class docutils literal notranslate"><span class="pre">Select</span></code></a> and
+<a class="reference internal" href="#deepr.layers.combinators.Sequential" title="deepr.layers.combinators.Sequential"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequential</span></code></a> as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="n">dprl</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
     <span class="n">dprl</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="s2">&quot;x, y&quot;</span><span class="p">,</span> <span class="s2">&quot;a, b&quot;</span><span class="p">),</span>
     <span class="n">Add</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;a, b&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">),</span>
@@ -658,7 +658,7 @@ inputs and outputs name that are not suitable for your needs.</p>
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.combinators.</code><code class="sig-name descname">Select</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inputs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outputs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_in</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/combinators.html#Select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.combinators.Select" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
 <p>Layer to extract inputs / outputs from previous layers</p>
-<p>The <cite>Select</cite> layer is particularly useful when defining arbitrary
+<p>The <a class="reference internal" href="#deepr.layers.combinators.Select" title="deepr.layers.combinators.Select"><code class="xref py py-class docutils literal notranslate"><span class="pre">Select</span></code></a> layer is particularly useful when defining arbitrary
 DAGs of layers : it is a convenient way to select which nodes should
 be inputs, and which should be outputs. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="n">dprl</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="s2">&quot;x, y&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">indices</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -666,7 +666,7 @@ be inputs, and which should be outputs. For example:</p>
 <span class="n">layer</span><span class="p">({</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>  <span class="c1"># {&quot;z&quot;: 2}</span>
 </pre></div>
 </div>
-<p>See <cite>Sequential</cite> documentation for more precisions.</p>
+<p>See <a class="reference internal" href="#deepr.layers.combinators.Sequential" title="deepr.layers.combinators.Sequential"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequential</span></code></a> documentation for more precisions.</p>
 <dl class="py method">
 <dt id="deepr.layers.combinators.Select.forward">
 <code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/combinators.html#Select.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.combinators.Select.forward" title="Permalink to this definition">¶</a></dt>
@@ -697,7 +697,7 @@ others. For example:</p>
 </div>
 <p>Because in some cases your model is more complicated (branches etc.)
 you can exploit the inputs / outputs naming capability of the base
-<cite>Layer</cite> class. For example:</p>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code> class. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dprl</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">tensors</span><span class="p">):</span>
     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">tensors</span>
@@ -713,12 +713,12 @@ you can exploit the inputs / outputs naming capability of the base
 </pre></div>
 </div>
 <p>As always, the resulting layer can be operated on Tensors or
-dictionaries of Tensors. The inputs / outputs of the <cite>Sequential</cite>
+dictionaries of Tensors. The inputs / outputs of the <a class="reference internal" href="#deepr.layers.combinators.Sequential" title="deepr.layers.combinators.Sequential"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequential</span></code></a>
 layer corresponds to the inputs of the first layer and the outputs
 of the last layer in the stack (intermediary nodes that are not
 returned by the last layer will not be returned).</p>
 <p>An easy way to define arbitrary inputs / outputs nodes is to use the
-<cite>Select</cite> class. For example:</p>
+<a class="reference internal" href="#deepr.layers.combinators.Select" title="deepr.layers.combinators.Select"><code class="xref py py-class docutils literal notranslate"><span class="pre">Select</span></code></a> class. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="n">dprl</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
     <span class="n">dprl</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="s2">&quot;x1, x2&quot;</span><span class="p">),</span>
     <span class="n">OffsetLayer</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;y1&quot;</span><span class="p">),</span>

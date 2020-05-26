@@ -229,7 +229,7 @@
 <span class="sd">    path_model : str</span>
 <span class="sd">        Path to the model directory. Can be either local or HDFS.</span>
 <span class="sd">    pred_fn : Callable[[Dict[str, tf.Tensor], str], Dict[str, tf.Tensor]]</span>
-<span class="sd">        Typically a `Layer` instance, but in general, any callable.</span>
+<span class="sd">        Typically a :class:`~deepr.layers.Layer` instance, but in general, any callable.</span>
 
 <span class="sd">        Its signature is the following:</span>
 <span class="sd">          - features : Dict</span>
@@ -238,7 +238,7 @@
 <span class="sd">                Predictions</span>
 
 <span class="sd">    loss_fn : Callable[[Dict[str, tf.Tensor], str], Dict[str, tf.Tensor]]</span>
-<span class="sd">        Typically a `Layer` instance, but in general, any callable.</span>
+<span class="sd">        Typically a :class:`~deepr.layers.Layer` instance, but in general, any callable.</span>
 
 <span class="sd">        Its signature is the following:</span>
 <span class="sd">          - features_and_predictions : Dict</span>
@@ -250,7 +250,7 @@
 <span class="sd">        to the `optimizer_fn`.</span>
 
 <span class="sd">    optimizer_fn : Callable[[Dict[str, tf.Tensor]], Dict[str, tf.Tensor]]</span>
-<span class="sd">        Typically an `Optimizer` instance, but in general, any callable.</span>
+<span class="sd">        Typically an :class:`~deepr.optimizers.Optimizer` instance, but in general, any callable.</span>
 
 <span class="sd">        Its signature is the following:</span>
 <span class="sd">          - inputs : Dict[str, tf.Tensor]</span>
@@ -259,7 +259,7 @@
 <span class="sd">                Need key &quot;train_op&quot;</span>
 
 <span class="sd">    train_input_fn : Callable[[], tf.data.Dataset]</span>
-<span class="sd">        Typically a `Reader` instance, but in general, any callable.</span>
+<span class="sd">        Typically a :class:`~deepr.readers.Reader` instance, but in general, any callable.</span>
 
 <span class="sd">        Used for training.</span>
 
@@ -269,7 +269,7 @@
 <span class="sd">                should create a new dataset and a new graph.</span>
 
 <span class="sd">    eval_input_fn : Callable[[], tf.data.Dataset]</span>
-<span class="sd">        Typically a `Reader` instance, but in general, any callable.</span>
+<span class="sd">        Typically a :class:`~deepr.readers.Reader` instance, but in general, any callable.</span>
 
 <span class="sd">        Used for evaluation.</span>
 
@@ -279,7 +279,7 @@
 <span class="sd">                should create a new dataset and a new graph.</span>
 
 <span class="sd">    prepro_fn: Callable[[tf.data.Dataset, str], tf.data.Dataset], Optional</span>
-<span class="sd">        Typically a `Prepro` instance, but in general, any callable.</span>
+<span class="sd">        Typically a :class:`~deepr.prepros.Prepro` instance, but in general, any callable.</span>
 
 <span class="sd">        Its signature is the following:</span>
 <span class="sd">          - inputs :</span>
@@ -295,7 +295,7 @@
 <span class="sd">        default Graph.</span>
 
 <span class="sd">    train_metrics: List[Callable], Optional</span>
-<span class="sd">        Typically, `Metric` instances, but in general, any callables.</span>
+<span class="sd">        Typically, :class:`~deepr.metrics.Metric` instances, but in general, any callables.</span>
 
 <span class="sd">        Used for training.</span>
 
@@ -306,7 +306,7 @@
 <span class="sd">                Dictionary of tuples of (tensor_value, update_op).</span>
 
 <span class="sd">    eval_metrics: List[Callable], Optional</span>
-<span class="sd">        Typically, `Metric` instances, but in general, any callables.</span>
+<span class="sd">        Typically, :class:`~deepr.metrics.Metric` instances, but in general, any callables.</span>
 
 <span class="sd">        Used for evaluation.</span>
 
@@ -317,9 +317,9 @@
 <span class="sd">                Dictionary of tuples of (tensor_value, update_op).</span>
 
 <span class="sd">    exporters: List[Callable], Optional</span>
-<span class="sd">        Typically, `Exporter` instances, but in general, any callables.</span>
+<span class="sd">        Typically, :class:`~deepr.exporters.Exporter` instances, but in general, any callables.</span>
 
-<span class="sd">        Used at the end of training on the trained `tf.Estimator`.</span>
+<span class="sd">        Used at the end of training on the trained :mod:`~`tf.Estimator`.</span>
 
 <span class="sd">        Each callable must have the following signature:</span>
 <span class="sd">          - inputs : tf.estimator.Estimator</span>
@@ -331,9 +331,9 @@
 <span class="sd">        Used for training.</span>
 
 <span class="sd">        Some hook can be fully defined during instantiation of Trainer,</span>
-<span class="sd">        for example a `StepsPerSecHook`. However, other hooks requires</span>
+<span class="sd">        for example a :class:`~deepr.hooks.StepsPerSecHook`. However, other hooks requires</span>
 <span class="sd">        objects to be instantiated that will only be created after</span>
-<span class="sd">        running the `Trainer`.</span>
+<span class="sd">        running the :class:`~deepr.jobs.Trainer`.</span>
 
 <span class="sd">        The `hooks` module defines factories for more complicated hooks.</span>
 
@@ -343,20 +343,20 @@
 <span class="sd">        Used for evaluation.</span>
 
 <span class="sd">        Some hook can be fully defined during instantiation of Trainer,</span>
-<span class="sd">        for example a `StepsPerSecHook`. However, other hooks requires</span>
+<span class="sd">        for example a :class:`~deepr.hooks.StepsPerSecHook`. However, other hooks requires</span>
 <span class="sd">        objects to be instantiated that will only be created after</span>
-<span class="sd">        running the `Trainer`.</span>
+<span class="sd">        running the :class:`~deepr.jobs.Trainer`.</span>
 
 <span class="sd">        The `hooks` module defines factories for more complicated hooks.</span>
 
 <span class="sd">    eval_spec: Dict, Optional</span>
-<span class="sd">        Optional parameters for `tf.estimator.EvalSpec`.</span>
+<span class="sd">        Optional parameters for :class:`~tf.estimator.EvalSpec`.</span>
 <span class="sd">    train_spec: Dict, Optional</span>
-<span class="sd">        Optional parameters for `tf.estimator.TrainSpec`.</span>
+<span class="sd">        Optional parameters for :class:`~tf.estimator.TrainSpec`.</span>
 <span class="sd">    run_config: Dict, Optional</span>
-<span class="sd">        Optional parameters for `tf.estimator.RunConfig`.</span>
+<span class="sd">        Optional parameters for :class:`~tf.estimator.RunConfig`.</span>
 <span class="sd">    config_proto: Dict, Optional</span>
-<span class="sd">        Optional parameters for `tf.estimator.RunConfig`.</span>
+<span class="sd">        Optional parameters for :class:`~tf.estimator.RunConfig`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">path_model</span><span class="p">:</span> <span class="nb">str</span>
