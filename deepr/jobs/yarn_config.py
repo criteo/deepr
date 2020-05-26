@@ -81,7 +81,7 @@ def upload_pex(
         )
     elif not Path(path_pex_existing).is_hdfs:
         LOGGER.info(f"Uploading env to {path_pex}")
-        packaging.upload_zip_to_hdfs(path_pex, archive_on_hdfs=path_pex_existing)
+        packaging.upload_zip_to_hdfs(path_pex_existing, archive_on_hdfs=path_pex)
     else:
         LOGGER.info(f"Skipping upload, PEX {path_pex_existing} already exists")
         path_pex = path_pex_existing
