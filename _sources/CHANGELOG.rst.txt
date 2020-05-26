@@ -25,6 +25,8 @@ Removed
 ~~~~~~~
 Fixed
 ~~~~~
+- wrong arguments in ``YarnConfig`` for ``upload_zip_to_hdfs``.
+
 Security
 ~~~~~~~~
 

@@ -243,7 +243,7 @@
         <span class="p">)</span>
     <span class="k">elif</span> <span class="ow">not</span> <span class="n">Path</span><span class="p">(</span><span class="n">path_pex_existing</span><span class="p">)</span><span class="o">.</span><span class="n">is_hdfs</span><span class="p">:</span>
         <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Uploading env to </span><span class="si">{</span><span class="n">path_pex</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">packaging</span><span class="o">.</span><span class="n">upload_zip_to_hdfs</span><span class="p">(</span><span class="n">path_pex</span><span class="p">,</span> <span class="n">archive_on_hdfs</span><span class="o">=</span><span class="n">path_pex_existing</span><span class="p">)</span>
+        <span class="n">packaging</span><span class="o">.</span><span class="n">upload_zip_to_hdfs</span><span class="p">(</span><span class="n">path_pex_existing</span><span class="p">,</span> <span class="n">archive_on_hdfs</span><span class="o">=</span><span class="n">path_pex</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skipping upload, PEX </span><span class="si">{</span><span class="n">path_pex_existing</span><span class="si">}</span><span class="s2"> already exists&quot;</span><span class="p">)</span>
         <span class="n">path_pex</span> <span class="o">=</span> <span class="n">path_pex_existing</span>
