@@ -554,12 +554,12 @@ div.rendered_html tbody tr:hover {
 <p>Similar to the metrics, we can define hooks for all 3 modes : training, evaluation and final evaluation.</p>
 <p>For training, let’s add</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">LoggingTensorHookFactory</span></code> : log additional metrics, optionaly send to MLFlow / Graphite</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">SummarySaverHookFactory</span></code> : save summaries for Tensorboard</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">NumParamsHook</span></code> : log initial number of parameters in the model</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">LogVariablesInitHook</span></code> : log some basic stats about initial parameters (number of zeros, average norm)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">StepsPerSecHook</span></code> : log training speed (number of batches and examples per second)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">EarlyStoppingHookFactory</span></code> : stop training if the <code class="docutils literal notranslate"><span class="pre">loss</span></code> does not decrease on the validation set of 100 consecutive training steps.</p></li>
+<li><p><a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.hooks.LoggingTensorHookFactory.html">LoggingTensorHookFactory</a> : log additional metrics, optionaly send to MLFlow / Graphite</p></li>
+<li><p><a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.hooks.SummarySaverHookFactory.html">SummarySaverHookFactory</a> : save summaries for Tensorboard</p></li>
+<li><p><a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.hooks.NumParamsHook.html">NumParamsHook</a> : log initial number of parameters in the model</p></li>
+<li><p><a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.hooks.LogVariablesInitHook.html">LogVariablesInitHook</a> : log some basic stats about initial parameters (number of zeros, average norm)</p></li>
+<li><p><a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.hooks.StepsPerSecHook.html">StepsPerSecHook</a> : log training speed (number of batches and examples per second)</p></li>
+<li><p><a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.hooks.EarlyStoppingHookFactory.html">EarlyStoppingHookFactory</a> : stop training if the <code class="docutils literal notranslate"><span class="pre">loss</span></code> does not decrease on the validation set of 100 consecutive training steps.</p></li>
 </ul>
 <p>For evaluation and final evaluation, let’s just add a <code class="docutils literal notranslate"><span class="pre">LoggingTensorHookFactory</span></code> to log the metrics values and optionaly send them to MLFlow Graphite (with the <code class="docutils literal notranslate"><span class="pre">use_mlflow</span></code> and <code class="docutils literal notranslate"><span class="pre">use_graphite</span></code> arguments)</p>
 <div class="nbinput nblast docutils container">
@@ -684,7 +684,7 @@ div.rendered_html tbody tr:hover {
 <li><p>also, it might contain parts of the graph that are not actually useful for inference.</p></li>
 <li><p>finally, maybe the actual inputs of our graph will be intermediate nodes. For example, in NLP, if we have fine-tuned some embeddings and they are part of the graph, the <code class="docutils literal notranslate"><span class="pre">SavedModel</span></code> probably will expect the word indices. However, in a deployment scenario, the service producing embeddings might be independent from our model. In other words, during training, the graph inputs were the word indices. During inference, the graph inputs are the actual embeddings.</p></li>
 </ul>
-<p>We can do some of these optimizations using the <code class="docutils literal notranslate"><span class="pre">OptimizeSavedModel</span></code> job.</p>
+<p>We can do some of these optimizations using the <a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.jobs.OptimizeSavedModel.html#deepr.jobs.OptimizeSavedModel">OptimizeSavedModel</a> job.</p>
 <p>It produces one self-contained file (a <code class="docutils literal notranslate"><span class="pre">.pb</span></code> file, like the <code class="docutils literal notranslate"><span class="pre">SavedModel</span></code>), that contains an updated version of the graph (only the part that produces some tensor <code class="docutils literal notranslate"><span class="pre">fetch</span></code> given some other tensors <code class="docutils literal notranslate"><span class="pre">feeds</span></code>), makes it possible to update the tensor’s names, and adds the variable values directly inside the graph definition (effectively making them constants).</p>
 <p>Note to more experienced users: the <code class="docutils literal notranslate"><span class="pre">.pb</span></code> format has a limit in size, which means that Tensorflow graphs cannot be bigger than 2GB. If your model has too many parameters, the <code class="docutils literal notranslate"><span class="pre">OptimizeSavedModel</span></code> won’t be able to produce one protobuffer file for your graph.</p>
 <div class="nbinput nblast docutils container">

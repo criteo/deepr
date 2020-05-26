@@ -431,28 +431,27 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="section" id="Quickstart">
 <h1>Quickstart<a class="headerlink" href="#Quickstart" title="Permalink to this headline">¶</a></h1>
-<p>This notebook is a gentle introduction to the few concepts and abstractions of deepr_python.</p>
+<p>This notebook is a gentle introduction to the few concepts and abstractions of deepr.</p>
 <p>It demonstrates how to train a model that learns how to multiply a number by 2.</p>
-<p>The reference documentation can be found at <a class="reference external" href="http://go/nndoc">http://go/nndoc</a>.</p>
-<p>To train a model with deepr-python the main entry point is the <a class="reference external" href="http://mozart-rbeaumont-default.service.am6.consul.prod.crto.in:8000/_modules/deepr_python/core/jobs/trainer.html#Trainer">Trainer</a> job.</p>
-<p>It is important at this point to stress that <code class="docutils literal notranslate"><span class="pre">deepr_python</span></code> is not yet another library to build neural networks, but merely a utility to build functions that operate on basic Tensorflow types, i.e. <code class="docutils literal notranslate"><span class="pre">tf.Tensor</span></code> and <code class="docutils literal notranslate"><span class="pre">tf.data.Dataset</span></code>.</p>
-<p>Using functional programming makes it easy to lazily define graphs that will only be built at run time by the <code class="docutils literal notranslate"><span class="pre">tf.estimator</span></code> high-level API.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> job uses most of the <a class="reference external" href="http://mozart-rbeaumont-default.service.am6.consul.prod.crto.in:8000/CORE_API.html">important concepts</a> of deepr-python, while only expecting basic types (mainly functions operating on datasets, dictionaries of tensors, etc.).</p>
+<p>To train a model with deepr the main entry point is the <a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.jobs.Trainer.html#deepr.jobs.Trainer">Trainer</a> job.</p>
+<p>It is important at this point to stress that <code class="docutils literal notranslate"><span class="pre">deepr</span></code> is not yet another library to build neural networks, but merely a utility to build functions that operate on basic Tensorflow types, i.e. <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/Tensor">tf.Tensor</a> and <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/data/Dataset">tf.data.Dataset</a>.</p>
+<p>Using functional programming makes it easy to lazily define graphs that will only be built at run time by the <a class="reference external" href="https://www.tensorflow.org/guide/estimator">tf.estimator</a> high-level API.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> job uses most of the <a class="reference external" href="https://criteo.github.io/deepr/API/core.html">important concepts</a> of deepr, while only expecting basic types (mainly functions operating on datasets, dictionaries of tensors, etc.).</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">path_model</span> <span class="pre">:</span> <span class="pre">str</span></code> Path to the model directory. Can be either local or HDFS.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pred_fn</span> <span class="pre">:</span> <span class="pre">Callable[[Dict[str,</span> <span class="pre">tf.Tensor],</span> <span class="pre">str],</span> <span class="pre">Dict[str,</span> <span class="pre">tf.Tensor]]</span></code> Typically a <code class="docutils literal notranslate"><span class="pre">Layer</span></code> instance, but in general, any callable.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">loss_fn</span> <span class="pre">:</span> <span class="pre">Callable[[Dict[str,</span> <span class="pre">tf.Tensor],</span> <span class="pre">str],</span> <span class="pre">Dict[str,</span> <span class="pre">tf.Tensor]]</span></code> Typically a <code class="docutils literal notranslate"><span class="pre">Layer</span></code> instance, but in general, any callable.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">optimizer_fn</span> <span class="pre">:</span> <span class="pre">Callable[[tf.Tensor],</span> <span class="pre">tf.Tensor]</span></code> Typically an <code class="docutils literal notranslate"><span class="pre">Optimizer</span></code> instance, but in general, any callable.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">train_input_fn</span> <span class="pre">:</span> <span class="pre">Callable[[],</span> <span class="pre">tf.data.Dataset]</span></code> Typically a <code class="docutils literal notranslate"><span class="pre">Reader</span></code> instance, but in general, any callable.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">eval_input_fn</span> <span class="pre">:</span> <span class="pre">Callable[[],</span> <span class="pre">tf.data.Dataset]</span></code> Typically a <code class="docutils literal notranslate"><span class="pre">Reader</span></code> instance, but in general, any callable.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">prepro_fn:</span> <span class="pre">Callable[[tf.data.Dataset,</span> <span class="pre">str],</span> <span class="pre">tf.data.Dataset],</span> <span class="pre">Optional</span></code> Typically a <code class="docutils literal notranslate"><span class="pre">Prepro</span></code> instance, but in general, any callable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pred_fn</span> <span class="pre">:</span> <span class="pre">Callable[[Dict[str,</span> <span class="pre">tf.Tensor],</span> <span class="pre">str],</span> <span class="pre">Dict[str,</span> <span class="pre">tf.Tensor]]</span></code> Typically a <a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.layers.Layer.html#deepr.layers.Layer">Layer</a> instance, but in general, any callable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loss_fn</span> <span class="pre">:</span> <span class="pre">Callable[[Dict[str,</span> <span class="pre">tf.Tensor],</span> <span class="pre">str],</span> <span class="pre">Dict[str,</span> <span class="pre">tf.Tensor]]</span></code> Typically a <a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.layers.Layer.html#deepr.layers.Layer">Layer</a> instance, but in general, any callable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optimizer_fn</span> <span class="pre">:</span> <span class="pre">Callable[[tf.Tensor],</span> <span class="pre">tf.Tensor]</span></code> Typically an <a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.optimizers.Optimizer.html#deepr.optimizers.Optimizer">Optimizer</a> instance, but in general, any callable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">train_input_fn</span> <span class="pre">:</span> <span class="pre">Callable[[],</span> <span class="pre">tf.data.Dataset]</span></code> Typically a <a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.readers.Reader.html#deepr.readers.Reader">Reader</a> instance, but in general, any callable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eval_input_fn</span> <span class="pre">:</span> <span class="pre">Callable[[],</span> <span class="pre">tf.data.Dataset]</span></code> Typically a <a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.readers.Reader.html#deepr.readers.Reader">Reader</a> instance, but in general, any callable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prepro_fn:</span> <span class="pre">Callable[[tf.data.Dataset,</span> <span class="pre">str],</span> <span class="pre">tf.data.Dataset],</span> <span class="pre">Optional</span></code> Typically a <a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.prepros.Prepro.html#deepr.prepros.Prepro">Prepro</a> instance, but in general, any callable.</p></li>
 </ul>
 <p>There are more parameters that use the other concepts (hooks, metrics, exporter, …) and this will be covered in another guide.</p>
 <p>So to train our model, we need to define all that, let’s start !</p>
 <div class="section" id="Dataset">
 <h2>Dataset<a class="headerlink" href="#Dataset" title="Permalink to this headline">¶</a></h2>
 <p>The first step is to build a dataset. For this we will build a synthetic dataset of numbers of (x, 2x).</p>
-<p>Also see other ways to build a dataset in the <a class="reference external" href="http://mozart-rbeaumont-default.service.am6.consul.prod.crto.in:8000/CORE_API.html#reader">reader reference</a></p>
+<p>Also see other ways to build a dataset in the <a class="reference external" href="https://criteo.github.io/deepr/API/core.html#reader">reader reference</a></p>
 <p>Some imports first</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -478,7 +477,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p>Let’s define a generator function and then use a <a class="reference external" href="http://mozart-rbeaumont-default.service.am6.consul.prod.crto.in:8000/_autosummary/deepr.readers.GeneratorReader.html?highlight=generatorreader">GeneratorReader</a> to create a <code class="docutils literal notranslate"><span class="pre">tf.data.Dataset</span></code></p>
+<p>Let’s define a generator function and then use a <a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.readers.GeneratorReader.html#deepr.readers.GeneratorReader">GeneratorReader</a> to create a <code class="docutils literal notranslate"><span class="pre">tf.data.Dataset</span></code></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -570,7 +569,7 @@ div.rendered_html tbody tr:hover {
 <h2>Prepro<a class="headerlink" href="#Prepro" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have datasets, we need to preprocess them before feeding data to our model. In this example, we only need to create batches of data, and allow multiple iterations over the dataset to be able to perform multiple epochs.</p>
 <p>Let’s use the <code class="docutils literal notranslate"><span class="pre">prepro</span></code> module to functionally define a preprocessing function.</p>
-<p>See the <a class="reference external" href="http://mozart-rbeaumont-default.service.am6.consul.prod.crto.in:8000/CORE_API.html#prepro">prepro reference</a></p>
+<p>See the <a class="reference external" href="https://criteo.github.io/deepr/API/core.html#prepro">prepro reference</a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -645,7 +644,7 @@ div.rendered_html tbody tr:hover {
 <li><p><code class="docutils literal notranslate"><span class="pre">loss_fn(tensors:</span> <span class="pre">Dict,</span> <span class="pre">mode)</span> <span class="pre">-&gt;</span> <span class="pre">Dict</span></code> operates on the dataset and <code class="docutils literal notranslate"><span class="pre">pred_fn</span></code> results, creates at least one new tensor <code class="docutils literal notranslate"><span class="pre">loss</span></code>.</p></li>
 </ol>
 <p>We’re going to use the <code class="docutils literal notranslate"><span class="pre">layer</span></code> module to quickly define those functions.</p>
-<p>Make sure to check the <a class="reference external" href="http://mozart-rbeaumont-default.service.am6.consul.prod.crto.in:8000/CORE_API.html#layer">layer reference</a> for more information.</p>
+<p>Make sure to check the <a class="reference external" href="https://criteo.github.io/deepr/API/core.html#layer">layer reference</a> for more information.</p>
 <div class="section" id="Pred-function">
 <h3>Pred function<a class="headerlink" href="#Pred-function" title="Permalink to this headline">¶</a></h3>
 <p>The first part of the model is the prediction function.</p>
@@ -697,7 +696,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p>The power of the base <code class="docutils literal notranslate"><span class="pre">Layer</span></code> class is that layers are actually functions that can operate on both dictionaries and tuples of tensors.</p>
+<p>The power of the base <a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.layers.Layer.html#deepr.layers.Layer">Layer</a> class is that layers are actually functions that can operate on both dictionaries and tuples of tensors.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">outputs</span></code> arguments, when given, specify the keys of the dictionaries to use for the layer.</p>
 <p>Let’s see how it works</p>
 <div class="nbinput docutils container">
@@ -792,7 +791,7 @@ Tensor(&#34;mul:0&#34;, shape=(), dtype=float32)
 </div>
 <div class="section" id="Optimizer">
 <h3>Optimizer<a class="headerlink" href="#Optimizer" title="Permalink to this headline">¶</a></h3>
-<p>The last thing we need is the optimizer. See the <a class="reference external" href="http://mozart-rbeaumont-default.service.am6.consul.prod.crto.in:8000/CORE_API.html#optimizer">optimizer reference</a></p>
+<p>The last thing we need is the optimizer. See the <a class="reference external" href="https://criteo.github.io/deepr/API/core.html#optimizer">optimizer reference</a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
@@ -807,7 +806,7 @@ Tensor(&#34;mul:0&#34;, shape=(), dtype=float32)
 <div class="section" id="Trainer-job">
 <h2>Trainer job<a class="headerlink" href="#Trainer-job" title="Permalink to this headline">¶</a></h2>
 <p>Since all these concepts are now defined, let’s create a <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> job.</p>
-<p>Make sure to check the <a class="reference external" href="http://mozart-rbeaumont-default.service.am6.consul.prod.crto.in:8000/_autosummary/deepr.jobs.Trainer.html">trainer reference</a></p>
+<p>Make sure to check the <a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.jobs.Trainer.html#deepr.jobs.Trainer">trainer reference</a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
