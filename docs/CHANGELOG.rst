@@ -22,6 +22,25 @@ Fixed
 Security
 ~~~~~~~~
 
+1.2.1 - 2020-05-27
+------------------
+
+Added
+~~~~~
+Changed
+~~~~~~~
+Deprecated
+~~~~~~~~~~
+Removed
+~~~~~~~
+Fixed
+~~~~~
+Avoid mkdir for HDFS path_model for permissions reasons
+
+Security
+~~~~~~~~
+
+
 1.2.0 - 2020-05-26
 ------------------
 
