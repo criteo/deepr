@@ -103,7 +103,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#security">Security</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">1.2.0 - 2020-05-26</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">1.2.1 - 2020-05-27</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id2">Added</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id3">Changed</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id4">Deprecated</a></li>
@@ -112,12 +112,21 @@
 <li class="toctree-l3"><a class="reference internal" href="#id7">Security</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id8">[1.1.0] - 2020-05-25</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id8">1.2.0 - 2020-05-26</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id9">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Changed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">Deprecated</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Removed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">Fixed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">Security</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id10">[1.0.0] - 2020-05-19</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id11">Added</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id15">[1.1.0] - 2020-05-25</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id16">Added</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id17">[1.0.0] - 2020-05-19</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id18">Added</a></li>
 </ul>
 </li>
 </ul>
@@ -242,19 +251,12 @@ and this project adheres to <a class="reference external" href="http://semver.or
 </div>
 </div>
 <div class="section" id="id1">
-<h2>1.2.0 - 2020-05-26<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>1.2.1 - 2020-05-27<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id2">
 <h3>Added<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">OptimizeSavedModel</span></code> now supports multiple fetches</p></li>
-<li><p>new graph utils, <code class="docutils literal notranslate"><span class="pre">import_graph_def</span></code>, <code class="docutils literal notranslate"><span class="pre">get_feedable_tensors</span></code>, <code class="docutils literal notranslate"><span class="pre">get_fetchable_tensors</span></code></p></li>
-</ul>
 </div>
 <div class="section" id="id3">
 <h3>Changed<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">example.jobs.Predict</span></code> arguments (<code class="docutils literal notranslate"><span class="pre">path_model</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_name</span></code> instead of <code class="docutils literal notranslate"><span class="pre">path_model_pb</span></code>, <code class="docutils literal notranslate"><span class="pre">fetch</span></code> instead of <code class="docutils literal notranslate"><span class="pre">fetches</span></code> for consistency with <code class="docutils literal notranslate"><span class="pre">OptimizeSavedModel</span></code>).</p></li>
-</ul>
 </div>
 <div class="section" id="id4">
 <h3>Deprecated<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
@@ -264,18 +266,47 @@ and this project adheres to <a class="reference external" href="http://semver.or
 </div>
 <div class="section" id="id6">
 <h3>Fixed<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>wrong arguments in <code class="docutils literal notranslate"><span class="pre">YarnConfig</span></code> for <code class="docutils literal notranslate"><span class="pre">upload_zip_to_hdfs</span></code>.</p></li>
-</ul>
+<p>Avoid mkdir for HDFS path_model for permissions reasons</p>
 </div>
 <div class="section" id="id7">
 <h3>Security<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 </div>
 </div>
 <div class="section" id="id8">
-<h2>[1.1.0] - 2020-05-25<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<h2>1.2.0 - 2020-05-26<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id9">
 <h3>Added<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">OptimizeSavedModel</span></code> now supports multiple fetches</p></li>
+<li><p>new graph utils, <code class="docutils literal notranslate"><span class="pre">import_graph_def</span></code>, <code class="docutils literal notranslate"><span class="pre">get_feedable_tensors</span></code>, <code class="docutils literal notranslate"><span class="pre">get_fetchable_tensors</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h3>Changed<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">example.jobs.Predict</span></code> arguments (<code class="docutils literal notranslate"><span class="pre">path_model</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_name</span></code> instead of <code class="docutils literal notranslate"><span class="pre">path_model_pb</span></code>, <code class="docutils literal notranslate"><span class="pre">fetch</span></code> instead of <code class="docutils literal notranslate"><span class="pre">fetches</span></code> for consistency with <code class="docutils literal notranslate"><span class="pre">OptimizeSavedModel</span></code>).</p></li>
+</ul>
+</div>
+<div class="section" id="id11">
+<h3>Deprecated<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id12">
+<h3>Removed<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id13">
+<h3>Fixed<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>wrong arguments in <code class="docutils literal notranslate"><span class="pre">YarnConfig</span></code> for <code class="docutils literal notranslate"><span class="pre">upload_zip_to_hdfs</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="id14">
+<h3>Security<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id15">
+<h2>[1.1.0] - 2020-05-25<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id16">
+<h3>Added<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Remove some kwargs for cleaner error stacks</p></li>
 <li><p>Make example more complex, add advanced notebook</p></li>
@@ -285,10 +316,10 @@ and this project adheres to <a class="reference external" href="http://semver.or
 </ul>
 </div>
 </div>
-<div class="section" id="id10">
-<h2>[1.0.0] - 2020-05-19<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id11">
-<h3>Added<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id17">
+<h2>[1.0.0] - 2020-05-19<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id18">
+<h3>Added<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Public Release</p></li>
 </ul>
