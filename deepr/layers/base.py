@@ -3,7 +3,8 @@
 from abc import ABC
 import logging
 import inspect
-from typing import Callable, Type, Dict, Union, Tuple, List
+import functools
+from typing import Callable, Dict, Union, Tuple, List, Type
 
 import tensorflow as tf
 
@@ -147,6 +148,12 @@ class Layer(ABC):
         if n_out is None and outputs is None:
             raise ValueError("You must set either n_out or outputs (both are None)")
 
+        def _default_names(num: int, prefix: str = "t_"):
+            if num == 1:
+                return f"{prefix}0"
+            else:
+                return tuple(f"{prefix}{idx}" for idx in range(num))
+
         # Resolve n_in / inputs from arguments
         if n_in is None and inputs is not None:
             n_in = len(to_flat_tuple(inputs))
@@ -234,7 +241,7 @@ class Layer(ABC):
             if isinstance(tensors, dict):
                 # Check that tensors is coherent with self.inputs
                 if not set(to_flat_tuple(self.inputs)) <= set(tensors):
-                    msg = f"Missing inputs: {set(to_flat_tuple(self.inputs)) - set(tensors)}"
+                    msg = f"{self} missing inputs: {set(to_flat_tuple(self.inputs)) - set(tensors)}"
                     raise KeyError(msg)
 
                 # Call forward_as_dict to get output tensors
@@ -242,17 +249,17 @@ class Layer(ABC):
 
                 # Check that tensors_dict is coherent with self.outputs
                 if not set(to_flat_tuple(self.outputs)) <= set(tensors_dict):
-                    msg = f"Missing outputs: {set(to_flat_tuple(self.outputs)) - set(tensors_dict)}"
+                    msg = f"{self} missing outputs: {set(to_flat_tuple(self.outputs)) - set(tensors_dict)}"
                     raise KeyError(msg)
 
                 return tensors_dict
             else:
                 # Check that tensors is coherent with self.n_in
                 if self.n_in == 1 and isinstance(tensors, tuple):
-                    msg = f"Expected 1 input, but got {tensors} (should not be a tuple)"
+                    msg = f"{self} expected 1 input, but got {tensors} (should not be a tuple)"
                     raise KeyError(msg)
                 if self.n_in > 1 and len(to_flat_tuple(tensors)) != self.n_in:
-                    msg = f"Expected {self.n_in} inputs, but got {tensors}"
+                    msg = f"{self} expected {self.n_in} inputs, but got {tensors}"
                     raise KeyError(msg)
 
                 # Call forward and convert to tuple
@@ -318,22 +325,22 @@ class Layer(ABC):
 
 
 def layer(
+    fn: Callable = None,
     n_in: int = None,
     n_out: int = None,
     inputs: Union[str, Tuple[str, ...], List[str]] = None,
     outputs: Union[str, Tuple[str, ...], List[str]] = None,
 ):
-    """Decorator that creates a layer from a function
+    """Decorator that creates a layer constructor from a function.
 
-    This decorator can be used to define :class:`~Layer` classes in a non
-    verbose way.
+    The decorator returns a subclass of :class:`~Layer`
+    whose ``forward`` method is defined by the decorated function.
 
-    For example, the following snippet defines a subclass of :class:`~Layer`
-    whose `forward` method returns `tensors + offset`.
+    For example
 
     >>> from deepr.layers import layer
     >>> @layer(n_in=1, n_out=1)
-    ... def AddOffset(tensors, offset):
+    ... def AddOffset(tensors, mode, offset):
     ...     return tensors + offset
     >>> add = AddOffset(offset=1)
     >>> add(1)
@@ -367,86 +374,47 @@ def layer(
 
     Note that 'tensors' and 'mode' need to be the the first arguments
     of the function IN THIS ORDER.
-
-    Another way of using the decorator is on functions that create layer
-    instances. This allows you to create factories of layers and make
-    them :class:`~Layer` classes.
-
-    For example, the following snippet defines a subclass of :class:`~Layer`
-    whose `forward` method is the same as the layer returned by the
-    function.
-    >>> @layer(n_in=1, n_out=1)
-    ... def AddOne() -> Layer:
-    ...     return AddOffset(offset=1)
-    >>> add_one = AddOne()
-    >>> add_one(1)
-    2
-
-    A nice feature of the :class:`~layer` decorator is laziness: the code
-    inside the function is not executed until a call on a tensor. In
-    other words:
-    >>> @layer(n_in=1, n_out=1)
-    ... def AddOffset(tensors, offset):
-    ...     print("Calling layer")
-    ...     return tensors + offset
-    >>> add_one = AddOffset(offset=1)
-    >>> add_one(1)
-    Calling layer
-    2
     """
     # pylint: disable=protected-access,invalid-name
-
     def _create_layer_class(fn: Callable) -> Type[Layer]:
-        """Decorator that creates a Layer class from a function"""
+        """Decorator that creates a Layer constructor."""
         parameters = inspect.signature(fn).parameters
         signature = inspect.Signature([param for key, param in parameters.items() if key not in {"tensors", "mode"}])
 
-        if "tensors" in parameters:  # From a `forward` function
+        # Check parameters
+        if list(parameters.keys())[0] != "tensors":
+            raise TypeError(f"'tensors' should be the first parameter of {fn.__name__}")
+        if "mode" in parameters:
+            if list(parameters.keys())[1] != "mode":
+                raise TypeError(f"'mode' should be the second parameter of {fn.__name__}")
 
-            if list(parameters.keys())[0] != "tensors":
-                raise TypeError(f"'tensors' should be the first positional argument")
-
-            if "mode" in parameters:
-
-                if list(parameters.keys())[1] != "mode":
-                    raise TypeError(f"'mode' should be the second positional argument")
-
-                def _forward(self, tensors, mode: str = None):
-                    return fn(tensors, mode, *self._args, **self._kwargs)
-
-            else:
-
-                def _forward(self, tensors, mode: str = None):
-                    # pylint: disable=unused-argument
-                    return fn(tensors, *self._args, **self._kwargs)
-
-        else:  # From a constructor
-
-            def _forward(self, tensors, mode: str = None):
-                return fn(*self._args, **self._kwargs).forward(tensors, mode)
-
+        @functools.wraps(fn)
         def _init(self, *args, **kwargs):
-            # Extract base.Layer arguments from kwargs
             _n_in = kwargs.pop("n_in") if "n_in" in kwargs else n_in
             _n_out = kwargs.pop("n_out") if "n_out" in kwargs else n_out
             _inputs = kwargs.pop("inputs") if "inputs" in kwargs else inputs
             _outputs = kwargs.pop("outputs") if "outputs" in kwargs else outputs
             _name = kwargs.pop("name") if "name" in kwargs else None
             Layer.__init__(self, n_in=_n_in, n_out=_n_out, inputs=_inputs, outputs=_outputs, name=_name)
-
-            # Check and store arguments for the wrapped function
             signature.bind(*args, **kwargs)
             self._args = args
             self._kwargs = kwargs
 
+        if "mode" in parameters:
+
+            def _forward(self, tensors, mode: str = None):
+                return fn(tensors, mode, *self._args, **self._kwargs)
+
+        else:
+
+            def _forward(self, tensors, mode: str = None):
+                # pylint: disable=unused-argument
+                return fn(tensors, *self._args, **self._kwargs)
+
         attributes = {"__module__": fn.__module__, "__doc__": fn.__doc__, "__init__": _init, "forward": _forward}
         return type(fn.__name__, (Layer,), attributes)
 
-    return _create_layer_class
-
-
-def _default_names(num: int, prefix: str = "t_"):
-    if num == 1:
-        return f"{prefix}0"
+    if fn is not None:
+        return _create_layer_class(fn)
     else:
-        return tuple(f"{prefix}{idx}" for idx in range(num))
+        return _create_layer_class

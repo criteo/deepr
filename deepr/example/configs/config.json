@@ -6,7 +6,7 @@
     "run_on_yarn": "$params:run_on_yarn",
     "job": {
         "type": "deepr.jobs.Pipeline",
-        "eval": "skip",
+        "eval": null,
         "jobs": [
             {
                 "num_examples": 1000,
@@ -21,7 +21,7 @@
                 "train_on_yarn": "$params:train_on_yarn",
                 "trainer": {
                     "type": "deepr.jobs.Trainer",
-                    "eval": "skip",
+                    "eval": null,
                     "eval_input_fn": {
                         "num_parallel_calls": 8,
                         "num_parallel_reads": 8,

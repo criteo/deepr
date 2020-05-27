@@ -7,7 +7,6 @@ import deepr as dpr
 import deepr.prepros as dprp
 
 
-@dprp.prepro
 def DefaultPrepro(batch_size, repeat_size):
     return dpr.prepros.Serial(
         dprp.TFRecordSequenceExample(

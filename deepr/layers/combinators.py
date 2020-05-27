@@ -16,7 +16,7 @@ class Sequential(Layer):
     .. code-block:: python
 
         @dprl.layer(n_in=1, n_out=1)
-        def OffsetLayer(tensors, offset):
+        def OffsetLayer(tensors, mode, offset):
             return tensors + offset
 
         layer = dprl.Sequential(
@@ -33,7 +33,7 @@ class Sequential(Layer):
     .. code-block:: python
 
         @dprl.layer(n_in=2, n_out=1)
-        def Add(tensors):
+        def Add(tensors, mode):
             x, y = tensors
             return x + y
 
@@ -90,9 +90,13 @@ class Sequential(Layer):
             inputs=self.layers[0].inputs,
             outputs=self.layers[-1].outputs,
         )
-
-    def __repr__(self) -> str:
-        return f"{self.__class__.__name__}({self.layers}"
+        # Check consistency of inputs / outputs of intermediate layers
+        keys = set(to_flat_tuple(self.inputs))
+        for layer in self.layers:
+            for key in to_flat_tuple(layer.inputs):
+                if key not in keys:
+                    raise ValueError(f"Input '{key}' of layer {layer} not found")
+            keys.update(to_flat_tuple(layer.outputs))
 
     def forward_as_dict(self, tensors: Dict, mode: str = None) -> Dict:
         """Forward method of the layer"""
@@ -106,13 +110,13 @@ class Sequential(Layer):
 class Select(Layer):
     """Layer to extract inputs / outputs from previous layers
 
-    The :class:`~Select` layer is particularly useful when defining arbitrary
-    DAGs of layers : it is a convenient way to select which nodes should
-    be inputs, and which should be outputs. For example:
+    The :class:`~Select` layer is particularly useful when defining
+    arbitrary DAGs of layers : it is a convenient way to select which
+    nodes should be inputs, and which should be outputs. For example:
 
     .. code-block:: python
 
-        layer = dprl.Select("x, y", "z", n_in=2, indices=1)
+        layer = dprl.Select(inputs=("x", "y"), outputs="z", n_in=2, indices=1)
         layer((1, 2))  # 2
         layer({"x": 1, "y": 2})  # {"z": 2}
 
@@ -130,10 +134,10 @@ class Select(Layer):
             msg = "`n_in` and `inputs` cannot both be `None`"
             raise ValueError(msg)
         if n_in is None:
-            n_in = len(inputs.split(",")) if isinstance(inputs, str) else len(inputs)  # type: ignore
-        if inputs is not None and outputs is None:
-            outputs = inputs
+            n_in = len(to_flat_tuple(inputs))
         self.indices = to_flat_tuple(indices) if indices is not None else list(range(n_in))
+        if inputs is not None and outputs is None:
+            outputs = tuple(inputs[idx] for idx in self.indices)
         super().__init__(n_in=n_in, n_out=len(self.indices), inputs=inputs, outputs=outputs)
 
     def forward(self, tensors, mode: str = None):
@@ -146,12 +150,40 @@ class Select(Layer):
             return result
 
 
+class ActiveMode(Layer):
+    """Active Mode Layer."""
+
+    def __init__(
+        self,
+        layer: Layer,
+        mode: Union[str, Tuple[str, ...]] = None,
+        inputs: Union[str, Tuple[str, ...], List[str]] = None,
+        outputs: Union[str, Tuple[str, ...], List[str]] = None,
+    ):
+        if inputs is None:
+            inputs = layer.inputs
+        if outputs is None:
+            outputs = layer.outputs
+        super().__init__(n_in=layer.n_in, n_out=layer.n_out, inputs=inputs, outputs=outputs, name=layer.name)
+        self.layer = layer
+        self.mode = to_flat_tuple(mode)
+        if self.n_in != self.n_out:
+            raise ValueError("Number of inputs / outputs must be the same/")
+
+    def forward(self, tensors, mode: str = None):
+        """Forward method of the layer"""
+        if self.mode is not None and mode is not None and mode not in self.mode:
+            return tensors
+        return self.layer.forward(tensors, mode)
+
+
 class Rename(Layer):
     """Wrap Layer in a Node to rename inputs / outputs.
 
-    Allows you to rename inputs / outputs nodes of a :class:`~Layer` instance.
-    This can be useful if you end up with a :class:`~Layer` instance with
-    inputs and outputs name that are not suitable for your needs.
+    Allows you to rename inputs / outputs nodes of a :class:`~Layer`
+    instance. This can be useful if you end up with a :class:`~Layer`
+    instance with inputs and outputs name that are not suitable for your
+    needs.
 
     For example:
 
@@ -167,14 +199,14 @@ class Rename(Layer):
         layer((1, 1))  # 2
         layer({"x": 1, "y": 1})  # {"z": 2}
 
-    Note that the same behavior can be achieved using :class:`~Select` and
-    :class:`~Sequential` as follows:
+    Note that the same behavior can be achieved using :class:`~Select`
+    and :class:`~Sequential` as follows:
 
     .. code-block:: python
 
         layer = dprl.Sequential(
-            dprl.Select("x, y", "a, b"),
-            Add(inputs="a, b", outputs="c"),
+            dprl.Select(inputs=("x", "y"), outputs=("a", "b")),
+            Add(inputs=("a", "b"), outputs="c"),
             dprl.Select("c", "z"),
         )
     """

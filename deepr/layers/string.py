@@ -17,4 +17,4 @@ class StringJoin(base.Layer):
         """Forward method of the layer"""
         tensors = [tensor if tensor.dtype == tf.string else tf.as_string(tensor) for tensor in tensors]
         tensors = make_same_shape(tensors)
-        return tf.string_join(tensors, separator=self.separator)
+        return tf.strings.join(tensors, separator=self.separator)

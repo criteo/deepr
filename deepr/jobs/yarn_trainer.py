@@ -13,7 +13,6 @@ import tf_yarn
 
 from deepr.config.base import from_config
 from deepr.jobs import base
-from deepr.jobs.trainer import Trainer
 from deepr.jobs.yarn_config import YarnConfig
 
 
@@ -62,11 +61,6 @@ class YarnTrainer(base.Job):
     trainer: Dict
     config: YarnTrainerConfig
     train_on_yarn: bool = True
-
-    def __post_init__(self):
-        trainer = from_config(self.trainer)
-        if not isinstance(trainer, Trainer):
-            raise TypeError(f"Expected job of type {Trainer} but got {type(trainer)}")
 
     def run(self):
         if self.train_on_yarn:

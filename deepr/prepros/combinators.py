@@ -58,26 +58,34 @@ class Serial(Prepro):
         num_parallel_calls: int = None,
     ):
         super().__init__()
-        self.preprocessors = (
-            _fuse(*to_flat_tuple(preprocessors), num_parallel_calls=num_parallel_calls)
-            if fuse
-            else to_flat_tuple(preprocessors)
-        )
+        self.preprocessors = to_flat_tuple(preprocessors)
         self.fuse = fuse
         self.num_parallel_calls = num_parallel_calls
+
+        # Iterable of preprocessors used by the apply method
+        self._preprocessors = (
+            _fuse(*self.preprocessors, num_parallel_calls=num_parallel_calls) if fuse else self.preprocessors
+        )
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.preprocessors})"
 
     def apply(self, dataset: tf.data.Dataset, mode: str = None) -> tf.data.Dataset:
         """Pre-process a dataset"""
-        for prepro in self.preprocessors:
+        for prepro in self._preprocessors:
             dataset = prepro.apply(dataset, mode=mode)
         return dataset
 
 
 def _fuse(*preprocessors: Prepro, num_parallel_calls: int = None) -> Tuple[Prepro, ...]:
     """Group Map and Filter in _FusedMap and _FusedFilter"""
+
+    def _flatten(prepros):
+        for prepro in prepros:
+            if isinstance(prepro, Serial):
+                yield from _flatten(prepro.preprocessors)
+            else:
+                yield prepro
 
     def _prepro_type(prepro: Prepro) -> str:
         if isinstance(prepro, core.Map):
@@ -88,7 +96,7 @@ def _fuse(*preprocessors: Prepro, num_parallel_calls: int = None) -> Tuple[Prepr
             return "other"
 
     def _gen():
-        for prepro_type, prepros in itertools.groupby(preprocessors, _prepro_type):
+        for prepro_type, prepros in itertools.groupby(_flatten(preprocessors), _prepro_type):
             if prepro_type == "map":
                 yield _FusedMap(*list(prepros), num_parallel_calls=num_parallel_calls)
             elif prepro_type == "filter":

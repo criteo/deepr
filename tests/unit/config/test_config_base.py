@@ -21,6 +21,12 @@ class B:
         return type(self) is type(other) and self.args == other.args
 
 
+@dataclass
+class C:
+    x: Any
+    y: Any
+
+
 @pytest.mark.parametrize(
     "config, macros, expected",
     [
@@ -29,7 +35,7 @@ class B:
         (
             {"type": "test_config_base.A", "x": "@self"},
             None,
-            {"type": "test_config_base.A", "x": {"type": "test_config_base.A", "eval": "skip", "x": "@self"}},
+            {"type": "test_config_base.A", "x": {"type": "test_config_base.A", "eval": None, "x": "@self"}},
         ),
     ],
 )
@@ -51,8 +57,21 @@ def test_config_parse_config(config, macros, expected):
         ({1: 2}, {1: 2}),
         ({"type": "test_config_base.A", "x": 1}, A(1)),
         ({"type": "test_config_base.B", "*": (1, 2)}, B(1, 2)),
-        ({"type": "test_config_base.A", "eval": "skip", "x": 1}, {"type": "test_config_base.A", "x": 1}),
+        ({"type": "test_config_base.A", "eval": None, "x": 1}, {"type": "test_config_base.A", "x": 1}),
     ],
 )
 def test_config_from_config(item, expected):
     assert dpr.from_config(item) == expected
+
+
+@pytest.mark.parametrize(
+    "item, kwargs, expected",
+    [
+        ({"type": "test_config_base.C", "eval": "partial", "x": 1}, {"y": 2}, C(1, 2)),
+        ({"eval": "partial", "x": 1}, {"y": 2}, {"x": 1, "y": 2}),
+    ],
+)
+def test_config_from_config_constructor(item, kwargs, expected):
+    constructor = dpr.from_config(item)
+    instance = constructor(**kwargs)
+    assert instance == expected
