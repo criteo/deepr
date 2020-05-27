@@ -37,6 +37,11 @@ class MLFlowSaveInfo(base.Job):
 
             # Save info to path
             info = {"run_id": self.run_id, "run_uuid": self.run_uuid, "experiment_id": self.experiment_id}
-            Path(self.path_mlflow).parent.mkdir(parents=True, exist_ok=True)
+
+            # Need to create directory if not HDFS
+            if not Path(self.path_mlflow).is_hdfs:
+                Path(self.path_mlflow).parent.mkdir(parents=True, exist_ok=True)
+
+            # Dump MLFlow information to path
             with Path(self.path_mlflow).open("w") as file:
                 json.dump(info, file, indent=4)
