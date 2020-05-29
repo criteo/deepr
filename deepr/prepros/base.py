@@ -19,39 +19,51 @@ class Prepro(ABC):
 
     The basic usage of a :class:`~Prepro` is to apply it on a Dataset. For
     example:
-
-    >>> dataset = tf.data.Dataset.from_generator(range(3))
-    [0, 1, 2]
-    >>> prepro_fn = Map(lambda element: element + 1)
-    >>> dataset = prepro_fn(dataset)
-    [1, 2, 3]
+    >>> from deepr import readers
+    >>> from deepr.prepros import Map
+    >>> def gen():
+    ...     for i in range(3):
+    ...         yield {"a": i}
+    >>> raw_dataset = tf.data.Dataset.from_generator(gen, {"a": tf.int32}, {"a": tf.TensorShape([])})
+    >>> list(readers.from_dataset(raw_dataset))
+    [{'a': 0}, {'a': 1}, {'a': 2}]
+    >>> prepro_fn = Map(lambda x: {'a': x['a'] + 1})
+    >>> dataset = prepro_fn(raw_dataset)
+    >>> list(readers.from_dataset(dataset))
+    [{'a': 1}, {'a': 2}, {'a': 3}]
 
     Because some preprocessing pipelines behave differently depending
     on the mode (TRAIN, EVAL, PREDICT), an optional argument can be
     provided:
-
-    >>> def map_func(element, mode = None):
+    >>> def map_func(element, mode=None):
     ...     if mode == tf.estimator.ModeKeys.PREDICT:
-    ...         return 0
+    ...         return {'a': 0}
     ...     else:
     ...         return element
     >>> prepro_fn = Map(map_func)
-    >>> dataset = prepro_fn(dataset, tf.estimator.ModeKeys.TRAIN)
-    [0, 1, 2]
-    >>> dataset = prepro_fn(dataset, tf.estimator.ModeKeys.PREDICT)
-    [0, 0, 0]
+    >>> list(readers.from_dataset(raw_dataset))
+    [{'a': 0}, {'a': 1}, {'a': 2}]
+    >>> dataset = prepro_fn(raw_dataset, mode=tf.estimator.ModeKeys.TRAIN)
+    >>> list(readers.from_dataset(dataset))
+    [{'a': 0}, {'a': 1}, {'a': 2}]
+    >>> dataset = prepro_fn(raw_dataset, mode=tf.estimator.ModeKeys.PREDICT)
+    >>> list(readers.from_dataset(dataset))
+    [{'a': 0}, {'a': 1}, {'a': 2}]
+
+    TODO: Actually mode in map_func is not taken into account
 
     :class:`~Map`, :class:`~Filter`, :class:`~Shuffle` and :class:`~Repeat` have a special attribute
     `modes` that you can use to specify the modes on which the
     preprocessing should be applied. For example:
-
-    >>> def map_func(element, mode = None):
-    ...     return 0
-    >>> prepro_fn = Map(map_func, modes=[tf.estimator.PREDICT])
-    >>> dataset = prepro_fn(dataset, tf.estimator.ModeKeys.TRAIN)
-    [0, 1, 2]
+    >>> def map_func(element, mode=None):
+    ...     return {'a': 0}
+    >>> prepro_fn = Map(map_func, modes=[tf.estimator.ModeKeys.PREDICT])
+    >>> dataset = prepro_fn(raw_dataset, tf.estimator.ModeKeys.TRAIN)
+    >>> list(readers.from_dataset(dataset))
+    [{'a': 0}, {'a': 1}, {'a': 2}]
     >>> dataset = prepro_fn(dataset, tf.estimator.ModeKeys.PREDICT)
-    [0, 0, 0]
+    >>> list(readers.from_dataset(dataset))
+    [{'a': 0}, {'a': 0}, {'a': 0}]
 
     Authors of new :class:`~Prepro` subclasses typically override the `apply`
     method of the base :class:`~Prepro` class::
@@ -84,13 +96,15 @@ def prepro(fn: Callable) -> Type:
 
     For example, the following snippet defines a subclass of :class:`~Prepro`
     whose `apply` offsets each element of the dataset by `offset`:
-
+    >>> from deepr import readers
+    >>> from deepr.prepros import prepro
     >>> @prepro
     ... def AddOffset(dataset, offset):
     ...     return dataset.map(lambda element: element + offset)
-    >>> dataset = [0, 1, 2]
+    >>> raw_dataset = tf.data.Dataset.from_tensor_slices([0, 1, 2])
     >>> prepro_fn = AddOffset(offset=1)
-    >>> dataset = prepro_fn(dataset)
+    >>> dataset = prepro_fn(raw_dataset)
+    >>> list(readers.from_dataset(dataset))
     [1, 2, 3]
 
     The class created by the decorator is roughly equivalent to
@@ -107,18 +121,21 @@ def prepro(fn: Callable) -> Type:
                 return dataset.map(lambda element: element + self.offset)
 
     You can also add a 'mode' argument to your preprocessor like so
-
     >>> @prepro
-    ... def AddOffset(dataset, mode, offset):
+    ... def AddOffsetInTrain(dataset, mode, offset):
     ...     if mode == tf.estimator.ModeKeys.TRAIN:
     ...         return dataset.map(lambda element: element + offset)
     ...     else:
     ...         return dataset
-    >>> dataset = [0, 1, 2]
-    >>> prepro_fn = AddOffset(offset=1)
-    >>> dataset = prepro_fn(dataset, tf.estimator.ModeKeys.TRAIN)
+    >>> prepro_fn = AddOffsetInTrain(offset=1)
+    >>> dataset = prepro_fn(raw_dataset, tf.estimator.ModeKeys.TRAIN)
+    >>> list(readers.from_dataset(dataset))
     [1, 2, 3]
-    >>> dataset = prepro_fn(dataset, tf.estimator.ModeKeys.PREDICT)
+    >>> dataset = prepro_fn(raw_dataset, tf.estimator.ModeKeys.PREDICT)
+    >>> list(readers.from_dataset(dataset))
+    [0, 1, 2]
+    >>> dataset = prepro_fn(raw_dataset)
+    >>> list(readers.from_dataset(dataset))
     [0, 1, 2]
 
     Note that 'dataset' and 'mode' need to be the the first arguments
@@ -131,26 +148,24 @@ def prepro(fn: Callable) -> Type:
     For example, the following snippet defines a subclass of :class:`~Prepro`
     whose `apply` method is the same as the prepro returned by the
     function.
-
     >>> @prepro
     ... def AddOne() -> Prepro:
     ...     return AddOffset(offset=1)
-    >>> dataset = [0, 1, 2]
     >>> prepro_fn = AddOne()
-    >>> dataset = prepro_fn(dataset)
+    >>> dataset = prepro_fn(raw_dataset)
+    >>> list(readers.from_dataset(dataset))
     [1, 2, 3]
 
     A nice feature of the `prepro` decorator is laziness: the code
     inside the function is not executed until a call on a dataset. In
     other words:
-
-    >>> @prepro
-    ... def MyLookup():
-    ...     table = create_table_from_file(...)
-    ...     return Map(Lookup(table, inputs="ids", outputs="indices"))
-    >>> prepro_fn = MyLookup()
+    >>> @prepro  # doctest: +SKIP
+    ... def MyLookup():  # doctest: +SKIP
+    ...     table = create_table_from_file(...)  # doctest: +SKIP
+    ...     return Map(Lookup(table, inputs="ids", outputs="indices"))  # doctest: +SKIP
+    >>> prepro_fn = MyLookup()  # doctest: +SKIP
     The `table` object is not created
-    >>> dataset = prepro_fn(dataset)
+    >>> dataset = prepro_fn(dataset)  # doctest: +SKIP
     The body of `MyLookup` gets executed
     """
     # pylint: disable=protected-access,invalid-name

@@ -32,16 +32,19 @@ class Layer(ABC):
     The basic usage of a :class:`~Layer` is to build graphs as intuitively as
     possible. For example:
 
+    >>> from deepr.layers import Dense
     >>> input_tensor = tf.ones([32, 8])
     >>> dense = Dense(16)
     >>> output_tensor = dense(input_tensor)
-    tf.Tensor(shape=[32, 16])
+    >>> output_tensor
+    <tf.Tensor 'dense/BiasAdd:0' shape=(32, 16) dtype=float32>
 
 
     Because some layers (like :class:`~Dropout`) might behave differently
     depending on the mode (TRAIN, EVAL, PREDICT), an optional argument
     can be provided:
 
+    >>> from deepr.layers import Dropout
     >>> tensor = tf.ones([32, 8])
     >>> dropout = Dropout(0.5)
     >>> dropped = dropout(input_tensor, tf.estimator.ModeKeys.TRAIN)
@@ -51,10 +54,12 @@ class Layer(ABC):
     dictionary, yielded by a tf.data.Dataset for example, you can also
     do:
 
+    >>> tf.reset_default_graph()
     >>> tensors = {"x": tf.ones([32, 8])}
     >>> dense = Dense(16, inputs="x", outputs="y")
     >>> tensors = dense(tensors)
-    {"y": tf.Tensor(shape=[32, 16])}
+    >>> tensors
+    {'y': <tf.Tensor 'dense/BiasAdd:0' shape=(32, 16) dtype=float32>}
 
     The `inputs` and `outputs` are optional (defaults to t_0, t_1 etc.)
     and their order needs to be coherent with the order of tensors in
@@ -80,9 +85,13 @@ class Layer(ABC):
     should not create variables at instantiation time nor store
     variables or any other graph references as attributes.
 
+    >>> tf.reset_default_graph()
     >>> dense = Dense(16)
+
     No parameters are created
     >>> dense(tf.ones([32, 8]))
+    <tf.Tensor 'dense/BiasAdd:0' shape=(32, 16) dtype=float32>
+
     Parameters are created in the current tf.Graph
 
     In other words, calling the layer should not change its state. This
@@ -95,9 +104,15 @@ class Layer(ABC):
     arguments at call time. Behind the scene, it's simply wrapping the
     TF1.X variable management into a :meth:`~tf.variable_scope`.
 
+    >>> tf.reset_default_graph()
     >>> dense = Dense(16)
-    >>> dense(tf.ones([32, 8])) == dense(tf.ones([32, 8]), reuse=True)
-    True
+    >>> dense(tf.ones([32, 8]))
+    <tf.Tensor 'dense/BiasAdd:0' shape=(32, 16) dtype=float32>
+    >>> dense(tf.ones([32, 8]), reuse=True)
+    <tf.Tensor 'dense_1/BiasAdd:0' shape=(32, 16) dtype=float32>
+
+    While the two operations have different names 'dense/BiasAdd:0' and
+    'dense_1/BiasAdd:0', they both share the same weights.
 
     Good examples on how to implement parametrized layers are deepr.Dense
     and embedding.Embedding.
@@ -316,6 +331,7 @@ def layer(
     For example, the following snippet defines a subclass of :class:`~Layer`
     whose `forward` method returns `tensors + offset`.
 
+    >>> from deepr.layers import layer
     >>> @layer(n_in=1, n_out=1)
     ... def AddOffset(tensors, offset):
     ...     return tensors + offset
@@ -337,14 +353,13 @@ def layer(
                 return tensors + self.offset
 
     You can also add a 'mode' argument to your layer like so
-
     >>> @layer(n_in=1, n_out=1)
-    ... def AddOffset(tensors, mode, offset):
+    ... def AddOffsetInTrain(tensors, mode, offset):
     ...     if mode == tf.estimator.ModeKeys.TRAIN:
     ...         return tensors + offset
     ...     else:
     ...         return tensors
-    >>> add = AddOffset(offset=1)
+    >>> add = AddOffsetInTrain(offset=1)
     >>> add(1, tf.estimator.ModeKeys.TRAIN)
     2
     >>> add(1, tf.estimator.ModeKeys.PREDICT)
@@ -360,7 +375,6 @@ def layer(
     For example, the following snippet defines a subclass of :class:`~Layer`
     whose `forward` method is the same as the layer returned by the
     function.
-
     >>> @layer(n_in=1, n_out=1)
     ... def AddOne() -> Layer:
     ...     return AddOffset(offset=1)
@@ -371,14 +385,14 @@ def layer(
     A nice feature of the :class:`~layer` decorator is laziness: the code
     inside the function is not executed until a call on a tensor. In
     other words:
-
     >>> @layer(n_in=1, n_out=1)
     ... def AddOffset(tensors, offset):
     ...     print("Calling layer")
     ...     return tensors + offset
     >>> add_one = AddOffset(offset=1)
     >>> add_one(1)
-    "Calling layer"
+    Calling layer
+    2
     """
     # pylint: disable=protected-access,invalid-name
 

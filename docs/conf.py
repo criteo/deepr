@@ -35,11 +35,18 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
+    "sphinx.ext.doctest",
     "sphinxcontrib.napoleon",
     "sphinx.ext.viewcode",
     "sphinx_autodoc_typehints",
     "nbsphinx",
 ]
+
+doctest_global_setup = """
+import pandas as pd
+import tensorflow as tf
+import numpy as np
+"""
 
 nbsphinx_execute = "never"
 

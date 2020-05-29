@@ -78,8 +78,9 @@ def get_macro_and_param(item: str) -> Tuple[str, str]:
 
     Example
     -------
-    >>> get_macro_and_params("$macro:param")
-    ("macro", "param")
+    >>> from deepr.config import get_macro_and_param
+    >>> get_macro_and_param("$macro:param")
+    ('macro', 'param')
     """
     macro, param = item[len(MACRO) :].split(":")
     return macro, param

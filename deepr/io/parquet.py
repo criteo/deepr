@@ -22,9 +22,10 @@ class ParquetDataset:
 
     Makes it easier to read / write :class:`~ParquetDataset`. For example
 
-    >>> df = pd.DataFrame(...)
-    >>> with ParquetDataset("viewfs://root/foo.parquet.snappy").open() as ds:
-    ...     ds.write_pandas(df, chunk_size=100)
+    >>> from deepr.io import ParquetDataset
+    >>> df = pd.DataFrame(data={'col1': [1, 2], 'col2': [3, 4]})
+    >>> with ParquetDataset("viewfs://root/foo.parquet.snappy").open() as ds:  # doctest: +SKIP
+    ...     ds.write_pandas(df, chunk_size=100)  # doctest: +SKIP
 
     The use of context managers automatically opens / closes the dataset
     as well as the connection to the FileSystem.

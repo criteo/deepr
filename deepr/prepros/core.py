@@ -37,42 +37,47 @@ class Map(base.Prepro):
     If you wish to use a :class:`~deepr.layers.Layer` with a given ``mode``, you can do
 
     >>> from functools import partial
-    >>> Map(partial(layer.forward_as_dict, mode=tf.estimator.ModeKeys.TRAIN))
+    >>> from deepr import readers
+    >>> from deepr.layers import Sum
+    >>> from deepr.prepros import Map
+    >>> layer = Sum()
+    >>> prepro_fn = Map(partial(layer.forward_as_dict, mode=tf.estimator.ModeKeys.TRAIN))
 
     For example, by setting `update=True` (DEFAULT behavior)
 
     >>> def gen():
-    ... yield {"a": [0]}
-    >>> dataset = tf.data.Dataset.from_generator(gen, {"a": tf.int32}, {"a": (None,))
-    {"a": 0}
+    ...     yield {"a": 0}
+    >>> dataset = tf.data.Dataset.from_generator(gen, {"a": tf.int32}, {"a": tf.TensorShape([])})
+    >>> list(readers.from_dataset(dataset))
+    [{'a': 0}]
     >>> def map_func(x):
     ...     return {"b": x["a"] + 1}
     >>> prepro_fn = Map(map_func, update=True)
-    >>> prepro_fn(dataset)
-    {"a": 0, "b": 1}
+    >>> list(readers.from_dataset(prepro_fn(dataset)))
+    [{'a': 0, 'b': 1}]
 
     On the other hand, ``update=False`` yields the output of the
     ``map_func``
 
     >>> prepro_fn = Map(map_func, update=False)
-    >>> prepro_fn(dataset)
-    {"b": 1}
+    >>> list(readers.from_dataset(prepro_fn(dataset)))
+    [{'b': 1}]
 
     Because some preprocessing pipelines behave differently depending
     on the mode (TRAIN, EVAL, PREDICT), an optional argument can be
     provided. By setting modes, you select the modes on which the map
     transformation should apply. For example:
 
-    >>> prepro_fn = Map(map_func, modes=[tf.estimator.TRAIN])
-    >>> dataset = prepro_fn(dataset, tf.estimator.ModeKeys.TRAIN)
-    {"a": 0, "b": 1}
-    >>> dataset = prepro_fn(dataset, tf.estimator.ModeKeys.PREDICT)
-    {"a": 0}
+    >>> prepro_fn = Map(map_func, modes=[tf.estimator.ModeKeys.TRAIN])
+    >>> list(readers.from_dataset(prepro_fn(dataset, tf.estimator.ModeKeys.TRAIN)))
+    [{'a': 0, 'b': 1}]
+    >>> list(readers.from_dataset(prepro_fn(dataset, tf.estimator.ModeKeys.PREDICT)))
+    [{'a': 0}]
 
     If the mode is not given at runtime, the preprocessing is applied.
 
-    >>> dataset = prepro_fn(dataset)
-    {"a": 0, "b": 1}
+    >>> list(readers.from_dataset(prepro_fn(dataset)))
+    [{'a': 0, 'b': 1}]
 
 
     Attributes
@@ -142,23 +147,31 @@ class Filter(base.Prepro):
     provided. By setting modes, you select the modes on which the map
     transformation should apply. For example:
 
+    >>> from deepr import readers
+    >>> from deepr.prepros import Filter
     >>> def gen():
-    ... yield {"a": [0]}
-    ... yield {"a": [1]}
-    >>> dataset = tf.data.Dataset.from_generator(gen, {"a": tf.int32}, {"a": (None,))
-    {"a": 0}, {"a": 1}
+    ...     yield {"a": 0}
+    ...     yield {"a": 1}
+    >>> raw_dataset = tf.data.Dataset.from_generator(gen, {"a": tf.int32}, {"a": tf.TensorShape([])})
+    >>> list(readers.from_dataset(raw_dataset))
+    [{'a': 0}, {'a': 1}]
     >>> def predicate(x):
-    ...     return {"b": x["a"] == 0}
-    >>> prepro_fn = Filter(predicate, modes=[tf.estimator.TRAIN])
-    >>> dataset = prepro_fn(predicate, tf.estimator.ModeKeys.TRAIN)
-    {"a": 0}
-    >>> dataset = prepro_fn(predicate, tf.estimator.ModeKeys.PREDICT)
-    {"a": 0}, {"a": 1}
+    ...     return {"b": tf.equal(x["a"], 0)}
+    >>> prepro_fn = Filter(predicate, modes=[tf.estimator.ModeKeys.TRAIN])
+    >>> raw_dataset = tf.data.Dataset.from_generator(gen, {"a": tf.int32}, {"a": tf.TensorShape([])})
+    >>> dataset = prepro_fn(raw_dataset, tf.estimator.ModeKeys.TRAIN)
+    >>> list(readers.from_dataset(dataset))
+    [{'a': 0}]
+
+    >>> dataset = prepro_fn(raw_dataset, tf.estimator.ModeKeys.PREDICT)
+    >>> list(readers.from_dataset(dataset))
+    [{'a': 0}, {'a': 1}]
 
     If the mode is not given at runtime, the preprocessing is applied.
 
-    >>> dataset = prepro_fn(dataset)
-    {"a": 0}, {"a": 1}
+    >>> dataset = prepro_fn(raw_dataset)
+    >>> list(readers.from_dataset(dataset))
+    [{'a': 0}]
 
     Attributes
     ----------

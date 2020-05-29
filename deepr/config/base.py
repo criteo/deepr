@@ -25,10 +25,11 @@ def parse_config(config: Dict, macros: Dict = None) -> Dict:
 
     Example
     -------
+    >>> from deepr.config import parse_config
     >>> config = {"x": "$params:x", "y": 2}
     >>> macros = {"params": {"x": 1}}
     >>> parse_config(config, macros)
-    {"x": 1, "y": 2}
+    {'x': 1, 'y': 2}
 
     Parameters
     ----------
