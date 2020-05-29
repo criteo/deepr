@@ -11,6 +11,8 @@ and this project adheres to `Semantic Versioning <http://semver.org/>`_.
 
 Added
 ~~~~~
+Doctest run in CI.
+
 Changed
 ~~~~~~~
 Deprecated
@@ -19,6 +21,8 @@ Removed
 ~~~~~~~
 Fixed
 ~~~~~
+Doctests were fixed.
+
 Security
 ~~~~~~~~
 

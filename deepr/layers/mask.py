@@ -90,12 +90,13 @@ class BooleanMask(base.Layer):
 class LookAheadMask(base.Layer):
     """ The look-ahead mask is used to mask the future items in a sequence
 
-    >>> x = tf.random.uniform((1, 3))
-    >>> LookAheadMask()(x)
-        <tf.Tensor: shape=(3, 3), dtype=float32, numpy=
-        array([[0., 1., 1.],
-               [0., 0., 1.],
-               [0., 0., 0.]], dtype=float32)>
+    >>> from deepr.layers import LookAheadMask
+    >>> x = tf.constant([[0.8913734, 0.3576287, 0.9788116]])
+    >>> with tf.Session() as sess:
+    ...     sess.run(LookAheadMask()(x))
+    array([[0., 1., 1.],
+           [0., 0., 1.],
+           [0., 0., 0.]], dtype=float32)
     """
 
     def __init__(self, **kwargs):

@@ -55,6 +55,7 @@ class MLFlowFormatter:
 
     Example
     -------
+    >>> from deepr.jobs import MLFlowFormatter
     >>> params = {
     ...     "foo": {
     ...         "type": "foo.Foo",
@@ -66,7 +67,7 @@ class MLFlowFormatter:
     ... }
     >>> formatter = MLFlowFormatter(include_keys=("bar", "x"), skip_values=(2,))
     >>> formatter(params)
-    {"bar.x": 1, "x": 1}
+    {'bar.x': 1, 'x': 1}
 
     Attributes
     ----------
@@ -112,8 +113,8 @@ class MLFlowFormatter:
             ...         "type": "foo.Foo",
             ...         "bar": [{"type": "foo.Bar", "baz": 1}]
             ...     }
-            ... }
-            >>> _flatten(data)
+            ... }  # doctest: +SKIP
+            >>> _flatten(data)  # doctest: +SKIP
             {"foo.type": "Foo", "foo.bar.Bar.baz": 1}
             """
             flat = dict()  # type: ignore
@@ -145,7 +146,7 @@ class MLFlowFormatter:
                     if sliced or key in self.include_keys:
                         sliced.append(key)
                 keys = sliced
-            if not keys or set(keys) & set(self.skip_keys) or any(val in str(value) for val in self.skip_values):
+            if not keys or set(keys) & set(self.skip_keys) or any(str(val) in str(value) for val in self.skip_values):
                 continue
 
             # Update formatted with the sliced param key if not present

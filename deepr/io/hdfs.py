@@ -14,8 +14,9 @@ class HDFSFileSystem:
 
     Open and closes connection to HDFS thanks to a context manager
 
-    >>> with HDFSFileSystem() as fs:
-    ...     fs.open("path/to/file")
+    >>> from deepr.io import HDFSFileSystem
+    >>> with HDFSFileSystem() as fs:  # doctest: +SKIP
+    ...     fs.open("path/to/file")  # doctest: +SKIP
     """
 
     def __init__(self):
@@ -40,9 +41,10 @@ class HDFSFile:
     Makes it easier to read or write file from any filesystem. For
     example, if you use HDFS you can do
 
+    >>> from deepr.io import HDFSFileSystem
     >>> with HDFSFileSystem() as fs:
-    ...     with HDFSFile(fs, "viewfs://root/user/foo.txt", "w") as file:
-    ...         file.write("Hello world!")
+    ...     with HDFSFile(fs, "viewfs://root/user/foo.txt", "w") as file:  # doctest: +SKIP
+    ...         file.write("Hello world!")  # doctest: +SKIP
 
     The use of context manager means that the connection to the
     filesystem is automatically opened / closed, as well as the file
