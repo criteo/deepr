@@ -22,6 +22,7 @@ Removed
 Fixed
 ~~~~~
 Doctests were fixed.
+Add metric name sanitizer, especially needed to sanitize keras built variable names.
 
 Security
 ~~~~~~~~

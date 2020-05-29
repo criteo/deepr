@@ -9,6 +9,7 @@ import tensorflow as tf
 from deepr.hooks.base import TensorHookFactory
 from deepr.utils import mlflow
 from deepr.utils import graphite
+from deepr.metrics import sanitize_metric_name
 
 
 LOGGER = logging.getLogger(__name__)
@@ -140,7 +141,7 @@ class LoggingTensorHook(tf.train.LoggingTensorHook):
                 graphite.log_metric(tag, value, postfix=self.name)
             if self.use_mlflow:
                 tag = tag if self.name is None else f"{self.name}_{tag}"
-                mlflow.log_metric(tag, value, step=global_step)
+                mlflow.log_metric(sanitize_metric_name(tag), value, step=global_step)
 
 
 _UNIT_TO_FACTOR = {"kb": 1024, "mb": 1024 ** 2, "gb": 1024 ** 3}
