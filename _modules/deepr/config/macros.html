@@ -240,8 +240,9 @@
 
 <span class="sd">    Example</span>
 <span class="sd">    -------</span>
-<span class="sd">    &gt;&gt;&gt; get_macro_and_params(&quot;$macro:param&quot;)</span>
-<span class="sd">    (&quot;macro&quot;, &quot;param&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; from deepr.config import get_macro_and_param</span>
+<span class="sd">    &gt;&gt;&gt; get_macro_and_param(&quot;$macro:param&quot;)</span>
+<span class="sd">    (&#39;macro&#39;, &#39;param&#39;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">macro</span><span class="p">,</span> <span class="n">param</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">MACRO</span><span class="p">)</span> <span class="p">:]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">macro</span><span class="p">,</span> <span class="n">param</span></div>

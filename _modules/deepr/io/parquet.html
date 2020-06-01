@@ -184,9 +184,10 @@
 
 <span class="sd">    Makes it easier to read / write :class:`~ParquetDataset`. For example</span>
 
-<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame(...)</span>
-<span class="sd">    &gt;&gt;&gt; with ParquetDataset(&quot;viewfs://root/foo.parquet.snappy&quot;).open() as ds:</span>
-<span class="sd">    ...     ds.write_pandas(df, chunk_size=100)</span>
+<span class="sd">    &gt;&gt;&gt; from deepr.io import ParquetDataset</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame(data={&#39;col1&#39;: [1, 2], &#39;col2&#39;: [3, 4]})</span>
+<span class="sd">    &gt;&gt;&gt; with ParquetDataset(&quot;viewfs://root/foo.parquet.snappy&quot;).open() as ds:  # doctest: +SKIP</span>
+<span class="sd">    ...     ds.write_pandas(df, chunk_size=100)  # doctest: +SKIP</span>
 
 <span class="sd">    The use of context managers automatically opens / closes the dataset</span>
 <span class="sd">    as well as the connection to the FileSystem.</span>

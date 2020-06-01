@@ -199,42 +199,47 @@
 <span class="sd">    If you wish to use a :class:`~deepr.layers.Layer` with a given ``mode``, you can do</span>
 
 <span class="sd">    &gt;&gt;&gt; from functools import partial</span>
-<span class="sd">    &gt;&gt;&gt; Map(partial(layer.forward_as_dict, mode=tf.estimator.ModeKeys.TRAIN))</span>
+<span class="sd">    &gt;&gt;&gt; from deepr import readers</span>
+<span class="sd">    &gt;&gt;&gt; from deepr.layers import Sum</span>
+<span class="sd">    &gt;&gt;&gt; from deepr.prepros import Map</span>
+<span class="sd">    &gt;&gt;&gt; layer = Sum()</span>
+<span class="sd">    &gt;&gt;&gt; prepro_fn = Map(partial(layer.forward_as_dict, mode=tf.estimator.ModeKeys.TRAIN))</span>
 
 <span class="sd">    For example, by setting `update=True` (DEFAULT behavior)</span>
 
 <span class="sd">    &gt;&gt;&gt; def gen():</span>
-<span class="sd">    ... yield {&quot;a&quot;: [0]}</span>
-<span class="sd">    &gt;&gt;&gt; dataset = tf.data.Dataset.from_generator(gen, {&quot;a&quot;: tf.int32}, {&quot;a&quot;: (None,))</span>
-<span class="sd">    {&quot;a&quot;: 0}</span>
+<span class="sd">    ...     yield {&quot;a&quot;: 0}</span>
+<span class="sd">    &gt;&gt;&gt; dataset = tf.data.Dataset.from_generator(gen, {&quot;a&quot;: tf.int32}, {&quot;a&quot;: tf.TensorShape([])})</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(dataset))</span>
+<span class="sd">    [{&#39;a&#39;: 0}]</span>
 <span class="sd">    &gt;&gt;&gt; def map_func(x):</span>
 <span class="sd">    ...     return {&quot;b&quot;: x[&quot;a&quot;] + 1}</span>
 <span class="sd">    &gt;&gt;&gt; prepro_fn = Map(map_func, update=True)</span>
-<span class="sd">    &gt;&gt;&gt; prepro_fn(dataset)</span>
-<span class="sd">    {&quot;a&quot;: 0, &quot;b&quot;: 1}</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(prepro_fn(dataset)))</span>
+<span class="sd">    [{&#39;a&#39;: 0, &#39;b&#39;: 1}]</span>
 
 <span class="sd">    On the other hand, ``update=False`` yields the output of the</span>
 <span class="sd">    ``map_func``</span>
 
 <span class="sd">    &gt;&gt;&gt; prepro_fn = Map(map_func, update=False)</span>
-<span class="sd">    &gt;&gt;&gt; prepro_fn(dataset)</span>
-<span class="sd">    {&quot;b&quot;: 1}</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(prepro_fn(dataset)))</span>
+<span class="sd">    [{&#39;b&#39;: 1}]</span>
 
 <span class="sd">    Because some preprocessing pipelines behave differently depending</span>
 <span class="sd">    on the mode (TRAIN, EVAL, PREDICT), an optional argument can be</span>
 <span class="sd">    provided. By setting modes, you select the modes on which the map</span>
 <span class="sd">    transformation should apply. For example:</span>
 
-<span class="sd">    &gt;&gt;&gt; prepro_fn = Map(map_func, modes=[tf.estimator.TRAIN])</span>
-<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset, tf.estimator.ModeKeys.TRAIN)</span>
-<span class="sd">    {&quot;a&quot;: 0, &quot;b&quot;: 1}</span>
-<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset, tf.estimator.ModeKeys.PREDICT)</span>
-<span class="sd">    {&quot;a&quot;: 0}</span>
+<span class="sd">    &gt;&gt;&gt; prepro_fn = Map(map_func, modes=[tf.estimator.ModeKeys.TRAIN])</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(prepro_fn(dataset, tf.estimator.ModeKeys.TRAIN)))</span>
+<span class="sd">    [{&#39;a&#39;: 0, &#39;b&#39;: 1}]</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(prepro_fn(dataset, tf.estimator.ModeKeys.PREDICT)))</span>
+<span class="sd">    [{&#39;a&#39;: 0}]</span>
 
 <span class="sd">    If the mode is not given at runtime, the preprocessing is applied.</span>
 
-<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset)</span>
-<span class="sd">    {&quot;a&quot;: 0, &quot;b&quot;: 1}</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(prepro_fn(dataset)))</span>
+<span class="sd">    [{&#39;a&#39;: 0, &#39;b&#39;: 1}]</span>
 
 
 <span class="sd">    Attributes</span>
@@ -304,23 +309,31 @@
 <span class="sd">    provided. By setting modes, you select the modes on which the map</span>
 <span class="sd">    transformation should apply. For example:</span>
 
+<span class="sd">    &gt;&gt;&gt; from deepr import readers</span>
+<span class="sd">    &gt;&gt;&gt; from deepr.prepros import Filter</span>
 <span class="sd">    &gt;&gt;&gt; def gen():</span>
-<span class="sd">    ... yield {&quot;a&quot;: [0]}</span>
-<span class="sd">    ... yield {&quot;a&quot;: [1]}</span>
-<span class="sd">    &gt;&gt;&gt; dataset = tf.data.Dataset.from_generator(gen, {&quot;a&quot;: tf.int32}, {&quot;a&quot;: (None,))</span>
-<span class="sd">    {&quot;a&quot;: 0}, {&quot;a&quot;: 1}</span>
+<span class="sd">    ...     yield {&quot;a&quot;: 0}</span>
+<span class="sd">    ...     yield {&quot;a&quot;: 1}</span>
+<span class="sd">    &gt;&gt;&gt; raw_dataset = tf.data.Dataset.from_generator(gen, {&quot;a&quot;: tf.int32}, {&quot;a&quot;: tf.TensorShape([])})</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(raw_dataset))</span>
+<span class="sd">    [{&#39;a&#39;: 0}, {&#39;a&#39;: 1}]</span>
 <span class="sd">    &gt;&gt;&gt; def predicate(x):</span>
-<span class="sd">    ...     return {&quot;b&quot;: x[&quot;a&quot;] == 0}</span>
-<span class="sd">    &gt;&gt;&gt; prepro_fn = Filter(predicate, modes=[tf.estimator.TRAIN])</span>
-<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(predicate, tf.estimator.ModeKeys.TRAIN)</span>
-<span class="sd">    {&quot;a&quot;: 0}</span>
-<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(predicate, tf.estimator.ModeKeys.PREDICT)</span>
-<span class="sd">    {&quot;a&quot;: 0}, {&quot;a&quot;: 1}</span>
+<span class="sd">    ...     return {&quot;b&quot;: tf.equal(x[&quot;a&quot;], 0)}</span>
+<span class="sd">    &gt;&gt;&gt; prepro_fn = Filter(predicate, modes=[tf.estimator.ModeKeys.TRAIN])</span>
+<span class="sd">    &gt;&gt;&gt; raw_dataset = tf.data.Dataset.from_generator(gen, {&quot;a&quot;: tf.int32}, {&quot;a&quot;: tf.TensorShape([])})</span>
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(raw_dataset, tf.estimator.ModeKeys.TRAIN)</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(dataset))</span>
+<span class="sd">    [{&#39;a&#39;: 0}]</span>
+
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(raw_dataset, tf.estimator.ModeKeys.PREDICT)</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(dataset))</span>
+<span class="sd">    [{&#39;a&#39;: 0}, {&#39;a&#39;: 1}]</span>
 
 <span class="sd">    If the mode is not given at runtime, the preprocessing is applied.</span>
 
-<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset)</span>
-<span class="sd">    {&quot;a&quot;: 0}, {&quot;a&quot;: 1}</span>
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(raw_dataset)</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(dataset))</span>
+<span class="sd">    [{&#39;a&#39;: 0}]</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>

@@ -233,41 +233,49 @@
 <p><cite>Prepro</cite> are the basic building blocks of a preprocessing pipeline.
 A <cite>Prepro</cite> defines a function on a tf.data.Dataset.</p>
 <p>The basic usage of a <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a> is to apply it on a Dataset. For
-example:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_generator</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-<span class="go">[0, 1, 2]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">element</span><span class="p">:</span> <span class="n">element</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-<span class="go">[1, 2, 3]</span>
-</pre></div>
-</div>
+example:
+&gt;&gt;&gt; from deepr import readers
+&gt;&gt;&gt; from deepr.prepros import Map
+&gt;&gt;&gt; def gen():
+…     for i in range(3):
+…         yield {“a”: i}
+&gt;&gt;&gt; raw_dataset = tf.data.Dataset.from_generator(gen, {“a”: tf.int32}, {“a”: tf.TensorShape([])})
+&gt;&gt;&gt; list(readers.from_dataset(raw_dataset))
+[{‘a’: 0}, {‘a’: 1}, {‘a’: 2}]
+&gt;&gt;&gt; prepro_fn = Map(lambda x: {‘a’: x[‘a’] + 1})
+&gt;&gt;&gt; dataset = prepro_fn(raw_dataset)
+&gt;&gt;&gt; list(readers.from_dataset(dataset))
+[{‘a’: 1}, {‘a’: 2}, {‘a’: 3}]</p>
 <p>Because some preprocessing pipelines behave differently depending
 on the mode (TRAIN, EVAL, PREDICT), an optional argument can be
-provided:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">map_func</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">:</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="mi">0</span>
-<span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="n">element</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">map_func</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">)</span>
-<span class="go">[0, 1, 2]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">)</span>
-<span class="go">[0, 0, 0]</span>
-</pre></div>
-</div>
+provided:
+&gt;&gt;&gt; def map_func(element, mode=None):
+…     if mode == tf.estimator.ModeKeys.PREDICT:
+…         return {‘a’: 0}
+…     else:
+…         return element
+&gt;&gt;&gt; prepro_fn = Map(map_func)
+&gt;&gt;&gt; list(readers.from_dataset(raw_dataset))
+[{‘a’: 0}, {‘a’: 1}, {‘a’: 2}]
+&gt;&gt;&gt; dataset = prepro_fn(raw_dataset, mode=tf.estimator.ModeKeys.TRAIN)
+&gt;&gt;&gt; list(readers.from_dataset(dataset))
+[{‘a’: 0}, {‘a’: 1}, {‘a’: 2}]
+&gt;&gt;&gt; dataset = prepro_fn(raw_dataset, mode=tf.estimator.ModeKeys.PREDICT)
+&gt;&gt;&gt; list(readers.from_dataset(dataset))
+[{‘a’: 0}, {‘a’: 1}, {‘a’: 2}]</p>
+<p>TODO: Actually mode in map_func is not taken into account</p>
 <p><code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Shuffle</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">Repeat</span></code> have a special attribute
 <cite>modes</cite> that you can use to specify the modes on which the
-preprocessing should be applied. For example:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">map_func</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">return</span> <span class="mi">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">map_func</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">)</span>
-<span class="go">[0, 1, 2]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">)</span>
-<span class="go">[0, 0, 0]</span>
-</pre></div>
-</div>
+preprocessing should be applied. For example:
+&gt;&gt;&gt; def map_func(element, mode=None):
+…     return {‘a’: 0}
+&gt;&gt;&gt; prepro_fn = Map(map_func, modes=[tf.estimator.ModeKeys.PREDICT])
+&gt;&gt;&gt; dataset = prepro_fn(raw_dataset, tf.estimator.ModeKeys.TRAIN)
+&gt;&gt;&gt; list(readers.from_dataset(dataset))
+[{‘a’: 0}, {‘a’: 1}, {‘a’: 2}]
+&gt;&gt;&gt; dataset = prepro_fn(dataset, tf.estimator.ModeKeys.PREDICT)
+&gt;&gt;&gt; list(readers.from_dataset(dataset))
+[{‘a’: 0}, {‘a’: 0}, {‘a’: 0}]</p>
 <p>Authors of new <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a> subclasses typically override the <cite>apply</cite>
 method of the base <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a> class:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
@@ -296,16 +304,17 @@ method of the base <a class="reference internal" href="#deepr.prepros.base.Prepr
 <p>This decorator can be used to define <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a> classes in a non
 verbose way.</p>
 <p>For example, the following snippet defines a subclass of <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a>
-whose <cite>apply</cite> offsets each element of the dataset by <cite>offset</cite>:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@prepro</span>
-<span class="gp">... </span><span class="k">def</span> <span class="nf">AddOffset</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">element</span><span class="p">:</span> <span class="n">element</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">AddOffset</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-<span class="go">[1, 2, 3]</span>
-</pre></div>
-</div>
+whose <cite>apply</cite> offsets each element of the dataset by <cite>offset</cite>:
+&gt;&gt;&gt; from deepr import readers
+&gt;&gt;&gt; from deepr.prepros import prepro
+&gt;&gt;&gt; &#64;prepro
+… def AddOffset(dataset, offset):
+…     return dataset.map(lambda element: element + offset)
+&gt;&gt;&gt; raw_dataset = tf.data.Dataset.from_tensor_slices([0, 1, 2])
+&gt;&gt;&gt; prepro_fn = AddOffset(offset=1)
+&gt;&gt;&gt; dataset = prepro_fn(raw_dataset)
+&gt;&gt;&gt; list(readers.from_dataset(dataset))
+[1, 2, 3]</p>
 <p>The class created by the decorator is roughly equivalent to</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AddOffset</span><span class="p">(</span><span class="n">Prepro</span><span class="p">):</span>
 
@@ -317,21 +326,23 @@ whose <cite>apply</cite> offsets each element of the dataset by <cite>offset</ci
         <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">element</span><span class="p">:</span> <span class="n">element</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>You can also add a ‘mode’ argument to your preprocessor like so</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@prepro</span>
-<span class="gp">... </span><span class="k">def</span> <span class="nf">AddOffset</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">:</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">element</span><span class="p">:</span> <span class="n">element</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="n">dataset</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">AddOffset</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">)</span>
-<span class="go">[1, 2, 3]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">)</span>
-<span class="go">[0, 1, 2]</span>
-</pre></div>
-</div>
+<p>You can also add a ‘mode’ argument to your preprocessor like so
+&gt;&gt;&gt; &#64;prepro
+… def AddOffsetInTrain(dataset, mode, offset):
+…     if mode == tf.estimator.ModeKeys.TRAIN:
+…         return dataset.map(lambda element: element + offset)
+…     else:
+…         return dataset
+&gt;&gt;&gt; prepro_fn = AddOffsetInTrain(offset=1)
+&gt;&gt;&gt; dataset = prepro_fn(raw_dataset, tf.estimator.ModeKeys.TRAIN)
+&gt;&gt;&gt; list(readers.from_dataset(dataset))
+[1, 2, 3]
+&gt;&gt;&gt; dataset = prepro_fn(raw_dataset, tf.estimator.ModeKeys.PREDICT)
+&gt;&gt;&gt; list(readers.from_dataset(dataset))
+[0, 1, 2]
+&gt;&gt;&gt; dataset = prepro_fn(raw_dataset)
+&gt;&gt;&gt; list(readers.from_dataset(dataset))
+[0, 1, 2]</p>
 <p>Note that ‘dataset’ and ‘mode’ need to be the the first arguments
 of the function IN THIS ORDER.</p>
 <p>Another way of using the decorator is on functions that create
@@ -339,29 +350,25 @@ of the function IN THIS ORDER.</p>
 preprocessors and make them <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a> classes.</p>
 <p>For example, the following snippet defines a subclass of <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a>
 whose <cite>apply</cite> method is the same as the prepro returned by the
-function.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@prepro</span>
-<span class="gp">... </span><span class="k">def</span> <span class="nf">AddOne</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Prepro</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">return</span> <span class="n">AddOffset</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">AddOne</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-<span class="go">[1, 2, 3]</span>
-</pre></div>
-</div>
+function.
+&gt;&gt;&gt; &#64;prepro
+… def AddOne() -&gt; Prepro:
+…     return AddOffset(offset=1)
+&gt;&gt;&gt; prepro_fn = AddOne()
+&gt;&gt;&gt; dataset = prepro_fn(raw_dataset)
+&gt;&gt;&gt; list(readers.from_dataset(dataset))
+[1, 2, 3]</p>
 <p>A nice feature of the <cite>prepro</cite> decorator is laziness: the code
 inside the function is not executed until a call on a dataset. In
-other words:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@prepro</span>
-<span class="gp">... </span><span class="k">def</span> <span class="nf">MyLookup</span><span class="p">():</span>
-<span class="gp">... </span>    <span class="n">table</span> <span class="o">=</span> <span class="n">create_table_from_file</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="k">return</span> <span class="n">Map</span><span class="p">(</span><span class="n">Lookup</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;ids&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;indices&quot;</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">MyLookup</span><span class="p">()</span>
-<span class="go">The `table` object is not created</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-<span class="go">The body of `MyLookup` gets executed</span>
-</pre></div>
-</div>
+other words:
+&gt;&gt;&gt; &#64;prepro  # doctest: +SKIP
+… def MyLookup():  # doctest: +SKIP
+…     table = create_table_from_file(…)  # doctest: +SKIP
+…     return Map(Lookup(table, inputs=”ids”, outputs=”indices”))  # doctest: +SKIP
+&gt;&gt;&gt; prepro_fn = MyLookup()  # doctest: +SKIP
+The <cite>table</cite> object is not created
+&gt;&gt;&gt; dataset = prepro_fn(dataset)  # doctest: +SKIP
+The body of <cite>MyLookup</cite> gets executed</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a></p>
@@ -490,23 +497,32 @@ dataset and keeps only element for which predicate returns True.</p>
 on the mode (TRAIN, EVAL, PREDICT), an optional argument can be
 provided. By setting modes, you select the modes on which the map
 transformation should apply. For example:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">gen</span><span class="p">():</span>
-<span class="gp">... </span><span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
-<span class="gp">... </span><span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_generator</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">(</span><span class="kc">None</span><span class="p">,))</span>
-<span class="go">{&quot;a&quot;: 0}, {&quot;a&quot;: 1}</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr</span> <span class="kn">import</span> <span class="n">readers</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr.prepros</span> <span class="kn">import</span> <span class="n">Filter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">gen</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="gp">... </span>    <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">raw_dataset</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_generator</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">TensorShape</span><span class="p">([])})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">readers</span><span class="o">.</span><span class="n">from_dataset</span><span class="p">(</span><span class="n">raw_dataset</span><span class="p">))</span>
+<span class="go">[{&#39;a&#39;: 0}, {&#39;a&#39;: 1}]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">predicate</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Filter</span><span class="p">(</span><span class="n">predicate</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">predicate</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">)</span>
-<span class="go">{&quot;a&quot;: 0}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">predicate</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">)</span>
-<span class="go">{&quot;a&quot;: 0}, {&quot;a&quot;: 1}</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="mi">0</span><span class="p">)}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Filter</span><span class="p">(</span><span class="n">predicate</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">raw_dataset</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_generator</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">TensorShape</span><span class="p">([])})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">raw_dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">readers</span><span class="o">.</span><span class="n">from_dataset</span><span class="p">(</span><span class="n">dataset</span><span class="p">))</span>
+<span class="go">[{&#39;a&#39;: 0}]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">raw_dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">readers</span><span class="o">.</span><span class="n">from_dataset</span><span class="p">(</span><span class="n">dataset</span><span class="p">))</span>
+<span class="go">[{&#39;a&#39;: 0}, {&#39;a&#39;: 1}]</span>
 </pre></div>
 </div>
 <p>If the mode is not given at runtime, the preprocessing is applied.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-<span class="go">{&quot;a&quot;: 0}, {&quot;a&quot;: 1}</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">raw_dataset</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">readers</span><span class="o">.</span><span class="n">from_dataset</span><span class="p">(</span><span class="n">dataset</span><span class="p">))</span>
+<span class="go">[{&#39;a&#39;: 0}]</span>
 </pre></div>
 </div>
 <dl class="py attribute">
@@ -579,42 +595,47 @@ always be used. This is intended to keep the signature of the
 generic <code class="docutils literal notranslate"><span class="pre">map_func</span></code> in line with the <code class="docutils literal notranslate"><span class="pre">tf.Dataset.map</span></code> method.</p>
 <p>If you wish to use a <a class="reference internal" href="../API/_autosummary/deepr.layers.Layer.html#deepr.layers.Layer" title="deepr.layers.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> with a given <code class="docutils literal notranslate"><span class="pre">mode</span></code>, you can do</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Map</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">forward_as_dict</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr</span> <span class="kn">import</span> <span class="n">readers</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr.layers</span> <span class="kn">import</span> <span class="n">Sum</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr.prepros</span> <span class="kn">import</span> <span class="n">Map</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">layer</span> <span class="o">=</span> <span class="n">Sum</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">forward_as_dict</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>For example, by setting <cite>update=True</cite> (DEFAULT behavior)</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">gen</span><span class="p">():</span>
-<span class="gp">... </span><span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_generator</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">(</span><span class="kc">None</span><span class="p">,))</span>
-<span class="go">{&quot;a&quot;: 0}</span>
+<span class="gp">... </span>    <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_generator</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">TensorShape</span><span class="p">([])})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">readers</span><span class="o">.</span><span class="n">from_dataset</span><span class="p">(</span><span class="n">dataset</span><span class="p">))</span>
+<span class="go">[{&#39;a&#39;: 0}]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">map_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">map_func</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-<span class="go">{&quot;a&quot;: 0, &quot;b&quot;: 1}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">readers</span><span class="o">.</span><span class="n">from_dataset</span><span class="p">(</span><span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)))</span>
+<span class="go">[{&#39;a&#39;: 0, &#39;b&#39;: 1}]</span>
 </pre></div>
 </div>
 <p>On the other hand, <code class="docutils literal notranslate"><span class="pre">update=False</span></code> yields the output of the
 <code class="docutils literal notranslate"><span class="pre">map_func</span></code></p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">map_func</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-<span class="go">{&quot;b&quot;: 1}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">readers</span><span class="o">.</span><span class="n">from_dataset</span><span class="p">(</span><span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)))</span>
+<span class="go">[{&#39;b&#39;: 1}]</span>
 </pre></div>
 </div>
 <p>Because some preprocessing pipelines behave differently depending
 on the mode (TRAIN, EVAL, PREDICT), an optional argument can be
 provided. By setting modes, you select the modes on which the map
 transformation should apply. For example:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">map_func</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">)</span>
-<span class="go">{&quot;a&quot;: 0, &quot;b&quot;: 1}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">)</span>
-<span class="go">{&quot;a&quot;: 0}</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">map_func</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">readers</span><span class="o">.</span><span class="n">from_dataset</span><span class="p">(</span><span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">)))</span>
+<span class="go">[{&#39;a&#39;: 0, &#39;b&#39;: 1}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">readers</span><span class="o">.</span><span class="n">from_dataset</span><span class="p">(</span><span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">)))</span>
+<span class="go">[{&#39;a&#39;: 0}]</span>
 </pre></div>
 </div>
 <p>If the mode is not given at runtime, the preprocessing is applied.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-<span class="go">{&quot;a&quot;: 0, &quot;b&quot;: 1}</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">readers</span><span class="o">.</span><span class="n">from_dataset</span><span class="p">(</span><span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">)))</span>
+<span class="go">[{&#39;a&#39;: 0, &#39;b&#39;: 1}]</span>
 </pre></div>
 </div>
 <dl class="py attribute">

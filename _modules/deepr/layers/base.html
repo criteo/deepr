@@ -194,16 +194,19 @@
 <span class="sd">    The basic usage of a :class:`~Layer` is to build graphs as intuitively as</span>
 <span class="sd">    possible. For example:</span>
 
+<span class="sd">    &gt;&gt;&gt; from deepr.layers import Dense</span>
 <span class="sd">    &gt;&gt;&gt; input_tensor = tf.ones([32, 8])</span>
 <span class="sd">    &gt;&gt;&gt; dense = Dense(16)</span>
 <span class="sd">    &gt;&gt;&gt; output_tensor = dense(input_tensor)</span>
-<span class="sd">    tf.Tensor(shape=[32, 16])</span>
+<span class="sd">    &gt;&gt;&gt; output_tensor</span>
+<span class="sd">    &lt;tf.Tensor &#39;dense/BiasAdd:0&#39; shape=(32, 16) dtype=float32&gt;</span>
 
 
 <span class="sd">    Because some layers (like :class:`~Dropout`) might behave differently</span>
 <span class="sd">    depending on the mode (TRAIN, EVAL, PREDICT), an optional argument</span>
 <span class="sd">    can be provided:</span>
 
+<span class="sd">    &gt;&gt;&gt; from deepr.layers import Dropout</span>
 <span class="sd">    &gt;&gt;&gt; tensor = tf.ones([32, 8])</span>
 <span class="sd">    &gt;&gt;&gt; dropout = Dropout(0.5)</span>
 <span class="sd">    &gt;&gt;&gt; dropped = dropout(input_tensor, tf.estimator.ModeKeys.TRAIN)</span>
@@ -213,10 +216,12 @@
 <span class="sd">    dictionary, yielded by a tf.data.Dataset for example, you can also</span>
 <span class="sd">    do:</span>
 
+<span class="sd">    &gt;&gt;&gt; tf.reset_default_graph()</span>
 <span class="sd">    &gt;&gt;&gt; tensors = {&quot;x&quot;: tf.ones([32, 8])}</span>
 <span class="sd">    &gt;&gt;&gt; dense = Dense(16, inputs=&quot;x&quot;, outputs=&quot;y&quot;)</span>
 <span class="sd">    &gt;&gt;&gt; tensors = dense(tensors)</span>
-<span class="sd">    {&quot;y&quot;: tf.Tensor(shape=[32, 16])}</span>
+<span class="sd">    &gt;&gt;&gt; tensors</span>
+<span class="sd">    {&#39;y&#39;: &lt;tf.Tensor &#39;dense/BiasAdd:0&#39; shape=(32, 16) dtype=float32&gt;}</span>
 
 <span class="sd">    The `inputs` and `outputs` are optional (defaults to t_0, t_1 etc.)</span>
 <span class="sd">    and their order needs to be coherent with the order of tensors in</span>
@@ -242,9 +247,13 @@
 <span class="sd">    should not create variables at instantiation time nor store</span>
 <span class="sd">    variables or any other graph references as attributes.</span>
 
+<span class="sd">    &gt;&gt;&gt; tf.reset_default_graph()</span>
 <span class="sd">    &gt;&gt;&gt; dense = Dense(16)</span>
+
 <span class="sd">    No parameters are created</span>
 <span class="sd">    &gt;&gt;&gt; dense(tf.ones([32, 8]))</span>
+<span class="sd">    &lt;tf.Tensor &#39;dense/BiasAdd:0&#39; shape=(32, 16) dtype=float32&gt;</span>
+
 <span class="sd">    Parameters are created in the current tf.Graph</span>
 
 <span class="sd">    In other words, calling the layer should not change its state. This</span>
@@ -257,9 +266,15 @@
 <span class="sd">    arguments at call time. Behind the scene, it&#39;s simply wrapping the</span>
 <span class="sd">    TF1.X variable management into a :meth:`~tf.variable_scope`.</span>
 
+<span class="sd">    &gt;&gt;&gt; tf.reset_default_graph()</span>
 <span class="sd">    &gt;&gt;&gt; dense = Dense(16)</span>
-<span class="sd">    &gt;&gt;&gt; dense(tf.ones([32, 8])) == dense(tf.ones([32, 8]), reuse=True)</span>
-<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; dense(tf.ones([32, 8]))</span>
+<span class="sd">    &lt;tf.Tensor &#39;dense/BiasAdd:0&#39; shape=(32, 16) dtype=float32&gt;</span>
+<span class="sd">    &gt;&gt;&gt; dense(tf.ones([32, 8]), reuse=True)</span>
+<span class="sd">    &lt;tf.Tensor &#39;dense_1/BiasAdd:0&#39; shape=(32, 16) dtype=float32&gt;</span>
+
+<span class="sd">    While the two operations have different names &#39;dense/BiasAdd:0&#39; and</span>
+<span class="sd">    &#39;dense_1/BiasAdd:0&#39;, they both share the same weights.</span>
 
 <span class="sd">    Good examples on how to implement parametrized layers are deepr.Dense</span>
 <span class="sd">    and embedding.Embedding.</span>
@@ -478,6 +493,7 @@
 <span class="sd">    For example, the following snippet defines a subclass of :class:`~Layer`</span>
 <span class="sd">    whose `forward` method returns `tensors + offset`.</span>
 
+<span class="sd">    &gt;&gt;&gt; from deepr.layers import layer</span>
 <span class="sd">    &gt;&gt;&gt; @layer(n_in=1, n_out=1)</span>
 <span class="sd">    ... def AddOffset(tensors, offset):</span>
 <span class="sd">    ...     return tensors + offset</span>
@@ -499,14 +515,13 @@
 <span class="sd">                return tensors + self.offset</span>
 
 <span class="sd">    You can also add a &#39;mode&#39; argument to your layer like so</span>
-
 <span class="sd">    &gt;&gt;&gt; @layer(n_in=1, n_out=1)</span>
-<span class="sd">    ... def AddOffset(tensors, mode, offset):</span>
+<span class="sd">    ... def AddOffsetInTrain(tensors, mode, offset):</span>
 <span class="sd">    ...     if mode == tf.estimator.ModeKeys.TRAIN:</span>
 <span class="sd">    ...         return tensors + offset</span>
 <span class="sd">    ...     else:</span>
 <span class="sd">    ...         return tensors</span>
-<span class="sd">    &gt;&gt;&gt; add = AddOffset(offset=1)</span>
+<span class="sd">    &gt;&gt;&gt; add = AddOffsetInTrain(offset=1)</span>
 <span class="sd">    &gt;&gt;&gt; add(1, tf.estimator.ModeKeys.TRAIN)</span>
 <span class="sd">    2</span>
 <span class="sd">    &gt;&gt;&gt; add(1, tf.estimator.ModeKeys.PREDICT)</span>
@@ -522,7 +537,6 @@
 <span class="sd">    For example, the following snippet defines a subclass of :class:`~Layer`</span>
 <span class="sd">    whose `forward` method is the same as the layer returned by the</span>
 <span class="sd">    function.</span>
-
 <span class="sd">    &gt;&gt;&gt; @layer(n_in=1, n_out=1)</span>
 <span class="sd">    ... def AddOne() -&gt; Layer:</span>
 <span class="sd">    ...     return AddOffset(offset=1)</span>
@@ -533,14 +547,14 @@
 <span class="sd">    A nice feature of the :class:`~layer` decorator is laziness: the code</span>
 <span class="sd">    inside the function is not executed until a call on a tensor. In</span>
 <span class="sd">    other words:</span>
-
 <span class="sd">    &gt;&gt;&gt; @layer(n_in=1, n_out=1)</span>
 <span class="sd">    ... def AddOffset(tensors, offset):</span>
 <span class="sd">    ...     print(&quot;Calling layer&quot;)</span>
 <span class="sd">    ...     return tensors + offset</span>
 <span class="sd">    &gt;&gt;&gt; add_one = AddOffset(offset=1)</span>
 <span class="sd">    &gt;&gt;&gt; add_one(1)</span>
-<span class="sd">    &quot;Calling layer&quot;</span>
+<span class="sd">    Calling layer</span>
+<span class="sd">    2</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># pylint: disable=protected-access,invalid-name</span>
 

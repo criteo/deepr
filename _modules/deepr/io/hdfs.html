@@ -176,8 +176,9 @@
 
 <span class="sd">    Open and closes connection to HDFS thanks to a context manager</span>
 
-<span class="sd">    &gt;&gt;&gt; with HDFSFileSystem() as fs:</span>
-<span class="sd">    ...     fs.open(&quot;path/to/file&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; from deepr.io import HDFSFileSystem</span>
+<span class="sd">    &gt;&gt;&gt; with HDFSFileSystem() as fs:  # doctest: +SKIP</span>
+<span class="sd">    ...     fs.open(&quot;path/to/file&quot;)  # doctest: +SKIP</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="HDFSFileSystem.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.io.HDFSFileSystem.html#deepr.io.HDFSFileSystem.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -202,9 +203,10 @@
 <span class="sd">    Makes it easier to read or write file from any filesystem. For</span>
 <span class="sd">    example, if you use HDFS you can do</span>
 
+<span class="sd">    &gt;&gt;&gt; from deepr.io import HDFSFileSystem</span>
 <span class="sd">    &gt;&gt;&gt; with HDFSFileSystem() as fs:</span>
-<span class="sd">    ...     with HDFSFile(fs, &quot;viewfs://root/user/foo.txt&quot;, &quot;w&quot;) as file:</span>
-<span class="sd">    ...         file.write(&quot;Hello world!&quot;)</span>
+<span class="sd">    ...     with HDFSFile(fs, &quot;viewfs://root/user/foo.txt&quot;, &quot;w&quot;) as file:  # doctest: +SKIP</span>
+<span class="sd">    ...         file.write(&quot;Hello world!&quot;)  # doctest: +SKIP</span>
 
 <span class="sd">    The use of context manager means that the connection to the</span>
 <span class="sd">    filesystem is automatically opened / closed, as well as the file</span>

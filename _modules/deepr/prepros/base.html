@@ -181,39 +181,51 @@
 
 <span class="sd">    The basic usage of a :class:`~Prepro` is to apply it on a Dataset. For</span>
 <span class="sd">    example:</span>
-
-<span class="sd">    &gt;&gt;&gt; dataset = tf.data.Dataset.from_generator(range(3))</span>
-<span class="sd">    [0, 1, 2]</span>
-<span class="sd">    &gt;&gt;&gt; prepro_fn = Map(lambda element: element + 1)</span>
-<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset)</span>
-<span class="sd">    [1, 2, 3]</span>
+<span class="sd">    &gt;&gt;&gt; from deepr import readers</span>
+<span class="sd">    &gt;&gt;&gt; from deepr.prepros import Map</span>
+<span class="sd">    &gt;&gt;&gt; def gen():</span>
+<span class="sd">    ...     for i in range(3):</span>
+<span class="sd">    ...         yield {&quot;a&quot;: i}</span>
+<span class="sd">    &gt;&gt;&gt; raw_dataset = tf.data.Dataset.from_generator(gen, {&quot;a&quot;: tf.int32}, {&quot;a&quot;: tf.TensorShape([])})</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(raw_dataset))</span>
+<span class="sd">    [{&#39;a&#39;: 0}, {&#39;a&#39;: 1}, {&#39;a&#39;: 2}]</span>
+<span class="sd">    &gt;&gt;&gt; prepro_fn = Map(lambda x: {&#39;a&#39;: x[&#39;a&#39;] + 1})</span>
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(raw_dataset)</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(dataset))</span>
+<span class="sd">    [{&#39;a&#39;: 1}, {&#39;a&#39;: 2}, {&#39;a&#39;: 3}]</span>
 
 <span class="sd">    Because some preprocessing pipelines behave differently depending</span>
 <span class="sd">    on the mode (TRAIN, EVAL, PREDICT), an optional argument can be</span>
 <span class="sd">    provided:</span>
-
-<span class="sd">    &gt;&gt;&gt; def map_func(element, mode = None):</span>
+<span class="sd">    &gt;&gt;&gt; def map_func(element, mode=None):</span>
 <span class="sd">    ...     if mode == tf.estimator.ModeKeys.PREDICT:</span>
-<span class="sd">    ...         return 0</span>
+<span class="sd">    ...         return {&#39;a&#39;: 0}</span>
 <span class="sd">    ...     else:</span>
 <span class="sd">    ...         return element</span>
 <span class="sd">    &gt;&gt;&gt; prepro_fn = Map(map_func)</span>
-<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset, tf.estimator.ModeKeys.TRAIN)</span>
-<span class="sd">    [0, 1, 2]</span>
-<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset, tf.estimator.ModeKeys.PREDICT)</span>
-<span class="sd">    [0, 0, 0]</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(raw_dataset))</span>
+<span class="sd">    [{&#39;a&#39;: 0}, {&#39;a&#39;: 1}, {&#39;a&#39;: 2}]</span>
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(raw_dataset, mode=tf.estimator.ModeKeys.TRAIN)</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(dataset))</span>
+<span class="sd">    [{&#39;a&#39;: 0}, {&#39;a&#39;: 1}, {&#39;a&#39;: 2}]</span>
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(raw_dataset, mode=tf.estimator.ModeKeys.PREDICT)</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(dataset))</span>
+<span class="sd">    [{&#39;a&#39;: 0}, {&#39;a&#39;: 1}, {&#39;a&#39;: 2}]</span>
+
+<span class="sd">    TODO: Actually mode in map_func is not taken into account</span>
 
 <span class="sd">    :class:`~Map`, :class:`~Filter`, :class:`~Shuffle` and :class:`~Repeat` have a special attribute</span>
 <span class="sd">    `modes` that you can use to specify the modes on which the</span>
 <span class="sd">    preprocessing should be applied. For example:</span>
-
-<span class="sd">    &gt;&gt;&gt; def map_func(element, mode = None):</span>
-<span class="sd">    ...     return 0</span>
-<span class="sd">    &gt;&gt;&gt; prepro_fn = Map(map_func, modes=[tf.estimator.PREDICT])</span>
-<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset, tf.estimator.ModeKeys.TRAIN)</span>
-<span class="sd">    [0, 1, 2]</span>
+<span class="sd">    &gt;&gt;&gt; def map_func(element, mode=None):</span>
+<span class="sd">    ...     return {&#39;a&#39;: 0}</span>
+<span class="sd">    &gt;&gt;&gt; prepro_fn = Map(map_func, modes=[tf.estimator.ModeKeys.PREDICT])</span>
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(raw_dataset, tf.estimator.ModeKeys.TRAIN)</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(dataset))</span>
+<span class="sd">    [{&#39;a&#39;: 0}, {&#39;a&#39;: 1}, {&#39;a&#39;: 2}]</span>
 <span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset, tf.estimator.ModeKeys.PREDICT)</span>
-<span class="sd">    [0, 0, 0]</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(dataset))</span>
+<span class="sd">    [{&#39;a&#39;: 0}, {&#39;a&#39;: 0}, {&#39;a&#39;: 0}]</span>
 
 <span class="sd">    Authors of new :class:`~Prepro` subclasses typically override the `apply`</span>
 <span class="sd">    method of the base :class:`~Prepro` class::</span>
@@ -246,13 +258,15 @@
 
 <span class="sd">    For example, the following snippet defines a subclass of :class:`~Prepro`</span>
 <span class="sd">    whose `apply` offsets each element of the dataset by `offset`:</span>
-
+<span class="sd">    &gt;&gt;&gt; from deepr import readers</span>
+<span class="sd">    &gt;&gt;&gt; from deepr.prepros import prepro</span>
 <span class="sd">    &gt;&gt;&gt; @prepro</span>
 <span class="sd">    ... def AddOffset(dataset, offset):</span>
 <span class="sd">    ...     return dataset.map(lambda element: element + offset)</span>
-<span class="sd">    &gt;&gt;&gt; dataset = [0, 1, 2]</span>
+<span class="sd">    &gt;&gt;&gt; raw_dataset = tf.data.Dataset.from_tensor_slices([0, 1, 2])</span>
 <span class="sd">    &gt;&gt;&gt; prepro_fn = AddOffset(offset=1)</span>
-<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset)</span>
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(raw_dataset)</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(dataset))</span>
 <span class="sd">    [1, 2, 3]</span>
 
 <span class="sd">    The class created by the decorator is roughly equivalent to</span>
@@ -269,18 +283,21 @@
 <span class="sd">                return dataset.map(lambda element: element + self.offset)</span>
 
 <span class="sd">    You can also add a &#39;mode&#39; argument to your preprocessor like so</span>
-
 <span class="sd">    &gt;&gt;&gt; @prepro</span>
-<span class="sd">    ... def AddOffset(dataset, mode, offset):</span>
+<span class="sd">    ... def AddOffsetInTrain(dataset, mode, offset):</span>
 <span class="sd">    ...     if mode == tf.estimator.ModeKeys.TRAIN:</span>
 <span class="sd">    ...         return dataset.map(lambda element: element + offset)</span>
 <span class="sd">    ...     else:</span>
 <span class="sd">    ...         return dataset</span>
-<span class="sd">    &gt;&gt;&gt; dataset = [0, 1, 2]</span>
-<span class="sd">    &gt;&gt;&gt; prepro_fn = AddOffset(offset=1)</span>
-<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset, tf.estimator.ModeKeys.TRAIN)</span>
+<span class="sd">    &gt;&gt;&gt; prepro_fn = AddOffsetInTrain(offset=1)</span>
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(raw_dataset, tf.estimator.ModeKeys.TRAIN)</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(dataset))</span>
 <span class="sd">    [1, 2, 3]</span>
-<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset, tf.estimator.ModeKeys.PREDICT)</span>
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(raw_dataset, tf.estimator.ModeKeys.PREDICT)</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(dataset))</span>
+<span class="sd">    [0, 1, 2]</span>
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(raw_dataset)</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(dataset))</span>
 <span class="sd">    [0, 1, 2]</span>
 
 <span class="sd">    Note that &#39;dataset&#39; and &#39;mode&#39; need to be the the first arguments</span>
@@ -293,26 +310,24 @@
 <span class="sd">    For example, the following snippet defines a subclass of :class:`~Prepro`</span>
 <span class="sd">    whose `apply` method is the same as the prepro returned by the</span>
 <span class="sd">    function.</span>
-
 <span class="sd">    &gt;&gt;&gt; @prepro</span>
 <span class="sd">    ... def AddOne() -&gt; Prepro:</span>
 <span class="sd">    ...     return AddOffset(offset=1)</span>
-<span class="sd">    &gt;&gt;&gt; dataset = [0, 1, 2]</span>
 <span class="sd">    &gt;&gt;&gt; prepro_fn = AddOne()</span>
-<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset)</span>
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(raw_dataset)</span>
+<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(dataset))</span>
 <span class="sd">    [1, 2, 3]</span>
 
 <span class="sd">    A nice feature of the `prepro` decorator is laziness: the code</span>
 <span class="sd">    inside the function is not executed until a call on a dataset. In</span>
 <span class="sd">    other words:</span>
-
-<span class="sd">    &gt;&gt;&gt; @prepro</span>
-<span class="sd">    ... def MyLookup():</span>
-<span class="sd">    ...     table = create_table_from_file(...)</span>
-<span class="sd">    ...     return Map(Lookup(table, inputs=&quot;ids&quot;, outputs=&quot;indices&quot;))</span>
-<span class="sd">    &gt;&gt;&gt; prepro_fn = MyLookup()</span>
+<span class="sd">    &gt;&gt;&gt; @prepro  # doctest: +SKIP</span>
+<span class="sd">    ... def MyLookup():  # doctest: +SKIP</span>
+<span class="sd">    ...     table = create_table_from_file(...)  # doctest: +SKIP</span>
+<span class="sd">    ...     return Map(Lookup(table, inputs=&quot;ids&quot;, outputs=&quot;indices&quot;))  # doctest: +SKIP</span>
+<span class="sd">    &gt;&gt;&gt; prepro_fn = MyLookup()  # doctest: +SKIP</span>
 <span class="sd">    The `table` object is not created</span>
-<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset)</span>
+<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset)  # doctest: +SKIP</span>
 <span class="sd">    The body of `MyLookup` gets executed</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># pylint: disable=protected-access,invalid-name</span>

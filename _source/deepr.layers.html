@@ -247,16 +247,19 @@ function from one or more inputs to one or more outputs.</p>
 </dl>
 <p>The basic usage of a <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> is to build graphs as intuitively as
 possible. For example:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_tensor</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">input_tensor</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dense</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">output_tensor</span> <span class="o">=</span> <span class="n">dense</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
-<span class="go">tf.Tensor(shape=[32, 16])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output_tensor</span>
+<span class="go">&lt;tf.Tensor &#39;dense/BiasAdd:0&#39; shape=(32, 16) dtype=float32&gt;</span>
 </pre></div>
 </div>
 <p>Because some layers (like <code class="xref py py-class docutils literal notranslate"><span class="pre">Dropout</span></code>) might behave differently
 depending on the mode (TRAIN, EVAL, PREDICT), an optional argument
 can be provided:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tensor</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr.layers</span> <span class="kn">import</span> <span class="n">Dropout</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tensor</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dropout</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dropped</span> <span class="o">=</span> <span class="n">dropout</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">not_dropped</span> <span class="o">=</span> <span class="n">dropout</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">EVAL</span><span class="p">)</span>
@@ -265,10 +268,12 @@ can be provided:</p>
 <p>Because in a lot of cases, a <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> needs to be applied on a
 dictionary, yielded by a tf.data.Dataset for example, you can also
 do:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tensors</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">])}</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tf</span><span class="o">.</span><span class="n">reset_default_graph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tensors</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">])}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dense</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tensors</span> <span class="o">=</span> <span class="n">dense</span><span class="p">(</span><span class="n">tensors</span><span class="p">)</span>
-<span class="go">{&quot;y&quot;: tf.Tensor(shape=[32, 16])}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tensors</span>
+<span class="go">{&#39;y&#39;: &lt;tf.Tensor &#39;dense/BiasAdd:0&#39; shape=(32, 16) dtype=float32&gt;}</span>
 </pre></div>
 </div>
 <p>The <cite>inputs</cite> and <cite>outputs</cite> are optional (defaults to t_0, t_1 etc.)
@@ -291,12 +296,14 @@ decorator (see documentation).</p>
 <p>Note that layers using parameters (a <code class="xref py py-class docutils literal notranslate"><span class="pre">Dense</span></code> layer for example)
 should not create variables at instantiation time nor store
 variables or any other graph references as attributes.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dense</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
-<span class="go">No parameters are created</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dense</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">]))</span>
-<span class="go">Parameters are created in the current tf.Graph</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tf</span><span class="o">.</span><span class="n">reset_default_graph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dense</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>No parameters are created
+&gt;&gt;&gt; dense(tf.ones([32, 8]))
+&lt;tf.Tensor ‘dense/BiasAdd:0’ shape=(32, 16) dtype=float32&gt;</p>
+<p>Parameters are created in the current tf.Graph</p>
 <p>In other words, calling the layer should not change its state. This
 is effectively enforcing functional programming. The state of the
 layer is only used to parametrize its runtime. This makes it simpler
@@ -305,11 +312,16 @@ to define graphs with the tf.estimator API.</p>
 its variables), you need to be explicit, and set the <cite>reuse=True</cite>
 arguments at call time. Behind the scene, it’s simply wrapping the
 TF1.X variable management into a <code class="xref py py-meth docutils literal notranslate"><span class="pre">variable_scope()</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dense</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dense</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">]))</span> <span class="o">==</span> <span class="n">dense</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">]),</span> <span class="n">reuse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="go">True</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tf</span><span class="o">.</span><span class="n">reset_default_graph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dense</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dense</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">]))</span>
+<span class="go">&lt;tf.Tensor &#39;dense/BiasAdd:0&#39; shape=(32, 16) dtype=float32&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dense</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">]),</span> <span class="n">reuse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&lt;tf.Tensor &#39;dense_1/BiasAdd:0&#39; shape=(32, 16) dtype=float32&gt;</span>
 </pre></div>
 </div>
+<p>While the two operations have different names ‘dense/BiasAdd:0’ and
+‘dense_1/BiasAdd:0’, they both share the same weights.</p>
 <p>Good examples on how to implement parametrized layers are deepr.Dense
 and embedding.Embedding.</p>
 <dl class="py attribute">
@@ -432,7 +444,8 @@ It returns a new dictionary (does not mutate the input
 verbose way.</p>
 <p>For example, the following snippet defines a subclass of <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a>
 whose <cite>forward</cite> method returns <cite>tensors + offset</cite>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr.layers</span> <span class="kn">import</span> <span class="n">layer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">... </span><span class="k">def</span> <span class="nf">AddOffset</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">tensors</span> <span class="o">+</span> <span class="n">offset</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">AddOffset</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -451,20 +464,18 @@ whose <cite>forward</cite> method returns <cite>tensors + offset</cite>.</p>
         <span class="k">return</span> <span class="n">tensors</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span>
 </pre></div>
 </div>
-<p>You can also add a ‘mode’ argument to your layer like so</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">def</span> <span class="nf">AddOffset</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">:</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="n">tensors</span> <span class="o">+</span> <span class="n">offset</span>
-<span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="n">tensors</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">AddOffset</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">)</span>
-<span class="go">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">)</span>
-<span class="go">1</span>
-</pre></div>
-</div>
+<p>You can also add a ‘mode’ argument to your layer like so
+&gt;&gt;&gt; &#64;layer(n_in=1, n_out=1)
+… def AddOffsetInTrain(tensors, mode, offset):
+…     if mode == tf.estimator.ModeKeys.TRAIN:
+…         return tensors + offset
+…     else:
+…         return tensors
+&gt;&gt;&gt; add = AddOffsetInTrain(offset=1)
+&gt;&gt;&gt; add(1, tf.estimator.ModeKeys.TRAIN)
+2
+&gt;&gt;&gt; add(1, tf.estimator.ModeKeys.PREDICT)
+1</p>
 <p>Note that ‘tensors’ and ‘mode’ need to be the the first arguments
 of the function IN THIS ORDER.</p>
 <p>Another way of using the decorator is on functions that create layer
@@ -472,27 +483,24 @@ instances. This allows you to create factories of layers and make
 them <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> classes.</p>
 <p>For example, the following snippet defines a subclass of <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a>
 whose <cite>forward</cite> method is the same as the layer returned by the
-function.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">def</span> <span class="nf">AddOne</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Layer</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">return</span> <span class="n">AddOffset</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">add_one</span> <span class="o">=</span> <span class="n">AddOne</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">add_one</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">2</span>
-</pre></div>
-</div>
+function.
+&gt;&gt;&gt; &#64;layer(n_in=1, n_out=1)
+… def AddOne() -&gt; Layer:
+…     return AddOffset(offset=1)
+&gt;&gt;&gt; add_one = AddOne()
+&gt;&gt;&gt; add_one(1)
+2</p>
 <p>A nice feature of the <a class="reference internal" href="#deepr.layers.base.layer" title="deepr.layers.base.layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">layer</span></code></a> decorator is laziness: the code
 inside the function is not executed until a call on a tensor. In
-other words:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">def</span> <span class="nf">AddOffset</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calling layer&quot;</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="k">return</span> <span class="n">tensors</span> <span class="o">+</span> <span class="n">offset</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">add_one</span> <span class="o">=</span> <span class="n">AddOffset</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">add_one</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">&quot;Calling layer&quot;</span>
-</pre></div>
-</div>
+other words:
+&gt;&gt;&gt; &#64;layer(n_in=1, n_out=1)
+… def AddOffset(tensors, offset):
+…     print(“Calling layer”)
+…     return tensors + offset
+&gt;&gt;&gt; add_one = AddOffset(offset=1)
+&gt;&gt;&gt; add_one(1)
+Calling layer
+2</p>
 </dd></dl>
 
 </div>
@@ -1213,12 +1221,13 @@ each key to its corresponding line index as an tf.int64.</p>
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.mask.</code><code class="sig-name descname">LookAheadMask</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/mask.html#LookAheadMask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.mask.LookAheadMask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
 <p>The look-ahead mask is used to mask the future items in a sequence</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">LookAheadMask</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
-<span class="go">    &lt;tf.Tensor: shape=(3, 3), dtype=float32, numpy=</span>
-<span class="go">    array([[0., 1., 1.],</span>
-<span class="go">           [0., 0., 1.],</span>
-<span class="go">           [0., 0., 0.]], dtype=float32)&gt;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr.layers</span> <span class="kn">import</span> <span class="n">LookAheadMask</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mf">0.8913734</span><span class="p">,</span> <span class="mf">0.3576287</span><span class="p">,</span> <span class="mf">0.9788116</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">LookAheadMask</span><span class="p">()(</span><span class="n">x</span><span class="p">))</span>
+<span class="go">array([[0., 1., 1.],</span>
+<span class="go">       [0., 0., 1.],</span>
+<span class="go">       [0., 0., 0.]], dtype=float32)</span>
 </pre></div>
 </div>
 <dl class="py method">

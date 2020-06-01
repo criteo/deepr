@@ -217,8 +217,9 @@
 <em class="property">class </em><code class="sig-prename descclassname">deepr.io.</code><code class="sig-name descname">HDFSFileSystem</code><a class="reference internal" href="../../_modules/deepr/io/hdfs.html#HDFSFileSystem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.HDFSFileSystem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Context aware HDFSFileSystem using pyarrow.hdfs.</p>
 <p>Open and closes connection to HDFS thanks to a context manager</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">HDFSFileSystem</span><span class="p">()</span> <span class="k">as</span> <span class="n">fs</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;path/to/file&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr.io</span> <span class="kn">import</span> <span class="n">HDFSFileSystem</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">HDFSFileSystem</span><span class="p">()</span> <span class="k">as</span> <span class="n">fs</span><span class="p">:</span>  
+<span class="gp">... </span>    <span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;path/to/file&quot;</span><span class="p">)</span>  
 </pre></div>
 </div>
 <dl class="py method">

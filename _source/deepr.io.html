@@ -232,9 +232,10 @@
 <p>FileSystemFile, support of “r”, “w” modes, readlines and iter.</p>
 <p>Makes it easier to read or write file from any filesystem. For
 example, if you use HDFS you can do</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">HDFSFileSystem</span><span class="p">()</span> <span class="k">as</span> <span class="n">fs</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">with</span> <span class="n">HDFSFile</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="s2">&quot;viewfs://root/user/foo.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-<span class="gp">... </span>        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr.io</span> <span class="kn">import</span> <span class="n">HDFSFileSystem</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">HDFSFileSystem</span><span class="p">()</span> <span class="k">as</span> <span class="n">fs</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">with</span> <span class="n">HDFSFile</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="s2">&quot;viewfs://root/user/foo.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>  
+<span class="gp">... </span>        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>  
 </pre></div>
 </div>
 <p>The use of context manager means that the connection to the
@@ -296,8 +297,9 @@ buffer.</p>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Context aware HDFSFileSystem using pyarrow.hdfs.</p>
 <p>Open and closes connection to HDFS thanks to a context manager</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">HDFSFileSystem</span><span class="p">()</span> <span class="k">as</span> <span class="n">fs</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;path/to/file&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr.io</span> <span class="kn">import</span> <span class="n">HDFSFileSystem</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">HDFSFileSystem</span><span class="p">()</span> <span class="k">as</span> <span class="n">fs</span><span class="p">:</span>  
+<span class="gp">... </span>    <span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;path/to/file&quot;</span><span class="p">)</span>  
 </pre></div>
 </div>
 </dd></dl>
@@ -350,9 +352,10 @@ buffer.</p>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Context aware ParquetDataset with support for chunk writing.</p>
 <p>Makes it easier to read / write <a class="reference internal" href="#deepr.io.parquet.ParquetDataset" title="deepr.io.parquet.ParquetDataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParquetDataset</span></code></a>. For example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">ParquetDataset</span><span class="p">(</span><span class="s2">&quot;viewfs://root/foo.parquet.snappy&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">ds</span><span class="o">.</span><span class="n">write_pandas</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr.io</span> <span class="kn">import</span> <span class="n">ParquetDataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;col1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;col2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">ParquetDataset</span><span class="p">(</span><span class="s2">&quot;viewfs://root/foo.parquet.snappy&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>  
+<span class="gp">... </span>    <span class="n">ds</span><span class="o">.</span><span class="n">write_pandas</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>  
 </pre></div>
 </div>
 <p>The use of context managers automatically opens / closes the dataset

@@ -217,6 +217,7 @@
 
 <span class="sd">    Example</span>
 <span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from deepr.jobs import MLFlowFormatter</span>
 <span class="sd">    &gt;&gt;&gt; params = {</span>
 <span class="sd">    ...     &quot;foo&quot;: {</span>
 <span class="sd">    ...         &quot;type&quot;: &quot;foo.Foo&quot;,</span>
@@ -228,7 +229,7 @@
 <span class="sd">    ... }</span>
 <span class="sd">    &gt;&gt;&gt; formatter = MLFlowFormatter(include_keys=(&quot;bar&quot;, &quot;x&quot;), skip_values=(2,))</span>
 <span class="sd">    &gt;&gt;&gt; formatter(params)</span>
-<span class="sd">    {&quot;bar.x&quot;: 1, &quot;x&quot;: 1}</span>
+<span class="sd">    {&#39;bar.x&#39;: 1, &#39;x&#39;: 1}</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -274,8 +275,8 @@
 <span class="sd">            ...         &quot;type&quot;: &quot;foo.Foo&quot;,</span>
 <span class="sd">            ...         &quot;bar&quot;: [{&quot;type&quot;: &quot;foo.Bar&quot;, &quot;baz&quot;: 1}]</span>
 <span class="sd">            ...     }</span>
-<span class="sd">            ... }</span>
-<span class="sd">            &gt;&gt;&gt; _flatten(data)</span>
+<span class="sd">            ... }  # doctest: +SKIP</span>
+<span class="sd">            &gt;&gt;&gt; _flatten(data)  # doctest: +SKIP</span>
 <span class="sd">            {&quot;foo.type&quot;: &quot;Foo&quot;, &quot;foo.bar.Bar.baz&quot;: 1}</span>
 <span class="sd">            &quot;&quot;&quot;</span>
             <span class="n">flat</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
@@ -307,7 +308,7 @@
                     <span class="k">if</span> <span class="n">sliced</span> <span class="ow">or</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">include_keys</span><span class="p">:</span>
                         <span class="n">sliced</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
                 <span class="n">keys</span> <span class="o">=</span> <span class="n">sliced</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">keys</span> <span class="ow">or</span> <span class="nb">set</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">skip_keys</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span><span class="n">val</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_values</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">keys</span> <span class="ow">or</span> <span class="nb">set</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">skip_keys</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_values</span><span class="p">):</span>
                 <span class="k">continue</span>
 
             <span class="c1"># Update formatted with the sliced param key if not present</span>
