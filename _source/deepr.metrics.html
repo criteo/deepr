@@ -237,6 +237,31 @@
 <code class="sig-prename descclassname">deepr.metrics.base.</code><code class="sig-name descname">get_metric_variable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">shape</span></em>, <em class="sig-param"><span class="n">dtype</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/base.html#get_metric_variable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.base.get_metric_variable" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="py function">
+<dt id="deepr.metrics.base.sanitize_metric_name">
+<code class="sig-prename descclassname">deepr.metrics.base.</code><code class="sig-name descname">sanitize_metric_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/base.html#sanitize_metric_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.base.sanitize_metric_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sanitize scope/variable name for tensorflow and mlflow</p>
+<p>This is needed as sometimes variables automatically created while
+building layers contain forbidden characters
+&gt;&gt;&gt; from tensorflow.python.framework.ops import _VALID_SCOPE_NAME_REGEX as TF_VALID_REGEX
+&gt;&gt;&gt; from mlflow.utils.validation import _VALID_PARAM_AND_METRIC_NAMES as MLFLOW_VALID_REGEX
+&gt;&gt;&gt; from deepr.metrics import sanitize_metric_name
+&gt;&gt;&gt; kernel_variable_name = ‘my_layer/kernel:0’
+&gt;&gt;&gt; bool(TF_VALID_REGEX.match(kernel_variable_name))
+False
+&gt;&gt;&gt; bool(MLFLOW_VALID_REGEX.match(kernel_variable_name))
+False
+&gt;&gt;&gt; bool(TF_VALID_REGEX.match(sanitize_metric_name(kernel_variable_name)))
+True
+&gt;&gt;&gt; bool(MLFLOW_VALID_REGEX.match(sanitize_metric_name(kernel_variable_name)))
+True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-deepr.metrics.core">
 <span id="deepr-metrics-core-module"></span><h2>deepr.metrics.core module<a class="headerlink" href="#module-deepr.metrics.core" title="Permalink to this headline">¶</a></h2>

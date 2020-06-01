@@ -175,9 +175,31 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
 
 
+<div class="viewcode-block" id="sanitize_metric_name"><a class="viewcode-back" href="../../../_source/deepr.metrics.html#deepr.metrics.sanitize_metric_name">[docs]</a><span class="k">def</span> <span class="nf">sanitize_metric_name</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Sanitize scope/variable name for tensorflow and mlflow</span>
+
+<span class="sd">    This is needed as sometimes variables automatically created while</span>
+<span class="sd">    building layers contain forbidden characters</span>
+<span class="sd">    &gt;&gt;&gt; from tensorflow.python.framework.ops import _VALID_SCOPE_NAME_REGEX as TF_VALID_REGEX</span>
+<span class="sd">    &gt;&gt;&gt; from mlflow.utils.validation import _VALID_PARAM_AND_METRIC_NAMES as MLFLOW_VALID_REGEX</span>
+<span class="sd">    &gt;&gt;&gt; from deepr.metrics import sanitize_metric_name</span>
+<span class="sd">    &gt;&gt;&gt; kernel_variable_name = &#39;my_layer/kernel:0&#39;</span>
+<span class="sd">    &gt;&gt;&gt; bool(TF_VALID_REGEX.match(kernel_variable_name))</span>
+<span class="sd">    False</span>
+<span class="sd">    &gt;&gt;&gt; bool(MLFLOW_VALID_REGEX.match(kernel_variable_name))</span>
+<span class="sd">    False</span>
+<span class="sd">    &gt;&gt;&gt; bool(TF_VALID_REGEX.match(sanitize_metric_name(kernel_variable_name)))</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; bool(MLFLOW_VALID_REGEX.match(sanitize_metric_name(kernel_variable_name)))</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">name</span></div>
+
+
 <div class="viewcode-block" id="get_metric_variable"><a class="viewcode-back" href="../../../_source/deepr.metrics.html#deepr.metrics.get_metric_variable">[docs]</a><span class="k">def</span> <span class="nf">get_metric_variable</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">dtype</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">sanitize_metric_name</span><span class="p">(</span><span class="n">name</span><span class="p">),</span>
         <span class="n">shape</span><span class="o">=</span><span class="n">shape</span><span class="p">,</span>
         <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span>
         <span class="n">initializer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">constant_initializer</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
