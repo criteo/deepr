@@ -131,6 +131,19 @@ class Path:
             else:
                 pathlib.Path(str(self)).mkdir(parents=parents, exist_ok=exist_ok)
 
+    def delete_dir(self, filesystem: FileSystem = None):
+        """Delete dir from filesystem"""
+        if not self.is_dir(filesystem=filesystem):
+            raise FileNotFoundError(str(self))
+        if filesystem is not None:
+            filesystem.rm(str(self), recursive=True)
+        else:
+            if self.is_hdfs:
+                with HDFSFileSystem() as hdfs:
+                    hdfs.rm(str(self), recursive=True)
+            else:
+                shutil.rmtree(str(self))
+
     def delete(self, filesystem: FileSystem = None):
         """Delete file from filesystem"""
         if not self.is_file(filesystem=filesystem):
