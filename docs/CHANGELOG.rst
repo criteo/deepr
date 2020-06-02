@@ -15,6 +15,8 @@ Doctest run in CI.
 
 Changed
 ~~~~~~~
+copy_dir job will now overwrite the target by default
+
 Deprecated
 ~~~~~~~~~~
 Removed
