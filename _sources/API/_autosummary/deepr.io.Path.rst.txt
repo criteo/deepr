@@ -17,6 +17,7 @@ deepr.io.Path
       ~Path.copy_dir
       ~Path.copy_file
       ~Path.delete
+      ~Path.delete_dir
       ~Path.exists
       ~Path.glob
       ~Path.is_dir
