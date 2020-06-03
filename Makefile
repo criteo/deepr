@@ -21,8 +21,10 @@ lint: ## [Local development] Run mypy, pylint and black
 black: ## [Local development] Auto-format python code using black
 	python -m black -l 120 .
 
-test: ## [Local development] Run unit tests.
+test: ## [Local development] Run unit tests, doctest and notebooks
 	python -m pytest -n 4 -v tests/unit
+	python -m pytest --doctest-modules -v deepr
+	find docs/getting_started/*.ipynb | xargs jupyter nbconvert --to notebook --execute && rm docs/getting_started/*.nbconvert.ipynb
 
 integration: ## [Local development] Run integration tests.
 	python -m pytest tests/integration

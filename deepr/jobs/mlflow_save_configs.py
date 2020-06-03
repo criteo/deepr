@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import Dict, Optional, Callable, Tuple, Any
 import logging
 
-from deepr.config.base import fill_macros, KEY_TYPE
+from deepr.config.base import fill_macros, TYPE
 from deepr.jobs import base
 from deepr.utils import mlflow
 
@@ -29,8 +29,8 @@ class MLFlowSaveConfigs(base.Job):
 
         if self.use_mlflow:
             # Prepare configs to upload
-            macros_static = {macro: params for macro, params in macros.items() if KEY_TYPE not in params}
-            macros_no_static = {macro: params for macro, params in macros.items() if KEY_TYPE in params}
+            macros_static = {macro: params for macro, params in macros.items() if TYPE not in params}
+            macros_no_static = {macro: params for macro, params in macros.items() if TYPE in params}
             config_no_static = fill_macros(config, macros_static)
             config_no_macros = fill_macros(config, macros_eval)
 
@@ -121,14 +121,12 @@ class MLFlowFormatter:
             for key, value in data.items():
                 if isinstance(value, dict):
                     flat.update({f"{key}.{subkey}": subval for subkey, subval in _flatten(value).items()})
-                elif isinstance(value, (list, tuple)) and all(
-                    isinstance(val, dict) and KEY_TYPE in val for val in value
-                ):
+                elif isinstance(value, (list, tuple)) and all(isinstance(val, dict) and TYPE in val for val in value):
                     for item in value:
-                        dtype = _format_type(item[KEY_TYPE])
-                        params = {key: val for key, val in item.items() if key != KEY_TYPE}
+                        dtype = _format_type(item[TYPE])
+                        params = {key: val for key, val in item.items() if key != TYPE}
                         flat.update(_flatten({key: {dtype: params}}))
-                elif key == KEY_TYPE:
+                elif key == TYPE:
                     flat[key] = _format_type(value)
                 else:
                     flat[str(key)] = value
@@ -158,4 +156,15 @@ class MLFlowFormatter:
             if self.include_keys is not None and last in self.include_keys:
                 formatted[last] = formatted.get(last, value)
 
-        return formatted
+        # Make sure keys are within the 250 characters limit
+        filtered = {}
+        for key, value in formatted.items():
+            if len(str(key)) >= 250:
+                LOGGER.error(f"Key too long {key}")
+                continue
+            if len(str(value)) >= 250:
+                LOGGER.error(f"Value too long {value}")
+                continue
+            filtered[key] = value
+
+        return filtered

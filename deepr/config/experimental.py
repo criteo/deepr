@@ -5,7 +5,7 @@ import inspect
 from typing import Dict, Any, List
 from collections import Counter
 
-from deepr.config.base import KEY_TYPE
+from deepr.config.base import TYPE
 from deepr.config.macros import MACRO, find_macro_params
 
 
@@ -41,7 +41,7 @@ def to_config(obj):
             return parameters
 
         return {
-            KEY_TYPE: obj.__class__.__module__ + "." + obj.__class__.__name__,
+            TYPE: obj.__class__.__module__ + "." + obj.__class__.__name__,
             **{key: to_config(value) for key, value in _get_params(obj.__class__).items()},
         }
 

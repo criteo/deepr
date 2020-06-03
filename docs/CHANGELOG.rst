@@ -11,20 +11,35 @@ and this project adheres to `Semantic Versioning <http://semver.org/>`_.
 
 Added
 ~~~~~
-Doctest run in CI.
+- Doctest run in CI.
 
 Changed
 ~~~~~~~
-copy_dir job will now overwrite the target by default
+- copy_dir job will now overwrite the target by default
+- Nested support for ``prepros.Serial``
+- Context manager ``TableContext`` for tables reuse
+- Automatic table context creation in ``prepro.__call__``
+- Prepro ``TableInitializer`` to run ``table_initializer_fn`` before ``map`` transforms
+- Vocabulary utilities (``read``, ``write``, ``size``)
+- Reverse lookup table function ``index_to_string_table_from_file`` and associated layer ``LookupIndexToString``
+- Layer combinator ``ActiveMode`` to apply layer only on given modes
+- Layer ``ToFloat``
+- Config evaluation modes: ``skip`` -> ``None``, ``instance`` -> ``call``
+- New evaluation mode for config dictionary ``partial``
+- Remove ``__post_init__`` for ``YarnTrainer`` and ``YarnLauncher`` to avoid unexpected non-laziness
 
 Deprecated
 ~~~~~~~~~~
 Removed
 ~~~~~~~
+- Use of ``prepro`` and ``layer`` decorator on constructors
+- Lazy behavior for ``prepro`` and ``layer`` decorator
+
 Fixed
 ~~~~~
-Doctests were fixed.
-Add metric name sanitizer, especially needed to sanitize keras built variable names.
+- Doctests were fixed.
+- Add metric name sanitizer, especially needed to sanitize keras built variable names.
+- Typo in ``example`` predict (feedable / fetchable)
 
 Security
 ~~~~~~~~

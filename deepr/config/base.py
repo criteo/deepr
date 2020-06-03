@@ -1,5 +1,6 @@
 """Evaluate objects from arbitrary nested dictionaries."""
 
+import functools
 import logging
 from typing import Dict, Any
 
@@ -9,15 +10,15 @@ from deepr.config.references import fill_references, default_references
 
 LOGGER = logging.getLogger(__name__)
 
-KEY_TYPE = "type"
+TYPE = "type"
 
-KEY_EVAL_MODE = "eval"
+EVAL = "eval"
 
-KEY_POSITIONAL_ARG = "*"
+CALL = "call"
 
-EVAL_MODE_INSTANCE = "instance"
+PARTIAL = "partial"
 
-EVAL_MODE_SKIP = "skip"
+POSITIONAL = "*"
 
 
 def parse_config(config: Dict, macros: Dict = None) -> Dict:
@@ -85,28 +86,43 @@ def from_config(item: Any) -> Any:
     """
     if isinstance(item, dict):
         # Get eval_mode from item, default is EVAL_MODE_INSTANCE
-        eval_mode = item.get(KEY_EVAL_MODE, EVAL_MODE_INSTANCE)
-        item = {key: value for key, value in item.items() if key != KEY_EVAL_MODE}
+        mode = item.get(EVAL, CALL)
+        params = {key: value for key, value in item.items() if key != EVAL}
 
-        # Retrieve type, evaluate arguments and return instance
-        if eval_mode == EVAL_MODE_INSTANCE:
-            if KEY_TYPE in item:
-                cls = _import(item[KEY_TYPE])
-                args = item.get(KEY_POSITIONAL_ARG)
-                kwargs = {key: value for key, value in item.items() if key not in {KEY_TYPE, KEY_POSITIONAL_ARG}}
+        # Return evaluated class or function with provided arguments
+        if mode == CALL:
+            if TYPE in params:
+                cls_or_fn = _import(params[TYPE])
+                args = from_config(params.get(POSITIONAL))
+                kwargs = {key: from_config(value) for key, value in params.items() if key not in {TYPE, POSITIONAL}}
                 try:
-                    return cls(*from_config(args), **from_config(kwargs)) if args else cls(**from_config(kwargs))
-                except TypeError as e:
-                    raise TypeError(f"Error instantiating {cls})") from e
+                    return cls_or_fn(*args, **kwargs) if args else cls_or_fn(**kwargs)
+                except (ValueError, TypeError) as e:
+                    raise type(e)(f"Error while calling {cls_or_fn})") from e
             else:
-                return {key: from_config(value) for key, value in item.items()}
+                return {key: from_config(value) for key, value in params.items()}
 
-        # Return item (no recursive evaluation)
-        if eval_mode == EVAL_MODE_SKIP:
-            return item
+        # Return partial class or function with provided arguments
+        if mode == PARTIAL:
+            if TYPE in params:
+                cls_or_fn = _import(params[TYPE])
+                args = from_config(params.get(POSITIONAL))
+                kwargs = {key: from_config(value) for key, value in params.items() if key not in {TYPE, POSITIONAL}}
+                return functools.partial(cls_or_fn, *args, **kwargs) if args else functools.partial(cls_or_fn, **kwargs)
+            else:
+                instantiated = from_config(params)
 
-        # Fail if eval_mode is not recognized.
-        raise ValueError(f"Unexpected eval_mode: '{eval_mode}' in item {item}")
+                def _partial(**kwargs):
+                    return {**instantiated, **kwargs}
+
+                return _partial
+
+        # Return raw dictionary
+        if mode is None:
+            return params
+
+        raise ValueError(f"Unexpected evaluation mode: '{mode}' in item {item}")
+
     if isinstance(item, list):
         return [from_config(it) for it in item]
     if isinstance(item, tuple):

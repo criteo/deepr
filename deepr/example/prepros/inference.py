@@ -6,7 +6,6 @@ import tensorflow as tf
 import deepr as dpr
 
 
-@dpr.prepros.prepro
 def InferencePrepro(batch_size, count):
     return dpr.prepros.Serial(
         dpr.prepros.TFRecordSequenceExample(

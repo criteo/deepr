@@ -114,6 +114,12 @@ def LogicalAnd(tensors):
     return tf.logical_and(t1, t2)
 
 
+@base.layer(n_in=1, n_out=1)
+def ToFloat(tensors):
+    """Cast tensor to float32"""
+    return tf.cast(tensors, tf.float32)
+
+
 class Identity(base.Layer):
     """Identity Layer"""
 

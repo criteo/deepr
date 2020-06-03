@@ -68,7 +68,7 @@ def default_references(config: Dict, macros: Dict = None, macros_eval: Dict = No
     Evaluation mode for the default references is set to "skip" to avoid
     double evaluation of those nested references.
     """
-    config = {**config, "eval": "skip"} if config is not None else None
-    macros = {**macros, "eval": "skip"} if macros is not None else None
-    macros_eval = {**macros_eval, "eval": "skip"} if macros_eval is not None else None
+    config = {**config, "eval": None} if config is not None else None
+    macros = {**macros, "eval": None} if macros is not None else None
+    macros_eval = {**macros_eval, "eval": None} if macros_eval is not None else None
     return {REF_SELF: config, REF_MACROS: macros, REF_MACROS_EVAL: macros_eval}

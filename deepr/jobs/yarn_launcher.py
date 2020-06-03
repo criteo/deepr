@@ -42,11 +42,6 @@ class YarnLauncher(base.Job):
     config: YarnLauncherConfig
     run_on_yarn: bool = True
 
-    def __post_init__(self):
-        job = from_config(self.job)
-        if not isinstance(job, base.Job):
-            raise TypeError(f"Expected type {base.Job} but got {job}")
-
     def run(self):
         if self.run_on_yarn:
             # Dump job and base as local json files for yarn_launcher

@@ -1,4 +1,4 @@
-# pylint: disable=no-value-for-parameter,invalid-name,unexpected-keyword-arg
+# pylint: disable=no-value-for-parameter,invalid-name,unexpected-keyword-arg,redefined-outer-name
 """Tests for layers.base"""
 
 import pytest
@@ -7,214 +7,154 @@ import tensorflow as tf
 import deepr as dpr
 
 
+@pytest.fixture
+def session():
+    with tf.Session() as sess:
+        yield sess
+
+
 @dpr.layers.layer(n_in=2, n_out=1)
 def Add(tensors):
+    """Add"""
     x, y = tensors
     return x + y
 
 
 @dpr.layers.layer(n_in=2, n_out=2)
 def Swap(tensors):
+    """Swap"""
     x, y = tensors
     return y, x
 
 
 @dpr.layers.layer(n_in=1, n_out=1)
 def AddOffset(tensors, offset):
+    """AddOffset"""
     return tensors + offset
 
 
 @dpr.layers.layer(n_in=1, n_out=1)
-def AddOne():
-    return AddOffset(offset=1)
+def AddOne(tensors):
+    return tensors + 1
+
+
+def test_layers_call(session):
+    """Test layer ability to operate on dictionaries and tuples."""
+    offset_layer = AddOffset(inputs="x", outputs="y", offset=1)
+    assert isinstance(offset_layer, dpr.layers.Layer)
+    result = offset_layer(tf.constant(1))
+    result_dict = offset_layer({"x": tf.constant(1)})
+    assert session.run(result) == 2
+    assert session.run(result_dict) == {"y": 2}
 
 
 @pytest.mark.parametrize(
     "cls, inputs, outputs, error, inputs_exp, outputs_exp",
     [
-        (AddOne, None, None, False, "t_0", "t_0"),
-        (AddOne, "x", "y", False, "x", "y"),
-        (AddOne, ("x", "y"), "y", True, None, None),
-        (AddOne, ("x",), "y", True, None, None),
-        (AddOne, "x", ("y",), True, None, None),
-        (AddOne, "x", ("y", "z"), True, None, None),
-        (Add, None, None, False, ("t_0", "t_1"), "t_0"),
-        (Add, ("x", "y"), "z", False, ("x", "y"), "z"),
-        (Add, "x", "z", True, None, None),
-        (Add, ("x", "y"), ("y", "z"), True, None, None),
-        (Swap, None, None, False, ("t_0", "t_1"), ("t_0", "t_1")),
-        (Swap, ("x", "y"), ("y", "z"), False, ("x", "y"), ("y", "z")),
-        (Swap, "x", ("y", "z"), True, None, None),
-        (Swap, ("x", "y"), "z", True, None, None),
-        (Swap, ("x", "y", "z"), ("y", "z"), True, None, None),
-        (Swap, ("x", "y"), ("x", "y", "z"), True, None, None),
+        # One input / one output
+        (AddOne, None, None, None, "t_0", "t_0"),
+        (AddOne, "x", "y", None, "x", "y"),
+        (AddOne, ("x", "y"), "y", ValueError, None, None),
+        (AddOne, ("x",), "y", ValueError, None, None),
+        (AddOne, "x", ("y",), ValueError, None, None),
+        (AddOne, "x", ("y", "z"), ValueError, None, None),
+        # Two inputs / one output
+        (Add, None, None, None, ("t_0", "t_1"), "t_0"),
+        (Add, ("x", "y"), "z", None, ("x", "y"), "z"),
+        (Add, "x", "z", ValueError, None, None),
+        (Add, ("x", "y"), ("y", "z"), ValueError, None, None),
+        # Two inputs / two outputs
+        (Swap, None, None, None, ("t_0", "t_1"), ("t_0", "t_1")),
+        (Swap, ("x", "y"), ("y", "z"), None, ("x", "y"), ("y", "z")),
+        (Swap, "x", ("y", "z"), ValueError, None, None),
+        (Swap, ("x", "y"), "z", ValueError, None, None),
+        (Swap, ("x", "y", "z"), ("y", "z"), ValueError, None, None),
+        (Swap, ("x", "y"), ("x", "y", "z"), ValueError, None, None),
     ],
 )
 def test_layers_inputs_outputs(cls, inputs, outputs, error, inputs_exp, outputs_exp):
-    """Test that inputs / outputs are set correctly"""
-    if error:
-        with pytest.raises(ValueError):
+    """Test that inputs and outputs are set correctly."""
+    if error is not None:
+        with pytest.raises(error):
             cls(inputs=inputs, outputs=outputs)
-
     else:
         instance = cls(inputs=inputs, outputs=outputs)
         assert instance.inputs == inputs_exp
         assert instance.outputs == outputs_exp
 
 
-def test_layers_call():
-    """Test `Layer.__call__` ability to operate on dict / tuples"""
-    offset_layer = AddOffset(offset=1, inputs="x", outputs="y")
-    assert isinstance(offset_layer, dpr.layers.Layer)
-    result = offset_layer(tf.constant(1))
-    result_dict = offset_layer({"x": tf.constant(1)})
-    with tf.Session() as sess:
-        assert sess.run(result) == 2
-        assert sess.run(result_dict) == {"y": 2}
+def test_layers_decorator_from_forward(session):
+    """Test decorator on forward function."""
+    # Check decorated function properties
+    assert issubclass(AddOffset, dpr.layers.Layer)
+    assert AddOffset.__name__ == "AddOffset"
+    assert AddOffset.__doc__ == "AddOffset"
+    assert AddOffset.__module__ == __name__
 
-
-def test_layers_decorator_from_forward():
-    """Test decorator on forward function"""
-
-    @dpr.layers.layer(n_in=1, n_out=1)
-    def MyOffset(tensors, foo, bar=1):
-        return tensors + foo + 2 * bar
-
-    # Positional arguments
-    offset_layer = MyOffset(1, 2)
-    assert isinstance(offset_layer, dpr.layers.Layer)
+    # Check instance properties
+    offset_layer = AddOffset(offset=1)
+    assert isinstance(offset_layer, AddOffset)
     result = offset_layer.forward(tf.constant(1))
-    with tf.Session() as sess:
-        assert sess.run(result) == 6
-
-    # Keyword arguments
-    offset_layer = MyOffset(foo=1, bar=2)
-    assert isinstance(offset_layer, dpr.layers.Layer)
-    result = offset_layer.forward(tf.constant(1))
-    with tf.Session() as sess:
-        assert sess.run(result) == 6
+    assert session.run(result) == 2
 
 
-def test_layers_decorator_from_constructor():
-    """Test decorator on constructors"""
+def test_layers_decorator_from_forward_laziness():
+    """Test decorator laziness."""
 
     @dpr.layers.layer(n_in=1, n_out=1)
-    def MyOffset(foo, bar=1):
-        return AddOffset(foo + 2 * bar)
+    def RaiseForward(tensors):
+        raise RuntimeError()
 
-    # Positional arguments
-    offset_layer = MyOffset(1, 2)
-    assert isinstance(offset_layer, dpr.layers.Layer)
-    result = offset_layer.forward(tf.constant(1))
-    with tf.Session() as sess:
-        assert sess.run(result) == 6
+    layer = RaiseForward()
 
-    # Keyword arguments
-    offset_layer = MyOffset(foo=1, bar=2)
-    assert isinstance(offset_layer, dpr.layers.Layer)
-    result = offset_layer.forward(tf.constant(1))
-    with tf.Session() as sess:
-        assert sess.run(result) == 6
+    with pytest.raises(RuntimeError):
+        layer.forward(tf.constant(1))
 
 
-def test_layers_decorator_signatures():
-    """Test incorrect use of decorator"""
-    # pylint: disable=unused-argument,unused-variable,too-many-function-args
-
-    # Simple Layer with no arguments
-    @dpr.layers.layer(n_in=1, n_out=1)
-    def Simple(tensors) -> tf.data.Dataset:
-        pass
-
-    Simple()
-
-    with pytest.raises(TypeError):
-        Simple(tensors=1)
-
-    with pytest.raises(TypeError):
-        Simple(1)
-
-    with pytest.raises(TypeError):
-        Simple(foo=1)
-
-    # Typical Layer with positional and keyword arguments
-    @dpr.layers.layer(n_in=1, n_out=1)
-    def Typical(tensors, mode, foo, bar=1):
-        pass
-
-    Typical(1)
-    Typical(1, 2)
-    Typical(foo=1, bar=2)
-    Typical(1, bar=2)
-
-    with pytest.raises(TypeError):
-        Typical(1, 2, 3)
-
-    with pytest.raises(TypeError):
-        Typical(1, foo=1)
-
-    with pytest.raises(TypeError):
-        Typical(1, baz=1)
-
-    # From constructor
-    @dpr.layers.layer(n_in=1, n_out=1)
-    def FromConstructor(foo, bar=1) -> dpr.layers.Layer:
-        pass
-
-    FromConstructor(1, 2)
-    FromConstructor(1, bar=2)
-    FromConstructor(foo=1, bar=2)
-
-    with pytest.raises(TypeError):
-        FromConstructor(1, 2, 3)
-
-    with pytest.raises(TypeError):
-        Typical(1, foo=1)
-
-    with pytest.raises(TypeError):
-        Typical(1, baz=1)
-
-    # Test wrong order in arguments raises error at decoration time
+def test_layers_decorator_from_forward_wrong_order():
+    """Test wrong order in arguments raises error at decoration time."""
+    # pylint: disable=unused-variable
     with pytest.raises(TypeError):
 
         @dpr.layers.layer(n_in=1, n_out=1)
         def WrongOrder(offset, tensors):
-            pass
+            return tensors + offset
 
 
-def test_layers_decorator_laziness_from_forward():
-    """Test decorator laziness and keyword arguments check"""
-
-    @dpr.layers.layer(n_in=1, n_out=1)
-    def Offset(tensors, offset):
-        raise RuntimeError()
-
-    Offset(offset=1)  # Test laziness
-
-    with pytest.raises(TypeError):
-        Offset(baz=1)
-
-    with pytest.raises(TypeError):
-        Offset(tensors=1)
-
-    with pytest.raises(TypeError):
-        Offset()
+@dpr.layers.layer(n_in=1, n_out=1)
+def Identity(tensors) -> tf.data.Dataset:
+    return tensors
 
 
-def test_layers_decorator_laziness_from_constructor():
-    """Test decorator laziness and keyword arguments check"""
+@dpr.layers.layer(n_in=1, n_out=1)
+def Typical(tensors, mode, foo, bar=1):
+    # pylint: disable=unused-argument
+    return tensors + foo + bar
 
-    @dpr.layers.layer(n_in=1, n_out=1)
-    def Offset(offset):
-        raise RuntimeError()
 
-    Offset(offset=1)  # Test laziness
-
-    with pytest.raises(TypeError):
-        Offset(baz=1)
-
-    with pytest.raises(TypeError):
-        Offset(tensors=1)
-
-    with pytest.raises(TypeError):
-        Offset()
+@pytest.mark.parametrize(
+    "cls, args, kwargs, error",
+    [
+        # Simple layer with no special arguments
+        (Identity, (), {}, None),
+        (Identity, (), {"tensors": 1}, TypeError),
+        (Identity, (1,), None, TypeError),
+        (Identity, (), {"foo": 1}, TypeError),
+        # Typical layers with positional and keyword arguments
+        (Typical, (1,), {}, None),
+        (Typical, (1, 2), {}, None),
+        (Typical, (), {"foo": 1, "bar": 2}, None),
+        (Typical, (1,), {"bar": 2}, None),
+        (Typical, (1, 2, 3), {}, TypeError),
+        (Typical, (1,), {"foo": 1}, TypeError),
+        (Typical, (1,), {"baz": 1}, TypeError),
+    ],
+)
+def test_layers_decorator_instantiation(cls, args, kwargs, error):
+    """Test layer instantiation from decorator."""
+    if error is not None:
+        with pytest.raises(error):
+            cls(*args, **kwargs)
+    else:
+        instance = cls(*args, **kwargs)
+        assert isinstance(instance, dpr.layers.Layer)

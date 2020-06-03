@@ -45,14 +45,19 @@ def test_prepros_fused_filter():
 
 def test_prepros_serial():
     """Test Serial"""
+    # pylint: disable=protected-access
+
+    def DummyFactory():
+        return dpr.prepros.Serial(dpr.prepros.Filter(dpr.layers.IsMinSize(inputs="b", outputs="b_size", size=2)))
+
     prepro_fn = dpr.prepros.Serial(
         [
             dpr.prepros.Map(dpr.layers.Sum(inputs=("a", "b"), outputs="c")),
             dpr.prepros.Filter(dpr.layers.IsMinSize(inputs="a", outputs="a_size", size=2)),
-            dpr.prepros.Filter(dpr.layers.IsMinSize(inputs="b", outputs="b_size", size=2)),
+            dpr.prepros.Serial(DummyFactory()),
         ]
     )
-    assert len(prepro_fn.preprocessors) == 2
+    assert len(prepro_fn._preprocessors) == 2
 
     def gen():
         yield {"a": [0], "b": [0, 1]}

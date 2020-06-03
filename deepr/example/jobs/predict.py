@@ -32,7 +32,7 @@ class Predict(dpr.jobs.Job):
             # Import Graph, retrieve feed and fetch tensors
             dpr.utils.import_graph_def(f"{self.path_model}/{self.graph_name}")
             feedable_tensors = dpr.utils.get_feedable_tensors(sess.graph, feeds)
-            fetchable_tensors = dpr.utils.get_feedable_tensors(sess.graph, fetch)
+            fetchable_tensors = dpr.utils.get_fetchable_tensors(sess.graph, fetch)
 
             # Compute prediction on dataset
             dataset = self.prepro_fn(self.input_fn(), tf.estimator.ModeKeys.PREDICT)
@@ -44,7 +44,7 @@ class Predict(dpr.jobs.Job):
                 while True:
                     batch = sess.run(next_element)
                     preds = sess.run(
-                        fetchable_tensors, {feedable_tensors[key]: tensor for key, tensor in batch.items()}
+                        fetchable_tensors, {tensor: batch[key] for key, tensor in feedable_tensors.items()}
                     )
                     LOGGER.info({**batch, **preds})
             except tf.errors.OutOfRangeError:

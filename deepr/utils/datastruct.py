@@ -42,6 +42,7 @@ def to_flat_tuple(items) -> Tuple:
 
 
 def item_to_dict(items, keys) -> Dict:
+    """Convert tuple or object to dictionary."""
     if isinstance(keys, str):
         return {keys: items}
     else:
@@ -49,6 +50,7 @@ def item_to_dict(items, keys) -> Dict:
 
 
 def dict_to_item(data: Dict, keys):
+    """Convert dictionary into object or tuple of objects."""
     if isinstance(keys, str):
         return data[keys]
     else:
