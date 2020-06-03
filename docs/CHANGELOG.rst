@@ -6,8 +6,26 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog <http://keepachangelog.com/>`_
 and this project adheres to `Semantic Versioning <http://semver.org/>`_.
 
+
 [Unreleased]
 ------------
+
+Added
+~~~~~
+Changed
+~~~~~~~
+Deprecated
+~~~~~~~~~~
+Removed
+~~~~~~~
+Fixed
+~~~~~
+Security
+~~~~~~~~
+
+
+2.0.0 - 2020-06-03
+------------------
 
 Added
 ~~~~~
