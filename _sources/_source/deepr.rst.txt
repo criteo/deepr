@@ -22,6 +22,7 @@ Subpackages
    deepr.prepros
    deepr.readers
    deepr.utils
+   deepr.vocab
 
 Submodules
 ----------

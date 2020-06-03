@@ -116,6 +116,7 @@
 <li class="toctree-l4"><a class="reference internal" href="deepr.prepros.html">deepr.prepros package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="deepr.readers.html">deepr.readers package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="deepr.utils.html">deepr.utils package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.vocab.html">deepr.vocab package</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.html#submodules">Submodules</a></li>
@@ -227,43 +228,19 @@
 <div class="section" id="module-deepr.example.prepros.default">
 <span id="deepr-example-prepros-default-module"></span><h2>deepr.example.prepros.default module<a class="headerlink" href="#module-deepr.example.prepros.default" title="Permalink to this headline">¶</a></h2>
 <p>Preprocessing</p>
-<dl class="py class">
+<dl class="py function">
 <dt id="deepr.example.prepros.default.DefaultPrepro">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.example.prepros.default.</code><code class="sig-name descname">DefaultPrepro</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/example/prepros/default.html#DefaultPrepro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.example.prepros.default.DefaultPrepro" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="deepr.prepros.html#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
-<dl class="py method">
-<dt id="deepr.example.prepros.default.DefaultPrepro.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span><span class="p">:</span> <span class="n">tensorflow.python.data.ops.dataset_ops.DatasetV1</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; tensorflow.python.data.ops.dataset_ops.DatasetV1<a class="headerlink" href="#deepr.example.prepros.default.DefaultPrepro.apply" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create prepro during first call (lazy)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DatasetV1</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
+<code class="sig-prename descclassname">deepr.example.prepros.default.</code><code class="sig-name descname">DefaultPrepro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">batch_size</span></em>, <em class="sig-param"><span class="n">repeat_size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/example/prepros/default.html#DefaultPrepro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.example.prepros.default.DefaultPrepro" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 <div class="section" id="module-deepr.example.prepros.inference">
 <span id="deepr-example-prepros-inference-module"></span><h2>deepr.example.prepros.inference module<a class="headerlink" href="#module-deepr.example.prepros.inference" title="Permalink to this headline">¶</a></h2>
 <p>Inference Preprocessor</p>
-<dl class="py class">
+<dl class="py function">
 <dt id="deepr.example.prepros.inference.InferencePrepro">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.example.prepros.inference.</code><code class="sig-name descname">InferencePrepro</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/example/prepros/inference.html#InferencePrepro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.example.prepros.inference.InferencePrepro" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="deepr.prepros.html#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
-<dl class="py method">
-<dt id="deepr.example.prepros.inference.InferencePrepro.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span><span class="p">:</span> <span class="n">tensorflow.python.data.ops.dataset_ops.DatasetV1</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; tensorflow.python.data.ops.dataset_ops.DatasetV1<a class="headerlink" href="#deepr.example.prepros.inference.InferencePrepro.apply" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create prepro during first call (lazy)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DatasetV1</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
+<code class="sig-prename descclassname">deepr.example.prepros.inference.</code><code class="sig-name descname">InferencePrepro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">batch_size</span></em>, <em class="sig-param"><span class="n">count</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/example/prepros/inference.html#InferencePrepro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.example.prepros.inference.InferencePrepro" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 <div class="section" id="module-deepr.example.prepros">

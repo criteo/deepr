@@ -1,0 +1,6 @@
+deepr.vocab.write
+=================
+
+.. currentmodule:: deepr.vocab
+
+.. autofunction:: write

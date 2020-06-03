@@ -628,7 +628,13 @@ div.rendered_html tbody tr:hover {
 <h2>Argument as config<a class="headerlink" href="#Argument-as-config" title="Permalink to this headline">¶</a></h2>
 <p>In some cases, the argument to be provided to an instance should be left as a config. To specify that a block should not be instantiated but kept as a dict config, use the special key:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">eval</span></code> (Optional): can take 2 values: “instance” (default), and “skip”. If “skip”, the dictionary will be kept as is and no instance will be created. It effectively delegates the creation of the instance to its container.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eval</span></code> (Optional): can take 3 values:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;call&quot;</span></code>: call the class or function referenced by “type” with the provided arguments.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;partial&quot;</span></code>: return a callable equivalent to the callable referenced by “type” with pre-filled arguments.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code>: the dictionary will be kept as is and no instance will be created.</p></li>
+</ul>
+</li>
 </ul>
 <p>For example if you have the following class and configuration</p>
 <div class="nbinput docutils container">
@@ -648,7 +654,7 @@ div.rendered_html tbody tr:hover {
     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.Job&quot;</span><span class="p">,</span>
     <span class="s2">&quot;model_config&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.Model&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;eval&quot;</span><span class="p">:</span> <span class="s2">&quot;skip&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;eval&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
         <span class="s2">&quot;*&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
      <span class="p">}</span>
 <span class="p">}</span>
@@ -709,9 +715,11 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;config&#39;: &#39;@self&#39;, &#39;macros&#39;: &#39;@macros&#39;, &#39;macros_eval&#39;: &#39;@macros_eval&#39;, &#39;eval&#39;: &#39;skip&#39;}
-{&#39;date&#39;: {&#39;type&#39;: &#39;__main__.DateMacro&#39;}, &#39;params&#39;: {&#39;learning_rate&#39;: 0.1}, &#39;eval&#39;: &#39;skip&#39;}
-{&#39;date&#39;: {&#39;year&#39;: &#39;2020&#39;}, &#39;params&#39;: {&#39;learning_rate&#39;: 0.1}, &#39;eval&#39;: &#39;skip&#39;}
+WARNING:deepr.config.base:- MACRO PARAM NOT USED: macro = &#39;date&#39;, param = &#39;year&#39;
+WARNING:deepr.config.base:- MACRO PARAM NOT USED: macro = &#39;params&#39;, param = &#39;learning_rate&#39;
+{&#39;config&#39;: &#39;@self&#39;, &#39;macros&#39;: &#39;@macros&#39;, &#39;macros_eval&#39;: &#39;@macros_eval&#39;, &#39;eval&#39;: None}
+{&#39;date&#39;: {&#39;type&#39;: &#39;__main__.DateMacro&#39;}, &#39;params&#39;: {&#39;learning_rate&#39;: 0.1}, &#39;eval&#39;: None}
+{&#39;date&#39;: {&#39;year&#39;: &#39;2020&#39;}, &#39;params&#39;: {&#39;learning_rate&#39;: 0.1}, &#39;eval&#39;: None}
 </pre></div></div>
 </div>
 <p>The intended use of these references is mainly for logging and should be used sparingly.</p>

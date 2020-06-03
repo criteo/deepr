@@ -116,7 +116,7 @@
     "    \"type\": \"deepr.jobs.yarn_launcher.YarnLauncher\",\n",
     "    \"job\": {\n",
     "        \"type\": \"deepr.jobs.Pipeline\",\n",
-    "        \"eval\": \"skip\",\n",
+    "        \"eval\": None,\n",
     "        \"jobs\": [\n",
     "            {\n",
     "                \"type\": \"deepr.example.jobs.BuildDataset\",\n",
@@ -208,8 +208,8 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "{'path_model': 'viewfs://root/user/deepr/dev/example/models/2020-05-18-16-40-25', 'path_dataset': 'viewfs://root/user/deepr/dev/example/data.tfrecord'}\n",
-      "{'path_model': 'viewfs://root/user/deepr/dev/example/models/2020-05-18-16-40-27', 'path_dataset': 'viewfs://root/user/deepr/dev/example/data.tfrecord'}\n"
+      "{'path_model': 'viewfs://root/user/deepr/dev/example/models/2020-06-03-15-45-11', 'path_dataset': 'viewfs://root/user/deepr/dev/example/data.tfrecord'}\n",
+      "{'path_model': 'viewfs://root/user/deepr/dev/example/models/2020-06-03-15-45-13', 'path_dataset': 'viewfs://root/user/deepr/dev/example/data.tfrecord'}\n"
      ]
     }
    ],
@@ -229,7 +229,7 @@
      "output_type": "stream",
      "text": [
       "WARNING:deepr.config.base:- MACRO PARAM NOT USED: macro = 'paths', param = 'path_dataset'\n",
-      "viewfs://root/user/deepr/dev/example/models/2020-05-18-16-40-27\n",
+      "viewfs://root/user/deepr/dev/example/models/2020-06-03-15-45-13\n",
       "0.01\n",
       "16\n"
      ]
@@ -310,12 +310,22 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 9,
    "metadata": {},
    "outputs": [],
    "source": [
-    "tuner = dpr.jobs.ParamsTuner(job=config, macros=macros, sampler=sampler)\n",
-    "tuner.run()"
+    "HAS_HADOOP = False"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "if HAS_HADOOP:\n",
+    "    tuner = dpr.jobs.ParamsTuner(job=config, macros=macros, sampler=sampler)\n",
+    "    tuner.run()"
    ]
   }
  ],
@@ -340,10 +350,10 @@
   "pycharm": {
    "stem_cell": {
     "cell_type": "raw",
-    "source": [],
     "metadata": {
      "collapsed": false
-    }
+    },
+    "source": []
    }
   }
  },

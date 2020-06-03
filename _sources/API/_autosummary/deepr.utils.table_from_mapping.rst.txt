@@ -1,0 +1,6 @@
+deepr.utils.table\_from\_mapping
+================================
+
+.. currentmodule:: deepr.utils
+
+.. autofunction:: table_from_mapping

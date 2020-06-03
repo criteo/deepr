@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="deepr.layers.MaskedBPR" href="deepr.layers.MaskedBPR.html" />
+    <link rel="next" title="deepr.layers.LookupIndexToString" href="deepr.layers.LookupIndexToString.html" />
     <link rel="prev" title="deepr.layers.LookupFromFile" href="deepr.layers.LookupFromFile.html" /> 
 </head>
 
@@ -105,6 +105,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../core.html#io">Io</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../core.html#job">Job</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../core.html#layer">Layer</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="deepr.layers.ActiveMode.html">deepr.layers.ActiveMode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Add.html">deepr.layers.Add</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Average.html">deepr.layers.Average</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.BPR.html">deepr.layers.BPR</a></li>
@@ -122,6 +123,7 @@
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Lookup.html">deepr.layers.Lookup</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.LookupFromFile.html">deepr.layers.LookupFromFile</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">deepr.layers.LookupFromMapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.layers.LookupIndexToString.html">deepr.layers.LookupIndexToString</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.MaskedBPR.html">deepr.layers.MaskedBPR</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.NotEqual.html">deepr.layers.NotEqual</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Parallel.html">deepr.layers.Parallel</a></li>
@@ -135,6 +137,7 @@
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.StringJoin.html">deepr.layers.StringJoin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Sum.html">deepr.layers.Sum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.ToDense.html">deepr.layers.ToDense</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.layers.ToFloat.html">deepr.layers.ToFloat</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.WeightedAverage.html">deepr.layers.WeightedAverage</a></li>
 </ul>
 </li>
@@ -144,6 +147,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../core.html#prepro">Prepro</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../core.html#reader">Reader</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../core.html#utils">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#vocab">Vocab</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../_source/modules.html">deepr</a></li>
@@ -241,8 +245,8 @@
 <h1>deepr.layers.LookupFromMapping<a class="headerlink" href="#deepr-layers-lookupfrommapping" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="deepr.layers.LookupFromMapping">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.</code><code class="sig-name descname">LookupFromMapping</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_name</span></em>, <em class="sig-param"><span class="n">mapping</span></em>, <em class="sig-param"><span class="n">default_value</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">key_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">value_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/lookup.html#LookupFromMapping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.LookupFromMapping" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lookup From Mapping Layer</p>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.</code><code class="sig-name descname">LookupFromMapping</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_name</span></em>, <em class="sig-param"><span class="n">mapping</span></em>, <em class="sig-param"><span class="n">default_value</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">key_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">value_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">reuse</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/lookup.html#LookupFromMapping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.LookupFromMapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lookup From Mapping Layer.</p>
 <dl class="py attribute">
 <dt id="deepr.layers.LookupFromMapping.default_value">
 <code class="sig-name descname">default_value</code><a class="headerlink" href="#deepr.layers.LookupFromMapping.default_value" title="Permalink to this definition">¶</a></dt>
@@ -277,6 +281,17 @@
 </dd></dl>
 
 <dl class="py attribute">
+<dt id="deepr.layers.LookupFromMapping.reuse">
+<code class="sig-name descname">reuse</code><a class="headerlink" href="#deepr.layers.LookupFromMapping.reuse" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, reuse the layer with the same name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
 <dt id="deepr.layers.LookupFromMapping.table_name">
 <code class="sig-name descname">table_name</code><a class="headerlink" href="#deepr.layers.LookupFromMapping.table_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the HashTable</p>
@@ -300,7 +315,7 @@
 
 <dl class="py method">
 <dt id="deepr.layers.LookupFromMapping.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_name</span></em>, <em class="sig-param"><span class="n">mapping</span></em>, <em class="sig-param"><span class="n">default_value</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">key_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">value_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/lookup.html#LookupFromMapping.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.LookupFromMapping.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_name</span></em>, <em class="sig-param"><span class="n">mapping</span></em>, <em class="sig-param"><span class="n">default_value</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">key_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">value_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">reuse</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/lookup.html#LookupFromMapping.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.LookupFromMapping.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
@@ -334,7 +349,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="deepr.layers.MaskedBPR.html" class="btn btn-neutral float-right" title="deepr.layers.MaskedBPR" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="deepr.layers.LookupIndexToString.html" class="btn btn-neutral float-right" title="deepr.layers.LookupIndexToString" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="deepr.layers.LookupFromFile.html" class="btn btn-neutral float-left" title="deepr.layers.LookupFromFile" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

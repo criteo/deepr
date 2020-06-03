@@ -472,8 +472,17 @@ div.rendered_html tbody tr:hover {
 
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">deepr_python</span>
 <span class="kn">import</span> <span class="nn">deepr</span> <span class="k">as</span> <span class="nn">dpr</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">if</span> <span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+    <span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">delete_dir</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -485,7 +494,7 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Build-Dataset-Job">
 <h3>Build Dataset Job<a class="headerlink" href="#Build-Dataset-Job" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -521,7 +530,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -531,7 +540,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>Let’s run the job</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -553,12 +562,11 @@ Wrote dataset to &#39;data.tfrecord&#39;
 <p>Because the data is now stored in tfrecord files, the <code class="docutils literal notranslate"><span class="pre">prepro_fn</span></code> needs to deserialize the file’s content.</p>
 <p>Let’s define a preprocessor and check that everything works correctly with the dataset created by the <code class="docutils literal notranslate"><span class="pre">BuildDataset</span></code> job.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nd">@dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">prepro</span>
-<span class="k">def</span> <span class="nf">DefaultPrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">repeat_size</span><span class="p">):</span>
+<span></span><span class="k">def</span> <span class="nf">DefaultPrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">repeat_size</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span>
         <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">TFRecordSequenceExample</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span>
             <span class="n">dpr</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
@@ -594,7 +602,7 @@ Wrote dataset to &#39;data.tfrecord&#39;
 <p>This lazy behavior is convenient when resources are created in the function (like tables), resources that should only be defined at runtime.</p>
 <p>Let’s create an instance of <code class="docutils literal notranslate"><span class="pre">DefaultPrepro</span></code></p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -607,7 +615,7 @@ Wrote dataset to &#39;data.tfrecord&#39;
 <h3>Reader<a class="headerlink" href="#Reader" title="Permalink to this headline">¶</a></h3>
 <p>In the quickstart we used a <code class="docutils literal notranslate"><span class="pre">GeneratorReader</span></code>. With tfrecords, let’s use a <code class="docutils literal notranslate"><span class="pre">TFRecordReader</span></code>.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -616,7 +624,7 @@ Wrote dataset to &#39;data.tfrecord&#39;
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -631,19 +639,23 @@ Wrote dataset to &#39;data.tfrecord&#39;
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;x&#39;: array([0.32337564, 0.50094163, 0.2441018 , 0.15789932, 0.60923856,
-       0.8122508 , 0.94414985, 0.74952406, 0.2807497 , 0.588288  ,
-       0.54501027, 0.29069403, 0.41932568, 0.34819102, 0.3383653 ,
-       0.14353554, 0.27960363, 0.73993534, 0.7299636 , 0.5470599 ,
-       0.31707385, 0.14296998, 0.28161713, 0.2063866 , 0.96695954,
-       0.6501754 , 0.7693862 , 0.46509   , 0.01724341, 0.62549555,
-       0.2915013 , 0.07535852], dtype=float32), &#39;y&#39;: array([0.6467513 , 1.0018833 , 0.4882036 , 0.31579864, 1.2184771 ,
-       1.6245016 , 1.8882997 , 1.4990481 , 0.5614994 , 1.176576  ,
-       1.0900205 , 0.58138806, 0.83865136, 0.69638205, 0.6767306 ,
-       0.28707108, 0.55920726, 1.4798707 , 1.4599272 , 1.0941198 ,
-       0.6341477 , 0.28593996, 0.56323427, 0.4127732 , 1.9339191 ,
-       1.3003508 , 1.5387723 , 0.93018   , 0.03448683, 1.2509911 ,
-       0.5830026 , 0.15071705], dtype=float32)}
+{&#39;x&#39;: array([4.4587484e-01, 7.4005979e-01, 4.4701755e-01, 7.2319156e-01,
+       9.4345409e-01, 1.7840658e-01, 7.2584116e-01, 9.9800736e-01,
+       2.0697144e-01, 7.9954338e-01, 4.6816257e-01, 5.7633847e-01,
+       5.0513422e-01, 7.7767682e-04, 7.4887043e-01, 4.0597153e-01,
+       3.5977897e-01, 2.4122241e-01, 7.7473664e-01, 7.0897418e-01,
+       2.2657214e-01, 4.1462871e-01, 9.0375322e-01, 5.8769149e-01,
+       2.9490185e-01, 8.1388289e-01, 2.5151196e-01, 4.3744230e-01,
+       8.1327051e-01, 9.7379398e-01, 1.4938317e-01, 4.8239645e-01],
+      dtype=float32), &#39;y&#39;: array([8.9174968e-01, 1.4801196e+00, 8.9403510e-01, 1.4463831e+00,
+       1.8869082e+00, 3.5681316e-01, 1.4516823e+00, 1.9960147e+00,
+       4.1394287e-01, 1.5990868e+00, 9.3632513e-01, 1.1526769e+00,
+       1.0102684e+00, 1.5553536e-03, 1.4977409e+00, 8.1194305e-01,
+       7.1955794e-01, 4.8244482e-01, 1.5494733e+00, 1.4179484e+00,
+       4.5314428e-01, 8.2925743e-01, 1.8075064e+00, 1.1753830e+00,
+       5.8980370e-01, 1.6277658e+00, 5.0302392e-01, 8.7488461e-01,
+       1.6265410e+00, 1.9475880e+00, 2.9876634e-01, 9.6479291e-01],
+      dtype=float32)}
 </pre></div></div>
 </div>
 </div>
@@ -658,7 +670,7 @@ Wrote dataset to &#39;data.tfrecord&#39;
 </ol>
 <p>We will need to make these classes available on the <code class="docutils literal notranslate"><span class="pre">pex</span></code> that will be shipped to yarn, so let’s add them to a module living alongside the core library.</p>
 <p>For example,</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>deepr_python
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>deepr
 ├── __init__.py
 ├── core
 ├── example
@@ -678,7 +690,7 @@ Wrote dataset to &#39;data.tfrecord&#39;
 <p>Now, these classes can easily be imported from anywhere.</p>
 <p>Let’s replicate the quickstart by defining and running a full pipeline that builds the dataset and then trains a model.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -687,7 +699,7 @@ Wrote dataset to &#39;data.tfrecord&#39;
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -696,7 +708,7 @@ Wrote dataset to &#39;data.tfrecord&#39;
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -713,7 +725,7 @@ Wrote dataset to &#39;data.tfrecord&#39;
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -728,7 +740,7 @@ Wrote dataset to &#39;data.tfrecord&#39;
 </ol>
 <p>We can simply run it with</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -743,9 +755,9 @@ Wrote dataset to &#39;data.tfrecord&#39;
 <div class="highlight"><pre>
 INFO:deepr.example.jobs.build_dataset:Wrote dataset to &#39;data.tfrecord&#39;
 INFO:deepr.prepros.core:Not applying Repeat(10) (mode=eval)
-INFO:deepr.jobs.trainer:Running final evaluation, using global_step = 3840
+INFO:deepr.jobs.trainer:Running final evaluation, using global_step = 320
 INFO:deepr.prepros.core:Not applying Repeat(10) (mode=eval)
-INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
+INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 320}
 </pre></div></div>
 </div>
 </div>
@@ -758,7 +770,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 <div class="section" id="Build-Job">
 <h3>Build Job<a class="headerlink" href="#Build-Job" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -774,7 +786,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 <div class="section" id="id1">
 <h3>Reader<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -792,7 +804,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 <div class="section" id="id2">
 <h3>Prepro<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -808,7 +820,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 <div class="section" id="Prediction-Function">
 <h3>Prediction Function<a class="headerlink" href="#Prediction-Function" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -820,7 +832,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 <div class="section" id="Loss-Function">
 <h3>Loss Function<a class="headerlink" href="#Loss-Function" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -833,7 +845,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 <h3>Trainer Job<a class="headerlink" href="#Trainer-Job" title="Permalink to this headline">¶</a></h3>
 <p>This is a good example of what a nested config looks like</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -860,7 +872,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 <p>We can use these configs to re-instantiate the objects using the <code class="docutils literal notranslate"><span class="pre">from_config</span></code> function, which supports arbitrary nesting of configs.</p>
 <p>For example, we can re-create the build and trainer jobs with</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -869,7 +881,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -879,7 +891,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 </div>
 <p>and define a new pipeline, that we could then run like above</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -900,7 +912,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 </ul>
 <p>Let’s do it</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -915,7 +927,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.jobs.YarnTrainer&quot;</span><span class="p">,</span>
             <span class="s2">&quot;trainer&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="o">**</span><span class="n">trainer_job_config</span><span class="p">,</span>
-                <span class="s2">&quot;eval&quot;</span><span class="p">:</span> <span class="s2">&quot;skip&quot;</span>  <span class="c1"># from_config will not instantiate the trainer argument</span>
+                <span class="s2">&quot;eval&quot;</span><span class="p">:</span> <span class="kc">None</span>  <span class="c1"># from_config will not instantiate the trainer argument</span>
             <span class="p">},</span>
             <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.jobs.YarnTrainerConfig&quot;</span>
@@ -930,33 +942,35 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 3840}
 <p>Once the <code class="docutils literal notranslate"><span class="pre">YarnLauncher</span></code> job is defined, we can run it.</p>
 <p>It uploads the current environment as a <code class="docutils literal notranslate"><span class="pre">pex</span></code> to HDFS using the settings provided by the <code class="docutils literal notranslate"><span class="pre">DefaultYarnLauncherConfig</span></code>, and then executes the job from its config by simply doing something equivalent to what we did above, i.e. <code class="docutils literal notranslate"><span class="pre">from_config(job).run()</span></code>.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">pipeline_yarn</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span></span><span class="n">HAS_HADOOP</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">if</span> <span class="n">HAS_HADOOP</span><span class="p">:</span>
+    <span class="n">pipeline_yarn</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <p>When the job completes, it only means that the job was successfully submitted to yarn. We need to wait for the job to finish.</p>
 <p>After a few minutes, we can check that the build and training jobs ran successfully by looking at the files on the HDFS!</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">list</span><span class="p">(</span><span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;viewfs://root/user/deepr/dev/example&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">))</span>
+<span></span><span class="k">if</span> <span class="n">HAS_HADOOP</span><span class="p">:</span>
+    <span class="nb">list</span><span class="p">(</span><span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;viewfs://root/user/deepr/dev/example&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-[Path(viewfs://root/user/deepr/dev/example/envs)]
-</pre></div></div>
 </div>
 </div>
 <div class="section" id="Using-config-files">

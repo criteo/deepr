@@ -1,0 +1,6 @@
+deepr.vocab.size
+================
+
+.. currentmodule:: deepr.vocab
+
+.. autofunction:: size

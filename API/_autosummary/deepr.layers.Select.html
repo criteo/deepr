@@ -105,6 +105,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../core.html#io">Io</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../core.html#job">Job</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../core.html#layer">Layer</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="deepr.layers.ActiveMode.html">deepr.layers.ActiveMode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Add.html">deepr.layers.Add</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Average.html">deepr.layers.Average</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.BPR.html">deepr.layers.BPR</a></li>
@@ -122,6 +123,7 @@
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Lookup.html">deepr.layers.Lookup</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.LookupFromFile.html">deepr.layers.LookupFromFile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.LookupFromMapping.html">deepr.layers.LookupFromMapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.layers.LookupIndexToString.html">deepr.layers.LookupIndexToString</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.MaskedBPR.html">deepr.layers.MaskedBPR</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.NotEqual.html">deepr.layers.NotEqual</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Parallel.html">deepr.layers.Parallel</a></li>
@@ -135,6 +137,7 @@
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.StringJoin.html">deepr.layers.StringJoin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Sum.html">deepr.layers.Sum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.ToDense.html">deepr.layers.ToDense</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.layers.ToFloat.html">deepr.layers.ToFloat</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.WeightedAverage.html">deepr.layers.WeightedAverage</a></li>
 </ul>
 </li>
@@ -144,6 +147,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../core.html#prepro">Prepro</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../core.html#reader">Reader</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../core.html#utils">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#vocab">Vocab</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../_source/modules.html">deepr</a></li>
@@ -243,10 +247,10 @@
 <dt id="deepr.layers.Select">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.</code><code class="sig-name descname">Select</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inputs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outputs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_in</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/combinators.html#Select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.Select" title="Permalink to this definition">¶</a></dt>
 <dd><p>Layer to extract inputs / outputs from previous layers</p>
-<p>The <a class="reference internal" href="#deepr.layers.Select" title="deepr.layers.Select"><code class="xref py py-class docutils literal notranslate"><span class="pre">Select</span></code></a> layer is particularly useful when defining arbitrary
-DAGs of layers : it is a convenient way to select which nodes should
-be inputs, and which should be outputs. For example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="n">dprl</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="s2">&quot;x, y&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">indices</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<p>The <a class="reference internal" href="#deepr.layers.Select" title="deepr.layers.Select"><code class="xref py py-class docutils literal notranslate"><span class="pre">Select</span></code></a> layer is particularly useful when defining
+arbitrary DAGs of layers : it is a convenient way to select which
+nodes should be inputs, and which should be outputs. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="n">dprl</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">indices</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">layer</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># 2</span>
 <span class="n">layer</span><span class="p">({</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>  <span class="c1"># {&quot;z&quot;: 2}</span>
 </pre></div>

@@ -233,22 +233,44 @@ and this project adheres to <a class="reference external" href="http://semver.or
 <h2>[Unreleased]<a class="headerlink" href="#unreleased" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="added">
 <h3>Added<a class="headerlink" href="#added" title="Permalink to this headline">¶</a></h3>
-<p>Doctest run in CI.</p>
+<ul class="simple">
+<li><p>Doctest run in CI.</p></li>
+</ul>
 </div>
 <div class="section" id="changed">
 <h3>Changed<a class="headerlink" href="#changed" title="Permalink to this headline">¶</a></h3>
-<p>copy_dir job will now overwrite the target by default</p>
+<ul class="simple">
+<li><p>copy_dir job will now overwrite the target by default</p></li>
+<li><p>Nested support for <code class="docutils literal notranslate"><span class="pre">prepros.Serial</span></code></p></li>
+<li><p>Context manager <code class="docutils literal notranslate"><span class="pre">TableContext</span></code> for tables reuse</p></li>
+<li><p>Automatic table context creation in <code class="docutils literal notranslate"><span class="pre">prepro.__call__</span></code></p></li>
+<li><p>Prepro <code class="docutils literal notranslate"><span class="pre">TableInitializer</span></code> to run <code class="docutils literal notranslate"><span class="pre">table_initializer_fn</span></code> before <code class="docutils literal notranslate"><span class="pre">map</span></code> transforms</p></li>
+<li><p>Vocabulary utilities (<code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">write</span></code>, <code class="docutils literal notranslate"><span class="pre">size</span></code>)</p></li>
+<li><p>Reverse lookup table function <code class="docutils literal notranslate"><span class="pre">index_to_string_table_from_file</span></code> and associated layer <code class="docutils literal notranslate"><span class="pre">LookupIndexToString</span></code></p></li>
+<li><p>Layer combinator <code class="docutils literal notranslate"><span class="pre">ActiveMode</span></code> to apply layer only on given modes</p></li>
+<li><p>Layer <code class="docutils literal notranslate"><span class="pre">ToFloat</span></code></p></li>
+<li><p>Config evaluation modes: <code class="docutils literal notranslate"><span class="pre">skip</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">instance</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">call</span></code></p></li>
+<li><p>New evaluation mode for config dictionary <code class="docutils literal notranslate"><span class="pre">partial</span></code></p></li>
+<li><p>Remove <code class="docutils literal notranslate"><span class="pre">__post_init__</span></code> for <code class="docutils literal notranslate"><span class="pre">YarnTrainer</span></code> and <code class="docutils literal notranslate"><span class="pre">YarnLauncher</span></code> to avoid unexpected non-laziness</p></li>
+</ul>
 </div>
 <div class="section" id="deprecated">
 <h3>Deprecated<a class="headerlink" href="#deprecated" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="removed">
 <h3>Removed<a class="headerlink" href="#removed" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Use of <code class="docutils literal notranslate"><span class="pre">prepro</span></code> and <code class="docutils literal notranslate"><span class="pre">layer</span></code> decorator on constructors</p></li>
+<li><p>Lazy behavior for <code class="docutils literal notranslate"><span class="pre">prepro</span></code> and <code class="docutils literal notranslate"><span class="pre">layer</span></code> decorator</p></li>
+</ul>
 </div>
 <div class="section" id="fixed">
 <h3>Fixed<a class="headerlink" href="#fixed" title="Permalink to this headline">¶</a></h3>
-<p>Doctests were fixed.
-Add metric name sanitizer, especially needed to sanitize keras built variable names.</p>
+<ul class="simple">
+<li><p>Doctests were fixed.</p></li>
+<li><p>Add metric name sanitizer, especially needed to sanitize keras built variable names.</p></li>
+<li><p>Typo in <code class="docutils literal notranslate"><span class="pre">example</span></code> predict (feedable / fetchable)</p></li>
+</ul>
 </div>
 <div class="section" id="security">
 <h3>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h3>

@@ -1,0 +1,22 @@
+deepr.vocab package
+===================
+
+Submodules
+----------
+
+deepr.vocab.base module
+-----------------------
+
+.. automodule:: deepr.vocab.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.vocab
+   :members:
+   :undoc-members:
+   :show-inheritance:

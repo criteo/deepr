@@ -114,6 +114,7 @@ It takes as input / returns a dictionary of :class:`~tf.Tensor`. This means that
 .. autosummary::
    :toctree: _autosummary
 
+   ActiveMode
    Add
    Average
    BPR
@@ -131,6 +132,7 @@ It takes as input / returns a dictionary of :class:`~tf.Tensor`. This means that
    Lookup
    LookupFromFile
    LookupFromMapping
+   LookupIndexToString
    MaskedBPR
    NotEqual
    Parallel
@@ -144,6 +146,7 @@ It takes as input / returns a dictionary of :class:`~tf.Tensor`. This means that
    StringJoin
    Sum
    ToDense
+   ToFloat
    WeightedAverage
 
 Macros
@@ -211,6 +214,7 @@ The most common way to define a :class:`~deepr.prepros.Prepro` is to wrap a :cla
    Repeat
    Serial
    Shuffle
+   TableInitializer
    TFRecordSequenceExample
    Take
 
@@ -242,15 +246,34 @@ Various functions
 
    Field
    GraphiteClient
+   TableContext
    TensorType
    dict_to_item
    get_feedable_tensors
    get_fetchable_tensors
    handle_exceptions
    import_graph_def
+   index_to_string_table_from_file
    item_to_dict
    make_same_shape
    msb_lsb_to_str
    save_variables_in_ckpt
    str_to_msb_lsb
+   table_from_file
+   table_from_mapping
    to_flat_tuple
+
+
+Vocab
+-----
+
+Simple helpers for vocabularies
+
+.. currentmodule:: deepr.vocab
+
+.. autosummary::
+   :toctree: _autosummary
+
+   read
+   size
+   write

@@ -473,13 +473,22 @@ div.rendered_html tbody tr:hover {
 <span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">deepr</span> <span class="k">as</span> <span class="nn">dpr</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">deepr.layers</span> <span class="k">as</span> <span class="nn">dprl</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">if</span> <span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+    <span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">delete_dir</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <p>Let’s define a generator function and then use a <a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.readers.GeneratorReader.html#deepr.readers.GeneratorReader">GeneratorReader</a> to create a <code class="docutils literal notranslate"><span class="pre">tf.data.Dataset</span></code></p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -499,7 +508,7 @@ div.rendered_html tbody tr:hover {
 <p>The <code class="docutils literal notranslate"><span class="pre">Reader</span></code> classes are simple helper functions to create <code class="docutils literal notranslate"><span class="pre">tf.data.Dataset</span></code>, heavily inspired by the <code class="docutils literal notranslate"><span class="pre">tensorflow_dataset</span></code> package.</p>
 <p>Once the reader is configured, you can create a new <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> with</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -523,7 +532,7 @@ div.rendered_html tbody tr:hover {
 <p>The base <code class="docutils literal notranslate"><span class="pre">Reader</span></code> class makes it possible to iterate over the dataset, faking eager-execution mode (under the hood it simply creates a session in the special <code class="docutils literal notranslate"><span class="pre">__iter__</span></code> method).</p>
 <p>Let’s have a look at the content of our dataset</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -539,23 +548,23 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;x&#39;: 0.5050241, &#39;y&#39;: 1.0100482}
-{&#39;x&#39;: 0.74931484, &#39;y&#39;: 1.4986297}
-{&#39;x&#39;: 0.6693086, &#39;y&#39;: 1.3386172}
-{&#39;x&#39;: 0.713442, &#39;y&#39;: 1.426884}
-{&#39;x&#39;: 0.840372, &#39;y&#39;: 1.680744}
-{&#39;x&#39;: 0.7257865, &#39;y&#39;: 1.451573}
-{&#39;x&#39;: 0.7972316, &#39;y&#39;: 1.5944632}
-{&#39;x&#39;: 0.71821946, &#39;y&#39;: 1.4364389}
-{&#39;x&#39;: 0.90175074, &#39;y&#39;: 1.8035015}
-{&#39;x&#39;: 0.6040216, &#39;y&#39;: 1.2080432}
-{&#39;x&#39;: 0.6545429, &#39;y&#39;: 1.3090858}
+{&#39;x&#39;: 0.026452266, &#39;y&#39;: 0.05290453}
+{&#39;x&#39;: 0.22739638, &#39;y&#39;: 0.45479277}
+{&#39;x&#39;: 0.5724985, &#39;y&#39;: 1.144997}
+{&#39;x&#39;: 0.403317, &#39;y&#39;: 0.806634}
+{&#39;x&#39;: 0.21341616, &#39;y&#39;: 0.42683232}
+{&#39;x&#39;: 0.83121186, &#39;y&#39;: 1.6624237}
+{&#39;x&#39;: 0.3990266, &#39;y&#39;: 0.7980532}
+{&#39;x&#39;: 0.7587566, &#39;y&#39;: 1.5175132}
+{&#39;x&#39;: 0.24581175, &#39;y&#39;: 0.4916235}
+{&#39;x&#39;: 0.40846375, &#39;y&#39;: 0.8169275}
+{&#39;x&#39;: 0.27732524, &#39;y&#39;: 0.5546505}
 </pre></div></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> job expects 2 <code class="docutils literal notranslate"><span class="pre">input_fn</span></code> that are simple callables creating new <code class="docutils literal notranslate"><span class="pre">tf.data.Dataset</span></code>.</p>
 <p>Our <code class="docutils literal notranslate"><span class="pre">reader</span></code> does exactly that, so let’s set</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -571,7 +580,7 @@ div.rendered_html tbody tr:hover {
 <p>Let’s use the <code class="docutils literal notranslate"><span class="pre">prepro</span></code> module to functionally define a preprocessing function.</p>
 <p>See the <a class="reference external" href="https://criteo.github.io/deepr/API/core.html#prepro">prepro reference</a></p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -584,7 +593,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>As expected, the output of this prepro function is a batched dataset</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -593,7 +602,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -603,7 +612,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>Let’s check the result of our preprocessing by iterating over the dataset. We use the helper function <code class="docutils literal notranslate"><span class="pre">from_dataset</span></code> that creates a <code class="docutils literal notranslate"><span class="pre">reader</span></code> from any <code class="docutils literal notranslate"><span class="pre">tf.data.Dataset</span></code>, which gives us eager-like iteration over the underlying dataset.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -618,19 +627,23 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;x&#39;: array([0.2884208 , 0.6716708 , 0.60438156, 0.74616903, 0.60974383,
-       0.8843869 , 0.28427488, 0.744994  , 0.02057592, 0.3612376 ,
-       0.9891428 , 0.04443246, 0.98389417, 0.07303068, 0.46858358,
-       0.8129141 , 0.42637283, 0.68399006, 0.7564984 , 0.16813973,
-       0.30100608, 0.69422716, 0.1550892 , 0.995761  , 0.91428363,
-       0.909327  , 0.36975038, 0.74172604, 0.7243495 , 0.44936314,
-       0.4023981 , 0.8480999 ], dtype=float32), &#39;y&#39;: array([0.5768416 , 1.3433416 , 1.2087631 , 1.4923381 , 1.2194877 ,
-       1.7687738 , 0.56854975, 1.489988  , 0.04115184, 0.7224752 ,
-       1.9782856 , 0.08886492, 1.9677883 , 0.14606136, 0.93716717,
-       1.6258281 , 0.85274565, 1.3679801 , 1.5129968 , 0.33627945,
-       0.60201216, 1.3884543 , 0.3101784 , 1.991522  , 1.8285673 ,
-       1.818654  , 0.73950076, 1.4834521 , 1.448699  , 0.8987263 ,
-       0.8047962 , 1.6961998 ], dtype=float32)}
+{&#39;x&#39;: array([8.38533640e-01, 5.11415541e-01, 4.91451062e-02, 6.71378195e-01,
+       7.19314665e-02, 2.07208991e-01, 6.07405782e-01, 2.14489564e-01,
+       1.24138966e-01, 5.16671121e-01, 2.33591374e-04, 3.69159013e-01,
+       3.05574089e-01, 9.81275201e-01, 4.54333931e-01, 3.23030204e-01,
+       6.02127731e-01, 2.13016793e-01, 8.41403484e-01, 6.13585055e-01,
+       1.33147994e-02, 6.54389381e-01, 8.09324920e-01, 5.17527759e-01,
+       2.62713879e-01, 2.71976054e-01, 4.55039740e-01, 2.46606708e-01,
+       8.55176270e-01, 2.10764825e-01, 9.98475403e-02, 1.92478955e-01],
+      dtype=float32), &#39;y&#39;: array([1.6770673e+00, 1.0228311e+00, 9.8290212e-02, 1.3427564e+00,
+       1.4386293e-01, 4.1441798e-01, 1.2148116e+00, 4.2897913e-01,
+       2.4827793e-01, 1.0333422e+00, 4.6718275e-04, 7.3831803e-01,
+       6.1114818e-01, 1.9625504e+00, 9.0866786e-01, 6.4606041e-01,
+       1.2042555e+00, 4.2603359e-01, 1.6828070e+00, 1.2271701e+00,
+       2.6629599e-02, 1.3087788e+00, 1.6186498e+00, 1.0350555e+00,
+       5.2542776e-01, 5.4395211e-01, 9.1007948e-01, 4.9321342e-01,
+       1.7103525e+00, 4.2152965e-01, 1.9969508e-01, 3.8495791e-01],
+      dtype=float32)}
 </pre></div></div>
 </div>
 </div>
@@ -651,11 +664,11 @@ div.rendered_html tbody tr:hover {
 <p>Here it’s pretty simple : it will predict a <code class="docutils literal notranslate"><span class="pre">y_pred</span></code> with an <code class="docutils literal notranslate"><span class="pre">alpha</span></code> parameter such that <code class="docutils literal notranslate"><span class="pre">y_pred</span> <span class="pre">=</span> <span class="pre">alpha</span> <span class="pre">*</span> <span class="pre">x</span></code></p>
 <p>We first define this as a <code class="docutils literal notranslate"><span class="pre">Multiply</span></code> layer :</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nd">@dprl</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span></span><span class="nd">@dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">Multiply</span><span class="p">(</span><span class="n">tensors</span><span class="p">):</span>
     <span class="n">alpha</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;alpha&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">tensors</span>
@@ -688,7 +701,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>We can instantiate our <code class="docutils literal notranslate"><span class="pre">Layer</span></code> with</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -700,7 +713,7 @@ div.rendered_html tbody tr:hover {
 <p>The <code class="docutils literal notranslate"><span class="pre">inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">outputs</span></code> arguments, when given, specify the keys of the dictionaries to use for the layer.</p>
 <p>Let’s see how it works</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -722,7 +735,7 @@ Tensor(&#34;mul:0&#34;, shape=(), dtype=float32)
 </div>
 <p>Let’s check the output of this model (alpha is initialized randomly) :</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -739,7 +752,7 @@ Tensor(&#34;mul:0&#34;, shape=(), dtype=float32)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
--1.4690943
+1.6913518
 </pre></div></div>
 </div>
 </div>
@@ -747,11 +760,11 @@ Tensor(&#34;mul:0&#34;, shape=(), dtype=float32)
 <h3>Loss function<a class="headerlink" href="#Loss-function" title="Permalink to this headline">¶</a></h3>
 <p>Let’s then define the loss function. A squared l2 loss will work fine here, let’s create a layer for this :</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nd">@dprl</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span></span><span class="nd">@dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">SquaredL2</span><span class="p">(</span><span class="n">tensors</span><span class="p">):</span>
     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">tensors</span>
     <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
@@ -759,7 +772,7 @@ Tensor(&#34;mul:0&#34;, shape=(), dtype=float32)
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -769,7 +782,7 @@ Tensor(&#34;mul:0&#34;, shape=(), dtype=float32)
 </div>
 <p>Let’s see if it works :</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -793,7 +806,7 @@ Tensor(&#34;mul:0&#34;, shape=(), dtype=float32)
 <h3>Optimizer<a class="headerlink" href="#Optimizer" title="Permalink to this headline">¶</a></h3>
 <p>The last thing we need is the optimizer. See the <a class="reference external" href="https://criteo.github.io/deepr/API/core.html#optimizer">optimizer reference</a></p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -808,7 +821,7 @@ Tensor(&#34;mul:0&#34;, shape=(), dtype=float32)
 <p>Since all these concepts are now defined, let’s create a <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> job.</p>
 <p>Make sure to check the <a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.jobs.Trainer.html#deepr.jobs.Trainer">trainer reference</a></p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -826,7 +839,7 @@ Tensor(&#34;mul:0&#34;, shape=(), dtype=float32)
 </div>
 <p>Creating the job is lazy and doesn’t take any time. To run it, call the run method :</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -840,15 +853,15 @@ Tensor(&#34;mul:0&#34;, shape=(), dtype=float32)
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 INFO:deepr.prepros.core:Not applying Repeat(10) (mode=eval)
-INFO:deepr.jobs.trainer:Running final evaluation, using global_step = 640
+INFO:deepr.jobs.trainer:Running final evaluation, using global_step = 320
 INFO:deepr.prepros.core:Not applying Repeat(10) (mode=eval)
-INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 640}
+INFO:deepr.jobs.trainer:{&#39;loss&#39;: 2.5611915e-12, &#39;global_step&#39;: 320}
 </pre></div></div>
 </div>
 <p>The loss is 0, great, we now know how to multiply by 2 :)</p>
 <p>Let’s check alpha is indeed equal to 2 :</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -863,7 +876,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 640}
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-2.0
+2.0000005
 </pre></div></div>
 </div>
 </div>

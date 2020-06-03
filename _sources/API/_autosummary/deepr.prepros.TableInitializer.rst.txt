@@ -1,0 +1,23 @@
+deepr.prepros.TableInitializer
+==============================
+
+.. currentmodule:: deepr.prepros
+
+.. autoclass:: TableInitializer
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TableInitializer.__init__
+      ~TableInitializer.apply
+   
+   
+
+   
+   
+   

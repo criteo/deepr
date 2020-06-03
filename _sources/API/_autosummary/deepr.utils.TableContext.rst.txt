@@ -1,0 +1,27 @@
+deepr.utils.TableContext
+========================
+
+.. currentmodule:: deepr.utils
+
+.. autoclass:: TableContext
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TableContext.__init__
+      ~TableContext.active
+      ~TableContext.close
+      ~TableContext.get
+      ~TableContext.is_active
+      ~TableContext.set
+   
+   
+
+   
+   
+   

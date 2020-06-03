@@ -178,7 +178,7 @@
 <span class="sd">    .. code-block:: python</span>
 
 <span class="sd">        @dprl.layer(n_in=1, n_out=1)</span>
-<span class="sd">        def OffsetLayer(tensors, offset):</span>
+<span class="sd">        def OffsetLayer(tensors, mode, offset):</span>
 <span class="sd">            return tensors + offset</span>
 
 <span class="sd">        layer = dprl.Sequential(</span>
@@ -195,7 +195,7 @@
 <span class="sd">    .. code-block:: python</span>
 
 <span class="sd">        @dprl.layer(n_in=2, n_out=1)</span>
-<span class="sd">        def Add(tensors):</span>
+<span class="sd">        def Add(tensors, mode):</span>
 <span class="sd">            x, y = tensors</span>
 <span class="sd">            return x + y</span>
 
@@ -251,10 +251,14 @@
             <span class="n">n_out</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">to_flat_tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">outputs</span><span class="p">)),</span>
             <span class="n">inputs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span>
             <span class="n">outputs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">outputs</span><span class="p">,</span>
-        <span class="p">)</span></div>
-
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="c1"># Check consistency of inputs / outputs of intermediate layers</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">to_flat_tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">to_flat_tuple</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">inputs</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input &#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&#39; of layer </span><span class="si">{</span><span class="n">layer</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
+            <span class="n">keys</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">to_flat_tuple</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">outputs</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="Sequential.forward_as_dict"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.Sequential.forward_as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">forward_as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Forward method of the layer&quot;&quot;&quot;</span>
@@ -268,13 +272,13 @@
 <div class="viewcode-block" id="Select"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.Select">[docs]</a><span class="k">class</span> <span class="nc">Select</span><span class="p">(</span><span class="n">Layer</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Layer to extract inputs / outputs from previous layers</span>
 
-<span class="sd">    The :class:`~Select` layer is particularly useful when defining arbitrary</span>
-<span class="sd">    DAGs of layers : it is a convenient way to select which nodes should</span>
-<span class="sd">    be inputs, and which should be outputs. For example:</span>
+<span class="sd">    The :class:`~Select` layer is particularly useful when defining</span>
+<span class="sd">    arbitrary DAGs of layers : it is a convenient way to select which</span>
+<span class="sd">    nodes should be inputs, and which should be outputs. For example:</span>
 
 <span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        layer = dprl.Select(&quot;x, y&quot;, &quot;z&quot;, n_in=2, indices=1)</span>
+<span class="sd">        layer = dprl.Select(inputs=(&quot;x&quot;, &quot;y&quot;), outputs=&quot;z&quot;, n_in=2, indices=1)</span>
 <span class="sd">        layer((1, 2))  # 2</span>
 <span class="sd">        layer({&quot;x&quot;: 1, &quot;y&quot;: 2})  # {&quot;z&quot;: 2}</span>
 
@@ -292,10 +296,10 @@
             <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;`n_in` and `inputs` cannot both be `None`&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n_in</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">n_in</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">))</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-        <span class="k">if</span> <span class="n">inputs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">outputs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">outputs</span> <span class="o">=</span> <span class="n">inputs</span>
+            <span class="n">n_in</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">to_flat_tuple</span><span class="p">(</span><span class="n">inputs</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">indices</span> <span class="o">=</span> <span class="n">to_flat_tuple</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span> <span class="k">if</span> <span class="n">indices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_in</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">inputs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">outputs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">inputs</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="n">n_in</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">),</span> <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">outputs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Select.forward"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.Select.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
@@ -308,12 +312,40 @@
             <span class="k">return</span> <span class="n">result</span></div></div>
 
 
+<div class="viewcode-block" id="ActiveMode"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.ActiveMode">[docs]</a><span class="k">class</span> <span class="nc">ActiveMode</span><span class="p">(</span><span class="n">Layer</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Active Mode Layer.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ActiveMode.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.layers.ActiveMode.html#deepr.layers.ActiveMode.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">layer</span><span class="p">:</span> <span class="n">Layer</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">inputs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">outputs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="n">inputs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">inputs</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">inputs</span>
+        <span class="k">if</span> <span class="n">outputs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">outputs</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="n">layer</span><span class="o">.</span><span class="n">n_in</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="n">layer</span><span class="o">.</span><span class="n">n_out</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">outputs</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">layer</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="n">layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">to_flat_tuple</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_in</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_out</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Number of inputs / outputs must be the same/&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ActiveMode.forward"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.ActiveMode.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Forward method of the layer&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">tensors</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">layer</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span></div></div>
+
+
 <div class="viewcode-block" id="Rename"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.Rename">[docs]</a><span class="k">class</span> <span class="nc">Rename</span><span class="p">(</span><span class="n">Layer</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Wrap Layer in a Node to rename inputs / outputs.</span>
 
-<span class="sd">    Allows you to rename inputs / outputs nodes of a :class:`~Layer` instance.</span>
-<span class="sd">    This can be useful if you end up with a :class:`~Layer` instance with</span>
-<span class="sd">    inputs and outputs name that are not suitable for your needs.</span>
+<span class="sd">    Allows you to rename inputs / outputs nodes of a :class:`~Layer`</span>
+<span class="sd">    instance. This can be useful if you end up with a :class:`~Layer`</span>
+<span class="sd">    instance with inputs and outputs name that are not suitable for your</span>
+<span class="sd">    needs.</span>
 
 <span class="sd">    For example:</span>
 
@@ -329,14 +361,14 @@
 <span class="sd">        layer((1, 1))  # 2</span>
 <span class="sd">        layer({&quot;x&quot;: 1, &quot;y&quot;: 1})  # {&quot;z&quot;: 2}</span>
 
-<span class="sd">    Note that the same behavior can be achieved using :class:`~Select` and</span>
-<span class="sd">    :class:`~Sequential` as follows:</span>
+<span class="sd">    Note that the same behavior can be achieved using :class:`~Select`</span>
+<span class="sd">    and :class:`~Sequential` as follows:</span>
 
 <span class="sd">    .. code-block:: python</span>
 
 <span class="sd">        layer = dprl.Sequential(</span>
-<span class="sd">            dprl.Select(&quot;x, y&quot;, &quot;a, b&quot;),</span>
-<span class="sd">            Add(inputs=&quot;a, b&quot;, outputs=&quot;c&quot;),</span>
+<span class="sd">            dprl.Select(inputs=(&quot;x&quot;, &quot;y&quot;), outputs=(&quot;a&quot;, &quot;b&quot;)),</span>
+<span class="sd">            Add(inputs=(&quot;a&quot;, &quot;b&quot;), outputs=&quot;c&quot;),</span>
 <span class="sd">            dprl.Select(&quot;c&quot;, &quot;z&quot;),</span>
 <span class="sd">        )</span>
 <span class="sd">    &quot;&quot;&quot;</span>

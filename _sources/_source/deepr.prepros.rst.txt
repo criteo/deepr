@@ -28,6 +28,14 @@ deepr.prepros.core module
    :undoc-members:
    :show-inheritance:
 
+deepr.prepros.lookup module
+---------------------------
+
+.. automodule:: deepr.prepros.lookup
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 deepr.prepros.record module
 ---------------------------
 

@@ -68,6 +68,14 @@ deepr.utils.mlflow module
    :undoc-members:
    :show-inheritance:
 
+deepr.utils.tables module
+-------------------------
+
+.. automodule:: deepr.utils.tables
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 deepr.utils.uuid module
 -----------------------
 

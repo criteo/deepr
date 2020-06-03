@@ -1,0 +1,24 @@
+deepr.layers.LookupIndexToString
+================================
+
+.. currentmodule:: deepr.layers
+
+.. autoclass:: LookupIndexToString
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~LookupIndexToString.__init__
+      ~LookupIndexToString.forward
+      ~LookupIndexToString.forward_as_dict
+   
+   
+
+   
+   
+   

@@ -105,6 +105,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../core.html#io">Io</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../core.html#job">Job</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../core.html#layer">Layer</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="deepr.layers.ActiveMode.html">deepr.layers.ActiveMode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Add.html">deepr.layers.Add</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Average.html">deepr.layers.Average</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.BPR.html">deepr.layers.BPR</a></li>
@@ -122,6 +123,7 @@
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Lookup.html">deepr.layers.Lookup</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">deepr.layers.LookupFromFile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.LookupFromMapping.html">deepr.layers.LookupFromMapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.layers.LookupIndexToString.html">deepr.layers.LookupIndexToString</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.MaskedBPR.html">deepr.layers.MaskedBPR</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.NotEqual.html">deepr.layers.NotEqual</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Parallel.html">deepr.layers.Parallel</a></li>
@@ -135,6 +137,7 @@
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.StringJoin.html">deepr.layers.StringJoin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Sum.html">deepr.layers.Sum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.ToDense.html">deepr.layers.ToDense</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.layers.ToFloat.html">deepr.layers.ToFloat</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.WeightedAverage.html">deepr.layers.WeightedAverage</a></li>
 </ul>
 </li>
@@ -144,6 +147,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../core.html#prepro">Prepro</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../core.html#reader">Reader</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../core.html#utils">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#vocab">Vocab</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../_source/modules.html">deepr</a></li>
@@ -241,8 +245,8 @@
 <h1>deepr.layers.LookupFromFile<a class="headerlink" href="#deepr-layers-lookupfromfile" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="deepr.layers.LookupFromFile">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.</code><code class="sig-name descname">LookupFromFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_name</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">key_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/lookup.html#LookupFromFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.LookupFromFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lookup From File Layer</p>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.</code><code class="sig-name descname">LookupFromFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_name</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">key_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">reuse</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/lookup.html#LookupFromFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.LookupFromFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lookup From File Layer.</p>
 <p>Creates a table at runtime from a mapping file. The table will map
 each key to its corresponding line index as an tf.int64.</p>
 <dl class="py attribute">
@@ -268,6 +272,17 @@ each key to its corresponding line index as an tf.int64.</p>
 </dd></dl>
 
 <dl class="py attribute">
+<dt id="deepr.layers.LookupFromFile.reuse">
+<code class="sig-name descname">reuse</code><a class="headerlink" href="#deepr.layers.LookupFromFile.reuse" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, reuse table with the same name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
 <dt id="deepr.layers.LookupFromFile.table_name">
 <code class="sig-name descname">table_name</code><a class="headerlink" href="#deepr.layers.LookupFromFile.table_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the HashTable</p>
@@ -280,7 +295,7 @@ each key to its corresponding line index as an tf.int64.</p>
 
 <dl class="py method">
 <dt id="deepr.layers.LookupFromFile.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_name</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">key_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/lookup.html#LookupFromFile.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.LookupFromFile.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_name</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">key_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">reuse</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/lookup.html#LookupFromFile.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.LookupFromFile.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
@@ -291,7 +306,7 @@ each key to its corresponding line index as an tf.int64.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.layers.LookupFromFile.__init__" title="deepr.layers.LookupFromFile.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(table_name, path[, key_dtype])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.layers.LookupFromFile.__init__" title="deepr.layers.LookupFromFile.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(table_name, path[, key_dtype, reuse])</p></td>
 <td><p>Initialize self.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code>(tensors[, mode])</p></td>

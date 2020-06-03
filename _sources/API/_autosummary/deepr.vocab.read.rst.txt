@@ -1,0 +1,6 @@
+deepr.vocab.read
+================
+
+.. currentmodule:: deepr.vocab
+
+.. autofunction:: read

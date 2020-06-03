@@ -162,6 +162,7 @@
   <h1>Source code for deepr.config.base</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Evaluate objects from arbitrary nested dictionaries.&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">functools</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
 
@@ -171,15 +172,15 @@
 
 <span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-<span class="n">KEY_TYPE</span> <span class="o">=</span> <span class="s2">&quot;type&quot;</span>
+<span class="n">TYPE</span> <span class="o">=</span> <span class="s2">&quot;type&quot;</span>
 
-<span class="n">KEY_EVAL_MODE</span> <span class="o">=</span> <span class="s2">&quot;eval&quot;</span>
+<span class="n">EVAL</span> <span class="o">=</span> <span class="s2">&quot;eval&quot;</span>
 
-<span class="n">KEY_POSITIONAL_ARG</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span>
+<span class="n">CALL</span> <span class="o">=</span> <span class="s2">&quot;call&quot;</span>
 
-<span class="n">EVAL_MODE_INSTANCE</span> <span class="o">=</span> <span class="s2">&quot;instance&quot;</span>
+<span class="n">PARTIAL</span> <span class="o">=</span> <span class="s2">&quot;partial&quot;</span>
 
-<span class="n">EVAL_MODE_SKIP</span> <span class="o">=</span> <span class="s2">&quot;skip&quot;</span>
+<span class="n">POSITIONAL</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span>
 
 
 <div class="viewcode-block" id="parse_config"><a class="viewcode-back" href="../../../_source/deepr.config.html#deepr.config.parse_config">[docs]</a><span class="k">def</span> <span class="nf">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">macros</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
@@ -247,28 +248,43 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="c1"># Get eval_mode from item, default is EVAL_MODE_INSTANCE</span>
-        <span class="n">eval_mode</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">KEY_EVAL_MODE</span><span class="p">,</span> <span class="n">EVAL_MODE_INSTANCE</span><span class="p">)</span>
-        <span class="n">item</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="o">!=</span> <span class="n">KEY_EVAL_MODE</span><span class="p">}</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">EVAL</span><span class="p">,</span> <span class="n">CALL</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="o">!=</span> <span class="n">EVAL</span><span class="p">}</span>
 
-        <span class="c1"># Retrieve type, evaluate arguments and return instance</span>
-        <span class="k">if</span> <span class="n">eval_mode</span> <span class="o">==</span> <span class="n">EVAL_MODE_INSTANCE</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">KEY_TYPE</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
-                <span class="bp">cls</span> <span class="o">=</span> <span class="n">_import</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="n">KEY_TYPE</span><span class="p">])</span>
-                <span class="n">args</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">KEY_POSITIONAL_ARG</span><span class="p">)</span>
-                <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="n">KEY_TYPE</span><span class="p">,</span> <span class="n">KEY_POSITIONAL_ARG</span><span class="p">}}</span>
+        <span class="c1"># Return evaluated class or function with provided arguments</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">CALL</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">TYPE</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+                <span class="n">cls_or_fn</span> <span class="o">=</span> <span class="n">_import</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="n">TYPE</span><span class="p">])</span>
+                <span class="n">args</span> <span class="o">=</span> <span class="n">from_config</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">POSITIONAL</span><span class="p">))</span>
+                <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">from_config</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="n">TYPE</span><span class="p">,</span> <span class="n">POSITIONAL</span><span class="p">}}</span>
                 <span class="k">try</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">from_config</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">from_config</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span> <span class="k">if</span> <span class="n">args</span> <span class="k">else</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">from_config</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span>
-                <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error instantiating </span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+                    <span class="k">return</span> <span class="n">cls_or_fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span> <span class="k">else</span> <span class="n">cls_or_fn</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)(</span><span class="sa">f</span><span class="s2">&quot;Error while calling </span><span class="si">{</span><span class="n">cls_or_fn</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">from_config</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+                <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">from_config</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 
-        <span class="c1"># Return item (no recursive evaluation)</span>
-        <span class="k">if</span> <span class="n">eval_mode</span> <span class="o">==</span> <span class="n">EVAL_MODE_SKIP</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">item</span>
+        <span class="c1"># Return partial class or function with provided arguments</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">PARTIAL</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">TYPE</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+                <span class="n">cls_or_fn</span> <span class="o">=</span> <span class="n">_import</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="n">TYPE</span><span class="p">])</span>
+                <span class="n">args</span> <span class="o">=</span> <span class="n">from_config</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">POSITIONAL</span><span class="p">))</span>
+                <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">from_config</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="n">TYPE</span><span class="p">,</span> <span class="n">POSITIONAL</span><span class="p">}}</span>
+                <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">cls_or_fn</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span> <span class="k">else</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">cls_or_fn</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">instantiated</span> <span class="o">=</span> <span class="n">from_config</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
 
-        <span class="c1"># Fail if eval_mode is not recognized.</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected eval_mode: &#39;</span><span class="si">{</span><span class="n">eval_mode</span><span class="si">}</span><span class="s2">&#39; in item </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">def</span> <span class="nf">_partial</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="p">{</span><span class="o">**</span><span class="n">instantiated</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">}</span>
+
+                <span class="k">return</span> <span class="n">_partial</span>
+
+        <span class="c1"># Return raw dictionary</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">params</span>
+
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected evaluation mode: &#39;</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&#39; in item </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">from_config</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">item</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>

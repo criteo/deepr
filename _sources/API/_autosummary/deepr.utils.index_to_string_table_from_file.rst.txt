@@ -1,0 +1,6 @@
+deepr.utils.index\_to\_string\_table\_from\_file
+================================================
+
+.. currentmodule:: deepr.utils
+
+.. autofunction:: index_to_string_table_from_file

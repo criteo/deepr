@@ -457,9 +457,19 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p>Let’s reuse the same <code class="docutils literal notranslate"><span class="pre">build_job</span></code> to create a dataset of random pairs of (x, 2x)</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">if</span> <span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+    <span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">delete_dir</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s reuse the same <code class="docutils literal notranslate"><span class="pre">build_job</span></code> to create a dataset of random pairs of (x, 2x)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -471,7 +481,7 @@ div.rendered_html tbody tr:hover {
 <h2>Original TrainerJob<a class="headerlink" href="#Original-TrainerJob" title="Permalink to this headline">¶</a></h2>
 <p>Before defining our more advanced <code class="docutils literal notranslate"><span class="pre">Trainer</span></code>, let’s remind what our original <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> looked like</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -494,7 +504,7 @@ div.rendered_html tbody tr:hover {
 <h2>TrainSpec and EvalSpec<a class="headerlink" href="#TrainSpec-and-EvalSpec" title="Permalink to this headline">¶</a></h2>
 <p>For starters, the <code class="docutils literal notranslate"><span class="pre">tf.estimator</span></code> API uses the concepts of <code class="docutils literal notranslate"><span class="pre">TrainSpec</span></code> and <code class="docutils literal notranslate"><span class="pre">EvalSpec</span></code> to configure how often / how many batches of data the training and the evaluation should use. You can pass this information along as follows</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -522,7 +532,7 @@ div.rendered_html tbody tr:hover {
 </ul>
 <p>Let’s add some to our model, by computing an exponential moving average of the loss during training, or computing the mean of the loss on the validation set (already done by <code class="docutils literal notranslate"><span class="pre">tf.estimator</span></code> but we do it for the sake of the example).</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -563,7 +573,7 @@ div.rendered_html tbody tr:hover {
 </ul>
 <p>For evaluation and final evaluation, let’s just add a <code class="docutils literal notranslate"><span class="pre">LoggingTensorHookFactory</span></code> to log the metrics values and optionaly send them to MLFlow Graphite (with the <code class="docutils literal notranslate"><span class="pre">use_mlflow</span></code> and <code class="docutils literal notranslate"><span class="pre">use_graphite</span></code> arguments)</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -615,7 +625,7 @@ div.rendered_html tbody tr:hover {
 <li><p>use <code class="docutils literal notranslate"><span class="pre">SavedModel</span></code> to export the <code class="docutils literal notranslate"><span class="pre">tf.estimator</span></code> as a <code class="docutils literal notranslate"><span class="pre">SavedModel</span></code>. As it runs after the <code class="docutils literal notranslate"><span class="pre">BestCheckpoint</span></code>, it will use the best checkpoint. Note that you need to define the input fields of your model (they are not currently inferred from the other parameters of the trainer, though we might add this in the future).</p></li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -636,7 +646,7 @@ div.rendered_html tbody tr:hover {
 <h2>Full TrainerJob<a class="headerlink" href="#Full-TrainerJob" title="Permalink to this headline">¶</a></h2>
 <p>Now that we’ve defined the specs, metrics, hooks and exporters, we update our original <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> job into</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -667,7 +677,7 @@ div.rendered_html tbody tr:hover {
 <p>Now that we have a more powerful <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> job, let’s also review some additional jobs that might be added at the end of the training pipeline.</p>
 <p>One of them is the <code class="docutils literal notranslate"><span class="pre">CleanupCheckpoints</span></code> job : it does what it says it does, i.e. deleting the model’s checkpoints (which can save you a lot of disk usage if you run thousands of experiments and have no need to reuse the checkpoints). Because we exported our model as a <code class="docutils literal notranslate"><span class="pre">SavedModel</span></code>, we probably don’t need those.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -688,7 +698,7 @@ div.rendered_html tbody tr:hover {
 <p>It produces one self-contained file (a <code class="docutils literal notranslate"><span class="pre">.pb</span></code> file, like the <code class="docutils literal notranslate"><span class="pre">SavedModel</span></code>), that contains an updated version of the graph (only the part that produces some tensor <code class="docutils literal notranslate"><span class="pre">fetch</span></code> given some other tensors <code class="docutils literal notranslate"><span class="pre">feeds</span></code>), makes it possible to update the tensor’s names, and adds the variable values directly inside the graph definition (effectively making them constants).</p>
 <p>Note to more experienced users: the <code class="docutils literal notranslate"><span class="pre">.pb</span></code> format has a limit in size, which means that Tensorflow graphs cannot be bigger than 2GB. If your model has too many parameters, the <code class="docutils literal notranslate"><span class="pre">OptimizeSavedModel</span></code> won’t be able to produce one protobuffer file for your graph.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -709,7 +719,7 @@ div.rendered_html tbody tr:hover {
 <p>Once the <code class="docutils literal notranslate"><span class="pre">OptimizeSavedModel</span></code> has run, how do we use it for inference? Usually, this file will be sent to some production service (probably not using python) in charge of using it to compute predictions. However, we might want to use it in python.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Predict</span></code> job in <code class="docutils literal notranslate"><span class="pre">example</span></code> illustrates how to reload the <code class="docutils literal notranslate"><span class="pre">_model.pb</span></code> file and use it to compute predictions. All it does is print the predictions given some <code class="docutils literal notranslate"><span class="pre">input_fn</span></code>.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -729,7 +739,7 @@ div.rendered_html tbody tr:hover {
 <h2>Full Pipeline<a class="headerlink" href="#Full-Pipeline" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have a production-ready pipeline, let’s run it!</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -738,7 +748,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -754,15 +764,15 @@ div.rendered_html tbody tr:hover {
 INFO:deepr.example.jobs.build_dataset:Wrote dataset to &#39;data.tfrecord&#39;
 INFO:deepr.hooks.num_params:Number of parameters (global) = 7
 INFO:deepr.hooks.num_params:Number of parameters (trainable) = 1
-INFO:deepr.hooks.log_variables_init:alpha_init_average_norm = 0.6522008180618286
+INFO:deepr.hooks.log_variables_init:alpha_init_average_norm = 1.157610297203064
 INFO:deepr.hooks.log_variables_init:alpha_init_num_zeros = 0
-INFO:deepr.hooks.logging_tensor:global_step = 1, loss = 20.8512726, num_steps = 1, max_memory_gb = 0.3162727, memory_gb = 0.3162727
-INFO:deepr.hooks.steps_per_sec:steps_per_sec = 278.84, examples_per_sec = 8922.88
-INFO:deepr.hooks.logging_tensor:global_step = 101, loss = 3.0594656, num_steps = 101, max_memory_gb = 0.3165245, memory_gb = 0.3165245
-INFO:deepr.hooks.steps_per_sec:steps_per_sec = 404.99, examples_per_sec = 12959.81
-INFO:deepr.hooks.logging_tensor:global_step = 201, loss = 0.4057514, num_steps = 201, max_memory_gb = 0.3165321, memory_gb = 0.3165321
-INFO:deepr.hooks.steps_per_sec:steps_per_sec = 393.68, examples_per_sec = 12597.64
-INFO:deepr.hooks.logging_tensor:global_step = 301, loss = 0.0538107, num_steps = 301, max_memory_gb = 0.3165321, memory_gb = 0.3165321
+INFO:deepr.hooks.logging_tensor:global_step = 1, loss = 7.9222879, num_steps = 1, max_memory_gb = 0.3226509, memory_gb = 0.3226509
+INFO:deepr.hooks.steps_per_sec:steps_per_sec = 373.44, examples_per_sec = 11949.94
+INFO:deepr.hooks.logging_tensor:global_step = 101, loss = 1.1289085, num_steps = 101, max_memory_gb = 0.3230362, memory_gb = 0.3230362
+INFO:deepr.hooks.steps_per_sec:steps_per_sec = 402.09, examples_per_sec = 12866.95
+INFO:deepr.hooks.logging_tensor:global_step = 201, loss = 0.1497175, num_steps = 201, max_memory_gb = 0.3230362, memory_gb = 0.3230362
+INFO:deepr.hooks.steps_per_sec:steps_per_sec = 480.80, examples_per_sec = 15385.73
+INFO:deepr.hooks.logging_tensor:global_step = 301, loss = 0.0198555, num_steps = 301, max_memory_gb = 0.3230362, memory_gb = 0.3230286
 INFO:deepr.prepros.core:Not applying Repeat(10) (mode=eval)
 INFO:deepr.hooks.logging_tensor:global_step = 320, loss = 0
 INFO:deepr.exporters.best_checkpoint:Reloading summaries from model/checkpoints
@@ -780,11 +790,11 @@ INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-0.in
 INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-320.index
 INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-320.data-00000-of-00001
 INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-0.meta
-INFO:deepr.jobs.optimize_saved_model:Using SavedModel model/saved_model/1590432505
+INFO:deepr.jobs.optimize_saved_model:Using SavedModel model/saved_model/1591191884
 INFO:deepr.jobs.optimize_saved_model:Node renamed: x -&gt; inputs/x
 INFO:deepr.jobs.optimize_saved_model:Optimized Model successfully exported to model/optimized_saved_model/_model.pb
-INFO:deepr.example.jobs.predict:{&#39;inputs/x&#39;: array([0.71388227], dtype=float32), &#39;y_pred&#39;: array([1.4277645], dtype=float32)}
-INFO:deepr.example.jobs.predict:Reached end of &lt;deepr.readers.record.TFRecordReader object at 0x13b2a7f98&gt;
+INFO:deepr.example.jobs.predict:{&#39;inputs/x&#39;: array([0.39897504], dtype=float32), &#39;y_pred&#39;: array([0.7979501], dtype=float32)}
+INFO:deepr.example.jobs.predict:Reached end of &lt;deepr.readers.record.TFRecordReader object at 0x13e8ddeb8&gt;
 </pre></div></div>
 </div>
 </div>

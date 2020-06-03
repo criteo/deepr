@@ -164,10 +164,13 @@
 
 <span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">functools</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Type</span>
 <span class="kn">import</span> <span class="nn">inspect</span>
 
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="kn">from</span> <span class="nn">deepr.utils.tables</span> <span class="kn">import</span> <span class="n">TableContext</span>
 
 
 <span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -242,7 +245,11 @@
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Alias for apply&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">TableContext</span><span class="o">.</span><span class="n">is_active</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">TableContext</span><span class="p">():</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Prepro.apply"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.Prepro.apply">[docs]</a>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
@@ -250,18 +257,17 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div></div>
 
 
-<div class="viewcode-block" id="prepro"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.prepro">[docs]</a><span class="k">def</span> <span class="nf">prepro</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Type</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Decorator that creates a :class:`~Prepro` class from a function</span>
+<div class="viewcode-block" id="prepro"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.prepro">[docs]</a><span class="k">def</span> <span class="nf">prepro</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Type</span><span class="p">[</span><span class="n">Prepro</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Decorator that creates a :class:`~Prepro` class from a function.</span>
 
-<span class="sd">    This decorator can be used to define :class:`~Prepro` classes in a non</span>
-<span class="sd">    verbose way.</span>
+<span class="sd">    For example, the following snippet defines a subclass of</span>
+<span class="sd">    :class:`~Prepro` whose `apply` offsets each element of the dataset</span>
+<span class="sd">    by `offset`:</span>
 
-<span class="sd">    For example, the following snippet defines a subclass of :class:`~Prepro`</span>
-<span class="sd">    whose `apply` offsets each element of the dataset by `offset`:</span>
 <span class="sd">    &gt;&gt;&gt; from deepr import readers</span>
 <span class="sd">    &gt;&gt;&gt; from deepr.prepros import prepro</span>
 <span class="sd">    &gt;&gt;&gt; @prepro</span>
-<span class="sd">    ... def AddOffset(dataset, offset):</span>
+<span class="sd">    ... def AddOffset(dataset, mode, offset):</span>
 <span class="sd">    ...     return dataset.map(lambda element: element + offset)</span>
 <span class="sd">    &gt;&gt;&gt; raw_dataset = tf.data.Dataset.from_tensor_slices([0, 1, 2])</span>
 <span class="sd">    &gt;&gt;&gt; prepro_fn = AddOffset(offset=1)</span>
@@ -279,7 +285,7 @@
 <span class="sd">                Prepro.__init__(self)</span>
 <span class="sd">                self.offset = offset</span>
 
-<span class="sd">            def forward(self, dataset, mode: str = None):</span>
+<span class="sd">            def apply(self, dataset, mode: str = None):</span>
 <span class="sd">                return dataset.map(lambda element: element + self.offset)</span>
 
 <span class="sd">    You can also add a &#39;mode&#39; argument to your preprocessor like so</span>
@@ -302,69 +308,35 @@
 
 <span class="sd">    Note that &#39;dataset&#39; and &#39;mode&#39; need to be the the first arguments</span>
 <span class="sd">    of the function IN THIS ORDER.</span>
-
-<span class="sd">    Another way of using the decorator is on functions that create</span>
-<span class="sd">    :class:`~Prepro` instances. This allows you to create factories of</span>
-<span class="sd">    preprocessors and make them :class:`~Prepro` classes.</span>
-
-<span class="sd">    For example, the following snippet defines a subclass of :class:`~Prepro`</span>
-<span class="sd">    whose `apply` method is the same as the prepro returned by the</span>
-<span class="sd">    function.</span>
-<span class="sd">    &gt;&gt;&gt; @prepro</span>
-<span class="sd">    ... def AddOne() -&gt; Prepro:</span>
-<span class="sd">    ...     return AddOffset(offset=1)</span>
-<span class="sd">    &gt;&gt;&gt; prepro_fn = AddOne()</span>
-<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(raw_dataset)</span>
-<span class="sd">    &gt;&gt;&gt; list(readers.from_dataset(dataset))</span>
-<span class="sd">    [1, 2, 3]</span>
-
-<span class="sd">    A nice feature of the `prepro` decorator is laziness: the code</span>
-<span class="sd">    inside the function is not executed until a call on a dataset. In</span>
-<span class="sd">    other words:</span>
-<span class="sd">    &gt;&gt;&gt; @prepro  # doctest: +SKIP</span>
-<span class="sd">    ... def MyLookup():  # doctest: +SKIP</span>
-<span class="sd">    ...     table = create_table_from_file(...)  # doctest: +SKIP</span>
-<span class="sd">    ...     return Map(Lookup(table, inputs=&quot;ids&quot;, outputs=&quot;indices&quot;))  # doctest: +SKIP</span>
-<span class="sd">    &gt;&gt;&gt; prepro_fn = MyLookup()  # doctest: +SKIP</span>
-<span class="sd">    The `table` object is not created</span>
-<span class="sd">    &gt;&gt;&gt; dataset = prepro_fn(dataset)  # doctest: +SKIP</span>
-<span class="sd">    The body of `MyLookup` gets executed</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># pylint: disable=protected-access,invalid-name</span>
     <span class="n">parameters</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span>
     <span class="n">signature</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Signature</span><span class="p">([</span><span class="n">param</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;dataset&quot;</span><span class="p">,</span> <span class="s2">&quot;mode&quot;</span><span class="p">}])</span>
 
-    <span class="k">if</span> <span class="s2">&quot;dataset&quot;</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>  <span class="c1"># From an `apply` function</span>
+    <span class="c1"># Check parameters</span>
+    <span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;dataset&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;dataset&#39; should be the first parameter of </span><span class="si">{</span><span class="n">fn</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;mode&quot;</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;mode&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;mode&#39; should be the second parameter of </span><span class="si">{</span><span class="n">fn</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;dataset&quot;</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;dataset&#39; should be the first positional argument.&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="s2">&quot;mode&quot;</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
-
-            <span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;mode&quot;</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;mode&#39; should be the second positional argument.&quot;</span><span class="p">)</span>
-
-            <span class="k">def</span> <span class="nf">_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="p">)</span>
-
-        <span class="k">else</span><span class="p">:</span>
-
-            <span class="k">def</span> <span class="nf">_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
-                <span class="c1"># pylint: disable=unused-argument</span>
-                <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="p">)</span>
-
-    <span class="k">else</span><span class="p">:</span>  <span class="c1"># From a constructor</span>
-
-        <span class="k">def</span> <span class="nf">_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
-            <span class="sd">&quot;&quot;&quot;Create prepro during first call (lazy)&quot;&quot;&quot;</span>
-            <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>
-
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># Check and store arguments for the wrapped function</span>
         <span class="n">Prepro</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">signature</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_args</span> <span class="o">=</span> <span class="n">args</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+
+    <span class="k">if</span> <span class="s2">&quot;mode&quot;</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+
+        <span class="k">def</span> <span class="nf">_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="k">def</span> <span class="nf">_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="c1"># pylint: disable=unused-argument</span>
+            <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="p">)</span>
 
     <span class="n">attributes</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;__module__&quot;</span><span class="p">:</span> <span class="n">fn</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span> <span class="s2">&quot;__doc__&quot;</span><span class="p">:</span> <span class="n">fn</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">,</span> <span class="s2">&quot;__init__&quot;</span><span class="p">:</span> <span class="n">_init</span><span class="p">,</span> <span class="s2">&quot;apply&quot;</span><span class="p">:</span> <span class="n">_apply</span><span class="p">}</span>
     <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">fn</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="p">(</span><span class="n">Prepro</span><span class="p">,),</span> <span class="n">attributes</span><span class="p">)</span></div>

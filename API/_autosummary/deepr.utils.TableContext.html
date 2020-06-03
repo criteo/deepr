@@ -1,0 +1,336 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>deepr.utils.TableContext &mdash; deepr 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="deepr.utils.TensorType" href="deepr.utils.TensorType.html" />
+    <link rel="prev" title="deepr.utils.Field" href="deepr.utils.Field.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/advanced.html">Advanced</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">DeepR: Build and Train Deep Learning Pipelines for Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../core.html">DeepR</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core.html#config">Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#exporter">Exporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#hook">Hook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#initializer">Initializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#io">Io</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#job">Job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#layer">Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#macros">Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#metrics">Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#optimizer">Optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#prepro">Prepro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#reader">Reader</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../core.html#utils">Utils</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="deepr.utils.Field.html">deepr.utils.Field</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">deepr.utils.TableContext</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.utils.TensorType.html">deepr.utils.TensorType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.utils.dict_to_item.html">deepr.utils.dict_to_item</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.utils.get_feedable_tensors.html">deepr.utils.get_feedable_tensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.utils.get_fetchable_tensors.html">deepr.utils.get_fetchable_tensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.utils.handle_exceptions.html">deepr.utils.handle_exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.utils.import_graph_def.html">deepr.utils.import_graph_def</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.utils.index_to_string_table_from_file.html">deepr.utils.index_to_string_table_from_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.utils.item_to_dict.html">deepr.utils.item_to_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.utils.make_same_shape.html">deepr.utils.make_same_shape</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.utils.msb_lsb_to_str.html">deepr.utils.msb_lsb_to_str</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.utils.save_variables_in_ckpt.html">deepr.utils.save_variables_in_ckpt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.utils.str_to_msb_lsb.html">deepr.utils.str_to_msb_lsb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.utils.table_from_file.html">deepr.utils.table_from_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.utils.table_from_mapping.html">deepr.utils.table_from_mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.utils.to_flat_tuple.html">deepr.utils.to_flat_tuple</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#vocab">Vocab</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../_source/modules.html">deepr</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../core.html">DeepR</a> &raquo;</li>
+        
+      <li>deepr.utils.TableContext</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/API/_autosummary/deepr.utils.TableContext.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="deepr-utils-tablecontext">
+<h1>deepr.utils.TableContext<a class="headerlink" href="#deepr-utils-tablecontext" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="deepr.utils.TableContext">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.utils.</code><code class="sig-name descname">TableContext</code><a class="reference internal" href="../../_modules/deepr/utils/tables.html#TableContext"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.TableContext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Context Manager to reuse Tensorflow tables.</p>
+<p>Tensorflow does not have a <code class="docutils literal notranslate"><span class="pre">tf.get_variable</span></code> equivalent for
+tables. The <code class="docutils literal notranslate"><span class="pre">TableContext</span></code> is here to provide this functionality.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">deepr</span> <span class="k">as</span> <span class="nn">dpr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">dpr</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">TableContext</span><span class="p">()</span> <span class="k">as</span> <span class="n">tables</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">table</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">table_from_mapping</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_table&quot;</span><span class="p">,</span> <span class="n">mapping</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+<span class="gp">... </span>    <span class="n">tables</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;my_table&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="n">table</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">dpr</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">TableContext</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">table</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">table_from_mapping</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_table&quot;</span><span class="p">,</span> <span class="n">mapping</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+<span class="gp">... </span>    <span class="n">reused</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">table_from_mapping</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_table&quot;</span><span class="p">,</span> <span class="n">reuse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">table</span> <span class="ow">is</span> <span class="n">reused</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt id="deepr.utils.TableContext.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/utils/tables.html#TableContext.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.TableContext.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.utils.TableContext.__init__" title="deepr.utils.TableContext.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>()</p></td>
+<td><p>Initialize self.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">active</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">close</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code>(name)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_active</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set</span></code>(name, table)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="deepr.utils.TensorType.html" class="btn btn-neutral float-right" title="deepr.utils.TensorType" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="deepr.utils.Field.html" class="btn btn-neutral float-left" title="deepr.utils.Field" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Criteo
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -116,6 +116,7 @@
 <li class="toctree-l4"><a class="reference internal" href="deepr.prepros.html">deepr.prepros package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="deepr.readers.html">deepr.readers package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="deepr.utils.html">deepr.utils package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.vocab.html">deepr.vocab package</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.html#submodules">Submodules</a></li>
@@ -438,15 +439,14 @@ It returns a new dictionary (does not mutate the input
 
 <dl class="py function">
 <dt id="deepr.layers.base.layer">
-<code class="sig-prename descclassname">deepr.layers.base.</code><code class="sig-name descname">layer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_in</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_out</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inputs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outputs</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/base.html#layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.base.layer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Decorator that creates a layer from a function</p>
-<p>This decorator can be used to define <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> classes in a non
-verbose way.</p>
-<p>For example, the following snippet defines a subclass of <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a>
-whose <cite>forward</cite> method returns <cite>tensors + offset</cite>.</p>
+<code class="sig-prename descclassname">deepr.layers.base.</code><code class="sig-name descname">layer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fn</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_in</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_out</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inputs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outputs</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/base.html#layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.base.layer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that creates a layer constructor from a function.</p>
+<p>The decorator returns a subclass of <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a>
+whose <code class="docutils literal notranslate"><span class="pre">forward</span></code> method is defined by the decorated function.</p>
+<p>For example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr.layers</span> <span class="kn">import</span> <span class="n">layer</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nd">@layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">def</span> <span class="nf">AddOffset</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">AddOffset</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">tensors</span> <span class="o">+</span> <span class="n">offset</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">AddOffset</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -478,29 +478,6 @@ whose <cite>forward</cite> method returns <cite>tensors + offset</cite>.</p>
 1</p>
 <p>Note that ‘tensors’ and ‘mode’ need to be the the first arguments
 of the function IN THIS ORDER.</p>
-<p>Another way of using the decorator is on functions that create layer
-instances. This allows you to create factories of layers and make
-them <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> classes.</p>
-<p>For example, the following snippet defines a subclass of <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a>
-whose <cite>forward</cite> method is the same as the layer returned by the
-function.
-&gt;&gt;&gt; &#64;layer(n_in=1, n_out=1)
-… def AddOne() -&gt; Layer:
-…     return AddOffset(offset=1)
-&gt;&gt;&gt; add_one = AddOne()
-&gt;&gt;&gt; add_one(1)
-2</p>
-<p>A nice feature of the <a class="reference internal" href="#deepr.layers.base.layer" title="deepr.layers.base.layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">layer</span></code></a> decorator is laziness: the code
-inside the function is not executed until a call on a tensor. In
-other words:
-&gt;&gt;&gt; &#64;layer(n_in=1, n_out=1)
-… def AddOffset(tensors, offset):
-…     print(“Calling layer”)
-…     return tensors + offset
-&gt;&gt;&gt; add_one = AddOffset(offset=1)
-&gt;&gt;&gt; add_one(1)
-Calling layer
-2</p>
 </dd></dl>
 
 </div>
@@ -603,6 +580,19 @@ Calling layer
 <span id="deepr-layers-combinators-module"></span><h2>deepr.layers.combinators module<a class="headerlink" href="#module-deepr.layers.combinators" title="Permalink to this headline">¶</a></h2>
 <p>Combinators layers</p>
 <dl class="py class">
+<dt id="deepr.layers.combinators.ActiveMode">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.combinators.</code><code class="sig-name descname">ActiveMode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">layer</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inputs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outputs</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/combinators.html#ActiveMode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.combinators.ActiveMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Active Mode Layer.</p>
+<dl class="py method">
+<dt id="deepr.layers.combinators.ActiveMode.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/combinators.html#ActiveMode.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.combinators.ActiveMode.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method of the layer</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="deepr.layers.combinators.Parallel">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.combinators.</code><code class="sig-name descname">Parallel</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">layers</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/combinators.html#Parallel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.combinators.Parallel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
@@ -629,9 +619,10 @@ layer H(a, b, c) -&gt; (x, y, z). For example:</p>
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.combinators.</code><code class="sig-name descname">Rename</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">layer</span></em>, <em class="sig-param"><span class="n">inputs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outputs</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/combinators.html#Rename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.combinators.Rename" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
 <p>Wrap Layer in a Node to rename inputs / outputs.</p>
-<p>Allows you to rename inputs / outputs nodes of a <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code> instance.
-This can be useful if you end up with a <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code> instance with
-inputs and outputs name that are not suitable for your needs.</p>
+<p>Allows you to rename inputs / outputs nodes of a <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code>
+instance. This can be useful if you end up with a <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code>
+instance with inputs and outputs name that are not suitable for your
+needs.</p>
 <p>For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dprl</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">tensors</span><span class="p">):</span>
@@ -644,11 +635,11 @@ inputs and outputs name that are not suitable for your needs.</p>
 <span class="n">layer</span><span class="p">({</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>  <span class="c1"># {&quot;z&quot;: 2}</span>
 </pre></div>
 </div>
-<p>Note that the same behavior can be achieved using <a class="reference internal" href="#deepr.layers.combinators.Select" title="deepr.layers.combinators.Select"><code class="xref py py-class docutils literal notranslate"><span class="pre">Select</span></code></a> and
-<a class="reference internal" href="#deepr.layers.combinators.Sequential" title="deepr.layers.combinators.Sequential"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequential</span></code></a> as follows:</p>
+<p>Note that the same behavior can be achieved using <a class="reference internal" href="#deepr.layers.combinators.Select" title="deepr.layers.combinators.Select"><code class="xref py py-class docutils literal notranslate"><span class="pre">Select</span></code></a>
+and <a class="reference internal" href="#deepr.layers.combinators.Sequential" title="deepr.layers.combinators.Sequential"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequential</span></code></a> as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="n">dprl</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
-    <span class="n">dprl</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="s2">&quot;x, y&quot;</span><span class="p">,</span> <span class="s2">&quot;a, b&quot;</span><span class="p">),</span>
-    <span class="n">Add</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;a, b&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">),</span>
+    <span class="n">dprl</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)),</span>
+    <span class="n">Add</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">),</span>
     <span class="n">dprl</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
@@ -666,10 +657,10 @@ inputs and outputs name that are not suitable for your needs.</p>
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.combinators.</code><code class="sig-name descname">Select</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inputs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outputs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_in</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/combinators.html#Select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.combinators.Select" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
 <p>Layer to extract inputs / outputs from previous layers</p>
-<p>The <a class="reference internal" href="#deepr.layers.combinators.Select" title="deepr.layers.combinators.Select"><code class="xref py py-class docutils literal notranslate"><span class="pre">Select</span></code></a> layer is particularly useful when defining arbitrary
-DAGs of layers : it is a convenient way to select which nodes should
-be inputs, and which should be outputs. For example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="n">dprl</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="s2">&quot;x, y&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">indices</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<p>The <a class="reference internal" href="#deepr.layers.combinators.Select" title="deepr.layers.combinators.Select"><code class="xref py py-class docutils literal notranslate"><span class="pre">Select</span></code></a> layer is particularly useful when defining
+arbitrary DAGs of layers : it is a convenient way to select which
+nodes should be inputs, and which should be outputs. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="n">dprl</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">indices</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">layer</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># 2</span>
 <span class="n">layer</span><span class="p">({</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>  <span class="c1"># {&quot;z&quot;: 2}</span>
 </pre></div>
@@ -692,7 +683,7 @@ be inputs, and which should be outputs. For example:</p>
 The easiest way to define a DAG is by stacking layers on top of each
 others. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dprl</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">OffsetLayer</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">OffsetLayer</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">tensors</span> <span class="o">+</span> <span class="n">offset</span>
 
 <span class="n">layer</span> <span class="o">=</span> <span class="n">dprl</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
@@ -707,7 +698,7 @@ others. For example:</p>
 you can exploit the inputs / outputs naming capability of the base
 <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code> class. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dprl</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">tensors</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">tensors</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 
@@ -770,7 +761,7 @@ correctly named nodes are defined.</p>
 <p>Core Layers</p>
 <dl class="py class">
 <dt id="deepr.layers.core.Add">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.core.</code><code class="sig-name descname">Add</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#Add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.Add" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.core.</code><code class="sig-name descname">Add</code><a class="reference internal" href="../_modules/deepr/layers/core.html#Add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.Add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
 <p>Add two tensors of any compatible shape</p>
 <dl class="py method">
@@ -782,7 +773,7 @@ correctly named nodes are defined.</p>
 
 <dl class="py class">
 <dt id="deepr.layers.core.Concat">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.core.</code><code class="sig-name descname">Concat</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#Concat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.Concat" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.core.</code><code class="sig-name descname">Concat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">axis</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#Concat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.Concat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
 <p>Concatenate tensors on axis</p>
 <dl class="py method">
@@ -930,7 +921,7 @@ example, if</p>
 
 <dl class="py class">
 <dt id="deepr.layers.core.LogicalAnd">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.core.</code><code class="sig-name descname">LogicalAnd</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#LogicalAnd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.LogicalAnd" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.core.</code><code class="sig-name descname">LogicalAnd</code><a class="reference internal" href="../_modules/deepr/layers/core.html#LogicalAnd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.LogicalAnd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
 <p>Perform logical_and on two tensors of compatible shape</p>
 <dl class="py method">
@@ -963,6 +954,18 @@ example, if</p>
 <code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#Sum.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.Sum.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward method of the layer</p>
 </dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.layers.core.ToFloat">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.core.</code><code class="sig-name descname">ToFloat</code><a class="reference internal" href="../_modules/deepr/layers/core.html#ToFloat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.ToFloat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Cast tensor to float32</p>
+<dl class="py method">
+<dt id="deepr.layers.core.ToFloat.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.layers.core.ToFloat.forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -1002,7 +1005,7 @@ example, if</p>
 <p>Partitioned Embedding Layer</p>
 <dl class="py class">
 <dt id="deepr.layers.embedding.CombineEmbeddings">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.embedding.</code><code class="sig-name descname">CombineEmbeddings</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/embedding.html#CombineEmbeddings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.embedding.CombineEmbeddings" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.embedding.</code><code class="sig-name descname">CombineEmbeddings</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mode</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">project</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/embedding.html#CombineEmbeddings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.embedding.CombineEmbeddings" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
 <p>Combine Embeddings Layers</p>
 <dl class="py method">
@@ -1033,7 +1036,7 @@ example, if</p>
 <dt id="deepr.layers.lookup.Lookup">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.lookup.</code><code class="sig-name descname">Lookup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_initializer_fn</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/lookup.html#Lookup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.lookup.Lookup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
-<p>Lookup Layer</p>
+<p>Lookup Layer.</p>
 <dl class="py attribute">
 <dt id="deepr.layers.lookup.Lookup.table_initializer_fn">
 <code class="sig-name descname">table_initializer_fn</code><a class="headerlink" href="#deepr.layers.lookup.Lookup.table_initializer_fn" title="Permalink to this definition">¶</a></dt>
@@ -1055,9 +1058,9 @@ example, if</p>
 
 <dl class="py class">
 <dt id="deepr.layers.lookup.LookupFromFile">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.lookup.</code><code class="sig-name descname">LookupFromFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_name</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">key_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/lookup.html#LookupFromFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.lookup.LookupFromFile" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.lookup.</code><code class="sig-name descname">LookupFromFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_name</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">key_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">reuse</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/lookup.html#LookupFromFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.lookup.LookupFromFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.lookup.Lookup" title="deepr.layers.lookup.Lookup"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.lookup.Lookup</span></code></a></p>
-<p>Lookup From File Layer</p>
+<p>Lookup From File Layer.</p>
 <p>Creates a table at runtime from a mapping file. The table will map
 each key to its corresponding line index as an tf.int64.</p>
 <dl class="py attribute">
@@ -1083,6 +1086,17 @@ each key to its corresponding line index as an tf.int64.</p>
 </dd></dl>
 
 <dl class="py attribute">
+<dt id="deepr.layers.lookup.LookupFromFile.reuse">
+<code class="sig-name descname">reuse</code><a class="headerlink" href="#deepr.layers.lookup.LookupFromFile.reuse" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, reuse table with the same name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
 <dt id="deepr.layers.lookup.LookupFromFile.table_name">
 <code class="sig-name descname">table_name</code><a class="headerlink" href="#deepr.layers.lookup.LookupFromFile.table_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the HashTable</p>
@@ -1097,9 +1111,9 @@ each key to its corresponding line index as an tf.int64.</p>
 
 <dl class="py class">
 <dt id="deepr.layers.lookup.LookupFromMapping">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.lookup.</code><code class="sig-name descname">LookupFromMapping</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_name</span></em>, <em class="sig-param"><span class="n">mapping</span></em>, <em class="sig-param"><span class="n">default_value</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">key_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">value_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/lookup.html#LookupFromMapping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.lookup.LookupFromMapping" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.lookup.</code><code class="sig-name descname">LookupFromMapping</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_name</span></em>, <em class="sig-param"><span class="n">mapping</span></em>, <em class="sig-param"><span class="n">default_value</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">key_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">value_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">reuse</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/lookup.html#LookupFromMapping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.lookup.LookupFromMapping" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.lookup.Lookup" title="deepr.layers.lookup.Lookup"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.lookup.Lookup</span></code></a></p>
-<p>Lookup From Mapping Layer</p>
+<p>Lookup From Mapping Layer.</p>
 <dl class="py attribute">
 <dt id="deepr.layers.lookup.LookupFromMapping.default_value">
 <code class="sig-name descname">default_value</code><a class="headerlink" href="#deepr.layers.lookup.LookupFromMapping.default_value" title="Permalink to this definition">¶</a></dt>
@@ -1134,6 +1148,17 @@ each key to its corresponding line index as an tf.int64.</p>
 </dd></dl>
 
 <dl class="py attribute">
+<dt id="deepr.layers.lookup.LookupFromMapping.reuse">
+<code class="sig-name descname">reuse</code><a class="headerlink" href="#deepr.layers.lookup.LookupFromMapping.reuse" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, reuse the layer with the same name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
 <dt id="deepr.layers.lookup.LookupFromMapping.table_name">
 <code class="sig-name descname">table_name</code><a class="headerlink" href="#deepr.layers.lookup.LookupFromMapping.table_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the HashTable</p>
@@ -1157,16 +1182,68 @@ each key to its corresponding line index as an tf.int64.</p>
 
 </dd></dl>
 
-<dl class="py function">
-<dt id="deepr.layers.lookup.table_from_file">
-<code class="sig-prename descclassname">deepr.layers.lookup.</code><code class="sig-name descname">table_from_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">key_dtype</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/lookup.html#table_from_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.lookup.table_from_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create table from file</p>
+<dl class="py class">
+<dt id="deepr.layers.lookup.LookupIndexToString">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.lookup.</code><code class="sig-name descname">LookupIndexToString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_name</span></em>, <em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">vocab_size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">default_value</span><span class="o">=</span><span class="default_value">'UNK'</span></em>, <em class="sig-param"><span class="n">reuse</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/lookup.html#LookupIndexToString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.lookup.LookupIndexToString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.lookup.Lookup" title="deepr.layers.lookup.Lookup"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.lookup.Lookup</span></code></a></p>
+<p>Lookup Index To String.</p>
+<p>Creates a table at runtime from a mapping file. The table will map
+each key to its corresponding line index as an tf.int64.</p>
+<dl class="py attribute">
+<dt id="deepr.layers.lookup.LookupIndexToString.default_value">
+<code class="sig-name descname">default_value</code><a class="headerlink" href="#deepr.layers.lookup.LookupIndexToString.default_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default Value for missing keys</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="py function">
-<dt id="deepr.layers.lookup.table_from_mapping">
-<code class="sig-prename descclassname">deepr.layers.lookup.</code><code class="sig-name descname">table_from_mapping</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">mapping</span></em>, <em class="sig-param"><span class="n">default_value</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">key_dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">value_dtype</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/lookup.html#table_from_mapping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.lookup.table_from_mapping" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create table from mapping</p>
+<dl class="py attribute">
+<dt id="deepr.layers.lookup.LookupIndexToString.path">
+<code class="sig-name descname">path</code><a class="headerlink" href="#deepr.layers.lookup.LookupIndexToString.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to mapping file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.layers.lookup.LookupIndexToString.reuse">
+<code class="sig-name descname">reuse</code><a class="headerlink" href="#deepr.layers.lookup.LookupIndexToString.reuse" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, reuse the table with the same name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.layers.lookup.LookupIndexToString.table_name">
+<code class="sig-name descname">table_name</code><a class="headerlink" href="#deepr.layers.lookup.LookupIndexToString.table_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the HashTable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.layers.lookup.LookupIndexToString.vocab_size">
+<code class="sig-name descname">vocab_size</code><a class="headerlink" href="#deepr.layers.lookup.LookupIndexToString.vocab_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Size of the vocab</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </div>
