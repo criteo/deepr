@@ -6,7 +6,7 @@ import tensorflow as tf
 from tensorflow.python.platform import gfile
 
 
-def import_graph_def(path_pb: str):
+def import_graph_def(path_pb: str, name: str = "model"):
     """Import Graph Definition from protobuff into the current Graph.
 
     Parameters
@@ -17,7 +17,7 @@ def import_graph_def(path_pb: str):
     with gfile.FastGFile(f"{path_pb}", "rb") as f:
         graph_def = tf.GraphDef()
         graph_def.ParseFromString(f.read())
-        tf.import_graph_def(graph_def, name="model")
+        tf.import_graph_def(graph_def, name=name)
 
 
 def get_feedable_tensors(graph: tf.Graph, names: List[str]) -> Dict[str, tf.Tensor]:
@@ -37,7 +37,7 @@ def get_feedable_tensors(graph: tf.Graph, names: List[str]) -> Dict[str, tf.Tens
     """
     feedable_tensors = {}
     for name in names:
-        op_or_tensor = graph.as_graph_element(f"model/{name}")
+        op_or_tensor = graph.as_graph_element(name)
         if isinstance(op_or_tensor, tf.Tensor):
             tensor = op_or_tensor
         else:
@@ -67,7 +67,7 @@ def get_fetchable_tensors(graph: tf.Graph, names: List[str]) -> Dict[str, tf.Ten
     """
     fetchable_tensors = {}
     for name in names:
-        op_or_tensor = graph.as_graph_element(f"model/{name}")
+        op_or_tensor = graph.as_graph_element(name)
         if isinstance(op_or_tensor, tf.Tensor):
             tensor = op_or_tensor
         else:
