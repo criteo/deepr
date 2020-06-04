@@ -27,7 +27,7 @@ test: ## [Local development] Run unit tests, doctest and notebooks
 	find docs/getting_started/*.ipynb | xargs jupyter nbconvert --to notebook --execute && rm docs/getting_started/*.nbconvert.ipynb
 
 integration: ## [Local development] Run integration tests.
-	python -m pytest tests/integration
+	python -m pytest -v tests/integration
 
 venv-lint-test-integration: ## [Continuous integration] Install in venv and run lint and test
 	python3.6 -m venv .env && . .env/bin/activate && make install install-dev lint test integration && rm -rf .env
