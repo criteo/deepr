@@ -12,6 +12,7 @@ import deepr.jobs
 import deepr.layers
 import deepr.metrics
 import deepr.optimizers
+import deepr.predictors
 import deepr.prepros
 import deepr.readers
 import deepr.utils

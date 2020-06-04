@@ -1,7 +1,7 @@
 """Compute prediction on a dataset and log result."""
 
 import logging
-from typing import List, Callable, Union
+from typing import List, Callable, Union, Optional
 from dataclasses import dataclass
 
 import tensorflow as tf
@@ -13,40 +13,37 @@ LOGGER = logging.getLogger(__name__)
 
 
 @dataclass
-class Predict(dpr.jobs.Job):
-    """Compute prediction on a dataset and log result."""
+class PredictProto(dpr.jobs.Job):
+    """Compute predictions from a single .pb file."""
 
     path_model: str
     graph_name: str
-    feeds: Union[str, List[str]]
-    fetch: Union[str, List[str]]
     input_fn: Callable[[], tf.data.Dataset]
     prepro_fn: Callable[[tf.data.Dataset, str], tf.data.Dataset]
+    feeds: Union[str, List[str]]
+    fetches: Union[str, List[str]]
 
     def run(self):
-        # Normalize feeds and fetch
-        fetch = self.fetch.split(",") if isinstance(self.fetch, str) else self.fetch
-        feeds = self.feeds.split(",") if isinstance(self.feeds, str) else self.feeds
+        predictor = dpr.predictors.ProtoPredictor(
+            path=f"{self.path_model}/{self.graph_name}", feeds=self.feeds, fetches=self.fetches
+        )
+        for preds in predictor(lambda: self.prepro_fn(self.input_fn(), tf.estimator.ModeKeys.PREDICT)):
+            LOGGER.info(preds)
 
-        with tf.Session(graph=tf.Graph()) as sess:
-            # Import Graph, retrieve feed and fetch tensors
-            dpr.utils.import_graph_def(f"{self.path_model}/{self.graph_name}")
-            feedable_tensors = dpr.utils.get_feedable_tensors(sess.graph, feeds)
-            fetchable_tensors = dpr.utils.get_fetchable_tensors(sess.graph, fetch)
 
-            # Compute prediction on dataset
-            dataset = self.prepro_fn(self.input_fn(), tf.estimator.ModeKeys.PREDICT)
-            iterator = dataset.make_initializable_iterator()
-            next_element = iterator.get_next()
-            sess.run(tf.tables_initializer())
-            sess.run(iterator.initializer)
-            try:
-                while True:
-                    batch = sess.run(next_element)
-                    preds = sess.run(
-                        fetchable_tensors, {tensor: batch[key] for key, tensor in feedable_tensors.items()}
-                    )
-                    LOGGER.info({**batch, **preds})
-            except tf.errors.OutOfRangeError:
-                LOGGER.info(f"Reached end of {self.input_fn}")
-                pass
+@dataclass
+class PredictSavedModel(dpr.jobs.Job):
+    """Compute predictions from a directory containing saved models."""
+
+    path_saved_model: str
+    input_fn: Callable[[], tf.data.Dataset]
+    prepro_fn: Callable[[tf.data.Dataset, str], tf.data.Dataset]
+    feeds: Optional[Union[str, List[str]]] = None
+    fetches: Optional[Union[str, List[str]]] = None
+
+    def run(self):
+        predictor = dpr.predictors.SavedModelPredictor(
+            path=dpr.predictors.get_latest_saved_model(self.path_saved_model), feeds=self.feeds, fetches=self.fetches
+        )
+        for preds in predictor(lambda: self.prepro_fn(self.input_fn(), tf.estimator.ModeKeys.PREDICT)):
+            LOGGER.info(preds)
