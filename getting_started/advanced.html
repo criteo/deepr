@@ -723,13 +723,28 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">predict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Predict</span><span class="p">(</span>
+<span></span><span class="n">predict_proto</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">PredictProto</span><span class="p">(</span>
     <span class="n">path_model</span><span class="o">=</span><span class="s2">&quot;model/optimized_saved_model&quot;</span><span class="p">,</span>
     <span class="n">graph_name</span><span class="o">=</span><span class="s2">&quot;_model.pb&quot;</span><span class="p">,</span>
-    <span class="n">feeds</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;inputs/x&quot;</span><span class="p">],</span>
-    <span class="n">fetch</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;y_pred&quot;</span><span class="p">],</span>
     <span class="n">input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
-    <span class="n">prepro_fn</span><span class="o">=</span><span class="n">example</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">InferencePrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">prepro_fn</span><span class="o">=</span><span class="n">example</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">InferencePrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;inputs/x&quot;</span><span class="p">),</span>
+    <span class="n">feeds</span><span class="o">=</span><span class="s2">&quot;inputs/x&quot;</span><span class="p">,</span>
+    <span class="n">fetches</span><span class="o">=</span><span class="s2">&quot;y_pred&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">predict_saved_model</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">PredictSavedModel</span><span class="p">(</span>
+    <span class="n">path_saved_model</span><span class="o">=</span><span class="s2">&quot;model/saved_model&quot;</span><span class="p">,</span>
+    <span class="n">input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
+    <span class="n">prepro_fn</span><span class="o">=</span><span class="n">example</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">InferencePrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">),</span>
+    <span class="n">feeds</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+    <span class="n">fetches</span><span class="o">=</span><span class="s2">&quot;y_pred&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -739,16 +754,23 @@ div.rendered_html tbody tr:hover {
 <h2>Full Pipeline<a class="headerlink" href="#Full-Pipeline" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have a production-ready pipeline, let’s run it!</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">([</span><span class="n">build_job</span><span class="p">,</span> <span class="n">trainer_job</span><span class="p">,</span> <span class="n">cleanup_checkpoints</span><span class="p">,</span> <span class="n">optimize_saved_model</span><span class="p">,</span> <span class="n">predict</span><span class="p">])</span>
+<span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">([</span>
+    <span class="n">build_job</span><span class="p">,</span>
+    <span class="n">trainer_job</span><span class="p">,</span>
+    <span class="n">cleanup_checkpoints</span><span class="p">,</span>
+    <span class="n">optimize_saved_model</span><span class="p">,</span>
+    <span class="n">predict_proto</span><span class="p">,</span>
+    <span class="n">predict_saved_model</span>
+<span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -764,15 +786,15 @@ div.rendered_html tbody tr:hover {
 INFO:deepr.example.jobs.build_dataset:Wrote dataset to &#39;data.tfrecord&#39;
 INFO:deepr.hooks.num_params:Number of parameters (global) = 7
 INFO:deepr.hooks.num_params:Number of parameters (trainable) = 1
-INFO:deepr.hooks.log_variables_init:alpha_init_average_norm = 1.157610297203064
+INFO:deepr.hooks.log_variables_init:alpha_init_average_norm = 0.6624704599380493
 INFO:deepr.hooks.log_variables_init:alpha_init_num_zeros = 0
-INFO:deepr.hooks.logging_tensor:global_step = 1, loss = 7.9222879, num_steps = 1, max_memory_gb = 0.3226509, memory_gb = 0.3226509
-INFO:deepr.hooks.steps_per_sec:steps_per_sec = 373.44, examples_per_sec = 11949.94
-INFO:deepr.hooks.logging_tensor:global_step = 101, loss = 1.1289085, num_steps = 101, max_memory_gb = 0.3230362, memory_gb = 0.3230362
-INFO:deepr.hooks.steps_per_sec:steps_per_sec = 402.09, examples_per_sec = 12866.95
-INFO:deepr.hooks.logging_tensor:global_step = 201, loss = 0.1497175, num_steps = 201, max_memory_gb = 0.3230362, memory_gb = 0.3230362
-INFO:deepr.hooks.steps_per_sec:steps_per_sec = 480.80, examples_per_sec = 15385.73
-INFO:deepr.hooks.logging_tensor:global_step = 301, loss = 0.0198555, num_steps = 301, max_memory_gb = 0.3230362, memory_gb = 0.3230286
+INFO:deepr.hooks.logging_tensor:global_step = 1, loss = 19.3623104, num_steps = 1, max_memory_gb = 0.3229027, memory_gb = 0.3229027
+INFO:deepr.hooks.steps_per_sec:steps_per_sec = 385.02, examples_per_sec = 12320.53
+INFO:deepr.hooks.logging_tensor:global_step = 101, loss = 2.8516533, num_steps = 101, max_memory_gb = 0.3230286, memory_gb = 0.3230286
+INFO:deepr.hooks.steps_per_sec:steps_per_sec = 386.96, examples_per_sec = 12382.86
+INFO:deepr.hooks.logging_tensor:global_step = 201, loss = 0.3781913, num_steps = 201, max_memory_gb = 0.3230324, memory_gb = 0.3230324
+INFO:deepr.hooks.steps_per_sec:steps_per_sec = 338.05, examples_per_sec = 10817.53
+INFO:deepr.hooks.logging_tensor:global_step = 301, loss = 0.0501557, num_steps = 301, max_memory_gb = 0.3230324, memory_gb = 0.3230324
 INFO:deepr.prepros.core:Not applying Repeat(10) (mode=eval)
 INFO:deepr.hooks.logging_tensor:global_step = 320, loss = 0
 INFO:deepr.exporters.best_checkpoint:Reloading summaries from model/checkpoints
@@ -790,11 +812,13 @@ INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-0.in
 INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-320.index
 INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-320.data-00000-of-00001
 INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-0.meta
-INFO:deepr.jobs.optimize_saved_model:Using SavedModel model/saved_model/1591191884
+INFO:deepr.jobs.optimize_saved_model:Using SavedModel model/saved_model/1591275607
 INFO:deepr.jobs.optimize_saved_model:Node renamed: x -&gt; inputs/x
 INFO:deepr.jobs.optimize_saved_model:Optimized Model successfully exported to model/optimized_saved_model/_model.pb
-INFO:deepr.example.jobs.predict:{&#39;inputs/x&#39;: array([0.39897504], dtype=float32), &#39;y_pred&#39;: array([0.7979501], dtype=float32)}
-INFO:deepr.example.jobs.predict:Reached end of &lt;deepr.readers.record.TFRecordReader object at 0x13e8ddeb8&gt;
+INFO:deepr.example.jobs.predict:{&#39;y_pred&#39;: array([1.7362353], dtype=float32)}
+INFO:deepr.example.jobs.predict:{&#39;y_pred&#39;: array([1.4670771], dtype=float32)}
+INFO:deepr.example.jobs.predict:{&#39;y_pred&#39;: array([1.7362353], dtype=float32)}
+INFO:deepr.example.jobs.predict:{&#39;y_pred&#39;: array([1.4670771], dtype=float32)}
 </pre></div></div>
 </div>
 </div>

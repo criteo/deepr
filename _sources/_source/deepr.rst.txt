@@ -19,6 +19,7 @@ Subpackages
    deepr.macros
    deepr.metrics
    deepr.optimizers
+   deepr.predictors
    deepr.prepros
    deepr.readers
    deepr.utils

@@ -168,7 +168,7 @@
 <span class="kn">from</span> <span class="nn">tensorflow.python.platform</span> <span class="kn">import</span> <span class="n">gfile</span>
 
 
-<div class="viewcode-block" id="import_graph_def"><a class="viewcode-back" href="../../../_source/deepr.utils.html#deepr.utils.import_graph_def">[docs]</a><span class="k">def</span> <span class="nf">import_graph_def</span><span class="p">(</span><span class="n">path_pb</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<div class="viewcode-block" id="import_graph_def"><a class="viewcode-back" href="../../../_source/deepr.utils.html#deepr.utils.import_graph_def">[docs]</a><span class="k">def</span> <span class="nf">import_graph_def</span><span class="p">(</span><span class="n">path_pb</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;model&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Import Graph Definition from protobuff into the current Graph.</span>
 
 <span class="sd">    Parameters</span>
@@ -179,7 +179,7 @@
     <span class="k">with</span> <span class="n">gfile</span><span class="o">.</span><span class="n">FastGFile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_pb</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">graph_def</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">GraphDef</span><span class="p">()</span>
         <span class="n">graph_def</span><span class="o">.</span><span class="n">ParseFromString</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-        <span class="n">tf</span><span class="o">.</span><span class="n">import_graph_def</span><span class="p">(</span><span class="n">graph_def</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">)</span></div>
+        <span class="n">tf</span><span class="o">.</span><span class="n">import_graph_def</span><span class="p">(</span><span class="n">graph_def</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="get_feedable_tensors"><a class="viewcode-back" href="../../../_source/deepr.utils.html#deepr.utils.get_feedable_tensors">[docs]</a><span class="k">def</span> <span class="nf">get_feedable_tensors</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
@@ -199,7 +199,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">feedable_tensors</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
-        <span class="n">op_or_tensor</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">as_graph_element</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;model/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">op_or_tensor</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">as_graph_element</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">op_or_tensor</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
             <span class="n">tensor</span> <span class="o">=</span> <span class="n">op_or_tensor</span>
         <span class="k">else</span><span class="p">:</span>
@@ -229,7 +229,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">fetchable_tensors</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
-        <span class="n">op_or_tensor</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">as_graph_element</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;model/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">op_or_tensor</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">as_graph_element</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">op_or_tensor</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
             <span class="n">tensor</span> <span class="o">=</span> <span class="n">op_or_tensor</span>
         <span class="k">else</span><span class="p">:</span>

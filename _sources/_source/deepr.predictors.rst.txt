@@ -1,0 +1,38 @@
+deepr.predictors package
+========================
+
+Submodules
+----------
+
+deepr.predictors.base module
+----------------------------
+
+.. automodule:: deepr.predictors.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.predictors.proto module
+-----------------------------
+
+.. automodule:: deepr.predictors.proto
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.predictors.saved\_model module
+------------------------------------
+
+.. automodule:: deepr.predictors.saved_model
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.predictors
+   :members:
+   :undoc-members:
+   :show-inheritance:
