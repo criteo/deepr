@@ -98,6 +98,7 @@ Jobs are the programs that will actually run, they are composable through the pi
    MLFlowSaveConfigs
    MLFlowSaveInfo
    OptimizeSavedModel
+   ExportXlaModelMetadata
    Pipeline
    Trainer
    YarnLauncher
