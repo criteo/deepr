@@ -23,6 +23,24 @@ Fixed
 Security
 ~~~~~~~~
 
+[2.1.1] - 2020-06-05
+--------------------
+
+Added
+~~~~~
+- Predictors also yield inputs when applied on a ``tf.data.Dataset``
+
+Changed
+~~~~~~~
+Deprecated
+~~~~~~~~~~
+Removed
+~~~~~~~
+Fixed
+~~~~~
+Security
+~~~~~~~~
+
 
 [2.1.0] - 2020-06-04
 --------------------
