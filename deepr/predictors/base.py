@@ -54,7 +54,8 @@ class Predictor(abc.ABC):
                     try:
                         while True:
                             input_dict = self.session.run(next_element)
-                            yield self.__call__(input_dict)
+                            output_dict = self.__call__(input_dict)
+                            yield {**input_dict, **output_dict}
                     except tf.errors.OutOfRangeError:
                         pass
 
