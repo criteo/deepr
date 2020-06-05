@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>deepr.predictors.base &mdash; deepr 2.0.0 documentation</title>
+  <title>deepr.predictors.base &mdash; deepr 2.1.1 documentation</title>
   
 
   
@@ -216,7 +216,8 @@
                     <span class="k">try</span><span class="p">:</span>
                         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
                             <span class="n">input_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">next_element</span><span class="p">)</span>
-                            <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">input_dict</span><span class="p">)</span>
+                            <span class="n">output_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">input_dict</span><span class="p">)</span>
+                            <span class="k">yield</span> <span class="p">{</span><span class="o">**</span><span class="n">input_dict</span><span class="p">,</span> <span class="o">**</span><span class="n">output_dict</span><span class="p">}</span>
                     <span class="k">except</span> <span class="n">tf</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">OutOfRangeError</span><span class="p">:</span>
                         <span class="k">pass</span>
 
