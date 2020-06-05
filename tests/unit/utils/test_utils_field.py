@@ -6,25 +6,21 @@ import tensorflow as tf
 import deepr as dpr
 
 
-@pytest.mark.parametrize("shape, expected", [([None, None], False), ([2], True), ([None, 2], False)])
-def test_has_fixed_len(shape, expected):
-    """Test has_fixed_len method"""
-    field = dpr.Field(name="name", shape=shape, dtype=tf.int32)
-    assert field.has_fixed_len() == expected
-    assert field.has_fixed_len() != field.has_var_len()
-
-
 @pytest.mark.parametrize(
-    "field",
+    "field, expected",
     [
-        dpr.Field(name="name", shape=[None, None], dtype=tf.int32),
-        dpr.Field(name="name", shape=[2], dtype=tf.int32),
-        dpr.Field(name="name", shape=[None, 2], dtype=tf.int32),
+        (dpr.Field(name="name", shape=[None, None], dtype=tf.int64), tf.io.VarLenFeature(dtype=tf.int64)),
+        (dpr.Field(name="name", shape=[None], dtype=tf.int64), tf.io.FixedLenSequenceFeature(shape=(), dtype=tf.int64)),
+        (dpr.Field(name="name", shape=[2], dtype=tf.int64), tf.io.FixedLenFeature(shape=(2,), dtype=tf.int64)),
+        (
+            dpr.Field(name="name", shape=[None, 2], dtype=tf.int64),
+            tf.io.FixedLenSequenceFeature(shape=(2,), dtype=tf.int64),
+        ),
     ],
 )
-def test_as_feature(field):
+def test_feature_specs(field, expected):
     """Test as_feature method"""
-    field.as_feature()
+    assert field.feature_specs == expected
 
 
 def test_startswith():

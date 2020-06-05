@@ -392,3 +392,35 @@ class Take(base.Prepro):
             return dataset
         else:
             return dataset.take(self.count)
+
+
+class Cache(base.Prepro):
+    """Cache Dataset in memory, unless a file is provided.
+
+    You must iterate over the dataset completely to cache it (i.e. a
+    ``tf.error.OutOfRangeError`` must be raised).
+
+    If caching to file, note that it consumes a lot of disk space (10x
+    to 100x compared to tfrecords), and reloading seems brittle.
+
+    Prefer writing preprocessed data to tfrecord instead.
+
+    Attributes
+    ----------
+    filename: str
+    """
+
+    def __init__(self, filename: str = None, modes: Iterable[str] = None):
+        super().__init__()
+        self.filename = filename
+        self.modes = modes
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}({self.filename})"
+
+    def apply(self, dataset: tf.data.Dataset, mode: str = None):
+        # pylint: disable=unused-argument
+        if mode is not None and self.modes is not None and mode not in self.modes:
+            LOGGER.info(f"Not applying {self} (mode={mode})")
+            return dataset
+        return dataset.cache(self.filename)

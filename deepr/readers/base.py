@@ -44,6 +44,9 @@ class DatasetReader(Reader):
         super().__init__()
         self._dataset = dataset
 
+    def __repr__(self):
+        return f"DatasetReader(dataset={self._dataset})"
+
     def as_dataset(self) -> tf.data.Dataset:
         """Build a tf.data.Dataset"""
         return self._dataset

@@ -19,7 +19,7 @@ def dummy_tfrecord(tmpdir) -> str:
 
     # Write TFRecord file
     path = str(tmpdir.join("dummy.tfrecord"))
-    with tf.python_io.TFRecordWriter(path) as writer:
+    with tf.io.TFRecordWriter(path) as writer:
         writer.write(sample.SerializeToString())
 
     return path
@@ -27,5 +27,5 @@ def dummy_tfrecord(tmpdir) -> str:
 
 def test_readers_record(dummy_tfrecord: str):
     """Test TFRecordReader"""
-    reader = dpr.readers.TFRecordReader([dummy_tfrecord])
+    reader = dpr.readers.TFRecordReader(dummy_tfrecord)
     assert len(list(reader)) == 1

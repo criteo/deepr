@@ -10,6 +10,7 @@ from deepr.jobs.mlflow_save_info import MLFlowSaveInfo
 from deepr.jobs.optimize_saved_model import OptimizeSavedModel
 from deepr.jobs.export_xla_model_metadata import ExportXlaModelMetadata
 from deepr.jobs.params_tuner import ParamsTuner, GridSampler, ParamsSampler
+from deepr.jobs.save_dataset import SaveDataset
 from deepr.jobs.trainer import Trainer, TrainSpec, EvalSpec, RunConfig, ConfigProto
 from deepr.jobs.yarn_launcher import YarnLauncherConfig, YarnLauncher
 from deepr.jobs.yarn_trainer import YarnTrainerConfig, YarnTrainer

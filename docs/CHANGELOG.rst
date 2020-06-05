@@ -12,14 +12,27 @@ and this project adheres to `Semantic Versioning <http://semver.org/>`_.
 
 Added
 ~~~~~
+- ``writers`` module, ``TFRecordWriter``
+- ``ToExample`` prepro to convert a dataset to ``tf.Example``
+- ``Field`` now has a ``to_feature(value)`` method
+- ``iter`` utils: ``progress`` (logs progress every n seconds), ``chunks`` to return chunks from an iterable
+- ``SaveDataset`` job to write a dataset to tfrecords.
+
 Changed
 ~~~~~~~
+- ``TFRecordSequenceExample`` renamed ``FromExample`` (but old name still available).
+- ``Field`` method ``as_feature`` renamed ``feature_specs`` to avoid confusion with ``to_feature``.
+
 Deprecated
 ~~~~~~~~~~
 Removed
 ~~~~~~~
+- Removed ``Field`` methods (leading to incorrect uses): ``has_var_len``, ``as_feature``, ``has_fixed_len``
+
 Fixed
 ~~~~~
+- Incorrect ``shuffle`` argument use in ``TFRecordReader``
+
 Security
 ~~~~~~~~
 

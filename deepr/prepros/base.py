@@ -3,7 +3,7 @@
 from abc import ABC, abstractmethod
 import logging
 import functools
-from typing import Callable, Type
+from typing import Callable, Type, Optional
 import inspect
 
 import tensorflow as tf
@@ -93,6 +93,16 @@ class Prepro(ABC):
     def apply(self, dataset: tf.data.Dataset, mode: str = None) -> tf.data.Dataset:
         """Pre-process a dataset"""
         raise NotImplementedError()
+
+
+class PreproFn(Prepro):
+    """Prepro from function."""
+
+    def __init__(self, prepro_fn: Callable[[tf.data.Dataset, Optional[str]], tf.data.Dataset]):
+        self.prepro_fn = prepro_fn
+
+    def apply(self, dataset: tf.data.Dataset, mode: str = None) -> tf.data.Dataset:
+        return self.prepro_fn(dataset, mode)
 
 
 def prepro(fn: Callable) -> Type[Prepro]:

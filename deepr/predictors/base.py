@@ -38,7 +38,7 @@ class Predictor(abc.ABC):
     def __call__(self, inputs: Union[Dict[str, np.array], Callable[[], tf.data.Dataset]]):
         if isinstance(inputs, dict):
             if not set(self.feed_tensors) <= set(inputs):
-                raise KeyError(f"Missing keys in inputs: {set(inputs) - set(self.feed_tensors)} (inputs = {inputs})")
+                raise KeyError(f"Missing keys in inputs: {set(self.feed_tensors) - set(inputs)} (inputs = {inputs})")
             return self.session.run(
                 self.fetch_tensors, feed_dict={tensor: inputs[name] for name, tensor in self.feed_tensors.items()}
             )

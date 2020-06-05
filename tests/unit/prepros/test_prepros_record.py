@@ -1,37 +1,43 @@
 # pylint: disable=redefined-outer-name
 """Tests for prepros.record"""
 
-import pytest
+import numpy as np
 import tensorflow as tf
 
 import deepr as dpr
 
 
-@pytest.fixture
-def dummy_tfrecord(tmpdir) -> str:
-    """Writes a dummy tf record file"""
-    # Create tf.SequenceExample
-    context = {"a": dpr.readers.bytes_feature([b"0"])}
-    feature_list = {"b": dpr.readers.int64_feature_list([[0, 1], [2, 3]])}
-    sample = tf.train.SequenceExample(
-        context=tf.train.Features(feature=context), feature_lists=tf.train.FeatureLists(feature_list=feature_list)
+def test_prepros_from_example():
+    """Test FromExample."""
+    example = tf.train.Example(
+        features=tf.train.Features(feature={"x": tf.train.Feature(int64_list=tf.train.Int64List(value=[0, 1, 2, 3]))})
     )
+    serialized = example.SerializeToString()
+    from_example = dpr.prepros.FromExample(fields=[dpr.Field(name="x", shape=(2, 2), dtype=tf.int64)])
+    got = from_example.parse_fn(serialized)
+    assert isinstance(got["x"], tf.Tensor)
+    assert got["x"].shape == (2, 2)
+    with tf.Session() as sess:
+        np.testing.assert_equal(sess.run(got), {"x": np.array([[0, 1], [2, 3]])})
 
-    # Write TFRecord file
-    path = str(tmpdir.join("dummy.tfrecord"))
-    with tf.python_io.TFRecordWriter(path) as writer:
-        writer.write(sample.SerializeToString())
 
-    return path
+def test_prepros_to_example():
+    """Test ToExample."""
+    tensor = {"x": np.array([[0, 1], [2, 3]])}
+    to_example = dpr.prepros.ToExample(fields=[dpr.Field(name="x", shape=(2, 2), dtype=tf.int64)])
+    example = to_example.serialize_fn(tensor)
+    assert isinstance(example, tf.Tensor)
+    assert example.dtype == tf.string
+    assert example.shape == ()
 
 
-def test_prepro_record_sequence_example(dummy_tfrecord: str):
-    """Test TFRecordSequenceReader"""
-    fields = [dpr.Field(name="a", shape=(), dtype=tf.string), dpr.Field(name="b", shape=(None, 2), dtype=tf.int64)]
-    reader = dpr.readers.TFRecordReader([dummy_tfrecord])
-    prepro = dpr.prepros.TFRecordSequenceExample(fields=fields)
-    dataset = reader.as_dataset()
-    dataset = prepro(dataset)
-    elements = list(dpr.readers.from_dataset(dataset))
-    assert len(elements) == 1
-    assert elements[0].keys() == {"a", "b"}
+def test_end_to_end():
+    """Test end-to-end, serialize then parse."""
+    field = dpr.Field(name="x", shape=(2, 2), dtype=tf.int64)
+    tensor = {"x": np.array([[0, 1], [2, 3]])}
+    to_example = dpr.prepros.ToExample(fields=[field])
+    from_example = dpr.prepros.FromExample(fields=[field])
+    example = to_example.serialize_fn(tensor)
+    got = from_example.parse_fn(example)
+    with tf.Session() as sess:
+        np.testing.assert_equal(sess.run(got), tensor)
