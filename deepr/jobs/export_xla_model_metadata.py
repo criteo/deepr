@@ -9,7 +9,7 @@ import tensorflow as tf
 from deepr.io import Path
 from deepr.jobs import base
 from deepr.utils import import_graph_def
-import deepr.utils.xla as xla
+import deepr.utils.tf2xla_pb2 as xla
 
 LOGGER = logging.getLogger(__name__)
 
@@ -20,8 +20,8 @@ class ExportXlaModelMetadata(base.Job):
 
     Attributes
     ----------
-    path_saved_model : str
-        Path to directory containing SavedModel exports to convert
+    path_optimized_model : str
+        Path to directory containing optimized saved model exports to convert
     path_metadata : str
         Path to directory that will contain the metadata
     graph_name : str
@@ -34,7 +34,7 @@ class ExportXlaModelMetadata(base.Job):
         Shapes of fetches to expose
     """
 
-    path_saved_model: str
+    path_optimized_model: str
     path_metadata: str
     graph_name: str
     metadata_name: str
@@ -45,7 +45,7 @@ class ExportXlaModelMetadata(base.Job):
         # Create session and import graph under scope "model"
         session = tf.Session(graph=tf.Graph())
         with session.graph.as_default():
-            import_graph_def(f"{self.path_saved_model}/{self.graph_name}", name="")
+            import_graph_def(f"{self.path_optimized_model}/{self.graph_name}", name="")
 
             feed_nodes = get_nodes(session.graph_def, self.feed_shapes.keys())
             fetch_nodes = get_nodes(session.graph_def, self.fetch_shapes.keys())
@@ -56,7 +56,7 @@ class ExportXlaModelMetadata(base.Job):
             for name, node in fetch_nodes.items():
                 add_metadata_item(meta.fetch.add(), node, self.fetch_shapes[name])
 
-            with Path(f"{self.path_metadata}/{self.metadata_name}").open("wb", "ascii") as file:
+            with Path(f"{self.path_metadata}/{self.metadata_name}").open("wb") as file:
                 file.write(str(meta).encode("ascii"))
             LOGGER.info(f"Metadata successfully saved to {self.path_metadata}/{self.metadata_name}")
 
