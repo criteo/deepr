@@ -17,6 +17,7 @@ import deepr.prepros
 import deepr.readers
 import deepr.utils
 import deepr.vocab
+import deepr.writers
 from deepr.config import parse_config, from_config
 from deepr.utils import Field
 from deepr.version import __author__, __version__

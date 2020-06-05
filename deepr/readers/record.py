@@ -36,14 +36,17 @@ class TFRecordReader(base.Reader):
         self.num_parallel_calls = num_parallel_calls
         self.shuffle = shuffle
 
+    def __repr__(self) -> str:
+        return f"TFRecordReader(path={self.path})"
+
     @property
     def filenames(self):
         if isinstance(self.path, list):
-            return [str(path) for path in self.path]
+            return sorted([str(path) for path in self.path])
         else:
             if Path(self.path).is_dir():
                 paths = Path(self.path).glob("*")
-                return [str(path) for path in paths if path.is_file() and not path.name.startswith("_")]
+                return sorted([str(path) for path in paths if path.is_file() and not path.name.startswith("_")])
             else:
                 return [str(self.path)]
 
@@ -51,12 +54,14 @@ class TFRecordReader(base.Reader):
     def compression_type(self):
         if str(self.filenames[0]).endswith("gz"):
             return "GZIP"
+        elif str(self.filenames[0]).endswith("zlib"):
+            return "ZLIB"
         else:
             return ""
 
     def as_dataset(self) -> tf.data.Dataset:
         """Build a tf.data.Dataset"""
-        if self.shuffle is not None:
+        if self.shuffle:
             filenames = self.filenames
             dataset = tf.data.Dataset.from_tensor_slices(filenames).shuffle(len(filenames))
             dataset = dataset.interleave(
