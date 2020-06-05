@@ -23,7 +23,7 @@ black: ## [Local development] Auto-format python code using black
 
 test: ## [Local development] Run unit tests, doctest and notebooks
 	python -m pytest -n 4 -v tests/unit
-	python -m pytest --doctest-modules --ignore-glob="*xla.py" --ignore-glob="*export_xla_model_metadata.py" -v deepr
+	python -m pytest --doctest-modules -v deepr
 	find docs/getting_started/*.ipynb | xargs jupyter nbconvert --to notebook --execute && rm docs/getting_started/*.nbconvert.ipynb
 
 integration: ## [Local development] Run integration tests.

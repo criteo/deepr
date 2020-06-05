@@ -190,6 +190,15 @@
                 "new_names": {"x": "inputs/x"}
             },
             {
+                "type": "deepr.jobs.ExportXlaModelMetadata",
+                "path_optimized_model": "$paths:path_optimized_model",
+                "path_metadata": "$paths:path_optimized_model",
+                "graph_name": "_model.pb",
+                "metadata_name": "_meta.pbtxt",
+                "feed_shapes": {"inputs/x": [1]},
+                "fetch_shapes": {"y_pred": null}
+            },
+            {
                 "type": "deepr.example.jobs.PredictProto",
                 "path_model": "$paths:path_optimized_model",
                 "graph_name": "_model.pb",
