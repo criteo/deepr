@@ -84,6 +84,14 @@ deepr.utils.uuid module
    :undoc-members:
    :show-inheritance:
 
+deepr.utils.xla module
+----------------------
+
+.. automodule:: deepr.utils.xla
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 
 Module contents
 ---------------

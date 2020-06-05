@@ -501,16 +501,19 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.OptimizeSavedModel.html#deepr.jobs.OptimizeSavedModel" title="deepr.jobs.OptimizeSavedModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OptimizeSavedModel</span></code></a>(path_saved_model, …[, …])</p></td>
 <td><p>Converts SavedModel into an optimized protobuf for inference</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.Pipeline.html#deepr.jobs.Pipeline" title="deepr.jobs.Pipeline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Pipeline</span></code></a>(jobs)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExportXlaModelMetadata</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.Pipeline.html#deepr.jobs.Pipeline" title="deepr.jobs.Pipeline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Pipeline</span></code></a>(jobs)</p></td>
 <td><p>Pipeline, executes list of jobs in order</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.Trainer.html#deepr.jobs.Trainer" title="deepr.jobs.Trainer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Trainer</span></code></a>(path_model, pred_fn, loss_fn, …[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.Trainer.html#deepr.jobs.Trainer" title="deepr.jobs.Trainer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Trainer</span></code></a>(path_model, pred_fn, loss_fn, …[, …])</p></td>
 <td><p>Train and evaluate a tf.Estimator on the current machine.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.YarnLauncher.html#deepr.jobs.YarnLauncher" title="deepr.jobs.YarnLauncher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">YarnLauncher</span></code></a>(job, config[, run_on_yarn])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.YarnLauncher.html#deepr.jobs.YarnLauncher" title="deepr.jobs.YarnLauncher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">YarnLauncher</span></code></a>(job, config[, run_on_yarn])</p></td>
 <td><p>Packages current environment, upload <cite>.pex</cite> and run yarn job.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.YarnTrainer.html#deepr.jobs.YarnTrainer" title="deepr.jobs.YarnTrainer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">YarnTrainer</span></code></a>(trainer, config[, train_on_yarn])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.jobs.YarnTrainer.html#deepr.jobs.YarnTrainer" title="deepr.jobs.YarnTrainer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">YarnTrainer</span></code></a>(trainer, config[, train_on_yarn])</p></td>
 <td><p>Run a <a class="reference internal" href="_autosummary/deepr.jobs.Trainer.html#deepr.jobs.Trainer" title="deepr.jobs.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trainer</span></code></a> job on yarn using distributed settings.</p></td>
 </tr>
 </tbody>

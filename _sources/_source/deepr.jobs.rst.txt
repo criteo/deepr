@@ -36,6 +36,14 @@ deepr.jobs.copy\_dir module
    :undoc-members:
    :show-inheritance:
 
+deepr.jobs.export\_xla\_model\_metadata module
+----------------------------------------------
+
+.. automodule:: deepr.jobs.export_xla_model_metadata
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 deepr.jobs.log\_metric module
 -----------------------------
 
