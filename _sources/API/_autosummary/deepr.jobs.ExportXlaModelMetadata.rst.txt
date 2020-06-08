@@ -1,0 +1,23 @@
+deepr.jobs.ExportXlaModelMetadata
+=================================
+
+.. currentmodule:: deepr.jobs
+
+.. autoclass:: ExportXlaModelMetadata
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ExportXlaModelMetadata.__init__
+      ~ExportXlaModelMetadata.run
+   
+   
+
+   
+   
+   

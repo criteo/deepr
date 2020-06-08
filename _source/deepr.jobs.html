@@ -327,8 +327,128 @@
 </dd></dl>
 
 </div>
-<div class="section" id="deepr-jobs-export-xla-model-metadata-module">
-<h2>deepr.jobs.export_xla_model_metadata module<a class="headerlink" href="#deepr-jobs-export-xla-model-metadata-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-deepr.jobs.export_xla_model_metadata">
+<span id="deepr-jobs-export-xla-model-metadata-module"></span><h2>deepr.jobs.export_xla_model_metadata module<a class="headerlink" href="#module-deepr.jobs.export_xla_model_metadata" title="Permalink to this headline">¶</a></h2>
+<p>Export xla compatible model metadata from a saved model</p>
+<dl class="py class">
+<dt id="deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.jobs.export_xla_model_metadata.</code><code class="sig-name descname">ExportXlaModelMetadata</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_optimized_model</span></em>, <em class="sig-param"><span class="n">path_metadata</span></em>, <em class="sig-param"><span class="n">graph_name</span></em>, <em class="sig-param"><span class="n">metadata_name</span></em>, <em class="sig-param"><span class="n">feed_shapes</span></em>, <em class="sig-param"><span class="n">fetch_shapes</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/jobs/export_xla_model_metadata.html#ExportXlaModelMetadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.jobs.base.Job" title="deepr.jobs.base.Job"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.jobs.base.Job</span></code></a></p>
+<p>Export xla compatible model metadata from a saved model</p>
+<dl class="py attribute">
+<dt id="deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata.path_optimized_model">
+<code class="sig-name descname">path_optimized_model</code><a class="headerlink" href="#deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata.path_optimized_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to directory containing optimized saved model exports to convert</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata.path_metadata">
+<code class="sig-name descname">path_metadata</code><a class="headerlink" href="#deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata.path_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to directory that will contain the metadata</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata.graph_name">
+<code class="sig-name descname">graph_name</code><a class="headerlink" href="#deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata.graph_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the saved model graph (name of the protobuf file)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata.metadata_name">
+<code class="sig-name descname">metadata_name</code><a class="headerlink" href="#deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata.metadata_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the metadata file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata.feed_shapes">
+<code class="sig-name descname">feed_shapes</code><a class="headerlink" href="#deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata.feed_shapes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shapes of feeds to expose</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, List[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata.fetch_shapes">
+<code class="sig-name descname">fetch_shapes</code><a class="headerlink" href="#deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata.fetch_shapes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shapes of fetches to expose</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, List[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="id0">
+<code class="sig-name descname">feed_shapes</code><em class="property">: Dict[str, List[int]]</em><em class="property"> = None</em><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id1">
+<code class="sig-name descname">fetch_shapes</code><em class="property">: Dict[str, List[int]]</em><em class="property"> = None</em><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id2">
+<code class="sig-name descname">graph_name</code><em class="property">: str</em><em class="property"> = None</em><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id3">
+<code class="sig-name descname">metadata_name</code><em class="property">: str</em><em class="property"> = None</em><a class="headerlink" href="#id3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id4">
+<code class="sig-name descname">path_metadata</code><em class="property">: str</em><em class="property"> = None</em><a class="headerlink" href="#id4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id5">
+<code class="sig-name descname">path_optimized_model</code><em class="property">: str</em><em class="property"> = None</em><a class="headerlink" href="#id5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/jobs/export_xla_model_metadata.html#ExportXlaModelMetadata.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run Job</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.jobs.export_xla_model_metadata.add_metadata_item">
+<code class="sig-prename descclassname">deepr.jobs.export_xla_model_metadata.</code><code class="sig-name descname">add_metadata_item</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">item</span></em>, <em class="sig-param"><span class="n">node</span></em>, <em class="sig-param"><span class="n">target_shape</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/jobs/export_xla_model_metadata.html#add_metadata_item"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.jobs.export_xla_model_metadata.add_metadata_item" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="deepr.jobs.export_xla_model_metadata.get_nodes">
+<code class="sig-prename descclassname">deepr.jobs.export_xla_model_metadata.</code><code class="sig-name descname">get_nodes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph_def</span></em>, <em class="sig-param"><span class="n">names</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/jobs/export_xla_model_metadata.html#get_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.jobs.export_xla_model_metadata.get_nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 <div class="section" id="module-deepr.jobs.log_metric">
 <span id="deepr-jobs-log-metric-module"></span><h2>deepr.jobs.log_metric module<a class="headerlink" href="#module-deepr.jobs.log_metric" title="Permalink to this headline">¶</a></h2>
@@ -599,38 +719,38 @@ a separate job.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="id0">
-<code class="sig-name descname">blacklisted_variables</code><em class="property">: List[str]</em><em class="property"> = None</em><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="id1">
-<code class="sig-name descname">feeds</code><em class="property">: Union[str, List[str]]</em><em class="property"> = None</em><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="id2">
-<code class="sig-name descname">fetch</code><em class="property">: Union[str, List[str]]</em><em class="property"> = None</em><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="id3">
-<code class="sig-name descname">graph_name</code><em class="property">: str</em><em class="property"> = None</em><a class="headerlink" href="#id3" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="id4">
-<code class="sig-name descname">new_names</code><em class="property">: Dict[str, str]</em><em class="property"> = None</em><a class="headerlink" href="#id4" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="id5">
-<code class="sig-name descname">path_optimized_model</code><em class="property">: str</em><em class="property"> = None</em><a class="headerlink" href="#id5" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
 <dt id="id6">
-<code class="sig-name descname">path_saved_model</code><em class="property">: str</em><em class="property"> = None</em><a class="headerlink" href="#id6" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">blacklisted_variables</code><em class="property">: List[str]</em><em class="property"> = None</em><a class="headerlink" href="#id6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id7">
+<code class="sig-name descname">feeds</code><em class="property">: Union[str, List[str]]</em><em class="property"> = None</em><a class="headerlink" href="#id7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id8">
+<code class="sig-name descname">fetch</code><em class="property">: Union[str, List[str]]</em><em class="property"> = None</em><a class="headerlink" href="#id8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id9">
+<code class="sig-name descname">graph_name</code><em class="property">: str</em><em class="property"> = None</em><a class="headerlink" href="#id9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id10">
+<code class="sig-name descname">new_names</code><em class="property">: Dict[str, str]</em><em class="property"> = None</em><a class="headerlink" href="#id10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id11">
+<code class="sig-name descname">path_optimized_model</code><em class="property">: str</em><em class="property"> = None</em><a class="headerlink" href="#id11" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id12">
+<code class="sig-name descname">path_saved_model</code><em class="property">: str</em><em class="property"> = None</em><a class="headerlink" href="#id12" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1133,8 +1253,8 @@ running the <a class="reference internal" href="../API/_autosummary/deepr.jobs.T
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="id7">
-<code class="sig-name descname">config_proto</code><em class="property">: Dict</em><em class="property"> = None</em><a class="headerlink" href="#id7" title="Permalink to this definition">¶</a></dt>
+<dt id="id13">
+<code class="sig-name descname">config_proto</code><em class="property">: Dict</em><em class="property"> = None</em><a class="headerlink" href="#id13" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1154,28 +1274,28 @@ eval_spec : tf.estimator.EvalSpec</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="id8">
-<code class="sig-name descname">eval_hooks</code><em class="property">: List</em><em class="property"> = None</em><a class="headerlink" href="#id8" title="Permalink to this definition">¶</a></dt>
+<dt id="id14">
+<code class="sig-name descname">eval_hooks</code><em class="property">: List</em><em class="property"> = None</em><a class="headerlink" href="#id14" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="id9">
-<code class="sig-name descname">eval_input_fn</code><em class="property">: Callable[[], tf.data.Dataset]</em><em class="property"> = None</em><a class="headerlink" href="#id9" title="Permalink to this definition">¶</a></dt>
+<dt id="id15">
+<code class="sig-name descname">eval_input_fn</code><em class="property">: Callable[[], tf.data.Dataset]</em><em class="property"> = None</em><a class="headerlink" href="#id15" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="id10">
-<code class="sig-name descname">eval_metrics</code><em class="property">: List[Callable]</em><em class="property"> = None</em><a class="headerlink" href="#id10" title="Permalink to this definition">¶</a></dt>
+<dt id="id16">
+<code class="sig-name descname">eval_metrics</code><em class="property">: List[Callable]</em><em class="property"> = None</em><a class="headerlink" href="#id16" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="id11">
-<code class="sig-name descname">eval_spec</code><em class="property">: Dict</em><em class="property"> = None</em><a class="headerlink" href="#id11" title="Permalink to this definition">¶</a></dt>
+<dt id="id17">
+<code class="sig-name descname">eval_spec</code><em class="property">: Dict</em><em class="property"> = None</em><a class="headerlink" href="#id17" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="id12">
-<code class="sig-name descname">exporters</code><em class="property">: List[Callable]</em><em class="property"> = None</em><a class="headerlink" href="#id12" title="Permalink to this definition">¶</a></dt>
+<dt id="id18">
+<code class="sig-name descname">exporters</code><em class="property">: List[Callable]</em><em class="property"> = None</em><a class="headerlink" href="#id18" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1194,33 +1314,33 @@ eval_spec : tf.estimator.EvalSpec</p>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="id13">
-<code class="sig-name descname">initializer_fn</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id13" title="Permalink to this definition">¶</a></dt>
+<dt id="id19">
+<code class="sig-name descname">initializer_fn</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id19" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="id14">
-<code class="sig-name descname">loss_fn</code><em class="property">: Callable[[Dict[str, tf.Tensor], str], Dict[str, tf.Tensor]]</em><em class="property"> = None</em><a class="headerlink" href="#id14" title="Permalink to this definition">¶</a></dt>
+<dt id="id20">
+<code class="sig-name descname">loss_fn</code><em class="property">: Callable[[Dict[str, tf.Tensor], str], Dict[str, tf.Tensor]]</em><em class="property"> = None</em><a class="headerlink" href="#id20" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="id15">
-<code class="sig-name descname">optimizer_fn</code><em class="property">: Callable[[Dict[str, tf.Tensor]], Dict[str, tf.Tensor]]</em><em class="property"> = None</em><a class="headerlink" href="#id15" title="Permalink to this definition">¶</a></dt>
+<dt id="id21">
+<code class="sig-name descname">optimizer_fn</code><em class="property">: Callable[[Dict[str, tf.Tensor]], Dict[str, tf.Tensor]]</em><em class="property"> = None</em><a class="headerlink" href="#id21" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="id16">
-<code class="sig-name descname">path_model</code><em class="property">: str</em><em class="property"> = None</em><a class="headerlink" href="#id16" title="Permalink to this definition">¶</a></dt>
+<dt id="id22">
+<code class="sig-name descname">path_model</code><em class="property">: str</em><em class="property"> = None</em><a class="headerlink" href="#id22" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="id17">
-<code class="sig-name descname">pred_fn</code><em class="property">: Callable[[Dict[str, tf.Tensor], str], Dict[str, tf.Tensor]]</em><em class="property"> = None</em><a class="headerlink" href="#id17" title="Permalink to this definition">¶</a></dt>
+<dt id="id23">
+<code class="sig-name descname">pred_fn</code><em class="property">: Callable[[Dict[str, tf.Tensor], str], Dict[str, tf.Tensor]]</em><em class="property"> = None</em><a class="headerlink" href="#id23" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="id18">
-<code class="sig-name descname">prepro_fn</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id18" title="Permalink to this definition">¶</a></dt>
+<dt id="id24">
+<code class="sig-name descname">prepro_fn</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id24" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1235,8 +1355,8 @@ eval_spec : tf.estimator.EvalSpec</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="id19">
-<code class="sig-name descname">run_config</code><em class="property">: Dict</em><em class="property"> = None</em><a class="headerlink" href="#id19" title="Permalink to this definition">¶</a></dt>
+<dt id="id25">
+<code class="sig-name descname">run_config</code><em class="property">: Dict</em><em class="property"> = None</em><a class="headerlink" href="#id25" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1246,23 +1366,23 @@ eval_spec : tf.estimator.EvalSpec</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="id20">
-<code class="sig-name descname">train_hooks</code><em class="property">: List</em><em class="property"> = None</em><a class="headerlink" href="#id20" title="Permalink to this definition">¶</a></dt>
+<dt id="id26">
+<code class="sig-name descname">train_hooks</code><em class="property">: List</em><em class="property"> = None</em><a class="headerlink" href="#id26" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="id21">
-<code class="sig-name descname">train_input_fn</code><em class="property">: Callable[[], tf.data.Dataset]</em><em class="property"> = None</em><a class="headerlink" href="#id21" title="Permalink to this definition">¶</a></dt>
+<dt id="id27">
+<code class="sig-name descname">train_input_fn</code><em class="property">: Callable[[], tf.data.Dataset]</em><em class="property"> = None</em><a class="headerlink" href="#id27" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="id22">
-<code class="sig-name descname">train_metrics</code><em class="property">: List[Callable]</em><em class="property"> = None</em><a class="headerlink" href="#id22" title="Permalink to this definition">¶</a></dt>
+<dt id="id28">
+<code class="sig-name descname">train_metrics</code><em class="property">: List[Callable]</em><em class="property"> = None</em><a class="headerlink" href="#id28" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="id23">
-<code class="sig-name descname">train_spec</code><em class="property">: Dict</em><em class="property"> = None</em><a class="headerlink" href="#id23" title="Permalink to this definition">¶</a></dt>
+<dt id="id29">
+<code class="sig-name descname">train_spec</code><em class="property">: Dict</em><em class="property"> = None</em><a class="headerlink" href="#id29" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1397,7 +1517,7 @@ eval_spec : tf.estimator.EvalSpec</p>
 
 <dl class="py class">
 <dt id="deepr.jobs.yarn_launcher.YarnLauncherConfig">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.jobs.yarn_launcher.</code><code class="sig-name descname">YarnLauncherConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'yarn-launcher-2020-06-05-17-37-05'</span></em>, <em class="sig-param"><span class="n">gpu_additional_packages</span><span class="o">=</span><span class="default_value">'tensorflow-gpu==1.15.2', 'tf-yarn-gpu==0.4.19'</span></em>, <em class="sig-param"><span class="n">gpu_ignored_packages</span><span class="o">=</span><span class="default_value">'tensorflow', 'tf-yarn'</span></em>, <em class="sig-param"><span class="n">gpu_to_use</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">jvm_memory_in_gb</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">path_pex_cpu</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_pex_gpu</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_pex_prefix</span><span class="o">=</span><span class="default_value">'viewfs://root/user/runner/envs'</span></em>, <em class="sig-param"><span class="n">hadoop_file_systems</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">memory</span><span class="o">=</span><span class="default_value">'48 GiB'</span></em>, <em class="sig-param"><span class="n">num_cores</span><span class="o">=</span><span class="default_value">48</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/jobs/yarn_launcher.html#YarnLauncherConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.jobs.yarn_launcher.YarnLauncherConfig" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.jobs.yarn_launcher.</code><code class="sig-name descname">YarnLauncherConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'yarn-launcher-2020-06-08-08-35-06'</span></em>, <em class="sig-param"><span class="n">gpu_additional_packages</span><span class="o">=</span><span class="default_value">'tensorflow-gpu==1.15.2', 'tf-yarn-gpu==0.4.19'</span></em>, <em class="sig-param"><span class="n">gpu_ignored_packages</span><span class="o">=</span><span class="default_value">'tensorflow', 'tf-yarn'</span></em>, <em class="sig-param"><span class="n">gpu_to_use</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">jvm_memory_in_gb</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">path_pex_cpu</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_pex_gpu</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_pex_prefix</span><span class="o">=</span><span class="default_value">'viewfs://root/user/runner/envs'</span></em>, <em class="sig-param"><span class="n">hadoop_file_systems</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">memory</span><span class="o">=</span><span class="default_value">'48 GiB'</span></em>, <em class="sig-param"><span class="n">num_cores</span><span class="o">=</span><span class="default_value">48</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/jobs/yarn_launcher.html#YarnLauncherConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.jobs.yarn_launcher.YarnLauncherConfig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.jobs.yarn_config.YarnConfig" title="deepr.jobs.yarn_config.YarnConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.jobs.yarn_config.YarnConfig</span></code></a></p>
 <p>Yarn Launcher Config.</p>
 <dl class="py attribute">
@@ -1412,7 +1532,7 @@ eval_spec : tf.estimator.EvalSpec</p>
 
 <dl class="py attribute">
 <dt id="deepr.jobs.yarn_launcher.YarnLauncherConfig.name">
-<code class="sig-name descname">name</code><em class="property">: str</em><em class="property"> = 'yarn-launcher-2020-06-05-17-37-05'</em><a class="headerlink" href="#deepr.jobs.yarn_launcher.YarnLauncherConfig.name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">name</code><em class="property">: str</em><em class="property"> = 'yarn-launcher-2020-06-08-08-35-06'</em><a class="headerlink" href="#deepr.jobs.yarn_launcher.YarnLauncherConfig.name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1467,7 +1587,7 @@ eval_spec : tf.estimator.EvalSpec</p>
 
 <dl class="py class">
 <dt id="deepr.jobs.yarn_trainer.YarnTrainerConfig">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.jobs.yarn_trainer.</code><code class="sig-name descname">YarnTrainerConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'yarn-trainer-2020-06-05-17-37-05'</span></em>, <em class="sig-param"><span class="n">gpu_additional_packages</span><span class="o">=</span><span class="default_value">'tensorflow-gpu==1.15.2', 'tf-yarn-gpu==0.4.19'</span></em>, <em class="sig-param"><span class="n">gpu_ignored_packages</span><span class="o">=</span><span class="default_value">'tensorflow', 'tf-yarn'</span></em>, <em class="sig-param"><span class="n">gpu_to_use</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">jvm_memory_in_gb</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">path_pex_cpu</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_pex_gpu</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_pex_prefix</span><span class="o">=</span><span class="default_value">'viewfs://root/user/runner/envs'</span></em>, <em class="sig-param"><span class="n">nb_ps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nb_retries</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">nb_workers</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pre_script_hook</span><span class="o">=</span><span class="default_value">'source /etc/profile.d/cuda.sh &amp;&amp; setupCUDA 10.1 &amp;&amp; setupCUDNN cuda10.1_v7.6.4.38'</span></em>, <em class="sig-param"><span class="n">queue</span><span class="o">=</span><span class="default_value">'dev'</span></em>, <em class="sig-param"><span class="n">tf_yarn</span><span class="o">=</span><span class="default_value">'cpu'</span></em>, <em class="sig-param"><span class="n">tf_yarn_chief_cores</span><span class="o">=</span><span class="default_value">48</span></em>, <em class="sig-param"><span class="n">tf_yarn_chief_memory</span><span class="o">=</span><span class="default_value">'48 GiB'</span></em>, <em class="sig-param"><span class="n">tf_yarn_evaluator_cores</span><span class="o">=</span><span class="default_value">48</span></em>, <em class="sig-param"><span class="n">tf_yarn_evaluator_memory</span><span class="o">=</span><span class="default_value">'48 GiB'</span></em>, <em class="sig-param"><span class="n">tf_yarn_tensorboard_memory</span><span class="o">=</span><span class="default_value">'48 GiB'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/jobs/yarn_trainer.html#YarnTrainerConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.jobs.yarn_trainer.YarnTrainerConfig" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.jobs.yarn_trainer.</code><code class="sig-name descname">YarnTrainerConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'yarn-trainer-2020-06-08-08-35-06'</span></em>, <em class="sig-param"><span class="n">gpu_additional_packages</span><span class="o">=</span><span class="default_value">'tensorflow-gpu==1.15.2', 'tf-yarn-gpu==0.4.19'</span></em>, <em class="sig-param"><span class="n">gpu_ignored_packages</span><span class="o">=</span><span class="default_value">'tensorflow', 'tf-yarn'</span></em>, <em class="sig-param"><span class="n">gpu_to_use</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">jvm_memory_in_gb</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">path_pex_cpu</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_pex_gpu</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_pex_prefix</span><span class="o">=</span><span class="default_value">'viewfs://root/user/runner/envs'</span></em>, <em class="sig-param"><span class="n">nb_ps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nb_retries</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">nb_workers</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pre_script_hook</span><span class="o">=</span><span class="default_value">'source /etc/profile.d/cuda.sh &amp;&amp; setupCUDA 10.1 &amp;&amp; setupCUDNN cuda10.1_v7.6.4.38'</span></em>, <em class="sig-param"><span class="n">queue</span><span class="o">=</span><span class="default_value">'dev'</span></em>, <em class="sig-param"><span class="n">tf_yarn</span><span class="o">=</span><span class="default_value">'cpu'</span></em>, <em class="sig-param"><span class="n">tf_yarn_chief_cores</span><span class="o">=</span><span class="default_value">48</span></em>, <em class="sig-param"><span class="n">tf_yarn_chief_memory</span><span class="o">=</span><span class="default_value">'48 GiB'</span></em>, <em class="sig-param"><span class="n">tf_yarn_evaluator_cores</span><span class="o">=</span><span class="default_value">48</span></em>, <em class="sig-param"><span class="n">tf_yarn_evaluator_memory</span><span class="o">=</span><span class="default_value">'48 GiB'</span></em>, <em class="sig-param"><span class="n">tf_yarn_tensorboard_memory</span><span class="o">=</span><span class="default_value">'48 GiB'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/jobs/yarn_trainer.html#YarnTrainerConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.jobs.yarn_trainer.YarnTrainerConfig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.jobs.yarn_config.YarnConfig" title="deepr.jobs.yarn_config.YarnConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.jobs.yarn_config.YarnConfig</span></code></a></p>
 <p>Default Yarn Trainer Config</p>
 <dl class="py method">
@@ -1478,7 +1598,7 @@ eval_spec : tf.estimator.EvalSpec</p>
 
 <dl class="py attribute">
 <dt id="deepr.jobs.yarn_trainer.YarnTrainerConfig.name">
-<code class="sig-name descname">name</code><em class="property">: str</em><em class="property"> = 'yarn-trainer-2020-06-05-17-37-05'</em><a class="headerlink" href="#deepr.jobs.yarn_trainer.YarnTrainerConfig.name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">name</code><em class="property">: str</em><em class="property"> = 'yarn-trainer-2020-06-08-08-35-06'</em><a class="headerlink" href="#deepr.jobs.yarn_trainer.YarnTrainerConfig.name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">

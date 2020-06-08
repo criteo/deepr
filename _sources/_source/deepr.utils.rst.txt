@@ -76,18 +76,18 @@ deepr.utils.tables module
    :undoc-members:
    :show-inheritance:
 
-deepr.utils.uuid module
------------------------
+deepr.utils.tf2xla\_pb2 module
+------------------------------
 
-.. automodule:: deepr.utils.uuid
+.. automodule:: deepr.utils.tf2xla_pb2
    :members:
    :undoc-members:
    :show-inheritance:
 
-deepr.utils.xla module
-----------------------
+deepr.utils.uuid module
+-----------------------
 
-.. automodule:: deepr.utils.xla
+.. automodule:: deepr.utils.uuid
    :members:
    :undoc-members:
    :show-inheritance:

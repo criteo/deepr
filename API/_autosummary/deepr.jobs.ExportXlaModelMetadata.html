@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>deepr.jobs.OptimizeSavedModel &mdash; deepr 2.1.1 documentation</title>
+  <title>deepr.jobs.ExportXlaModelMetadata &mdash; deepr 2.1.1 documentation</title>
   
 
   
@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="deepr.jobs.ExportXlaModelMetadata" href="deepr.jobs.ExportXlaModelMetadata.html" />
-    <link rel="prev" title="deepr.jobs.MLFlowSaveInfo" href="deepr.jobs.MLFlowSaveInfo.html" /> 
+    <link rel="next" title="deepr.jobs.Pipeline" href="deepr.jobs.Pipeline.html" />
+    <link rel="prev" title="deepr.jobs.OptimizeSavedModel" href="deepr.jobs.OptimizeSavedModel.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -108,8 +108,8 @@
 <li class="toctree-l3"><a class="reference internal" href="deepr.jobs.LogMetric.html">deepr.jobs.LogMetric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.jobs.MLFlowSaveConfigs.html">deepr.jobs.MLFlowSaveConfigs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.jobs.MLFlowSaveInfo.html">deepr.jobs.MLFlowSaveInfo</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">deepr.jobs.OptimizeSavedModel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="deepr.jobs.ExportXlaModelMetadata.html">deepr.jobs.ExportXlaModelMetadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.jobs.OptimizeSavedModel.html">deepr.jobs.OptimizeSavedModel</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">deepr.jobs.ExportXlaModelMetadata</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.jobs.Pipeline.html">deepr.jobs.Pipeline</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.jobs.Trainer.html">deepr.jobs.Trainer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.jobs.YarnLauncher.html">deepr.jobs.YarnLauncher</a></li>
@@ -174,13 +174,13 @@
         
           <li><a href="../core.html">DeepR</a> &raquo;</li>
         
-      <li>deepr.jobs.OptimizeSavedModel</li>
+      <li>deepr.jobs.ExportXlaModelMetadata</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/API/_autosummary/deepr.jobs.OptimizeSavedModel.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/API/_autosummary/deepr.jobs.ExportXlaModelMetadata.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -217,27 +217,16 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="deepr-jobs-optimizesavedmodel">
-<h1>deepr.jobs.OptimizeSavedModel<a class="headerlink" href="#deepr-jobs-optimizesavedmodel" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="deepr-jobs-exportxlamodelmetadata">
+<h1>deepr.jobs.ExportXlaModelMetadata<a class="headerlink" href="#deepr-jobs-exportxlamodelmetadata" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="deepr.jobs.OptimizeSavedModel">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.jobs.</code><code class="sig-name descname">OptimizeSavedModel</code><span class="sig-paren">(</span><em class="sig-param">path_saved_model</em>, <em class="sig-param">path_optimized_model</em>, <em class="sig-param">graph_name</em>, <em class="sig-param">feeds</em>, <em class="sig-param">fetch</em>, <em class="sig-param">new_names=&lt;factory&gt;</em>, <em class="sig-param">blacklisted_variables=&lt;factory&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/jobs/optimize_saved_model.html#OptimizeSavedModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts SavedModel into an optimized protobuf for inference</p>
-<p>This job reads the input SavedModel, rename some nodes using the
-<code class="docutils literal notranslate"><span class="pre">new_names</span></code> argument (raises an error if some renames cannot be
-found), create placeholders given by <code class="docutils literal notranslate"><span class="pre">feeds</span></code> (and removes all
-other placeholders not in this list), and finally freezes the sub
-graph that produces the output tensor <code class="docutils literal notranslate"><span class="pre">fetch</span></code>.</p>
-<p>When creating the original SavedModel, it is recommended to use
-<code class="docutils literal notranslate"><span class="pre">tf.identity</span></code> operators to mark some tensors as future feeds or
-fetches.</p>
-<p>WARNING: successful completion of this job is no guarantee that the
-exported Graph is correct. It is recommended to test the export in
-a separate job.</p>
+<dt id="deepr.jobs.ExportXlaModelMetadata">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.jobs.</code><code class="sig-name descname">ExportXlaModelMetadata</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_optimized_model</span></em>, <em class="sig-param"><span class="n">path_metadata</span></em>, <em class="sig-param"><span class="n">graph_name</span></em>, <em class="sig-param"><span class="n">metadata_name</span></em>, <em class="sig-param"><span class="n">feed_shapes</span></em>, <em class="sig-param"><span class="n">fetch_shapes</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/jobs/export_xla_model_metadata.html#ExportXlaModelMetadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.jobs.ExportXlaModelMetadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export xla compatible model metadata from a saved model</p>
 <dl class="py attribute">
-<dt id="deepr.jobs.OptimizeSavedModel.path_saved_model">
-<code class="sig-name descname">path_saved_model</code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.path_saved_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Path to directory containing SavedModel exports to convert</p>
+<dt id="deepr.jobs.ExportXlaModelMetadata.path_optimized_model">
+<code class="sig-name descname">path_optimized_model</code><a class="headerlink" href="#deepr.jobs.ExportXlaModelMetadata.path_optimized_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to directory containing optimized saved model exports to convert</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
@@ -246,9 +235,9 @@ a separate job.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.jobs.OptimizeSavedModel.path_optimized_model">
-<code class="sig-name descname">path_optimized_model</code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.path_optimized_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Path to directory that will contain the export</p>
+<dt id="deepr.jobs.ExportXlaModelMetadata.path_metadata">
+<code class="sig-name descname">path_metadata</code><a class="headerlink" href="#deepr.jobs.ExportXlaModelMetadata.path_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to directory that will contain the metadata</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
@@ -257,9 +246,9 @@ a separate job.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.jobs.OptimizeSavedModel.graph_name">
-<code class="sig-name descname">graph_name</code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.graph_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Name of the output graph (name of the protobuf file)</p>
+<dt id="deepr.jobs.ExportXlaModelMetadata.graph_name">
+<code class="sig-name descname">graph_name</code><a class="headerlink" href="#deepr.jobs.ExportXlaModelMetadata.graph_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the saved model graph (name of the protobuf file)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
@@ -268,52 +257,41 @@ a separate job.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.jobs.OptimizeSavedModel.new_names">
-<code class="sig-name descname">new_names</code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.new_names" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mapping old names (SavedModel nodes) -&gt; new names (export)</p>
+<dt id="deepr.jobs.ExportXlaModelMetadata.metadata_name">
+<code class="sig-name descname">metadata_name</code><a class="headerlink" href="#deepr.jobs.ExportXlaModelMetadata.metadata_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the metadata file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.jobs.OptimizeSavedModel.blacklisted_variables">
-<code class="sig-name descname">blacklisted_variables</code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.blacklisted_variables" title="Permalink to this definition">¶</a></dt>
-<dd><p>List of variable names not to include in the export</p>
+<dt id="deepr.jobs.ExportXlaModelMetadata.feed_shapes">
+<code class="sig-name descname">feed_shapes</code><a class="headerlink" href="#deepr.jobs.ExportXlaModelMetadata.feed_shapes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shapes of feeds to expose</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>]]</p>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, List[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a>]]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.jobs.OptimizeSavedModel.feeds">
-<code class="sig-name descname">feeds</code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.feeds" title="Permalink to this definition">¶</a></dt>
-<dd><p>List of nodes to use as inputs, or comma separated string.</p>
+<dt id="deepr.jobs.ExportXlaModelMetadata.fetch_shapes">
+<code class="sig-name descname">fetch_shapes</code><a class="headerlink" href="#deepr.jobs.ExportXlaModelMetadata.fetch_shapes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shapes of fetches to expose</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>]]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="deepr.jobs.OptimizeSavedModel.fetch">
-<code class="sig-name descname">fetch</code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.fetch" title="Permalink to this definition">¶</a></dt>
-<dd><p>List of nodes to use as output, or comma separated string.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>]]</p>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, List[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a>]]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.jobs.OptimizeSavedModel.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">path_saved_model</em>, <em class="sig-param">path_optimized_model</em>, <em class="sig-param">graph_name</em>, <em class="sig-param">feeds</em>, <em class="sig-param">fetch</em>, <em class="sig-param">new_names=&lt;factory&gt;</em>, <em class="sig-param">blacklisted_variables=&lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.__init__" title="Permalink to this definition">¶</a></dt>
+<dt id="deepr.jobs.ExportXlaModelMetadata.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_optimized_model</span></em>, <em class="sig-param"><span class="n">path_metadata</span></em>, <em class="sig-param"><span class="n">graph_name</span></em>, <em class="sig-param"><span class="n">metadata_name</span></em>, <em class="sig-param"><span class="n">feed_shapes</span></em>, <em class="sig-param"><span class="n">fetch_shapes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.jobs.ExportXlaModelMetadata.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
@@ -328,7 +306,7 @@ a separate job.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.jobs.OptimizeSavedModel.__init__" title="deepr.jobs.OptimizeSavedModel.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(path_saved_model, …[, new_names, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.jobs.ExportXlaModelMetadata.__init__" title="deepr.jobs.ExportXlaModelMetadata.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(path_optimized_model, …)</p></td>
 <td><p><dl class="field-list simple">
 <dt class="field-odd">rtype</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
@@ -353,10 +331,10 @@ a separate job.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="deepr.jobs.ExportXlaModelMetadata.html" class="btn btn-neutral float-right" title="deepr.jobs.ExportXlaModelMetadata" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="deepr.jobs.Pipeline.html" class="btn btn-neutral float-right" title="deepr.jobs.Pipeline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="deepr.jobs.MLFlowSaveInfo.html" class="btn btn-neutral float-left" title="deepr.jobs.MLFlowSaveInfo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="deepr.jobs.OptimizeSavedModel.html" class="btn btn-neutral float-left" title="deepr.jobs.OptimizeSavedModel" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

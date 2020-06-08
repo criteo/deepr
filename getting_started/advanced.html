@@ -96,6 +96,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#Full-TrainerJob">Full TrainerJob</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Cleanup-Job">Cleanup Job</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#OptimizeSavedModel">OptimizeSavedModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ExportXlaModelMetadata">ExportXlaModelMetadata</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Predict-Job">Predict Job</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Full-Pipeline">Full Pipeline</a></li>
 </ul>
@@ -714,12 +715,38 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </div>
+<div class="section" id="ExportXlaModelMetadata">
+<h2>ExportXlaModelMetadata<a class="headerlink" href="#ExportXlaModelMetadata" title="Permalink to this headline">¶</a></h2>
+<p>An optional step in our pipeline can be to use XLA.</p>
+<p><a class="reference external" href="https://www.tensorflow.org/xla">XLA</a> is a technology that can compile a tensorflow graph to machine code and in the process optimize this graph even more.</p>
+<p><a class="reference external" href="https://criteo.github.io/deepr/API/_autosummary/deepr.jobs.ExportXlaModelMetadata.html#deepr.jobs.ExportXlaModelMetadata">ExportXlaModelMetadata</a> is a job that can create a metadata file that is optimized for XLA: it will fix all the shapes so XLA can do its best work.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">export_xla_model_metadata</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">ExportXlaModelMetadata</span><span class="p">(</span>
+    <span class="n">path_optimized_model</span><span class="o">=</span> <span class="s2">&quot;model/optimized_saved_model&quot;</span><span class="p">,</span>
+    <span class="n">path_metadata</span><span class="o">=</span><span class="s2">&quot;model/optimized_saved_model&quot;</span><span class="p">,</span>
+    <span class="n">graph_name</span><span class="o">=</span><span class="s2">&quot;_model.pb&quot;</span><span class="p">,</span>
+    <span class="n">metadata_name</span><span class="o">=</span><span class="s2">&quot;_meta.pbtxt&quot;</span><span class="p">,</span>
+    <span class="n">feed_shapes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;inputs/x&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,),</span>
+    <span class="p">},</span>
+    <span class="n">fetch_shapes</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;y_pred&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="Predict-Job">
 <h2>Predict Job<a class="headerlink" href="#Predict-Job" title="Permalink to this headline">¶</a></h2>
 <p>Once the <code class="docutils literal notranslate"><span class="pre">OptimizeSavedModel</span></code> has run, how do we use it for inference? Usually, this file will be sent to some production service (probably not using python) in charge of using it to compute predictions. However, we might want to use it in python.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Predict</span></code> job in <code class="docutils literal notranslate"><span class="pre">example</span></code> illustrates how to reload the <code class="docutils literal notranslate"><span class="pre">_model.pb</span></code> file and use it to compute predictions. All it does is print the predictions given some <code class="docutils literal notranslate"><span class="pre">input_fn</span></code>.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -735,7 +762,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -754,7 +781,7 @@ div.rendered_html tbody tr:hover {
 <h2>Full Pipeline<a class="headerlink" href="#Full-Pipeline" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have a production-ready pipeline, let’s run it!</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -763,6 +790,7 @@ div.rendered_html tbody tr:hover {
     <span class="n">trainer_job</span><span class="p">,</span>
     <span class="n">cleanup_checkpoints</span><span class="p">,</span>
     <span class="n">optimize_saved_model</span><span class="p">,</span>
+    <span class="n">export_xla_model_metadata</span><span class="p">,</span>
     <span class="n">predict_proto</span><span class="p">,</span>
     <span class="n">predict_saved_model</span>
 <span class="p">])</span>
@@ -770,7 +798,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -786,15 +814,15 @@ div.rendered_html tbody tr:hover {
 INFO:deepr.example.jobs.build_dataset:Wrote dataset to &#39;data.tfrecord&#39;
 INFO:deepr.hooks.num_params:Number of parameters (global) = 7
 INFO:deepr.hooks.num_params:Number of parameters (trainable) = 1
-INFO:deepr.hooks.log_variables_init:alpha_init_average_norm = 0.6624704599380493
+INFO:deepr.hooks.log_variables_init:alpha_init_average_norm = 0.19867420196533203
 INFO:deepr.hooks.log_variables_init:alpha_init_num_zeros = 0
-INFO:deepr.hooks.logging_tensor:global_step = 1, loss = 19.3623104, num_steps = 1, max_memory_gb = 0.3229027, memory_gb = 0.3229027
-INFO:deepr.hooks.steps_per_sec:steps_per_sec = 385.02, examples_per_sec = 12320.53
-INFO:deepr.hooks.logging_tensor:global_step = 101, loss = 2.8516533, num_steps = 101, max_memory_gb = 0.3230286, memory_gb = 0.3230286
-INFO:deepr.hooks.steps_per_sec:steps_per_sec = 386.96, examples_per_sec = 12382.86
-INFO:deepr.hooks.logging_tensor:global_step = 201, loss = 0.3781913, num_steps = 201, max_memory_gb = 0.3230324, memory_gb = 0.3230324
-INFO:deepr.hooks.steps_per_sec:steps_per_sec = 338.05, examples_per_sec = 10817.53
-INFO:deepr.hooks.logging_tensor:global_step = 301, loss = 0.0501557, num_steps = 301, max_memory_gb = 0.3230324, memory_gb = 0.3230324
+INFO:deepr.hooks.logging_tensor:global_step = 1, loss = 34.0529022, num_steps = 1, max_memory_gb = 0.3966637, memory_gb = 0.3966637
+INFO:deepr.hooks.steps_per_sec:steps_per_sec = 537.98, examples_per_sec = 17215.24
+INFO:deepr.hooks.logging_tensor:global_step = 101, loss = 5.2031665, num_steps = 101, max_memory_gb = 0.3975182, memory_gb = 0.3975182
+INFO:deepr.hooks.steps_per_sec:steps_per_sec = 623.07, examples_per_sec = 19938.28
+INFO:deepr.hooks.logging_tensor:global_step = 201, loss = 0.6900585, num_steps = 201, max_memory_gb = 0.3977661, memory_gb = 0.3977661
+INFO:deepr.hooks.steps_per_sec:steps_per_sec = 616.28, examples_per_sec = 19721.02
+INFO:deepr.hooks.logging_tensor:global_step = 301, loss = 0.0915155, num_steps = 301, max_memory_gb = 0.3977661, memory_gb = 0.3977661
 INFO:deepr.prepros.core:Not applying Repeat(10) (mode=eval)
 INFO:deepr.hooks.logging_tensor:global_step = 320, loss = 0
 INFO:deepr.exporters.best_checkpoint:Reloading summaries from model/checkpoints
@@ -806,19 +834,20 @@ INFO:deepr.prepros.core:Not applying Repeat(10) (mode=eval)
 INFO:deepr.hooks.logging_tensor:global_step = 320, loss = 0
 INFO:deepr.jobs.trainer:{&#39;average_loss&#39;: 0.0, &#39;loss&#39;: 0.0, &#39;global_step&#39;: 320}
 INFO:deepr.jobs.cleanup_checkpoints:Cleanup checkpoints in model/checkpoints
-INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-320.meta
 INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-0.data-00000-of-00001
 INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-0.index
-INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-320.index
-INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-320.data-00000-of-00001
 INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-0.meta
-INFO:deepr.jobs.optimize_saved_model:Using SavedModel model/saved_model/1591275607
+INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-320.data-00000-of-00001
+INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-320.index
+INFO:deepr.jobs.cleanup_checkpoints:- Deleting model/checkpoints/model.ckpt-320.meta
+INFO:deepr.jobs.optimize_saved_model:Using SavedModel model/saved_model/1591388473
 INFO:deepr.jobs.optimize_saved_model:Node renamed: x -&gt; inputs/x
 INFO:deepr.jobs.optimize_saved_model:Optimized Model successfully exported to model/optimized_saved_model/_model.pb
-INFO:deepr.example.jobs.predict:{&#39;y_pred&#39;: array([1.7362353], dtype=float32)}
-INFO:deepr.example.jobs.predict:{&#39;y_pred&#39;: array([1.4670771], dtype=float32)}
-INFO:deepr.example.jobs.predict:{&#39;y_pred&#39;: array([1.7362353], dtype=float32)}
-INFO:deepr.example.jobs.predict:{&#39;y_pred&#39;: array([1.4670771], dtype=float32)}
+INFO:deepr.jobs.export_xla_model_metadata:Metadata successfully saved to model/optimized_saved_model/_meta.pbtxt
+INFO:deepr.example.jobs.predict:{&#39;inputs/x&#39;: array([0.61406577], dtype=float32), &#39;y_pred&#39;: array([1.2281315], dtype=float32)}
+INFO:deepr.example.jobs.predict:{&#39;inputs/x&#39;: array([0.5699364], dtype=float32), &#39;y_pred&#39;: array([1.1398728], dtype=float32)}
+INFO:deepr.example.jobs.predict:{&#39;x&#39;: array([0.61406577], dtype=float32), &#39;y_pred&#39;: array([1.2281315], dtype=float32)}
+INFO:deepr.example.jobs.predict:{&#39;x&#39;: array([0.5699364], dtype=float32), &#39;y_pred&#39;: array([1.1398728], dtype=float32)}
 </pre></div></div>
 </div>
 </div>
