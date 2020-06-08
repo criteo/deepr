@@ -12,6 +12,22 @@ and this project adheres to `Semantic Versioning <http://semver.org/>`_.
 
 Added
 ~~~~~
+Changed
+~~~~~~~
+Deprecated
+~~~~~~~~~~
+Removed
+~~~~~~~
+Fixed
+~~~~~
+Security
+~~~~~~~~
+
+[2.2.0] - 2020-06-08
+------------
+
+Added
+~~~~~
 ExportXlaModelMetadata job is added : make it possible to export metadata for xla models
 Changed
 ~~~~~~~
