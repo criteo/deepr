@@ -36,6 +36,14 @@ deepr.metrics.step module
    :undoc-members:
    :show-inheritance:
 
+deepr.metrics.variable module
+-----------------------------
+
+.. automodule:: deepr.metrics.variable
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 
 Module contents
 ---------------

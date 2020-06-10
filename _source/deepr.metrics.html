@@ -238,7 +238,68 @@
 <dl class="py function">
 <dt id="deepr.metrics.base.get_metric_variable">
 <code class="sig-prename descclassname">deepr.metrics.base.</code><code class="sig-name descname">get_metric_variable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">shape</span></em>, <em class="sig-param"><span class="n">dtype</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/base.html#get_metric_variable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.base.get_metric_variable" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">VariableV1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.metrics.base.get_scalars">
+<code class="sig-prename descclassname">deepr.metrics.base.</code><code class="sig-name descname">get_scalars</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">names</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pattern</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/base.html#get_scalars"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.base.get_scalars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve scalars from tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>tf.Tensor</em><em>]</em>) – Dictionary</p></li>
+<li><p><strong>names</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – Tensor names</p></li>
+<li><p><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Pattern for re.match</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, tf.Tensor]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.metrics.base.get_tensors">
+<code class="sig-prename descclassname">deepr.metrics.base.</code><code class="sig-name descname">get_tensors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">names</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pattern</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/base.html#get_tensors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.base.get_tensors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract tensors with names / pattern from tensors dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>tf.Tensor</em><em>]</em>) – Dictionary</p></li>
+<li><p><strong>names</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – Names in tensors</p></li>
+<li><p><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Pattern for re.match</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, tf.Tensor]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.metrics.base.keep_scalars">
+<code class="sig-prename descclassname">deepr.metrics.base.</code><code class="sig-name descname">keep_scalars</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/base.html#keep_scalars"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.base.keep_scalars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove non-scalar tensors from tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tensors</strong> (<em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>tf.Tensor</em><em>]</em>) – Dictionary</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="deepr.metrics.base.sanitize_metric_name">
@@ -271,22 +332,17 @@ True</p>
 <p>Last value metric</p>
 <dl class="py class">
 <dt id="deepr.metrics.core.LastValue">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.metrics.core.</code><code class="sig-name descname">LastValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/core.html#LastValue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.core.LastValue" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.metrics.core.</code><code class="sig-name descname">LastValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pattern</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/core.html#LastValue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.core.LastValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.metrics.base.Metric" title="deepr.metrics.base.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.metrics.base.Metric</span></code></a></p>
 <p>Last value Metric</p>
 </dd></dl>
 
 <dl class="py class">
 <dt id="deepr.metrics.core.MaxValue">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.metrics.core.</code><code class="sig-name descname">MaxValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/core.html#MaxValue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.core.MaxValue" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.metrics.core.</code><code class="sig-name descname">MaxValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pattern</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/core.html#MaxValue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.core.MaxValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.metrics.base.Metric" title="deepr.metrics.base.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.metrics.base.Metric</span></code></a></p>
 <p>Max value Metric</p>
 </dd></dl>
-
-<dl class="py function">
-<dt id="deepr.metrics.core.last_value_metric">
-<code class="sig-prename descclassname">deepr.metrics.core.</code><code class="sig-name descname">last_value_metric</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/core.html#last_value_metric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.core.last_value_metric" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py function">
 <dt id="deepr.metrics.core.max_value_metric">
@@ -299,21 +355,21 @@ True</p>
 <p>Mean Metrics</p>
 <dl class="py class">
 <dt id="deepr.metrics.mean.DecayMean">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.metrics.mean.</code><code class="sig-name descname">DecayMean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">decay</span><span class="o">=</span><span class="default_value">0.99</span></em>, <em class="sig-param"><span class="n">tensors</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/mean.html#DecayMean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.mean.DecayMean" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.metrics.mean.</code><code class="sig-name descname">DecayMean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">decay</span><span class="o">=</span><span class="default_value">0.99</span></em>, <em class="sig-param"><span class="n">tensors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pattern</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/mean.html#DecayMean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.mean.DecayMean" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.metrics.base.Metric" title="deepr.metrics.base.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.metrics.base.Metric</span></code></a></p>
 <p>Decay Mean Metric</p>
 </dd></dl>
 
 <dl class="py class">
 <dt id="deepr.metrics.mean.FiniteMean">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.metrics.mean.</code><code class="sig-name descname">FiniteMean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/mean.html#FiniteMean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.mean.FiniteMean" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.metrics.mean.</code><code class="sig-name descname">FiniteMean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pattern</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/mean.html#FiniteMean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.mean.FiniteMean" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.metrics.base.Metric" title="deepr.metrics.base.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.metrics.base.Metric</span></code></a></p>
 <p>Finite Mean Metric</p>
 </dd></dl>
 
 <dl class="py class">
 <dt id="deepr.metrics.mean.Mean">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.metrics.mean.</code><code class="sig-name descname">Mean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/mean.html#Mean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.mean.Mean" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.metrics.mean.</code><code class="sig-name descname">Mean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pattern</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/mean.html#Mean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.mean.Mean" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.metrics.base.Metric" title="deepr.metrics.base.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.metrics.base.Metric</span></code></a></p>
 <p>Finite Mean Metric</p>
 </dd></dl>
@@ -338,6 +394,30 @@ True</p>
 <em class="property">class </em><code class="sig-prename descclassname">deepr.metrics.step.</code><code class="sig-name descname">StepCounter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/step.html#StepCounter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.step.StepCounter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.metrics.base.Metric" title="deepr.metrics.base.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.metrics.base.Metric</span></code></a></p>
 <p>StepCounter Metric</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.metrics.variable">
+<span id="deepr-metrics-variable-module"></span><h2>deepr.metrics.variable module<a class="headerlink" href="#module-deepr.metrics.variable" title="Permalink to this headline">¶</a></h2>
+<p>Variable Value Metric.</p>
+<dl class="py class">
+<dt id="deepr.metrics.variable.VariableValue">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.metrics.variable.</code><code class="sig-name descname">VariableValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/metrics/variable.html#VariableValue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.metrics.variable.VariableValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.metrics.base.Metric" title="deepr.metrics.base.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.metrics.base.Metric</span></code></a></p>
+<p>Variable Value Metric.</p>
+<p>Return value of variable created with <code class="docutils literal notranslate"><span class="pre">tf.get_variable</span></code> if the
+variable is a scalar. Otherwise, return the norm of that variable.</p>
+<dl class="py attribute">
+<dt id="deepr.metrics.variable.VariableValue.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#deepr.metrics.variable.VariableValue.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Variable name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </div>

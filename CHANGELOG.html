@@ -448,9 +448,16 @@ Security
 <h2>[1.2.1] - 2020-05-27<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id32">
 <h3>Added<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Utilities to <code class="docutils literal notranslate"><span class="pre">metrics.base</span></code>: <code class="docutils literal notranslate"><span class="pre">get_tensors</span></code>, <code class="docutils literal notranslate"><span class="pre">keep_scalars</span></code>, <code class="docutils literal notranslate"><span class="pre">get_scalars</span></code></p></li>
+<li><p>New metrics for variables <code class="docutils literal notranslate"><span class="pre">VariableValue</span></code> that returns value / global norm of a variable</p></li>
+</ul>
 </div>
 <div class="section" id="id33">
 <h3>Changed<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">LastValue</span></code> metric does not store tensor values in a special metric variable.</p></li>
+</ul>
 </div>
 <div class="section" id="id34">
 <h3>Deprecated<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h3>

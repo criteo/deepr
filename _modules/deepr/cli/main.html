@@ -331,6 +331,7 @@
 <div class="viewcode-block" id="main"><a class="viewcode-back" href="../../../_source/deepr.cli.html#deepr.cli.main.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Main entry point&quot;&quot;&quot;</span>
     <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;tensorflow&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">handlers</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">fire</span><span class="o">.</span><span class="n">Fire</span><span class="p">(</span>
         <span class="p">{</span>
             <span class="s2">&quot;run&quot;</span><span class="p">:</span> <span class="n">run</span><span class="p">,</span>

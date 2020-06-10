@@ -15,6 +15,7 @@ deepr.utils.Field
    
       ~Field.__init__
       ~Field.as_placeholder
+      ~Field.is_sparse
       ~Field.startswith
       ~Field.to_feature
    

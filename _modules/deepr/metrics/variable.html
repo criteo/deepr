@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>deepr.metrics.step &mdash; deepr 2.1.1 documentation</title>
+  <title>deepr.metrics.variable &mdash; deepr 2.1.1 documentation</title>
   
 
   
@@ -144,7 +144,7 @@
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
-      <li>deepr.metrics.step</li>
+      <li>deepr.metrics.variable</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -159,30 +159,48 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for deepr.metrics.step</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;StepCounter Metric&quot;&quot;&quot;</span>
+  <h1>Source code for deepr.metrics.variable</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Variable Value Metric.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 
 <span class="kn">from</span> <span class="nn">deepr.metrics</span> <span class="kn">import</span> <span class="n">base</span>
 
 
-<div class="viewcode-block" id="StepCounter"><a class="viewcode-back" href="../../../_source/deepr.metrics.html#deepr.metrics.StepCounter">[docs]</a><span class="k">class</span> <span class="nc">StepCounter</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Metric</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;StepCounter Metric&quot;&quot;&quot;</span>
+<span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-<div class="viewcode-block" id="StepCounter.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.metrics.StepCounter.html#deepr.metrics.StepCounter.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span></div>
+
+<div class="viewcode-block" id="VariableValue"><a class="viewcode-back" href="../../../_source/deepr.metrics.html#deepr.metrics.variable.VariableValue">[docs]</a><span class="k">class</span> <span class="nc">VariableValue</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Metric</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Variable Value Metric.</span>
+
+<span class="sd">    Return value of variable created with ``tf.get_variable`` if the</span>
+<span class="sd">    variable is a scalar. Otherwise, return the norm of that variable.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Variable name</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(name=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">)&quot;</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">]:</span>
         <span class="c1"># pylint: disable=unused-argument</span>
-        <span class="n">value</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">get_metric_variable</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
-        <span class="n">update_op</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">update_op</span><span class="p">)}</span></div>
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">variable_scope</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">get_variable_scope</span><span class="p">(),</span> <span class="n">reuse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="n">variable</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">variable</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">():</span>
+                <span class="n">metric</span> <span class="o">=</span> <span class="n">variable</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variable </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> has shape </span><span class="si">{</span><span class="n">variable</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, computing norm instead&quot;</span><span class="p">)</span>
+                <span class="n">metric</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">global_norm</span><span class="p">([</span><span class="n">variable</span><span class="p">])</span>
+        <span class="k">return</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">no_op</span><span class="p">())}</span></div>
 </pre></div>
 
            </div>
