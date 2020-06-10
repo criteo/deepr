@@ -23,6 +23,19 @@ Fixed
 Security
 ~~~~~~~~
 
+[2.4.0] - 2020-06-10
+--------------------
+
+Added
+~~~~~
+- Utilities to ``metrics.base``: ``get_tensors``, ``keep_scalars``, ``get_scalars``
+- New metrics for variables ``VariableValue`` that returns value / global norm of a variable
+
+Changed
+~~~~~~~
+- ``LastValue`` metric does not store tensor values in a special metric variable.
+
+
 [2.3.0] - 2020-06-10
 --------------------
 
@@ -110,6 +123,7 @@ Security
 ~~~~~~~~
 
 
+
 [2.0.0] - 2020-06-03
 --------------------
 
@@ -153,13 +167,8 @@ Security
 
 Added
 ~~~~~
-- Utilities to ``metrics.base``: ``get_tensors``, ``keep_scalars``, ``get_scalars``
-- New metrics for variables ``VariableValue`` that returns value / global norm of a variable
-
 Changed
 ~~~~~~~
-- ``LastValue`` metric does not store tensor values in a special metric variable.
-
 Deprecated
 ~~~~~~~~~~
 Removed
