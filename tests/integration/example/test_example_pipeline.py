@@ -21,7 +21,11 @@ def test_example_pipeline(tmpdir):
     eval_spec = dpr.jobs.EvalSpec(
         throttle_secs=10, start_delay_secs=10, steps=None  # None means "use all the validation set"
     )
-    train_metrics = [dpr.metrics.StepCounter(name="num_steps"), dpr.metrics.DecayMean(tensors=["loss"], decay=0.98)]
+    train_metrics = [
+        dpr.metrics.StepCounter(name="num_steps"),
+        dpr.metrics.DecayMean(tensors=["loss"], decay=0.98),
+        dpr.metrics.VariableValue("alpha"),
+    ]
     eval_metrics = [dpr.metrics.Mean(tensors=["loss"])]
     final_metrics = [dpr.metrics.Mean(tensors=["loss"])]
     train_hooks = [

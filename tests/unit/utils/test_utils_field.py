@@ -10,7 +10,7 @@ import deepr as dpr
     "field, expected",
     [
         (dpr.Field(name="name", shape=[None, None], dtype=tf.int64), tf.io.VarLenFeature(dtype=tf.int64)),
-        (dpr.Field(name="name", shape=[None], dtype=tf.int64), tf.io.FixedLenSequenceFeature(shape=(), dtype=tf.int64)),
+        (dpr.Field(name="name", shape=[None], dtype=tf.int64), tf.io.VarLenFeature(dtype=tf.int64)),
         (dpr.Field(name="name", shape=[2], dtype=tf.int64), tf.io.FixedLenFeature(shape=(2,), dtype=tf.int64)),
         (
             dpr.Field(name="name", shape=[None, 2], dtype=tf.int64),

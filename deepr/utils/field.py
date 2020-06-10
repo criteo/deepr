@@ -37,7 +37,9 @@ class Field:
         self.shape = tuple(shape)
         self.dtype = TensorType(dtype).tf
         self.default = default if default is not None else TensorType(dtype).default
-        self.sequence = sequence if sequence is not None else (self.shape[0] is None if shape else False)
+        self.sequence = (
+            sequence if sequence is not None else (any(dim is None for dim in shape) if len(shape) > 1 else False)
+        )
 
         if self.sequence and not self.shape:
             msg = f"sequence=True but shape={self.shape}: expected at least one dimension."
@@ -62,6 +64,9 @@ class Field:
                 return tf.io.VarLenFeature(dtype=self.dtype)
             else:
                 return tf.io.FixedLenFeature(shape=self.shape, dtype=self.dtype)
+
+    def is_sparse(self):
+        return isinstance(self.feature_specs, tf.io.VarLenFeature)
 
     def startswith(self, prefix: str):
         return self.name.startswith(prefix)

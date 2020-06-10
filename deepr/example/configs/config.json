@@ -72,6 +72,10 @@
                             "type": "deepr.metrics.DecayMean",
                             "tensors": ["loss"],
                             "decay": 0.98
+                        },
+                        {
+                            "type": "deepr.metrics.VariableValue",
+                            "name": "alpha"
                         }
                     ],
                     "eval_metrics": [
