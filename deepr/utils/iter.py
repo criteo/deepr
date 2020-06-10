@@ -28,12 +28,12 @@ def progress(iterable: Iterable, secs: int = 60):
             if now - last > secs:
                 speed = (idx + 1) / (now - start)
                 last = now
-                LOGGER.info(f"- At {idx + 1}, item/sec = {speed}")
+                LOGGER.info(f"- At {idx + 1}, item/sec = {speed:.2f}")
             yield item
 
         # Log end
         speed = (idx + 1) / (time.time() - start)
-        LOGGER.info(f"Number of items {idx + 1}, item/sec = {speed}")
+        LOGGER.info(f"Number of items {idx + 1}, item/sec = {speed:.2f}")
 
     if secs is None:
         return iterable

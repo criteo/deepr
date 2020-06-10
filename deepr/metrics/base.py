@@ -1,9 +1,14 @@
 """Base class for Metrics"""
 
 from abc import ABC
-from typing import Dict, Tuple
+from typing import Dict, Tuple, List
+import re
+import logging
 
 import tensorflow as tf
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 class Metric(ABC):
@@ -11,6 +16,73 @@ class Metric(ABC):
 
     def __call__(self, tensors: Dict[str, tf.Tensor]) -> Dict[str, Tuple]:
         raise NotImplementedError()
+
+    def __repr__(self) -> str:
+        return self.__class__.__name__
+
+
+def get_tensors(tensors: Dict[str, tf.Tensor], names: List[str] = None, pattern: str = None) -> Dict[str, tf.Tensor]:
+    """Extract tensors with names / pattern from tensors dictionary
+
+    Parameters
+    ----------
+    tensors : Dict[str, tf.Tensor]
+        Dictionary
+    names : List[str], optional
+        Names in tensors
+    pattern : str, optional
+        Pattern for re.match
+
+    Returns
+    -------
+    Dict[str, tf.Tensor]
+    """
+    found = dict()
+    if names is not None:
+        found.update({name: tensors[name] for name in names})
+    if pattern is not None:
+        found.update({name: tensor for name, tensor in tensors.items() if re.match(pattern, name)})
+    return found
+
+
+def keep_scalars(tensors: Dict[str, tf.Tensor]) -> Dict[str, tf.Tensor]:
+    """Remove non-scalar tensors from tensors.
+
+    Parameters
+    ----------
+    tensors : Dict[str, tf.Tensor]
+        Dictionary
+    """
+    filtered = {}
+    for name, tensor in tensors.items():
+        if len(tensor.shape) != 0:
+            LOGGER.warning(f"Remove {name}, shape={tensor.shape} (must be scalar).")
+            continue
+        filtered[name] = tensor
+    return filtered
+
+
+def get_scalars(tensors: Dict[str, tf.Tensor], names: List[str] = None, pattern: str = None) -> Dict[str, tf.Tensor]:
+    """Retrieve scalars from tensors.
+
+    Parameters
+    ----------
+    tensors : Dict[str, tf.Tensor]
+        Dictionary
+    names : List[str], optional
+        Tensor names
+    pattern : str, optional
+        Pattern for re.match
+
+    Returns
+    -------
+    Dict[str, tf.Tensor]
+    """
+    if names is not None or pattern is not None:
+        tensors = get_tensors(tensors=tensors, names=names, pattern=pattern)
+    else:
+        tensors = {key: tensor for key, tensor in tensors.items() if len(tensor.shape) == 0}
+    return keep_scalars(tensors)
 
 
 def sanitize_metric_name(name: str) -> str:
@@ -35,7 +107,7 @@ def sanitize_metric_name(name: str) -> str:
     return name
 
 
-def get_metric_variable(name: str, shape: Tuple, dtype):
+def get_metric_variable(name: str, shape: Tuple, dtype) -> tf.Variable:
     return tf.get_variable(
         name=sanitize_metric_name(name),
         shape=shape,

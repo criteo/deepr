@@ -169,6 +169,7 @@ def add_macro(config: str, macros: str, params: Union[List[str], str], macro: st
 def main():
     """Main entry point"""
     logging.basicConfig(level=logging.INFO)
+    logging.getLogger("tensorflow").handlers = []
     fire.Fire(
         {
             "run": run,

@@ -1,6 +1,6 @@
 """Train Job"""
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, fields
 import functools
 from typing import Callable, Dict, List, Tuple, Iterable
 import logging
@@ -220,6 +220,13 @@ class Trainer(Job):
     run_config: Dict = field(default_factory=RunConfig)
     config_proto: Dict = field(default_factory=ConfigProto)
     random_seed: int = 42
+
+    def __post_init__(self):
+        # Automatically replace None values by the default field value
+        for f in fields(self):
+            if getattr(self, f.name) is None:
+                default = f.default_factory() if callable(f.default_factory) else f.default
+                setattr(self, f.name, default)
 
     def run(self):
         """Train, evaluate and export Estimator"""

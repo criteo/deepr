@@ -137,8 +137,13 @@ Security
 
 Added
 ~~~~~
+- Utilities to ``metrics.base``: ``get_tensors``, ``keep_scalars``, ``get_scalars``
+- New metrics for variables ``VariableValue`` that returns value / global norm of a variable
+
 Changed
 ~~~~~~~
+- ``LastValue`` metric does not store tensor values in a special metric variable.
+
 Deprecated
 ~~~~~~~~~~
 Removed
