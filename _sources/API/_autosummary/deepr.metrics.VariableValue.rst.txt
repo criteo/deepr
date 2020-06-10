@@ -1,0 +1,22 @@
+deepr.metrics.VariableValue
+===========================
+
+.. currentmodule:: deepr.metrics
+
+.. autoclass:: VariableValue
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~VariableValue.__init__
+   
+   
+
+   
+   
+   

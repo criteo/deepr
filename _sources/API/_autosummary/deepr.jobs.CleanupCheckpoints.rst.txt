@@ -1,0 +1,29 @@
+deepr.jobs.CleanupCheckpoints
+=============================
+
+.. currentmodule:: deepr.jobs
+
+.. autoclass:: CleanupCheckpoints
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~CleanupCheckpoints.__init__
+      ~CleanupCheckpoints.run
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~CleanupCheckpoints.path_checkpoints
+   
+   

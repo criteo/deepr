@@ -1,0 +1,29 @@
+deepr.prepros.ToExample
+=======================
+
+.. currentmodule:: deepr.prepros
+
+.. autoclass:: ToExample
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ToExample.__init__
+      ~ToExample.apply
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ToExample.serialize_fn
+   
+   

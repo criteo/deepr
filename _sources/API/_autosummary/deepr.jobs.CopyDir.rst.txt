@@ -1,0 +1,30 @@
+deepr.jobs.CopyDir
+==================
+
+.. currentmodule:: deepr.jobs
+
+.. autoclass:: CopyDir
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~CopyDir.__init__
+      ~CopyDir.run
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~CopyDir.overwrite
+      ~CopyDir.skip_copy
+   
+   

@@ -1,0 +1,6 @@
+deepr.utils.chunks
+==================
+
+.. currentmodule:: deepr.utils
+
+.. autofunction:: chunks

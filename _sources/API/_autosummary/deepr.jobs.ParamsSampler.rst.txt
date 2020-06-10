@@ -1,0 +1,22 @@
+deepr.jobs.ParamsSampler
+========================
+
+.. currentmodule:: deepr.jobs
+
+.. autoclass:: ParamsSampler
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ParamsSampler.__init__
+   
+   
+
+   
+   
+   

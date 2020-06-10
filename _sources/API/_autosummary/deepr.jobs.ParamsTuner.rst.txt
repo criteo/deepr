@@ -1,0 +1,23 @@
+deepr.jobs.ParamsTuner
+======================
+
+.. currentmodule:: deepr.jobs
+
+.. autoclass:: ParamsTuner
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ParamsTuner.__init__
+      ~ParamsTuner.run
+   
+   
+
+   
+   
+   

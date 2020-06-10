@@ -1,0 +1,33 @@
+deepr.jobs.SaveDataset
+======================
+
+.. currentmodule:: deepr.jobs
+
+.. autoclass:: SaveDataset
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SaveDataset.__init__
+      ~SaveDataset.prepro_fn
+      ~SaveDataset.run
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SaveDataset.chunk_size
+      ~SaveDataset.compression_type
+      ~SaveDataset.num_parallel_calls
+      ~SaveDataset.secs
+   
+   

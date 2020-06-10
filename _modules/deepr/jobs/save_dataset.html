@@ -178,7 +178,7 @@
 <span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="SaveDataset"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.save_dataset.SaveDataset">[docs]</a><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<div class="viewcode-block" id="SaveDataset"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.SaveDataset">[docs]</a><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">SaveDataset</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Save Dataset Job.&quot;&quot;&quot;</span>
 
@@ -191,7 +191,7 @@
     <span class="n">compression_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;GZIP&quot;</span>
     <span class="n">secs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">60</span>
 
-<div class="viewcode-block" id="SaveDataset.run"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.save_dataset.SaveDataset.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SaveDataset.run"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.SaveDataset.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saving dataset to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">Serial</span><span class="p">(</span>
             <span class="n">PreproFn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prepro_fn</span><span class="p">),</span> <span class="n">ToExample</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">),</span> <span class="n">num_parallel_calls</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_parallel_calls</span>

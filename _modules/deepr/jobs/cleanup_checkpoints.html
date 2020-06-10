@@ -172,14 +172,14 @@
 <span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="CleanupCheckpoints"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.cleanup_checkpoints.CleanupCheckpoints">[docs]</a><span class="nd">@dataclass</span>
+<div class="viewcode-block" id="CleanupCheckpoints"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.CleanupCheckpoints">[docs]</a><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">CleanupCheckpoints</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Cleanup Checkpoints in path_model&quot;&quot;&quot;</span>
 
     <span class="n">path_model</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">path_checkpoints</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;checkpoints&quot;</span>
 
-<div class="viewcode-block" id="CleanupCheckpoints.run"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.cleanup_checkpoints.CleanupCheckpoints.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CleanupCheckpoints.run"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.CleanupCheckpoints.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cleanup checkpoints in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path_model</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path_checkpoints</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">checkpoint_files</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_model</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">path_checkpoints</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;model.ckpt-*&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">checkpoint_file</span> <span class="ow">in</span> <span class="n">checkpoint_files</span><span class="p">:</span>

@@ -93,13 +93,20 @@ Jobs are the programs that will actually run, they are composable through the pi
 .. autosummary::
    :toctree: _autosummary
 
+   CleanupCheckpoints
+   CopyDir
+   ExportXlaModelMetadata
+   GridSampler
    Job
    LogMetric
    MLFlowSaveConfigs
    MLFlowSaveInfo
    OptimizeSavedModel
-   ExportXlaModelMetadata
+   ParamsSampler
+   ParamsTuner
    Pipeline
+   Sampler
+   SaveDataset
    Trainer
    YarnLauncher
    YarnTrainer
@@ -180,6 +187,7 @@ Metrics compute training and validation information during training.
    Mean
    Metric
    StepCounter
+   VariableValue
 
 Optimizer
 ---------
@@ -208,6 +216,7 @@ The most common way to define a :class:`~deepr.prepros.Prepro` is to wrap a :cla
 
    Batch
    Filter
+   FromExample
    Map
    PaddedBatch
    Prefetch
@@ -215,9 +224,10 @@ The most common way to define a :class:`~deepr.prepros.Prepro` is to wrap a :cla
    Repeat
    Serial
    Shuffle
-   TableInitializer
    TFRecordSequenceExample
+   TableInitializer
    Take
+   ToExample
 
 
 
@@ -249,6 +259,7 @@ Various functions
    GraphiteClient
    TableContext
    TensorType
+   chunks
    dict_to_item
    get_feedable_tensors
    get_fetchable_tensors
@@ -258,6 +269,7 @@ Various functions
    item_to_dict
    make_same_shape
    msb_lsb_to_str
+   progress
    save_variables_in_ckpt
    str_to_msb_lsb
    table_from_file
@@ -278,3 +290,16 @@ Simple helpers for vocabularies
    read
    size
    write
+
+Writer
+------
+
+A :class:`~deepr.writers.Writer` makes it possible to write dataset to disk.
+
+.. currentmodule:: deepr.writers
+
+.. autosummary::
+   :toctree: _autosummary
+
+   Writer
+   TFRecordWriter

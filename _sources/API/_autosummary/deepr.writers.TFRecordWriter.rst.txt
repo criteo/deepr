@@ -1,0 +1,23 @@
+deepr.writers.TFRecordWriter
+============================
+
+.. currentmodule:: deepr.writers
+
+.. autoclass:: TFRecordWriter
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TFRecordWriter.__init__
+      ~TFRecordWriter.write
+   
+   
+
+   
+   
+   

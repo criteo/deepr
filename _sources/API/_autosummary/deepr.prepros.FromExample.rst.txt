@@ -1,0 +1,29 @@
+deepr.prepros.FromExample
+=========================
+
+.. currentmodule:: deepr.prepros
+
+.. autoclass:: FromExample
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~FromExample.__init__
+      ~FromExample.apply
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FromExample.parse_fn
+   
+   
