@@ -84,6 +84,14 @@ deepr.jobs.params\_tuner module
    :undoc-members:
    :show-inheritance:
 
+deepr.jobs.save\_dataset module
+-------------------------------
+
+.. automodule:: deepr.jobs.save_dataset
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 deepr.jobs.trainer module
 -------------------------
 

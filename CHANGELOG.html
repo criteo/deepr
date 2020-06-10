@@ -264,18 +264,35 @@ and this project adheres to <a class="reference external" href="http://semver.or
 <h2>[Unreleased]<a class="headerlink" href="#unreleased" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="added">
 <h3>Added<a class="headerlink" href="#added" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">writers</span></code> module, <code class="docutils literal notranslate"><span class="pre">TFRecordWriter</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ToExample</span></code> prepro to convert a dataset to <code class="docutils literal notranslate"><span class="pre">tf.Example</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Field</span></code> now has a <code class="docutils literal notranslate"><span class="pre">to_feature(value)</span></code> method</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iter</span></code> utils: <code class="docutils literal notranslate"><span class="pre">progress</span></code> (logs progress every n seconds), <code class="docutils literal notranslate"><span class="pre">chunks</span></code> to return chunks from an iterable</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SaveDataset</span></code> job to write a dataset to tfrecords.</p></li>
+</ul>
 </div>
 <div class="section" id="changed">
 <h3>Changed<a class="headerlink" href="#changed" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TFRecordSequenceExample</span></code> renamed <code class="docutils literal notranslate"><span class="pre">FromExample</span></code> (but old name still available).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Field</span></code> method <code class="docutils literal notranslate"><span class="pre">as_feature</span></code> renamed <code class="docutils literal notranslate"><span class="pre">feature_specs</span></code> to avoid confusion with <code class="docutils literal notranslate"><span class="pre">to_feature</span></code>.</p></li>
+</ul>
 </div>
 <div class="section" id="deprecated">
 <h3>Deprecated<a class="headerlink" href="#deprecated" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="removed">
 <h3>Removed<a class="headerlink" href="#removed" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Removed <code class="docutils literal notranslate"><span class="pre">Field</span></code> methods (leading to incorrect uses): <code class="docutils literal notranslate"><span class="pre">has_var_len</span></code>, <code class="docutils literal notranslate"><span class="pre">as_feature</span></code>, <code class="docutils literal notranslate"><span class="pre">has_fixed_len</span></code></p></li>
+</ul>
 </div>
 <div class="section" id="fixed">
 <h3>Fixed<a class="headerlink" href="#fixed" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Incorrect <code class="docutils literal notranslate"><span class="pre">shuffle</span></code> argument use in <code class="docutils literal notranslate"><span class="pre">TFRecordReader</span></code></p></li>
+</ul>
 </div>
 <div class="section" id="security">
 <h3>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h3>

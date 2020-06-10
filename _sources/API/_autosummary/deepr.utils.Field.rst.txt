@@ -14,14 +14,18 @@ deepr.utils.Field
    .. autosummary::
    
       ~Field.__init__
-      ~Field.as_feature
       ~Field.as_placeholder
-      ~Field.has_fixed_len
-      ~Field.has_var_len
       ~Field.startswith
+      ~Field.to_feature
    
    
 
    
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Field.feature_specs
    
    

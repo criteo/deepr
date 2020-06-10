@@ -118,6 +118,7 @@
 <li class="toctree-l4"><a class="reference internal" href="deepr.readers.html">deepr.readers package</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">deepr.utils package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="deepr.vocab.html">deepr.vocab package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.writers.html">deepr.writers package</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.html#submodules">Submodules</a></li>
@@ -320,10 +321,10 @@ or <cite>tf.Tensor</cite>. For example:</p>
 </div>
 <div class="section" id="module-deepr.utils.field">
 <span id="deepr-utils-field-module"></span><h2>deepr.utils.field module<a class="headerlink" href="#module-deepr.utils.field" title="Permalink to this headline">¶</a></h2>
-<p>Field</p>
+<p>Field.</p>
 <dl class="py class">
 <dt id="deepr.utils.field.Field">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.utils.field.</code><code class="sig-name descname">Field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">shape</span></em>, <em class="sig-param"><span class="n">dtype</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/field.html#Field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.field.Field" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.utils.field.</code><code class="sig-name descname">Field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">shape</span></em>, <em class="sig-param"><span class="n">dtype</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sequence</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/field.html#Field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.field.Field" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Convenient way to define fields for features.</p>
 <dl class="py attribute">
@@ -351,10 +352,26 @@ or <cite>tf.Tensor</cite>. For example:</p>
 <dl class="py attribute">
 <dt id="deepr.utils.field.Field.name">
 <code class="sig-name descname">name</code><a class="headerlink" href="#deepr.utils.field.Field.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Name of the fields</p>
+<dd><p>Name of the field</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.utils.field.Field.sequence">
+<code class="sig-name descname">sequence</code><a class="headerlink" href="#deepr.utils.field.Field.sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, the field represents a sequence.</p>
+<p>Used for <code class="docutils literal notranslate"><span class="pre">tf.Example</span></code> message serialization : if <code class="docutils literal notranslate"><span class="pre">sequence</span></code>
+is <code class="docutils literal notranslate"><span class="pre">True</span></code>, the field with be stored in the <code class="docutils literal notranslate"><span class="pre">feature_list</span></code>
+entry of a <code class="docutils literal notranslate"><span class="pre">tf.train.SequenceExample</span></code>.</p>
+<p>Automatically set if not given : <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">shape</span></code>’s first
+dimension is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -371,11 +388,6 @@ or <cite>tf.Tensor</cite>. For example:</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.utils.field.Field.as_feature">
-<code class="sig-name descname">as_feature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/field.html#Field.as_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.field.Field.as_feature" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
 <dt id="deepr.utils.field.Field.as_placeholder">
 <code class="sig-name descname">as_placeholder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">batch</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/field.html#Field.as_placeholder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.field.Field.as_placeholder" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
@@ -386,29 +398,48 @@ or <cite>tf.Tensor</cite>. For example:</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.utils.field.Field.has_fixed_len">
-<code class="sig-name descname">has_fixed_len</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/field.html#Field.has_fixed_len"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.field.Field.has_fixed_len" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="deepr.utils.field.Field.has_var_len">
-<code class="sig-name descname">has_var_len</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/field.html#Field.has_var_len"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.field.Field.has_var_len" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
-</dd>
-</dl>
+<dt id="deepr.utils.field.Field.feature_specs">
+<em class="property">property </em><code class="sig-name descname">feature_specs</code><a class="headerlink" href="#deepr.utils.field.Field.feature_specs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return feature specs for parsing Example messages.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="deepr.utils.field.Field.startswith">
 <code class="sig-name descname">startswith</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">prefix</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/field.html#Field.startswith"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.field.Field.startswith" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt id="deepr.utils.field.Field.to_feature">
+<code class="sig-name descname">to_feature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/field.html#Field.to_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.field.Field.to_feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert value to tf.train.Feature or tf.train.FeatureList.</p>
+<p>For shapes with more than 2 dimensions, uses <code class="docutils literal notranslate"><span class="pre">np.ravel</span></code> to
+flatten tensors in a list of values. Note that because
+<code class="docutils literal notranslate"><span class="pre">tf.Example</span></code> uses row-major to parse list of values, we make
+sure to use the same order with NumPy.</p>
+<p>For that reason, if any of the dimensions is not set (i.e. is
+<code class="docutils literal notranslate"><span class="pre">None</span></code>), a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> is raised.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>np.array</em>) – Tensor values</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Feature</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">FeatureList</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>tf.train.FeatureList</em> – If <code class="docutils literal notranslate"><span class="pre">sequence</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></li>
+<li><p><em>tf.train.Feature</em> – If <code class="docutils literal notranslate"><span class="pre">sequence</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">sequence</span></code>, <code class="docutils literal notranslate"><span class="pre">len(shape)</span> <span class="pre">&gt;</span> <span class="pre">2</span></code> and one of the non-first
+    dimensions is not set (i.e. is <code class="docutils literal notranslate"><span class="pre">None</span></code>).
+    If not <code class="docutils literal notranslate"><span class="pre">sequence</span></code>, <code class="docutils literal notranslate"><span class="pre">len(shape)</span> <span class="pre">&gt;</span> <span class="pre">2</span></code> and any of the
+    dimensions is not set (i.e. is <code class="docutils literal notranslate"><span class="pre">None</span></code>).</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -493,6 +524,42 @@ or <cite>tf.Tensor</cite>. For example:</p>
 <dt id="deepr.utils.graphite.log_metrics">
 <code class="sig-prename descclassname">deepr.utils.graphite.</code><code class="sig-name descname">log_metrics</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">metrics</span></em>, <em class="sig-param"><span class="n">postfix</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/graphite.html#log_metrics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.graphite.log_metrics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log metrics to graphite</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.utils.iter">
+<span id="deepr-utils-iter-module"></span><h2>deepr.utils.iter module<a class="headerlink" href="#module-deepr.utils.iter" title="Permalink to this headline">¶</a></h2>
+<p>Utilities for logging.</p>
+<dl class="py function">
+<dt id="deepr.utils.iter.chunks">
+<code class="sig-prename descclassname">deepr.utils.iter.</code><code class="sig-name descname">chunks</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterable</span></em>, <em class="sig-param"><span class="n">chunk_size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/iter.html#chunks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.iter.chunks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split Iterable into Iterable chunks.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr.utils</span> <span class="kn">import</span> <span class="n">chunks</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">chunks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">chunk</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+<span class="go">-</span>
+<span class="go">0</span>
+<span class="go">1</span>
+<span class="go">-</span>
+<span class="go">2</span>
+<span class="go">3</span>
+<span class="go">-</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.utils.iter.progress">
+<code class="sig-prename descclassname">deepr.utils.iter.</code><code class="sig-name descname">progress</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterable</span></em>, <em class="sig-param"><span class="n">secs</span><span class="o">=</span><span class="default_value">60</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/iter.html#progress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.iter.progress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log progress on Iterable.iterable</p>
+<p>&gt;&gt; from deepr.utils import progress
+&gt;&gt;&gt; for idx in progress(range(2), secs=10):
+…     print(idx)
+0
+1</p>
 </dd></dl>
 
 </div>

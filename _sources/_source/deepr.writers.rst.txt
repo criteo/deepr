@@ -1,0 +1,30 @@
+deepr.writers package
+=====================
+
+Submodules
+----------
+
+deepr.writers.base module
+-------------------------
+
+.. automodule:: deepr.writers.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.writers.record module
+---------------------------
+
+.. automodule:: deepr.writers.record
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.writers
+   :members:
+   :undoc-members:
+   :show-inheritance:

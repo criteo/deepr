@@ -60,6 +60,14 @@ deepr.utils.graphite module
    :undoc-members:
    :show-inheritance:
 
+deepr.utils.iter module
+-----------------------
+
+.. automodule:: deepr.utils.iter
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 deepr.utils.mlflow module
 -------------------------
 

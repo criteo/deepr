@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>deepr.example.macros package &mdash; deepr 2.1.1 documentation</title>
+  <title>deepr.writers package &mdash; deepr 2.1.1 documentation</title>
   
 
   
@@ -36,8 +36,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="deepr.example.prepros package" href="deepr.example.prepros.html" />
-    <link rel="prev" title="deepr.example.layers package" href="deepr.example.layers.html" /> 
+    <link rel="prev" title="deepr.vocab package" href="deepr.vocab.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -103,7 +102,7 @@
 <li class="toctree-l3 current"><a class="reference internal" href="deepr.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="deepr.cli.html">deepr.cli package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="deepr.config.html">deepr.config package</a></li>
-<li class="toctree-l4 current"><a class="reference internal" href="deepr.example.html">deepr.example package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.example.html">deepr.example package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="deepr.exporters.html">deepr.exporters package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="deepr.hooks.html">deepr.hooks package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="deepr.initializers.html">deepr.initializers package</a></li>
@@ -118,7 +117,7 @@
 <li class="toctree-l4"><a class="reference internal" href="deepr.readers.html">deepr.readers package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="deepr.utils.html">deepr.utils package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="deepr.vocab.html">deepr.vocab package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="deepr.writers.html">deepr.writers package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">deepr.writers package</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.html#submodules">Submodules</a></li>
@@ -177,15 +176,13 @@
         
           <li><a href="deepr.html">deepr package</a> &raquo;</li>
         
-          <li><a href="deepr.example.html">deepr.example package</a> &raquo;</li>
-        
-      <li>deepr.example.macros package</li>
+      <li>deepr.writers package</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/_source/deepr.example.macros.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/_source/deepr.writers.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -222,24 +219,45 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="deepr-example-macros-package">
-<h1>deepr.example.macros package<a class="headerlink" href="#deepr-example-macros-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="deepr-writers-package">
+<h1>deepr.writers package<a class="headerlink" href="#deepr-writers-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-deepr.example.macros.paths">
-<span id="deepr-example-macros-paths-module"></span><h2>deepr.example.macros.paths module<a class="headerlink" href="#module-deepr.example.macros.paths" title="Permalink to this headline">¶</a></h2>
-<p>Macro that generates new path_model based on date.</p>
+<div class="section" id="module-deepr.writers.base">
+<span id="deepr-writers-base-module"></span><h2>deepr.writers.base module<a class="headerlink" href="#module-deepr.writers.base" title="Permalink to this headline">¶</a></h2>
+<p>Base class for writers.</p>
 <dl class="py class">
-<dt id="deepr.example.macros.paths.Paths">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.example.macros.paths.</code><code class="sig-name descname">Paths</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_model</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_dataset</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/example/macros/paths.html#Paths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.example.macros.paths.Paths" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
-<p>Macro that generates new path_model based on date.</p>
+<dt id="deepr.writers.base.Writer">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.writers.base.</code><code class="sig-name descname">Writer</code><a class="reference internal" href="../_modules/deepr/writers/base.html#Writer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.writers.base.Writer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<p>Base class for writers.</p>
+<dl class="py method">
+<dt id="deepr.writers.base.Writer.write">
+<em class="property">abstract </em><code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/writers/base.html#Writer.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.writers.base.Writer.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>
-<div class="section" id="module-deepr.example.macros">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-deepr.example.macros" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-deepr.writers.record">
+<span id="deepr-writers-record-module"></span><h2>deepr.writers.record module<a class="headerlink" href="#module-deepr.writers.record" title="Permalink to this headline">¶</a></h2>
+<p>TFRecords writer.</p>
+<dl class="py class">
+<dt id="deepr.writers.record.TFRecordWriter">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.writers.record.</code><code class="sig-name descname">TFRecordWriter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">chunk_size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">compression_type</span><span class="o">=</span><span class="default_value">'GZIP'</span></em>, <em class="sig-param"><span class="n">secs</span><span class="o">=</span><span class="default_value">60</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/writers/record.html#TFRecordWriter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.writers.record.TFRecordWriter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.writers.base.Writer" title="deepr.writers.base.Writer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.writers.base.Writer</span></code></a></p>
+<p>TFRecords writer.</p>
+<dl class="py method">
+<dt id="deepr.writers.record.TFRecordWriter.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/writers/record.html#TFRecordWriter.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.writers.record.TFRecordWriter.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.writers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-deepr.writers" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -251,10 +269,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="deepr.example.prepros.html" class="btn btn-neutral float-right" title="deepr.example.prepros package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="deepr.example.layers.html" class="btn btn-neutral float-left" title="deepr.example.layers package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="deepr.vocab.html" class="btn btn-neutral float-left" title="deepr.vocab package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
