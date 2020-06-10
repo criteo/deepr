@@ -12,6 +12,22 @@ and this project adheres to `Semantic Versioning <http://semver.org/>`_.
 
 Added
 ~~~~~
+Changed
+~~~~~~~
+Deprecated
+~~~~~~~~~~
+Removed
+~~~~~~~
+Fixed
+~~~~~
+Security
+~~~~~~~~
+
+[2.3.0] - 2020-06-10
+--------------------
+
+Added
+~~~~~
 - ``writers`` module, ``TFRecordWriter``
 - ``ToExample`` prepro to convert a dataset to ``tf.Example``
 - ``Field`` now has a ``to_feature(value)`` method
