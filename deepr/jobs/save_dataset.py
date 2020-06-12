@@ -28,6 +28,7 @@ class SaveDataset(base.Job):
     chunk_size: Optional[int] = None
     compression_type: str = "GZIP"
     secs: Optional[int] = 60
+    mode: Optional[str] = None
 
     def run(self):
         LOGGER.info(f"Saving dataset to {self.path}")
@@ -37,4 +38,4 @@ class SaveDataset(base.Job):
         writer = TFRecordWriter(
             path=self.path, chunk_size=self.chunk_size, compression_type=self.compression_type, secs=self.secs
         )
-        writer.write(prepro_fn(self.input_fn()))
+        writer.write(prepro_fn(self.input_fn(), mode=self.mode))

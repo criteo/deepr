@@ -21,7 +21,13 @@ class FromExample(base.Prepro):
     def parse_fn(self):
         """Return parse function."""
 
-        features = {field.name: field.feature_specs for field in self.fields if not field.sequence}
+        features = {
+            field.name: (
+                field.feature_specs if field.is_featurizable() else tf.io.FixedLenFeature(shape=(), dtype=tf.string)
+            )
+            for field in self.fields
+            if not field.sequence
+        }
         sequence_features = {field.name: field.feature_specs for field in self.fields if field.sequence}
 
         def _parse_func(serialized) -> Dict[str, tf.Tensor]:
@@ -30,9 +36,18 @@ class FromExample(base.Prepro):
                 context, sequence = tf.io.parse_single_sequence_example(
                     serialized, context_features=features, sequence_features=sequence_features
                 )
-                return {**context, **sequence}
+                tensors = {**context, **sequence}
             else:
-                return tf.io.parse_single_example(serialized, features=features)
+                tensors = tf.io.parse_single_example(serialized, features=features)
+
+            return {
+                field.name: (
+                    tensors[field.name]
+                    if field.is_featurizable()
+                    else tf.io.parse_tensor(tensors[field.name], out_type=field.dtype)
+                )
+                for field in self.fields
+            }
 
         return _parse_func
 
@@ -59,7 +74,13 @@ class ToExample(base.Prepro):
         def _serialize_fn(*tensors):
             feature, feature_list = {}, {}
             for field, tensor in zip(self.fields, tensors):
-                feat = field.to_feature(tensor)
+                # Convert Eager Tensor to tf.train.Feature
+                if field.is_featurizable():
+                    feat = field.to_feature(tensor.numpy())
+                else:
+                    feat = tf.train.Feature(bytes_list=tf.train.BytesList(value=[tensor.numpy()]))
+
+                # Update feature and feature_list
                 if isinstance(feat, tf.train.Feature):
                     feature[field.name] = feat
                 elif isinstance(feat, tf.train.FeatureList):
@@ -77,7 +98,11 @@ class ToExample(base.Prepro):
             return example.SerializeToString()
 
         def _tf_serialize_fn(element):
-            tf_string = tf.py_function(_serialize_fn, [element[field.name] for field in self.fields], tf.string)
+            tensors = [
+                (element[field.name] if field.is_featurizable() else tf.io.serialize_tensor(element[field.name]))
+                for field in self.fields
+            ]
+            tf_string = tf.py_function(_serialize_fn, tensors, tf.string)
             return tf.reshape(tf_string, ())
 
         return _tf_serialize_fn
