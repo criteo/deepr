@@ -27,6 +27,7 @@ deepr.jobs.SaveDataset
    
       ~SaveDataset.chunk_size
       ~SaveDataset.compression_type
+      ~SaveDataset.mode
       ~SaveDataset.num_parallel_calls
       ~SaveDataset.secs
    

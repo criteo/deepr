@@ -183,7 +183,13 @@
     <span class="k">def</span> <span class="nf">parse_fn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return parse function.&quot;&quot;&quot;</span>
 
-        <span class="n">features</span> <span class="o">=</span> <span class="p">{</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">field</span><span class="o">.</span><span class="n">feature_specs</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">field</span><span class="o">.</span><span class="n">sequence</span><span class="p">}</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="p">(</span>
+                <span class="n">field</span><span class="o">.</span><span class="n">feature_specs</span> <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">is_featurizable</span><span class="p">()</span> <span class="k">else</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">FixedLenFeature</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">string</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">field</span><span class="o">.</span><span class="n">sequence</span>
+        <span class="p">}</span>
         <span class="n">sequence_features</span> <span class="o">=</span> <span class="p">{</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">field</span><span class="o">.</span><span class="n">feature_specs</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">sequence</span><span class="p">}</span>
 
         <span class="k">def</span> <span class="nf">_parse_func</span><span class="p">(</span><span class="n">serialized</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
@@ -192,9 +198,18 @@
                 <span class="n">context</span><span class="p">,</span> <span class="n">sequence</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">parse_single_sequence_example</span><span class="p">(</span>
                     <span class="n">serialized</span><span class="p">,</span> <span class="n">context_features</span><span class="o">=</span><span class="n">features</span><span class="p">,</span> <span class="n">sequence_features</span><span class="o">=</span><span class="n">sequence_features</span>
                 <span class="p">)</span>
-                <span class="k">return</span> <span class="p">{</span><span class="o">**</span><span class="n">context</span><span class="p">,</span> <span class="o">**</span><span class="n">sequence</span><span class="p">}</span>
+                <span class="n">tensors</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">context</span><span class="p">,</span> <span class="o">**</span><span class="n">sequence</span><span class="p">}</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">parse_single_example</span><span class="p">(</span><span class="n">serialized</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">)</span>
+                <span class="n">tensors</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">parse_single_example</span><span class="p">(</span><span class="n">serialized</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="p">(</span>
+                    <span class="n">tensors</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">is_featurizable</span><span class="p">()</span>
+                    <span class="k">else</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">parse_tensor</span><span class="p">(</span><span class="n">tensors</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">out_type</span><span class="o">=</span><span class="n">field</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span>
+            <span class="p">}</span>
 
         <span class="k">return</span> <span class="n">_parse_func</span>
 
@@ -221,7 +236,13 @@
         <span class="k">def</span> <span class="nf">_serialize_fn</span><span class="p">(</span><span class="o">*</span><span class="n">tensors</span><span class="p">):</span>
             <span class="n">feature</span><span class="p">,</span> <span class="n">feature_list</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{}</span>
             <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">tensor</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">,</span> <span class="n">tensors</span><span class="p">):</span>
-                <span class="n">feat</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">to_feature</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span>
+                <span class="c1"># Convert Eager Tensor to tf.train.Feature</span>
+                <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">is_featurizable</span><span class="p">():</span>
+                    <span class="n">feat</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">to_feature</span><span class="p">(</span><span class="n">tensor</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">feat</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Feature</span><span class="p">(</span><span class="n">bytes_list</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">BytesList</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="p">[</span><span class="n">tensor</span><span class="o">.</span><span class="n">numpy</span><span class="p">()]))</span>
+
+                <span class="c1"># Update feature and feature_list</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">feat</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Feature</span><span class="p">):</span>
                     <span class="n">feature</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">feat</span>
                 <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">feat</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">FeatureList</span><span class="p">):</span>
@@ -239,7 +260,11 @@
             <span class="k">return</span> <span class="n">example</span><span class="o">.</span><span class="n">SerializeToString</span><span class="p">()</span>
 
         <span class="k">def</span> <span class="nf">_tf_serialize_fn</span><span class="p">(</span><span class="n">element</span><span class="p">):</span>
-            <span class="n">tf_string</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">py_function</span><span class="p">(</span><span class="n">_serialize_fn</span><span class="p">,</span> <span class="p">[</span><span class="n">element</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">],</span> <span class="n">tf</span><span class="o">.</span><span class="n">string</span><span class="p">)</span>
+            <span class="n">tensors</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">(</span><span class="n">element</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">is_featurizable</span><span class="p">()</span> <span class="k">else</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">serialize_tensor</span><span class="p">(</span><span class="n">element</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">]))</span>
+                <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span>
+            <span class="p">]</span>
+            <span class="n">tf_string</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">py_function</span><span class="p">(</span><span class="n">_serialize_fn</span><span class="p">,</span> <span class="n">tensors</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">string</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">tf_string</span><span class="p">,</span> <span class="p">())</span>
 
         <span class="k">return</span> <span class="n">_tf_serialize_fn</span>

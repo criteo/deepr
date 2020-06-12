@@ -229,11 +229,11 @@
 <h1>deepr.jobs.SaveDataset<a class="headerlink" href="#deepr-jobs-savedataset" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="deepr.jobs.SaveDataset">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.jobs.</code><code class="sig-name descname">SaveDataset</code><span class="sig-paren">(</span><em class="sig-param">input_fn</em>, <em class="sig-param">path</em>, <em class="sig-param">fields</em>, <em class="sig-param">prepro_fn=&lt;function SaveDataset.&lt;lambda&gt;&gt;</em>, <em class="sig-param">num_parallel_calls=None</em>, <em class="sig-param">chunk_size=None</em>, <em class="sig-param">compression_type='GZIP'</em>, <em class="sig-param">secs=60</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/jobs/save_dataset.html#SaveDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.jobs.SaveDataset" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.jobs.</code><code class="sig-name descname">SaveDataset</code><span class="sig-paren">(</span><em class="sig-param">input_fn</em>, <em class="sig-param">path</em>, <em class="sig-param">fields</em>, <em class="sig-param">prepro_fn=&lt;function SaveDataset.&lt;lambda&gt;&gt;</em>, <em class="sig-param">num_parallel_calls=None</em>, <em class="sig-param">chunk_size=None</em>, <em class="sig-param">compression_type='GZIP'</em>, <em class="sig-param">secs=60</em>, <em class="sig-param">mode=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/jobs/save_dataset.html#SaveDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.jobs.SaveDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save Dataset Job.</p>
 <dl class="py method">
 <dt id="deepr.jobs.SaveDataset.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">input_fn</em>, <em class="sig-param">path</em>, <em class="sig-param">fields</em>, <em class="sig-param">prepro_fn=&lt;function SaveDataset.&lt;lambda&gt;&gt;</em>, <em class="sig-param">num_parallel_calls=None</em>, <em class="sig-param">chunk_size=None</em>, <em class="sig-param">compression_type='GZIP'</em>, <em class="sig-param">secs=60</em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.jobs.SaveDataset.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">input_fn</em>, <em class="sig-param">path</em>, <em class="sig-param">fields</em>, <em class="sig-param">prepro_fn=&lt;function SaveDataset.&lt;lambda&gt;&gt;</em>, <em class="sig-param">num_parallel_calls=None</em>, <em class="sig-param">chunk_size=None</em>, <em class="sig-param">compression_type='GZIP'</em>, <em class="sig-param">secs=60</em>, <em class="sig-param">mode=None</em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.jobs.SaveDataset.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -273,10 +273,13 @@
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compression_type</span></code></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_parallel_calls</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">mode</span></code></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">secs</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_parallel_calls</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">secs</span></code></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
