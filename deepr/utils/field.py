@@ -38,7 +38,7 @@ class Field:
         self.dtype = TensorType(dtype).tf
         self.default = default if default is not None else TensorType(dtype).default
         self.sequence = (
-            sequence if sequence is not None else (any(dim is None for dim in shape) if len(shape) > 1 else False)
+            sequence if sequence is not None else (any(dim is None for dim in shape) if len(shape) == 2 else False)
         )
 
         if self.sequence and not self.shape:
@@ -54,6 +54,8 @@ class Field:
     @property
     def feature_specs(self):
         """Return feature specs for parsing Example messages."""
+        if not self.is_featurizable():
+            raise ValueError(f"{self} is not featurizable, no feature specs.")
         if self.sequence:
             if any(dim is None for dim in self.shape[1:]):
                 return tf.io.VarLenFeature(dtype=self.dtype)
@@ -65,8 +67,19 @@ class Field:
             else:
                 return tf.io.FixedLenFeature(shape=self.shape, dtype=self.dtype)
 
-    def is_sparse(self):
-        return isinstance(self.feature_specs, tf.io.VarLenFeature)
+    def is_sparse(self) -> bool:
+        if self.is_featurizable():
+            return isinstance(self.feature_specs, tf.io.VarLenFeature)
+        return False
+
+    def is_featurizable(self) -> bool:
+        if self.sequence:
+            if len(self.shape) > 2 and any(dim is None for dim in self.shape[1:]):
+                return False
+        else:
+            if len(self.shape) > 1 and any(dim is None for dim in self.shape):
+                return False
+        return True
 
     def startswith(self, prefix: str):
         return self.name.startswith(prefix)
