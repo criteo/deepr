@@ -1,6 +1,7 @@
 # pylint: disable=no-value-for-parameter,invalid-name,unexpected-keyword-arg
 """Tests for layers.combinators"""
 
+import pytest
 import tensorflow as tf
 
 import deepr as dpr
@@ -67,6 +68,34 @@ def test_layers_select():
     with tf.Session() as sess:
         assert sess.run(result) == 2
         assert sess.run(result_dict)["z"] == 2
+
+
+@pytest.mark.parametrize(
+    "inputs, outputs, indices, expected",
+    [
+        ("foo", None, None, dpr.layers.Select(n_in=1, inputs="foo", outputs="foo", indices=0)),
+        (
+            ("foo", "bar"),
+            None,
+            None,
+            dpr.layers.Select(n_in=2, inputs=("foo", "bar"), outputs=("foo", "bar"), indices=(0, 1)),
+        ),
+        (("foo", "bar"), None, 0, dpr.layers.Select(n_in=2, inputs=("foo", "bar"), outputs="foo", indices=0)),
+        (("foo", "bar"), None, 1, dpr.layers.Select(n_in=2, inputs=("foo", "bar"), outputs="bar", indices=1)),
+        (
+            ("foo", "bar"),
+            None,
+            (1, 0),
+            dpr.layers.Select(n_in=2, inputs=("foo", "bar"), outputs=("bar", "foo"), indices=(1, 0)),
+        ),
+    ],
+)
+def test_layers_select_init(inputs, outputs, indices, expected):
+    got = dpr.layers.Select(inputs=inputs, outputs=outputs, indices=indices)
+    assert got.inputs == expected.inputs
+    assert got.outputs == expected.outputs
+    assert got.n_in == expected.n_in
+    assert got.indices == expected.indices
 
 
 def test_layers_select_dag():

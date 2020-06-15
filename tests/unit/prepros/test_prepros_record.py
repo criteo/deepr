@@ -37,17 +37,20 @@ def test_prepros_to_example():
         sess.run(example)
 
 
-@pytest.mark.parametrize("field, tensor", [
-    (dpr.Field(name="x", shape=(), dtype=tf.string), b"1234"),
-    (dpr.Field(name="x", shape=(2,), dtype=tf.int64), np.arange(2)),
-    (dpr.Field(name="x", shape=(2, 2), dtype=tf.int64), np.reshape(np.arange(2 * 2), (2, 2))),
-    (dpr.Field(name="x", shape=(None, 2), dtype=tf.int64), np.reshape(np.arange(2 * 2), (2, 2))),
-    (dpr.Field(name="x", shape=(None, None), dtype=tf.int64), np.reshape(np.arange(2 * 2), (2, 2))),
-    (dpr.Field(name="x", shape=(2, 3, 4), dtype=tf.int64), np.reshape(np.arange(2 * 3 * 4), (2, 3, 4))),
-    (dpr.Field(name="x", shape=(None, 3, 4), dtype=tf.int64), np.reshape(np.arange(2 * 3 * 4), (2, 3, 4))),
-    (dpr.Field(name="x", shape=(None, None, 4), dtype=tf.int64), np.reshape(np.arange(2 * 3 * 4), (2, 3, 4))),
-    (dpr.Field(name="x", shape=(None, None, None), dtype=tf.int64), np.reshape(np.arange(2 * 3 * 4), (2, 3, 4))),
-])
+@pytest.mark.parametrize(
+    "field, tensor",
+    [
+        (dpr.Field(name="x", shape=(), dtype=tf.string), b"1234"),
+        (dpr.Field(name="x", shape=(2,), dtype=tf.int64), np.arange(2)),
+        (dpr.Field(name="x", shape=(2, 2), dtype=tf.int64), np.reshape(np.arange(2 * 2), (2, 2))),
+        (dpr.Field(name="x", shape=(None, 2), dtype=tf.int64), np.reshape(np.arange(2 * 2), (2, 2))),
+        (dpr.Field(name="x", shape=(None, None), dtype=tf.int64), np.reshape(np.arange(2 * 2), (2, 2))),
+        (dpr.Field(name="x", shape=(2, 3, 4), dtype=tf.int64), np.reshape(np.arange(2 * 3 * 4), (2, 3, 4))),
+        (dpr.Field(name="x", shape=(None, 3, 4), dtype=tf.int64), np.reshape(np.arange(2 * 3 * 4), (2, 3, 4))),
+        (dpr.Field(name="x", shape=(None, None, 4), dtype=tf.int64), np.reshape(np.arange(2 * 3 * 4), (2, 3, 4))),
+        (dpr.Field(name="x", shape=(None, None, None), dtype=tf.int64), np.reshape(np.arange(2 * 3 * 4), (2, 3, 4))),
+    ],
+)
 def test_end_to_end(field, tensor):
     """Test end-to-end, serialize then parse."""
     to_example = dpr.prepros.ToExample(fields=[field])

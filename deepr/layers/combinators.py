@@ -127,7 +127,7 @@ class Select(Layer):
         self,
         inputs: Union[str, Tuple[str, ...], List[str]] = None,
         outputs: Union[str, Tuple[str, ...], List[str]] = None,
-        indices: List[int] = None,
+        indices: Union[int, Tuple[int]] = None,
         n_in: int = None,
     ):
         if n_in is None and inputs is None:
@@ -135,9 +135,10 @@ class Select(Layer):
             raise ValueError(msg)
         if n_in is None:
             n_in = len(to_flat_tuple(inputs))
-        self.indices = to_flat_tuple(indices) if indices is not None else list(range(n_in))
+        self.indices = to_flat_tuple(indices) if indices is not None else tuple(range(n_in))
         if inputs is not None and outputs is None:
-            outputs = tuple(inputs[idx] for idx in self.indices)
+            outputs_tuple = tuple(to_flat_tuple(inputs)[idx] for idx in self.indices)
+            outputs = outputs_tuple if len(outputs_tuple) > 1 else outputs_tuple[0]
         super().__init__(n_in=n_in, n_out=len(self.indices), inputs=inputs, outputs=outputs)
 
     def forward(self, tensors, mode: str = None):
