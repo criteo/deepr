@@ -423,4 +423,7 @@ class Cache(base.Prepro):
         if mode is not None and self.modes is not None and mode not in self.modes:
             LOGGER.info(f"Not applying {self} (mode={mode})")
             return dataset
-        return dataset.cache(self.filename)
+        if self.filename:
+            return dataset.cache(self.filename)
+        else:
+            return dataset.cache()
