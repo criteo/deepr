@@ -23,6 +23,16 @@ Fixed
 Security
 ~~~~~~~~
 
+
+[2.4.1] - 2020-06-15
+--------------------
+
+Fixed
+~~~~~
+- Fix incorrect inputs / outputs resolution in ``deepr.layers.Select``
+- Fix edge cases of ``ToExample`` and ``FromExample`` (on scalars, tensors with dynamic shapes with ndims > 2)
+
+
 [2.4.0] - 2020-06-10
 --------------------
 
