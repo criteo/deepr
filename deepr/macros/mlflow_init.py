@@ -2,11 +2,22 @@
 
 import logging
 import os
+from typing import Callable
 
 from deepr.utils import mlflow
 
 
 LOGGER = logging.getLogger(__name__)
+
+
+def standard_url_formatter(tracking_uri: str, experiment_id: str, run_id: str) -> str:
+    """Default URL formatter for MLFlow runs."""
+    return f"{tracking_uri}/#/experiments/{experiment_id}/runs/{run_id}"
+
+
+def internal_url_formatter(tracking_uri: str, experiment_id: str, run_id: str) -> str:
+    """Internal URL formatter for MLFlow runs."""
+    return f"{tracking_uri}/experiments/{experiment_id}/runs/{run_id}"
 
 
 class MLFlowInit(dict):
@@ -19,6 +30,7 @@ class MLFlowInit(dict):
         tracking_uri: str = None,
         experiment_name: str = None,
         artifact_location: str = None,
+        url_formatter: Callable[[str, str, str], str] = internal_url_formatter,
     ):
         if use_mlflow:
             # Check arguments are not None
@@ -40,7 +52,7 @@ class MLFlowInit(dict):
             run_id = run.info.run_id
             run_uuid = run.info.run_uuid
             experiment_id = run.info.experiment_id
-            url = f"{tracking_uri}/#/experiments/{experiment_id}/runs/{run_id}"
+            url = url_formatter(tracking_uri, experiment_id, run_id)
 
             # MLFlow config in environment variables
             os.environ["MLFLOW_TRACKING_URI"] = tracking_uri
