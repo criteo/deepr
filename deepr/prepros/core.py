@@ -255,7 +255,7 @@ class Repeat(base.Prepro):
     Attributes
     ----------
     count : int
-        Number of dataset repeat
+        Number of dataset repeat, if None or -1, repeat forever.
     modes : Iterable[str], Optional
         Active modes for the map (will skip modes not in modes).
         Default is None (all modes are considered active modes).
