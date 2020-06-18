@@ -255,9 +255,31 @@
 <p>Initializes MLFlow run</p>
 <dl class="py class">
 <dt id="deepr.macros.mlflow_init.MLFlowInit">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.macros.mlflow_init.</code><code class="sig-name descname">MLFlowInit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">use_mlflow</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">run_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tracking_uri</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">experiment_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">artifact_location</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/macros/mlflow_init.html#MLFlowInit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.macros.mlflow_init.MLFlowInit" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.macros.mlflow_init.</code><code class="sig-name descname">MLFlowInit</code><span class="sig-paren">(</span><em class="sig-param">use_mlflow=False</em>, <em class="sig-param">run_name=None</em>, <em class="sig-param">tracking_uri=None</em>, <em class="sig-param">experiment_name=None</em>, <em class="sig-param">artifact_location=None</em>, <em class="sig-param">url_formatter=&lt;function internal_url_formatter&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/macros/mlflow_init.html#MLFlowInit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.macros.mlflow_init.MLFlowInit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 <p>MLFlow Macro initializes MLFlow run and sets MLFlow parameters</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.macros.mlflow_init.internal_url_formatter">
+<code class="sig-prename descclassname">deepr.macros.mlflow_init.</code><code class="sig-name descname">internal_url_formatter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tracking_uri</span></em>, <em class="sig-param"><span class="n">experiment_id</span></em>, <em class="sig-param"><span class="n">run_id</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/macros/mlflow_init.html#internal_url_formatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.macros.mlflow_init.internal_url_formatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal URL formatter for MLFlow runs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.macros.mlflow_init.standard_url_formatter">
+<code class="sig-prename descclassname">deepr.macros.mlflow_init.</code><code class="sig-name descname">standard_url_formatter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tracking_uri</span></em>, <em class="sig-param"><span class="n">experiment_id</span></em>, <em class="sig-param"><span class="n">run_id</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/macros/mlflow_init.html#standard_url_formatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.macros.mlflow_init.standard_url_formatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default URL formatter for MLFlow runs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
