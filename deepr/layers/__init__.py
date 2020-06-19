@@ -16,6 +16,7 @@ from deepr.layers.lookup import (
     table_from_file,
     table_from_mapping,
 )
+from deepr.layers.losses import BPRMax, MaskedBPRMax, NegativeSampling, MaskedNegativeSampling
 from deepr.layers.mask import Equal, NotEqual, BooleanMask, BooleanReduceMode, LookAheadMask, PaddingMask
 from deepr.layers.reduce import Average, WeightedAverage
 from deepr.layers.size import IsMinSize
