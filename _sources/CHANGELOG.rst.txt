@@ -40,6 +40,7 @@ Added
 ~~~~~
 - Utilities to ``metrics.base``: ``get_tensors``, ``keep_scalars``, ``get_scalars``
 - New metrics for variables ``VariableValue`` that returns value / global norm of a variable
+- Allow user to ignore cpu packages shipped in the pex to Yarn
 
 Changed
 ~~~~~~~
