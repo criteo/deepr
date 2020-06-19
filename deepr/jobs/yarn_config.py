@@ -23,6 +23,7 @@ class YarnConfig:
     name: str
     gpu_additional_packages: Tuple[str, ...] = ("tensorflow-gpu==1.15.2", "tf-yarn-gpu==0.4.19")
     gpu_ignored_packages: Tuple[str, ...] = ("tensorflow", "tf-yarn")
+    cpu_ignored_packages: Tuple[str, ...] = ()
     gpu_to_use: Optional[int] = None
     jvm_memory_in_gb: int = 8
     path_pex_cpu: Optional[str] = None
@@ -54,7 +55,11 @@ class YarnConfig:
     def upload_pex_cpu(self) -> str:
         """Upload Current Environment as PEX for CPU."""
         path_pex = f"{self.path_pex_prefix}/cpu/{self.name}.pex"
-        return upload_pex(path_pex=path_pex, path_pex_existing=self.path_pex_cpu)
+        return upload_pex(
+            path_pex=path_pex,
+            path_pex_existing=self.path_pex_cpu,
+            ignored_packages=list(self.cpu_ignored_packages) if self.cpu_ignored_packages else None,
+        )
 
     def upload_pex_gpu(self) -> str:
         """Upload Current Environment as PEX for GPU."""
