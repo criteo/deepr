@@ -12,14 +12,6 @@ deepr.layers.base module
    :undoc-members:
    :show-inheritance:
 
-deepr.layers.bpr module
------------------------
-
-.. automodule:: deepr.layers.bpr
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 deepr.layers.click\_rank module
 -------------------------------
 
@@ -64,6 +56,14 @@ deepr.layers.lookup module
 --------------------------
 
 .. automodule:: deepr.layers.lookup
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.layers.losses module
+--------------------------
+
+.. automodule:: deepr.layers.losses
    :members:
    :undoc-members:
    :show-inheritance:

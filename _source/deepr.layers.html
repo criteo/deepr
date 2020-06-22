@@ -486,68 +486,6 @@ of the function IN THIS ORDER.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-deepr.layers.bpr">
-<span id="deepr-layers-bpr-module"></span><h2>deepr.layers.bpr module<a class="headerlink" href="#module-deepr.layers.bpr" title="Permalink to this headline">¶</a></h2>
-<p>BPR Loss Layer</p>
-<dl class="py class">
-<dt id="deepr.layers.bpr.BPR">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.bpr.</code><code class="sig-name descname">BPR</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/bpr.html#BPR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.bpr.BPR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
-<p>Vanilla BPR Loss Layer</p>
-<dl class="py method">
-<dt id="deepr.layers.bpr.BPR.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/bpr.html#BPR.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.bpr.BPR.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Forward method of the layer</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>tensors</strong> (<em>Tuple</em><em>[</em><em>tf.Tensor</em><em>]</em>) – <ul class="simple">
-<li><p>positives: shape = [batch]</p></li>
-<li><p>negatives: shape = [batch]</p></li>
-</ul>
-</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>BPR loss</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tf.Tensor</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="deepr.layers.bpr.MaskedBPR">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.bpr.</code><code class="sig-name descname">MaskedBPR</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/bpr.html#MaskedBPR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.bpr.MaskedBPR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
-<p>Masked BPR Loss Layer</p>
-<dl class="py method">
-<dt id="deepr.layers.bpr.MaskedBPR.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/bpr.html#MaskedBPR.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.bpr.MaskedBPR.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Forward method of the layer</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>tensors</strong> (<em>Tuple</em><em>[</em><em>tf.Tensor</em><em>]</em>) – <ul class="simple">
-<li><p>positives : shape = (batch, num_events)</p></li>
-<li><p>negatives : shape = (batch, num_events, num_negatives)</p></li>
-<li><p>mask : shape = (batch, num_events, num_negatives)</p></li>
-<li><p>weights : shape = (batch, num_events)</p></li>
-</ul>
-</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>BPR loss</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tf.Tensor</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</div>
 <div class="section" id="module-deepr.layers.click_rank">
 <span id="deepr-layers-click-rank-module"></span><h2>deepr.layers.click_rank module<a class="headerlink" href="#module-deepr.layers.click_rank" title="Permalink to this headline">¶</a></h2>
 <p>Rank Layer</p>
@@ -1360,6 +1298,185 @@ each key to its corresponding line index as an tf.int64.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.layers.losses">
+<span id="deepr-layers-losses-module"></span><h2>deepr.layers.losses module<a class="headerlink" href="#module-deepr.layers.losses" title="Permalink to this headline">¶</a></h2>
+<p>Losses Layers</p>
+<dl class="py class">
+<dt id="deepr.layers.losses.BPR">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.losses.</code><code class="sig-name descname">BPR</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/losses.html#BPR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.losses.BPR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Vanilla BPR Loss Layer</p>
+<dl class="py method">
+<dt id="deepr.layers.losses.BPR.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/losses.html#BPR.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.losses.BPR.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method of the layer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tensors</strong> (<em>Tuple</em><em>[</em><em>tf.Tensor</em><em>]</em>) – <ul class="simple">
+<li><p>positives: shape = [batch]</p></li>
+<li><p>negatives: shape = [batch]</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>BPR loss</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.layers.losses.BPRMax">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.losses.</code><code class="sig-name descname">BPRMax</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpr_max_regularizer</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/losses.html#BPRMax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.losses.BPRMax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Vanilla BPR Max Loss Layer</p>
+<dl class="py method">
+<dt id="deepr.layers.losses.BPRMax.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/losses.html#BPRMax.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.losses.BPRMax.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method of the layer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tensors</strong> (<em>Tuple</em><em>[</em><em>tf.Tensor</em><em>]</em>) – <ul class="simple">
+<li><p>positives: shape = [batch, num_events, embedding_dim]</p></li>
+<li><p>negatives: shape = [batch, num_events, num_negatives, embedding_dim]</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>BPR Max loss</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.layers.losses.MaskedBPR">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.losses.</code><code class="sig-name descname">MaskedBPR</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/losses.html#MaskedBPR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.losses.MaskedBPR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Masked BPR Loss Layer</p>
+<dl class="py method">
+<dt id="deepr.layers.losses.MaskedBPR.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/losses.html#MaskedBPR.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.losses.MaskedBPR.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method of the layer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tensors</strong> (<em>Tuple</em><em>[</em><em>tf.Tensor</em><em>]</em>) – <ul class="simple">
+<li><p>positives : shape = (batch, num_events)</p></li>
+<li><p>negatives : shape = (batch, num_events, num_negatives)</p></li>
+<li><p>mask : shape = (batch, num_events, num_negatives)</p></li>
+<li><p>weights : shape = (batch, num_events)</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>BPR loss</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.layers.losses.MaskedBPRMax">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.losses.</code><code class="sig-name descname">MaskedBPRMax</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpr_max_regularizer</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/losses.html#MaskedBPRMax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.losses.MaskedBPRMax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.losses.BPRMax" title="deepr.layers.losses.BPRMax"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.losses.BPRMax</span></code></a></p>
+<p>Masked BPR Max Loss Layer</p>
+<dl class="py method">
+<dt id="deepr.layers.losses.MaskedBPRMax.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/losses.html#MaskedBPRMax.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.losses.MaskedBPRMax.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method of the layer
+(details: <a class="reference external" href="https://arxiv.org/pdf/1706.03847.pdf">https://arxiv.org/pdf/1706.03847.pdf</a>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tensors</strong> (<em>Tuple</em><em>[</em><em>tf.Tensor</em><em>]</em>) – <ul class="simple">
+<li><p>positives : shape = (batch, num_events)</p></li>
+<li><p>negatives : shape = (batch, num_events, num_negatives)</p></li>
+<li><p>mask : shape = (batch, num_events, num_negatives)</p></li>
+<li><p>weights : shape = (batch, num_events)</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>BPR Max loss</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.layers.losses.MaskedNegativeSampling">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.losses.</code><code class="sig-name descname">MaskedNegativeSampling</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/losses.html#MaskedNegativeSampling"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.losses.MaskedNegativeSampling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Masked Negative Sampling Loss Layer</p>
+<dl class="py method">
+<dt id="deepr.layers.losses.MaskedNegativeSampling.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/losses.html#MaskedNegativeSampling.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.losses.MaskedNegativeSampling.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method of the layer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tensors</strong> (<em>Tuple</em><em>[</em><em>tf.Tensor</em><em>]</em>) – <ul class="simple">
+<li><p>positives : shape = (batch, num_events, embedding_dim)</p></li>
+<li><p>negatives : shape = (batch, num_events, num_negatives, embedding_dim)</p></li>
+<li><p>mask : shape = (batch, num_events, num_negatives)</p></li>
+<li><p>weights : shape = (batch, num_events)</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Negative Sampling  loss</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.layers.losses.NegativeSampling">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.losses.</code><code class="sig-name descname">NegativeSampling</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/losses.html#NegativeSampling"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.losses.NegativeSampling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Vanilla Negative Sampling Loss Layer</p>
+<dl class="py method">
+<dt id="deepr.layers.losses.NegativeSampling.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/losses.html#NegativeSampling.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.losses.NegativeSampling.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method of the layer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tensors</strong> (<em>Tuple</em><em>[</em><em>tf.Tensor</em><em>]</em>) – <ul class="simple">
+<li><p>positives: shape = [batch, num_events, embedding_dim]</p></li>
+<li><p>negatives: shape = [batch, num_events, num_negatives, embedding_dim]</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Negative Sampling loss</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Tensor</p>
 </dd>
 </dl>
 </dd></dl>

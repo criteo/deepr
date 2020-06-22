@@ -535,9 +535,11 @@
       <li><a href="API/_autosummary/deepr.layers.BPR.html#deepr.layers.BPR">BPR (class in deepr.layers)</a>
 
       <ul>
-        <li><a href="_source/deepr.layers.html#deepr.layers.bpr.BPR">(class in deepr.layers.bpr)</a>
+        <li><a href="_source/deepr.layers.html#deepr.layers.losses.BPR">(class in deepr.layers.losses)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.losses.BPRMax">BPRMax (class in deepr.layers.losses)</a>
+</li>
       <li><a href="_source/deepr.prepros.html#deepr.prepros.core.Prefetch.buffer_size">buffer_size (deepr.prepros.core.Prefetch attribute)</a>
 
       <ul>
@@ -1087,13 +1089,6 @@
 </li>
       </ul></li>
       <li>
-    deepr.layers.bpr
-
-      <ul>
-        <li><a href="_source/deepr.layers.html#module-deepr.layers.bpr">module</a>
-</li>
-      </ul></li>
-      <li>
     deepr.layers.click_rank
 
       <ul>
@@ -1121,8 +1116,6 @@
         <li><a href="_source/deepr.layers.html#module-deepr.layers.dropout">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     deepr.layers.embedding
 
@@ -1130,11 +1123,20 @@
         <li><a href="_source/deepr.layers.html#module-deepr.layers.embedding">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     deepr.layers.lookup
 
       <ul>
         <li><a href="_source/deepr.layers.html#module-deepr.layers.lookup">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.layers.losses
+
+      <ul>
+        <li><a href="_source/deepr.layers.html#module-deepr.layers.losses">module</a>
 </li>
       </ul></li>
       <li>
@@ -1785,18 +1787,12 @@
         <li><a href="_source/deepr.jobs.html#deepr.jobs.mlflow_save_configs.MLFlowSaveConfigs.formatter">(deepr.jobs.mlflow_save_configs.MLFlowSaveConfigs attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.example.layers.html#deepr.example.layers.loss.SquaredL2.forward">forward() (deepr.example.layers.loss.SquaredL2 method)</a>
 
       <ul>
         <li><a href="_source/deepr.example.layers.html#deepr.example.layers.model.Multiply.forward">(deepr.example.layers.model.Multiply method)</a>
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.base.Layer.forward">(deepr.layers.base.Layer method)</a>
-</li>
-        <li><a href="_source/deepr.layers.html#deepr.layers.bpr.BPR.forward">(deepr.layers.bpr.BPR method)</a>
-</li>
-        <li><a href="_source/deepr.layers.html#deepr.layers.bpr.MaskedBPR.forward">(deepr.layers.bpr.MaskedBPR method)</a>
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.click_rank.ClickRank.forward">(deepr.layers.click_rank.ClickRank method)</a>
 </li>
@@ -1838,6 +1834,18 @@
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.lookup.Lookup.forward">(deepr.layers.lookup.Lookup method)</a>
 </li>
+        <li><a href="_source/deepr.layers.html#deepr.layers.losses.BPR.forward">(deepr.layers.losses.BPR method)</a>
+</li>
+        <li><a href="_source/deepr.layers.html#deepr.layers.losses.BPRMax.forward">(deepr.layers.losses.BPRMax method)</a>
+</li>
+        <li><a href="_source/deepr.layers.html#deepr.layers.losses.MaskedBPR.forward">(deepr.layers.losses.MaskedBPR method)</a>
+</li>
+        <li><a href="_source/deepr.layers.html#deepr.layers.losses.MaskedBPRMax.forward">(deepr.layers.losses.MaskedBPRMax method)</a>
+</li>
+        <li><a href="_source/deepr.layers.html#deepr.layers.losses.MaskedNegativeSampling.forward">(deepr.layers.losses.MaskedNegativeSampling method)</a>
+</li>
+        <li><a href="_source/deepr.layers.html#deepr.layers.losses.NegativeSampling.forward">(deepr.layers.losses.NegativeSampling method)</a>
+</li>
         <li><a href="_source/deepr.layers.html#deepr.layers.mask.BooleanMask.forward">(deepr.layers.mask.BooleanMask method)</a>
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.mask.Equal.forward">(deepr.layers.mask.Equal method)</a>
@@ -1867,6 +1875,8 @@
         <li><a href="_source/deepr.layers.html#deepr.layers.string.StringJoin.forward">(deepr.layers.string.StringJoin method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.layers.html#deepr.layers.base.Layer.forward_as_dict">forward_as_dict() (deepr.layers.base.Layer method)</a>
 
       <ul>
@@ -2308,9 +2318,13 @@
       <li><a href="API/_autosummary/deepr.layers.MaskedBPR.html#deepr.layers.MaskedBPR">MaskedBPR (class in deepr.layers)</a>
 
       <ul>
-        <li><a href="_source/deepr.layers.html#deepr.layers.bpr.MaskedBPR">(class in deepr.layers.bpr)</a>
+        <li><a href="_source/deepr.layers.html#deepr.layers.losses.MaskedBPR">(class in deepr.layers.losses)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.losses.MaskedBPRMax">MaskedBPRMax (class in deepr.layers.losses)</a>
+</li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.losses.MaskedNegativeSampling">MaskedNegativeSampling (class in deepr.layers.losses)</a>
+</li>
       <li><a href="_source/deepr.hooks.html#deepr.hooks.early_stopping.EarlyStoppingHookFactory.max_steps_without_improvement">max_steps_without_improvement (deepr.hooks.early_stopping.EarlyStoppingHookFactory attribute)</a>
 
       <ul>
@@ -2551,8 +2565,6 @@
 </li>
         <li><a href="_source/deepr.layers.html#module-deepr.layers.base">deepr.layers.base</a>
 </li>
-        <li><a href="_source/deepr.layers.html#module-deepr.layers.bpr">deepr.layers.bpr</a>
-</li>
         <li><a href="_source/deepr.layers.html#module-deepr.layers.click_rank">deepr.layers.click_rank</a>
 </li>
         <li><a href="_source/deepr.layers.html#module-deepr.layers.combinators">deepr.layers.combinators</a>
@@ -2564,6 +2576,8 @@
         <li><a href="_source/deepr.layers.html#module-deepr.layers.embedding">deepr.layers.embedding</a>
 </li>
         <li><a href="_source/deepr.layers.html#module-deepr.layers.lookup">deepr.layers.lookup</a>
+</li>
+        <li><a href="_source/deepr.layers.html#module-deepr.layers.losses">deepr.layers.losses</a>
 </li>
         <li><a href="_source/deepr.layers.html#module-deepr.layers.mask">deepr.layers.mask</a>
 </li>
@@ -2724,13 +2738,15 @@
       </ul></li>
       <li><a href="_source/deepr.io.html#deepr.io.path.Path.name">name() (deepr.io.path.Path property)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.nb_ps">nb_ps (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.nb_retries">nb_retries (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.nb_workers">nb_workers (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
+</li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.losses.NegativeSampling">NegativeSampling (class in deepr.layers.losses)</a>
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.optimize_saved_model.OptimizeSavedModel.new_names">new_names (deepr.jobs.optimize_saved_model.OptimizeSavedModel attribute)</a>, <a href="_source/deepr.jobs.html#id10">[1]</a>
 
