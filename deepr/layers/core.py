@@ -160,3 +160,18 @@ class Conv1d(base.Layer):
             use_bias=self.use_bias,
             **self._kwargs
         )
+
+
+class Softmax(base.Layer):
+    """Apply softmax to the last dimension of tensor with filtering masked values"""
+
+    def __init__(self, n_in: int = 2, n_out=1, **kwargs):
+        super().__init__(n_in=n_in, n_out=n_out, **kwargs)
+
+    def forward(self, tensors, mode: str = None):
+        """Forward method of the layer"""
+        tensor, mask = tensors
+        mask = tf.cast(mask, tf.float32)
+        tensor_exp = tf.exp(tensor - tf.reduce_max(tensor * mask, axis=-1, keepdims=True))
+        sum_tensor_exp = tf.reduce_sum(tf.multiply(tensor_exp, mask), axis=-1, keepdims=True)
+        return tf.div_no_nan(tensor_exp, sum_tensor_exp) * mask

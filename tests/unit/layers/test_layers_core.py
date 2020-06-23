@@ -78,3 +78,32 @@ def test_layers_conv1d():
         got2 = sess.run(result2)
         assert got.shape == (8, 8, 5)
         np.testing.assert_equal(got, got2)
+
+
+@pytest.mark.parametrize(
+    "tensor, mask, expected",
+    [
+        # normal 1d case
+        ([1, 1, 1, 1], [True, True, True, True], [0.25, 0.25, 0.25, 0.25]),
+        # normal 2d case
+        (
+            [[1, 1, 1, 1], [1, 1, 1, 1]],
+            [[True, True, True, True], [True, True, True, True]],
+            [[0.25, 0.25, 0.25, 0.25], [0.25, 0.25, 0.25, 0.25]],
+        ),
+        # case with mask
+        ([1, 1, 1, 1], [True, True, False, False], [0.5, 0.5, 0, 0]),
+        # case with mask
+        ([10_000, 0, 0, 0], [True, True, False, False], [1, 0, 0, 0]),
+    ],
+)
+def test_layers_softmax(tensor, mask, expected):
+    """Test for Softmax layer"""
+    tensor = tf.constant(tensor, dtype=tf.float32)
+    mask = tf.constant(mask, dtype=tf.bool)
+    expected = np.array(expected, dtype=np.float)
+    results = dpr.layers.Softmax()((tensor, mask))
+    with tf.Session() as sess:
+        sess.run(tf.global_variables_initializer())
+        got = sess.run(results)
+        np.testing.assert_equal(expected, got)
