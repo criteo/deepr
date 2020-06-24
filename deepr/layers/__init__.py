@@ -1,9 +1,23 @@
 # pylint: disable=unused-import,missing-docstring
 
 from deepr.layers.base import Layer, layer
+from deepr.layers.bpr import BPR, MaskedBPR
+from deepr.layers.bpr_max import BPRMax, MaskedBPRMax
 from deepr.layers.click_rank import ClickRank
 from deepr.layers.combinators import Sequential, Select, Rename, Parallel, ActiveMode
-from deepr.layers.core import Product, Sum, Concat, Dense, LogicalAnd, DotProduct, Add, Identity, Conv1d, ToFloat
+from deepr.layers.core import (
+    Product,
+    Sum,
+    Concat,
+    Dense,
+    LogicalAnd,
+    DotProduct,
+    Add,
+    Identity,
+    Conv1d,
+    ToFloat,
+    Softmax,
+)
 from deepr.layers.dropout import SpatialDropout1D, Dropout
 from deepr.layers.embedding import Embedding, CombineEmbeddings
 from deepr.layers.lookup import (
@@ -15,8 +29,8 @@ from deepr.layers.lookup import (
     table_from_file,
     table_from_mapping,
 )
-from deepr.layers.losses import BPR, MaskedBPR, BPRMax, MaskedBPRMax, NegativeSampling, MaskedNegativeSampling
 from deepr.layers.mask import Equal, NotEqual, BooleanMask, BooleanReduceMode, LookAheadMask, PaddingMask
+from deepr.layers.nce_loss import NegativeSampling, MaskedNegativeSampling
 from deepr.layers.reduce import Average, WeightedAverage
 from deepr.layers.size import IsMinSize
 from deepr.layers.slice import Slice, SliceFirst, SliceLast, SliceLastPadded
