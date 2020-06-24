@@ -12,6 +12,22 @@ deepr.layers.base module
    :undoc-members:
    :show-inheritance:
 
+deepr.layers.bpr module
+-----------------------
+
+.. automodule:: deepr.layers.bpr
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.layers.bpr\_max module
+----------------------------
+
+.. automodule:: deepr.layers.bpr_max
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 deepr.layers.click\_rank module
 -------------------------------
 
@@ -60,18 +76,18 @@ deepr.layers.lookup module
    :undoc-members:
    :show-inheritance:
 
-deepr.layers.losses module
---------------------------
-
-.. automodule:: deepr.layers.losses
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 deepr.layers.mask module
 ------------------------
 
 .. automodule:: deepr.layers.mask
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.layers.nce\_loss module
+-----------------------------
+
+.. automodule:: deepr.layers.nce_loss
    :members:
    :undoc-members:
    :show-inheritance:

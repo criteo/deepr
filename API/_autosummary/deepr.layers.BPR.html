@@ -249,11 +249,11 @@
 <h1>deepr.layers.BPR<a class="headerlink" href="#deepr-layers-bpr" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="deepr.layers.BPR">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.</code><code class="sig-name descname">BPR</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/losses.html#BPR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.BPR" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.</code><code class="sig-name descname">BPR</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/bpr.html#BPR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.BPR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Vanilla BPR Loss Layer</p>
 <dl class="py method">
 <dt id="deepr.layers.BPR.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/losses.html#BPR.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.BPR.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/bpr.html#BPR.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.BPR.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
@@ -268,7 +268,7 @@
 <td><p>Initialize self.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code>(tensors[, mode])</p></td>
-<td><p>Forward method of the layer</p></td>
+<td><p>Forward method of the layer (details: <a class="reference external" href="https://arxiv.org/pdf/1205.2618.pdf">https://arxiv.org/pdf/1205.2618.pdf</a>)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward_as_dict</span></code>(tensors[, mode])</p></td>
 <td><p>Forward method on a dictionary of Tensors.</p></td>
