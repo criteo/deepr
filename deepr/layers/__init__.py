@@ -36,3 +36,5 @@ from deepr.layers.size import IsMinSize
 from deepr.layers.slice import Slice, SliceFirst, SliceLast, SliceLastPadded
 from deepr.layers.sparse import ToDense
 from deepr.layers.string import StringJoin
+from deepr.layers.top_one import TopOne, MaskedTopOne
+from deepr.layers.top_one_max import TopOneMax, MaskedTopOneMax
