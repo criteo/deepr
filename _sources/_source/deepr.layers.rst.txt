@@ -132,6 +132,22 @@ deepr.layers.string module
    :undoc-members:
    :show-inheritance:
 
+deepr.layers.top\_one module
+----------------------------
+
+.. automodule:: deepr.layers.top_one
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.layers.top\_one\_max module
+---------------------------------
+
+.. automodule:: deepr.layers.top_one_max
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 
 Module contents
 ---------------

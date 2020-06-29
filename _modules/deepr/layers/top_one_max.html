@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>deepr.layers.nce_loss &mdash; deepr 2.4.2 documentation</title>
+  <title>deepr.layers.top_one_max &mdash; deepr 2.4.2 documentation</title>
   
 
   
@@ -147,7 +147,7 @@
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
-      <li>deepr.layers.nce_loss</li>
+      <li>deepr.layers.top_one_max</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -162,25 +162,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for deepr.layers.nce_loss</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Negative Sampling Loss Layer&quot;&quot;&quot;</span>
+  <h1>Source code for deepr.layers.top_one_max</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;TopOne Max Loss Layer&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 
 <span class="kn">from</span> <span class="nn">deepr.layers</span> <span class="kn">import</span> <span class="n">base</span>
 <span class="kn">from</span> <span class="nn">deepr.layers.reduce</span> <span class="kn">import</span> <span class="n">WeightedAverage</span><span class="p">,</span> <span class="n">Average</span>
+<span class="kn">from</span> <span class="nn">deepr.layers.core</span> <span class="kn">import</span> <span class="n">Softmax</span>
+<span class="kn">from</span> <span class="nn">deepr.utils.broadcasting</span> <span class="kn">import</span> <span class="n">make_same_shape</span>
 
 
-<div class="viewcode-block" id="NegativeSampling"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.nce_loss.NegativeSampling">[docs]</a><span class="k">class</span> <span class="nc">NegativeSampling</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Layer</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Vanilla Negative Sampling Loss Layer&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="TopOneMax"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.top_one_max.TopOneMax">[docs]</a><span class="k">class</span> <span class="nc">TopOneMax</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Layer</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Vanilla TopOne Max Loss Layer&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bpr_max_regularizer</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bpr_max_regularizer</span> <span class="o">=</span> <span class="n">bpr_max_regularizer</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<div class="viewcode-block" id="NegativeSampling.forward"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.nce_loss.NegativeSampling.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="TopOneMax.forward"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.top_one_max.TopOneMax.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Forward method of the layer</span>
-<span class="sd">        (details:</span>
-<span class="sd">        https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf)</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -191,24 +192,25 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        tf.Tensor</span>
-<span class="sd">            Negative Sampling loss</span>
+<span class="sd">            TopOne Max loss</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">positives</span><span class="p">,</span> <span class="n">negatives</span> <span class="o">=</span> <span class="n">tensors</span>
-        <span class="n">true_losses</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">sigmoid_cross_entropy_with_logits</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">positives</span><span class="p">),</span> <span class="n">logits</span><span class="o">=</span><span class="n">positives</span><span class="p">)</span>
-        <span class="n">sampled_losses</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">sigmoid_cross_entropy_with_logits</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">negatives</span><span class="p">),</span> <span class="n">logits</span><span class="o">=</span><span class="n">negatives</span><span class="p">)</span>
-        <span class="n">sampled_losses</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">sampled_losses</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">losses</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">true_losses</span><span class="p">,</span> <span class="n">sampled_losses</span><span class="p">)</span>
+        <span class="n">positives</span><span class="p">,</span> <span class="n">negatives</span> <span class="o">=</span> <span class="n">make_same_shape</span><span class="p">([</span><span class="n">positives</span><span class="p">,</span> <span class="n">negatives</span><span class="p">],</span> <span class="n">broadcast</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">softmax_scores</span> <span class="o">=</span> <span class="n">Softmax</span><span class="p">()((</span><span class="n">negatives</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">negatives</span><span class="p">)))</span>
+        <span class="n">losses</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">softmax_scores</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">negatives</span> <span class="o">-</span> <span class="n">positives</span><span class="p">)</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">negatives</span><span class="p">)))</span>
         <span class="k">return</span> <span class="n">Average</span><span class="p">()(</span><span class="n">losses</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="MaskedNegativeSampling"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.nce_loss.MaskedNegativeSampling">[docs]</a><span class="k">class</span> <span class="nc">MaskedNegativeSampling</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Layer</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Masked Negative Sampling Loss Layer&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="MaskedTopOneMax"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.top_one_max.MaskedTopOneMax">[docs]</a><span class="k">class</span> <span class="nc">MaskedTopOneMax</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Layer</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Masked TopOne Max Loss Layer&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bpr_max_regularizer</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bpr_max_regularizer</span> <span class="o">=</span> <span class="n">bpr_max_regularizer</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<div class="viewcode-block" id="MaskedNegativeSampling.forward"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.nce_loss.MaskedNegativeSampling.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="MaskedTopOneMax.forward"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.top_one_max.MaskedTopOneMax.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Forward method of the layer</span>
+<span class="sd">        (details: https://arxiv.org/pdf/1706.03847.pdf)</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -221,18 +223,12 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        tf.Tensor</span>
-<span class="sd">            Negative Sampling  loss</span>
+<span class="sd">            TopOne Max loss</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">positives</span><span class="p">,</span> <span class="n">negatives</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">tensors</span>
-        <span class="n">true_losses</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">sigmoid_cross_entropy_with_logits</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">positives</span><span class="p">),</span> <span class="n">logits</span><span class="o">=</span><span class="n">positives</span><span class="p">)</span>
-        <span class="n">sampled_losses</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">sigmoid_cross_entropy_with_logits</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">negatives</span><span class="p">),</span> <span class="n">logits</span><span class="o">=</span><span class="n">negatives</span><span class="p">)</span>
-        <span class="c1"># filter the values that correspond to mask</span>
-        <span class="n">negative_number</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">to_float</span><span class="p">(</span><span class="n">mask</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">sampled_losses</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">sampled_losses</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">to_float</span><span class="p">(</span><span class="n">mask</span><span class="p">))</span>
-        <span class="n">sampled_losses</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">sampled_losses</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">sampled_losses</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">div_no_nan</span><span class="p">(</span><span class="n">sampled_losses</span><span class="p">,</span> <span class="n">negative_number</span><span class="p">)</span>
-
-        <span class="n">losses</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">true_losses</span><span class="p">,</span> <span class="n">sampled_losses</span><span class="p">)</span>
+        <span class="n">positives</span><span class="p">,</span> <span class="n">negatives</span> <span class="o">=</span> <span class="n">make_same_shape</span><span class="p">([</span><span class="n">positives</span><span class="p">,</span> <span class="n">negatives</span><span class="p">],</span> <span class="n">broadcast</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">softmax_scores</span> <span class="o">=</span> <span class="n">Softmax</span><span class="p">()((</span><span class="n">negatives</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">to_float</span><span class="p">(</span><span class="n">mask</span><span class="p">)))</span>
+        <span class="n">losses</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">softmax_scores</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">negatives</span> <span class="o">-</span> <span class="n">positives</span><span class="p">)</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">negatives</span><span class="p">)))</span>
         <span class="c1"># One loss per event, average of scores : (batch, num_events)</span>
         <span class="n">event_scores</span> <span class="o">=</span> <span class="n">WeightedAverage</span><span class="p">()((</span><span class="n">losses</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">to_float</span><span class="p">(</span><span class="n">mask</span><span class="p">)))</span>
         <span class="c1"># Each event contributes according to its weight</span>

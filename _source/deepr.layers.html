@@ -1789,6 +1789,132 @@ each key to its corresponding line index as an tf.int64.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-deepr.layers.top_one">
+<span id="deepr-layers-top-one-module"></span><h2>deepr.layers.top_one module<a class="headerlink" href="#module-deepr.layers.top_one" title="Permalink to this headline">¶</a></h2>
+<p>Top1 Loss Layer</p>
+<dl class="py class">
+<dt id="deepr.layers.top_one.MaskedTopOne">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.top_one.</code><code class="sig-name descname">MaskedTopOne</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpr_max_regularizer</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/top_one.html#MaskedTopOne"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.top_one.MaskedTopOne" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Masked Top1 Loss Layer</p>
+<dl class="py method">
+<dt id="deepr.layers.top_one.MaskedTopOne.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/top_one.html#MaskedTopOne.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.top_one.MaskedTopOne.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method of the layer
+(details: <a class="reference external" href="https://arxiv.org/pdf/1706.03847.pdf">https://arxiv.org/pdf/1706.03847.pdf</a>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tensors</strong> (<em>Tuple</em><em>[</em><em>tf.Tensor</em><em>]</em>) – <ul class="simple">
+<li><p>positives : shape = (batch, num_events)</p></li>
+<li><p>negatives : shape = (batch, num_events, num_negatives)</p></li>
+<li><p>mask : shape = (batch, num_events, num_negatives)</p></li>
+<li><p>weights : shape = (batch, num_events)</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Top1 loss</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.layers.top_one.TopOne">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.top_one.</code><code class="sig-name descname">TopOne</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpr_max_regularizer</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/top_one.html#TopOne"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.top_one.TopOne" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Vanilla Top1 Loss Layer</p>
+<dl class="py method">
+<dt id="deepr.layers.top_one.TopOne.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/top_one.html#TopOne.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.top_one.TopOne.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method of the layer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tensors</strong> (<em>Tuple</em><em>[</em><em>tf.Tensor</em><em>]</em>) – <ul class="simple">
+<li><p>positives : shape = (batch, num_events)</p></li>
+<li><p>negatives : shape = (batch, num_events, num_negatives)</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Top1 loss</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.layers.top_one_max">
+<span id="deepr-layers-top-one-max-module"></span><h2>deepr.layers.top_one_max module<a class="headerlink" href="#module-deepr.layers.top_one_max" title="Permalink to this headline">¶</a></h2>
+<p>TopOne Max Loss Layer</p>
+<dl class="py class">
+<dt id="deepr.layers.top_one_max.MaskedTopOneMax">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.top_one_max.</code><code class="sig-name descname">MaskedTopOneMax</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpr_max_regularizer</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/top_one_max.html#MaskedTopOneMax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.top_one_max.MaskedTopOneMax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Masked TopOne Max Loss Layer</p>
+<dl class="py method">
+<dt id="deepr.layers.top_one_max.MaskedTopOneMax.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/top_one_max.html#MaskedTopOneMax.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.top_one_max.MaskedTopOneMax.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method of the layer
+(details: <a class="reference external" href="https://arxiv.org/pdf/1706.03847.pdf">https://arxiv.org/pdf/1706.03847.pdf</a>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tensors</strong> (<em>Tuple</em><em>[</em><em>tf.Tensor</em><em>]</em>) – <ul class="simple">
+<li><p>positives : shape = (batch, num_events)</p></li>
+<li><p>negatives : shape = (batch, num_events, num_negatives)</p></li>
+<li><p>mask : shape = (batch, num_events, num_negatives)</p></li>
+<li><p>weights : shape = (batch, num_events)</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TopOne Max loss</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.layers.top_one_max.TopOneMax">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.top_one_max.</code><code class="sig-name descname">TopOneMax</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpr_max_regularizer</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/top_one_max.html#TopOneMax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.top_one_max.TopOneMax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Vanilla TopOne Max Loss Layer</p>
+<dl class="py method">
+<dt id="deepr.layers.top_one_max.TopOneMax.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/top_one_max.html#TopOneMax.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.top_one_max.TopOneMax.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method of the layer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tensors</strong> (<em>Tuple</em><em>[</em><em>tf.Tensor</em><em>]</em>) – <ul class="simple">
+<li><p>positives : shape = (batch, num_events)</p></li>
+<li><p>negatives : shape = (batch, num_events, num_negatives)</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TopOne Max loss</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="module-deepr.layers">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-deepr.layers" title="Permalink to this headline">¶</a></h2>
 </div>
