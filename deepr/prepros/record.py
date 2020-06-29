@@ -1,25 +1,27 @@
 """Parse TF Records"""
 
-from typing import Dict, List
+from typing import Dict, List, Iterable
 
 import tensorflow as tf
 
 from deepr.utils.field import Field
-from deepr.prepros import base
+from deepr.prepros import core
 
 
-class FromExample(base.Prepro):
+class FromExample(core.Map):
     """Parse TF Record Sequence Example"""
 
-    def __init__(self, fields: List[Field], num_parallel_calls: int = None, sequence: bool = None):
-        super().__init__()
+    def __init__(
+        self,
+        fields: List[Field],
+        sequence: bool = None,
+        modes: Iterable[str] = None,
+        num_parallel_calls: int = None,
+        batched: bool = False,
+    ):
         self.fields = fields
-        self.num_parallel_calls = num_parallel_calls
         self.sequence = sequence
-
-    @property
-    def parse_fn(self):
-        """Return parse function."""
+        self.batched = batched
 
         features = {
             field.name: (
@@ -30,15 +32,23 @@ class FromExample(base.Prepro):
         }
         sequence_features = {field.name: field.feature_specs for field in self.fields if field.sequence}
 
-        def _parse_func(serialized) -> Dict[str, tf.Tensor]:
+        def _map_func(serialized) -> Dict[str, tf.Tensor]:
             """Parse tf.Example into dictionary of tf.Tensor"""
             if sequence_features or self.sequence:
-                context, sequence = tf.io.parse_single_sequence_example(
-                    serialized, context_features=features, sequence_features=sequence_features
-                )
+                if self.batched:
+                    context, sequence, _ = tf.io.parse_sequence_example(
+                        serialized, context_features=features, sequence_features=sequence_features
+                    )
+                else:
+                    context, sequence = tf.io.parse_single_sequence_example(
+                        serialized, context_features=features, sequence_features=sequence_features
+                    )
                 tensors = {**context, **sequence}
             else:
-                tensors = tf.io.parse_single_example(serialized, features=features)
+                if self.batched:
+                    tensors = tf.io.parse_example(serialized, features=features)
+                else:
+                    tensors = tf.io.parse_single_example(serialized, features=features)
 
             return {
                 field.name: (
@@ -49,29 +59,24 @@ class FromExample(base.Prepro):
                 for field in self.fields
             }
 
-        return _parse_func
-
-    def apply(self, dataset: tf.data.Dataset, mode: str = None):
-        return dataset.map(self.parse_fn, num_parallel_calls=self.num_parallel_calls)
+        super().__init__(
+            map_func=_map_func, on_dict=False, update=False, num_parallel_calls=num_parallel_calls, modes=modes
+        )
 
 
 TFRecordSequenceExample = FromExample  # Legacy
 
 
-class ToExample(base.Prepro):
+class ToExample(core.Map):
     """Convert dictionary of Tensors to tf.SequenceExample."""
 
-    def __init__(self, fields: List[Field], num_parallel_calls: int = None, sequence: bool = None):
-        super().__init__()
+    def __init__(
+        self, fields: List[Field], sequence: bool = None, modes: Iterable[str] = None, num_parallel_calls: int = None
+    ):
         self.fields = fields
-        self.num_parallel_calls = num_parallel_calls
         self.sequence = sequence
 
-    @property
-    def serialize_fn(self):
-        """Return parse function."""
-
-        def _serialize_fn(*tensors):
+        def _map_func_np(*tensors):
             feature, feature_list = {}, {}
             for field, tensor in zip(self.fields, tensors):
                 # Convert Eager Tensor to tf.train.Feature
@@ -97,15 +102,14 @@ class ToExample(base.Prepro):
                 example = tf.train.Example(features=tf.train.Features(feature=feature))
             return example.SerializeToString()
 
-        def _tf_serialize_fn(element):
+        def _map_func_tf(element):
             tensors = [
                 (element[field.name] if field.is_featurizable() else tf.io.serialize_tensor(element[field.name]))
                 for field in self.fields
             ]
-            tf_string = tf.py_function(_serialize_fn, tensors, tf.string)
+            tf_string = tf.py_function(_map_func_np, tensors, tf.string)
             return tf.reshape(tf_string, ())
 
-        return _tf_serialize_fn
-
-    def apply(self, dataset: tf.data.Dataset, mode: str = None):
-        return dataset.map(self.serialize_fn, num_parallel_calls=self.num_parallel_calls)
+        super().__init__(
+            map_func=_map_func_tf, on_dict=False, update=False, num_parallel_calls=num_parallel_calls, modes=modes
+        )
