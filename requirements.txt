@@ -7,6 +7,6 @@ jsonnet==0.15.0
 numpy==1.18.2
 psutil==5.7.0
 pyarrow==0.14.1
-mlflow==1.8.0
+mlflow==1.9.1
 skein==0.8.0
 tf-yarn==0.4.20
