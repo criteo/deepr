@@ -1,12 +1,19 @@
 """Tensorflow Graph utilities."""
 
+import logging
 from typing import Dict, List
 
 import tensorflow as tf
 from tensorflow.python.platform import gfile
 
 
-def import_graph_def(path_pb: str, name: str = "model"):
+LOGGER = logging.getLogger(__name__)
+
+
+INIT_ALL_TABLES = "init_all_tables"
+
+
+def import_graph_def(path_pb: str, name: str = ""):
     """Import Graph Definition from protobuff into the current Graph.
 
     Parameters
@@ -18,6 +25,24 @@ def import_graph_def(path_pb: str, name: str = "model"):
         graph_def = tf.GraphDef()
         graph_def.ParseFromString(f.read())
         tf.import_graph_def(graph_def, name=name)
+
+
+def get_by_name(graph: tf.Graph, name: str):
+    """Return op in Graph with name or None if not found.
+
+    Parameters
+    ----------
+    graph : tf.Graph
+        A Tensorflow Graph
+
+    Returns
+    -------
+    tf.Operation or None
+    """
+    for node in graph.as_graph_def().node:
+        if node.name == name:
+            return graph.as_graph_element(node.name)
+    return None
 
 
 def get_feedable_tensors(graph: tf.Graph, names: List[str]) -> Dict[str, tf.Tensor]:

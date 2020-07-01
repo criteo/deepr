@@ -11,6 +11,7 @@ from tensorflow.python.framework.graph_util import extract_sub_graph
 
 from deepr.io import Path
 from deepr.jobs import base
+from deepr.utils.graph import INIT_ALL_TABLES
 
 
 LOGGER = logging.getLogger(__name__)
@@ -92,8 +93,20 @@ class OptimizeSavedModel(base.Job):
 
         # Reload SavedModel Graph, optimize and export
         with tf.Session(graph=tf.Graph()) as sess:
-            graph = tf.saved_model.loader.load(sess, ["serve"], latest)
-            graph_def = graph.graph_def
+            meta_graph_def = tf.saved_model.loader.load(sess, ["serve"], latest)
+            graph_def = meta_graph_def.graph_def
+
+            # Add table initializer if present, or create it
+            if INIT_ALL_TABLES in {node.name for node in graph_def.node}:
+                fetch.append(INIT_ALL_TABLES)
+            else:
+                table_initializers = tf.get_collection(tf.GraphKeys.TABLE_INITIALIZERS)
+                if table_initializers:
+                    LOGGER.info(f"Adding {INIT_ALL_TABLES} Node to the graph")
+                    table_init_op = tf.group(*table_initializers, name=INIT_ALL_TABLES)
+                    node_def = table_init_op.node_def
+                    graph_def.node.append(node_def)
+                    fetch.append(INIT_ALL_TABLES)
 
             # Rename nodes
             graph_def = rename_nodes(graph_def, self.new_names)
