@@ -1,4 +1,4 @@
-tensorflow>=1.15,<2
+tensorflow>=1.15,<3
 cluster-pack==0.0.8
 dataclasses
 fire==0.3.1

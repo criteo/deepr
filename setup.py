@@ -32,7 +32,7 @@ if __name__ == "__main__":
             "pyarrow>=0.14",
             "skein>=0.8",
         ],
-        extras_require={"cpu": ["tensorflow>=1.15,<2"], "gpu": ["tensorflow-gpu>=1.15,<2"]},
+        extras_require={"cpu": ["tensorflow>=1.15,<3"], "gpu": ["tensorflow-gpu>=1.15,<2"]},
         tests_require=["pytest"],
         dependency_links=[],
         entry_points={"console_scripts": ["deepr = deepr.cli.main:main"]},
