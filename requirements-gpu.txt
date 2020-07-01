@@ -3,7 +3,7 @@ cluster-pack==0.0.8
 dataclasses
 fire==0.3.1
 graphyte==1.6.0
-jsonnet==0.15.0
+jsonnet==0.16.0
 numpy==1.18.2
 psutil==5.7.0
 pyarrow==0.14.1
