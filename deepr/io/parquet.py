@@ -132,7 +132,7 @@ class ParquetDataset:
             msg = f"Cannot write table to {self.path_or_paths} (expected string)"
             raise TypeError(msg)
         if num_chunks is not None and chunk_size is not None:
-            msg = f"Both num_chunks and chunk_size are given, not allowed"
+            msg = "Both num_chunks and chunk_size are given, not allowed"
             raise ValueError(msg)
         if chunk_size is not None:
             num_chunks = max(len(df) // chunk_size, 1)

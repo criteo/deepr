@@ -74,7 +74,7 @@ class TableContext:
     @classmethod
     def active(cls):
         if cls._ACTIVE is None:
-            msg = f"No active TableContext found. Wrap your code in a `with TableContext():`"
+            msg = "No active TableContext found. Wrap your code in a `with TableContext():`"
             raise ValueError(msg)
         return cls._ACTIVE
 
