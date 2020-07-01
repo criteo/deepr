@@ -23,7 +23,7 @@ class CopyDir(base.Job):
         if self.skip_copy:
             LOGGER.info(f"NOT COPYING {self.source} to {self.target} (skip_copy=True)")
             return
-        if self.overwrite_destination_folder and Path(self.target).is_dir():
+        if self.overwrite and Path(self.target).is_dir():
             Path(self.target).delete_dir()
 
         LOGGER.info(f"Copying {self.source} to {self.target}")
