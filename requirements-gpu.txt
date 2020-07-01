@@ -7,4 +7,4 @@ jsonnet==0.15.0
 numpy==1.18.2
 psutil==5.7.0
 pyarrow==0.14.1
-tf-yarn==0.4.20
+tf-yarn==0.5.1
