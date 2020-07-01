@@ -15,7 +15,7 @@ def test_prepros_from_example():
     )
     serialized = example.SerializeToString()
     from_example = dpr.prepros.FromExample(fields=[dpr.Field(name="x", shape=(2, 2), dtype=tf.int64)])
-    got = from_example.parse_fn(serialized)
+    got = from_example.map_func(serialized)
     assert isinstance(got["x"], tf.Tensor)
     assert got["x"].shape == (2, 2)
     with tf.Session() as sess:
@@ -29,7 +29,7 @@ def test_prepros_to_example():
     uid = dpr.Field(name="uid", shape=(), dtype=tf.string)
     tensor = {"x": np.array([[0, 1], [2, 3]]), "y": np.ones([2, 3, 4], dtype=np.int64), "uid": b"1234"}
     to_example = dpr.prepros.ToExample(fields=[x, y, uid])
-    example = to_example.serialize_fn(tensor)
+    example = to_example.map_func(tensor)
     assert isinstance(example, tf.Tensor)
     assert example.dtype == tf.string
     assert example.shape == ()
@@ -55,8 +55,8 @@ def test_end_to_end(field, tensor):
     """Test end-to-end, serialize then parse."""
     to_example = dpr.prepros.ToExample(fields=[field])
     from_example = dpr.prepros.FromExample(fields=[field])
-    example = to_example.serialize_fn({field.name: tensor})
-    got = from_example.parse_fn(example)[field.name]
+    example = to_example.map_func({field.name: tensor})
+    got = from_example.map_func(example)[field.name]
     if field.is_sparse():
         got = dpr.layers.ToDense(default_value=field.default)(got)
     with tf.Session() as sess:
