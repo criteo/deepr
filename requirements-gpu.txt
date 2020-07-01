@@ -1,4 +1,4 @@
-tensorflow-gpu>=1,<2
+tensorflow-gpu>=1,<3
 cluster-pack==0.0.8
 dataclasses
 fire==0.3.1
