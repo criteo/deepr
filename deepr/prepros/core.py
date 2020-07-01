@@ -111,7 +111,7 @@ class Map(base.Prepro):
         self.num_parallel_calls = num_parallel_calls
 
         if self.update and not self.on_dict:
-            raise ValueError(f"update=True but on_dict=False (incoherent)")
+            raise ValueError("update=True but on_dict=False (incoherent)")
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.map_func})"

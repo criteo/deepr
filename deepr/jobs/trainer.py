@@ -349,7 +349,7 @@ def model_fn(
         return tf.estimator.EstimatorSpec(
             mode,
             loss=loss,
-            eval_metric_ops={key if key != "loss" else f"average_loss": metric for key, metric in metrics.items()},
+            eval_metric_ops={key if key != "loss" else "average_loss": metric for key, metric in metrics.items()},
             evaluation_hooks=[hook({key: val for key, (val, _) in metrics.items()}) for hook in eval_hooks],
         )
 
