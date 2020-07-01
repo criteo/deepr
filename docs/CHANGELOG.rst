@@ -23,6 +23,28 @@ Fixed
 Security
 ~~~~~~~~
 
+[2.5.0] - 2020-07-01
+--------------------
+
+Added
+~~~~~
+- Batched support for ``FromExample`` (use ``tf.train.parse_example`` instead of ``parse_single_example``)
+- Support ``num_shards_embeddings=None`` in ``utils.save_checkpoint``
+- Top1, Top1Max, BPRMax, NCE losses
+
+Changed
+~~~~~~~
+- Various versions of requirements in ``requirements.txt``
+
+Deprecated
+~~~~~~~~~~
+Removed
+~~~~~~~
+Fixed
+~~~~~
+Security
+~~~~~~~~
+
 
 [2.4.2] - 2020-06-19
 --------------------
