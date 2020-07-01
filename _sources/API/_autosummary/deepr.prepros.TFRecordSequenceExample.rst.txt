@@ -24,6 +24,6 @@ deepr.prepros.TFRecordSequenceExample
 
    .. autosummary::
    
-      ~TFRecordSequenceExample.parse_fn
+      ~TFRecordSequenceExample.tf_map_func
    
    

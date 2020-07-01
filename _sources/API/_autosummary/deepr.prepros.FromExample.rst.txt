@@ -24,6 +24,6 @@ deepr.prepros.FromExample
 
    .. autosummary::
    
-      ~FromExample.parse_fn
+      ~FromExample.tf_map_func
    
    

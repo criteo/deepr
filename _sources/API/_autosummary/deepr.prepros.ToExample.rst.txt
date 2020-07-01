@@ -24,6 +24,6 @@ deepr.prepros.ToExample
 
    .. autosummary::
    
-      ~ToExample.serialize_fn
+      ~ToExample.tf_map_func
    
    
