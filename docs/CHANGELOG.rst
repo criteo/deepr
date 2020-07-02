@@ -23,6 +23,13 @@ Fixed
 Security
 ~~~~~~~~
 
+[2.6.0] - 2020-07-02
+--------------------
+
+Added
+~~~~~
+- Add table support in ProtoPredict and ProtoExport
+
 
 [2.5.1] - 2020-07-01
 --------------------
