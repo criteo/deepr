@@ -6,7 +6,13 @@ from typing import List, Union
 import tensorflow as tf
 
 from deepr.predictors import base
-from deepr.utils.graph import import_graph_def, get_feedable_tensors, get_fetchable_tensors
+from deepr.utils.graph import (
+    import_graph_def,
+    get_feedable_tensors,
+    get_fetchable_tensors,
+    get_by_name,
+    INIT_ALL_TABLES,
+)
 
 
 LOGGER = logging.getLogger(__name__)
@@ -31,20 +37,19 @@ class ProtoPredictor(base.Predictor):
         self.feeds = feeds.split(",") if isinstance(feeds, str) else feeds
         self.fetches = fetches.split(",") if isinstance(fetches, str) else fetches
 
-        # Create session and import graph under scope "model"
+        # Create session and import graph
         session = tf.Session(graph=tf.Graph())
         with session.graph.as_default():
-            import_graph_def(path, name="model")
+            import_graph_def(path)
 
-        # Retrieve feed tensors (add and remove "model" scope prefix)
-        feed_tensors = {
-            "/".join(name.split("/")[1:]): tensor
-            for name, tensor in get_feedable_tensors(session.graph, [f"model/{name}" for name in self.feeds]).items()
-        }
+            # Run Table initializer if present in the graph
+            init_all_tables = get_by_name(session.graph, INIT_ALL_TABLES)
+            if init_all_tables:
+                LOGGER.info(f"Running {INIT_ALL_TABLES}")
+                session.run(init_all_tables)
 
-        # Retrieve fetch tensors (add and remove "model" scope prefix)
-        fetch_tensors = {
-            "/".join(name.split("/")[1:]): tensor
-            for name, tensor in get_fetchable_tensors(session.graph, [f"model/{name}" for name in self.fetches]).items()
-        }
+        # Retrieve feeds and fetches
+        feed_tensors = get_feedable_tensors(session.graph, self.feeds)
+        fetch_tensors = get_fetchable_tensors(session.graph, self.fetches)
+
         super().__init__(session=session, feed_tensors=feed_tensors, fetch_tensors=fetch_tensors)

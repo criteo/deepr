@@ -28,7 +28,6 @@ def test_layers_top_one_max():
         "negatives": np.random.random([batch_size, num_target, num_negatives, dim]),
         "mask": np.random.randint(0, 2, size=[batch_size, num_target, num_negatives]),
         "weights": np.random.random([batch_size, num_target]),
-
     }
 
     # Compute TopOne Max loss naively
@@ -63,7 +62,11 @@ def test_layers_top_one_max():
             for negative in range(num_negatives):
                 m = inputs["mask"][batch, target, negative]
                 neg_product = neg_products[negative]
-                scores += softmaxes[negative] * (1 / (1 + np.exp(-(neg_product - pos_product))) + 1 / (1 + np.exp(-neg_product ** 2))) * m
+                scores += (
+                    softmaxes[negative]
+                    * (1 / (1 + np.exp(-(neg_product - pos_product))) + 1 / (1 + np.exp(-neg_product ** 2)))
+                    * m
+                )
                 negative_mask += m
 
             scores = scores / negative_mask if negative_mask else 0
