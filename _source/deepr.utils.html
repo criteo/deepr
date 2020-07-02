@@ -477,6 +477,23 @@ sure to use the same order with NumPy.</p>
 <span id="deepr-utils-graph-module"></span><h2>deepr.utils.graph module<a class="headerlink" href="#module-deepr.utils.graph" title="Permalink to this headline">¶</a></h2>
 <p>Tensorflow Graph utilities.</p>
 <dl class="py function">
+<dt id="deepr.utils.graph.get_by_name">
+<code class="sig-prename descclassname">deepr.utils.graph.</code><code class="sig-name descname">get_by_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/graph.html#get_by_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.graph.get_by_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return op in Graph with name or None if not found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>tf.Graph</em>) – A Tensorflow Graph</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Operation or <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt id="deepr.utils.graph.get_feedable_tensors">
 <code class="sig-prename descclassname">deepr.utils.graph.</code><code class="sig-name descname">get_feedable_tensors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">names</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/graph.html#get_feedable_tensors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.graph.get_feedable_tensors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve feed tensors from graph.</p>
@@ -518,7 +535,7 @@ sure to use the same order with NumPy.</p>
 
 <dl class="py function">
 <dt id="deepr.utils.graph.import_graph_def">
-<code class="sig-prename descclassname">deepr.utils.graph.</code><code class="sig-name descname">import_graph_def</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_pb</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'model'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/graph.html#import_graph_def"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.graph.import_graph_def" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">deepr.utils.graph.</code><code class="sig-name descname">import_graph_def</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_pb</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/utils/graph.html#import_graph_def"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.utils.graph.import_graph_def" title="Permalink to this definition">¶</a></dt>
 <dd><p>Import Graph Definition from protobuff into the current Graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

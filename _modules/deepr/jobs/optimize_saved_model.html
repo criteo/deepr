@@ -176,6 +176,7 @@
 
 <span class="kn">from</span> <span class="nn">deepr.io</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">deepr.jobs</span> <span class="kn">import</span> <span class="n">base</span>
+<span class="kn">from</span> <span class="nn">deepr.utils.graph</span> <span class="kn">import</span> <span class="n">INIT_ALL_TABLES</span>
 
 
 <span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -257,8 +258,20 @@
 
         <span class="c1"># Reload SavedModel Graph, optimize and export</span>
         <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">())</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
-            <span class="n">graph</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;serve&quot;</span><span class="p">],</span> <span class="n">latest</span><span class="p">)</span>
-            <span class="n">graph_def</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">graph_def</span>
+            <span class="n">meta_graph_def</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;serve&quot;</span><span class="p">],</span> <span class="n">latest</span><span class="p">)</span>
+            <span class="n">graph_def</span> <span class="o">=</span> <span class="n">meta_graph_def</span><span class="o">.</span><span class="n">graph_def</span>
+
+            <span class="c1"># Add table initializer if present, or create it</span>
+            <span class="k">if</span> <span class="n">INIT_ALL_TABLES</span> <span class="ow">in</span> <span class="p">{</span><span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph_def</span><span class="o">.</span><span class="n">node</span><span class="p">}:</span>
+                <span class="n">fetch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">INIT_ALL_TABLES</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">table_initializers</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">GraphKeys</span><span class="o">.</span><span class="n">TABLE_INITIALIZERS</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">table_initializers</span><span class="p">:</span>
+                    <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Adding </span><span class="si">{</span><span class="n">INIT_ALL_TABLES</span><span class="si">}</span><span class="s2"> Node to the graph&quot;</span><span class="p">)</span>
+                    <span class="n">table_init_op</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="o">*</span><span class="n">table_initializers</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">INIT_ALL_TABLES</span><span class="p">)</span>
+                    <span class="n">node_def</span> <span class="o">=</span> <span class="n">table_init_op</span><span class="o">.</span><span class="n">node_def</span>
+                    <span class="n">graph_def</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node_def</span><span class="p">)</span>
+                    <span class="n">fetch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">INIT_ALL_TABLES</span><span class="p">)</span>
 
             <span class="c1"># Rename nodes</span>
             <span class="n">graph_def</span> <span class="o">=</span> <span class="n">rename_nodes</span><span class="p">(</span><span class="n">graph_def</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_names</span><span class="p">)</span>
