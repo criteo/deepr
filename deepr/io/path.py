@@ -1,7 +1,7 @@
 """Path Utilities"""
 
 from contextlib import contextmanager
-from typing import Union, Generator
+from typing import Union, Generator, Optional
 import os
 import pathlib
 from urllib import parse
@@ -201,7 +201,7 @@ class Path:
             return (Path(path) for path in tf.io.gfile.glob(str(Path(self, pattern))))
 
     @contextmanager
-    def open(self, mode: str = "r", encoding: str = None, filesystem: FileSystem = None):
+    def open(self, mode: str = "r", encoding: Optional[str] = "utf-8", filesystem: FileSystem = None):
         """Open file on both HDFS and Local File Systems.
 
         Example
@@ -215,13 +215,15 @@ class Path:
                 file.write("Hello world!")
 
         """
+        if "b" in mode:
+            encoding = None
         if filesystem is not None:
-            with HDFSFile(filesystem=filesystem, path=str(self), mode=mode) as file:
+            with HDFSFile(filesystem=filesystem, path=str(self), mode=mode, encoding=encoding) as file:
                 yield file
         else:
             if self.is_hdfs:
                 with HDFSFileSystem() as hdfs:
-                    with HDFSFile(filesystem=hdfs, path=str(self), mode=mode) as file:
+                    with HDFSFile(filesystem=hdfs, path=str(self), mode=mode, encoding=encoding) as file:
                         yield file
             else:
                 with pathlib.Path(str(self)).open(mode=mode, encoding=encoding) as file:

@@ -1,8 +1,9 @@
 """HDFS Utilities"""
 
+from typing import Optional
 import logging
-import pyarrow
 
+import pyarrow
 from pyarrow.filesystem import FileSystem
 
 
@@ -60,10 +61,11 @@ class HDFSFile:
         Write / read mode. Supported: "r", "rb" (default), "w", "wb".
     """
 
-    def __init__(self, filesystem: FileSystem, path: str, mode: str = "rb"):
+    def __init__(self, filesystem: FileSystem, path: str, mode: str = "rb", encoding: Optional[str] = "utf-8"):
         self.filesystem = filesystem
         self.path = path
         self.mode = mode
+        self.encoding = None if "b" in mode else encoding
         self._file = filesystem.open(self.path, mode={"r": "rb", "w": "wb"}.get(mode, mode))
 
     def __iter__(self):
@@ -82,15 +84,19 @@ class HDFSFile:
 
     def write(self, data):
         if self.mode == "w":
-            self._file.write(data.encode())
-        else:
+            self._file.write(data.encode(encoding=self.encoding))
+        elif self.mode == "wb":
             self._file.write(data)
+        else:
+            raise ValueError(f"Mode {self.mode} unkown (must be 'w' or 'wb').")
 
     def read(self):
         if self.mode == "r":
-            return self._file.read().decode()
-        else:
+            return self._file.read().decode(encoding=self.encoding)
+        elif self.mode == "rb":
             return self._file.read()
+        else:
+            raise ValueError(f"Mode {self.mode} unkown (must be 'r' or 'rb')")
 
     def readlines(self):
         return self.read().split("\n" if self.mode == "r" else b"\n")
