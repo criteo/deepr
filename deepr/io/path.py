@@ -216,7 +216,7 @@ class Path:
 
         """
         if "b" in mode:
-            encoding = None
+            encoding = None  # mypy: ignore
         if filesystem is not None:
             with HDFSFile(filesystem=filesystem, path=str(self), mode=mode, encoding=encoding) as file:
                 yield file
