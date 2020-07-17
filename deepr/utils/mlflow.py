@@ -45,16 +45,26 @@ search_runs = handle_exceptions(mlflow.search_runs)
 set_tag = handle_exceptions(mlflow.set_tag)
 set_tags = handle_exceptions(mlflow.set_tags)
 set_tracking_uri = handle_exceptions(mlflow.set_tracking_uri)
+set_experiment = handle_exceptions(mlflow.set_experiment)
 start_run = handle_exceptions(mlflow.start_run)
 
 
 @handle_exceptions
-def set_experiment(name: str, artifact_location: str = None):
+def set_or_create_experiment(name: str, artifact_location: str = None):
     """Set Experiment with specific artifact_location."""
-    if mlflow.tracking.client.MlflowClient().get_experiment_by_name(name) is None:
-        mlflow.create_experiment(name=name, artifact_location=artifact_location)
+    # Set or Create Experiment
+    if get_experiment_by_name(name) is None:
+        create_experiment(name=name, artifact_location=artifact_location)
     else:
-        mlflow.set_experiment(name)
+        set_experiment(name)
+
+    # Check Experiment
+    experiment = get_experiment_by_name(name)
+    LOGGER.info(f"Experiment: {experiment}")
+    if artifact_location:
+        if experiment.artifact_location != artifact_location:
+            msg = f"Incoherent artifact locations. Existing: {experiment.artifact_location}, Got: {artifact_location}"
+            LOGGER.warning(msg)
 
 
 @handle_exceptions
