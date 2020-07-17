@@ -4,19 +4,21 @@ from deepr.layers.base import Layer, layer
 from deepr.layers.bpr import BPR, MaskedBPR
 from deepr.layers.bpr_max import BPRMax, MaskedBPRMax
 from deepr.layers.click_rank import ClickRank
-from deepr.layers.combinators import Sequential, Select, Rename, Parallel, ActiveMode
+from deepr.layers.combinators import Sequential, Select, Rename, Parallel, ActiveMode, Scope
 from deepr.layers.core import (
-    Product,
-    Sum,
-    Concat,
-    Dense,
-    LogicalAnd,
-    DotProduct,
     Add,
-    Identity,
+    Concat,
     Conv1d,
-    ToFloat,
+    Dense,
+    DotProduct,
+    Identity,
+    LogicalAnd,
+    LogicalOr,
+    Product,
+    Scale,
     Softmax,
+    Sum,
+    ToFloat,
 )
 from deepr.layers.dropout import SpatialDropout1D, Dropout
 from deepr.layers.embedding import Embedding, CombineEmbeddings
@@ -29,7 +31,7 @@ from deepr.layers.lookup import (
     table_from_file,
     table_from_mapping,
 )
-from deepr.layers.mask import Equal, NotEqual, BooleanMask, BooleanReduceMode, LookAheadMask, PaddingMask
+from deepr.layers.mask import Equal, NotEqual, BooleanMask, BooleanReduceMode
 from deepr.layers.nce_loss import NegativeSampling, MaskedNegativeSampling
 from deepr.layers.reduce import Average, WeightedAverage
 from deepr.layers.size import IsMinSize
@@ -38,3 +40,11 @@ from deepr.layers.sparse import ToDense
 from deepr.layers.string import StringJoin
 from deepr.layers.top_one import TopOne, MaskedTopOne
 from deepr.layers.top_one_max import TopOneMax, MaskedTopOneMax
+from deepr.layers.transformer import (
+    Transformer,
+    FeedForward,
+    Normalization,
+    PositionalEncoding,
+    SelfMultiheadAttention,
+    AttentionMask,
+)

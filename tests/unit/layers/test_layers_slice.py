@@ -35,7 +35,7 @@ def test_layers_slice_last():
 
 def test_layers_slice_last_padded():
     """Test for SliceLastPadded"""
-    layer = dpr.layers.SliceLastPadded(padded_value=-1)
+    layer = dpr.layers.SliceLastPadded()
     tensor = tf.constant(
         [
             [[1, 1, 1], [2, 2, 2], [3, 3, 3], [4, 4, 4]],
@@ -44,8 +44,10 @@ def test_layers_slice_last_padded():
         ],
         dtype=tf.float32,
     )
-    input_timelines_batch = tf.constant([[0, -1, -1, -1], [2, 4, -1, -1], [1, 1, 0, 4]], dtype=tf.int64)
-    result = layer((tensor, input_timelines_batch))
+    mask = tf.constant(
+        [[True, False, False, False], [True, True, False, False], [True, False, True, True]], dtype=tf.bool
+    )
+    result = layer((tensor, mask))
     expected = np.array([[1, 1, 1], [2, 2, 2], [4, 4, 4]], dtype=np.float32)
     with tf.Session() as sess:
         got = sess.run(result)

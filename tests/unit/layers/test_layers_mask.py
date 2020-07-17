@@ -31,25 +31,3 @@ def test_layers_boolean_mask():
     with tf.Session() as sess:
         got = sess.run(result)
         np.testing.assert_equal(got, [0, 2])
-
-
-def test_layers_look_ahead_mask():
-    """Test for LookAheadMask"""
-    layer = dpr.layers.LookAheadMask()
-    tensor = tf.random.uniform((1, 3))
-    result = layer(tensor)
-    expected = [[0, 1, 1], [0, 0, 1], [0, 0, 0]]
-    with tf.Session() as sess:
-        got = sess.run(result)
-        np.testing.assert_equal(got, expected)
-
-
-def test_layers_padding_mask():
-    """Test for PaddingMask"""
-    layer = dpr.layers.PaddingMask(padded_value=-1)
-    tensor = [1, 2, 3, -1, -1, 4]
-    result = layer(tensor)
-    expected = [0, 0, 0, 1, 1, 0]
-    with tf.Session() as sess:
-        got = sess.run(result)
-        np.testing.assert_equal(got, expected)

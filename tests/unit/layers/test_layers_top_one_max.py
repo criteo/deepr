@@ -64,7 +64,7 @@ def test_layers_top_one_max():
                 neg_product = neg_products[negative]
                 scores += (
                     softmaxes[negative]
-                    * (1 / (1 + np.exp(-(neg_product - pos_product))) + 1 / (1 + np.exp(-neg_product ** 2)))
+                    * (1 / (1 + np.exp(-(neg_product - pos_product))) + 1 / (1 + np.exp(-(neg_product ** 2))))
                     * m
                 )
                 negative_mask += m

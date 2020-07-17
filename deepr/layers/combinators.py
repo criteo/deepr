@@ -2,6 +2,8 @@
 
 from typing import Dict, List, Union, Tuple, Generator
 
+import tensorflow as tf
+
 from deepr.layers.base import Layer
 from deepr.utils.datastruct import to_flat_tuple
 
@@ -176,6 +178,23 @@ class ActiveMode(Layer):
         if self.mode is not None and mode is not None and mode not in self.mode:
             return tensors
         return self.layer.forward(tensors, mode)
+
+
+class Scope(Layer):
+    """Add variable scoping to layer."""
+
+    def __init__(self, layer: Layer, name_or_scope: str, **kwargs):
+        self.layer = layer
+        self.name_or_scope = name_or_scope
+        self._kwargs = kwargs
+        super().__init__(
+            n_in=layer.n_in, n_out=layer.n_out, inputs=layer.inputs, outputs=layer.outputs, name=layer.name
+        )
+
+    def forward(self, tensors, mode: str = None):
+        """Forward method of the layer"""
+        with tf.variable_scope(self.name_or_scope, **self._kwargs):
+            return self.layer.forward(tensors, mode)
 
 
 class Rename(Layer):
