@@ -10,3 +10,4 @@ pyarrow==0.14.1
 mlflow==1.8.0
 skein==0.8.0
 tf-yarn==0.4.20
+pandas==1.0.5
