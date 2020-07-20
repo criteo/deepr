@@ -261,7 +261,7 @@
 
 <div class="viewcode-block" id="Add"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.Add">[docs]</a><span class="nd">@base</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">tensors</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Add two tensors of any compatible shape&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Add two tensors of any compatible shapes.&quot;&quot;&quot;</span>
     <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span> <span class="o">=</span> <span class="n">make_same_shape</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">broadcast</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">t1</span> <span class="o">+</span> <span class="n">t2</span></div>
 
@@ -274,15 +274,28 @@
 
 <div class="viewcode-block" id="LogicalAnd"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.LogicalAnd">[docs]</a><span class="nd">@base</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">LogicalAnd</span><span class="p">(</span><span class="n">tensors</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Perform logical_and on two tensors of compatible shape&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Perform logical_and on two tensors of compatible shapes.&quot;&quot;&quot;</span>
     <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span> <span class="o">=</span> <span class="n">make_same_shape</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">broadcast</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LogicalOr"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.LogicalOr">[docs]</a><span class="nd">@base</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">LogicalOr</span><span class="p">(</span><span class="n">tensors</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Perform logical_or on two tensors of compatible shapes.&quot;&quot;&quot;</span>
+    <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span> <span class="o">=</span> <span class="n">make_same_shape</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">broadcast</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ToFloat"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.ToFloat">[docs]</a><span class="nd">@base</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">ToFloat</span><span class="p">(</span><span class="n">tensors</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Cast tensor to float32&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Scale"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.Scale">[docs]</a><span class="nd">@base</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">Scale</span><span class="p">(</span><span class="n">tensors</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Scale tensor by multiplier.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Identity"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.Identity">[docs]</a><span class="k">class</span> <span class="nc">Identity</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Layer</span><span class="p">):</span>

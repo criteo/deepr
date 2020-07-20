@@ -148,6 +148,14 @@ deepr.layers.top\_one\_max module
    :undoc-members:
    :show-inheritance:
 
+deepr.layers.transformer module
+-------------------------------
+
+.. automodule:: deepr.layers.transformer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 
 Module contents
 ---------------

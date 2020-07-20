@@ -722,6 +722,19 @@ and <a class="reference internal" href="#deepr.layers.combinators.Sequential" ti
 </dd></dl>
 
 <dl class="py class">
+<dt id="deepr.layers.combinators.Scope">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.combinators.</code><code class="sig-name descname">Scope</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">layer</span></em>, <em class="sig-param"><span class="n">name_or_scope</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/combinators.html#Scope"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.combinators.Scope" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Add variable scoping to layer.</p>
+<dl class="py method">
+<dt id="deepr.layers.combinators.Scope.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/combinators.html#Scope.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.combinators.Scope.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method of the layer</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="deepr.layers.combinators.Select">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.combinators.</code><code class="sig-name descname">Select</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inputs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outputs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_in</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/combinators.html#Select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.combinators.Select" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
@@ -832,7 +845,7 @@ correctly named nodes are defined.</p>
 <dt id="deepr.layers.core.Add">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.core.</code><code class="sig-name descname">Add</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#Add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.Add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
-<p>Add two tensors of any compatible shape</p>
+<p>Add two tensors of any compatible shapes.</p>
 <dl class="py method">
 <dt id="deepr.layers.core.Add.forward">
 <code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.layers.core.Add.forward" title="Permalink to this definition">¶</a></dt>
@@ -1038,10 +1051,45 @@ example, if</p>
 <dt id="deepr.layers.core.LogicalAnd">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.core.</code><code class="sig-name descname">LogicalAnd</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#LogicalAnd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.LogicalAnd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
-<p>Perform logical_and on two tensors of compatible shape</p>
+<p>Perform logical_and on two tensors of compatible shapes.</p>
 <dl class="py method">
 <dt id="deepr.layers.core.LogicalAnd.forward">
 <code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.layers.core.LogicalAnd.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>Union</em><em>[</em><em>tf.Tensor</em><em>, </em><em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>..</em><em>]</em><em>]</em>) – <ul>
+<li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_in &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_out &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[tf.Tensor, Tuple[tf.Tensor, ..]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.layers.core.LogicalOr">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.core.</code><code class="sig-name descname">LogicalOr</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#LogicalOr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.LogicalOr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Perform logical_or on two tensors of compatible shapes.</p>
+<dl class="py method">
+<dt id="deepr.layers.core.LogicalOr.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.layers.core.LogicalOr.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1078,6 +1126,41 @@ example, if</p>
 <dt id="deepr.layers.core.Product.forward">
 <code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#Product.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.Product.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward method of the layer</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.layers.core.Scale">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.core.</code><code class="sig-name descname">Scale</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">multiplier</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#Scale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.Scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Scale tensor by multiplier.</p>
+<dl class="py method">
+<dt id="deepr.layers.core.Scale.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.layers.core.Scale.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>Union</em><em>[</em><em>tf.Tensor</em><em>, </em><em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>..</em><em>]</em><em>]</em>) – <ul>
+<li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_in &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_out &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[tf.Tensor, Tuple[tf.Tensor, ..]]</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -1491,50 +1574,6 @@ each key to its corresponding line index as an tf.int64.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="deepr.layers.mask.LookAheadMask">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.mask.</code><code class="sig-name descname">LookAheadMask</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/mask.html#LookAheadMask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.mask.LookAheadMask" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
-<p>The look-ahead mask is used to mask the future items in a sequence</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr.layers</span> <span class="kn">import</span> <span class="n">LookAheadMask</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mf">0.8913734</span><span class="p">,</span> <span class="mf">0.3576287</span><span class="p">,</span> <span class="mf">0.9788116</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">LookAheadMask</span><span class="p">()(</span><span class="n">x</span><span class="p">))</span>
-<span class="go">array([[0., 1., 1.],</span>
-<span class="go">       [0., 0., 1.],</span>
-<span class="go">       [0., 0., 0.]], dtype=float32)</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt id="deepr.layers.mask.LookAheadMask.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/mask.html#LookAheadMask.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.mask.LookAheadMask.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>tensors</strong> (<em>Union</em><em>[</em><em>tf.Tensor</em><em>, </em><em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>..</em><em>]</em><em>]</em>) – <ul>
-<li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
-<li><p>n_in &gt; 1: a tuple of tensors</p></li>
-</ul>
-</p></li>
-<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Description</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
-<li><p>n_out &gt; 1: a tuple of tensors</p></li>
-</ul>
-</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[tf.Tensor, Tuple[tf.Tensor, ..]]</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
 <dt id="deepr.layers.mask.NotEqual">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.mask.</code><code class="sig-name descname">NotEqual</code><span class="sig-paren">(</span><em class="sig-param">values</em>, <em class="sig-param">reduce_mode=&lt;BooleanReduceMode.AND: 'and'&gt;</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/mask.html#NotEqual"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.mask.NotEqual" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
@@ -1543,41 +1582,6 @@ each key to its corresponding line index as an tf.int64.</p>
 <dt id="deepr.layers.mask.NotEqual.forward">
 <code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/mask.html#NotEqual.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.mask.NotEqual.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward method of the layer</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="deepr.layers.mask.PaddingMask">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.mask.</code><code class="sig-name descname">PaddingMask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">padded_value</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/mask.html#PaddingMask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.mask.PaddingMask" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
-<p>Padding Mask Layer</p>
-<dl class="py method">
-<dt id="deepr.layers.mask.PaddingMask.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/mask.html#PaddingMask.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.mask.PaddingMask.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>tensors</strong> (<em>Union</em><em>[</em><em>tf.Tensor</em><em>, </em><em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>..</em><em>]</em><em>]</em>) – <ul>
-<li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
-<li><p>n_in &gt; 1: a tuple of tensors</p></li>
-</ul>
-</p></li>
-<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Description</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
-<li><p>n_out &gt; 1: a tuple of tensors</p></li>
-</ul>
-</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[tf.Tensor, Tuple[tf.Tensor, ..]]</p>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>
@@ -1738,7 +1742,7 @@ each key to its corresponding line index as an tf.int64.</p>
 
 <dl class="py class">
 <dt id="deepr.layers.slice.SliceLastPadded">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.slice.</code><code class="sig-name descname">SliceLastPadded</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">padded_value</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/slice.html#SliceLastPadded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.slice.SliceLastPadded" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.slice.</code><code class="sig-name descname">SliceLastPadded</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/slice.html#SliceLastPadded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.slice.SliceLastPadded" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
 <p>Get the values that corresponds to the last not padded values</p>
 <dl class="py method">
@@ -1746,11 +1750,6 @@ each key to its corresponding line index as an tf.int64.</p>
 <code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/slice.html#SliceLastPadded.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.slice.SliceLastPadded.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward method of the layer</p>
 </dd></dl>
-
-<dl class="py method">
-<dt id="deepr.layers.slice.SliceLastPadded.get_length">
-<code class="sig-name descname">get_length</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">batch</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/slice.html#SliceLastPadded.get_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.slice.SliceLastPadded.get_length" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 </dd></dl>
 
@@ -1912,6 +1911,260 @@ each key to its corresponding line index as an tf.int64.</p>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.layers.transformer">
+<span id="deepr-layers-transformer-module"></span><h2>deepr.layers.transformer module<a class="headerlink" href="#module-deepr.layers.transformer" title="Permalink to this headline">¶</a></h2>
+<p>Transformer Model.</p>
+<dl class="py class">
+<dt id="deepr.layers.transformer.AttentionMask">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.transformer.</code><code class="sig-name descname">AttentionMask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">use_look_ahead_mask</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/transformer.html#AttentionMask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.transformer.AttentionMask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Compute Attention Mask.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>tf.Tensor</em>) – Shape = [batch_size, sequence_length]</p></li>
+<li><p><strong>use_look_ahead_mask</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – Add look ahead mask if True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Shape = [batch_size, sequence_length, sequence_length]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Tensor</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="deepr.layers.transformer.AttentionMask.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.layers.transformer.AttentionMask.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>Union</em><em>[</em><em>tf.Tensor</em><em>, </em><em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>..</em><em>]</em><em>]</em>) – <ul>
+<li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_in &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_out &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[tf.Tensor, Tuple[tf.Tensor, ..]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.layers.transformer.FeedForward">
+<code class="sig-prename descclassname">deepr.layers.transformer.</code><code class="sig-name descname">FeedForward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inputs</span></em>, <em class="sig-param"><span class="n">outputs</span></em>, <em class="sig-param"><span class="n">units_inner</span></em>, <em class="sig-param"><span class="n">units_readout</span></em>, <em class="sig-param"><span class="n">dim</span></em>, <em class="sig-param"><span class="n">dropout_rate</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/transformer.html#FeedForward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.transformer.FeedForward" title="Permalink to this definition">¶</a></dt>
+<dd><p>FeedForward Layer.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.layers.transformer.Normalization">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.transformer.</code><code class="sig-name descname">Normalization</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">epsilon</span><span class="o">=</span><span class="default_value">1e-08</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/transformer.html#Normalization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.transformer.Normalization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Normalization Layer.</p>
+<dl class="py method">
+<dt id="deepr.layers.transformer.Normalization.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.layers.transformer.Normalization.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>Union</em><em>[</em><em>tf.Tensor</em><em>, </em><em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>..</em><em>]</em><em>]</em>) – <ul>
+<li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_in &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_out &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[tf.Tensor, Tuple[tf.Tensor, ..]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.layers.transformer.PositionalEncoding">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.transformer.</code><code class="sig-name descname">PositionalEncoding</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">max_sequence_length</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="n">trainable</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/transformer.html#PositionalEncoding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.transformer.PositionalEncoding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Add Positional Embeddings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>tf.Tensor</em>) – Input tensor, [batch_size, sequence_length, emb_dim]</p></li>
+<li><p><strong>use_positional_encoding</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – Use this layer in case of True, skip in case of False</p></li>
+<li><p><strong>max_sequence_length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Expected that input tensor length doesn’t exceed the
+<cite>max_sequence_length</cite> limit</p></li>
+<li><p><strong>trainable</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – Train / not train position encoding</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="deepr.layers.transformer.PositionalEncoding.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.layers.transformer.PositionalEncoding.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>Union</em><em>[</em><em>tf.Tensor</em><em>, </em><em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>..</em><em>]</em><em>]</em>) – <ul>
+<li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_in &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_out &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[tf.Tensor, Tuple[tf.Tensor, ..]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.layers.transformer.SelfMultiheadAttention">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.transformer.</code><code class="sig-name descname">SelfMultiheadAttention</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">num_heads</span></em>, <em class="sig-param"><span class="n">dim_head</span></em>, <em class="sig-param"><span class="n">residual_connection</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/transformer.html#SelfMultiheadAttention"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.transformer.SelfMultiheadAttention" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Self MultiHead Attention Layer.</p>
+<dl class="py attribute">
+<dt id="deepr.layers.transformer.SelfMultiheadAttention.block_id">
+<code class="sig-name descname">block_id</code><a class="headerlink" href="#deepr.layers.transformer.SelfMultiheadAttention.block_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Id of the block (scope TF variables using that name)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.layers.transformer.SelfMultiheadAttention.dim_head">
+<code class="sig-name descname">dim_head</code><a class="headerlink" href="#deepr.layers.transformer.SelfMultiheadAttention.dim_head" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dimension of each head</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.layers.transformer.SelfMultiheadAttention.num_heads">
+<code class="sig-name descname">num_heads</code><a class="headerlink" href="#deepr.layers.transformer.SelfMultiheadAttention.num_heads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of heads</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.layers.transformer.SelfMultiheadAttention.residual_connection">
+<code class="sig-name descname">residual_connection</code><a class="headerlink" href="#deepr.layers.transformer.SelfMultiheadAttention.residual_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, add input to output (residual connection)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.layers.transformer.SelfMultiheadAttention.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/transformer.html#SelfMultiheadAttention.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.transformer.SelfMultiheadAttention.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute MultiHead Attention.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tensors</strong> (<em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>tf.Tensor</em><em>]</em>) – x = [batch_size, sequence_length, dim]
+mask = [batch_size, sequence_length, sequence_length]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[batch_size, sequence_length, dim]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.layers.transformer.SelfMultiheadAttention.join_heads">
+<code class="sig-name descname">join_heads</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/transformer.html#SelfMultiheadAttention.join_heads"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.transformer.SelfMultiheadAttention.join_heads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Join head split tensor (Inverse of split_heads).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.layers.transformer.SelfMultiheadAttention.scaled_dot_attention">
+<code class="sig-name descname">scaled_dot_attention</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">query</span></em>, <em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">mask</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/transformer.html#SelfMultiheadAttention.scaled_dot_attention"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.transformer.SelfMultiheadAttention.scaled_dot_attention" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute Scaled Dot Attention.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>tf.Tensor</em>) – Shape = [batch, num_heads, sequence_length, dim_head]</p></li>
+<li><p><strong>key</strong> (<em>tf.Tensor</em>) – Shape = [batch, num_heads, sequence_length, dim_head]</p></li>
+<li><p><strong>value</strong> (<em>tf.Tensor</em>) – Shape = [batch, num_heads, sequence_length, dim_head]</p></li>
+<li><p><strong>mask</strong> (<em>tf.Tensor</em><em>, </em><em>optional</em>) – Shape = [batch, sequence_length, sequence_length]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>shape = [batch, heads, sequence_length, d]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.layers.transformer.SelfMultiheadAttention.split_heads">
+<code class="sig-name descname">split_heads</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/transformer.html#SelfMultiheadAttention.split_heads"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.transformer.SelfMultiheadAttention.split_heads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split the last dimension into heads.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.layers.transformer.Transformer">
+<code class="sig-prename descclassname">deepr.layers.transformer.</code><code class="sig-name descname">Transformer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dim</span></em>, <em class="sig-param"><span class="n">num_heads</span><span class="o">=</span><span class="default_value">4</span></em>, <em class="sig-param"><span class="n">encoding_blocks</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">dim_head</span><span class="o">=</span><span class="default_value">128</span></em>, <em class="sig-param"><span class="n">residual_connection</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">use_layer_normalization</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">event_dropout_rate</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">use_feedforward</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">ff_dropout_rate</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">ff_normalization</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">scale</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">use_positional_encoding</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">trainable_positional_encoding</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">use_look_ahead_mask</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">inputs</span><span class="o">=</span><span class="default_value">'inputPositive', 'inputMask'</span></em>, <em class="sig-param"><span class="n">outputs</span><span class="o">=</span><span class="default_value">'userEmbeddings'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/transformer.html#Transformer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.transformer.Transformer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transformer Model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

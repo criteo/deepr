@@ -476,6 +476,8 @@
         <li><a href="_source/deepr.config.html#deepr.config.macros.assert_no_macros">(in module deepr.config.macros)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.transformer.AttentionMask">AttentionMask (class in deepr.layers.transformer)</a>
+</li>
       <li><a href="API/_autosummary/deepr.layers.Average.html#deepr.layers.Average">Average (class in deepr.layers)</a>
 
       <ul>
@@ -518,6 +520,8 @@
         <li><a href="API/_autosummary/deepr.jobs.OptimizeSavedModel.html#deepr.jobs.OptimizeSavedModel.blacklisted_variables">(deepr.jobs.OptimizeSavedModel attribute)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.transformer.SelfMultiheadAttention.block_id">block_id (deepr.layers.transformer.SelfMultiheadAttention attribute)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="API/_autosummary/deepr.layers.BooleanMask.html#deepr.layers.BooleanMask">BooleanMask (class in deepr.layers)</a>
@@ -1133,8 +1137,6 @@
         <li><a href="_source/deepr.layers.html#module-deepr.layers.embedding">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     deepr.layers.lookup
 
@@ -1142,6 +1144,8 @@
         <li><a href="_source/deepr.layers.html#module-deepr.layers.lookup">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     deepr.layers.mask
 
@@ -1203,6 +1207,13 @@
 
       <ul>
         <li><a href="_source/deepr.layers.html#module-deepr.layers.top_one_max">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.layers.transformer
+
+      <ul>
+        <li><a href="_source/deepr.layers.html#module-deepr.layers.transformer">module</a>
 </li>
       </ul></li>
       <li>
@@ -1563,6 +1574,8 @@
         <li><a href="_source/deepr.utils.html#deepr.utils.datastruct.dict_to_item">(in module deepr.utils.datastruct)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.transformer.SelfMultiheadAttention.dim_head">dim_head (deepr.layers.transformer.SelfMultiheadAttention attribute)</a>
+</li>
       <li><a href="API/_autosummary/deepr.layers.DotProduct.html#deepr.layers.DotProduct">DotProduct (class in deepr.layers)</a>
 
       <ul>
@@ -1688,6 +1701,8 @@
 </li>
       </ul></li>
       <li><a href="_source/deepr.predictors.html#deepr.predictors.base.Predictor.feed_tensors">feed_tensors (deepr.predictors.base.Predictor attribute)</a>
+</li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.transformer.FeedForward">FeedForward() (in module deepr.layers.transformer)</a>
 </li>
       <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.PredictProto.feeds">feeds (deepr.example.jobs.predict.PredictProto attribute)</a>
 
@@ -1834,6 +1849,8 @@
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.combinators.Rename.forward">(deepr.layers.combinators.Rename method)</a>
 </li>
+        <li><a href="_source/deepr.layers.html#deepr.layers.combinators.Scope.forward">(deepr.layers.combinators.Scope method)</a>
+</li>
         <li><a href="_source/deepr.layers.html#deepr.layers.combinators.Select.forward">(deepr.layers.combinators.Select method)</a>
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.core.Add.forward">(deepr.layers.core.Add method)</a>
@@ -1850,7 +1867,11 @@
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.core.LogicalAnd.forward">(deepr.layers.core.LogicalAnd method)</a>
 </li>
+        <li><a href="_source/deepr.layers.html#deepr.layers.core.LogicalOr.forward">(deepr.layers.core.LogicalOr method)</a>
+</li>
         <li><a href="_source/deepr.layers.html#deepr.layers.core.Product.forward">(deepr.layers.core.Product method)</a>
+</li>
+        <li><a href="_source/deepr.layers.html#deepr.layers.core.Scale.forward">(deepr.layers.core.Scale method)</a>
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.core.Softmax.forward">(deepr.layers.core.Softmax method)</a>
 </li>
@@ -1872,11 +1893,7 @@
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.mask.Equal.forward">(deepr.layers.mask.Equal method)</a>
 </li>
-        <li><a href="_source/deepr.layers.html#deepr.layers.mask.LookAheadMask.forward">(deepr.layers.mask.LookAheadMask method)</a>
-</li>
         <li><a href="_source/deepr.layers.html#deepr.layers.mask.NotEqual.forward">(deepr.layers.mask.NotEqual method)</a>
-</li>
-        <li><a href="_source/deepr.layers.html#deepr.layers.mask.PaddingMask.forward">(deepr.layers.mask.PaddingMask method)</a>
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.nce_loss.MaskedNegativeSampling.forward">(deepr.layers.nce_loss.MaskedNegativeSampling method)</a>
 </li>
@@ -1907,6 +1924,14 @@
         <li><a href="_source/deepr.layers.html#deepr.layers.top_one_max.MaskedTopOneMax.forward">(deepr.layers.top_one_max.MaskedTopOneMax method)</a>
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.top_one_max.TopOneMax.forward">(deepr.layers.top_one_max.TopOneMax method)</a>
+</li>
+        <li><a href="_source/deepr.layers.html#deepr.layers.transformer.AttentionMask.forward">(deepr.layers.transformer.AttentionMask method)</a>
+</li>
+        <li><a href="_source/deepr.layers.html#deepr.layers.transformer.Normalization.forward">(deepr.layers.transformer.Normalization method)</a>
+</li>
+        <li><a href="_source/deepr.layers.html#deepr.layers.transformer.PositionalEncoding.forward">(deepr.layers.transformer.PositionalEncoding method)</a>
+</li>
+        <li><a href="_source/deepr.layers.html#deepr.layers.transformer.SelfMultiheadAttention.forward">(deepr.layers.transformer.SelfMultiheadAttention method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -1983,18 +2008,16 @@
       </ul></li>
       <li><a href="_source/deepr.predictors.html#deepr.predictors.saved_model.get_latest_saved_model">get_latest_saved_model() (in module deepr.predictors.saved_model)</a>
 </li>
-      <li><a href="_source/deepr.layers.html#deepr.layers.slice.SliceLastPadded.get_length">get_length() (deepr.layers.slice.SliceLastPadded method)</a>
-</li>
       <li><a href="_source/deepr.config.html#deepr.config.macros.get_macro_and_param">get_macro_and_param() (in module deepr.config.macros)</a>
 </li>
       <li><a href="_source/deepr.metrics.html#deepr.metrics.base.get_metric_variable">get_metric_variable() (in module deepr.metrics.base)</a>
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.export_xla_model_metadata.get_nodes">get_nodes() (in module deepr.jobs.export_xla_model_metadata)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.hooks.html#deepr.hooks.num_params.get_num_params">get_num_params() (in module deepr.hooks.num_params)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.metrics.html#deepr.metrics.base.get_scalars">get_scalars() (in module deepr.metrics.base)</a>
 </li>
       <li><a href="_source/deepr.utils.html#deepr.utils.graphite.get_sender">get_sender() (in module deepr.utils.graphite)</a>
@@ -2187,6 +2210,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.combinators.Pipeline.jobs">jobs (deepr.jobs.combinators.Pipeline attribute)</a>
 </li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.transformer.SelfMultiheadAttention.join_heads">join_heads() (deepr.layers.transformer.SelfMultiheadAttention method)</a>
+</li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_config.YarnConfig.jvm_memory_in_gb">jvm_memory_in_gb (deepr.jobs.yarn_config.YarnConfig attribute)</a>
 </li>
   </ul></td>
@@ -2267,6 +2292,8 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_source/deepr.layers.html#deepr.layers.core.LogicalOr">LogicalOr (class in deepr.layers.core)</a>
+</li>
       <li><a href="API/_autosummary/deepr.jobs.LogMetric.html#deepr.jobs.LogMetric">LogMetric (class in deepr.jobs)</a>
 
       <ul>
@@ -2274,8 +2301,6 @@
 </li>
       </ul></li>
       <li><a href="_source/deepr.hooks.html#deepr.hooks.log_variables_init.LogVariablesInitHook">LogVariablesInitHook (class in deepr.hooks.log_variables_init)</a>
-</li>
-      <li><a href="_source/deepr.layers.html#deepr.layers.mask.LookAheadMask">LookAheadMask (class in deepr.layers.mask)</a>
 </li>
       <li><a href="API/_autosummary/deepr.layers.Lookup.html#deepr.layers.Lookup">Lookup (class in deepr.layers)</a>
 
@@ -2639,6 +2664,8 @@
 </li>
         <li><a href="_source/deepr.layers.html#module-deepr.layers.top_one_max">deepr.layers.top_one_max</a>
 </li>
+        <li><a href="_source/deepr.layers.html#module-deepr.layers.transformer">deepr.layers.transformer</a>
+</li>
         <li><a href="_source/deepr.macros.html#module-deepr.macros">deepr.macros</a>
 </li>
         <li><a href="_source/deepr.macros.html#module-deepr.macros.dynamic">deepr.macros.dynamic</a>
@@ -2788,10 +2815,10 @@
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.nb_ps">nb_ps (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.nb_retries">nb_retries (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.nb_workers">nb_workers (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
 </li>
       <li><a href="_source/deepr.layers.html#deepr.layers.nce_loss.NegativeSampling">NegativeSampling (class in deepr.layers.nce_loss)</a>
@@ -2802,6 +2829,8 @@
         <li><a href="API/_autosummary/deepr.jobs.OptimizeSavedModel.html#deepr.jobs.OptimizeSavedModel.new_names">(deepr.jobs.OptimizeSavedModel attribute)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.transformer.Normalization">Normalization (class in deepr.layers.transformer)</a>
+</li>
       <li><a href="API/_autosummary/deepr.layers.NotEqual.html#deepr.layers.NotEqual">NotEqual (class in deepr.layers)</a>
 
       <ul>
@@ -2811,6 +2840,8 @@
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_launcher.YarnLauncherConfig.num_cores">num_cores (deepr.jobs.yarn_launcher.YarnLauncherConfig attribute)</a>
 </li>
       <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.build_dataset.BuildDataset.num_examples">num_examples (deepr.example.jobs.build_dataset.BuildDataset attribute)</a>
+</li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.transformer.SelfMultiheadAttention.num_heads">num_heads (deepr.layers.transformer.SelfMultiheadAttention attribute)</a>
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.save_dataset.SaveDataset.num_parallel_calls">num_parallel_calls (deepr.jobs.save_dataset.SaveDataset attribute)</a>
 
@@ -2916,8 +2947,6 @@
         <li><a href="_source/deepr.prepros.html#deepr.prepros.core.PaddedBatch">(class in deepr.prepros.core)</a>
 </li>
       </ul></li>
-      <li><a href="_source/deepr.layers.html#deepr.layers.mask.PaddingMask">PaddingMask (class in deepr.layers.mask)</a>
-</li>
       <li><a href="API/_autosummary/deepr.layers.Parallel.html#deepr.layers.Parallel">Parallel (class in deepr.layers)</a>
 
       <ul>
@@ -3018,10 +3047,10 @@
       </ul></li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_config.YarnConfig.path_pex_cpu">path_pex_cpu (deepr.jobs.yarn_config.YarnConfig attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_config.YarnConfig.path_pex_gpu">path_pex_gpu (deepr.jobs.yarn_config.YarnConfig attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_config.YarnConfig.path_pex_prefix">path_pex_prefix (deepr.jobs.yarn_config.YarnConfig attribute)</a>
 </li>
       <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.PredictSavedModel.path_saved_model">path_saved_model (deepr.example.jobs.predict.PredictSavedModel attribute)</a>
@@ -3050,6 +3079,8 @@
         <li><a href="_source/deepr.jobs.html#deepr.jobs.combinators.Pipeline">(class in deepr.jobs.combinators)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.transformer.PositionalEncoding">PositionalEncoding (class in deepr.layers.transformer)</a>
+</li>
       <li><a href="_source/deepr.io.html#deepr.io.parquet.ParquetDataset.pq_dataset">pq_dataset() (deepr.io.parquet.ParquetDataset property)</a>
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.pre_script_hook">pre_script_hook (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
@@ -3196,6 +3227,8 @@
         <li><a href="_source/deepr.hooks.html#deepr.hooks.logging_tensor.ResidentMemory">(class in deepr.hooks.logging_tensor)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.transformer.SelfMultiheadAttention.residual_connection">residual_connection (deepr.layers.transformer.SelfMultiheadAttention attribute)</a>
+</li>
       <li><a href="_source/deepr.layers.html#deepr.layers.lookup.LookupFromFile.reuse">reuse (deepr.layers.lookup.LookupFromFile attribute)</a>
 
       <ul>
@@ -3320,6 +3353,12 @@
         <li><a href="_source/deepr.exporters.html#deepr.exporters.save_variables.SaveVariables">(class in deepr.exporters.save_variables)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.core.Scale">Scale (class in deepr.layers.core)</a>
+</li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.transformer.SelfMultiheadAttention.scaled_dot_attention">scaled_dot_attention() (deepr.layers.transformer.SelfMultiheadAttention method)</a>
+</li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.combinators.Scope">Scope (class in deepr.layers.combinators)</a>
+</li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.save_dataset.SaveDataset.secs">secs (deepr.jobs.save_dataset.SaveDataset attribute)</a>
 </li>
       <li><a href="API/_autosummary/deepr.layers.Select.html#deepr.layers.Select">Select (class in deepr.layers)</a>
@@ -3328,6 +3367,8 @@
         <li><a href="_source/deepr.layers.html#deepr.layers.combinators.Select">(class in deepr.layers.combinators)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.transformer.SelfMultiheadAttention">SelfMultiheadAttention (class in deepr.layers.transformer)</a>
+</li>
       <li><a href="API/_autosummary/deepr.utils.Field.html#deepr.utils.Field.sequence">sequence (deepr.utils.Field attribute)</a>
 
       <ul>
@@ -3419,6 +3460,8 @@
       <li><a href="_source/deepr.jobs.html#deepr.jobs.copy_dir.CopyDir.source">source (deepr.jobs.copy_dir.CopyDir attribute)</a>
 </li>
       <li><a href="_source/deepr.layers.html#deepr.layers.dropout.SpatialDropout1D">SpatialDropout1D (class in deepr.layers.dropout)</a>
+</li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.transformer.SelfMultiheadAttention.split_heads">split_heads() (deepr.layers.transformer.SelfMultiheadAttention method)</a>
 </li>
       <li><a href="_source/deepr.example.layers.html#deepr.example.layers.loss.SquaredL2">SquaredL2 (class in deepr.example.layers.loss)</a>
 </li>
@@ -3564,10 +3607,10 @@
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.tf_yarn_chief_cores">tf_yarn_chief_cores (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.tf_yarn_chief_memory">tf_yarn_chief_memory (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.tf_yarn_evaluator_cores">tf_yarn_evaluator_cores (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.tf_yarn_evaluator_memory">tf_yarn_evaluator_memory (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
@@ -3659,6 +3702,8 @@
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainer.trainer">trainer (deepr.jobs.yarn_trainer.YarnTrainer attribute)</a>
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.trainer.TrainSpec">TrainSpec (class in deepr.jobs.trainer)</a>
+</li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.transformer.Transformer">Transformer() (in module deepr.layers.transformer)</a>
 </li>
   </ul></td>
 </tr></table>
