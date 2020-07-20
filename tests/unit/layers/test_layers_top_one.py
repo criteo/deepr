@@ -50,7 +50,7 @@ def test_layers_top_one():
                     neg_product += inputs["preds"][batch, d] * inputs["negatives"][batch, target, negative, d]
                 m = inputs["mask"][batch, target, negative]
 
-                scores += (1 / (1 + np.exp(-(neg_product - pos_product))) + 1 / (1 + np.exp(-neg_product ** 2))) * m
+                scores += (1 / (1 + np.exp(-(neg_product - pos_product))) + 1 / (1 + np.exp(-(neg_product ** 2)))) * m
                 negative_mask += m
 
             # Compute event score and weight

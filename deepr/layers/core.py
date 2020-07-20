@@ -96,7 +96,7 @@ class Dense(base.Layer):
 
 @base.layer(n_in=2, n_out=1)
 def Add(tensors):
-    """Add two tensors of any compatible shape"""
+    """Add two tensors of any compatible shapes."""
     t1, t2 = make_same_shape(tensors, broadcast=False)
     return t1 + t2
 
@@ -109,15 +109,28 @@ def Concat(tensors, axis: int = -1):
 
 @base.layer(n_in=2, n_out=1)
 def LogicalAnd(tensors):
-    """Perform logical_and on two tensors of compatible shape"""
+    """Perform logical_and on two tensors of compatible shapes."""
     t1, t2 = make_same_shape(tensors, broadcast=False)
     return tf.logical_and(t1, t2)
+
+
+@base.layer(n_in=2, n_out=1)
+def LogicalOr(tensors):
+    """Perform logical_or on two tensors of compatible shapes."""
+    t1, t2 = make_same_shape(tensors, broadcast=False)
+    return tf.logical_or(t1, t2)
 
 
 @base.layer(n_in=1, n_out=1)
 def ToFloat(tensors):
     """Cast tensor to float32"""
     return tf.cast(tensors, tf.float32)
+
+
+@base.layer(n_in=1, n_out=1)
+def Scale(tensors: tf.Tensor, multiplier: float):
+    """Scale tensor by multiplier."""
+    return tf.multiply(tensors, multiplier)
 
 
 class Identity(base.Layer):

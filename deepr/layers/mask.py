@@ -85,36 +85,3 @@ class BooleanMask(base.Layer):
         """Forward method of the layer"""
         tensor, mask = tensors
         return tf.boolean_mask(tensor, mask)
-
-
-class LookAheadMask(base.Layer):
-    """ The look-ahead mask is used to mask the future items in a sequence
-
-    >>> from deepr.layers import LookAheadMask
-    >>> x = tf.constant([[0.8913734, 0.3576287, 0.9788116]])
-    >>> with tf.Session() as sess:
-    ...     sess.run(LookAheadMask()(x))
-    array([[0., 1., 1.],
-           [0., 0., 1.],
-           [0., 0., 0.]], dtype=float32)
-    """
-
-    def __init__(self, **kwargs):
-        super().__init__(n_in=1, n_out=1, **kwargs)
-
-    def forward(self, tensors, mode: str = None):
-        seq_len = tf.shape(tensors)[-1]
-        mask = 1 - tf.linalg.band_part(tf.ones((seq_len, seq_len)), -1, 0)
-        return mask
-
-
-class PaddingMask(base.Layer):
-    """ Padding Mask Layer """
-
-    def __init__(self, padded_value, **kwargs):
-        super().__init__(n_in=1, n_out=1, **kwargs)
-        self.padded_value = padded_value
-
-    def forward(self, tensors, mode: str = None):
-        seq_batch = tf.cast(tf.math.equal(tensors, self.padded_value), tf.float32)
-        return seq_batch
