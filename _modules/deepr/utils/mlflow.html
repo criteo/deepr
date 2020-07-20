@@ -210,16 +210,26 @@
 <span class="n">set_tag</span> <span class="o">=</span> <span class="n">handle_exceptions</span><span class="p">(</span><span class="n">mlflow</span><span class="o">.</span><span class="n">set_tag</span><span class="p">)</span>
 <span class="n">set_tags</span> <span class="o">=</span> <span class="n">handle_exceptions</span><span class="p">(</span><span class="n">mlflow</span><span class="o">.</span><span class="n">set_tags</span><span class="p">)</span>
 <span class="n">set_tracking_uri</span> <span class="o">=</span> <span class="n">handle_exceptions</span><span class="p">(</span><span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">)</span>
+<span class="n">set_experiment</span> <span class="o">=</span> <span class="n">handle_exceptions</span><span class="p">(</span><span class="n">mlflow</span><span class="o">.</span><span class="n">set_experiment</span><span class="p">)</span>
 <span class="n">start_run</span> <span class="o">=</span> <span class="n">handle_exceptions</span><span class="p">(</span><span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="set_experiment"><a class="viewcode-back" href="../../../_source/deepr.utils.html#deepr.utils.mlflow.set_experiment">[docs]</a><span class="nd">@handle_exceptions</span>
-<span class="k">def</span> <span class="nf">set_experiment</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">artifact_location</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="set_or_create_experiment"><a class="viewcode-back" href="../../../_source/deepr.utils.html#deepr.utils.mlflow.set_or_create_experiment">[docs]</a><span class="nd">@handle_exceptions</span>
+<span class="k">def</span> <span class="nf">set_or_create_experiment</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">artifact_location</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Set Experiment with specific artifact_location.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">tracking</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">MlflowClient</span><span class="p">()</span><span class="o">.</span><span class="n">get_experiment_by_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">mlflow</span><span class="o">.</span><span class="n">create_experiment</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">artifact_location</span><span class="o">=</span><span class="n">artifact_location</span><span class="p">)</span>
+    <span class="c1"># Set or Create Experiment</span>
+    <span class="k">if</span> <span class="n">get_experiment_by_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">create_experiment</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">artifact_location</span><span class="o">=</span><span class="n">artifact_location</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">mlflow</span><span class="o">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
+        <span class="n">set_experiment</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="c1"># Check Experiment</span>
+    <span class="n">experiment</span> <span class="o">=</span> <span class="n">get_experiment_by_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Experiment: </span><span class="si">{</span><span class="n">experiment</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">artifact_location</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">experiment</span><span class="o">.</span><span class="n">artifact_location</span> <span class="o">!=</span> <span class="n">artifact_location</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Incoherent artifact locations. Existing: </span><span class="si">{</span><span class="n">experiment</span><span class="o">.</span><span class="n">artifact_location</span><span class="si">}</span><span class="s2">, Got: </span><span class="si">{</span><span class="n">artifact_location</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">LOGGER</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="log_dict"><a class="viewcode-back" href="../../../_source/deepr.utils.html#deepr.utils.mlflow.log_dict">[docs]</a><span class="nd">@handle_exceptions</span>

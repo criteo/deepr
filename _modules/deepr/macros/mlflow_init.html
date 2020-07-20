@@ -210,7 +210,7 @@
 
             <span class="c1"># Start MLFlow run</span>
             <span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="n">tracking_uri</span><span class="p">)</span>
-            <span class="n">mlflow</span><span class="o">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">,</span> <span class="n">artifact_location</span><span class="p">)</span>
+            <span class="n">mlflow</span><span class="o">.</span><span class="n">set_or_create_experiment</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">,</span> <span class="n">artifact_location</span><span class="p">)</span>
             <span class="n">run</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">(</span><span class="n">run_name</span><span class="o">=</span><span class="n">run_name</span><span class="p">)</span>
 
             <span class="c1"># Define new parameters</span>
