@@ -51,6 +51,9 @@ class Field:
     def __str__(self):
         return self.name
 
+    def __hash__(self):
+        return hash(self.name)
+
     @property
     def feature_specs(self):
         """Return feature specs for parsing Example messages."""

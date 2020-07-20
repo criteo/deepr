@@ -22,14 +22,8 @@ class Timeline(NamedTuple):
 
     def split(self, target_ratio: float = 0.2):
         start_target_index = int(len(self.movie_ids) * (1 - target_ratio))
-        input_part = Timeline(
-            uid=self.uid,
-            movie_ids=self.movie_ids[:start_target_index],
-        )
-        target_part = Timeline(
-            uid=self.uid,
-            movie_ids=self.movie_ids[start_target_index:],
-        )
+        input_part = Timeline(uid=self.uid, movie_ids=self.movie_ids[:start_target_index],)
+        target_part = Timeline(uid=self.uid, movie_ids=self.movie_ids[start_target_index:],)
         return input_part, target_part
 
 
@@ -57,8 +51,7 @@ def upload_ml20m_dataset(path_ratings: str, min_rating: float, min_length: int) 
     timelines: List[Timeline] = []
     for index, row in grouped_data.iterrows():
         timeline = Timeline(
-            uid=str(row.userId),
-            movie_ids=_sort_list_by_other_list(row.movieId, key_list=row.timestamp)
+            uid=str(row.userId), movie_ids=_sort_list_by_other_list(row.movieId, key_list=row.timestamp)
         )
         timelines.append(timeline)
     return timelines
@@ -82,11 +75,7 @@ def negative_samples(num_examples: int, available_items, nb_negatives: int = 8):
     return sample
 
 
-def generate_negative_sampling(
-        timelines: List[Timeline],
-        target_ratio,
-        nb_negatives,
-) -> List[Record]:
+def generate_negative_sampling(timelines: List[Timeline], target_ratio, nb_negatives,) -> List[Record]:
     """
     convert list of `Timeline` to list of `Record` and generation of negative samples
     """
@@ -105,20 +94,19 @@ def generate_negative_sampling(
             uid=input_timeline.uid,
             inputPositives=input_timeline.movie_ids,
             targetPositives=target_timeline.movie_ids,
-            targetNegatives=negative_samples(
-                len(target_timeline.movie_ids), available_movies, nb_negatives),
+            targetNegatives=negative_samples(len(target_timeline.movie_ids), available_movies, nb_negatives),
         )
         records.append(record)
     return records
 
 
 def prepare_dataset(
-        data_dir: str,
-        min_rating: int = 4,
-        min_length: int = 5,
-        validation_ratio: float = 0.2,
-        nb_negatives: int = 8,
-        target_ratio: float = 0.2
+    data_dir: str,
+    min_rating: int = 4,
+    min_length: int = 5,
+    validation_ratio: float = 0.2,
+    nb_negatives: int = 8,
+    target_ratio: float = 0.2,
 ):
     path_ratings = os.path.join(data_dir, "ratings.csv")
 
@@ -158,7 +146,13 @@ def get_input_fn(dataset):
     )
 
 
-def get_prepro_fn(batch_size: int = 16, buffer_size: int = 10, epochs: Optional[int] = None, max_input_size: int = 10000, max_target_size: int = 1000):
+def get_prepro_fn(
+    batch_size: int = 16,
+    buffer_size: int = 10,
+    epochs: Optional[int] = None,
+    max_input_size: int = 10000,
+    max_target_size: int = 1000,
+):
 
     fields = [
         dpr.Field(name="uid", shape=(None,), dtype=tf.string),
@@ -167,8 +161,14 @@ def get_prepro_fn(batch_size: int = 16, buffer_size: int = 10, epochs: Optional[
         dpr.Field(name="targetNegatives", shape=(None, None), dtype=tf.int64),
     ]
     return dpr.prepros.Serial(
-        (dpr.prepros.Map(dpr.layers.SliceLast(max_input_size, inputs="inputPositives", outputs=key)) for key in ["inputPositives"]),
-        (dpr.prepros.Map(dpr.layers.SliceFirst(max_target_size, inputs=key, outputs=key)) for key in ["targetPositives", "targetNegatives"]),
+        (
+            dpr.prepros.Map(dpr.layers.SliceLast(max_input_size, inputs="inputPositives", outputs=key))
+            for key in ["inputPositives"]
+        ),
+        (
+            dpr.prepros.Map(dpr.layers.SliceFirst(max_target_size, inputs=key, outputs=key))
+            for key in ["targetPositives", "targetNegatives"]
+        ),
         (dpr.prepros.PaddedBatch(batch_size=batch_size, fields=fields)),
         dpr.prepros.Repeat(epochs, modes=[dpr.TRAIN]),
         dpr.prepros.Prefetch(buffer_size),
@@ -271,9 +271,7 @@ def TransformerModel(
             )
             for block_id in range(encoding_blocks)
         ),
-        dpr.layers.SliceLastPadded(
-            inputs=("inputEnc", "inputPositives"), outputs="userEmbeddings", padded_value=-1
-        ),
+        dpr.layers.SliceLastPadded(inputs=("inputEnc", "inputPositives"), outputs="userEmbeddings", padded_value=-1),
         dpr.layers.Select(inputs=_outputs, outputs=outputs if outputs else _outputs),
     )
 
@@ -501,7 +499,7 @@ def main():
         min_length=5,
         validation_ratio=0.2,
         nb_negatives=8,
-        target_ratio=0.2
+        target_ratio=0.2,
     )
 
     # 2. get input_fns
@@ -524,7 +522,7 @@ def main():
         optimizer_fn=optimizer_fn,
         train_input_fn=train_input_fn,
         eval_input_fn=eval_input_fn,
-        prepro_fn=prepro_fn
+        prepro_fn=prepro_fn,
     )
 
     job.run()
