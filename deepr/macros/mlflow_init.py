@@ -45,7 +45,7 @@ class MLFlowInit(dict):
 
             # Start MLFlow run
             mlflow.set_tracking_uri(tracking_uri)
-            mlflow.set_experiment(experiment_name, artifact_location)
+            mlflow.set_or_create_experiment(experiment_name, artifact_location)
             run = mlflow.start_run(run_name=run_name)
 
             # Define new parameters
