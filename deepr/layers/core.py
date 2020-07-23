@@ -128,6 +128,11 @@ def ToFloat(tensors):
 
 
 @base.layer(n_in=1, n_out=1)
+def ExpandDims(tensors, axis: int = -1):
+    return tf.expand_dims(tensors, axis=axis)
+
+
+@base.layer(n_in=1, n_out=1)
 def Scale(tensors: tf.Tensor, multiplier: float):
     """Scale tensor by multiplier."""
     return tf.multiply(tensors, multiplier)

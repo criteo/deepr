@@ -32,18 +32,18 @@ def Transformer(
     use_positional_encoding: bool = True,
     trainable_positional_encoding: bool = True,
     use_look_ahead_mask: bool = True,
-    inputs: Tuple[str, str] = ("inputPositive", "inputMask"),
+    inputs: Tuple[str, str] = ("inputEmbeddings", "inputMask"),
     outputs: str = "userEmbeddings",
 ) -> base.Layer:
     """Transformer Model."""
     return Sequential(
-        Select(n_in=2, inputs=inputs, outputs=("inputPositive", "inputMask")),
-        SpatialDropout1D(inputs="inputPositive", outputs="inputPositiveDropout", dropout_rate=event_dropout_rate,),
+        Select(n_in=2, inputs=inputs, outputs=("inputEmbeddings", "inputMask")),
+        SpatialDropout1D(inputs="inputEmbeddings", outputs="inputEmbeddingsDropout", dropout_rate=event_dropout_rate,),
         AttentionMask(inputs="inputMask", outputs="mask", use_look_ahead_mask=use_look_ahead_mask),
         (
-            Scale(inputs="inputPositiveDropout", outputs="inputEnc", multiplier=(num_heads * dim_head) ** 0.5)
+            Scale(inputs="inputEmbeddingsDropout", outputs="inputEnc", multiplier=(num_heads * dim_head) ** 0.5)
             if scale
-            else Select(inputs="inputPositiveDropout", outputs="inputEnc")
+            else Select(inputs="inputEmbeddingsDropout", outputs="inputEnc")
         ),
         (
             PositionalEncoding(inputs="inputEnc", outputs="inputEnc", trainable=trainable_positional_encoding,)
