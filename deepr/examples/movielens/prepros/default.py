@@ -18,7 +18,7 @@ def DefaultPrepro(
     batch_size: int = 16,
     buffer_size: int = 10,
     epochs: Optional[int] = None,
-    max_input_size: int = 10000,
+    max_input_size: int = 50,
     max_target_size: int = 1000,
 ):
     sparse_fields = [field for field in FIELDS_RECORD if field.is_sparse()]

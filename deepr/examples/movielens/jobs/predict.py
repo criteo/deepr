@@ -45,9 +45,6 @@ class Predict(dpr.jobs.Job):
             for uid, user, target, mask in zip(preds["uid"], preds["userEmbeddings"], preds["targetPositives"], preds["targetMask"]):
                 predictions.append((uid, user.astype(np.float32).tolist(), target[mask].astype(np.int64).tolist()))
 
-            print(predictions)
-            break
-
         with dpr.io.ParquetDataset(self.path_predictions).open() as ds:
             df = pd.DataFrame(data=predictions, columns=COLUMNS)
             ds.write_pandas(df, compression="snappy", schema=SCHEMA)
