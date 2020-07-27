@@ -35,9 +35,9 @@ class Evaluate(dpr.jobs.Job):
         index.add(np.ascontiguousarray(embeddings))
         _, indices = index.search(users, k=self.k)
         precision, recall, f1_score = self.compute_metrics(predictions["target"], indices)
-        LOGGER.info(f"precision@{self.k} = {precision}\n"
-                    f"recall@{self.k} = {recall}\n"
-                    f"f1_score@{self.k} = {f1_score}")
+        LOGGER.info(
+            f"precision@{self.k} = {precision}\n" f"recall@{self.k} = {recall}\n" f"f1_score@{self.k} = {f1_score}"
+        )
         return precision, recall, f1_score
 
     def compute_metrics(self, actuals: List[np.ndarray], predictions: List[np.ndarray]):
@@ -45,7 +45,7 @@ class Evaluate(dpr.jobs.Job):
         precisions = []
         f1_scores = []
         for actual, pred in zip(actuals, predictions):
-            r, p, f1 = self.precision_recall_f1(actual, pred)
+            p, r, f1 = self.precision_recall_f1(actual, pred)
             recalls.append(r)
             precisions.append(p)
             f1_scores.append(f1)

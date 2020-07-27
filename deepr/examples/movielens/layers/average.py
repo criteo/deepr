@@ -8,10 +8,8 @@ def AverageModel(vocab_size: int, dim: int):
     return dpr.layers.Sequential(
         dpr.layers.Select(inputs=("inputPositives", "inputMask")),
         dpr.layers.Embedding(
-            inputs="inputPositives", outputs="inputEmbeddings", variable_name="embeddings", shape=[vocab_size, dim]
+            inputs="inputPositives", outputs="inputEmbeddings", variable_name="embeddings", shape=(vocab_size, dim)
         ),
         dpr.layers.ToFloat(inputs="inputMask", outputs="inputWeights"),
-        dpr.layers.WeightedAverage(
-            inputs=("inputEmbeddings", "inputWeights"), outputs="userEmbeddings"
-        ),
+        dpr.layers.WeightedAverage(inputs=("inputEmbeddings", "inputWeights"), outputs="userEmbeddings"),
     )

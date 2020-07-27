@@ -27,13 +27,14 @@ def main(path_ratings: str):
     path_model = path_root + "/model"
     path_data = path_root + "/data"
     path_variables = path_root + "/variables"
-    path_predictions = path_root + "/predictions"
+    path_predictions = path_root + "/predictions.parquet.snappy"
     path_saved_model = path_root + "/saved_model"
     path_train = path_data + "/train.tfrecord.gz"
     path_test = path_data + "/test.tfrecord.gz"
     dpr.io.Path(path_root).mkdir(exist_ok=True)
     dpr.io.Path(path_model).mkdir(exist_ok=True)
     dpr.io.Path(path_data).mkdir(exist_ok=True)
+    max_steps = 100_000
 
     build = movielens.jobs.Build(
         path_ratings=path_ratings,
@@ -45,7 +46,8 @@ def main(path_ratings: str):
         num_negatives=8,
         target_ratio=0.2,
         sample_popularity=True,
-        seed=2020)
+        seed=2020,
+    )
 
     transformer_model = movielens.layers.TransformerModel(
         vocab_size=150_000,
@@ -53,10 +55,12 @@ def main(path_ratings: str):
         encoding_blocks=2,
         num_heads=8,
         dim_head=32,
+        residual_connection=False,
         use_layer_normalization=True,
+        use_feedforward=True,
         event_dropout_rate=0.4,
         ff_dropout_rate=0.5,
-        residual_connection=False,
+        ff_normalization=True,
         scale=False,
         use_positional_encoding=False,
         use_look_ahead_mask=False,
@@ -67,28 +71,67 @@ def main(path_ratings: str):
         pred_fn=transformer_model,
         loss_fn=movielens.layers.BPRLoss(vocab_size=150_000, dim=1000),
         optimizer_fn=dpr.optimizers.TensorflowOptimizer("LazyAdam", 0.0001),
-        train_input_fn=dpr.readers.TFRecordReader(path_train),
-        eval_input_fn=dpr.readers.TFRecordReader(path_test),
+        train_input_fn=dpr.readers.TFRecordReader(path_train, num_parallel_calls=8, num_parallel_reads=8),
+        eval_input_fn=dpr.readers.TFRecordReader(path_test, num_parallel_calls=8, num_parallel_reads=8),
         prepro_fn=movielens.prepros.DefaultPrepro(
-            batch_size=128,
-            max_input_size=50,
+            batch_size=128, max_input_size=50, max_target_size=50, num_parallel_calls=8
         ),
-        train_spec=dpr.jobs.TrainSpec(max_steps=10_000),
+        train_spec=dpr.jobs.TrainSpec(max_steps=max_steps),
         eval_spec=dpr.jobs.EvalSpec(steps=100),
         final_spec=dpr.jobs.FinalSpec(steps=None),
         exporters=[
-            dpr.exporters.SaveVariables(
-                path_variables=path_variables,
-                variable_names=["embeddings"]
-            ),
+            dpr.exporters.BestCheckpoint(metric="loss"),
+            dpr.exporters.SaveVariables(path_variables=path_variables, variable_names=["embeddings"]),
             dpr.exporters.SavedModel(
                 path_saved_model=path_saved_model,
                 fields=[
-                    dpr.Field(name="inputPositives", shape=[None], dtype=tf.int64),
-                    dpr.Field(name="inputMask", shape=[None], dtype=tf.bool)
-                ]
+                    dpr.Field(name="inputPositives", shape=(None,), dtype=tf.int64),
+                    dpr.Field(name="inputMask", shape=(None,), dtype=tf.bool),
+                ],
             ),
-        ]
+        ],
+        train_hooks=[
+            dpr.hooks.LoggingTensorHookFactory(
+                name="training",
+                functions={
+                    "memory_gb": dpr.hooks.ResidentMemory(unit="gb"),
+                    "max_memory_gb": dpr.hooks.MaxResidentMemory(unit="gb"),
+                },
+                every_n_iter=300,
+                use_graphite=False,
+                use_mlflow=False,
+            ),
+            dpr.hooks.SummarySaverHookFactory(save_steps=300),
+            dpr.hooks.NumParamsHook(use_mlflow=False),
+            dpr.hooks.LogVariablesInitHook(use_mlflow=False),
+            dpr.hooks.StepsPerSecHook(
+                name="training",
+                batch_size=128,
+                every_n_steps=300,
+                skip_after_step=max_steps,
+                use_mlflow=False,
+                use_graphite=False,
+            ),
+            dpr.hooks.EarlyStoppingHookFactory(
+                metric="loss",
+                mode="decrease",
+                max_steps_without_improvement=1000,
+                min_steps=1000,
+                run_every_steps=100,
+                final_step=max_steps,
+            ),
+        ],
+        eval_hooks=[dpr.hooks.LoggingTensorHookFactory(name="validation", at_end=True)],
+        final_hooks=[dpr.hooks.LoggingTensorHookFactory(name="final_validation", at_end=True)],
+        train_metrics=[dpr.metrics.StepCounter(name="num_steps"), dpr.metrics.DecayMean(tensors=["loss"], decay=0.98),],
+        eval_metrics=[dpr.metrics.Mean(tensors=["loss"])],
+        final_metrics=[dpr.metrics.Mean(tensors=["loss"])],
+        run_config=dpr.jobs.RunConfig(
+            save_checkpoints_steps=300, save_summary_steps=300, keep_checkpoint_max=None, log_step_count_steps=300
+        ),
+        config_proto=dpr.jobs.ConfigProto(
+            inter_op_parallelism_threads=8, intra_op_parallelism_threads=8, gpu_device_count=0, cpu_device_count=48,
+        ),
     )
     predict = movielens.jobs.Predict(
         path_saved_model=path_saved_model,
@@ -96,17 +139,11 @@ def main(path_ratings: str):
         input_fn=dpr.readers.TFRecordReader(path_test),
         prepro_fn=movielens.prepros.DefaultPrepro(),
     )
-    evaluate = movielens.jobs.Evaluate(
-        path_predictions=path_predictions,
-        path_embeddings=path_variables + "/embeddings",
-        k=20
-    )
-    pipeline = dpr.jobs.Pipeline([
-        build,
-        train,
-        predict,
-        evaluate,
-    ])
+    evaluate = [
+        movielens.jobs.Evaluate(path_predictions=path_predictions, path_embeddings=path_variables + "/embeddings", k=k)
+        for k in [10, 20, 50]
+    ]
+    pipeline = dpr.jobs.Pipeline([build, train, predict] + evaluate)
     pipeline.run()
 
 

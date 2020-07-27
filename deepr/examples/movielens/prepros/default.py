@@ -16,10 +16,11 @@ FIELDS_PREPRO = [fields.INPUT_MASK, fields.TARGET_MASK]
 
 def DefaultPrepro(
     batch_size: int = 16,
-    buffer_size: int = 10,
-    epochs: Optional[int] = None,
+    prefetch_size: int = 1,
+    repeat_size: Optional[int] = None,
     max_input_size: int = 50,
-    max_target_size: int = 1000,
+    max_target_size: int = 50,
+    num_parallel_calls: int = 8,
 ):
     sparse_fields = [field for field in FIELDS_RECORD if field.is_sparse()]
     return dpr.prepros.Serial(
@@ -36,8 +37,9 @@ def DefaultPrepro(
         dpr.prepros.Map(SequenceMask(inputs="inputPositives", outputs="inputMask")),
         dpr.prepros.Map(SequenceMask(inputs="targetPositives", outputs="targetMask")),
         (dpr.prepros.PaddedBatch(batch_size=batch_size, fields=FIELDS_RECORD + FIELDS_PREPRO)),
-        dpr.prepros.Repeat(epochs, modes=[dpr.TRAIN]),
-        dpr.prepros.Prefetch(buffer_size),
+        dpr.prepros.Repeat(repeat_size, modes=[dpr.TRAIN]),
+        dpr.prepros.Prefetch(prefetch_size),
+        num_parallel_calls=num_parallel_calls,
     )
 
 

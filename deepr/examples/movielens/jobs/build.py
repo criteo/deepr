@@ -116,7 +116,7 @@ def timelines_to_records(
 
     # Pre-sample with replacement enough negatives for all examples
     LOGGER.info("Pre-sampling negatives with replacement.")
-    movie_counts = Counter()
+    movie_counts = Counter()  # type: Dict[str, int]
     for _, movie_ids in timelines:
         movie_counts.update(movie_ids)
     movies, counts = zip(*movie_counts.items())

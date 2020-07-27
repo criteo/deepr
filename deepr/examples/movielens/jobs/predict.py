@@ -18,13 +18,7 @@ LOGGER = logging.getLogger(__name__)
 COLUMNS = ["uid", "user", "target"]
 
 
-SCHEMA = pa.schema(
-    [
-        ("uid", pa.string()),
-        ("user", pa.list_(pa.float32())),
-        ("target", pa.list_(pa.int64())),
-    ]
-)
+SCHEMA = pa.schema([("uid", pa.string()), ("user", pa.list_(pa.float32())), ("target", pa.list_(pa.int64()))])
 
 
 @dataclass
@@ -42,7 +36,9 @@ class Predict(dpr.jobs.Job):
         )
         predictions = []
         for preds in predictor(lambda: self.prepro_fn(self.input_fn(), tf.estimator.ModeKeys.PREDICT)):
-            for uid, user, target, mask in zip(preds["uid"], preds["userEmbeddings"], preds["targetPositives"], preds["targetMask"]):
+            for uid, user, target, mask in zip(
+                preds["uid"], preds["userEmbeddings"], preds["targetPositives"], preds["targetMask"]
+            ):
                 predictions.append((uid, user.astype(np.float32).tolist(), target[mask].astype(np.int64).tolist()))
 
         with dpr.io.ParquetDataset(self.path_predictions).open() as ds:
