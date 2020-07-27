@@ -24,6 +24,7 @@ class Build(dpr.jobs.Job):
     """Build MovieLens dataset."""
 
     path_ratings: str
+    path_mapping: str
     path_train: str
     path_test: str
     min_rating: int = 4
@@ -37,7 +38,7 @@ class Build(dpr.jobs.Job):
     def run(self):
         # Build records
         random.seed(self.seed)
-        timelines = get_timelines(
+        timelines, mapping = get_timelines(
             path_ratings=self.path_ratings, min_rating=self.min_rating, min_length=self.min_length
         )
         records = timelines_to_records(
@@ -46,6 +47,11 @@ class Build(dpr.jobs.Job):
             num_negatives=self.num_negatives,
             sample_popularity=self.sample_popularity,
         )
+
+        # Write mapping
+        reverse_mapping = {idx: movie for movie, idx in mapping.items()}
+        vocab = [str(reverse_mapping[idx]) for idx in range(len(reverse_mapping))]
+        dpr.vocab.write(self.path_mapping, vocab)
 
         # Shuffle and split
         random.shuffle(records)
@@ -91,14 +97,22 @@ def get_timelines(path_ratings: str, min_rating: float, min_length: int) -> List
     grouped_data = ratings_data.groupby("userId").agg(list).reset_index()
     grouped_data = grouped_data[grouped_data.rating.map(len) >= min_length]
 
+    # Build Mapping
+    LOGGER.info("Building mapping movieId -> index")
+    movies = set()
+    for ids in grouped_data["movieId"]:
+        movies.update(ids)
+    mapping = {movie: idx for idx, movie in enumerate(sorted(movies))}
+    LOGGER.info(f"Mapping size: {len(mapping)}")
+
     # Sort ratings by timestamp
     LOGGER.info("Building timelines (sort by timestamp).")
     timelines = []
     for _, row in dpr.utils.progress(grouped_data.iterrows(), secs=10):
         uid = str(row.userId)
-        movie_ids = [movie_id for _, movie_id in sorted(zip(row.timestamp, row.movieId))]
-        timelines.append((uid, movie_ids))
-    return timelines
+        movies = [mapping[movie] for _, movie in sorted(zip(row.timestamp, row.movieId))]
+        timelines.append((uid, movies))
+    return timelines, mapping
 
 
 def timelines_to_records(

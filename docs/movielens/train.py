@@ -29,6 +29,7 @@ def main(path_ratings: str):
     path_variables = path_root + "/variables"
     path_predictions = path_root + "/predictions.parquet.snappy"
     path_saved_model = path_root + "/saved_model"
+    path_mapping = path_data + "/mapping.txt"
     path_train = path_data + "/train.tfrecord.gz"
     path_test = path_data + "/test.tfrecord.gz"
     dpr.io.Path(path_root).mkdir(exist_ok=True)
@@ -38,6 +39,7 @@ def main(path_ratings: str):
 
     build = movielens.jobs.Build(
         path_ratings=path_ratings,
+        path_mapping=path_mapping,
         path_train=path_train,
         path_test=path_test,
         min_rating=4,
@@ -48,9 +50,10 @@ def main(path_ratings: str):
         sample_popularity=True,
         seed=2020,
     )
+    build.run()
 
     transformer_model = movielens.layers.TransformerModel(
-        vocab_size=150_000,
+        vocab_size=dpr.vocab.size(path_mapping),
         dim=1000,
         encoding_blocks=2,
         num_heads=8,
@@ -69,7 +72,7 @@ def main(path_ratings: str):
     train = dpr.jobs.Trainer(
         path_model=path_model,
         pred_fn=transformer_model,
-        loss_fn=movielens.layers.BPRLoss(vocab_size=150_000, dim=1000),
+        loss_fn=movielens.layers.BPRLoss(vocab_size=dpr.vocab.size(path_mapping), dim=1000),
         optimizer_fn=dpr.optimizers.TensorflowOptimizer("LazyAdam", 0.0001),
         train_input_fn=dpr.readers.TFRecordReader(path_train, num_parallel_calls=8, num_parallel_reads=8),
         eval_input_fn=dpr.readers.TFRecordReader(path_test, num_parallel_calls=8, num_parallel_reads=8),
@@ -115,15 +118,15 @@ def main(path_ratings: str):
             dpr.hooks.EarlyStoppingHookFactory(
                 metric="loss",
                 mode="decrease",
-                max_steps_without_improvement=1000,
-                min_steps=1000,
-                run_every_steps=100,
+                max_steps_without_improvement=10_000,
+                min_steps=20_000,
+                run_every_steps=300,
                 final_step=max_steps,
             ),
         ],
         eval_hooks=[dpr.hooks.LoggingTensorHookFactory(name="validation", at_end=True)],
         final_hooks=[dpr.hooks.LoggingTensorHookFactory(name="final_validation", at_end=True)],
-        train_metrics=[dpr.metrics.StepCounter(name="num_steps"), dpr.metrics.DecayMean(tensors=["loss"], decay=0.98),],
+        train_metrics=[dpr.metrics.StepCounter(name="num_steps"), dpr.metrics.DecayMean(tensors=["loss"], decay=0.98)],
         eval_metrics=[dpr.metrics.Mean(tensors=["loss"])],
         final_metrics=[dpr.metrics.Mean(tensors=["loss"])],
         run_config=dpr.jobs.RunConfig(
@@ -143,7 +146,7 @@ def main(path_ratings: str):
         movielens.jobs.Evaluate(path_predictions=path_predictions, path_embeddings=path_variables + "/embeddings", k=k)
         for k in [10, 20, 50]
     ]
-    pipeline = dpr.jobs.Pipeline([build, train, predict] + evaluate)
+    pipeline = dpr.jobs.Pipeline([train, predict] + evaluate)
     pipeline.run()
 
 
