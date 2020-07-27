@@ -13,4 +13,6 @@ TARGET_POSITIVES = dpr.Field(name="targetPositives", shape=(None,), dtype=tf.int
 
 TARGET_NEGATIVES = dpr.Field(name="targetNegatives", shape=(None, None), dtype=tf.int64)
 
-FIELDS_MOVIELENS = [UID, INPUT_POSITIVES, TARGET_POSITIVES, TARGET_NEGATIVES]
+INPUT_MASK = dpr.Field(name="inputMask", dtype=tf.bool, shape=[None], default=False)
+
+TARGET_MASK = dpr.Field(name="targetMask", dtype=tf.bool, shape=[None], default=False)

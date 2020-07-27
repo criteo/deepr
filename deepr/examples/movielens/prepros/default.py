@@ -6,26 +6,24 @@ from typing import Optional
 import deepr as dpr
 import tensorflow as tf
 
-from deepr.example.utils import fields
+from deepr.examples.movielens.utils import fields
 
 
-INPUT_MASK = dpr.Field(name="inputMask", dtype=tf.bool, shape=[None], default=False)
+FIELDS_RECORD = [fields.UID, fields.INPUT_POSITIVES, fields.TARGET_POSITIVES, fields.TARGET_NEGATIVES]
 
-TARGET_MASK = dpr.Field(name="targetMask", dtype=tf.bool, shape=[None], default=False)
-
-ALL_FIELDS = fields.FIELDS_MOVIELENS + [INPUT_MASK, TARGET_MASK]
+FIELDS_PREPRO = [fields.INPUT_MASK, fields.TARGET_MASK]
 
 
-def MovieLensPrepro(
+def DefaultPrepro(
     batch_size: int = 16,
     buffer_size: int = 10,
     epochs: Optional[int] = None,
     max_input_size: int = 10000,
     max_target_size: int = 1000,
 ):
-    sparse_fields = [field for field in fields.FIELDS_MOVIELENS if field.is_sparse()]
+    sparse_fields = [field for field in FIELDS_RECORD if field.is_sparse()]
     return dpr.prepros.Serial(
-        dpr.prepros.FromExample(fields.FIELDS_MOVIELENS),
+        dpr.prepros.FromExample(FIELDS_RECORD),
         (dpr.prepros.Map(dpr.layers.ToDense(f.default, inputs=f.name, outputs=f.name)) for f in sparse_fields),
         (
             dpr.prepros.Map(dpr.layers.SliceLast(max_input_size, inputs="inputPositives", outputs=key))
@@ -37,7 +35,7 @@ def MovieLensPrepro(
         ),
         dpr.prepros.Map(SequenceMask(inputs="inputPositives", outputs="inputMask")),
         dpr.prepros.Map(SequenceMask(inputs="targetPositives", outputs="targetMask")),
-        (dpr.prepros.PaddedBatch(batch_size=batch_size, fields=ALL_FIELDS)),
+        (dpr.prepros.PaddedBatch(batch_size=batch_size, fields=FIELDS_RECORD + FIELDS_PREPRO)),
         dpr.prepros.Repeat(epochs, modes=[dpr.TRAIN]),
         dpr.prepros.Prefetch(buffer_size),
     )

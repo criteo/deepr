@@ -7,6 +7,7 @@ from typing import List
 
 import faiss
 import numpy as np
+
 import deepr as dpr
 
 
@@ -14,8 +15,8 @@ LOGGER = logging.getLogger(__name__)
 
 
 @dataclass
-class EvalMovieLens(dpr.jobs.Job):
-    """Eval MovieLens."""
+class Evaluate(dpr.jobs.Job):
+    """Evaluate MovieLens."""
 
     path_predictions: str
     path_embeddings: str

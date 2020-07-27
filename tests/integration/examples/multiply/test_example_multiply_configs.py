@@ -1,19 +1,19 @@
-"""Test for example.configs"""
+"""Test for examples.multiply.configs"""
 
 import logging
 
 import deepr as dpr
-import deepr.example
+import deepr.examples.multiply
 
 
 logging.basicConfig(level=logging.INFO)
 
 
-PATH_CONFIG = dpr.io.Path(deepr.example.__file__).parent / "configs"
+PATH_CONFIG = dpr.io.Path(deepr.examples.multiply.__file__).parent / "configs"
 
 
-def test_example_configs(tmpdir):
-    """Test for example.configs"""
+def test_example_multiply_configs(tmpdir):
+    """Test for examples.multiply.configs"""
     path_model = str(tmpdir.join("model"))
     path_dataset = str(tmpdir.join("dataset"))
     config = dpr.io.read_json(PATH_CONFIG / "config.json")

@@ -28,7 +28,7 @@ SCHEMA = pa.schema(
 
 
 @dataclass
-class PredictMovieLens(dpr.jobs.Job):
+class Predict(dpr.jobs.Job):
     """Compute predictions from a directory containing saved models."""
 
     path_saved_model: str

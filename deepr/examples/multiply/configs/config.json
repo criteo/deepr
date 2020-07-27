@@ -11,7 +11,7 @@
             {
                 "num_examples": 1000,
                 "path_dataset": "$paths:path_dataset",
-                "type": "deepr.example.jobs.BuildDataset"
+                "type": "deepr.examples.multiply.jobs.Build"
             },
             {
                 "type": "deepr.jobs.YarnTrainer",
@@ -30,7 +30,7 @@
                         "type": "deepr.readers.TFRecordReader"
                     },
                     "loss_fn": {
-                        "type": "deepr.example.layers.SquaredL2"
+                        "type": "deepr.examples.multiply.layers.SquaredL2"
                     },
                     "optimizer_fn": {
                         "learning_rate": "$params:learning_rate",
@@ -39,12 +39,12 @@
                     },
                     "path_model": "$paths:path_model",
                     "pred_fn": {
-                        "type": "deepr.example.layers.Multiply"
+                        "type": "deepr.examples.multiply.layers.Multiply"
                     },
                     "prepro_fn": {
                         "batch_size": "$params:batch_size",
                         "repeat_size": 10,
-                        "type": "deepr.example.prepros.DefaultPrepro"
+                        "type": "deepr.examples.multiply.prepros.DefaultPrepro"
                     },
                     "train_input_fn": {
                         "num_parallel_calls": 8,
@@ -203,7 +203,7 @@
                 "fetch_shapes": {"y_pred": null}
             },
             {
-                "type": "deepr.example.jobs.PredictProto",
+                "type": "deepr.examples.multiply.jobs.PredictProto",
                 "path_model": "$paths:path_optimized_model",
                 "graph_name": "_model.pb",
                 "input_fn": {
@@ -214,7 +214,7 @@
                     "type": "deepr.readers.TFRecordReader"
                 },
                 "prepro_fn": {
-                    "type": "deepr.example.prepros.InferencePrepro",
+                    "type": "deepr.examples.multiply.prepros.InferencePrepro",
                     "batch_size": 1,
                     "count": 1,
                     "inputs": "inputs/x"
@@ -223,7 +223,7 @@
                 "fetches": "y_pred"
             },
             {
-                "type": "deepr.example.jobs.PredictSavedModel",
+                "type": "deepr.examples.multiply.jobs.PredictSavedModel",
                 "path_saved_model": "$paths:path_saved_model",
                 "input_fn": {
                     "num_parallel_calls": 8,
@@ -233,7 +233,7 @@
                     "type": "deepr.readers.TFRecordReader"
                 },
                 "prepro_fn": {
-                    "type": "deepr.example.prepros.InferencePrepro",
+                    "type": "deepr.examples.multiply.prepros.InferencePrepro",
                     "batch_size": 1,
                     "count": 1,
                     "inputs": "x"

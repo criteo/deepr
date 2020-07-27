@@ -8,16 +8,19 @@ from dataclasses import dataclass
 
 import pandas as pd
 import tensorflow as tf
-import deepr as dpr
 
-from deepr.example.utils import fields
+import deepr as dpr
+from deepr.examples.movielens.utils import fields
 
 
 LOGGER = logging.getLogger(__name__)
 
 
+FIELDS = [fields.UID, fields.INPUT_POSITIVES, fields.TARGET_POSITIVES, fields.TARGET_NEGATIVES]
+
+
 @dataclass
-class BuildMovieLens(dpr.jobs.Job):
+class Build(dpr.jobs.Job):
     """Build MovieLens dataset."""
 
     path_ratings: str
@@ -49,28 +52,25 @@ class BuildMovieLens(dpr.jobs.Job):
         delimiter = int(len(records) * (1 - self.test_ratio))
 
         # Write train dataset
+        LOGGER.info(f"Writing train dataset to {self.path_train}")
         train_dataset = tf.data.Dataset.from_generator(
             lambda: (record for record in records[:delimiter]),
-            output_types={field.name: field.dtype for field in fields.FIELDS_MOVIELENS},
-            output_shapes={field.name: field.shape for field in fields.FIELDS_MOVIELENS},
+            output_types={field.name: field.dtype for field in FIELDS},
+            output_shapes={field.name: field.shape for field in FIELDS},
         )
-        to_example = dpr.prepros.ToExample(fields=fields.FIELDS_MOVIELENS)
+        to_example = dpr.prepros.ToExample(fields=FIELDS)
         writer = dpr.writers.TFRecordWriter(path=self.path_train)
         writer.write(to_example(train_dataset))
 
         # Write test dataset
+        LOGGER.info(f"Writing test dataset to {self.path_test}")
         test_dataset = tf.data.Dataset.from_generator(
             lambda: (record for record in records[delimiter:]),
-            output_types={field.name: field.dtype for field in fields.FIELDS_MOVIELENS},
-            output_shapes={field.name: field.shape for field in fields.FIELDS_MOVIELENS},
+            output_types={field.name: field.dtype for field in FIELDS},
+            output_shapes={field.name: field.shape for field in FIELDS},
         )
         writer = dpr.writers.TFRecordWriter(path=self.path_test)
         writer.write(to_example(test_dataset))
-
-        input_fn = dpr.readers.TFRecordReader(path=self.path_train)
-        from_example = dpr.prepros.FromExample(fields=fields.FIELDS_MOVIELENS)
-        for x in dpr.readers.from_dataset(from_example(input_fn().take(1))):
-            print(x)
 
 
 def get_timelines(path_ratings: str, min_rating: float, min_length: int) -> List[Tuple[str, List[int]]]:
