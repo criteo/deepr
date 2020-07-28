@@ -27,10 +27,18 @@ class WeightedAverage(base.Layer):
     def forward(self, tensors, mode: str = None):
         """Forward method of the layer"""
         values, weights = tensors
+
+        # Values and weights need to have the same shape up to axis
+        # and compatible after axis
         axis = len(weights.shape) - 1
+        weights = tf.broadcast_to(weights, tf.shape(values)[:len(weights.shape)])
         values, weights = make_same_shape([values, weights], broadcast=False)
+
+        # Reduce weighted values and weights
         weighted_values = tf.reduce_sum(values * weights, axis=axis)
         sum_weights = tf.reduce_sum(weights, axis=axis)
+
+        # Average values and weights, take care of all weights zeros
         if self.default is None:
             return weighted_values / sum_weights
         elif self.default == 0:

@@ -36,7 +36,7 @@ def BPRLoss(vocab_size: int, dim: int):
         dpr.layers.Add(inputs=("targetPositiveBiases", "targetPositiveProduct"), outputs="targetPositiveLogits"),
         dpr.layers.Add(inputs=("targetNegativeBiases", "targetNegativeProduct"), outputs="targetNegativeLogits"),
         dpr.layers.ToFloat(inputs="targetMask", outputs="targetWeight"),
-        dpr.layers.ExpandDims(inputs="targetMask", outputs="targetMask", axis=-1),
+        dpr.layers.ExpandDims(inputs="targetMask", outputs="targetMask"),
         dpr.layers.MaskedBPR(
             inputs=("targetPositiveLogits", "targetNegativeLogits", "targetMask", "targetWeight"), outputs="loss"
         ),
