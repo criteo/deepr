@@ -40,4 +40,9 @@ def BPRLoss(vocab_size: int, dim: int):
         dpr.layers.MaskedBPR(
             inputs=("targetPositiveLogits", "targetNegativeLogits", "targetMask", "targetWeight"), outputs="loss"
         ),
+        dpr.layers.TripletPrecision(
+            inputs=("targetPositiveLogits", "targetNegativeLogits", "targetMask", "targetWeight"),
+            outputs="triplet_precision",
+        ),
+        dpr.layers.Select(inputs=("loss", "triplet_precision")),
     )

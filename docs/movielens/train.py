@@ -83,7 +83,7 @@ def main(path_ratings: str):
         eval_spec=dpr.jobs.EvalSpec(steps=100),
         final_spec=dpr.jobs.FinalSpec(steps=None),
         exporters=[
-            dpr.exporters.BestCheckpoint(metric="loss"),
+            dpr.exporters.BestCheckpoint(metric="triplet_precision"),
             dpr.exporters.SaveVariables(path_variables=path_variables, variable_names=["biases", "embeddings"]),
             dpr.exporters.SavedModel(
                 path_saved_model=path_saved_model,
@@ -116,19 +116,22 @@ def main(path_ratings: str):
                 use_graphite=False,
             ),
             dpr.hooks.EarlyStoppingHookFactory(
-                metric="loss",
-                mode="decrease",
-                max_steps_without_improvement=10_000,
-                min_steps=20_000,
+                metric="triplet_precision",
+                mode="increase",
+                max_steps_without_improvement=1000,
+                min_steps=10_000,
                 run_every_steps=300,
                 final_step=max_steps,
             ),
         ],
         eval_hooks=[dpr.hooks.LoggingTensorHookFactory(name="validation", at_end=True)],
         final_hooks=[dpr.hooks.LoggingTensorHookFactory(name="final_validation", at_end=True)],
-        train_metrics=[dpr.metrics.StepCounter(name="num_steps"), dpr.metrics.DecayMean(tensors=["loss"], decay=0.98)],
-        eval_metrics=[dpr.metrics.Mean(tensors=["loss"])],
-        final_metrics=[dpr.metrics.Mean(tensors=["loss"])],
+        train_metrics=[
+            dpr.metrics.StepCounter(name="num_steps"),
+            dpr.metrics.DecayMean(tensors=["loss", "triplet_precision"], decay=0.98),
+        ],
+        eval_metrics=[dpr.metrics.Mean(tensors=["loss", "triplet_precision"])],
+        final_metrics=[dpr.metrics.Mean(tensors=["loss", "triplet_precision"])],
         run_config=dpr.jobs.RunConfig(
             save_checkpoints_steps=300, save_summary_steps=300, keep_checkpoint_max=None, log_step_count_steps=300
         ),

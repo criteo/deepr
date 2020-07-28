@@ -49,3 +49,4 @@ from deepr.layers.transformer import (
     SelfMultiheadAttention,
     AttentionMask,
 )
+from deepr.layers.triplet_precision import TripletPrecision
