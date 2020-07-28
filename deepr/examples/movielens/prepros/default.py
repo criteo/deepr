@@ -1,5 +1,5 @@
 # pylint: disable=no-value-for-parameter,unexpected-keyword-arg
-"""Description"""
+"""Default Preprocessing for MovieLens."""
 
 from typing import Optional
 
@@ -22,10 +22,13 @@ def DefaultPrepro(
     max_target_size: int = 50,
     num_parallel_calls: int = 8,
 ):
-    sparse_fields = [field for field in FIELDS_RECORD if field.is_sparse()]
     return dpr.prepros.Serial(
         dpr.prepros.FromExample(FIELDS_RECORD),
-        (dpr.prepros.Map(dpr.layers.ToDense(f.default, inputs=f.name, outputs=f.name)) for f in sparse_fields),
+        (
+            dpr.prepros.Map(dpr.layers.ToDense(field.default, inputs=field.name, outputs=field.name))
+            for field in FIELDS_RECORD
+            if field.is_sparse()
+        ),
         dpr.prepros.Map(dpr.layers.SliceLast(max_input_size, inputs="inputPositives", outputs="inputPositives")),
         dpr.prepros.Map(dpr.layers.SliceFirst(max_target_size, inputs="targetPositives", outputs="targetPositives")),
         dpr.prepros.Map(dpr.layers.SliceFirst(max_target_size, inputs="targetNegatives", outputs="targetNegatives")),

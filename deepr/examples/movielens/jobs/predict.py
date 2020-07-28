@@ -31,6 +31,7 @@ class Predict(dpr.jobs.Job):
     prepro_fn: Callable[[tf.data.Dataset, str], tf.data.Dataset]
 
     def run(self):
+        LOGGER.info(f"Computing predictions from {self.path_saved_model}")
         predictor = dpr.predictors.SavedModelPredictor(
             path=dpr.predictors.get_latest_saved_model(self.path_saved_model)
         )
@@ -44,3 +45,4 @@ class Predict(dpr.jobs.Job):
         with dpr.io.ParquetDataset(self.path_predictions).open() as ds:
             df = pd.DataFrame(data=predictions, columns=COLUMNS)
             ds.write_pandas(df, compression="snappy", schema=SCHEMA)
+        LOGGER.info(f"Wrote predictions to {self.path_predictions}")

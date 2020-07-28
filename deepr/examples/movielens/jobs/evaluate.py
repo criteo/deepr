@@ -20,20 +20,29 @@ class Evaluate(dpr.jobs.Job):
 
     path_predictions: str
     path_embeddings: str
+    path_biases: str
     k: int
 
     def run(self):
         with dpr.io.ParquetDataset(self.path_predictions).open() as ds:
             predictions = ds.read_pandas().to_pandas()
             users = np.stack(predictions["user"])
+            ones = np.ones([users.shape[0], 1], np.float32)
+            users_with_ones = np.concatenate([users, ones], axis=-1)
 
         with dpr.io.ParquetDataset(self.path_embeddings).open() as ds:
             embeddings = ds.read_pandas().to_pandas()
             embeddings = embeddings.to_numpy()
 
-        index = faiss.IndexFlatIP(embeddings.shape[-1])
-        index.add(np.ascontiguousarray(embeddings))
-        _, indices = index.search(users, k=self.k)
+        with dpr.io.ParquetDataset(self.path_biases).open() as ds:
+            biases = ds.read_pandas().to_pandas()
+            biases = biases.to_numpy()
+
+        embeddings_with_biases = np.concatenate([embeddings, biases], axis=-1)
+
+        index = faiss.IndexFlatIP(embeddings_with_biases.shape[-1])
+        index.add(np.ascontiguousarray(embeddings_with_biases))
+        _, indices = index.search(users_with_ones, k=self.k)
         precision, recall, f1_score = self.compute_metrics(predictions["target"], indices)
         LOGGER.info(
             f"precision@{self.k} = {precision}\n" f"recall@{self.k} = {recall}\n" f"f1_score@{self.k} = {f1_score}"

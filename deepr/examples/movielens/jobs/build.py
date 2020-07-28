@@ -32,7 +32,7 @@ class Build(dpr.jobs.Job):
     test_ratio: float = 0.2
     num_negatives: int = 8
     target_ratio: float = 0.2
-    sample_popularity: bool = True
+    sample_popularity: bool = False
     seed: int = 2020
 
     def run(self):
@@ -55,28 +55,22 @@ class Build(dpr.jobs.Job):
 
         # Shuffle and split
         random.shuffle(records)
-        delimiter = int(len(records) * (1 - self.test_ratio))
+        delimiter = int(len(records) * self.test_ratio)
+        write_records(records[delimiter:], self.path_train)
+        write_records(records[:delimiter], self.path_test)
 
-        # Write train dataset
-        LOGGER.info(f"Writing train dataset to {self.path_train}")
-        train_dataset = tf.data.Dataset.from_generator(
-            lambda: (record for record in records[:delimiter]),
-            output_types={field.name: field.dtype for field in FIELDS},
-            output_shapes={field.name: field.shape for field in FIELDS},
-        )
-        to_example = dpr.prepros.ToExample(fields=FIELDS)
-        writer = dpr.writers.TFRecordWriter(path=self.path_train)
-        writer.write(to_example(train_dataset))
 
-        # Write test dataset
-        LOGGER.info(f"Writing test dataset to {self.path_test}")
-        test_dataset = tf.data.Dataset.from_generator(
-            lambda: (record for record in records[delimiter:]),
-            output_types={field.name: field.dtype for field in FIELDS},
-            output_shapes={field.name: field.shape for field in FIELDS},
-        )
-        writer = dpr.writers.TFRecordWriter(path=self.path_test)
-        writer.write(to_example(test_dataset))
+def write_records(records: List[Dict], path: str):
+    """Write records to path."""
+    LOGGER.info(f"Writing {len(records)} records to {path}")
+    dataset = tf.data.Dataset.from_generator(
+        lambda: (record for record in records),
+        output_types={field.name: field.dtype for field in FIELDS},
+        output_shapes={field.name: field.shape for field in FIELDS},
+    )
+    to_example = dpr.prepros.ToExample(fields=FIELDS)
+    writer = dpr.writers.TFRecordWriter(path=path)
+    writer.write(to_example(dataset))
 
 
 def get_timelines(path_ratings: str, min_rating: float, min_length: int) -> List[Tuple[str, List[int]]]:
@@ -90,12 +84,15 @@ def get_timelines(path_ratings: str, min_rating: float, min_length: int) -> List
     LOGGER.info(f"Reading ratings from {path_ratings}")
     with dpr.io.Path(path_ratings).open() as file:
         ratings_data = pd.read_csv(file, sep=",")
+    LOGGER.info(f"Number of timelines before filtration is {len(set(ratings_data.userId))}")
+    LOGGER.info(f"Number of movies before filtration is {len(set(ratings_data.movieId))}")
 
     # Group and aggregate ratings per user
     LOGGER.info("Grouping ratings by user")
     ratings_data = ratings_data[ratings_data.rating >= min_rating]
     grouped_data = ratings_data.groupby("userId").agg(list).reset_index()
     grouped_data = grouped_data[grouped_data.rating.map(len) >= min_length]
+    LOGGER.info(f"Number of timelines after filtration is {len(grouped_data)}")
 
     # Build Mapping
     LOGGER.info("Building mapping movieId -> index")
@@ -103,7 +100,7 @@ def get_timelines(path_ratings: str, min_rating: float, min_length: int) -> List
     for ids in grouped_data["movieId"]:
         movies.update(ids)
     mapping = {movie: idx for idx, movie in enumerate(sorted(movies))}
-    LOGGER.info(f"Mapping size: {len(mapping)}")
+    LOGGER.info(f"Number of movies after filtration is: {len(mapping)}")
 
     # Sort ratings by timestamp
     LOGGER.info("Building timelines (sort by timestamp).")
@@ -129,7 +126,7 @@ def timelines_to_records(
         splitted_timelines.append((uid, input_positives, target_positives))
 
     # Pre-sample with replacement enough negatives for all examples
-    LOGGER.info("Pre-sampling negatives with replacement.")
+    LOGGER.info(f"Pre-sampling negatives with replacement, sample_popularity={sample_popularity}.")
     movie_counts = Counter()  # type: Dict[str, int]
     for _, movie_ids in timelines:
         movie_counts.update(movie_ids)
