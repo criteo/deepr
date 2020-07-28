@@ -26,14 +26,9 @@ def DefaultPrepro(
     return dpr.prepros.Serial(
         dpr.prepros.FromExample(FIELDS_RECORD),
         (dpr.prepros.Map(dpr.layers.ToDense(f.default, inputs=f.name, outputs=f.name)) for f in sparse_fields),
-        (
-            dpr.prepros.Map(dpr.layers.SliceLast(max_input_size, inputs="inputPositives", outputs=key))
-            for key in ["inputPositives"]
-        ),
-        (
-            dpr.prepros.Map(dpr.layers.SliceFirst(max_target_size, inputs=key, outputs=key))
-            for key in ["targetPositives", "targetNegatives"]
-        ),
+        dpr.prepros.Map(dpr.layers.SliceLast(max_input_size, inputs="inputPositives", outputs="inputPositives")),
+        dpr.prepros.Map(dpr.layers.SliceFirst(max_target_size, inputs="targetPositives", outputs="targetPositives")),
+        dpr.prepros.Map(dpr.layers.SliceFirst(max_target_size, inputs="targetNegatives", outputs="targetNegatives")),
         dpr.prepros.Map(SequenceMask(inputs="inputPositives", outputs="inputMask")),
         dpr.prepros.Map(SequenceMask(inputs="targetPositives", outputs="targetMask")),
         (dpr.prepros.PaddedBatch(batch_size=batch_size, fields=FIELDS_RECORD + FIELDS_PREPRO)),

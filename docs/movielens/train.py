@@ -84,7 +84,7 @@ def main(path_ratings: str):
         final_spec=dpr.jobs.FinalSpec(steps=None),
         exporters=[
             dpr.exporters.BestCheckpoint(metric="loss"),
-            dpr.exporters.SaveVariables(path_variables=path_variables, variable_names=["embeddings"]),
+            dpr.exporters.SaveVariables(path_variables=path_variables, variable_names=["biases", "embeddings"]),
             dpr.exporters.SavedModel(
                 path_saved_model=path_saved_model,
                 fields=[

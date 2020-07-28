@@ -38,7 +38,7 @@ def Transformer(
     """Transformer Model."""
     return Sequential(
         Select(n_in=2, inputs=inputs, outputs=("inputEmbeddings", "inputMask")),
-        SpatialDropout1D(inputs="inputEmbeddings", outputs="inputEmbeddingsDropout", dropout_rate=event_dropout_rate,),
+        SpatialDropout1D(inputs="inputEmbeddings", outputs="inputEmbeddingsDropout", dropout_rate=event_dropout_rate),
         AttentionMask(inputs="inputMask", outputs="mask", use_look_ahead_mask=use_look_ahead_mask),
         (
             Scale(inputs="inputEmbeddingsDropout", outputs="inputEnc", multiplier=(num_heads * dim_head) ** 0.5)

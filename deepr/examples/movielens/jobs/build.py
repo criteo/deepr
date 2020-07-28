@@ -146,8 +146,8 @@ def timelines_to_records(
     for uid, input_positives, target_positives in dpr.utils.progress(splitted_timelines, secs=10):
         # Extract slice from negatives
         target_negatives = [
-            negatives[offset + idx : offset + idx + num_negatives]
-            for idx in range(0, len(target_positives) * num_negatives, num_negatives)
+            negatives[offset + idx * num_negatives : offset + (idx + 1) * num_negatives]
+            for idx in range(len(target_positives))
         ]
 
         # Update slice offset for negatives, create new record
