@@ -18,10 +18,13 @@ def DefaultPrepro(
     batch_size: int = 16,
     prefetch_size: int = 1,
     repeat_size: Optional[int] = None,
+    min_input_size: int = 3,
+    min_target_size: int = 3,
     max_input_size: int = 50,
     max_target_size: int = 50,
     num_parallel_calls: int = 8,
 ):
+    """Default Preprocessing for MovieLens."""
     return dpr.prepros.Serial(
         dpr.prepros.FromExample(FIELDS_RECORD),
         (
@@ -32,6 +35,12 @@ def DefaultPrepro(
         dpr.prepros.Map(dpr.layers.SliceLast(max_input_size, inputs="inputPositives", outputs="inputPositives")),
         dpr.prepros.Map(dpr.layers.SliceFirst(max_target_size, inputs="targetPositives", outputs="targetPositives")),
         dpr.prepros.Map(dpr.layers.SliceFirst(max_target_size, inputs="targetNegatives", outputs="targetNegatives")),
+        dpr.prepros.Filter(
+            dpr.layers.IsMinSize(inputs="inputPositives", size=min_input_size), modes=[dpr.TRAIN, dpr.EVAL]
+        ),
+        dpr.prepros.Filter(
+            dpr.layers.IsMinSize(inputs="targetPositives", size=min_target_size), modes=[dpr.TRAIN, dpr.EVAL]
+        ),
         dpr.prepros.Map(SequenceMask(inputs="inputPositives", outputs="inputMask")),
         dpr.prepros.Map(SequenceMask(inputs="targetPositives", outputs="targetMask")),
         (dpr.prepros.PaddedBatch(batch_size=batch_size, fields=FIELDS_RECORD + FIELDS_PREPRO)),

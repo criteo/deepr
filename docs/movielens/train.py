@@ -74,11 +74,16 @@ def main(path_ratings: str):
         path_model=path_model,
         pred_fn=transformer_model,
         loss_fn=movielens.layers.BPRLoss(vocab_size=vocab_size, dim=1000),
-        optimizer_fn=dpr.optimizers.TensorflowOptimizer("LazyAdam", 0.0001),
+        optimizer_fn=dpr.optimizers.TensorflowOptimizer("LazyAdam", 0.0001, skip_vars=["embeddings"], skip_steps=500),
         train_input_fn=dpr.readers.TFRecordReader(path_train, num_parallel_calls=8, num_parallel_reads=8),
         eval_input_fn=dpr.readers.TFRecordReader(path_test, num_parallel_calls=8, num_parallel_reads=8),
         prepro_fn=movielens.prepros.DefaultPrepro(
-            batch_size=128, max_input_size=50, max_target_size=50, num_parallel_calls=8
+            batch_size=128,
+            min_input_size=3,
+            min_target_size=3,
+            max_input_size=50,
+            max_target_size=50,
+            num_parallel_calls=8,
         ),
         train_spec=dpr.jobs.TrainSpec(max_steps=max_steps),
         eval_spec=dpr.jobs.EvalSpec(steps=100),
@@ -148,7 +153,8 @@ def main(path_ratings: str):
             path_predictions=path_predictions,
             path_embeddings=path_variables + "/embeddings",
             path_biases=path_variables + "/biases",
-            k=k)
+            k=k,
+        )
         for k in [10, 20, 50]
     ]
     pipeline = dpr.jobs.Pipeline([train, predict] + evaluate)
