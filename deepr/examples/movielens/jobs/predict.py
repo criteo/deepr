@@ -18,7 +18,7 @@ LOGGER = logging.getLogger(__name__)
 COLUMNS = ["uid", "user", "target"]
 
 
-SCHEMA = pa.schema([("uid", pa.string()), ("user", pa.list_(pa.float32())), ("target", pa.list_(pa.int64()))])
+SCHEMA = pa.schema([("uid", pa.int64()), ("user", pa.list_(pa.float32())), ("target", pa.list_(pa.int64()))])
 
 
 @dataclass

@@ -31,23 +31,26 @@ def main(path_ratings: str):
     path_saved_model = path_root + "/saved_model"
     path_mapping = path_data + "/mapping.txt"
     path_train = path_data + "/train.tfrecord.gz"
+    path_eval = path_data + "/eval.tfrecord.gz"
     path_test = path_data + "/test.tfrecord.gz"
     dpr.io.Path(path_root).mkdir(exist_ok=True)
     dpr.io.Path(path_model).mkdir(exist_ok=True)
     dpr.io.Path(path_data).mkdir(exist_ok=True)
-    max_steps = 20_000
+    max_steps = 100_000
 
     build = movielens.jobs.Build(
         path_ratings=path_ratings,
         path_mapping=path_mapping,
         path_train=path_train,
+        path_eval=path_eval,
         path_test=path_test,
         min_rating=4,
         min_length=5,
-        test_ratio=0.2,
         num_negatives=8,
         target_ratio=0.2,
-        sample_popularity=False,
+        size_test=10_000,
+        size_eval=10_000,
+        shuffle_timelines=True,
         seed=2020,
     )
     build.run()
@@ -76,7 +79,7 @@ def main(path_ratings: str):
         loss_fn=movielens.layers.BPRLoss(vocab_size=vocab_size, dim=1000),
         optimizer_fn=dpr.optimizers.TensorflowOptimizer("LazyAdam", 0.0001, skip_vars=["embeddings"], skip_steps=500),
         train_input_fn=dpr.readers.TFRecordReader(path_train, shuffle=True),
-        eval_input_fn=dpr.readers.TFRecordReader(path_test, shuffle=True),
+        eval_input_fn=dpr.readers.TFRecordReader(path_eval, shuffle=False),
         prepro_fn=movielens.prepros.DefaultPrepro(
             min_input_size=3,
             min_target_size=3,
@@ -89,7 +92,7 @@ def main(path_ratings: str):
             num_parallel_calls=8,
         ),
         train_spec=dpr.jobs.TrainSpec(max_steps=max_steps),
-        eval_spec=dpr.jobs.EvalSpec(steps=100),
+        eval_spec=dpr.jobs.EvalSpec(steps=None),
         final_spec=dpr.jobs.FinalSpec(steps=None),
         exporters=[
             dpr.exporters.BestCheckpoint(metric="triplet_precision", mode="increase"),

@@ -5,7 +5,7 @@ import tensorflow as tf
 import deepr as dpr
 
 
-UID = dpr.Field(name="uid", shape=(), dtype=tf.string)
+UID = dpr.Field(name="uid", shape=(), dtype=tf.int64)
 
 INPUT_POSITIVES = dpr.Field(name="inputPositives", shape=(None,), dtype=tf.int64)
 
