@@ -1,4 +1,4 @@
-"""Compute prediction on a dataset and log result."""
+"""Compute MovieLens predictions."""
 
 import logging
 from typing import Callable
@@ -23,7 +23,7 @@ SCHEMA = pa.schema([("uid", pa.int64()), ("user", pa.list_(pa.float32())), ("tar
 
 @dataclass
 class Predict(dpr.jobs.Job):
-    """Compute predictions from a directory containing saved models."""
+    """Compute MovieLens predictions."""
 
     path_saved_model: str
     path_predictions: str

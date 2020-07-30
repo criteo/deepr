@@ -1,4 +1,4 @@
-"""Train Transformer on MovieLens.
+"""Train model on MovieLens.
 
 Usage
 -----
@@ -23,22 +23,23 @@ def main(path_ratings: str):
         Path to ML20 dataset ratings
         Link https://grouplens.org/datasets/movielens/20m/
     """
-    path_root = "transformer_next_shuffle"
+    path_root = "wan"
     path_model = path_root + "/model"
     path_data = path_root + "/data"
     path_variables = path_root + "/variables"
     path_predictions = path_root + "/predictions.parquet.snappy"
     path_saved_model = path_root + "/saved_model"
     path_mapping = path_data + "/mapping.txt"
-    path_train = path_data + "/train.csv"
-    path_eval = path_data + "/eval.csv"
-    path_test = path_data + "/test.csv"
+    path_train = path_data + "/train.tfrecord.gz"
+    path_eval = path_data + "/eval.tfrecord.gz"
+    path_test = path_data + "/test.tfrecord.gz"
     dpr.io.Path(path_root).mkdir(exist_ok=True)
     dpr.io.Path(path_model).mkdir(exist_ok=True)
     dpr.io.Path(path_data).mkdir(exist_ok=True)
     max_steps = 100_000
 
-    build = movielens.jobs.BuildCSV(
+    # Build TF Records before defining the train job (need vocab size)
+    build = movielens.jobs.BuildRecords(
         path_ratings=path_ratings,
         path_mapping=path_mapping,
         path_train=path_train,
@@ -46,55 +47,24 @@ def main(path_ratings: str):
         path_test=path_test,
         min_rating=4,
         min_length=5,
+        num_negatives=8,
+        target_ratio=0.2,
         size_test=10_000,
         size_eval=10_000,
+        shuffle_timelines=True,
         seed=2020,
-        next_movie=100_000,
     )
     build.run()
-    vocab_size = dpr.vocab.size(path_mapping)
 
-    transformer_model = movielens.layers.TransformerModel(
-        vocab_size=vocab_size,
-        dim=100,
-        encoding_blocks=2,
-        num_heads=8,
-        dim_head=32,
-        residual_connection=False,
-        use_layer_normalization=True,
-        use_feedforward=True,
-        event_dropout_rate=0.4,
-        ff_dropout_rate=0.5,
-        ff_normalization=True,
-        scale=False,
-        use_positional_encoding=False,
-        use_look_ahead_mask=False,
-    )
-
-    average_model = movielens.layers.AverageModel(vocab_size=vocab_size, dim=100)
-
+    # Define train, predict and evaluate jobs
     train = dpr.jobs.Trainer(
         path_model=path_model,
-        pred_fn=transformer_model,
-        loss_fn=movielens.layers.BPRLoss(vocab_size=vocab_size, dim=100),
-        optimizer_fn=dpr.optimizers.TensorflowOptimizer("LazyAdam", 0.0001),
-        train_input_fn=movielens.readers.CSVReader(
-            path_csv=path_train,
-            path_mapping=path_mapping,
-            target_ratio=0.2,
-            num_negatives=8,
-            next_movie=100_000,
-            num_shuffle=10,
-        ),
-        eval_input_fn=movielens.readers.CSVReader(
-            path_csv=path_eval,
-            path_mapping=path_mapping,
-            target_ratio=0.2,
-            num_negatives=8,
-            next_movie=100_000,
-            num_shuffle=1,
-        ),
-        prepro_fn=movielens.prepros.CSVPrepro(
+        pred_fn=movielens.layers.AverageModel(vocab_size=dpr.vocab.size(path_mapping), dim=100),
+        loss_fn=movielens.layers.BPRLoss(vocab_size=dpr.vocab.size(path_mapping), dim=100),
+        optimizer_fn=dpr.optimizers.TensorflowOptimizer("LazyAdam", 0.001),
+        train_input_fn=dpr.readers.TFRecordReader(path_train),
+        eval_input_fn=dpr.readers.TFRecordReader(path_eval, shuffle=False),
+        prepro_fn=movielens.prepros.RecordPrepro(
             min_input_size=3,
             min_target_size=3,
             max_input_size=50,
@@ -165,15 +135,8 @@ def main(path_ratings: str):
     predict = movielens.jobs.Predict(
         path_saved_model=path_saved_model,
         path_predictions=path_predictions,
-        input_fn=movielens.readers.CSVReader(
-            path_csv=path_test,
-            path_mapping=path_mapping,
-            target_ratio=0.2,
-            num_negatives=8,
-            next_movie=100_000,
-            num_shuffle=1,
-        ),
-        prepro_fn=movielens.prepros.CSVPrepro(),
+        input_fn=dpr.readers.TFRecordReader(path_test, shuffle=False),
+        prepro_fn=movielens.prepros.RecordPrepro(),
     )
     evaluate = [
         movielens.jobs.Evaluate(
@@ -184,6 +147,8 @@ def main(path_ratings: str):
         )
         for k in [10, 20, 50]
     ]
+
+    # Run pipeline
     pipeline = dpr.jobs.Pipeline([train, predict] + evaluate)
     pipeline.run()
 

@@ -5,6 +5,7 @@ import deepr as dpr
 
 
 def AverageModel(vocab_size: int, dim: int):
+    """Average Model."""
     return dpr.layers.Sequential(
         dpr.layers.Select(inputs=("inputPositives", "inputMask")),
         dpr.layers.Embedding(

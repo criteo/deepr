@@ -1,5 +1,5 @@
 # pylint: disable=no-value-for-parameter,unexpected-keyword-arg
-"""Default Preprocessing for MovieLens."""
+"""TF Record Preprocessing for MovieLens."""
 
 from typing import Optional
 

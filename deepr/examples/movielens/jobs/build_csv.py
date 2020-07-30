@@ -1,4 +1,4 @@
-"""Build csv job."""
+"""Build MovieLens dataset as CSV files."""
 
 import logging
 import random
@@ -19,7 +19,7 @@ FIELDS = [fields.UID, fields.INPUT_POSITIVES, fields.TARGET_POSITIVES, fields.TA
 
 @dataclass
 class BuildCSV(dpr.jobs.Job):
-    """Build csv job."""
+    """Build MovieLens dataset as CSV files."""
 
     path_ratings: str
     path_mapping: str

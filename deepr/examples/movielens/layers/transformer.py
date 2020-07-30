@@ -8,6 +8,7 @@ import deepr as dpr
 
 
 def TransformerModel(vocab_size: int, dim: int, **kwargs):
+    """Transformer Model."""
     return dpr.layers.Sequential(
         dpr.layers.Select(inputs=("inputPositives", "inputMask")),
         dpr.layers.Embedding(

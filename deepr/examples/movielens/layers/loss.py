@@ -1,5 +1,5 @@
 # pylint: disable=unexpected-keyword-arg,no-value-for-parameter
-"""BPR Loss."""
+"""BPR Loss with biases."""
 
 import tensorflow as tf
 
@@ -7,6 +7,7 @@ import deepr as dpr
 
 
 def BPRLoss(vocab_size: int, dim: int):
+    """BPR Loss with biases."""
     return dpr.layers.Sequential(
         dpr.layers.Select(inputs=("userEmbeddings", "targetPositives", "targetNegatives", "targetMask")),
         dpr.layers.Embedding(

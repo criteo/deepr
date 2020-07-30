@@ -62,7 +62,7 @@ def Transformer(
                     ),
                     (
                         Scope(Normalization(inputs="inputEnc", outputs="inputEnc"), "attention_norm")
-                        if use_layer_normalization
+                        if use_layer_normalization and not (not use_feedforward and block_id == encoding_blocks - 1)
                         else []
                     ),
                     (
@@ -79,7 +79,7 @@ def Transformer(
                     ),
                     (
                         Scope(Normalization(inputs="inputEnc", outputs="inputEnc"), "ff_norm")
-                        if use_feedforward and ff_normalization
+                        if use_feedforward and ff_normalization and block_id != encoding_blocks - 1
                         else []
                     ),
                 ),

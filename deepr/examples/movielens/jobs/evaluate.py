@@ -1,5 +1,5 @@
 # pylint: disable=no-value-for-parameter
-"""Eval dataset."""
+"""Evaluate MovieLens."""
 
 import logging
 from dataclasses import dataclass
@@ -62,7 +62,7 @@ class Evaluate(dpr.jobs.Job):
 
     @staticmethod
     def precision_recall_f1(true: np.ndarray, pred: np.ndarray):
-        """ Compute precision, recall and f1_score"""
+        """Compute precision, recall and f1_score."""
         num_predicted = np.unique(pred).size
         num_intersect = np.intersect1d(pred, true).size
         num_observed = np.unique(true).size

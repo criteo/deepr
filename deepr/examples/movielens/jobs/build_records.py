@@ -1,4 +1,4 @@
-"""Build dataset."""
+"""Build MovieLens dataset as TFRecords."""
 
 import logging
 import random
@@ -22,7 +22,7 @@ FIELDS = [fields.UID, fields.INPUT_POSITIVES, fields.TARGET_POSITIVES, fields.TA
 
 @dataclass
 class BuildRecords(dpr.jobs.Job):
-    """Build MovieLens dataset."""
+    """Build MovieLens dataset as TFRecords."""
 
     path_ratings: str
     path_mapping: str
@@ -37,7 +37,6 @@ class BuildRecords(dpr.jobs.Job):
     size_eval: int = 10_000
     shuffle_timelines: bool = True
     seed: int = 2020
-    append_next: bool = False
 
     def run(self):
         # Read timelines (sorted by timestamp)
@@ -57,14 +56,7 @@ class BuildRecords(dpr.jobs.Job):
         movies = set()
         for _, ids in timelines_train:
             movies.update(ids)
-
-        # Add special id for a special <next> movie
-        next_id = max(movies) + 1
         vocab = sorted(movies)
-        if self.append_next:
-            vocab = [next_id] + vocab
-
-        # Write vocabulary
         mapping = {movie: idx for idx, movie in enumerate(vocab)}
         dpr.vocab.write(self.path_mapping, [str(movie) for movie in vocab])
         LOGGER.info(f"Number of movies after filtration is: {len(vocab)}")
@@ -83,8 +75,6 @@ class BuildRecords(dpr.jobs.Job):
                     num_negatives=self.num_negatives,
                     shuffle_timelines=self.shuffle_timelines,
                     mapping=mapping,
-                    append_next=self.append_next,
-                    next_id=next_id,
                 ),
                 path,
             )
@@ -108,8 +98,6 @@ def records_generator(
     num_negatives: int,
     shuffle_timelines: bool,
     mapping: Dict[int, int],
-    append_next: bool,
-    next_id: int,
 ) -> List[Dict]:
     """Convert Timelines to list of Records with negative samples."""
     for uid, movies in dpr.utils.progress(timelines, secs=10):
@@ -122,10 +110,6 @@ def records_generator(
         split = int(len(indices) * (1 - target_ratio))
         input_positives = indices[:split]
         target_positives = indices[split:]
-
-        # Append next uid
-        if append_next:
-            input_positives.append(mapping[next_id])
 
         # Sample negatives
         target_negatives = [random.sample(range(len(mapping)), num_negatives) for _ in range(len(target_positives))]

@@ -1,4 +1,4 @@
-"""Fields."""
+"""Fields for MovieLens."""
 
 import tensorflow as tf
 

@@ -1,4 +1,4 @@
-"""CSV Reader."""
+"""CSV Reader for MovieLens."""
 
 import random
 import json
@@ -15,7 +15,7 @@ FIELDS = [fields.UID, fields.INPUT_POSITIVES, fields.TARGET_POSITIVES, fields.TA
 
 
 class CSVReader(dpr.readers.Reader):
-    """CSV Reader."""
+    """CSV Reader for MovieLens."""
 
     def __init__(
         self,
