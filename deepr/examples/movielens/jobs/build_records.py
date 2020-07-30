@@ -98,7 +98,7 @@ def records_generator(
     num_negatives: int,
     shuffle_timelines: bool,
     mapping: Dict[int, int],
-) -> List[Dict]:
+):
     """Convert Timelines to list of Records with negative samples."""
     for uid, movies in dpr.utils.progress(timelines, secs=10):
         # Remap movies to index and shuffle

@@ -5,10 +5,14 @@ import logging
 from dataclasses import dataclass
 from typing import List
 
-import faiss
 import numpy as np
 
 import deepr as dpr
+
+try:
+    import faiss
+except ImportError as e:
+    print(f"Faiss needs to be installed for MovieLens {e}")
 
 
 LOGGER = logging.getLogger(__name__)

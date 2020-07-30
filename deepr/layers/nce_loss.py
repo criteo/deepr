@@ -3,7 +3,7 @@
 import tensorflow as tf
 
 from deepr.layers import base
-from deepr.layers.reduce import WeightedAverage, Average
+from deepr.layers.reduce import Average
 
 
 class NegativeSampling(base.Layer):
@@ -69,7 +69,9 @@ class MaskedNegativeSampling(base.Layer):
 
         losses = tf.add(true_losses, sampled_losses)
         # One loss per event, average of scores : (batch, num_events)
-        event_scores = WeightedAverage()((losses, tf.to_float(mask)))
+        # TODO: fix this line, it seems it's doing averaging twice
+        # event_scores = WeightedAverage()((losses, tf.to_float(mask)))
+        event_scores = losses
         # Each event contributes according to its weight
         event_weights = weights * tf.to_float(tf.reduce_any(mask, axis=-1))
         event_losses = event_scores * event_weights

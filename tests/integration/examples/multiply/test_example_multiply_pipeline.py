@@ -16,7 +16,7 @@ def test_examples_multiply_pipeline(tmpdir):
     dpr.io.Path(path_dataset).mkdir(exist_ok=True, parents=True)
 
     # Define jobs
-    build_job = multiply.jobs.BuildDataset(path_dataset=f"{path_dataset}/data.tfrecord", num_examples=1000)
+    build_job = multiply.jobs.Build(path_dataset=f"{path_dataset}/data.tfrecord", num_examples=1000)
     train_spec = dpr.jobs.TrainSpec(max_steps=1000)
     eval_spec = dpr.jobs.EvalSpec(
         throttle_secs=10, start_delay_secs=10, steps=None  # None means "use all the validation set"

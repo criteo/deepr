@@ -3,9 +3,12 @@
 import logging
 from typing import List, Tuple
 
-import pandas as pd
-
 import deepr as dpr
+
+try:
+    import pandas as pd
+except ImportError as e:
+    print(f"Pandas needs to be installed for MovieLens {e}")
 
 
 LOGGER = logging.getLogger(__name__)

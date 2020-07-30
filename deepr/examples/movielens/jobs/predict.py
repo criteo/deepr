@@ -7,9 +7,13 @@ from dataclasses import dataclass
 import numpy as np
 import tensorflow as tf
 import pyarrow as pa
-import pandas as pd
 
 import deepr as dpr
+
+try:
+    import pandas as pd
+except ImportError as e:
+    print(f"Pandas needs to be installed for MovieLens {e}")
 
 
 LOGGER = logging.getLogger(__name__)

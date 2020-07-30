@@ -4,12 +4,16 @@ import logging
 import random
 from dataclasses import dataclass
 
-import pandas as pd
-
 import deepr as dpr
 from deepr.examples.movielens.utils import fields
 
 from .build_utils import get_timelines
+
+try:
+    import pandas as pd
+except ImportError as e:
+    print(f"Pandas needs to be installed for MovieLens {e}")
+
 
 LOGGER = logging.getLogger(__name__)
 
