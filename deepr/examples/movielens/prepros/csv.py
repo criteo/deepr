@@ -1,5 +1,5 @@
 # pylint: disable=no-value-for-parameter,unexpected-keyword-arg
-"""Default Preprocessing for MovieLens."""
+"""CSV Preprocessing for MovieLens."""
 
 from typing import Optional
 
@@ -14,7 +14,7 @@ FIELDS_RECORD = [fields.UID, fields.INPUT_POSITIVES, fields.TARGET_POSITIVES, fi
 FIELDS_PREPRO = [fields.INPUT_MASK, fields.TARGET_MASK]
 
 
-def DefaultPrepro(
+def CSVPrepro(
     min_input_size: int = 3,
     min_target_size: int = 3,
     max_input_size: int = 50,
@@ -25,14 +25,8 @@ def DefaultPrepro(
     prefetch_size: int = 1,
     num_parallel_calls: int = 8,
 ):
-    """Default Preprocessing for MovieLens."""
+    """CSV Preprocessing for MovieLens."""
     return dpr.prepros.Serial(
-        dpr.prepros.FromExample(FIELDS_RECORD),
-        (
-            dpr.prepros.Map(dpr.layers.ToDense(field.default, inputs=field.name, outputs=field.name))
-            for field in FIELDS_RECORD
-            if field.is_sparse()
-        ),
         dpr.prepros.Filter(
             dpr.layers.IsMinSize(inputs="inputPositives", size=min_input_size), modes=[dpr.TRAIN, dpr.EVAL]
         ),

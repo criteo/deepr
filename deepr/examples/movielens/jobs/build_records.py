@@ -6,11 +6,12 @@ from typing import List, Dict, Tuple, Callable
 from functools import partial
 from dataclasses import dataclass
 
-import pandas as pd
 import tensorflow as tf
 
 import deepr as dpr
 from deepr.examples.movielens.utils import fields
+
+from .build_utils import get_timelines
 
 
 LOGGER = logging.getLogger(__name__)
@@ -20,7 +21,7 @@ FIELDS = [fields.UID, fields.INPUT_POSITIVES, fields.TARGET_POSITIVES, fields.TA
 
 
 @dataclass
-class Build(dpr.jobs.Job):
+class BuildRecords(dpr.jobs.Job):
     """Build MovieLens dataset."""
 
     path_ratings: str
@@ -36,6 +37,7 @@ class Build(dpr.jobs.Job):
     size_eval: int = 10_000
     shuffle_timelines: bool = True
     seed: int = 2020
+    append_next: bool = False
 
     def run(self):
         # Read timelines (sorted by timestamp)
@@ -50,12 +52,19 @@ class Build(dpr.jobs.Job):
         timelines_eval = timelines[self.size_test : self.size_test + self.size_eval]
         timelines_train = timelines[self.size_test + self.size_eval :]
 
-        # Build mapping
-        LOGGER.info("Building mapping movieId -> index")
+        # Build vocabulary
+        LOGGER.info("Building vocabulary of movieId")
         movies = set()
         for _, ids in timelines_train:
             movies.update(ids)
+
+        # Add special id for a special <next> movie
+        next_id = max(movies) + 1
         vocab = sorted(movies)
+        if self.append_next:
+            vocab = [next_id] + vocab
+
+        # Write vocabulary
         mapping = {movie: idx for idx, movie in enumerate(vocab)}
         dpr.vocab.write(self.path_mapping, [str(movie) for movie in vocab])
         LOGGER.info(f"Number of movies after filtration is: {len(vocab)}")
@@ -74,6 +83,8 @@ class Build(dpr.jobs.Job):
                     num_negatives=self.num_negatives,
                     shuffle_timelines=self.shuffle_timelines,
                     mapping=mapping,
+                    append_next=self.append_next,
+                    next_id=next_id,
                 ),
                 path,
             )
@@ -91,43 +102,14 @@ def write_records(gen: Callable, path: str):
     writer.write(to_example(dataset))
 
 
-def get_timelines(path_ratings: str, min_rating: float, min_length: int) -> List[Tuple[str, List[int]]]:
-    """Build timelines from MovieLens Dataset.
-
-    Apply the following filters
-        keep movies with ratings > min_rating
-        keep users with number of movies > min_length
-    """
-    # Open path_ratings from HDFS / Local FileSystem
-    LOGGER.info(f"Reading ratings from {path_ratings}")
-    with dpr.io.Path(path_ratings).open() as file:
-        ratings_data = pd.read_csv(file, sep=",")
-    LOGGER.info(f"Number of timelines before filtration is {len(set(ratings_data.userId))}")
-    LOGGER.info(f"Number of movies before filtration is {len(set(ratings_data.movieId))}")
-
-    # Group and aggregate ratings per user
-    LOGGER.info("Grouping ratings by user")
-    ratings_data = ratings_data[ratings_data.rating >= min_rating]
-    grouped_data = ratings_data.groupby("userId").agg(list).reset_index()
-    grouped_data = grouped_data[grouped_data.rating.map(len) >= min_length]
-    LOGGER.info(f"Number of timelines after filtration is {len(grouped_data)}")
-
-    # Sort ratings by timestamp
-    LOGGER.info("Building timelines (sort by timestamp).")
-    timelines = []
-    for _, row in dpr.utils.progress(grouped_data.iterrows(), secs=10):
-        uid = str(row.userId)
-        movies = [movie for _, movie in sorted(zip(row.timestamp, row.movieId))]
-        timelines.append((uid, movies))
-    return timelines
-
-
 def records_generator(
     timelines: List[Tuple[str, List[int]]],
     target_ratio: float,
     num_negatives: int,
     shuffle_timelines: bool,
     mapping: Dict[int, int],
+    append_next: bool,
+    next_id: int,
 ) -> List[Dict]:
     """Convert Timelines to list of Records with negative samples."""
     for uid, movies in dpr.utils.progress(timelines, secs=10):
@@ -140,6 +122,10 @@ def records_generator(
         split = int(len(indices) * (1 - target_ratio))
         input_positives = indices[:split]
         target_positives = indices[split:]
+
+        # Append next uid
+        if append_next:
+            input_positives.append(mapping[next_id])
 
         # Sample negatives
         target_negatives = [random.sample(range(len(mapping)), num_negatives) for _ in range(len(target_positives))]

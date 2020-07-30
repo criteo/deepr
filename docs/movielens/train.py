@@ -23,22 +23,22 @@ def main(path_ratings: str):
         Path to ML20 dataset ratings
         Link https://grouplens.org/datasets/movielens/20m/
     """
-    path_root = "wan"
+    path_root = "transformer_next_shuffle"
     path_model = path_root + "/model"
     path_data = path_root + "/data"
     path_variables = path_root + "/variables"
     path_predictions = path_root + "/predictions.parquet.snappy"
     path_saved_model = path_root + "/saved_model"
     path_mapping = path_data + "/mapping.txt"
-    path_train = path_data + "/train.tfrecord.gz"
-    path_eval = path_data + "/eval.tfrecord.gz"
-    path_test = path_data + "/test.tfrecord.gz"
+    path_train = path_data + "/train.csv"
+    path_eval = path_data + "/eval.csv"
+    path_test = path_data + "/test.csv"
     dpr.io.Path(path_root).mkdir(exist_ok=True)
     dpr.io.Path(path_model).mkdir(exist_ok=True)
     dpr.io.Path(path_data).mkdir(exist_ok=True)
     max_steps = 100_000
 
-    build = movielens.jobs.Build(
+    build = movielens.jobs.BuildCSV(
         path_ratings=path_ratings,
         path_mapping=path_mapping,
         path_train=path_train,
@@ -46,12 +46,10 @@ def main(path_ratings: str):
         path_test=path_test,
         min_rating=4,
         min_length=5,
-        num_negatives=8,
-        target_ratio=0.2,
         size_test=10_000,
         size_eval=10_000,
-        shuffle_timelines=True,
         seed=2020,
+        next_movie=100_000,
     )
     build.run()
     vocab_size = dpr.vocab.size(path_mapping)
@@ -77,12 +75,26 @@ def main(path_ratings: str):
 
     train = dpr.jobs.Trainer(
         path_model=path_model,
-        pred_fn=average_model,
+        pred_fn=transformer_model,
         loss_fn=movielens.layers.BPRLoss(vocab_size=vocab_size, dim=100),
-        optimizer_fn=dpr.optimizers.TensorflowOptimizer("LazyAdam", 0.001),
-        train_input_fn=dpr.readers.TFRecordReader(path_train, shuffle=True),
-        eval_input_fn=dpr.readers.TFRecordReader(path_eval, shuffle=False),
-        prepro_fn=movielens.prepros.DefaultPrepro(
+        optimizer_fn=dpr.optimizers.TensorflowOptimizer("LazyAdam", 0.0001),
+        train_input_fn=movielens.readers.CSVReader(
+            path_csv=path_train,
+            path_mapping=path_mapping,
+            target_ratio=0.2,
+            num_negatives=8,
+            next_movie=100_000,
+            num_shuffle=10,
+        ),
+        eval_input_fn=movielens.readers.CSVReader(
+            path_csv=path_eval,
+            path_mapping=path_mapping,
+            target_ratio=0.2,
+            num_negatives=8,
+            next_movie=100_000,
+            num_shuffle=1,
+        ),
+        prepro_fn=movielens.prepros.CSVPrepro(
             min_input_size=3,
             min_target_size=3,
             max_input_size=50,
@@ -153,8 +165,15 @@ def main(path_ratings: str):
     predict = movielens.jobs.Predict(
         path_saved_model=path_saved_model,
         path_predictions=path_predictions,
-        input_fn=dpr.readers.TFRecordReader(path_test),
-        prepro_fn=movielens.prepros.DefaultPrepro(),
+        input_fn=movielens.readers.CSVReader(
+            path_csv=path_test,
+            path_mapping=path_mapping,
+            target_ratio=0.2,
+            num_negatives=8,
+            next_movie=100_000,
+            num_shuffle=1,
+        ),
+        prepro_fn=movielens.prepros.CSVPrepro(),
     )
     evaluate = [
         movielens.jobs.Evaluate(

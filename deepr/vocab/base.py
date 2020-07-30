@@ -44,7 +44,7 @@ def read(path: str) -> List[str]:
         Path to .txt file with one item per line
     """
     with Path(path).open() as file:
-        return [line for line in file if line.strip()]
+        return [line.strip() for line in file if line.strip()]
 
 
 def size(path: str) -> int:
