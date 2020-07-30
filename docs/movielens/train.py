@@ -23,7 +23,7 @@ def main(path_ratings: str):
         Path to ML20 dataset ratings
         Link https://grouplens.org/datasets/movielens/20m/
     """
-    path_root = "transformer"
+    path_root = "wan"
     path_model = path_root + "/model"
     path_data = path_root + "/data"
     path_variables = path_root + "/variables"
@@ -58,7 +58,7 @@ def main(path_ratings: str):
 
     transformer_model = movielens.layers.TransformerModel(
         vocab_size=vocab_size,
-        dim=1000,
+        dim=100,
         encoding_blocks=2,
         num_heads=8,
         dim_head=32,
@@ -73,11 +73,13 @@ def main(path_ratings: str):
         use_look_ahead_mask=False,
     )
 
+    average_model = movielens.layers.AverageModel(vocab_size=vocab_size, dim=100)
+
     train = dpr.jobs.Trainer(
         path_model=path_model,
-        pred_fn=transformer_model,
-        loss_fn=movielens.layers.BPRLoss(vocab_size=vocab_size, dim=1000),
-        optimizer_fn=dpr.optimizers.TensorflowOptimizer("LazyAdam", 0.0001, skip_vars=["embeddings"], skip_steps=500),
+        pred_fn=average_model,
+        loss_fn=movielens.layers.BPRLoss(vocab_size=vocab_size, dim=100),
+        optimizer_fn=dpr.optimizers.TensorflowOptimizer("LazyAdam", 0.001),
         train_input_fn=dpr.readers.TFRecordReader(path_train, shuffle=True),
         eval_input_fn=dpr.readers.TFRecordReader(path_eval, shuffle=False),
         prepro_fn=movielens.prepros.DefaultPrepro(
@@ -92,7 +94,7 @@ def main(path_ratings: str):
             num_parallel_calls=8,
         ),
         train_spec=dpr.jobs.TrainSpec(max_steps=max_steps),
-        eval_spec=dpr.jobs.EvalSpec(steps=None),
+        eval_spec=dpr.jobs.EvalSpec(steps=None, start_delay_secs=30, throttle_secs=30),
         final_spec=dpr.jobs.FinalSpec(steps=None),
         exporters=[
             dpr.exporters.BestCheckpoint(metric="triplet_precision", mode="increase"),
