@@ -3,6 +3,6 @@ mypy==0.782
 pylint==2.5.3
 pytest-cov==2.10.0
 pytest-xdist==1.34.0
-pytest==6.0.0
+pytest==6.0.1
 jupyter
 notebook
