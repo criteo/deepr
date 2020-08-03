@@ -58,6 +58,7 @@ class BuildRecords(dpr.jobs.Job):
             movies.update(ids)
         vocab = sorted(movies)
         mapping = {movie: idx for idx, movie in enumerate(vocab)}
+        dpr.io.Path(self.path_mapping).parent.mkdir(parents=True, exist_ok=True)
         dpr.vocab.write(self.path_mapping, [str(movie) for movie in vocab])
         LOGGER.info(f"Number of movies after filtration is: {len(vocab)}")
 
@@ -65,6 +66,7 @@ class BuildRecords(dpr.jobs.Job):
         for timelines, path in zip(
             [timelines_train, timelines_test, timelines_eval], [self.path_train, self.path_test, self.path_eval]
         ):
+            dpr.io.Path(path).parent.mkdir(parents=True, exist_ok=True)
             LOGGER.info(f"Writing {len(timelines)} timelines to {path}")
             LOGGER.info(f"shuffle_timelines = {self.shuffle_timelines}, num_negatives = {self.num_negatives}")
             write_records(

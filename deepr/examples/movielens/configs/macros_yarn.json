@@ -1,0 +1,22 @@
+{
+    "run": {
+        "run_on_yarn": true,
+        "train_on_yarn": true
+    },
+    "paths": {
+        "type": "deepr.examples.movielens.macros.Paths",
+        "path_ratings": "viewfs://root/user/g.genthial/movielens/ml-20m/ratings.csv"
+    },
+    "mlflow": {
+        "type": "deepr.macros.MLFlowInit",
+        "use_mlflow": true,
+        "run_name": "$paths:run_name",
+        "tracking_uri": "https://mlflow.par.prod.crto.in",
+        "experiment_name": "deepr-nn",
+        "artifact_location": "viewfs://root/user/deepr/dev/mlflow_artifacts"
+    },
+    "params": {
+        "dim": 100,
+        "max_steps": 100000
+    }
+}

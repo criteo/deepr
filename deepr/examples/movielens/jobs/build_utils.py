@@ -24,7 +24,7 @@ def get_timelines(path_ratings: str, min_rating: float, min_length: int) -> List
     # Open path_ratings from HDFS / Local FileSystem
     LOGGER.info(f"Reading ratings from {path_ratings}")
     with dpr.io.Path(path_ratings).open() as file:
-        ratings_data = pd.read_csv(file, sep=",")
+        ratings_data = pd.read_csv(file)
     LOGGER.info(f"Number of timelines before filtration is {len(set(ratings_data.userId))}")
     LOGGER.info(f"Number of movies before filtration is {len(set(ratings_data.movieId))}")
 

@@ -8,6 +8,7 @@ from typing import List
 import numpy as np
 
 import deepr as dpr
+from deepr.utils import mlflow
 
 try:
     import faiss
@@ -26,6 +27,7 @@ class Evaluate(dpr.jobs.Job):
     path_embeddings: str
     path_biases: str
     k: int
+    use_mlflow: bool = False
 
     def run(self):
         with dpr.io.ParquetDataset(self.path_predictions).open() as ds:
@@ -47,22 +49,23 @@ class Evaluate(dpr.jobs.Job):
         index = faiss.IndexFlatIP(embeddings_with_biases.shape[-1])
         index.add(np.ascontiguousarray(embeddings_with_biases))
         _, indices = index.search(users_with_ones, k=self.k)
-        precision, recall, f1_score = self.compute_metrics(predictions["target"], indices)
-        LOGGER.info(
-            f"precision@{self.k} = {precision}\n" f"recall@{self.k} = {recall}\n" f"f1_score@{self.k} = {f1_score}"
-        )
-        return precision, recall, f1_score
+        precision, recall, f1 = self.compute_metrics(predictions["target"], indices)
+        LOGGER.info(f"precision@{self.k} = {precision}\n" f"recall@{self.k} = {recall}\n" f"f1@{self.k} = {f1}")
+        if self.use_mlflow:
+            mlflow.log_metric(key=f"precision_at_{self.k}", value=precision)
+            mlflow.log_metric(key=f"recall_at_{self.k}", value=recall)
+            mlflow.log_metric(key=f"f1_at_{self.k}", value=f1)
 
     def compute_metrics(self, actuals: List[np.ndarray], predictions: List[np.ndarray]):
         recalls = []
         precisions = []
-        f1_scores = []
+        f1s = []
         for actual, pred in zip(actuals, predictions):
             p, r, f1 = self.precision_recall_f1(actual, pred)
             recalls.append(r)
             precisions.append(p)
-            f1_scores.append(f1)
-        return np.mean(precisions), np.mean(recalls), np.mean(f1_scores)
+            f1s.append(f1)
+        return np.mean(precisions), np.mean(recalls), np.mean(f1s)
 
     @staticmethod
     def precision_recall_f1(true: np.ndarray, pred: np.ndarray):
