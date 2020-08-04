@@ -9,7 +9,7 @@ Subpackages
 
    deepr.cli
    deepr.config
-   deepr.example
+   deepr.examples
    deepr.exporters
    deepr.hooks
    deepr.initializers

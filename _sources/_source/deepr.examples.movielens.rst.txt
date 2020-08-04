@@ -1,0 +1,23 @@
+deepr.examples.movielens package
+================================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   deepr.examples.movielens.jobs
+   deepr.examples.movielens.layers
+   deepr.examples.movielens.macros
+   deepr.examples.movielens.prepros
+   deepr.examples.movielens.readers
+   deepr.examples.movielens.utils
+
+Module contents
+---------------
+
+.. automodule:: deepr.examples.movielens
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,38 @@
+deepr.examples.movielens.layers package
+=======================================
+
+Submodules
+----------
+
+deepr.examples.movielens.layers.average module
+----------------------------------------------
+
+.. automodule:: deepr.examples.movielens.layers.average
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.examples.movielens.layers.loss module
+-------------------------------------------
+
+.. automodule:: deepr.examples.movielens.layers.loss
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.examples.movielens.layers.transformer module
+--------------------------------------------------
+
+.. automodule:: deepr.examples.movielens.layers.transformer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.examples.movielens.layers
+   :members:
+   :undoc-members:
+   :show-inheritance:

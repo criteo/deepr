@@ -458,9 +458,11 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_source/deepr.readers.html#deepr.readers.base.DatasetReader.as_dataset">as_dataset() (deepr.readers.base.DatasetReader method)</a>
+      <li><a href="_source/deepr.examples.movielens.readers.html#deepr.examples.movielens.readers.csv.CSVReader.as_dataset">as_dataset() (deepr.examples.movielens.readers.csv.CSVReader method)</a>
 
       <ul>
+        <li><a href="_source/deepr.readers.html#deepr.readers.base.DatasetReader.as_dataset">(deepr.readers.base.DatasetReader method)</a>
+</li>
         <li><a href="_source/deepr.readers.html#deepr.readers.base.Reader.as_dataset">(deepr.readers.base.Reader method)</a>
 </li>
         <li><a href="_source/deepr.readers.html#deepr.readers.generator.GeneratorReader.as_dataset">(deepr.readers.generator.GeneratorReader method)</a>
@@ -484,6 +486,8 @@
         <li><a href="_source/deepr.layers.html#deepr.layers.reduce.Average">(class in deepr.layers.reduce)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.average.AverageModel">AverageModel() (in module deepr.examples.movielens.layers.average)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -522,14 +526,14 @@
       </ul></li>
       <li><a href="_source/deepr.layers.html#deepr.layers.transformer.SelfMultiheadAttention.block_id">block_id (deepr.layers.transformer.SelfMultiheadAttention attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="API/_autosummary/deepr.layers.BooleanMask.html#deepr.layers.BooleanMask">BooleanMask (class in deepr.layers)</a>
 
       <ul>
         <li><a href="_source/deepr.layers.html#deepr.layers.mask.BooleanMask">(class in deepr.layers.mask)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.layers.html#deepr.layers.mask.BooleanReduceMode">BooleanReduceMode (class in deepr.layers.mask)</a>
 </li>
       <li><a href="API/_autosummary/deepr.layers.BPR.html#deepr.layers.BPR">BPR (class in deepr.layers)</a>
@@ -538,6 +542,8 @@
         <li><a href="_source/deepr.layers.html#deepr.layers.bpr.BPR">(class in deepr.layers.bpr)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.loss.BPRLoss">BPRLoss() (in module deepr.examples.movielens.layers.loss)</a>
+</li>
       <li><a href="_source/deepr.layers.html#deepr.layers.bpr_max.BPRMax">BPRMax (class in deepr.layers.bpr_max)</a>
 </li>
       <li><a href="_source/deepr.prepros.html#deepr.prepros.core.Prefetch.buffer_size">buffer_size (deepr.prepros.core.Prefetch attribute)</a>
@@ -550,7 +556,11 @@
         <li><a href="API/_autosummary/deepr.prepros.Shuffle.html#deepr.prepros.Shuffle.buffer_size">(deepr.prepros.Shuffle attribute)</a>
 </li>
       </ul></li>
-      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.build_dataset.BuildDataset">BuildDataset (class in deepr.example.jobs.build_dataset)</a>
+      <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.build.Build">Build (class in deepr.examples.multiply.jobs.build)</a>
+</li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_csv.BuildCSV">BuildCSV (class in deepr.examples.movielens.jobs.build_csv)</a>
+</li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords">BuildRecords (class in deepr.examples.movielens.jobs.build_records)</a>
 </li>
       <li><a href="_source/deepr.readers.html#deepr.readers.record.bytes_feature">bytes_feature() (in module deepr.readers.record)</a>
 </li>
@@ -610,6 +620,8 @@
 </li>
       <li><a href="_source/deepr.readers.html#deepr.readers.record.TFRecordReader.compression_type">compression_type() (deepr.readers.record.TFRecordReader property)</a>
 </li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate.compute_metrics">compute_metrics() (deepr.examples.movielens.jobs.evaluate.Evaluate method)</a>
+</li>
       <li><a href="API/_autosummary/deepr.layers.Concat.html#deepr.layers.Concat">Concat (class in deepr.layers)</a>
 
       <ul>
@@ -663,6 +675,10 @@
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_config.YarnConfig.cpu_ignored_packages">cpu_ignored_packages (deepr.jobs.yarn_config.YarnConfig attribute)</a>
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.trainer.Trainer.create_experiment">create_experiment() (deepr.jobs.trainer.Trainer method)</a>
+</li>
+      <li><a href="_source/deepr.examples.movielens.prepros.html#deepr.examples.movielens.prepros.csv.CSVPrepro">CSVPrepro() (in module deepr.examples.movielens.prepros.csv)</a>
+</li>
+      <li><a href="_source/deepr.examples.movielens.readers.html#deepr.examples.movielens.readers.csv.CSVReader">CSVReader (class in deepr.examples.movielens.readers.csv)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -739,87 +755,234 @@
 </li>
       </ul></li>
       <li>
-    deepr.example
+    deepr.examples
 
       <ul>
-        <li><a href="_source/deepr.example.html#module-deepr.example">module</a>
+        <li><a href="_source/deepr.examples.html#module-deepr.examples">module</a>
 </li>
       </ul></li>
       <li>
-    deepr.example.jobs
+    deepr.examples.movielens
 
       <ul>
-        <li><a href="_source/deepr.example.jobs.html#module-deepr.example.jobs">module</a>
+        <li><a href="_source/deepr.examples.movielens.html#module-deepr.examples.movielens">module</a>
 </li>
       </ul></li>
       <li>
-    deepr.example.jobs.build_dataset
+    deepr.examples.movielens.jobs
 
       <ul>
-        <li><a href="_source/deepr.example.jobs.html#module-deepr.example.jobs.build_dataset">module</a>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs">module</a>
 </li>
       </ul></li>
       <li>
-    deepr.example.jobs.predict
+    deepr.examples.movielens.jobs.build_csv
 
       <ul>
-        <li><a href="_source/deepr.example.jobs.html#module-deepr.example.jobs.predict">module</a>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.build_csv">module</a>
 </li>
       </ul></li>
       <li>
-    deepr.example.layers
+    deepr.examples.movielens.jobs.build_records
 
       <ul>
-        <li><a href="_source/deepr.example.layers.html#module-deepr.example.layers">module</a>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.build_records">module</a>
 </li>
       </ul></li>
       <li>
-    deepr.example.layers.loss
+    deepr.examples.movielens.jobs.build_utils
 
       <ul>
-        <li><a href="_source/deepr.example.layers.html#module-deepr.example.layers.loss">module</a>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.build_utils">module</a>
 </li>
       </ul></li>
       <li>
-    deepr.example.layers.model
+    deepr.examples.movielens.jobs.evaluate
 
       <ul>
-        <li><a href="_source/deepr.example.layers.html#module-deepr.example.layers.model">module</a>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.evaluate">module</a>
 </li>
       </ul></li>
       <li>
-    deepr.example.macros
+    deepr.examples.movielens.jobs.predict
 
       <ul>
-        <li><a href="_source/deepr.example.macros.html#module-deepr.example.macros">module</a>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.predict">module</a>
 </li>
       </ul></li>
       <li>
-    deepr.example.macros.paths
+    deepr.examples.movielens.layers
 
       <ul>
-        <li><a href="_source/deepr.example.macros.html#module-deepr.example.macros.paths">module</a>
+        <li><a href="_source/deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers">module</a>
 </li>
       </ul></li>
       <li>
-    deepr.example.prepros
+    deepr.examples.movielens.layers.average
 
       <ul>
-        <li><a href="_source/deepr.example.prepros.html#module-deepr.example.prepros">module</a>
+        <li><a href="_source/deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.average">module</a>
 </li>
       </ul></li>
       <li>
-    deepr.example.prepros.default
+    deepr.examples.movielens.layers.loss
 
       <ul>
-        <li><a href="_source/deepr.example.prepros.html#module-deepr.example.prepros.default">module</a>
+        <li><a href="_source/deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.loss">module</a>
 </li>
       </ul></li>
       <li>
-    deepr.example.prepros.inference
+    deepr.examples.movielens.layers.transformer
 
       <ul>
-        <li><a href="_source/deepr.example.prepros.html#module-deepr.example.prepros.inference">module</a>
+        <li><a href="_source/deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.transformer">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.movielens.macros
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.macros.html#module-deepr.examples.movielens.macros">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.movielens.macros.paths
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.macros.html#module-deepr.examples.movielens.macros.paths">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.movielens.prepros
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.prepros.html#module-deepr.examples.movielens.prepros">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.movielens.prepros.csv
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.prepros.html#module-deepr.examples.movielens.prepros.csv">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.movielens.prepros.record
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.prepros.html#module-deepr.examples.movielens.prepros.record">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.movielens.readers
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.readers.html#module-deepr.examples.movielens.readers">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.movielens.readers.csv
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.readers.html#module-deepr.examples.movielens.readers.csv">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.movielens.utils
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.utils.html#module-deepr.examples.movielens.utils">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.movielens.utils.fields
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.utils.html#module-deepr.examples.movielens.utils.fields">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.multiply
+
+      <ul>
+        <li><a href="_source/deepr.examples.multiply.html#module-deepr.examples.multiply">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.multiply.jobs
+
+      <ul>
+        <li><a href="_source/deepr.examples.multiply.jobs.html#module-deepr.examples.multiply.jobs">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.multiply.jobs.build
+
+      <ul>
+        <li><a href="_source/deepr.examples.multiply.jobs.html#module-deepr.examples.multiply.jobs.build">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.multiply.jobs.predict
+
+      <ul>
+        <li><a href="_source/deepr.examples.multiply.jobs.html#module-deepr.examples.multiply.jobs.predict">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.multiply.layers
+
+      <ul>
+        <li><a href="_source/deepr.examples.multiply.layers.html#module-deepr.examples.multiply.layers">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.multiply.layers.loss
+
+      <ul>
+        <li><a href="_source/deepr.examples.multiply.layers.html#module-deepr.examples.multiply.layers.loss">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.multiply.layers.model
+
+      <ul>
+        <li><a href="_source/deepr.examples.multiply.layers.html#module-deepr.examples.multiply.layers.model">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.multiply.macros
+
+      <ul>
+        <li><a href="_source/deepr.examples.multiply.macros.html#module-deepr.examples.multiply.macros">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.multiply.macros.paths
+
+      <ul>
+        <li><a href="_source/deepr.examples.multiply.macros.html#module-deepr.examples.multiply.macros.paths">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.multiply.prepros
+
+      <ul>
+        <li><a href="_source/deepr.examples.multiply.prepros.html#module-deepr.examples.multiply.prepros">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.multiply.prepros.default
+
+      <ul>
+        <li><a href="_source/deepr.examples.multiply.prepros.html#module-deepr.examples.multiply.prepros.default">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.examples.multiply.prepros.inference
+
+      <ul>
+        <li><a href="_source/deepr.examples.multiply.prepros.html#module-deepr.examples.multiply.prepros.inference">module</a>
 </li>
       </ul></li>
       <li>
@@ -1074,6 +1237,8 @@
         <li><a href="_source/deepr.jobs.html#module-deepr.jobs.yarn_trainer">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     deepr.layers
 
@@ -1144,8 +1309,6 @@
         <li><a href="_source/deepr.layers.html#module-deepr.layers.lookup">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     deepr.layers.mask
 
@@ -1214,6 +1377,13 @@
 
       <ul>
         <li><a href="_source/deepr.layers.html#module-deepr.layers.transformer">module</a>
+</li>
+      </ul></li>
+      <li>
+    deepr.layers.triplet_precision
+
+      <ul>
+        <li><a href="_source/deepr.layers.html#module-deepr.layers.triplet_precision">module</a>
 </li>
       </ul></li>
       <li>
@@ -1556,7 +1726,7 @@
         <li><a href="API/_autosummary/deepr.layers.LookupIndexToString.html#deepr.layers.LookupIndexToString.default_value">(deepr.layers.LookupIndexToString attribute)</a>
 </li>
       </ul></li>
-      <li><a href="_source/deepr.example.prepros.html#deepr.example.prepros.default.DefaultPrepro">DefaultPrepro() (in module deepr.example.prepros.default)</a>
+      <li><a href="_source/deepr.examples.multiply.prepros.html#deepr.examples.multiply.prepros.default.DefaultPrepro">DefaultPrepro() (in module deepr.examples.multiply.prepros.default)</a>
 </li>
       <li><a href="_source/deepr.io.html#deepr.io.path.Path.delete">delete() (deepr.io.path.Path method)</a>
 </li>
@@ -1644,17 +1814,21 @@
         <li><a href="_source/deepr.jobs.html#deepr.jobs.trainer.Trainer.eval_metrics">(deepr.jobs.trainer.Trainer attribute)</a>, <a href="_source/deepr.jobs.html#id16">[1]</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="API/_autosummary/deepr.jobs.Trainer.html#deepr.jobs.Trainer.eval_spec">eval_spec (deepr.jobs.Trainer attribute)</a>
 
       <ul>
         <li><a href="_source/deepr.jobs.html#deepr.jobs.trainer.Trainer.eval_spec">(deepr.jobs.trainer.Trainer attribute)</a>, <a href="_source/deepr.jobs.html#id17">[1]</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.trainer.EvalSpec">EvalSpec (class in deepr.jobs.trainer)</a>
 </li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate">Evaluate (class in deepr.examples.movielens.jobs.evaluate)</a>
+</li>
       <li><a href="_source/deepr.io.html#deepr.io.path.Path.exists">exists() (deepr.io.path.Path method)</a>
+</li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.core.ExpandDims">ExpandDims (class in deepr.layers.core)</a>
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.mlflow_save_info.MLFlowSaveInfo.experiment_id">experiment_id (deepr.jobs.mlflow_save_info.MLFlowSaveInfo attribute)</a>
 </li>
@@ -1704,10 +1878,10 @@
 </li>
       <li><a href="_source/deepr.layers.html#deepr.layers.transformer.FeedForward">FeedForward() (in module deepr.layers.transformer)</a>
 </li>
-      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.PredictProto.feeds">feeds (deepr.example.jobs.predict.PredictProto attribute)</a>
+      <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictProto.feeds">feeds (deepr.examples.multiply.jobs.predict.PredictProto attribute)</a>
 
       <ul>
-        <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.PredictSavedModel.feeds">(deepr.example.jobs.predict.PredictSavedModel attribute)</a>
+        <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictSavedModel.feeds">(deepr.examples.multiply.jobs.predict.PredictSavedModel attribute)</a>
 </li>
         <li><a href="_source/deepr.jobs.html#deepr.jobs.optimize_saved_model.OptimizeSavedModel.feeds">(deepr.jobs.optimize_saved_model.OptimizeSavedModel attribute)</a>, <a href="_source/deepr.jobs.html#id7">[1]</a>
 </li>
@@ -1732,10 +1906,10 @@
       </ul></li>
       <li><a href="_source/deepr.predictors.html#deepr.predictors.base.Predictor.fetch_tensors">fetch_tensors (deepr.predictors.base.Predictor attribute)</a>
 </li>
-      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.PredictProto.fetches">fetches (deepr.example.jobs.predict.PredictProto attribute)</a>
+      <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictProto.fetches">fetches (deepr.examples.multiply.jobs.predict.PredictProto attribute)</a>
 
       <ul>
-        <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.PredictSavedModel.fetches">(deepr.example.jobs.predict.PredictSavedModel attribute)</a>
+        <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictSavedModel.fetches">(deepr.examples.multiply.jobs.predict.PredictSavedModel attribute)</a>
 </li>
         <li><a href="_source/deepr.predictors.html#deepr.predictors.proto.ProtoPredictor.fetches">(deepr.predictors.proto.ProtoPredictor attribute)</a>
 </li>
@@ -1826,10 +2000,14 @@
         <li><a href="_source/deepr.jobs.html#deepr.jobs.mlflow_save_configs.MLFlowSaveConfigs.formatter">(deepr.jobs.mlflow_save_configs.MLFlowSaveConfigs attribute)</a>
 </li>
       </ul></li>
-      <li><a href="_source/deepr.example.layers.html#deepr.example.layers.loss.SquaredL2.forward">forward() (deepr.example.layers.loss.SquaredL2 method)</a>
+      <li><a href="_source/deepr.examples.movielens.prepros.html#deepr.examples.movielens.prepros.csv.SequenceMask.forward">forward() (deepr.examples.movielens.prepros.csv.SequenceMask method)</a>
 
       <ul>
-        <li><a href="_source/deepr.example.layers.html#deepr.example.layers.model.Multiply.forward">(deepr.example.layers.model.Multiply method)</a>
+        <li><a href="_source/deepr.examples.movielens.prepros.html#deepr.examples.movielens.prepros.record.SequenceMask.forward">(deepr.examples.movielens.prepros.record.SequenceMask method)</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.layers.html#deepr.examples.multiply.layers.loss.SquaredL2.forward">(deepr.examples.multiply.layers.loss.SquaredL2 method)</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.layers.html#deepr.examples.multiply.layers.model.Multiply.forward">(deepr.examples.multiply.layers.model.Multiply method)</a>
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.base.Layer.forward">(deepr.layers.base.Layer method)</a>
 </li>
@@ -1862,6 +2040,8 @@
         <li><a href="_source/deepr.layers.html#deepr.layers.core.Dense.forward">(deepr.layers.core.Dense method)</a>
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.core.DotProduct.forward">(deepr.layers.core.DotProduct method)</a>
+</li>
+        <li><a href="_source/deepr.layers.html#deepr.layers.core.ExpandDims.forward">(deepr.layers.core.ExpandDims method)</a>
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.core.Identity.forward">(deepr.layers.core.Identity method)</a>
 </li>
@@ -1932,6 +2112,8 @@
         <li><a href="_source/deepr.layers.html#deepr.layers.transformer.PositionalEncoding.forward">(deepr.layers.transformer.PositionalEncoding method)</a>
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.transformer.SelfMultiheadAttention.forward">(deepr.layers.transformer.SelfMultiheadAttention method)</a>
+</li>
+        <li><a href="_source/deepr.layers.html#deepr.layers.triplet_precision.TripletPrecision.forward">(deepr.layers.triplet_precision.TripletPrecision method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -2026,6 +2208,8 @@
 </li>
       <li><a href="_source/deepr.metrics.html#deepr.metrics.base.get_tensors">get_tensors() (in module deepr.metrics.base)</a>
 </li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_utils.get_timelines">get_timelines() (in module deepr.examples.movielens.jobs.build_utils)</a>
+</li>
       <li><a href="_source/deepr.io.html#deepr.io.path.Path.glob">glob() (deepr.io.path.Path method)</a>
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_config.YarnConfig.gpu_additional_packages">gpu_additional_packages (deepr.jobs.yarn_config.YarnConfig attribute)</a>
@@ -2034,7 +2218,7 @@
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_config.YarnConfig.gpu_to_use">gpu_to_use (deepr.jobs.yarn_config.YarnConfig attribute)</a>
 </li>
-      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.PredictProto.graph_name">graph_name (deepr.example.jobs.predict.PredictProto attribute)</a>
+      <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictProto.graph_name">graph_name (deepr.examples.multiply.jobs.predict.PredictProto attribute)</a>
 
       <ul>
         <li><a href="_source/deepr.jobs.html#deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata.graph_name">(deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata attribute)</a>, <a href="_source/deepr.jobs.html#id2">[1]</a>
@@ -2106,7 +2290,7 @@
         <li><a href="_source/deepr.utils.html#deepr.utils.tables.index_to_string_table_from_file">(in module deepr.utils.tables)</a>
 </li>
       </ul></li>
-      <li><a href="_source/deepr.example.prepros.html#deepr.example.prepros.inference.InferencePrepro">InferencePrepro() (in module deepr.example.prepros.inference)</a>
+      <li><a href="_source/deepr.examples.multiply.prepros.html#deepr.examples.multiply.prepros.inference.InferencePrepro">InferencePrepro() (in module deepr.examples.multiply.prepros.inference)</a>
 </li>
       <li><a href="API/_autosummary/deepr.jobs.Trainer.html#deepr.jobs.Trainer.initializer_fn">initializer_fn (deepr.jobs.Trainer attribute)</a>
 
@@ -2116,10 +2300,12 @@
       </ul></li>
       <li><a href="_source/deepr.jobs.html#id19">initializer_fn() (deepr.jobs.trainer.Trainer method)</a>
 </li>
-      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.PredictProto.input_fn">input_fn (deepr.example.jobs.predict.PredictProto attribute)</a>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.predict.Predict.input_fn">input_fn (deepr.examples.movielens.jobs.predict.Predict attribute)</a>
 
       <ul>
-        <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.PredictSavedModel.input_fn">(deepr.example.jobs.predict.PredictSavedModel attribute)</a>
+        <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictProto.input_fn">(deepr.examples.multiply.jobs.predict.PredictProto attribute)</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictSavedModel.input_fn">(deepr.examples.multiply.jobs.predict.PredictSavedModel attribute)</a>
 </li>
         <li><a href="_source/deepr.jobs.html#deepr.jobs.save_dataset.SaveDataset.input_fn">(deepr.jobs.save_dataset.SaveDataset attribute)</a>
 </li>
@@ -2220,6 +2406,8 @@
 <h2 id="K">K</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate.k">k (deepr.examples.movielens.jobs.evaluate.Evaluate attribute)</a>
+</li>
       <li><a href="_source/deepr.metrics.html#deepr.metrics.base.keep_scalars">keep_scalars() (in module deepr.metrics.base)</a>
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.log_metric.LogMetric.key">key (deepr.jobs.log_metric.LogMetric attribute)</a>
@@ -2440,6 +2628,18 @@
         <li><a href="API/_autosummary/deepr.hooks.EarlyStoppingHookFactory.html#deepr.hooks.EarlyStoppingHookFactory.metric">(deepr.hooks.EarlyStoppingHookFactory attribute)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_csv.BuildCSV.min_length">min_length (deepr.examples.movielens.jobs.build_csv.BuildCSV attribute)</a>
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.min_length">(deepr.examples.movielens.jobs.build_records.BuildRecords attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_csv.BuildCSV.min_rating">min_rating (deepr.examples.movielens.jobs.build_csv.BuildCSV attribute)</a>
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.min_rating">(deepr.examples.movielens.jobs.build_records.BuildRecords attribute)</a>
+</li>
+      </ul></li>
       <li><a href="_source/deepr.hooks.html#deepr.hooks.early_stopping.EarlyStoppingHookFactory.min_steps">min_steps (deepr.hooks.early_stopping.EarlyStoppingHookFactory attribute)</a>
 
       <ul>
@@ -2530,29 +2730,71 @@
 </li>
         <li><a href="_source/deepr.config.html#module-deepr.config.references">deepr.config.references</a>
 </li>
-        <li><a href="_source/deepr.example.html#module-deepr.example">deepr.example</a>
+        <li><a href="_source/deepr.examples.html#module-deepr.examples">deepr.examples</a>
 </li>
-        <li><a href="_source/deepr.example.jobs.html#module-deepr.example.jobs">deepr.example.jobs</a>
+        <li><a href="_source/deepr.examples.movielens.html#module-deepr.examples.movielens">deepr.examples.movielens</a>
 </li>
-        <li><a href="_source/deepr.example.jobs.html#module-deepr.example.jobs.build_dataset">deepr.example.jobs.build_dataset</a>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs">deepr.examples.movielens.jobs</a>
 </li>
-        <li><a href="_source/deepr.example.jobs.html#module-deepr.example.jobs.predict">deepr.example.jobs.predict</a>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.build_csv">deepr.examples.movielens.jobs.build_csv</a>
 </li>
-        <li><a href="_source/deepr.example.layers.html#module-deepr.example.layers">deepr.example.layers</a>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.build_records">deepr.examples.movielens.jobs.build_records</a>
 </li>
-        <li><a href="_source/deepr.example.layers.html#module-deepr.example.layers.loss">deepr.example.layers.loss</a>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.build_utils">deepr.examples.movielens.jobs.build_utils</a>
 </li>
-        <li><a href="_source/deepr.example.layers.html#module-deepr.example.layers.model">deepr.example.layers.model</a>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.evaluate">deepr.examples.movielens.jobs.evaluate</a>
 </li>
-        <li><a href="_source/deepr.example.macros.html#module-deepr.example.macros">deepr.example.macros</a>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.predict">deepr.examples.movielens.jobs.predict</a>
 </li>
-        <li><a href="_source/deepr.example.macros.html#module-deepr.example.macros.paths">deepr.example.macros.paths</a>
+        <li><a href="_source/deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers">deepr.examples.movielens.layers</a>
 </li>
-        <li><a href="_source/deepr.example.prepros.html#module-deepr.example.prepros">deepr.example.prepros</a>
+        <li><a href="_source/deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.average">deepr.examples.movielens.layers.average</a>
 </li>
-        <li><a href="_source/deepr.example.prepros.html#module-deepr.example.prepros.default">deepr.example.prepros.default</a>
+        <li><a href="_source/deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.loss">deepr.examples.movielens.layers.loss</a>
 </li>
-        <li><a href="_source/deepr.example.prepros.html#module-deepr.example.prepros.inference">deepr.example.prepros.inference</a>
+        <li><a href="_source/deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.transformer">deepr.examples.movielens.layers.transformer</a>
+</li>
+        <li><a href="_source/deepr.examples.movielens.macros.html#module-deepr.examples.movielens.macros">deepr.examples.movielens.macros</a>
+</li>
+        <li><a href="_source/deepr.examples.movielens.macros.html#module-deepr.examples.movielens.macros.paths">deepr.examples.movielens.macros.paths</a>
+</li>
+        <li><a href="_source/deepr.examples.movielens.prepros.html#module-deepr.examples.movielens.prepros">deepr.examples.movielens.prepros</a>
+</li>
+        <li><a href="_source/deepr.examples.movielens.prepros.html#module-deepr.examples.movielens.prepros.csv">deepr.examples.movielens.prepros.csv</a>
+</li>
+        <li><a href="_source/deepr.examples.movielens.prepros.html#module-deepr.examples.movielens.prepros.record">deepr.examples.movielens.prepros.record</a>
+</li>
+        <li><a href="_source/deepr.examples.movielens.readers.html#module-deepr.examples.movielens.readers">deepr.examples.movielens.readers</a>
+</li>
+        <li><a href="_source/deepr.examples.movielens.readers.html#module-deepr.examples.movielens.readers.csv">deepr.examples.movielens.readers.csv</a>
+</li>
+        <li><a href="_source/deepr.examples.movielens.utils.html#module-deepr.examples.movielens.utils">deepr.examples.movielens.utils</a>
+</li>
+        <li><a href="_source/deepr.examples.movielens.utils.html#module-deepr.examples.movielens.utils.fields">deepr.examples.movielens.utils.fields</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.html#module-deepr.examples.multiply">deepr.examples.multiply</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.jobs.html#module-deepr.examples.multiply.jobs">deepr.examples.multiply.jobs</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.jobs.html#module-deepr.examples.multiply.jobs.build">deepr.examples.multiply.jobs.build</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.jobs.html#module-deepr.examples.multiply.jobs.predict">deepr.examples.multiply.jobs.predict</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.layers.html#module-deepr.examples.multiply.layers">deepr.examples.multiply.layers</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.layers.html#module-deepr.examples.multiply.layers.loss">deepr.examples.multiply.layers.loss</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.layers.html#module-deepr.examples.multiply.layers.model">deepr.examples.multiply.layers.model</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.macros.html#module-deepr.examples.multiply.macros">deepr.examples.multiply.macros</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.macros.html#module-deepr.examples.multiply.macros.paths">deepr.examples.multiply.macros.paths</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.prepros.html#module-deepr.examples.multiply.prepros">deepr.examples.multiply.prepros</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.prepros.html#module-deepr.examples.multiply.prepros.default">deepr.examples.multiply.prepros.default</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.prepros.html#module-deepr.examples.multiply.prepros.inference">deepr.examples.multiply.prepros.inference</a>
 </li>
         <li><a href="_source/deepr.exporters.html#module-deepr.exporters">deepr.exporters</a>
 </li>
@@ -2666,6 +2908,8 @@
 </li>
         <li><a href="_source/deepr.layers.html#module-deepr.layers.transformer">deepr.layers.transformer</a>
 </li>
+        <li><a href="_source/deepr.layers.html#module-deepr.layers.triplet_precision">deepr.layers.triplet_precision</a>
+</li>
         <li><a href="_source/deepr.macros.html#module-deepr.macros">deepr.macros</a>
 </li>
         <li><a href="_source/deepr.macros.html#module-deepr.macros.dynamic">deepr.macros.dynamic</a>
@@ -2767,7 +3011,7 @@
         <li><a href="_source/deepr.utils.html#deepr.utils.uuid.msb_lsb_to_str">(in module deepr.utils.uuid)</a>
 </li>
       </ul></li>
-      <li><a href="_source/deepr.example.layers.html#deepr.example.layers.model.Multiply">Multiply (class in deepr.example.layers.model)</a>
+      <li><a href="_source/deepr.examples.multiply.layers.html#deepr.examples.multiply.layers.model.Multiply">Multiply (class in deepr.examples.multiply.layers.model)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -2817,10 +3061,10 @@
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.nb_retries">nb_retries (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.nb_workers">nb_workers (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.layers.html#deepr.layers.nce_loss.NegativeSampling">NegativeSampling (class in deepr.layers.nce_loss)</a>
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.optimize_saved_model.OptimizeSavedModel.new_names">new_names (deepr.jobs.optimize_saved_model.OptimizeSavedModel attribute)</a>, <a href="_source/deepr.jobs.html#id10">[1]</a>
@@ -2829,6 +3073,8 @@
         <li><a href="API/_autosummary/deepr.jobs.OptimizeSavedModel.html#deepr.jobs.OptimizeSavedModel.new_names">(deepr.jobs.OptimizeSavedModel attribute)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_csv.BuildCSV.next_movie">next_movie (deepr.examples.movielens.jobs.build_csv.BuildCSV attribute)</a>
+</li>
       <li><a href="_source/deepr.layers.html#deepr.layers.transformer.Normalization">Normalization (class in deepr.layers.transformer)</a>
 </li>
       <li><a href="API/_autosummary/deepr.layers.NotEqual.html#deepr.layers.NotEqual">NotEqual (class in deepr.layers)</a>
@@ -2839,9 +3085,11 @@
       </ul></li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_launcher.YarnLauncherConfig.num_cores">num_cores (deepr.jobs.yarn_launcher.YarnLauncherConfig attribute)</a>
 </li>
-      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.build_dataset.BuildDataset.num_examples">num_examples (deepr.example.jobs.build_dataset.BuildDataset attribute)</a>
+      <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.build.Build.num_examples">num_examples (deepr.examples.multiply.jobs.build.Build attribute)</a>
 </li>
       <li><a href="_source/deepr.layers.html#deepr.layers.transformer.SelfMultiheadAttention.num_heads">num_heads (deepr.layers.transformer.SelfMultiheadAttention attribute)</a>
+</li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.num_negatives">num_negatives (deepr.examples.movielens.jobs.build_records.BuildRecords attribute)</a>
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.save_dataset.SaveDataset.num_parallel_calls">num_parallel_calls (deepr.jobs.save_dataset.SaveDataset attribute)</a>
 
@@ -3007,10 +3255,26 @@
         <li><a href="API/_autosummary/deepr.readers.TFRecordReader.html#deepr.readers.TFRecordReader.path">(deepr.readers.TFRecordReader attribute)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate.path_biases">path_biases (deepr.examples.movielens.jobs.evaluate.Evaluate attribute)</a>
+</li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.cleanup_checkpoints.CleanupCheckpoints.path_checkpoints">path_checkpoints (deepr.jobs.cleanup_checkpoints.CleanupCheckpoints attribute)</a>
 </li>
-      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.build_dataset.BuildDataset.path_dataset">path_dataset (deepr.example.jobs.build_dataset.BuildDataset attribute)</a>
+      <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.build.Build.path_dataset">path_dataset (deepr.examples.multiply.jobs.build.Build attribute)</a>
 </li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate.path_embeddings">path_embeddings (deepr.examples.movielens.jobs.evaluate.Evaluate attribute)</a>
+</li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_csv.BuildCSV.path_eval">path_eval (deepr.examples.movielens.jobs.build_csv.BuildCSV attribute)</a>
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.path_eval">(deepr.examples.movielens.jobs.build_records.BuildRecords attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_csv.BuildCSV.path_mapping">path_mapping (deepr.examples.movielens.jobs.build_csv.BuildCSV attribute)</a>
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.path_mapping">(deepr.examples.movielens.jobs.build_records.BuildRecords attribute)</a>
+</li>
+      </ul></li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata.path_metadata">path_metadata (deepr.jobs.export_xla_model_metadata.ExportXlaModelMetadata attribute)</a>, <a href="_source/deepr.jobs.html#id4">[1]</a>
 
       <ul>
@@ -3019,7 +3283,7 @@
       </ul></li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.mlflow_save_info.MLFlowSaveInfo.path_mlflow">path_mlflow (deepr.jobs.mlflow_save_info.MLFlowSaveInfo attribute)</a>
 </li>
-      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.PredictProto.path_model">path_model (deepr.example.jobs.predict.PredictProto attribute)</a>
+      <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictProto.path_model">path_model (deepr.examples.multiply.jobs.predict.PredictProto attribute)</a>
 
       <ul>
         <li><a href="_source/deepr.jobs.html#deepr.jobs.cleanup_checkpoints.CleanupCheckpoints.path_model">(deepr.jobs.cleanup_checkpoints.CleanupCheckpoints attribute)</a>
@@ -3049,13 +3313,27 @@
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_config.YarnConfig.path_pex_gpu">path_pex_gpu (deepr.jobs.yarn_config.YarnConfig attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_config.YarnConfig.path_pex_prefix">path_pex_prefix (deepr.jobs.yarn_config.YarnConfig attribute)</a>
 </li>
-      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.PredictSavedModel.path_saved_model">path_saved_model (deepr.example.jobs.predict.PredictSavedModel attribute)</a>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate.path_predictions">path_predictions (deepr.examples.movielens.jobs.evaluate.Evaluate attribute)</a>
 
       <ul>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.predict.Predict.path_predictions">(deepr.examples.movielens.jobs.predict.Predict attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_csv.BuildCSV.path_ratings">path_ratings (deepr.examples.movielens.jobs.build_csv.BuildCSV attribute)</a>
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.path_ratings">(deepr.examples.movielens.jobs.build_records.BuildRecords attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.predict.Predict.path_saved_model">path_saved_model (deepr.examples.movielens.jobs.predict.Predict attribute)</a>
+
+      <ul>
+        <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictSavedModel.path_saved_model">(deepr.examples.multiply.jobs.predict.PredictSavedModel attribute)</a>
+</li>
         <li><a href="_source/deepr.exporters.html#deepr.exporters.saved_model.SavedModel.path_saved_model">(deepr.exporters.saved_model.SavedModel attribute)</a>
 </li>
         <li><a href="API/_autosummary/deepr.exporters.SavedModel.html#deepr.exporters.SavedModel.path_saved_model">(deepr.exporters.SavedModel attribute)</a>
@@ -3065,14 +3343,30 @@
         <li><a href="API/_autosummary/deepr.jobs.OptimizeSavedModel.html#deepr.jobs.OptimizeSavedModel.path_saved_model">(deepr.jobs.OptimizeSavedModel attribute)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_csv.BuildCSV.path_test">path_test (deepr.examples.movielens.jobs.build_csv.BuildCSV attribute)</a>
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.path_test">(deepr.examples.movielens.jobs.build_records.BuildRecords attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_csv.BuildCSV.path_train">path_train (deepr.examples.movielens.jobs.build_csv.BuildCSV attribute)</a>
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.path_train">(deepr.examples.movielens.jobs.build_records.BuildRecords attribute)</a>
+</li>
+      </ul></li>
       <li><a href="_source/deepr.exporters.html#deepr.exporters.save_variables.SaveVariables.path_variables">path_variables (deepr.exporters.save_variables.SaveVariables attribute)</a>
 
       <ul>
         <li><a href="API/_autosummary/deepr.exporters.SaveVariables.html#deepr.exporters.SaveVariables.path_variables">(deepr.exporters.SaveVariables attribute)</a>
 </li>
       </ul></li>
-      <li><a href="_source/deepr.example.macros.html#deepr.example.macros.paths.Paths">Paths (class in deepr.example.macros.paths)</a>
+      <li><a href="_source/deepr.examples.movielens.macros.html#deepr.examples.movielens.macros.paths.Paths">Paths (class in deepr.examples.movielens.macros.paths)</a>
+
+      <ul>
+        <li><a href="_source/deepr.examples.multiply.macros.html#deepr.examples.multiply.macros.paths.Paths">(class in deepr.examples.multiply.macros.paths)</a>
 </li>
+      </ul></li>
       <li><a href="API/_autosummary/deepr.jobs.Pipeline.html#deepr.jobs.Pipeline">Pipeline (class in deepr.jobs)</a>
 
       <ul>
@@ -3084,6 +3378,8 @@
       <li><a href="_source/deepr.io.html#deepr.io.parquet.ParquetDataset.pq_dataset">pq_dataset() (deepr.io.parquet.ParquetDataset property)</a>
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.pre_script_hook">pre_script_hook (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
+</li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate.precision_recall_f1">precision_recall_f1() (deepr.examples.movielens.jobs.evaluate.Evaluate static method)</a>
 </li>
       <li><a href="API/_autosummary/deepr.jobs.Trainer.html#deepr.jobs.Trainer.pred_fn">pred_fn (deepr.jobs.Trainer attribute)</a>
 
@@ -3097,11 +3393,13 @@
         <li><a href="API/_autosummary/deepr.prepros.Filter.html#deepr.prepros.Filter.predicate">(deepr.prepros.Filter attribute)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.predict.Predict">Predict (class in deepr.examples.movielens.jobs.predict)</a>
+</li>
       <li><a href="_source/deepr.predictors.html#deepr.predictors.base.Predictor">Predictor (class in deepr.predictors.base)</a>
 </li>
-      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.PredictProto">PredictProto (class in deepr.example.jobs.predict)</a>
+      <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictProto">PredictProto (class in deepr.examples.multiply.jobs.predict)</a>
 </li>
-      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.PredictSavedModel">PredictSavedModel (class in deepr.example.jobs.predict)</a>
+      <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictSavedModel">PredictSavedModel (class in deepr.examples.multiply.jobs.predict)</a>
 </li>
       <li><a href="API/_autosummary/deepr.prepros.Prefetch.html#deepr.prepros.Prefetch">Prefetch (class in deepr.prepros)</a>
 
@@ -3123,10 +3421,12 @@
       </ul></li>
       <li><a href="_source/deepr.prepros.html#deepr.prepros.base.prepro">prepro() (in module deepr.prepros.base)</a>
 </li>
-      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.PredictProto.prepro_fn">prepro_fn (deepr.example.jobs.predict.PredictProto attribute)</a>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.predict.Predict.prepro_fn">prepro_fn (deepr.examples.movielens.jobs.predict.Predict attribute)</a>
 
       <ul>
-        <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.PredictSavedModel.prepro_fn">(deepr.example.jobs.predict.PredictSavedModel attribute)</a>
+        <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictProto.prepro_fn">(deepr.examples.multiply.jobs.predict.PredictProto attribute)</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictSavedModel.prepro_fn">(deepr.examples.multiply.jobs.predict.PredictSavedModel attribute)</a>
 </li>
         <li><a href="API/_autosummary/deepr.jobs.Trainer.html#deepr.jobs.Trainer.prepro_fn">(deepr.jobs.Trainer attribute)</a>
 </li>
@@ -3205,6 +3505,10 @@
       </ul></li>
       <li><a href="_source/deepr.io.html#deepr.io.hdfs.HDFSFile.readlines">readlines() (deepr.io.hdfs.HDFSFile method)</a>
 </li>
+      <li><a href="_source/deepr.examples.movielens.prepros.html#deepr.examples.movielens.prepros.record.RecordPrepro">RecordPrepro() (in module deepr.examples.movielens.prepros.record)</a>
+</li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.records_generator">records_generator() (in module deepr.examples.movielens.jobs.build_records)</a>
+</li>
       <li><a href="API/_autosummary/deepr.layers.Rename.html#deepr.layers.Rename">Rename (class in deepr.layers)</a>
 
       <ul>
@@ -3243,12 +3547,20 @@
         <li><a href="API/_autosummary/deepr.layers.LookupIndexToString.html#deepr.layers.LookupIndexToString.reuse">(deepr.layers.LookupIndexToString attribute)</a>
 </li>
       </ul></li>
-      <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.build_dataset.BuildDataset.run">run() (deepr.example.jobs.build_dataset.BuildDataset method)</a>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_csv.BuildCSV.run">run() (deepr.examples.movielens.jobs.build_csv.BuildCSV method)</a>
 
       <ul>
-        <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.PredictProto.run">(deepr.example.jobs.predict.PredictProto method)</a>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.run">(deepr.examples.movielens.jobs.build_records.BuildRecords method)</a>
 </li>
-        <li><a href="_source/deepr.example.jobs.html#deepr.example.jobs.predict.PredictSavedModel.run">(deepr.example.jobs.predict.PredictSavedModel method)</a>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate.run">(deepr.examples.movielens.jobs.evaluate.Evaluate method)</a>
+</li>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.predict.Predict.run">(deepr.examples.movielens.jobs.predict.Predict method)</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.build.Build.run">(deepr.examples.multiply.jobs.build.Build method)</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictProto.run">(deepr.examples.multiply.jobs.predict.PredictProto method)</a>
+</li>
+        <li><a href="_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictSavedModel.run">(deepr.examples.multiply.jobs.predict.PredictSavedModel method)</a>
 </li>
         <li><a href="_source/deepr.jobs.html#deepr.jobs.base.Job.run">(deepr.jobs.base.Job method)</a>
 </li>
@@ -3361,6 +3673,12 @@
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.save_dataset.SaveDataset.secs">secs (deepr.jobs.save_dataset.SaveDataset attribute)</a>
 </li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_csv.BuildCSV.seed">seed (deepr.examples.movielens.jobs.build_csv.BuildCSV attribute)</a>
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.seed">(deepr.examples.movielens.jobs.build_records.BuildRecords attribute)</a>
+</li>
+      </ul></li>
       <li><a href="API/_autosummary/deepr.layers.Select.html#deepr.layers.Select">Select (class in deepr.layers)</a>
 
       <ul>
@@ -3373,6 +3691,12 @@
 
       <ul>
         <li><a href="_source/deepr.utils.html#deepr.utils.field.Field.sequence">(deepr.utils.field.Field attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="_source/deepr.examples.movielens.prepros.html#deepr.examples.movielens.prepros.csv.SequenceMask">SequenceMask (class in deepr.examples.movielens.prepros.csv)</a>
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.prepros.html#deepr.examples.movielens.prepros.record.SequenceMask">(class in deepr.examples.movielens.prepros.record)</a>
 </li>
       </ul></li>
       <li><a href="API/_autosummary/deepr.layers.Sequential.html#deepr.layers.Sequential">Sequential (class in deepr.layers)</a>
@@ -3411,14 +3735,28 @@
         <li><a href="API/_autosummary/deepr.readers.TFRecordReader.html#deepr.readers.TFRecordReader.shuffle">(deepr.readers.TFRecordReader attribute)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.shuffle_timelines">shuffle_timelines (deepr.examples.movielens.jobs.build_records.BuildRecords attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="API/_autosummary/deepr.vocab.size.html#deepr.vocab.size">size() (in module deepr.vocab)</a>
 
       <ul>
         <li><a href="_source/deepr.vocab.html#deepr.vocab.base.size">(in module deepr.vocab.base)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_csv.BuildCSV.size_eval">size_eval (deepr.examples.movielens.jobs.build_csv.BuildCSV attribute)</a>
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.size_eval">(deepr.examples.movielens.jobs.build_records.BuildRecords attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_csv.BuildCSV.size_test">size_test (deepr.examples.movielens.jobs.build_csv.BuildCSV attribute)</a>
+
+      <ul>
+        <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.size_test">(deepr.examples.movielens.jobs.build_records.BuildRecords attribute)</a>
+</li>
+      </ul></li>
       <li><a href="_source/deepr.hooks.html#deepr.hooks.logging_tensor.LoggingTensorHookFactory.skip_after_step">skip_after_step (deepr.hooks.logging_tensor.LoggingTensorHookFactory attribute)</a>
 
       <ul>
@@ -3463,7 +3801,7 @@
 </li>
       <li><a href="_source/deepr.layers.html#deepr.layers.transformer.SelfMultiheadAttention.split_heads">split_heads() (deepr.layers.transformer.SelfMultiheadAttention method)</a>
 </li>
-      <li><a href="_source/deepr.example.layers.html#deepr.example.layers.loss.SquaredL2">SquaredL2 (class in deepr.example.layers.loss)</a>
+      <li><a href="_source/deepr.examples.multiply.layers.html#deepr.examples.multiply.layers.loss.SquaredL2">SquaredL2 (class in deepr.examples.multiply.layers.loss)</a>
 </li>
       <li><a href="_source/deepr.macros.html#deepr.macros.mlflow_init.standard_url_formatter">standard_url_formatter() (in module deepr.macros.mlflow_init)</a>
 </li>
@@ -3572,6 +3910,8 @@
 </li>
       </ul></li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.copy_dir.CopyDir.target">target (deepr.jobs.copy_dir.CopyDir attribute)</a>
+</li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.target_ratio">target_ratio (deepr.examples.movielens.jobs.build_records.BuildRecords attribute)</a>
 </li>
       <li><a href="API/_autosummary/deepr.optimizers.TensorflowOptimizer.html#deepr.optimizers.TensorflowOptimizer">TensorflowOptimizer (class in deepr.optimizers)</a>
 
@@ -3705,6 +4045,10 @@
 </li>
       <li><a href="_source/deepr.layers.html#deepr.layers.transformer.Transformer">Transformer() (in module deepr.layers.transformer)</a>
 </li>
+      <li><a href="_source/deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.transformer.TransformerModel">TransformerModel() (in module deepr.examples.movielens.layers.transformer)</a>
+</li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.triplet_precision.TripletPrecision">TripletPrecision (class in deepr.layers.triplet_precision)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -3735,9 +4079,11 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_source/deepr.exporters.html#deepr.exporters.best_checkpoint.BestCheckpoint.use_mlflow">use_mlflow (deepr.exporters.best_checkpoint.BestCheckpoint attribute)</a>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate.use_mlflow">use_mlflow (deepr.examples.movielens.jobs.evaluate.Evaluate attribute)</a>
 
       <ul>
+        <li><a href="_source/deepr.exporters.html#deepr.exporters.best_checkpoint.BestCheckpoint.use_mlflow">(deepr.exporters.best_checkpoint.BestCheckpoint attribute)</a>
+</li>
         <li><a href="API/_autosummary/deepr.exporters.BestCheckpoint.html#deepr.exporters.BestCheckpoint.use_mlflow">(deepr.exporters.BestCheckpoint attribute)</a>
 </li>
         <li><a href="_source/deepr.hooks.html#deepr.hooks.logging_tensor.LoggingTensorHookFactory.use_mlflow">(deepr.hooks.logging_tensor.LoggingTensorHookFactory attribute)</a>
@@ -3820,6 +4166,8 @@
       <li><a href="_source/deepr.io.html#deepr.io.json.write_json">write_json() (in module deepr.io.json)</a>
 </li>
       <li><a href="_source/deepr.io.html#deepr.io.parquet.ParquetDataset.write_pandas">write_pandas() (deepr.io.parquet.ParquetDataset method)</a>
+</li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.write_records">write_records() (in module deepr.examples.movielens.jobs.build_records)</a>
 </li>
       <li><a href="API/_autosummary/deepr.writers.Writer.html#deepr.writers.Writer">Writer (class in deepr.writers)</a>
 

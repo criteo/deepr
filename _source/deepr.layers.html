@@ -105,7 +105,7 @@
 <li class="toctree-l3 current"><a class="reference internal" href="deepr.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="deepr.cli.html">deepr.cli package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="deepr.config.html">deepr.config package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="deepr.example.html">deepr.example package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.html">deepr.examples package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="deepr.exporters.html">deepr.exporters package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="deepr.hooks.html">deepr.hooks package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="deepr.initializers.html">deepr.initializers package</a></li>
@@ -1008,6 +1008,40 @@ example, if</p>
 <dt id="deepr.layers.core.DotProduct.forward">
 <code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#DotProduct.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.DotProduct.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward method of the layer</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.layers.core.ExpandDims">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.core.</code><code class="sig-name descname">ExpandDims</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">axis</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#ExpandDims"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.ExpandDims" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<dl class="py method">
+<dt id="deepr.layers.core.ExpandDims.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.layers.core.ExpandDims.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>Union</em><em>[</em><em>tf.Tensor</em><em>, </em><em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>..</em><em>]</em><em>]</em>) – <ul>
+<li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_in &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_out &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[tf.Tensor, Tuple[tf.Tensor, ..]]</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -2158,13 +2192,47 @@ mask = [batch_size, sequence_length, sequence_length]</p>
 
 <dl class="py function">
 <dt id="deepr.layers.transformer.Transformer">
-<code class="sig-prename descclassname">deepr.layers.transformer.</code><code class="sig-name descname">Transformer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dim</span></em>, <em class="sig-param"><span class="n">num_heads</span><span class="o">=</span><span class="default_value">4</span></em>, <em class="sig-param"><span class="n">encoding_blocks</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">dim_head</span><span class="o">=</span><span class="default_value">128</span></em>, <em class="sig-param"><span class="n">residual_connection</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">use_layer_normalization</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">event_dropout_rate</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">use_feedforward</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">ff_dropout_rate</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">ff_normalization</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">scale</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">use_positional_encoding</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">trainable_positional_encoding</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">use_look_ahead_mask</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">inputs</span><span class="o">=</span><span class="default_value">'inputPositive', 'inputMask'</span></em>, <em class="sig-param"><span class="n">outputs</span><span class="o">=</span><span class="default_value">'userEmbeddings'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/transformer.html#Transformer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.transformer.Transformer" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">deepr.layers.transformer.</code><code class="sig-name descname">Transformer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dim</span></em>, <em class="sig-param"><span class="n">num_heads</span><span class="o">=</span><span class="default_value">4</span></em>, <em class="sig-param"><span class="n">encoding_blocks</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">dim_head</span><span class="o">=</span><span class="default_value">128</span></em>, <em class="sig-param"><span class="n">residual_connection</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">use_layer_normalization</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">event_dropout_rate</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">use_feedforward</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">ff_dropout_rate</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">ff_normalization</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">scale</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">use_positional_encoding</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">trainable_positional_encoding</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">use_look_ahead_mask</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">inputs</span><span class="o">=</span><span class="default_value">'inputEmbeddings', 'inputMask'</span></em>, <em class="sig-param"><span class="n">outputs</span><span class="o">=</span><span class="default_value">'userEmbeddings'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/transformer.html#Transformer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.transformer.Transformer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transformer Model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a></p>
 </dd>
 </dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.layers.triplet_precision">
+<span id="deepr-layers-triplet-precision-module"></span><h2>deepr.layers.triplet_precision module<a class="headerlink" href="#module-deepr.layers.triplet_precision" title="Permalink to this headline">¶</a></h2>
+<p>Triplet Precision Layer.</p>
+<dl class="py class">
+<dt id="deepr.layers.triplet_precision.TripletPrecision">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.triplet_precision.</code><code class="sig-name descname">TripletPrecision</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/triplet_precision.html#TripletPrecision"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.triplet_precision.TripletPrecision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Triplet Precision Layer.</p>
+<dl class="py method">
+<dt id="deepr.layers.triplet_precision.TripletPrecision.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/triplet_precision.html#TripletPrecision.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.triplet_precision.TripletPrecision.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes Triplet Precision</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tensors</strong> (<em>Tuple</em><em>[</em><em>tf.Tensor</em><em>]</em>) – <ul class="simple">
+<li><p>positives : shape = (batch, num_events)</p></li>
+<li><p>negatives : shape = (batch, num_events, num_negatives)</p></li>
+<li><p>mask : shape = (batch, num_events, num_negatives)</p></li>
+<li><p>weights : shape = (batch, num_events)</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>BPR loss</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </div>

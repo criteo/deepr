@@ -1,0 +1,22 @@
+deepr.examples.movielens.macros package
+=======================================
+
+Submodules
+----------
+
+deepr.examples.movielens.macros.paths module
+--------------------------------------------
+
+.. automodule:: deepr.examples.movielens.macros.paths
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.examples.movielens.macros
+   :members:
+   :undoc-members:
+   :show-inheritance:

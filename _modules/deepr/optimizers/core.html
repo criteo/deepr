@@ -207,6 +207,8 @@
         <span class="n">grad_norms</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">exclude_vars</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">clip</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">skip_vars</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">skip_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">optimizer</span>
@@ -215,6 +217,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">grad_norms</span> <span class="o">=</span> <span class="n">grad_norms</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">exclude_vars</span> <span class="o">=</span> <span class="n">exclude_vars</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clip</span> <span class="o">=</span> <span class="n">clip</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip_vars</span> <span class="o">=</span> <span class="n">skip_vars</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip_steps</span> <span class="o">=</span> <span class="n">skip_steps</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPTIMIZERS</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimizer </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="si">}</span><span class="s2"> not in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">OPTIMIZERS</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
@@ -250,8 +254,24 @@
             <span class="n">grads</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">clip_by_global_norm</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clip</span><span class="p">)</span>
             <span class="n">grad_and_vars</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="n">variables</span><span class="p">)</span>
 
-        <span class="c1"># Apply gradients and return</span>
+        <span class="c1"># Train op on all variables</span>
         <span class="n">train_op</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="n">grad_and_vars</span><span class="p">,</span> <span class="n">global_step</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">get_global_step</span><span class="p">())</span>
+
+        <span class="c1"># Train op that skip some variables for a few steps</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_vars</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_steps</span><span class="p">:</span>
+            <span class="n">non_skipped_grad_and_vars</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">grad</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">grad_and_vars</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">name</span> <span class="ow">in</span> <span class="n">var</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_vars</span><span class="p">):</span>
+                    <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skip training of </span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">skip_steps</span><span class="si">}</span><span class="s2"> steps&quot;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+                <span class="n">non_skipped_grad_and_vars</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">grad</span><span class="p">,</span> <span class="n">var</span><span class="p">))</span>
+            <span class="n">non_skipped_train_op</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span>
+                <span class="n">non_skipped_grad_and_vars</span><span class="p">,</span> <span class="n">global_step</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">get_global_step</span><span class="p">()</span>
+            <span class="p">)</span>
+            <span class="n">train_op</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span>
+                <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">get_global_step</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_steps</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">non_skipped_train_op</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">train_op</span><span class="p">,</span>
+            <span class="p">)</span>
+
         <span class="k">return</span> <span class="p">{</span><span class="o">**</span><span class="n">grad_norms</span><span class="p">,</span> <span class="s2">&quot;train_op&quot;</span><span class="p">:</span> <span class="n">train_op</span><span class="p">}</span></div>
 </pre></div>
 

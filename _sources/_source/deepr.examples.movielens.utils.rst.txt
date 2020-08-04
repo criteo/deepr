@@ -1,0 +1,22 @@
+deepr.examples.movielens.utils package
+======================================
+
+Submodules
+----------
+
+deepr.examples.movielens.utils.fields module
+--------------------------------------------
+
+.. automodule:: deepr.examples.movielens.utils.fields
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.examples.movielens.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,572 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>deepr.examples.movielens.jobs package &mdash; deepr 2.6.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="deepr.examples.movielens.layers package" href="deepr.examples.movielens.layers.html" />
+    <link rel="prev" title="deepr.examples.movielens package" href="deepr.examples.movielens.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> deepr
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/advanced.html">Advanced</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">DeepR: Build and Train Deep Learning Pipelines for Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../API/core.html">DeepR</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">deepr</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="deepr.html">deepr package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="deepr.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="deepr.cli.html">deepr.cli package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.config.html">deepr.config package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="deepr.examples.html">deepr.examples package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.exporters.html">deepr.exporters package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.hooks.html">deepr.hooks package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.initializers.html">deepr.initializers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.io.html">deepr.io package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.jobs.html">deepr.jobs package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.layers.html">deepr.layers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.macros.html">deepr.macros package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.metrics.html">deepr.metrics package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.optimizers.html">deepr.optimizers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.predictors.html">deepr.predictors package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.prepros.html">deepr.prepros package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.readers.html">deepr.readers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.utils.html">deepr.utils package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.vocab.html">deepr.vocab package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.writers.html">deepr.writers package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.html#module-deepr.version">deepr.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.html#module-deepr">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">deepr</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">deepr</a> &raquo;</li>
+        
+          <li><a href="deepr.html">deepr package</a> &raquo;</li>
+        
+          <li><a href="deepr.examples.html">deepr.examples package</a> &raquo;</li>
+        
+          <li><a href="deepr.examples.movielens.html">deepr.examples.movielens package</a> &raquo;</li>
+        
+      <li>deepr.examples.movielens.jobs package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_source/deepr.examples.movielens.jobs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="deepr-examples-movielens-jobs-package">
+<h1>deepr.examples.movielens.jobs package<a class="headerlink" href="#deepr-examples-movielens-jobs-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-deepr.examples.movielens.jobs.build_csv">
+<span id="deepr-examples-movielens-jobs-build-csv-module"></span><h2>deepr.examples.movielens.jobs.build_csv module<a class="headerlink" href="#module-deepr.examples.movielens.jobs.build_csv" title="Permalink to this headline">¶</a></h2>
+<p>Build MovieLens dataset as CSV files.</p>
+<dl class="py class">
+<dt id="deepr.examples.movielens.jobs.build_csv.BuildCSV">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.jobs.build_csv.</code><code class="sig-name descname">BuildCSV</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_ratings</span></em>, <em class="sig-param"><span class="n">path_mapping</span></em>, <em class="sig-param"><span class="n">path_train</span></em>, <em class="sig-param"><span class="n">path_eval</span></em>, <em class="sig-param"><span class="n">path_test</span></em>, <em class="sig-param"><span class="n">min_rating</span><span class="o">=</span><span class="default_value">4</span></em>, <em class="sig-param"><span class="n">min_length</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">size_test</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="n">size_eval</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">2020</span></em>, <em class="sig-param"><span class="n">next_movie</span><span class="o">=</span><span class="default_value">100000</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/build_csv.html#BuildCSV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.build_csv.BuildCSV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="deepr.jobs.html#deepr.jobs.base.Job" title="deepr.jobs.base.Job"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.jobs.base.Job</span></code></a></p>
+<p>Build MovieLens dataset as CSV files.</p>
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_csv.BuildCSV.min_length">
+<code class="sig-name descname">min_length</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></em><em class="property"> = 5</em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_csv.BuildCSV.min_length" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_csv.BuildCSV.min_rating">
+<code class="sig-name descname">min_rating</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></em><em class="property"> = 4</em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_csv.BuildCSV.min_rating" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_csv.BuildCSV.next_movie">
+<code class="sig-name descname">next_movie</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></em><em class="property"> = 100000</em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_csv.BuildCSV.next_movie" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_csv.BuildCSV.path_eval">
+<code class="sig-name descname">path_eval</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_csv.BuildCSV.path_eval" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_csv.BuildCSV.path_mapping">
+<code class="sig-name descname">path_mapping</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_csv.BuildCSV.path_mapping" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_csv.BuildCSV.path_ratings">
+<code class="sig-name descname">path_ratings</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_csv.BuildCSV.path_ratings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_csv.BuildCSV.path_test">
+<code class="sig-name descname">path_test</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_csv.BuildCSV.path_test" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_csv.BuildCSV.path_train">
+<code class="sig-name descname">path_train</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_csv.BuildCSV.path_train" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="deepr.examples.movielens.jobs.build_csv.BuildCSV.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/build_csv.html#BuildCSV.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.build_csv.BuildCSV.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run Job</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_csv.BuildCSV.seed">
+<code class="sig-name descname">seed</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></em><em class="property"> = 2020</em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_csv.BuildCSV.seed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_csv.BuildCSV.size_eval">
+<code class="sig-name descname">size_eval</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></em><em class="property"> = 10000</em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_csv.BuildCSV.size_eval" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_csv.BuildCSV.size_test">
+<code class="sig-name descname">size_test</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></em><em class="property"> = 10000</em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_csv.BuildCSV.size_test" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.examples.movielens.jobs.build_records">
+<span id="deepr-examples-movielens-jobs-build-records-module"></span><h2>deepr.examples.movielens.jobs.build_records module<a class="headerlink" href="#module-deepr.examples.movielens.jobs.build_records" title="Permalink to this headline">¶</a></h2>
+<p>Build MovieLens dataset as TFRecords.</p>
+<dl class="py class">
+<dt id="deepr.examples.movielens.jobs.build_records.BuildRecords">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.jobs.build_records.</code><code class="sig-name descname">BuildRecords</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_ratings</span></em>, <em class="sig-param"><span class="n">path_mapping</span></em>, <em class="sig-param"><span class="n">path_train</span></em>, <em class="sig-param"><span class="n">path_eval</span></em>, <em class="sig-param"><span class="n">path_test</span></em>, <em class="sig-param"><span class="n">min_rating</span><span class="o">=</span><span class="default_value">4</span></em>, <em class="sig-param"><span class="n">min_length</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">num_negatives</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">target_ratio</span><span class="o">=</span><span class="default_value">0.2</span></em>, <em class="sig-param"><span class="n">size_test</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="n">size_eval</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="n">shuffle_timelines</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">2020</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/build_records.html#BuildRecords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.build_records.BuildRecords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="deepr.jobs.html#deepr.jobs.base.Job" title="deepr.jobs.base.Job"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.jobs.base.Job</span></code></a></p>
+<p>Build MovieLens dataset as TFRecords.</p>
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_records.BuildRecords.min_length">
+<code class="sig-name descname">min_length</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></em><em class="property"> = 5</em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_records.BuildRecords.min_length" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_records.BuildRecords.min_rating">
+<code class="sig-name descname">min_rating</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></em><em class="property"> = 4</em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_records.BuildRecords.min_rating" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_records.BuildRecords.num_negatives">
+<code class="sig-name descname">num_negatives</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></em><em class="property"> = 8</em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_records.BuildRecords.num_negatives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_records.BuildRecords.path_eval">
+<code class="sig-name descname">path_eval</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_records.BuildRecords.path_eval" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_records.BuildRecords.path_mapping">
+<code class="sig-name descname">path_mapping</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_records.BuildRecords.path_mapping" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_records.BuildRecords.path_ratings">
+<code class="sig-name descname">path_ratings</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_records.BuildRecords.path_ratings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_records.BuildRecords.path_test">
+<code class="sig-name descname">path_test</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_records.BuildRecords.path_test" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_records.BuildRecords.path_train">
+<code class="sig-name descname">path_train</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_records.BuildRecords.path_train" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="deepr.examples.movielens.jobs.build_records.BuildRecords.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/build_records.html#BuildRecords.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.build_records.BuildRecords.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run Job</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_records.BuildRecords.seed">
+<code class="sig-name descname">seed</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></em><em class="property"> = 2020</em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_records.BuildRecords.seed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_records.BuildRecords.shuffle_timelines">
+<code class="sig-name descname">shuffle_timelines</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></em><em class="property"> = True</em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_records.BuildRecords.shuffle_timelines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_records.BuildRecords.size_eval">
+<code class="sig-name descname">size_eval</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></em><em class="property"> = 10000</em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_records.BuildRecords.size_eval" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_records.BuildRecords.size_test">
+<code class="sig-name descname">size_test</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></em><em class="property"> = 10000</em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_records.BuildRecords.size_test" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.build_records.BuildRecords.target_ratio">
+<code class="sig-name descname">target_ratio</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></em><em class="property"> = 0.2</em><a class="headerlink" href="#deepr.examples.movielens.jobs.build_records.BuildRecords.target_ratio" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.examples.movielens.jobs.build_records.records_generator">
+<code class="sig-prename descclassname">deepr.examples.movielens.jobs.build_records.</code><code class="sig-name descname">records_generator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">timelines</span></em>, <em class="sig-param"><span class="n">target_ratio</span></em>, <em class="sig-param"><span class="n">num_negatives</span></em>, <em class="sig-param"><span class="n">shuffle_timelines</span></em>, <em class="sig-param"><span class="n">mapping</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/build_records.html#records_generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.build_records.records_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert Timelines to list of Records with negative samples.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.examples.movielens.jobs.build_records.write_records">
+<code class="sig-prename descclassname">deepr.examples.movielens.jobs.build_records.</code><code class="sig-name descname">write_records</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">gen</span></em>, <em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/build_records.html#write_records"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.build_records.write_records" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write records to path.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.examples.movielens.jobs.build_utils">
+<span id="deepr-examples-movielens-jobs-build-utils-module"></span><h2>deepr.examples.movielens.jobs.build_utils module<a class="headerlink" href="#module-deepr.examples.movielens.jobs.build_utils" title="Permalink to this headline">¶</a></h2>
+<p>Build MovieLens utils.</p>
+<dl class="py function">
+<dt id="deepr.examples.movielens.jobs.build_utils.get_timelines">
+<code class="sig-prename descclassname">deepr.examples.movielens.jobs.build_utils.</code><code class="sig-name descname">get_timelines</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_ratings</span></em>, <em class="sig-param"><span class="n">min_rating</span></em>, <em class="sig-param"><span class="n">min_length</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/build_utils.html#get_timelines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.build_utils.get_timelines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build timelines from MovieLens Dataset.</p>
+<dl class="simple">
+<dt>Apply the following filters</dt><dd><p>keep movies with ratings &gt; min_rating
+keep users with number of movies &gt; min_length</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.examples.movielens.jobs.evaluate">
+<span id="deepr-examples-movielens-jobs-evaluate-module"></span><h2>deepr.examples.movielens.jobs.evaluate module<a class="headerlink" href="#module-deepr.examples.movielens.jobs.evaluate" title="Permalink to this headline">¶</a></h2>
+<p>Evaluate MovieLens.</p>
+<dl class="py class">
+<dt id="deepr.examples.movielens.jobs.evaluate.Evaluate">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.jobs.evaluate.</code><code class="sig-name descname">Evaluate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_predictions</span></em>, <em class="sig-param"><span class="n">path_embeddings</span></em>, <em class="sig-param"><span class="n">path_biases</span></em>, <em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">use_mlflow</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/evaluate.html#Evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="deepr.jobs.html#deepr.jobs.base.Job" title="deepr.jobs.base.Job"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.jobs.base.Job</span></code></a></p>
+<p>Evaluate MovieLens.</p>
+<dl class="py method">
+<dt id="deepr.examples.movielens.jobs.evaluate.Evaluate.compute_metrics">
+<code class="sig-name descname">compute_metrics</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">actuals</span></em>, <em class="sig-param"><span class="n">predictions</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/evaluate.html#Evaluate.compute_metrics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.compute_metrics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.evaluate.Evaluate.k">
+<code class="sig-name descname">k</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.k" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.evaluate.Evaluate.path_biases">
+<code class="sig-name descname">path_biases</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.path_biases" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.evaluate.Evaluate.path_embeddings">
+<code class="sig-name descname">path_embeddings</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.path_embeddings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.evaluate.Evaluate.path_predictions">
+<code class="sig-name descname">path_predictions</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.path_predictions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="deepr.examples.movielens.jobs.evaluate.Evaluate.precision_recall_f1">
+<em class="property">static </em><code class="sig-name descname">precision_recall_f1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">true</span></em>, <em class="sig-param"><span class="n">pred</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/evaluate.html#Evaluate.precision_recall_f1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.precision_recall_f1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute precision, recall and f1_score.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="deepr.examples.movielens.jobs.evaluate.Evaluate.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/evaluate.html#Evaluate.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run Job</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.evaluate.Evaluate.use_mlflow">
+<code class="sig-name descname">use_mlflow</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></em><em class="property"> = False</em><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.use_mlflow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.examples.movielens.jobs.predict">
+<span id="deepr-examples-movielens-jobs-predict-module"></span><h2>deepr.examples.movielens.jobs.predict module<a class="headerlink" href="#module-deepr.examples.movielens.jobs.predict" title="Permalink to this headline">¶</a></h2>
+<p>Compute MovieLens predictions.</p>
+<dl class="py class">
+<dt id="deepr.examples.movielens.jobs.predict.Predict">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.jobs.predict.</code><code class="sig-name descname">Predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_saved_model</span></em>, <em class="sig-param"><span class="n">path_predictions</span></em>, <em class="sig-param"><span class="n">input_fn</span></em>, <em class="sig-param"><span class="n">prepro_fn</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/predict.html#Predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.predict.Predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="deepr.jobs.html#deepr.jobs.base.Job" title="deepr.jobs.base.Job"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.jobs.base.Job</span></code></a></p>
+<p>Compute MovieLens predictions.</p>
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.predict.Predict.input_fn">
+<code class="sig-name descname">input_fn</code><em class="property">: Callable<span class="p">[</span><span class="p">]</span><span class="p">, </span>tf.data.Dataset<span class="p">]</span></em><a class="headerlink" href="#deepr.examples.movielens.jobs.predict.Predict.input_fn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.predict.Predict.path_predictions">
+<code class="sig-name descname">path_predictions</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.predict.Predict.path_predictions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.predict.Predict.path_saved_model">
+<code class="sig-name descname">path_saved_model</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.predict.Predict.path_saved_model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.predict.Predict.prepro_fn">
+<code class="sig-name descname">prepro_fn</code><em class="property">: Callable<span class="p">[</span><span class="p">[</span>tf.data.Dataset<span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">]</span><span class="p">, </span>tf.data.Dataset<span class="p">]</span></em><a class="headerlink" href="#deepr.examples.movielens.jobs.predict.Predict.prepro_fn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="deepr.examples.movielens.jobs.predict.Predict.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/predict.html#Predict.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.predict.Predict.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run Job</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.examples.movielens.jobs">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-deepr.examples.movielens.jobs" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="deepr.examples.movielens.layers.html" class="btn btn-neutral float-right" title="deepr.examples.movielens.layers package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="deepr.examples.movielens.html" class="btn btn-neutral float-left" title="deepr.examples.movielens package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Criteo
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

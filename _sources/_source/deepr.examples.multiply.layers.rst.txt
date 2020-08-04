@@ -1,0 +1,30 @@
+deepr.examples.multiply.layers package
+======================================
+
+Submodules
+----------
+
+deepr.examples.multiply.layers.loss module
+------------------------------------------
+
+.. automodule:: deepr.examples.multiply.layers.loss
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.examples.multiply.layers.model module
+-------------------------------------------
+
+.. automodule:: deepr.examples.multiply.layers.model
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.examples.multiply.layers
+   :members:
+   :undoc-members:
+   :show-inheritance:

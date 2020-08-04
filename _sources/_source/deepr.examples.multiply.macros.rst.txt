@@ -1,0 +1,22 @@
+deepr.examples.multiply.macros package
+======================================
+
+Submodules
+----------
+
+deepr.examples.multiply.macros.paths module
+-------------------------------------------
+
+.. automodule:: deepr.examples.multiply.macros.paths
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.examples.multiply.macros
+   :members:
+   :undoc-members:
+   :show-inheritance:

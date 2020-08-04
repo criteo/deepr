@@ -192,10 +192,18 @@
 <div class="viewcode-block" id="WeightedAverage.forward"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.WeightedAverage.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Forward method of the layer&quot;&quot;&quot;</span>
         <span class="n">values</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">tensors</span>
+
+        <span class="c1"># Values and weights need to have the same shape up to axis</span>
+        <span class="c1"># and compatible after axis</span>
         <span class="n">axis</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">broadcast_to</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">values</span><span class="p">)[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">shape</span><span class="p">)])</span>
         <span class="n">values</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">make_same_shape</span><span class="p">([</span><span class="n">values</span><span class="p">,</span> <span class="n">weights</span><span class="p">],</span> <span class="n">broadcast</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># Reduce weighted values and weights</span>
         <span class="n">weighted_values</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">values</span> <span class="o">*</span> <span class="n">weights</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
         <span class="n">sum_weights</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+
+        <span class="c1"># Average values and weights, take care of all weights zeros</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">default</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">weighted_values</span> <span class="o">/</span> <span class="n">sum_weights</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">default</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>

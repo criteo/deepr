@@ -1,0 +1,54 @@
+deepr.examples.movielens.jobs package
+=====================================
+
+Submodules
+----------
+
+deepr.examples.movielens.jobs.build\_csv module
+-----------------------------------------------
+
+.. automodule:: deepr.examples.movielens.jobs.build_csv
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.examples.movielens.jobs.build\_records module
+---------------------------------------------------
+
+.. automodule:: deepr.examples.movielens.jobs.build_records
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.examples.movielens.jobs.build\_utils module
+-------------------------------------------------
+
+.. automodule:: deepr.examples.movielens.jobs.build_utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.examples.movielens.jobs.evaluate module
+---------------------------------------------
+
+.. automodule:: deepr.examples.movielens.jobs.evaluate
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.examples.movielens.jobs.predict module
+--------------------------------------------
+
+.. automodule:: deepr.examples.movielens.jobs.predict
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.examples.movielens.jobs
+   :members:
+   :undoc-members:
+   :show-inheritance:

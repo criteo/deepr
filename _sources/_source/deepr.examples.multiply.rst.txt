@@ -1,0 +1,21 @@
+deepr.examples.multiply package
+===============================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   deepr.examples.multiply.jobs
+   deepr.examples.multiply.layers
+   deepr.examples.multiply.macros
+   deepr.examples.multiply.prepros
+
+Module contents
+---------------
+
+.. automodule:: deepr.examples.multiply
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,30 @@
+deepr.examples.movielens.prepros package
+========================================
+
+Submodules
+----------
+
+deepr.examples.movielens.prepros.csv module
+-------------------------------------------
+
+.. automodule:: deepr.examples.movielens.prepros.csv
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.examples.movielens.prepros.record module
+----------------------------------------------
+
+.. automodule:: deepr.examples.movielens.prepros.record
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.examples.movielens.prepros
+   :members:
+   :undoc-members:
+   :show-inheritance:

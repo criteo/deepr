@@ -156,6 +156,14 @@ deepr.layers.transformer module
    :undoc-members:
    :show-inheritance:
 
+deepr.layers.triplet\_precision module
+--------------------------------------
+
+.. automodule:: deepr.layers.triplet_precision
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 
 Module contents
 ---------------

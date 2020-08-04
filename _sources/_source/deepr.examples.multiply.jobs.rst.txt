@@ -1,0 +1,30 @@
+deepr.examples.multiply.jobs package
+====================================
+
+Submodules
+----------
+
+deepr.examples.multiply.jobs.build module
+-----------------------------------------
+
+.. automodule:: deepr.examples.multiply.jobs.build
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.examples.multiply.jobs.predict module
+-------------------------------------------
+
+.. automodule:: deepr.examples.multiply.jobs.predict
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.examples.multiply.jobs
+   :members:
+   :undoc-members:
+   :show-inheritance:

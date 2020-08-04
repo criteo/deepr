@@ -1,0 +1,19 @@
+deepr.examples package
+======================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   deepr.examples.movielens
+   deepr.examples.multiply
+
+Module contents
+---------------
+
+.. automodule:: deepr.examples
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -88,16 +88,16 @@
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Pipeline</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#1.-Custom-Build-Dataset-Job">1. Custom Build Dataset Job</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Build-Dataset-Job">Build Dataset Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Build-Job">Build Job</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Prepro">Prepro</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Reader">Reader</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#2.-Define-a-Pipeline">2. Define a Pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#3.-Run-on-Yarn">3. Run on Yarn</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Build-Job">Build Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Reader</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">Prepro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Build Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Reader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Prepro</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Prediction-Function">Prediction Function</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Loss-Function">Loss Function</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Trainer-Job">Trainer Job</a></li>
@@ -494,15 +494,15 @@ div.rendered_html tbody tr:hover {
 <p>The quickstart shortly introduced the concept of a job with the <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> job.</p>
 <p>Real-life pipelines consist of multiple jobs. In our example, we want to define a special job that creates the dataset.</p>
 <p>Let’s see how we would define a custom job that writes the dataset content in a tfrecord file.</p>
-<div class="section" id="Build-Dataset-Job">
-<h3>Build Dataset Job<a class="headerlink" href="#Build-Dataset-Job" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Build-Job">
+<h3>Build Job<a class="headerlink" href="#Build-Job" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">BuildDataset</span><span class="p">(</span><span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Build</span><span class="p">(</span><span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Build a dummy dataset of random (x, 2*x) as a tfrecord file&quot;&quot;&quot;</span>
 
     <span class="n">path_dataset</span><span class="p">:</span> <span class="nb">str</span>
@@ -537,7 +537,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">build_job</span> <span class="o">=</span> <span class="n">BuildDataset</span><span class="p">(</span><span class="n">path_dataset</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">,</span> <span class="n">num_examples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span></span><span class="n">build_job</span> <span class="o">=</span> <span class="n">Build</span><span class="p">(</span><span class="n">path_dataset</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">,</span> <span class="n">num_examples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -642,23 +642,19 @@ Wrote dataset to &#39;data.tfrecord&#39;
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;x&#39;: array([4.4587484e-01, 7.4005979e-01, 4.4701755e-01, 7.2319156e-01,
-       9.4345409e-01, 1.7840658e-01, 7.2584116e-01, 9.9800736e-01,
-       2.0697144e-01, 7.9954338e-01, 4.6816257e-01, 5.7633847e-01,
-       5.0513422e-01, 7.7767682e-04, 7.4887043e-01, 4.0597153e-01,
-       3.5977897e-01, 2.4122241e-01, 7.7473664e-01, 7.0897418e-01,
-       2.2657214e-01, 4.1462871e-01, 9.0375322e-01, 5.8769149e-01,
-       2.9490185e-01, 8.1388289e-01, 2.5151196e-01, 4.3744230e-01,
-       8.1327051e-01, 9.7379398e-01, 1.4938317e-01, 4.8239645e-01],
-      dtype=float32), &#39;y&#39;: array([8.9174968e-01, 1.4801196e+00, 8.9403510e-01, 1.4463831e+00,
-       1.8869082e+00, 3.5681316e-01, 1.4516823e+00, 1.9960147e+00,
-       4.1394287e-01, 1.5990868e+00, 9.3632513e-01, 1.1526769e+00,
-       1.0102684e+00, 1.5553536e-03, 1.4977409e+00, 8.1194305e-01,
-       7.1955794e-01, 4.8244482e-01, 1.5494733e+00, 1.4179484e+00,
-       4.5314428e-01, 8.2925743e-01, 1.8075064e+00, 1.1753830e+00,
-       5.8980370e-01, 1.6277658e+00, 5.0302392e-01, 8.7488461e-01,
-       1.6265410e+00, 1.9475880e+00, 2.9876634e-01, 9.6479291e-01],
-      dtype=float32)}
+{&#39;x&#39;: array([0.12249236, 0.19407886, 0.4287153 , 0.11553267, 0.00252286,
+       0.37583396, 0.9285378 , 0.11992821, 0.11691252, 0.54549456,
+       0.20779829, 0.22857946, 0.82357705, 0.6685327 , 0.3074787 ,
+       0.18468134, 0.77053934, 0.90410686, 0.00688817, 0.48377946,
+       0.01943498, 0.5244569 , 0.18175201, 0.25505018, 0.9191886 ,
+       0.33966148, 0.15110607, 0.10617658, 0.10038193, 0.87724835,
+       0.64753866, 0.6283632 ], dtype=float32), &#39;y&#39;: array([0.24498472, 0.38815773, 0.8574306 , 0.23106533, 0.00504571,
+       0.7516679 , 1.8570756 , 0.23985642, 0.23382504, 1.0909891 ,
+       0.41559657, 0.45715892, 1.6471541 , 1.3370655 , 0.6149574 ,
+       0.36936268, 1.5410787 , 1.8082137 , 0.01377634, 0.9675589 ,
+       0.03886997, 1.0489138 , 0.36350402, 0.51010036, 1.8383772 ,
+       0.67932296, 0.30221215, 0.21235317, 0.20076387, 1.7544967 ,
+       1.2950773 , 1.2567264 ], dtype=float32)}
 </pre></div></div>
 </div>
 </div>
@@ -692,21 +688,29 @@ Wrote dataset to &#39;data.tfrecord&#39;
 </div>
 <p>Now, these classes can easily be imported from anywhere.</p>
 <p>Let’s replicate the quickstart by defining and running a full pipeline that builds the dataset and then trains a model.</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">deepr.example</span>
+<span></span><span class="kn">import</span> <span class="nn">deepr.examples.multiply</span> <span class="k">as</span> <span class="nn">multiply</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+INFO:faiss:Loading faiss.
+</pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">build_job</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">BuildDataset</span><span class="p">(</span><span class="n">path_dataset</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">,</span> <span class="n">num_examples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span></span><span class="n">build_job</span> <span class="o">=</span> <span class="n">multiply</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Build</span><span class="p">(</span><span class="n">path_dataset</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">,</span> <span class="n">num_examples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -717,12 +721,12 @@ Wrote dataset to &#39;data.tfrecord&#39;
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">trainer_job</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span>
     <span class="n">path_model</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">,</span>
-    <span class="n">pred_fn</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Multiply</span><span class="p">(),</span>
-    <span class="n">loss_fn</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">SquaredL2</span><span class="p">(),</span>
+    <span class="n">pred_fn</span><span class="o">=</span><span class="n">multiply</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Multiply</span><span class="p">(),</span>
+    <span class="n">loss_fn</span><span class="o">=</span><span class="n">multiply</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">SquaredL2</span><span class="p">(),</span>
     <span class="n">optimizer_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">TensorflowOptimizer</span><span class="p">(</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
     <span class="n">train_input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
     <span class="n">eval_input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
-    <span class="n">prepro_fn</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">DefaultPrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">repeat_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">prepro_fn</span><span class="o">=</span><span class="n">multiply</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">DefaultPrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">repeat_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -756,7 +760,7 @@ Wrote dataset to &#39;data.tfrecord&#39;
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-INFO:deepr.example.jobs.build_dataset:Wrote dataset to &#39;data.tfrecord&#39;
+INFO:deepr.examples.multiply.jobs.build:Wrote dataset to &#39;data.tfrecord&#39;
 INFO:deepr.prepros.core:Not applying Repeat(10) (mode=eval)
 INFO:deepr.jobs.trainer:Running final evaluation, using global_step = 320
 INFO:deepr.prepros.core:Not applying Repeat(10) (mode=eval)
@@ -770,15 +774,15 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 320}
 <p>We need to parametrize the execution. Though this could be done in a ad-hoc manner using custom entry points, you can use the <code class="docutils literal notranslate"><span class="pre">config</span></code> capabilities.</p>
 <p>To read more about the config system, see the <a class="reference internal" href="config.html"><span class="doc">config introduction</span></a>.</p>
 <p>In short, you can define arbitrary trees of objects using dictionaries. The special key “type” contains the full import string of the object’s class. Other keys will be given as keyword arguments at instantiation time.</p>
-<div class="section" id="Build-Job">
-<h3>Build Job<a class="headerlink" href="#Build-Job" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h3>Build Job<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">build_job_config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.example.jobs.BuildDataset&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.examples.multiply.jobs.Build&quot;</span><span class="p">,</span>
     <span class="s2">&quot;path_dataset&quot;</span><span class="p">:</span> <span class="s2">&quot;viewfs://root/user/deepr/dev/example/data.tfrecord&quot;</span><span class="p">,</span>
     <span class="s2">&quot;num_examples&quot;</span><span class="p">:</span> <span class="mi">1000</span>
 <span class="p">}</span>
@@ -786,8 +790,8 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 320}
 </div>
 </div>
 </div>
-<div class="section" id="id1">
-<h3>Reader<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Reader<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
@@ -804,15 +808,15 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 320}
 </div>
 </div>
 </div>
-<div class="section" id="id2">
-<h3>Prepro<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Prepro<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">prepro_fn_config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.example.prepros.DefaultPrepro&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.examples.multiply.prepros.DefaultPrepro&quot;</span><span class="p">,</span>
     <span class="s2">&quot;batch_size&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
     <span class="s2">&quot;repeat_size&quot;</span><span class="p">:</span> <span class="mi">10</span>
 <span class="p">}</span>
@@ -827,7 +831,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 320}
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">pred_fn_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.example.layers.Multiply&quot;</span><span class="p">}</span>
+<span></span><span class="n">pred_fn_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.examples.multiply.layers.Multiply&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -839,7 +843,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 320}
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">loss_fn_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.example.layers.SquaredL2&quot;</span><span class="p">}</span>
+<span></span><span class="n">loss_fn_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.examples.multiply.layers.SquaredL2&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -919,7 +923,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 320}
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">yarn_launcher_config</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">YarnLauncherConfig</span><span class="p">(</span>
+<span></span><span class="n">yarn_launcher_config</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">YarnLauncherConfig</span><span class="p">(</span>
     <span class="n">path_pex_prefix</span><span class="o">=</span><span class="s2">&quot;viewfs://root/user/deepr/dev/example/envs&quot;</span>
 <span class="p">)</span>
 <span class="n">job_config</span> <span class="o">=</span> <span class="p">{</span>
@@ -982,7 +986,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 320}
 <p>A convenient way to compose configs (similar to what we did by defining different dictionaries before putting them together) is to use <a class="reference external" href="https://jsonnet.org/">jsonnet</a>.</p>
 <p>For example, we can define a file <code class="docutils literal notranslate"><span class="pre">build.jsonnet</span></code> like so</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.example.jobs.BuildDataset&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;deepr.examples.multiply.jobs.BuildDataset&quot;</span><span class="p">,</span>
     <span class="nt">&quot;path_dataset&quot;</span><span class="p">:</span> <span class="s2">&quot;viewfs://root/user/deepr/dev/example/data.tfrecord&quot;</span><span class="p">,</span>
     <span class="nt">&quot;num_examples&quot;</span><span class="p">:</span> <span class="mi">1000</span>
 <span class="p">}</span>

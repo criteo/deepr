@@ -1,0 +1,30 @@
+deepr.examples.multiply.prepros package
+=======================================
+
+Submodules
+----------
+
+deepr.examples.multiply.prepros.default module
+----------------------------------------------
+
+.. automodule:: deepr.examples.multiply.prepros.default
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.examples.multiply.prepros.inference module
+------------------------------------------------
+
+.. automodule:: deepr.examples.multiply.prepros.inference
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: deepr.examples.multiply.prepros
+   :members:
+   :undoc-members:
+   :show-inheritance:
