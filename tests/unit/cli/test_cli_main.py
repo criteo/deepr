@@ -13,7 +13,7 @@ def path_config_no_macro(tmpdir_factory):
     path_data = tmpdir_factory.mktemp("data")
     path = path_data.join("config.jsonnet")
     config = {
-        "type": "deepr.example.jobs.BuildDataset",
+        "type": "deepr.examples.multiply.jobs.Build",
         "path_dataset": f"{path_data}/data.tfrecord",
         "num_examples": 10,
     }
@@ -26,7 +26,7 @@ def path_config(tmpdir_factory):
     path_data = tmpdir_factory.mktemp("data")
     path = path_data.join("config.jsonnet")
     config = {
-        "type": "deepr.example.jobs.BuildDataset",
+        "type": "deepr.examples.multiply.jobs.Build",
         "path_dataset": f"{path_data}/data.tfrecord",
         "num_examples": "$params:num_examples",
     }

@@ -34,8 +34,6 @@ class Embedding(base.Layer):
         self.initializer = initializer
         self.reuse = reuse
         self.partition_strategy = partition_strategy
-        if self.initializer is None:
-            LOGGER.warning(f"No initializer given for {self.variable_name}, will use tf.zeros_initializer().")
 
     def forward(self, tensors, mode: str = None):
         """Forward method of the layer"""
@@ -44,7 +42,7 @@ class Embedding(base.Layer):
                 name=self.variable_name,
                 trainable=self.trainable,
                 shape=self.shape,
-                initializer=self.initializer if self.initializer is not None else tf.zeros_initializer(),
+                initializer=self.initializer,
                 partitioner=tf.fixed_size_partitioner(num_shards=self.num_shards, axis=0)
                 if self.num_shards is not None
                 else None,

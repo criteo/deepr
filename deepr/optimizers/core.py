@@ -42,6 +42,8 @@ class TensorflowOptimizer(base.Optimizer):
         grad_norms: List[str] = None,
         exclude_vars: List[str] = None,
         clip: float = None,
+        skip_vars: List[str] = None,
+        skip_steps: int = None,
         **kwargs,
     ):
         self.optimizer = optimizer
@@ -50,6 +52,8 @@ class TensorflowOptimizer(base.Optimizer):
         self.grad_norms = grad_norms
         self.exclude_vars = exclude_vars
         self.clip = clip
+        self.skip_vars = skip_vars
+        self.skip_steps = skip_steps
         self._kwargs = kwargs
         if not self.optimizer.lower() in self.OPTIMIZERS:
             raise ValueError(f"Optimizer {self.optimizer} not in {self.OPTIMIZERS}")
@@ -85,6 +89,22 @@ class TensorflowOptimizer(base.Optimizer):
             grads, _ = tf.clip_by_global_norm(grads, self.clip)
             grad_and_vars = zip(grads, variables)
 
-        # Apply gradients and return
+        # Train op on all variables
         train_op = optimizer.apply_gradients(grad_and_vars, global_step=tf.train.get_global_step())
+
+        # Train op that skip some variables for a few steps
+        if self.skip_vars and self.skip_steps:
+            non_skipped_grad_and_vars = []
+            for grad, var in grad_and_vars:
+                if any(name in var.name for name in self.skip_vars):
+                    LOGGER.info(f"Skip training of {var.name} for {self.skip_steps} steps")
+                    continue
+                non_skipped_grad_and_vars.append((grad, var))
+            non_skipped_train_op = optimizer.apply_gradients(
+                non_skipped_grad_and_vars, global_step=tf.train.get_global_step()
+            )
+            train_op = tf.cond(
+                tf.train.get_global_step() <= self.skip_steps, lambda: non_skipped_train_op, lambda: train_op,
+            )
+
         return {**grad_norms, "train_op": train_op}

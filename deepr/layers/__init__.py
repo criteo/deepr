@@ -11,6 +11,7 @@ from deepr.layers.core import (
     Conv1d,
     Dense,
     DotProduct,
+    ExpandDims,
     Identity,
     LogicalAnd,
     LogicalOr,
@@ -48,3 +49,4 @@ from deepr.layers.transformer import (
     SelfMultiheadAttention,
     AttentionMask,
 )
+from deepr.layers.triplet_precision import TripletPrecision

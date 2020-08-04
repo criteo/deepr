@@ -4,10 +4,10 @@
 import tensorflow as tf
 
 import deepr as dpr
-import deepr.example as example
+import deepr.examples.multiply as multiply
 
 
-def test_example_pipeline(tmpdir):
+def test_examples_multiply_pipeline(tmpdir):
     """Test Example Pipeline."""
     # Define paths
     path_model = str(tmpdir.join("model"))
@@ -16,7 +16,7 @@ def test_example_pipeline(tmpdir):
     dpr.io.Path(path_dataset).mkdir(exist_ok=True, parents=True)
 
     # Define jobs
-    build_job = dpr.example.jobs.BuildDataset(path_dataset=f"{path_dataset}/data.tfrecord", num_examples=1000)
+    build_job = multiply.jobs.Build(path_dataset=f"{path_dataset}/data.tfrecord", num_examples=1000)
     train_spec = dpr.jobs.TrainSpec(max_steps=1000)
     eval_spec = dpr.jobs.EvalSpec(
         throttle_secs=10, start_delay_secs=10, steps=None  # None means "use all the validation set"
@@ -70,12 +70,12 @@ def test_example_pipeline(tmpdir):
 
     trainer_job = dpr.jobs.Trainer(
         path_model=path_model,
-        pred_fn=example.layers.Multiply(inputs="x", outputs="y_pred"),
-        loss_fn=example.layers.SquaredL2(inputs=("y", "y_pred"), outputs="loss"),
+        pred_fn=multiply.layers.Multiply(inputs="x", outputs="y_pred"),
+        loss_fn=multiply.layers.SquaredL2(inputs=("y", "y_pred"), outputs="loss"),
         optimizer_fn=dpr.optimizers.TensorflowOptimizer(optimizer="Adam", learning_rate=0.1),
         train_input_fn=dpr.readers.TFRecordReader(path=f"{path_dataset}/data.tfrecord"),
         eval_input_fn=dpr.readers.TFRecordReader(path=f"{path_dataset}/data.tfrecord"),
-        prepro_fn=example.prepros.DefaultPrepro(batch_size=32, repeat_size=10),
+        prepro_fn=multiply.prepros.DefaultPrepro(batch_size=32, repeat_size=10),
         train_spec=train_spec,
         eval_spec=eval_spec,
         train_metrics=train_metrics,
@@ -96,18 +96,18 @@ def test_example_pipeline(tmpdir):
         fetch="y_pred",
         new_names={"x": "inputs/x"},
     )
-    predict_proto = example.jobs.PredictProto(
+    predict_proto = multiply.jobs.PredictProto(
         path_model=f"{path_model}/optimized_saved_model",
         graph_name="_model.pb",
         input_fn=dpr.readers.TFRecordReader(path=f"{path_dataset}/data.tfrecord"),
-        prepro_fn=example.prepros.InferencePrepro(batch_size=1, count=2, inputs="inputs/x"),
+        prepro_fn=multiply.prepros.InferencePrepro(batch_size=1, count=2, inputs="inputs/x"),
         feeds="inputs/x",
         fetches="y_pred",
     )
-    predict_saved_model = example.jobs.PredictSavedModel(
+    predict_saved_model = multiply.jobs.PredictSavedModel(
         path_saved_model=f"{path_model}/saved_model",
         input_fn=dpr.readers.TFRecordReader(path=f"{path_dataset}/data.tfrecord"),
-        prepro_fn=example.prepros.InferencePrepro(batch_size=1, count=2, inputs="x"),
+        prepro_fn=multiply.prepros.InferencePrepro(batch_size=1, count=2, inputs="x"),
         feeds="x",
         fetches="y_pred",
     )
@@ -120,7 +120,7 @@ def test_example_pipeline(tmpdir):
 
     # Test SavedModelPredictor (default)
     input_fn = dpr.readers.TFRecordReader(path=f"{path_dataset}/data.tfrecord")
-    prepro_fn = example.prepros.InferencePrepro(batch_size=1, count=2, inputs="x")
+    prepro_fn = multiply.prepros.InferencePrepro(batch_size=1, count=2, inputs="x")
     predictor = dpr.predictors.SavedModelPredictor(
         path=dpr.predictors.get_latest_saved_model(f"{path_model}/saved_model")
     )
@@ -132,7 +132,7 @@ def test_example_pipeline(tmpdir):
 
     # Test SavedModelPredictor (custom)
     input_fn = dpr.readers.TFRecordReader(path=f"{path_dataset}/data.tfrecord")
-    prepro_fn = example.prepros.InferencePrepro(batch_size=1, count=2, inputs="x")
+    prepro_fn = multiply.prepros.InferencePrepro(batch_size=1, count=2, inputs="x")
     predictor = dpr.predictors.SavedModelPredictor(
         path=dpr.predictors.get_latest_saved_model(f"{path_model}/saved_model"), feeds="x", fetches="y_pred"
     )
@@ -144,7 +144,7 @@ def test_example_pipeline(tmpdir):
 
     # Test ProtoPredictor
     input_fn = dpr.readers.TFRecordReader(path=f"{path_dataset}/data.tfrecord")
-    prepro_fn = example.prepros.InferencePrepro(batch_size=1, count=2, inputs="inputs/x")
+    prepro_fn = multiply.prepros.InferencePrepro(batch_size=1, count=2, inputs="inputs/x")
     predictor = dpr.predictors.ProtoPredictor(
         path=f"{path_model}/optimized_saved_model/_model.pb", feeds="inputs/x", fetches="y_pred"
     )

@@ -1,6 +1,6 @@
 {
     "paths": {
-        "type": "deepr.example.macros.Paths",
+        "type": "deepr.examples.multiply.macros.Paths",
         "path_model": null,
         "path_dataset": null
     },

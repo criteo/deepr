@@ -6,7 +6,7 @@ import logging
 import tensorflow as tf
 
 import deepr as dpr
-from deepr import example
+import deepr.examples.multiply as multiply
 
 
 logging.basicConfig(level=logging.INFO)
@@ -20,7 +20,7 @@ def test_jobs_optimize_saved_model(tmpdir):
     dpr.io.Path(path_dataset).mkdir(exist_ok=True, parents=True)
 
     # Build Dataset
-    build_job = dpr.example.jobs.BuildDataset(path_dataset=f"{path_dataset}/data.tfrecord", num_examples=1000)
+    build_job = multiply.jobs.Build(path_dataset=f"{path_dataset}/data.tfrecord", num_examples=1000)
     build_job.run()
 
     def _gen():
@@ -78,7 +78,7 @@ def test_jobs_optimize_saved_model(tmpdir):
         _infer_gen, output_types={"inputs/x": tf.int32}, output_shapes={"inputs/x": ()}
     )
 
-    predict_proto = example.jobs.PredictProto(
+    predict_proto = multiply.jobs.PredictProto(
         path_model=f"{path_model}/optimized_saved_model",
         graph_name="_model.pb",
         input_fn=infer_input_fn,

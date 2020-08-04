@@ -3,7 +3,7 @@
 import tensorflow as tf
 
 from deepr.layers import base
-from deepr.layers.reduce import WeightedAverage, Average
+from deepr.layers.reduce import Average
 from deepr.layers.core import Softmax
 from deepr.utils.broadcasting import make_same_shape
 
@@ -86,7 +86,9 @@ class MaskedBPRMax(base.Layer):
         )
         losses_with_regularization = losses + bpr_regularization
         # One loss per event, average of scores : (batch, num_events)
-        event_scores = WeightedAverage()((losses_with_regularization, mask))
+        # TODO: fix this line, it seems it's doing averaging twice
+        # event_scores = WeightedAverage()((losses_with_regularization, mask))
+        event_scores = losses_with_regularization
         # Each event contributes according to its weight
         event_weights = weights * tf.to_float(tf.reduce_any(tf.cast(mask, tf.bool), axis=-1))
         event_losses = event_scores * event_weights

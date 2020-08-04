@@ -82,19 +82,19 @@ class HDFSFile:
         # Expose self._file methods and attributes (mimic inheritance)
         return getattr(self._file, name)
 
-    def write(self, data):
+    def write(self, data, *args, **kwargs):
         if self.mode == "w":
-            self._file.write(data.encode(encoding=self.encoding))
+            self._file.write(data.encode(encoding=self.encoding), *args, **kwargs)
         elif self.mode == "wb":
-            self._file.write(data)
+            self._file.write(data, *args, **kwargs)
         else:
             raise ValueError(f"Mode {self.mode} unkown (must be 'w' or 'wb').")
 
-    def read(self):
+    def read(self, *args, **kwargs):
         if self.mode == "r":
-            return self._file.read().decode(encoding=self.encoding)
+            return self._file.read(*args, **kwargs).decode(encoding=self.encoding)
         elif self.mode == "rb":
-            return self._file.read()
+            return self._file.read(*args, **kwargs)
         else:
             raise ValueError(f"Mode {self.mode} unkown (must be 'r' or 'rb')")
 

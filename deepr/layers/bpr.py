@@ -56,13 +56,13 @@ class MaskedBPR(base.Layer):
         tf.Tensor
             BPR loss
         """
+        # Retrieve positives and negatives logits
         positives, negatives, mask, weights = tensors
         positives, negatives = make_same_shape([positives, negatives], broadcast=False)
-        # One score per negative : (batch, num_events, num_negatives)
-        scores = -tf.log_sigmoid(positives - negatives)
-        # One loss per event, average of scores : (batch, num_events)
-        event_scores = WeightedAverage()((scores, tf.to_float(mask)))
+
+        # One score per event
+        event_scores = WeightedAverage()((-tf.log_sigmoid(positives - negatives), tf.to_float(mask)))
+
         # Each event contributes according to its weight
         event_weights = weights * tf.to_float(tf.reduce_any(mask, axis=-1))
-        event_losses = event_scores * event_weights
-        return tf.div_no_nan(tf.reduce_sum(event_losses), tf.reduce_sum(event_weights))
+        return tf.div_no_nan(tf.reduce_sum(event_scores * event_weights), tf.reduce_sum(event_weights))

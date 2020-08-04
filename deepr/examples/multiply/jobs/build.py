@@ -13,7 +13,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 @dataclass
-class BuildDataset(dpr.jobs.Job):
+class Build(dpr.jobs.Job):
     """Build a dummy dataset of random (x, 2*x) as a tfrecord file"""
 
     path_dataset: str
