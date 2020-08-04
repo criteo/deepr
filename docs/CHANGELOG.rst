@@ -23,6 +23,28 @@ Fixed
 Security
 ~~~~~~~~
 
+[2.7.0] - 2020-08-04
+--------------------
+
+Added
+~~~~~
+- Add encoding support to Path / HDFSFile
+- Movielens example
+- TripletPrecision layer
+
+Changed
+~~~~~~~
+- Changed default initializer for embeddings in the embeddings layer
+
+Deprecated
+~~~~~~~~~~
+Removed
+~~~~~~~
+Fixed
+~~~~~
+Security
+~~~~~~~~
+
 [2.6.0] - 2020-07-02
 --------------------
 
