@@ -96,6 +96,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">DeepR: Build and Train Deep Learning Pipelines for Production</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#why-a-deep-learning-library-based-on-tf1-x">Why a Deep Learning Library based on TF1.x</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#use-deepr">Use DeepR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#movielens-example">MovieLens Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-pip">Using Pip</a></li>
@@ -221,8 +222,20 @@
 <div class="section" id="use-deepr">
 <h2>Use DeepR<a class="headerlink" href="#use-deepr" title="Permalink to this headline">¶</a></h2>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">DeepR</span></code> as a simple python library, reusing only a subset of the concepts (the config system is generic for example) or build your own extension as a standalone python package that depends on <code class="docutils literal notranslate"><span class="pre">deepr</span></code>.</p>
-<p>Have a look at the submodule <a class="reference external" href="../deepr/example">example</a> of <code class="docutils literal notranslate"><span class="pre">deepr</span></code> that illustrates what a package built on top of deepr would look like. It defines custom jobs, layers, preprocessors, macros as well as <a class="reference external" href="../deepr/example/configs">configs</a>. Once your custom components are packaged in a library, it is easy to run configs with</p>
+<p>Have a look at the submodule <a class="reference external" href="../deepr/examples">examples</a> of <code class="docutils literal notranslate"><span class="pre">deepr</span></code> that illustrates what packages built on top of deepr would look like. It defines custom jobs, layers, preprocessors, macros as well as <a class="reference external" href="../deepr/examples/multiply/configs">configs</a>. Once your custom components are packaged in a library, it is easy to run configs with</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">deepr</span> <span class="n">run</span> <span class="n">config</span><span class="o">.</span><span class="n">json</span> <span class="n">macros</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="movielens-example">
+<h2>MovieLens Example<a class="headerlink" href="#movielens-example" title="Permalink to this headline">¶</a></h2>
+<p>You can try using DeepR on the MovieLens dataset, consisting of movie ratings aggregated by users. The submodule <a class="reference external" href="../deepr/examples/movielens">movielens</a> implements an AverageModel, a Transformer Model and a BPR loss as well as jobs to build and evaluate on this dataset.</p>
+<p>You can jump to the notebook on <a class="reference external" href="https://colab.research.google.com/github/criteo/deepr/blob/master/docs/movielens/movielens.ipynb">Colab</a> or use the command line.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">deepr</span><span class="p">[</span><span class="n">cpu</span><span class="p">]</span> <span class="n">faiss_cpu</span>
+<span class="n">cd</span> <span class="n">deepr</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">movielens</span><span class="o">/</span><span class="n">configs</span>
+<span class="n">wget</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">files</span><span class="o">.</span><span class="n">grouplens</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">datasets</span><span class="o">/</span><span class="n">movielens</span><span class="o">/</span><span class="n">ml</span><span class="o">-</span><span class="mi">20</span><span class="n">m</span><span class="o">.</span><span class="n">zip</span>
+<span class="n">unzip</span> <span class="n">ml</span><span class="o">-</span><span class="mi">20</span><span class="n">m</span><span class="o">.</span><span class="n">zip</span>
+<span class="n">deepr</span> <span class="n">run</span> <span class="n">config</span><span class="o">.</span><span class="n">json</span> <span class="n">macros</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
 </div>
 </div>
