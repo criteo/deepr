@@ -15,6 +15,12 @@ Preprocessing, layers, metrics and learning jobs
 
 .. toctree::
    :maxdepth: 2
+   :caption: Examples
+
+   movielens/movielens
+
+.. toctree::
+   :maxdepth: 2
    :caption: Developper documentation
 
    README
