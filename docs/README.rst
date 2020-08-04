@@ -30,11 +30,26 @@ Use DeepR
 
 You can use ``DeepR`` as a simple python library, reusing only a subset of the concepts (the config system is generic for example) or build your own extension as a standalone python package that depends on ``deepr``.
 
-Have a look at the submodule `example <../deepr/example>`_ of ``deepr`` that illustrates what a package built on top of deepr would look like. It defines custom jobs, layers, preprocessors, macros as well as `configs <../deepr/example/configs>`_. Once your custom components are packaged in a library, it is easy to run configs with
+Have a look at the submodule `examples <../deepr/examples>`_ of ``deepr`` that illustrates what packages built on top of deepr would look like. It defines custom jobs, layers, preprocessors, macros as well as `configs <../deepr/examples/multiply/configs>`_. Once your custom components are packaged in a library, it is easy to run configs with
 
 
 .. code-block::
 
+    deepr run config.json macros.json
+
+MovieLens Example
+-----------------
+
+You can try using DeepR on the MovieLens dataset, consisting of movie ratings aggregated by users. The submodule `movielens <../deepr/examples/movielens>`_ implements an AverageModel, a Transformer Model and a BPR loss as well as jobs to build and evaluate on this dataset.
+
+You can jump to the notebook on `Colab <https://colab.research.google.com/github/criteo/deepr/blob/master/docs/movielens/movielens.ipynb>`_ or use the command line.
+
+.. code-block::
+
+    pip install deepr[cpu] faiss_cpu
+    cd deepr/examples/movielens/configs
+    wget http://files.grouplens.org/datasets/movielens/ml-20m.zip
+    unzip ml-20m.zip
     deepr run config.json macros.json
 
 
