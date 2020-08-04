@@ -15,6 +15,7 @@ It can be seen as a collection of generic tools and abstractions to be extended 
 
 Submitting jobs and defining flexible pipelines is made possible thanks to a config system based off simple dictionaries and import strings. It is similar to `Thinc config system <https://thinc.ai/docs>`_ or `gin config <https://github.com/google/gin-config>`_ in a lot of ways.
 
+To start with deepr go to `quickstart <https://colab.research.google.com/github/criteo/deepr/blob/master/docs/getting_started/quickstart.ipynb>`_
 
 Why a Deep Learning Library based on TF1.x
 ------------------------------------------
