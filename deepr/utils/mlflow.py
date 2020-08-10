@@ -52,11 +52,10 @@ start_run = handle_exceptions(mlflow.start_run)
 @handle_exceptions
 def set_or_create_experiment(name: str, artifact_location: str = None):
     """Set Experiment with specific artifact_location."""
-    # Set or Create Experiment
+    # Set (optionally create) Experiment
     if get_experiment_by_name(name) is None:
         create_experiment(name=name, artifact_location=artifact_location)
-    else:
-        set_experiment(name)
+    set_experiment(name)
 
     # Check Experiment
     experiment = get_experiment_by_name(name)

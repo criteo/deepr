@@ -8,7 +8,7 @@ import logging
 import tensorflow as tf
 from tf_yarn import Experiment
 
-from deepr.jobs.base import Job
+from deepr.jobs.trainer_base import TrainerBase
 from deepr.hooks.base import EstimatorHookFactory, TensorHookFactory
 
 
@@ -59,7 +59,7 @@ class RunConfig(dict):
 
 
 @dataclass
-class Trainer(Job):
+class Trainer(TrainerBase):
     """Train and evaluate a tf.Estimator on the current machine.
 
     Attributes
@@ -227,14 +227,6 @@ class Trainer(Job):
             if getattr(self, f.name) is None:
                 default = f.default_factory() if callable(f.default_factory) else f.default
                 setattr(self, f.name, default)
-
-    def run(self):
-        """Train, evaluate and export Estimator"""
-        experiment = self.create_experiment()
-        tf.estimator.train_and_evaluate(experiment.estimator, experiment.train_spec, experiment.eval_spec)
-        for exporter in self.exporters:
-            exporter(experiment.estimator)
-        self.run_final_evaluation()
 
     def create_experiment(self):
         """Create an Experiment object packaging Estimator and Specs.
