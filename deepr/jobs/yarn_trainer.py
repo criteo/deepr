@@ -56,7 +56,7 @@ class YarnTrainerConfig(YarnConfig):
 
 @dataclass
 class YarnTrainer(base.Job):
-    """Run a :class:`~deepr.jobs.Trainer` job on yarn using distributed settings."""
+    """Run a :class:`~deepr.jobs.TrainerBase` job on yarn."""
 
     trainer: Dict
     config: YarnTrainerConfig
