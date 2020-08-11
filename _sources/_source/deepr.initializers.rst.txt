@@ -12,7 +12,6 @@ deepr.initializers.checkpoint\_initializer module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 

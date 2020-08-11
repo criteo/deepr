@@ -1,4 +1,4 @@
-deepr.io.read\_json
+﻿deepr.io.read\_json
 ===================
 
 .. currentmodule:: deepr.io

@@ -1,4 +1,4 @@
-deepr.layers.Equal
+﻿deepr.layers.Equal
 ==================
 
 .. currentmodule:: deepr.layers

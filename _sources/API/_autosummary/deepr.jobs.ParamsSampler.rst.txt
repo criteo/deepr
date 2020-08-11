@@ -1,4 +1,4 @@
-deepr.jobs.ParamsSampler
+﻿deepr.jobs.ParamsSampler
 ========================
 
 .. currentmodule:: deepr.jobs

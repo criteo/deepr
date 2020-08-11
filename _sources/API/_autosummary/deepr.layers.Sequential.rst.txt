@@ -1,4 +1,4 @@
-deepr.layers.Sequential
+﻿deepr.layers.Sequential
 =======================
 
 .. currentmodule:: deepr.layers

@@ -1,4 +1,4 @@
-deepr.jobs.Sampler
+﻿deepr.jobs.Sampler
 ==================
 
 .. currentmodule:: deepr.jobs

@@ -1,4 +1,4 @@
-deepr.layers.Dense
+﻿deepr.layers.Dense
 ==================
 
 .. currentmodule:: deepr.layers

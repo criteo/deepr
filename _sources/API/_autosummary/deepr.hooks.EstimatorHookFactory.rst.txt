@@ -1,4 +1,4 @@
-deepr.hooks.EstimatorHookFactory
+﻿deepr.hooks.EstimatorHookFactory
 ================================
 
 .. currentmodule:: deepr.hooks

@@ -1,4 +1,4 @@
-deepr.prepros.FromExample
+﻿deepr.prepros.FromExample
 =========================
 
 .. currentmodule:: deepr.prepros

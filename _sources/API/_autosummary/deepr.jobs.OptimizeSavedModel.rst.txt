@@ -1,4 +1,4 @@
-deepr.jobs.OptimizeSavedModel
+﻿deepr.jobs.OptimizeSavedModel
 =============================
 
 .. currentmodule:: deepr.jobs

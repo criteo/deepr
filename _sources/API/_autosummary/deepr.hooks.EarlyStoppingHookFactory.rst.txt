@@ -1,4 +1,4 @@
-deepr.hooks.EarlyStoppingHookFactory
+﻿deepr.hooks.EarlyStoppingHookFactory
 ====================================
 
 .. currentmodule:: deepr.hooks

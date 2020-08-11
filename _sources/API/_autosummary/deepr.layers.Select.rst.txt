@@ -1,4 +1,4 @@
-deepr.layers.Select
+﻿deepr.layers.Select
 ===================
 
 .. currentmodule:: deepr.layers

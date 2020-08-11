@@ -1,4 +1,4 @@
-deepr.hooks.ResidentMemory
+﻿deepr.hooks.ResidentMemory
 ==========================
 
 .. currentmodule:: deepr.hooks

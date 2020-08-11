@@ -1,4 +1,4 @@
-deepr.metrics.Mean
+﻿deepr.metrics.Mean
 ==================
 
 .. currentmodule:: deepr.metrics

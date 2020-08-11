@@ -1,4 +1,4 @@
-deepr.layers.StringJoin
+﻿deepr.layers.StringJoin
 =======================
 
 .. currentmodule:: deepr.layers

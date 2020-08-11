@@ -1,4 +1,4 @@
-deepr.config.ismacro
+﻿deepr.config.ismacro
 ====================
 
 .. currentmodule:: deepr.config

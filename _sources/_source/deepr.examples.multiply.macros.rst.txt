@@ -12,7 +12,6 @@ deepr.examples.multiply.macros.paths module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 

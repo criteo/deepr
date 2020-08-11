@@ -1,4 +1,4 @@
-deepr.vocab.write
+﻿deepr.vocab.write
 =================
 
 .. currentmodule:: deepr.vocab

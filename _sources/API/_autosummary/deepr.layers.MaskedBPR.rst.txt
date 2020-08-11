@@ -1,4 +1,4 @@
-deepr.layers.MaskedBPR
+﻿deepr.layers.MaskedBPR
 ======================
 
 .. currentmodule:: deepr.layers

@@ -1,4 +1,4 @@
-deepr.jobs.Job
+﻿deepr.jobs.Job
 ==============
 
 .. currentmodule:: deepr.jobs

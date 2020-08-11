@@ -1,4 +1,4 @@
-deepr.config.isreference
+﻿deepr.config.isreference
 ========================
 
 .. currentmodule:: deepr.config

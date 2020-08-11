@@ -1,4 +1,4 @@
-deepr.utils.get\_fetchable\_tensors
+﻿deepr.utils.get\_fetchable\_tensors
 ===================================
 
 .. currentmodule:: deepr.utils

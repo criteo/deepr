@@ -1,4 +1,4 @@
-deepr.utils.table\_from\_mapping
+﻿deepr.utils.table\_from\_mapping
 ================================
 
 .. currentmodule:: deepr.utils

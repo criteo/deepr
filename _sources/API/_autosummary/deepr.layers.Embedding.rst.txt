@@ -1,4 +1,4 @@
-deepr.layers.Embedding
+﻿deepr.layers.Embedding
 ======================
 
 .. currentmodule:: deepr.layers

@@ -28,7 +28,6 @@ deepr.macros.mlflow\_init module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 

@@ -1,4 +1,4 @@
-deepr.config.assert\_no\_macros
+﻿deepr.config.assert\_no\_macros
 ===============================
 
 .. currentmodule:: deepr.config

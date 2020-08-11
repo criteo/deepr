@@ -1,4 +1,4 @@
-deepr.layers.Lookup
+﻿deepr.layers.Lookup
 ===================
 
 .. currentmodule:: deepr.layers

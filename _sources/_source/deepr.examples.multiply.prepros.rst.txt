@@ -20,7 +20,6 @@ deepr.examples.multiply.prepros.inference module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 

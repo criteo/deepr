@@ -1,4 +1,4 @@
-deepr.layers.BooleanMask
+﻿deepr.layers.BooleanMask
 ========================
 
 .. currentmodule:: deepr.layers

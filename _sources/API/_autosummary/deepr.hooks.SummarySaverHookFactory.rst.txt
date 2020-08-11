@@ -1,4 +1,4 @@
-deepr.hooks.SummarySaverHookFactory
+﻿deepr.hooks.SummarySaverHookFactory
 ===================================
 
 .. currentmodule:: deepr.hooks

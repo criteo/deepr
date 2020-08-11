@@ -1,4 +1,4 @@
-deepr.readers.TFRecordReader
+﻿deepr.readers.TFRecordReader
 ============================
 
 .. currentmodule:: deepr.readers

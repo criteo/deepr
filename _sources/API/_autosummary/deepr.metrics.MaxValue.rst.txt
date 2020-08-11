@@ -1,4 +1,4 @@
-deepr.metrics.MaxValue
+﻿deepr.metrics.MaxValue
 ======================
 
 .. currentmodule:: deepr.metrics

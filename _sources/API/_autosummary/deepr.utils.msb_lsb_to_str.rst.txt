@@ -1,4 +1,4 @@
-deepr.utils.msb\_lsb\_to\_str
+﻿deepr.utils.msb\_lsb\_to\_str
 =============================
 
 .. currentmodule:: deepr.utils

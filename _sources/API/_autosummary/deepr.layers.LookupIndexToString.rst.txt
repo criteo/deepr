@@ -1,4 +1,4 @@
-deepr.layers.LookupIndexToString
+﻿deepr.layers.LookupIndexToString
 ================================
 
 .. currentmodule:: deepr.layers

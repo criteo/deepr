@@ -1,4 +1,4 @@
-deepr.layers.DotProduct
+﻿deepr.layers.DotProduct
 =======================
 
 .. currentmodule:: deepr.layers

@@ -1,4 +1,4 @@
-deepr.vocab.read
+﻿deepr.vocab.read
 ================
 
 .. currentmodule:: deepr.vocab

@@ -1,4 +1,4 @@
-deepr.metrics.Metric
+﻿deepr.metrics.Metric
 ====================
 
 .. currentmodule:: deepr.metrics

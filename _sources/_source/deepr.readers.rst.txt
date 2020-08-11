@@ -28,7 +28,6 @@ deepr.readers.record module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 

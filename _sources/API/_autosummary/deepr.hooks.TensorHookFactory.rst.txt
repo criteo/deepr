@@ -1,4 +1,4 @@
-deepr.hooks.TensorHookFactory
+﻿deepr.hooks.TensorHookFactory
 =============================
 
 .. currentmodule:: deepr.hooks

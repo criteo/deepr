@@ -1,4 +1,4 @@
-deepr.hooks.MaxResidentMemory
+﻿deepr.hooks.MaxResidentMemory
 =============================
 
 .. currentmodule:: deepr.hooks

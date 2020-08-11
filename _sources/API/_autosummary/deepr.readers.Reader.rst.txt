@@ -1,4 +1,4 @@
-deepr.readers.Reader
+﻿deepr.readers.Reader
 ====================
 
 .. currentmodule:: deepr.readers

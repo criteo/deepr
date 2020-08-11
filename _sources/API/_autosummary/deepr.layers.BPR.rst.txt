@@ -1,4 +1,4 @@
-deepr.layers.BPR
+﻿deepr.layers.BPR
 ================
 
 .. currentmodule:: deepr.layers

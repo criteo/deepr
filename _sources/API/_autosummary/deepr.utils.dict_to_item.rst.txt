@@ -1,4 +1,4 @@
-deepr.utils.dict\_to\_item
+﻿deepr.utils.dict\_to\_item
 ==========================
 
 .. currentmodule:: deepr.utils

@@ -20,7 +20,6 @@ deepr.optimizers.core module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 

@@ -1,4 +1,4 @@
-deepr.layers.Average
+﻿deepr.layers.Average
 ====================
 
 .. currentmodule:: deepr.layers

@@ -1,4 +1,4 @@
-deepr.layers.SliceLast
+﻿deepr.layers.SliceLast
 ======================
 
 .. currentmodule:: deepr.layers

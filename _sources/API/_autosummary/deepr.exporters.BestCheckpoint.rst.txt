@@ -1,4 +1,4 @@
-deepr.exporters.BestCheckpoint
+﻿deepr.exporters.BestCheckpoint
 ==============================
 
 .. currentmodule:: deepr.exporters

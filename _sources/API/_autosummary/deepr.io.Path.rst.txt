@@ -1,4 +1,4 @@
-deepr.io.Path
+﻿deepr.io.Path
 =============
 
 .. currentmodule:: deepr.io

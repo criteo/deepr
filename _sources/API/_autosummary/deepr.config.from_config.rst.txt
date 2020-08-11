@@ -1,4 +1,4 @@
-deepr.config.from\_config
+﻿deepr.config.from\_config
 =========================
 
 .. currentmodule:: deepr.config

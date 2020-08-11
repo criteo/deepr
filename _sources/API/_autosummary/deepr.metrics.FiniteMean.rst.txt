@@ -1,4 +1,4 @@
-deepr.metrics.FiniteMean
+﻿deepr.metrics.FiniteMean
 ========================
 
 .. currentmodule:: deepr.metrics

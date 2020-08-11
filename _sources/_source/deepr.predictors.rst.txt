@@ -28,7 +28,6 @@ deepr.predictors.saved\_model module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 

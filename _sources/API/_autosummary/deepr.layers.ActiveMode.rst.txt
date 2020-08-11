@@ -1,4 +1,4 @@
-deepr.layers.ActiveMode
+﻿deepr.layers.ActiveMode
 =======================
 
 .. currentmodule:: deepr.layers

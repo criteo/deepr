@@ -1,4 +1,4 @@
-deepr.optimizers.Optimizer
+﻿deepr.optimizers.Optimizer
 ==========================
 
 .. currentmodule:: deepr.optimizers

@@ -1,4 +1,4 @@
-deepr.jobs.Trainer
+﻿deepr.jobs.Trainer
 ==================
 
 .. currentmodule:: deepr.jobs

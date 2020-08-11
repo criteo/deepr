@@ -1,4 +1,4 @@
-deepr.layers.ToDense
+﻿deepr.layers.ToDense
 ====================
 
 .. currentmodule:: deepr.layers

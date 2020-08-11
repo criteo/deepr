@@ -1,4 +1,4 @@
-deepr.prepros.Filter
+﻿deepr.prepros.Filter
 ====================
 
 .. currentmodule:: deepr.prepros

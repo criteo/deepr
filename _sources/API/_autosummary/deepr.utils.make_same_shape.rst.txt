@@ -1,4 +1,4 @@
-deepr.utils.make\_same\_shape
+﻿deepr.utils.make\_same\_shape
 =============================
 
 .. currentmodule:: deepr.utils

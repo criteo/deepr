@@ -1,4 +1,4 @@
-deepr.layers.ClickRank
+﻿deepr.layers.ClickRank
 ======================
 
 .. currentmodule:: deepr.layers

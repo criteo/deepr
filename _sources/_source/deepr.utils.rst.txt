@@ -100,7 +100,6 @@ deepr.utils.uuid module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 

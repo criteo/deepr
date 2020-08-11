@@ -1,4 +1,4 @@
-deepr.layers.Sum
+﻿deepr.layers.Sum
 ================
 
 .. currentmodule:: deepr.layers

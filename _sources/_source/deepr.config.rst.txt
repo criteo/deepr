@@ -36,7 +36,6 @@ deepr.config.references module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 

@@ -60,7 +60,6 @@ deepr.hooks.summary module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 

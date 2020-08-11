@@ -1,4 +1,4 @@
-deepr.hooks.StepsPerSecHook
+﻿deepr.hooks.StepsPerSecHook
 ===========================
 
 .. currentmodule:: deepr.hooks

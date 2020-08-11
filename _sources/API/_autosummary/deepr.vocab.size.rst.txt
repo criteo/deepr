@@ -1,4 +1,4 @@
-deepr.vocab.size
+﻿deepr.vocab.size
 ================
 
 .. currentmodule:: deepr.vocab

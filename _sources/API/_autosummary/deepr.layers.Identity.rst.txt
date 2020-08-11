@@ -1,4 +1,4 @@
-deepr.layers.Identity
+﻿deepr.layers.Identity
 =====================
 
 .. currentmodule:: deepr.layers

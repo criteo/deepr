@@ -1,4 +1,4 @@
-deepr.jobs.GridSampler
+﻿deepr.jobs.GridSampler
 ======================
 
 .. currentmodule:: deepr.jobs

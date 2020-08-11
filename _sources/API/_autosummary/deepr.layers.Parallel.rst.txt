@@ -1,4 +1,4 @@
-deepr.layers.Parallel
+﻿deepr.layers.Parallel
 =====================
 
 .. currentmodule:: deepr.layers

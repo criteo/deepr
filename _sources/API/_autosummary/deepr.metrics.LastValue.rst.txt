@@ -1,4 +1,4 @@
-deepr.metrics.LastValue
+﻿deepr.metrics.LastValue
 =======================
 
 .. currentmodule:: deepr.metrics

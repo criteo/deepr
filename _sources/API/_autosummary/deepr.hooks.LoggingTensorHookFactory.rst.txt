@@ -1,4 +1,4 @@
-deepr.hooks.LoggingTensorHookFactory
+﻿deepr.hooks.LoggingTensorHookFactory
 ====================================
 
 .. currentmodule:: deepr.hooks

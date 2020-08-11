@@ -1,4 +1,4 @@
-deepr.metrics.DecayMean
+﻿deepr.metrics.DecayMean
 =======================
 
 .. currentmodule:: deepr.metrics

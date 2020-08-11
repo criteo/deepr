@@ -1,4 +1,4 @@
-deepr.prepros.Shuffle
+﻿deepr.prepros.Shuffle
 =====================
 
 .. currentmodule:: deepr.prepros

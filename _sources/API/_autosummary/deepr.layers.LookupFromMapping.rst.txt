@@ -1,4 +1,4 @@
-deepr.layers.LookupFromMapping
+﻿deepr.layers.LookupFromMapping
 ==============================
 
 .. currentmodule:: deepr.layers

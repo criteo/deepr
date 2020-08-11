@@ -164,7 +164,6 @@ deepr.layers.triplet\_precision module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 

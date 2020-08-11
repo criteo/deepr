@@ -1,4 +1,4 @@
-deepr.writers.Writer
+﻿deepr.writers.Writer
 ====================
 
 .. currentmodule:: deepr.writers

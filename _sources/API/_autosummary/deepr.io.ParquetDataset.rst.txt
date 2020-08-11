@@ -1,4 +1,4 @@
-deepr.io.ParquetDataset
+﻿deepr.io.ParquetDataset
 =======================
 
 .. currentmodule:: deepr.io

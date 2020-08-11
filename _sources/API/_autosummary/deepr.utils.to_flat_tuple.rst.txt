@@ -1,4 +1,4 @@
-deepr.utils.to\_flat\_tuple
+﻿deepr.utils.to\_flat\_tuple
 ===========================
 
 .. currentmodule:: deepr.utils

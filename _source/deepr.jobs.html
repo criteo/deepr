@@ -286,7 +286,7 @@
 <p>Pipeline, executes list of jobs in order</p>
 <dl class="py attribute">
 <dt id="deepr.jobs.combinators.Pipeline.jobs">
-<code class="sig-name descname">jobs</code><em class="property">: List<span class="p">[</span>base.Job<span class="p">]</span></em><a class="headerlink" href="#deepr.jobs.combinators.Pipeline.jobs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">jobs</code><em class="property">: List<span class="p">[</span><a class="reference internal" href="#deepr.jobs.base.Job" title="deepr.jobs.base.Job">deepr.jobs.base.Job</a><span class="p">]</span></em><a class="headerlink" href="#deepr.jobs.combinators.Pipeline.jobs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -870,7 +870,7 @@ and thus should be limited to avoid overhead.</p>
 
 <dl class="py attribute">
 <dt id="deepr.jobs.params_tuner.ParamsTuner.sampler">
-<code class="sig-name descname">sampler</code><em class="property">: Sampler</em><a class="headerlink" href="#deepr.jobs.params_tuner.ParamsTuner.sampler" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">sampler</code><em class="property">: <a class="reference internal" href="#deepr.jobs.params_tuner.Sampler" title="deepr.jobs.params_tuner.Sampler">deepr.jobs.params_tuner.Sampler</a></em><a class="headerlink" href="#deepr.jobs.params_tuner.ParamsTuner.sampler" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -903,12 +903,12 @@ and thus should be limited to avoid overhead.</p>
 
 <dl class="py attribute">
 <dt id="deepr.jobs.save_dataset.SaveDataset.fields">
-<code class="sig-name descname">fields</code><em class="property">: List<span class="p">[</span>Field<span class="p">]</span></em><a class="headerlink" href="#deepr.jobs.save_dataset.SaveDataset.fields" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fields</code><em class="property">: List<span class="p">[</span><a class="reference internal" href="deepr.utils.html#deepr.utils.field.Field" title="deepr.utils.field.Field">deepr.utils.field.Field</a><span class="p">]</span></em><a class="headerlink" href="#deepr.jobs.save_dataset.SaveDataset.fields" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="deepr.jobs.save_dataset.SaveDataset.input_fn">
-<code class="sig-name descname">input_fn</code><em class="property">: Callable<span class="p">[</span><span class="p">]</span><span class="p">, </span>tf.data.Dataset<span class="p">]</span></em><a class="headerlink" href="#deepr.jobs.save_dataset.SaveDataset.input_fn" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">input_fn</code><em class="property">: Callable<span class="p">[</span>tensorflow.python.data.ops.dataset_ops.DatasetV1<span class="p">]</span></em><a class="headerlink" href="#deepr.jobs.save_dataset.SaveDataset.input_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1350,7 +1350,7 @@ eval_spec : tf.estimator.EvalSpec</p>
 
 <dl class="py attribute">
 <dt id="id15">
-<code class="sig-name descname">eval_input_fn</code><em class="property">: Callable<span class="p">[</span><span class="p">]</span><span class="p">, </span>tf.data.Dataset<span class="p">]</span></em><a class="headerlink" href="#id15" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">eval_input_fn</code><em class="property">: Callable<span class="p">[</span>tensorflow.python.data.ops.dataset_ops.DatasetV1<span class="p">]</span></em><a class="headerlink" href="#id15" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1390,12 +1390,12 @@ eval_spec : tf.estimator.EvalSpec</p>
 
 <dl class="py attribute">
 <dt id="id20">
-<code class="sig-name descname">loss_fn</code><em class="property">: Callable<span class="p">[</span><span class="p">[</span>Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span>tf.Tensor<span class="p">]</span><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">]</span><span class="p">, </span>Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span>tf.Tensor<span class="p">]</span><span class="p">]</span></em><a class="headerlink" href="#id20" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">loss_fn</code><em class="property">: Callable<span class="p">[</span><span class="p">[</span>Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span>tensorflow.python.framework.ops.Tensor<span class="p">]</span><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">]</span><span class="p">, </span>Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span>tensorflow.python.framework.ops.Tensor<span class="p">]</span><span class="p">]</span></em><a class="headerlink" href="#id20" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="id21">
-<code class="sig-name descname">optimizer_fn</code><em class="property">: Callable<span class="p">[</span><span class="p">[</span>Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span>tf.Tensor<span class="p">]</span><span class="p">]</span><span class="p">, </span>Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span>tf.Tensor<span class="p">]</span><span class="p">]</span></em><a class="headerlink" href="#id21" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">optimizer_fn</code><em class="property">: Callable<span class="p">[</span>Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span>tensorflow.python.framework.ops.Tensor<span class="p">]</span><span class="p">, </span>Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span>tensorflow.python.framework.ops.Tensor<span class="p">]</span><span class="p">]</span></em><a class="headerlink" href="#id21" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1405,7 +1405,7 @@ eval_spec : tf.estimator.EvalSpec</p>
 
 <dl class="py attribute">
 <dt id="id23">
-<code class="sig-name descname">pred_fn</code><em class="property">: Callable<span class="p">[</span><span class="p">[</span>Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span>tf.Tensor<span class="p">]</span><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">]</span><span class="p">, </span>Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span>tf.Tensor<span class="p">]</span><span class="p">]</span></em><a class="headerlink" href="#id23" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">pred_fn</code><em class="property">: Callable<span class="p">[</span><span class="p">[</span>Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span>tensorflow.python.framework.ops.Tensor<span class="p">]</span><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">]</span><span class="p">, </span>Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span>tensorflow.python.framework.ops.Tensor<span class="p">]</span><span class="p">]</span></em><a class="headerlink" href="#id23" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1442,7 +1442,7 @@ eval_spec : tf.estimator.EvalSpec</p>
 
 <dl class="py attribute">
 <dt id="id27">
-<code class="sig-name descname">train_input_fn</code><em class="property">: Callable<span class="p">[</span><span class="p">]</span><span class="p">, </span>tf.data.Dataset<span class="p">]</span></em><a class="headerlink" href="#id27" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">train_input_fn</code><em class="property">: Callable<span class="p">[</span>tensorflow.python.data.ops.dataset_ops.DatasetV1<span class="p">]</span></em><a class="headerlink" href="#id27" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1474,7 +1474,7 @@ eval_spec : tf.estimator.EvalSpec</p>
 <p>Basic Yarn Config in charge of uploading environment.</p>
 <dl class="py attribute">
 <dt id="deepr.jobs.yarn_config.YarnConfig.cpu_ignored_packages">
-<code class="sig-name descname">cpu_ignored_packages</code><em class="property">: Tuple[str, …]</em><em class="property"> = ()</em><a class="headerlink" href="#deepr.jobs.yarn_config.YarnConfig.cpu_ignored_packages" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cpu_ignored_packages</code><em class="property">: Tuple<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><span class="p">…</span><span class="p">]</span></em><em class="property"> = ()</em><a class="headerlink" href="#deepr.jobs.yarn_config.YarnConfig.cpu_ignored_packages" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1485,12 +1485,12 @@ eval_spec : tf.estimator.EvalSpec</p>
 
 <dl class="py attribute">
 <dt id="deepr.jobs.yarn_config.YarnConfig.gpu_additional_packages">
-<code class="sig-name descname">gpu_additional_packages</code><em class="property">: Tuple[str, …]</em><em class="property"> = ('tensorflow-gpu==1.15.2', 'tf-yarn-gpu==0.4.19')</em><a class="headerlink" href="#deepr.jobs.yarn_config.YarnConfig.gpu_additional_packages" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">gpu_additional_packages</code><em class="property">: Tuple<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><span class="p">…</span><span class="p">]</span></em><em class="property"> = ('tensorflow-gpu==1.15.2', 'tf-yarn-gpu==0.4.19')</em><a class="headerlink" href="#deepr.jobs.yarn_config.YarnConfig.gpu_additional_packages" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="deepr.jobs.yarn_config.YarnConfig.gpu_ignored_packages">
-<code class="sig-name descname">gpu_ignored_packages</code><em class="property">: Tuple[str, …]</em><em class="property"> = ('tensorflow', 'tf-yarn')</em><a class="headerlink" href="#deepr.jobs.yarn_config.YarnConfig.gpu_ignored_packages" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">gpu_ignored_packages</code><em class="property">: Tuple<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><span class="p">…</span><span class="p">]</span></em><em class="property"> = ('tensorflow', 'tf-yarn')</em><a class="headerlink" href="#deepr.jobs.yarn_config.YarnConfig.gpu_ignored_packages" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1569,7 +1569,7 @@ eval_spec : tf.estimator.EvalSpec</p>
 <p>Packages current environment, upload <cite>.pex</cite> and run yarn job.</p>
 <dl class="py attribute">
 <dt id="deepr.jobs.yarn_launcher.YarnLauncher.config">
-<code class="sig-name descname">config</code><em class="property">: YarnLauncherConfig</em><a class="headerlink" href="#deepr.jobs.yarn_launcher.YarnLauncher.config" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">config</code><em class="property">: <a class="reference internal" href="#deepr.jobs.yarn_launcher.YarnLauncherConfig" title="deepr.jobs.yarn_launcher.YarnLauncherConfig">deepr.jobs.yarn_launcher.YarnLauncherConfig</a></em><a class="headerlink" href="#deepr.jobs.yarn_launcher.YarnLauncher.config" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1592,12 +1592,12 @@ eval_spec : tf.estimator.EvalSpec</p>
 
 <dl class="py class">
 <dt id="deepr.jobs.yarn_launcher.YarnLauncherConfig">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.jobs.yarn_launcher.</code><code class="sig-name descname">YarnLauncherConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'yarn-launcher-2020-08-04-10-13-24'</span></em>, <em class="sig-param"><span class="n">gpu_additional_packages</span><span class="o">=</span><span class="default_value">'tensorflow-gpu==1.15.2', 'tf-yarn-gpu==0.4.19'</span></em>, <em class="sig-param"><span class="n">gpu_ignored_packages</span><span class="o">=</span><span class="default_value">'tensorflow', 'tf-yarn'</span></em>, <em class="sig-param"><span class="n">cpu_ignored_packages</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">gpu_to_use</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">jvm_memory_in_gb</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">path_pex_cpu</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_pex_gpu</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_pex_prefix</span><span class="o">=</span><span class="default_value">'viewfs://root/user/runner/envs'</span></em>, <em class="sig-param"><span class="n">hadoop_file_systems</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">memory</span><span class="o">=</span><span class="default_value">'48 GiB'</span></em>, <em class="sig-param"><span class="n">num_cores</span><span class="o">=</span><span class="default_value">48</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/jobs/yarn_launcher.html#YarnLauncherConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.jobs.yarn_launcher.YarnLauncherConfig" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.jobs.yarn_launcher.</code><code class="sig-name descname">YarnLauncherConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'yarn-launcher-2020-08-11-09-11-18'</span></em>, <em class="sig-param"><span class="n">gpu_additional_packages</span><span class="o">=</span><span class="default_value">'tensorflow-gpu==1.15.2', 'tf-yarn-gpu==0.4.19'</span></em>, <em class="sig-param"><span class="n">gpu_ignored_packages</span><span class="o">=</span><span class="default_value">'tensorflow', 'tf-yarn'</span></em>, <em class="sig-param"><span class="n">cpu_ignored_packages</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">gpu_to_use</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">jvm_memory_in_gb</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">path_pex_cpu</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_pex_gpu</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_pex_prefix</span><span class="o">=</span><span class="default_value">'viewfs://root/user/runner/envs'</span></em>, <em class="sig-param"><span class="n">hadoop_file_systems</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">memory</span><span class="o">=</span><span class="default_value">'48 GiB'</span></em>, <em class="sig-param"><span class="n">num_cores</span><span class="o">=</span><span class="default_value">48</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/jobs/yarn_launcher.html#YarnLauncherConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.jobs.yarn_launcher.YarnLauncherConfig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.jobs.yarn_config.YarnConfig" title="deepr.jobs.yarn_config.YarnConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.jobs.yarn_config.YarnConfig</span></code></a></p>
 <p>Yarn Launcher Config.</p>
 <dl class="py attribute">
 <dt id="deepr.jobs.yarn_launcher.YarnLauncherConfig.hadoop_file_systems">
-<code class="sig-name descname">hadoop_file_systems</code><em class="property">: Tuple[str, …]</em><em class="property"> = ()</em><a class="headerlink" href="#deepr.jobs.yarn_launcher.YarnLauncherConfig.hadoop_file_systems" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">hadoop_file_systems</code><em class="property">: Tuple<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><span class="p">…</span><span class="p">]</span></em><em class="property"> = ()</em><a class="headerlink" href="#deepr.jobs.yarn_launcher.YarnLauncherConfig.hadoop_file_systems" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1607,7 +1607,7 @@ eval_spec : tf.estimator.EvalSpec</p>
 
 <dl class="py attribute">
 <dt id="deepr.jobs.yarn_launcher.YarnLauncherConfig.name">
-<code class="sig-name descname">name</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><em class="property"> = 'yarn-launcher-2020-08-04-10-13-24'</em><a class="headerlink" href="#deepr.jobs.yarn_launcher.YarnLauncherConfig.name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">name</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><em class="property"> = 'yarn-launcher-2020-08-11-09-11-18'</em><a class="headerlink" href="#deepr.jobs.yarn_launcher.YarnLauncherConfig.name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1639,7 +1639,7 @@ eval_spec : tf.estimator.EvalSpec</p>
 <p>Run a <a class="reference internal" href="../API/_autosummary/deepr.jobs.Trainer.html#deepr.jobs.Trainer" title="deepr.jobs.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trainer</span></code></a> job on yarn using distributed settings.</p>
 <dl class="py attribute">
 <dt id="deepr.jobs.yarn_trainer.YarnTrainer.config">
-<code class="sig-name descname">config</code><em class="property">: YarnTrainerConfig</em><a class="headerlink" href="#deepr.jobs.yarn_trainer.YarnTrainer.config" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">config</code><em class="property">: <a class="reference internal" href="#deepr.jobs.yarn_trainer.YarnTrainerConfig" title="deepr.jobs.yarn_trainer.YarnTrainerConfig">deepr.jobs.yarn_trainer.YarnTrainerConfig</a></em><a class="headerlink" href="#deepr.jobs.yarn_trainer.YarnTrainer.config" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1662,7 +1662,7 @@ eval_spec : tf.estimator.EvalSpec</p>
 
 <dl class="py class">
 <dt id="deepr.jobs.yarn_trainer.YarnTrainerConfig">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.jobs.yarn_trainer.</code><code class="sig-name descname">YarnTrainerConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'yarn-trainer-2020-08-04-10-13-24'</span></em>, <em class="sig-param"><span class="n">gpu_additional_packages</span><span class="o">=</span><span class="default_value">'tensorflow-gpu==1.15.2', 'tf-yarn-gpu==0.4.19'</span></em>, <em class="sig-param"><span class="n">gpu_ignored_packages</span><span class="o">=</span><span class="default_value">'tensorflow', 'tf-yarn'</span></em>, <em class="sig-param"><span class="n">cpu_ignored_packages</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">gpu_to_use</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">jvm_memory_in_gb</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">path_pex_cpu</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_pex_gpu</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_pex_prefix</span><span class="o">=</span><span class="default_value">'viewfs://root/user/runner/envs'</span></em>, <em class="sig-param"><span class="n">nb_ps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nb_retries</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">nb_workers</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pre_script_hook</span><span class="o">=</span><span class="default_value">'source /etc/profile.d/cuda.sh &amp;&amp; setupCUDA 10.1 &amp;&amp; setupCUDNN cuda10.1_v7.6.4.38'</span></em>, <em class="sig-param"><span class="n">queue</span><span class="o">=</span><span class="default_value">'dev'</span></em>, <em class="sig-param"><span class="n">tf_yarn</span><span class="o">=</span><span class="default_value">'cpu'</span></em>, <em class="sig-param"><span class="n">tf_yarn_chief_cores</span><span class="o">=</span><span class="default_value">48</span></em>, <em class="sig-param"><span class="n">tf_yarn_chief_memory</span><span class="o">=</span><span class="default_value">'48 GiB'</span></em>, <em class="sig-param"><span class="n">tf_yarn_evaluator_cores</span><span class="o">=</span><span class="default_value">48</span></em>, <em class="sig-param"><span class="n">tf_yarn_evaluator_memory</span><span class="o">=</span><span class="default_value">'48 GiB'</span></em>, <em class="sig-param"><span class="n">tf_yarn_tensorboard_memory</span><span class="o">=</span><span class="default_value">'48 GiB'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/jobs/yarn_trainer.html#YarnTrainerConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.jobs.yarn_trainer.YarnTrainerConfig" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.jobs.yarn_trainer.</code><code class="sig-name descname">YarnTrainerConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'yarn-trainer-2020-08-11-09-11-18'</span></em>, <em class="sig-param"><span class="n">gpu_additional_packages</span><span class="o">=</span><span class="default_value">'tensorflow-gpu==1.15.2', 'tf-yarn-gpu==0.4.19'</span></em>, <em class="sig-param"><span class="n">gpu_ignored_packages</span><span class="o">=</span><span class="default_value">'tensorflow', 'tf-yarn'</span></em>, <em class="sig-param"><span class="n">cpu_ignored_packages</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">gpu_to_use</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">jvm_memory_in_gb</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">path_pex_cpu</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_pex_gpu</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_pex_prefix</span><span class="o">=</span><span class="default_value">'viewfs://root/user/runner/envs'</span></em>, <em class="sig-param"><span class="n">nb_ps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nb_retries</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">nb_workers</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pre_script_hook</span><span class="o">=</span><span class="default_value">'source /etc/profile.d/cuda.sh &amp;&amp; setupCUDA 10.1 &amp;&amp; setupCUDNN cuda10.1_v7.6.4.38'</span></em>, <em class="sig-param"><span class="n">queue</span><span class="o">=</span><span class="default_value">'dev'</span></em>, <em class="sig-param"><span class="n">tf_yarn</span><span class="o">=</span><span class="default_value">'cpu'</span></em>, <em class="sig-param"><span class="n">tf_yarn_chief_cores</span><span class="o">=</span><span class="default_value">48</span></em>, <em class="sig-param"><span class="n">tf_yarn_chief_memory</span><span class="o">=</span><span class="default_value">'48 GiB'</span></em>, <em class="sig-param"><span class="n">tf_yarn_evaluator_cores</span><span class="o">=</span><span class="default_value">48</span></em>, <em class="sig-param"><span class="n">tf_yarn_evaluator_memory</span><span class="o">=</span><span class="default_value">'48 GiB'</span></em>, <em class="sig-param"><span class="n">tf_yarn_tensorboard_memory</span><span class="o">=</span><span class="default_value">'48 GiB'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/jobs/yarn_trainer.html#YarnTrainerConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.jobs.yarn_trainer.YarnTrainerConfig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.jobs.yarn_config.YarnConfig" title="deepr.jobs.yarn_config.YarnConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.jobs.yarn_config.YarnConfig</span></code></a></p>
 <p>Default Yarn Trainer Config</p>
 <dl class="py method">
@@ -1673,7 +1673,7 @@ eval_spec : tf.estimator.EvalSpec</p>
 
 <dl class="py attribute">
 <dt id="deepr.jobs.yarn_trainer.YarnTrainerConfig.name">
-<code class="sig-name descname">name</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><em class="property"> = 'yarn-trainer-2020-08-04-10-13-24'</em><a class="headerlink" href="#deepr.jobs.yarn_trainer.YarnTrainerConfig.name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">name</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><em class="property"> = 'yarn-trainer-2020-08-11-09-11-18'</em><a class="headerlink" href="#deepr.jobs.yarn_trainer.YarnTrainerConfig.name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
