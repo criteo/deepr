@@ -1,14 +1,12 @@
 """Yarn Launcher Config Interface and Job"""
 
 from dataclasses import dataclass
-from typing import Dict, Optional, List, Tuple
+from typing import Dict, Tuple
 import datetime
 import json
 import logging
-import tempfile
 
-from cluster_pack.skein import skein_config_builder
-import getpass
+from cluster_pack.skein import skein_launcher
 import skein
 
 from deepr.config.base import from_config
@@ -53,11 +51,11 @@ class YarnLauncher(base.Job):
             pex_path = self.config.upload_pex_cpu()
             with skein.Client() as skein_client:
                 LOGGER.info(f"Submitting job {self.config.name}")
-                app_id = submit(
+                app_id = skein_launcher.submit(
                     skein_client=skein_client,
                     module_name="deepr.cli.main",
                     additional_files=[job_name],
-                    archive_hdfs=pex_path,
+                    package_path=pex_path,
                     args=["from_config", job_name, "-", "run"],
                     env_vars=self.config.get_env_vars(),
                     hadoop_file_systems=self.config.hadoop_file_systems,
@@ -72,69 +70,3 @@ class YarnLauncher(base.Job):
             LOGGER.info("Not running on yarn.")
             job = from_config(self.job)
             job.run()
-
-
-def submit(
-    skein_client: skein.Client,
-    module_name: str,
-    additional_files: Optional[List[str]] = None,
-    archive_hdfs: Optional[str] = None,
-    args: Optional[List[str]] = None,
-    env_vars: Optional[Dict[str, str]] = None,
-    hadoop_file_systems: Tuple[str, ...] = (),
-    max_attempts: int = 1,
-    max_restarts: int = 0,
-    memory: str = "1 GiB",
-    name: str = "yarn_launcher",
-    node_label: Optional[str] = None,
-    num_containers: int = 1,
-    num_cores: int = 1,
-    pre_script_hook: Optional[str] = None,
-    queue: Optional[str] = None,
-    user: Optional[str] = None,
-) -> str:
-    """Submit application via skein."""
-    with tempfile.TemporaryDirectory() as tmp_dir:
-        # Update Environment Variables and script hook
-        env = dict(env_vars) if env_vars else dict()
-        pre_script_hook = pre_script_hook if pre_script_hook else ""
-        env.update({"SKEIN_CONFIG": "./.skein", "GIT_PYTHON_REFRESH": "quiet"})
-
-        # Create Skein Config, Service and Spec
-        skein_config = skein_config_builder.build(
-            module_name,
-            args=args if args else [],
-            package_path=archive_hdfs,
-            additional_files=additional_files,
-            tmp_dir=tmp_dir,
-        )
-        skein_service = skein.Service(
-            resources=skein.model.Resources(memory, num_cores),
-            instances=num_containers,
-            files=skein_config.files,
-            env=env,
-            script=f"""
-                        set -x
-                        env
-                        {pre_script_hook}
-                        {skein_config.script}
-                    """,
-            max_restarts=max_restarts,
-        )
-        skein_spec = skein.ApplicationSpec(
-            name=name,
-            file_systems=list(hadoop_file_systems),
-            services={name: skein_service},
-            acls=skein.model.ACLs(enable=True, ui_users=["*"], view_users=["*"]),
-            max_attempts=max_attempts,
-        )
-
-        # Activate impersonation only if user to run the job is not
-        # the current user (yarn issue)
-        if user and user != getpass.getuser():
-            skein_spec.user = user
-        if queue:
-            skein_spec.queue = queue
-        if node_label:
-            skein_service.node_label = node_label
-        return skein_client.submit(skein_spec)
