@@ -170,14 +170,12 @@
 <span></span><span class="sd">&quot;&quot;&quot;Yarn Launcher Config Interface and Job&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">tempfile</span>
 
-<span class="kn">from</span> <span class="nn">cluster_pack.skein</span> <span class="kn">import</span> <span class="n">skein_config_builder</span>
-<span class="kn">import</span> <span class="nn">getpass</span>
+<span class="kn">from</span> <span class="nn">cluster_pack.skein</span> <span class="kn">import</span> <span class="n">skein_launcher</span>
 <span class="kn">import</span> <span class="nn">skein</span>
 
 <span class="kn">from</span> <span class="nn">deepr.config.base</span> <span class="kn">import</span> <span class="n">from_config</span>
@@ -222,11 +220,11 @@
             <span class="n">pex_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">upload_pex_cpu</span><span class="p">()</span>
             <span class="k">with</span> <span class="n">skein</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span> <span class="k">as</span> <span class="n">skein_client</span><span class="p">:</span>
                 <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Submitting job </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-                <span class="n">app_id</span> <span class="o">=</span> <span class="n">submit</span><span class="p">(</span>
+                <span class="n">app_id</span> <span class="o">=</span> <span class="n">skein_launcher</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
                     <span class="n">skein_client</span><span class="o">=</span><span class="n">skein_client</span><span class="p">,</span>
                     <span class="n">module_name</span><span class="o">=</span><span class="s2">&quot;deepr.cli.main&quot;</span><span class="p">,</span>
                     <span class="n">additional_files</span><span class="o">=</span><span class="p">[</span><span class="n">job_name</span><span class="p">],</span>
-                    <span class="n">archive_hdfs</span><span class="o">=</span><span class="n">pex_path</span><span class="p">,</span>
+                    <span class="n">package_path</span><span class="o">=</span><span class="n">pex_path</span><span class="p">,</span>
                     <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;from_config&quot;</span><span class="p">,</span> <span class="n">job_name</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">],</span>
                     <span class="n">env_vars</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get_env_vars</span><span class="p">(),</span>
                     <span class="n">hadoop_file_systems</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">hadoop_file_systems</span><span class="p">,</span>
@@ -241,72 +239,6 @@
             <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Not running on yarn.&quot;</span><span class="p">)</span>
             <span class="n">job</span> <span class="o">=</span> <span class="n">from_config</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">job</span><span class="p">)</span>
             <span class="n">job</span><span class="o">.</span><span class="n">run</span><span class="p">()</span></div></div>
-
-
-<div class="viewcode-block" id="submit"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.submit">[docs]</a><span class="k">def</span> <span class="nf">submit</span><span class="p">(</span>
-    <span class="n">skein_client</span><span class="p">:</span> <span class="n">skein</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span>
-    <span class="n">module_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">additional_files</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">archive_hdfs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">env_vars</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">hadoop_file_systems</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(),</span>
-    <span class="n">max_attempts</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="n">max_restarts</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="n">memory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1 GiB&quot;</span><span class="p">,</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;yarn_launcher&quot;</span><span class="p">,</span>
-    <span class="n">node_label</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">num_containers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="n">num_cores</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="n">pre_script_hook</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">queue</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">user</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Submit application via skein.&quot;&quot;&quot;</span>
-    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmp_dir</span><span class="p">:</span>
-        <span class="c1"># Update Environment Variables and script hook</span>
-        <span class="n">env</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">env_vars</span><span class="p">)</span> <span class="k">if</span> <span class="n">env_vars</span> <span class="k">else</span> <span class="nb">dict</span><span class="p">()</span>
-        <span class="n">pre_script_hook</span> <span class="o">=</span> <span class="n">pre_script_hook</span> <span class="k">if</span> <span class="n">pre_script_hook</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
-        <span class="n">env</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;SKEIN_CONFIG&quot;</span><span class="p">:</span> <span class="s2">&quot;./.skein&quot;</span><span class="p">,</span> <span class="s2">&quot;GIT_PYTHON_REFRESH&quot;</span><span class="p">:</span> <span class="s2">&quot;quiet&quot;</span><span class="p">})</span>
-
-        <span class="c1"># Create Skein Config, Service and Spec</span>
-        <span class="n">skein_config</span> <span class="o">=</span> <span class="n">skein_config_builder</span><span class="o">.</span><span class="n">build</span><span class="p">(</span>
-            <span class="n">module_name</span><span class="p">,</span>
-            <span class="n">args</span><span class="o">=</span><span class="n">args</span> <span class="k">if</span> <span class="n">args</span> <span class="k">else</span> <span class="p">[],</span>
-            <span class="n">package_path</span><span class="o">=</span><span class="n">archive_hdfs</span><span class="p">,</span>
-            <span class="n">additional_files</span><span class="o">=</span><span class="n">additional_files</span><span class="p">,</span>
-            <span class="n">tmp_dir</span><span class="o">=</span><span class="n">tmp_dir</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">skein_service</span> <span class="o">=</span> <span class="n">skein</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span>
-            <span class="n">resources</span><span class="o">=</span><span class="n">skein</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">Resources</span><span class="p">(</span><span class="n">memory</span><span class="p">,</span> <span class="n">num_cores</span><span class="p">),</span>
-            <span class="n">instances</span><span class="o">=</span><span class="n">num_containers</span><span class="p">,</span>
-            <span class="n">files</span><span class="o">=</span><span class="n">skein_config</span><span class="o">.</span><span class="n">files</span><span class="p">,</span>
-            <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
-            <span class="n">script</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">                        set -x</span>
-<span class="s2">                        env</span>
-<span class="s2">                        </span><span class="si">{</span><span class="n">pre_script_hook</span><span class="si">}</span><span class="s2"></span>
-<span class="s2">                        </span><span class="si">{</span><span class="n">skein_config</span><span class="o">.</span><span class="n">script</span><span class="si">}</span><span class="s2"></span>
-<span class="s2">                    &quot;&quot;&quot;</span><span class="p">,</span>
-            <span class="n">max_restarts</span><span class="o">=</span><span class="n">max_restarts</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">skein_spec</span> <span class="o">=</span> <span class="n">skein</span><span class="o">.</span><span class="n">ApplicationSpec</span><span class="p">(</span>
-            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
-            <span class="n">file_systems</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">hadoop_file_systems</span><span class="p">),</span>
-            <span class="n">services</span><span class="o">=</span><span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">skein_service</span><span class="p">},</span>
-            <span class="n">acls</span><span class="o">=</span><span class="n">skein</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">ACLs</span><span class="p">(</span><span class="n">enable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ui_users</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">],</span> <span class="n">view_users</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">]),</span>
-            <span class="n">max_attempts</span><span class="o">=</span><span class="n">max_attempts</span><span class="p">,</span>
-        <span class="p">)</span>
-
-        <span class="c1"># Activate impersonation only if user to run the job is not</span>
-        <span class="c1"># the current user (yarn issue)</span>
-        <span class="k">if</span> <span class="n">user</span> <span class="ow">and</span> <span class="n">user</span> <span class="o">!=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">():</span>
-            <span class="n">skein_spec</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">user</span>
-        <span class="k">if</span> <span class="n">queue</span><span class="p">:</span>
-            <span class="n">skein_spec</span><span class="o">.</span><span class="n">queue</span> <span class="o">=</span> <span class="n">queue</span>
-        <span class="k">if</span> <span class="n">node_label</span><span class="p">:</span>
-            <span class="n">skein_service</span><span class="o">.</span><span class="n">node_label</span> <span class="o">=</span> <span class="n">node_label</span>
-        <span class="k">return</span> <span class="n">skein_client</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">skein_spec</span><span class="p">)</span></div>
 </pre></div>
 
            </div>
