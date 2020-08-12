@@ -1,5 +1,5 @@
 tensorflow>=1.15,<2
-cluster-pack==0.0.11
+cluster-pack==0.1.0
 dataclasses
 fire==0.3.1
 graphyte==1.6.0
