@@ -10,6 +10,7 @@ import deepr.initializers
 import deepr.io
 import deepr.jobs
 import deepr.layers
+import deepr.macros
 import deepr.metrics
 import deepr.optimizers
 import deepr.predictors

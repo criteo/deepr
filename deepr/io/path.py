@@ -162,7 +162,7 @@ class Path:
         LOGGER.info(f"Copying file {self} to {dest}")
         if not self.is_file(filesystem=filesystem):
             raise FileNotFoundError(str(self))
-        if self.is_hdfs:
+        if self.is_hdfs or Path(dest).is_hdfs:
             tf.io.gfile.copy(str(self), str(dest), overwrite=True)
         else:
             shutil.copy(str(self), str(dest))
