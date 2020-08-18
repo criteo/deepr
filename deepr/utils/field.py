@@ -70,6 +70,10 @@ class Field:
             else:
                 return tf.io.FixedLenFeature(shape=self.shape, dtype=self.dtype)
 
+    @property
+    def batch_shape(self):
+        return tuple([None] + list(self.shape))
+
     def is_sparse(self) -> bool:
         if self.is_featurizable():
             return isinstance(self.feature_specs, tf.io.VarLenFeature)
