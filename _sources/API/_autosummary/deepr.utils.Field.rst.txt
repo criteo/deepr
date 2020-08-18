@@ -28,6 +28,7 @@
 
    .. autosummary::
    
+      ~Field.batch_shape
       ~Field.feature_specs
    
    
