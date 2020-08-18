@@ -18,7 +18,7 @@ class Reader(ABC):
 
     def __iter__(self):
         dataset = self.as_dataset()
-        iterator = dataset.make_initializable_iterator()
+        iterator = tf.data.make_initializable_iterator(dataset)
         next_element = iterator.get_next()
         with tf.Session() as sess:
             sess.run(tf.tables_initializer())
