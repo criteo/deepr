@@ -31,6 +31,7 @@ class MLFlowInit(dict):
         experiment_name: str = None,
         artifact_location: str = None,
         url_formatter: Callable[[str, str, str], str] = internal_url_formatter,
+        run_id: str = None,
     ):
         if use_mlflow:
             # Check arguments are not None
@@ -46,12 +47,13 @@ class MLFlowInit(dict):
             # Start MLFlow run
             mlflow.set_tracking_uri(tracking_uri)
             mlflow.set_or_create_experiment(experiment_name, artifact_location)
-            run = mlflow.start_run(run_name=run_name)
+            run = mlflow.start_run(run_id=run_id, run_name=run_name)
 
             # Define new parameters
             run_id = run.info.run_id
             run_uuid = run.info.run_uuid
             experiment_id = run.info.experiment_id
+            assert isinstance(run_id, str)  # For mypy
             url = url_formatter(tracking_uri, experiment_id, run_id)
 
             # MLFlow config in environment variables
