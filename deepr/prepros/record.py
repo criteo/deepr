@@ -77,30 +77,8 @@ class ToExample(core.Map):
         self.sequence = sequence
 
         def _map_func_np(*tensors):
-            feature, feature_list = {}, {}
-            for field, tensor in zip(self.fields, tensors):
-                # Convert Eager Tensor to tf.train.Feature
-                if field.is_featurizable():
-                    feat = field.to_feature(tensor.numpy())
-                else:
-                    feat = tf.train.Feature(bytes_list=tf.train.BytesList(value=[tensor.numpy()]))
-
-                # Update feature and feature_list
-                if isinstance(feat, tf.train.Feature):
-                    feature[field.name] = feat
-                elif isinstance(feat, tf.train.FeatureList):
-                    feature_list[field.name] = feat
-                else:
-                    raise TypeError(feat)
-
-            if feature_list or self.sequence:
-                example = tf.train.SequenceExample(
-                    context=tf.train.Features(feature=feature),
-                    feature_lists=tf.train.FeatureLists(feature_list=feature_list),
-                )
-            else:
-                example = tf.train.Example(features=tf.train.Features(feature=feature))
-            return example.SerializeToString()
+            arrays = [tensor.numpy() for tensor in tensors]
+            return arrays_to_example(arrays, self.fields, self.sequence).SerializeToString()
 
         def _map_func_tf(element):
             tensors = [
@@ -113,3 +91,30 @@ class ToExample(core.Map):
         super().__init__(
             map_func=_map_func_tf, on_dict=False, update=False, num_parallel_calls=num_parallel_calls, modes=modes
         )
+
+
+def arrays_to_example(arrays: List, fields: List[Field], sequence: bool = None):
+    """Convert NumPy arrays to a tf.train.Example."""
+    feature, feature_list = {}, {}
+    for field, array in zip(fields, arrays):
+        # Convert Eager Tensor to tf.train.Feature
+        if field.is_featurizable():
+            feat = field.to_feature(array)
+        else:
+            feat = tf.train.Feature(bytes_list=tf.train.BytesList(value=[array]))
+
+        # Update feature and feature_list
+        if isinstance(feat, tf.train.Feature):
+            feature[field.name] = feat
+        elif isinstance(feat, tf.train.FeatureList):
+            feature_list[field.name] = feat
+        else:
+            raise TypeError(feat)
+
+    if feature_list or sequence:
+        example = tf.train.SequenceExample(
+            context=tf.train.Features(feature=feature), feature_lists=tf.train.FeatureLists(feature_list=feature_list),
+        )
+    else:
+        example = tf.train.Example(features=tf.train.Features(feature=feature))
+    return example
