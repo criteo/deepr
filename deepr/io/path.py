@@ -198,7 +198,18 @@ class Path:
         if not self.is_hdfs:
             return (Path(path) for path in pathlib.Path(str(self)).glob(pattern))
         else:
-            return (Path(path) for path in tf.io.gfile.glob(str(Path(self, pattern))))
+
+            def _glob_rec(path, patt):
+                content = [Path(p) for p in tf.io.gfile.glob(str(Path(path, patt)))]
+                subdirs = [p for p in Path(path).iterdir() if p.is_dir()]
+                for p in subdirs:
+                    content.extend(_glob_rec(p, patt))
+                return content
+
+            if pattern.startswith("**/"):
+                return (p for p in _glob_rec(self, pattern[3:]))
+            else:
+                return (Path(p) for p in tf.io.gfile.glob(str(Path(self, pattern))))
 
     @contextmanager
     def open(self, mode: str = "r", encoding: Optional[str] = "utf-8", filesystem: FileSystem = None):

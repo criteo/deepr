@@ -29,23 +29,27 @@ class TFRecordReader(base.Reader):
         num_parallel_reads: int = 8,
         num_parallel_calls: int = 8,
         shuffle: bool = True,
+        recursive: bool = True,
     ):
         super().__init__()
         self.path = path
         self.num_parallel_reads = num_parallel_reads
         self.num_parallel_calls = num_parallel_calls
         self.shuffle = shuffle
+        self.recursive = recursive
 
     def __repr__(self) -> str:
         return f"TFRecordReader(path={self.path})"
 
     @property
     def filenames(self):
+        """Get filenames in path."""
+        pattern = "*" if not self.recursive else "**/*"
         if isinstance(self.path, list):
             return sorted([str(path) for path in self.path])
         else:
             if Path(self.path).is_dir():
-                paths = Path(self.path).glob("*")
+                paths = Path(self.path).glob(pattern)
                 return sorted([str(path) for path in paths if path.is_file() and not path.name.startswith("_")])
             else:
                 return [str(self.path)]
