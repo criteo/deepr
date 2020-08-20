@@ -246,30 +246,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">sequence</span> <span class="o">=</span> <span class="n">sequence</span>
 
         <span class="k">def</span> <span class="nf">_map_func_np</span><span class="p">(</span><span class="o">*</span><span class="n">tensors</span><span class="p">):</span>
-            <span class="n">feature</span><span class="p">,</span> <span class="n">feature_list</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">tensor</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">,</span> <span class="n">tensors</span><span class="p">):</span>
-                <span class="c1"># Convert Eager Tensor to tf.train.Feature</span>
-                <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">is_featurizable</span><span class="p">():</span>
-                    <span class="n">feat</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">to_feature</span><span class="p">(</span><span class="n">tensor</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">feat</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Feature</span><span class="p">(</span><span class="n">bytes_list</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">BytesList</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="p">[</span><span class="n">tensor</span><span class="o">.</span><span class="n">numpy</span><span class="p">()]))</span>
-
-                <span class="c1"># Update feature and feature_list</span>
-                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">feat</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Feature</span><span class="p">):</span>
-                    <span class="n">feature</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">feat</span>
-                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">feat</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">FeatureList</span><span class="p">):</span>
-                    <span class="n">feature_list</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">feat</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">feat</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">feature_list</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequence</span><span class="p">:</span>
-                <span class="n">example</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">SequenceExample</span><span class="p">(</span>
-                    <span class="n">context</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Features</span><span class="p">(</span><span class="n">feature</span><span class="o">=</span><span class="n">feature</span><span class="p">),</span>
-                    <span class="n">feature_lists</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">FeatureLists</span><span class="p">(</span><span class="n">feature_list</span><span class="o">=</span><span class="n">feature_list</span><span class="p">),</span>
-                <span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">example</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Example</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Features</span><span class="p">(</span><span class="n">feature</span><span class="o">=</span><span class="n">feature</span><span class="p">))</span>
-            <span class="k">return</span> <span class="n">example</span><span class="o">.</span><span class="n">SerializeToString</span><span class="p">()</span>
+            <span class="n">arrays</span> <span class="o">=</span> <span class="p">[</span><span class="n">tensor</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">tensor</span> <span class="ow">in</span> <span class="n">tensors</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">arrays_to_example</span><span class="p">(</span><span class="n">arrays</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequence</span><span class="p">)</span><span class="o">.</span><span class="n">SerializeToString</span><span class="p">()</span>
 
         <span class="k">def</span> <span class="nf">_map_func_tf</span><span class="p">(</span><span class="n">element</span><span class="p">):</span>
             <span class="n">tensors</span> <span class="o">=</span> <span class="p">[</span>
@@ -282,6 +260,33 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">map_func</span><span class="o">=</span><span class="n">_map_func_tf</span><span class="p">,</span> <span class="n">on_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">num_parallel_calls</span><span class="o">=</span><span class="n">num_parallel_calls</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="n">modes</span>
         <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="arrays_to_example"><a class="viewcode-back" href="../../../_source/deepr.prepros.html#deepr.prepros.arrays_to_example">[docs]</a><span class="k">def</span> <span class="nf">arrays_to_example</span><span class="p">(</span><span class="n">arrays</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">fields</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Field</span><span class="p">],</span> <span class="n">sequence</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert NumPy arrays to a tf.train.Example.&quot;&quot;&quot;</span>
+    <span class="n">feature</span><span class="p">,</span> <span class="n">feature_list</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">array</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">arrays</span><span class="p">):</span>
+        <span class="c1"># Convert Eager Tensor to tf.train.Feature</span>
+        <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">is_featurizable</span><span class="p">():</span>
+            <span class="n">feat</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">to_feature</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">feat</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Feature</span><span class="p">(</span><span class="n">bytes_list</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">BytesList</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="p">[</span><span class="n">array</span><span class="p">]))</span>
+
+        <span class="c1"># Update feature and feature_list</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">feat</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Feature</span><span class="p">):</span>
+            <span class="n">feature</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">feat</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">feat</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">FeatureList</span><span class="p">):</span>
+            <span class="n">feature_list</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">feat</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">feat</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">feature_list</span> <span class="ow">or</span> <span class="n">sequence</span><span class="p">:</span>
+        <span class="n">example</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">SequenceExample</span><span class="p">(</span>
+            <span class="n">context</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Features</span><span class="p">(</span><span class="n">feature</span><span class="o">=</span><span class="n">feature</span><span class="p">),</span> <span class="n">feature_lists</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">FeatureLists</span><span class="p">(</span><span class="n">feature_list</span><span class="o">=</span><span class="n">feature_list</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">example</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Example</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Features</span><span class="p">(</span><span class="n">feature</span><span class="o">=</span><span class="n">feature</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">example</span></div>
 </pre></div>
 
            </div>
