@@ -20,16 +20,16 @@ class Reader(ABC):
         dataset = self.as_dataset()
         iterator = tf.data.make_initializable_iterator(dataset)
         next_element = iterator.get_next()
-        with tf.Session() as sess:
-            sess.run(tf.tables_initializer())
-            sess.run(iterator.initializer)
-            try:
-                while True:
-                    yield sess.run(next_element)
-            except tf.errors.OutOfRangeError:
-                msg = f"Reached end of {self}"
-                LOGGER.info(msg)
-                pass
+        sess = tf.Session()
+        sess.run(tf.tables_initializer())
+        sess.run(iterator.initializer)
+        try:
+            while True:
+                yield sess.run(next_element)
+        except tf.errors.OutOfRangeError:
+            msg = f"Reached end of {self}"
+            LOGGER.info(msg)
+        sess.close()
 
     @abstractmethod
     def as_dataset(self) -> tf.data.Dataset:
