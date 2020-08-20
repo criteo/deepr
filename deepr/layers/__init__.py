@@ -32,6 +32,7 @@ from deepr.layers.lookup import (
     table_from_file,
     table_from_mapping,
 )
+from deepr.layers.lstm import LSTM
 from deepr.layers.mask import Equal, NotEqual, BooleanMask, BooleanReduceMode
 from deepr.layers.nce_loss import NegativeSampling, MaskedNegativeSampling
 from deepr.layers.reduce import Average, WeightedAverage
