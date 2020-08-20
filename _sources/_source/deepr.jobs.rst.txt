@@ -100,6 +100,22 @@ deepr.jobs.trainer module
    :undoc-members:
    :show-inheritance:
 
+deepr.jobs.trainer\_base module
+-------------------------------
+
+.. automodule:: deepr.jobs.trainer_base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.jobs.trainer\_keras module
+--------------------------------
+
+.. automodule:: deepr.jobs.trainer_keras
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 deepr.jobs.yarn\_config module
 ------------------------------
 

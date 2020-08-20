@@ -221,11 +221,10 @@
 <div class="viewcode-block" id="set_or_create_experiment"><a class="viewcode-back" href="../../../_source/deepr.utils.html#deepr.utils.mlflow.set_or_create_experiment">[docs]</a><span class="nd">@handle_exceptions</span>
 <span class="k">def</span> <span class="nf">set_or_create_experiment</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">artifact_location</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Set Experiment with specific artifact_location.&quot;&quot;&quot;</span>
-    <span class="c1"># Set or Create Experiment</span>
+    <span class="c1"># Set (optionally create) Experiment</span>
     <span class="k">if</span> <span class="n">get_experiment_by_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">create_experiment</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">artifact_location</span><span class="o">=</span><span class="n">artifact_location</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">set_experiment</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">set_experiment</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 
     <span class="c1"># Check Experiment</span>
     <span class="n">experiment</span> <span class="o">=</span> <span class="n">get_experiment_by_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
