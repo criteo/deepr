@@ -200,6 +200,7 @@
         <span class="n">experiment_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">artifact_location</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">url_formatter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">internal_url_formatter</span><span class="p">,</span>
+        <span class="n">run_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">if</span> <span class="n">use_mlflow</span><span class="p">:</span>
             <span class="c1"># Check arguments are not None</span>
@@ -215,12 +216,13 @@
             <span class="c1"># Start MLFlow run</span>
             <span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="n">tracking_uri</span><span class="p">)</span>
             <span class="n">mlflow</span><span class="o">.</span><span class="n">set_or_create_experiment</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">,</span> <span class="n">artifact_location</span><span class="p">)</span>
-            <span class="n">run</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">(</span><span class="n">run_name</span><span class="o">=</span><span class="n">run_name</span><span class="p">)</span>
+            <span class="n">run</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">(</span><span class="n">run_id</span><span class="o">=</span><span class="n">run_id</span><span class="p">,</span> <span class="n">run_name</span><span class="o">=</span><span class="n">run_name</span><span class="p">)</span>
 
             <span class="c1"># Define new parameters</span>
             <span class="n">run_id</span> <span class="o">=</span> <span class="n">run</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">run_id</span>
             <span class="n">run_uuid</span> <span class="o">=</span> <span class="n">run</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">run_uuid</span>
             <span class="n">experiment_id</span> <span class="o">=</span> <span class="n">run</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">experiment_id</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">run_id</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>  <span class="c1"># For mypy</span>
             <span class="n">url</span> <span class="o">=</span> <span class="n">url_formatter</span><span class="p">(</span><span class="n">tracking_uri</span><span class="p">,</span> <span class="n">experiment_id</span><span class="p">,</span> <span class="n">run_id</span><span class="p">)</span>
 
             <span class="c1"># MLFlow config in environment variables</span>
