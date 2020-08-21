@@ -4,6 +4,14 @@ deepr.metrics package
 Submodules
 ----------
 
+deepr.metrics.accuracy module
+-----------------------------
+
+.. automodule:: deepr.metrics.accuracy
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 deepr.metrics.base module
 -------------------------
 
