@@ -76,6 +76,14 @@ deepr.layers.lookup module
    :undoc-members:
    :show-inheritance:
 
+deepr.layers.lstm module
+------------------------
+
+.. automodule:: deepr.layers.lstm
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 deepr.layers.mask module
 ------------------------
 
