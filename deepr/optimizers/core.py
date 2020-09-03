@@ -1,5 +1,6 @@
 """Tensorflow Optimizers"""
 
+from collections import defaultdict
 from typing import Dict, List
 import logging
 
@@ -98,16 +99,16 @@ class TensorflowOptimizer(base.Optimizer):
             )
 
         # Compute gradients global norm for names in self.grad_norms
-        grad_norms = dict()
+        name_to_grads = defaultdict(list)
         if self.grad_norms is not None:
             for grad, var in grad_and_vars:
-                if any(name in var.name for name in self.grad_norms):
-                    if self.skip_vars and self.skip_steps and any(name in var.name for name in self.skip_vars):
-                        norm = tf.cond(
-                            tf.train.get_global_step() <= self.skip_steps, lambda: 0.0, lambda: tf.global_norm([grad])
-                        )
-                    else:
-                        norm = tf.global_norm([grad])
-                    grad_norms[f"grad_norm_{var.name}"] = norm
+                for name in self.grad_norms:
+                    if name in var.name:
+                        if self.skip_vars and self.skip_steps and any(name in var.name for name in self.skip_vars):
+                            grad = tf.cond(
+                                tf.train.get_global_step() <= self.skip_steps, lambda: tf.zeros_like(grad), lambda: grad
+                            )
+                        name_to_grads[name].append(grad)
+        grad_norms = {f"grad_norm_{name}": tf.global_norm(grads) for name, grads in name_to_grads.items()}
 
         return {**grad_norms, "train_op": train_op}
