@@ -23,6 +23,13 @@ Fixed
 Security
 ~~~~~~~~
 
+[2.8.1] - 2020-09-03
+--------------------
+
+Fixed
+~~~~~
+- breaking change in grad norms in Optimizer (store by query name, not variable name)
+
 [2.8.0] - 2020-09-03
 --------------------
 
