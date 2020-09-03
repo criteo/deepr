@@ -23,6 +23,32 @@ Fixed
 Security
 ~~~~~~~~
 
+[2.8.0] - 2020-09-03
+--------------------
+
+Added
+~~~~~
+- Accuracy and AccuracyAtK metrics
+- EvaluateJob
+- LSTM layer (using FusedOp)
+- Recursive .glob() in TFRecordReader for nested directory structures
+- Experimental Keras Trainer (converts tf.keras.Model into tf.estimator.Estimator)
+- Add run_id parameter to MlFlow macro (to restart a run)
+- Refactor to_example logic (make ``arrays_to_example`` importable to convert NumPy arrays to tf.Example)
+- Add missing macros module import
+- Add batch_shape to Field
+
+Changed
+~~~~~~~
+- ``__iter__`` method of `Reader` (remove context manager to avoid issue with Keras)
+- use skein_launcher instead of in-house implementation using skein.
+
+Fixed
+~~~~~
+- Use skip_steps when computing gradient norms in Optimizer
+- Path copy_file (to support local <> HDFS copies)
+
+
 [2.7.0] - 2020-08-04
 --------------------
 
