@@ -58,7 +58,7 @@ class YarnLauncher(base.Job):
                     package_path=pex_path,
                     args=["from_config", job_name, "-", "run"],
                     env_vars=self.config.get_env_vars(),
-                    hadoop_file_systems=self.config.hadoop_file_systems,
+                    hadoop_file_systems=list(self.config.hadoop_file_systems),
                     memory=self.config.memory,
                     name=self.config.name,
                     num_cores=self.config.num_cores,
