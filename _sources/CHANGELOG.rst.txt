@@ -23,6 +23,14 @@ Fixed
 Security
 ~~~~~~~~
 
+
+[2.8.2] - 2020-09-07
+--------------------
+
+Fixed
+~~~~~
+- Convert tuple of FileSystems into a List for skein (not cast by cluster_pack).
+
 [2.8.1] - 2020-09-03
 --------------------
 
