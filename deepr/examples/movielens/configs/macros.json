@@ -6,7 +6,7 @@
     "paths": {
         "type": "deepr.examples.movielens.macros.Paths",
         "path_ratings": "ml-20m/ratings.csv",
-        "path_root": "wan"
+        "path_root": "vae"
     },
     "mlflow": {
         "type": "deepr.macros.MLFlowInit",
@@ -18,6 +18,6 @@
     },
     "params": {
         "dim": 100,
-        "max_steps": 100000
+        "max_steps": 10000
     }
 }
