@@ -5,8 +5,8 @@
     },
     "paths": {
         "type": "deepr.examples.movielens.macros.Paths",
-        "path_ratings": "ml-20m/ratings.csv",
-        "path_root": "vae"
+        "path_ratings": "../ml-20m/ratings.csv",
+        "path_root": "model"
     },
     "mlflow": {
         "type": "deepr.macros.MLFlowInit",

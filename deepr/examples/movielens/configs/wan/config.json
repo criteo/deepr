@@ -107,7 +107,7 @@
                         "max_input_size": 50,
                         "max_target_size": 50,
                         "buffer_size": 1024,
-                        "batch_size": 128,
+                        "batch_size": "$params:batch_size",
                         "repeat_size": null,
                         "prefetch_size": 1,
                         "num_parallel_calls": 8
@@ -207,7 +207,7 @@
                         },
                         {
                             "type": "deepr.hooks.StepsPerSecHook",
-                            "batch_size": 128,
+                            "batch_size": "$params:batch_size",
                             "name": "training",
                             "use_mlflow": "$mlflow:use_mlflow",
                             "skip_after_step": 100000
@@ -280,14 +280,6 @@
                 "prepro_fn": {
                     "type": "deepr.examples.movielens.prepros.RecordPrepro"
                 }
-            },
-            {
-                "type": "deepr.examples.movielens.jobs.Evaluate",
-                "path_predictions": "$paths:path_predictions",
-                "path_embeddings": "$paths:path_embeddings",
-                "path_biases": "$paths:path_biases",
-                "k": 10,
-                "use_mlflow": "$mlflow:use_mlflow"
             },
             {
                 "type": "deepr.examples.movielens.jobs.Evaluate",
