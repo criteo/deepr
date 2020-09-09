@@ -17,7 +17,6 @@
         "artifact_location": null
     },
     "params": {
-        "dim": 100,
-        "max_steps": 10000
+        "max_steps": 20000
     }
 }
