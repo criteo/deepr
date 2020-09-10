@@ -1,3 +1,5 @@
+local path_dataset = "../ml-20m/";
+
 {
     "run": {
         "run_on_yarn": false,
@@ -5,7 +7,7 @@
     },
     "paths": {
         "type": "deepr.examples.movielens.macros.Paths",
-        "path_ratings": "../ml-20m/ratings.csv",
+        "path_ratings": path_dataset + "ratings.csv",
         "path_root": "model"
     },
     "mlflow": {
@@ -17,8 +19,8 @@
         "artifact_location": null
     },
     "params": {
-        "dim": 100,
-        "max_steps": 600,
-        "batch_size": 512,
+        "dim": 600,
+        "max_steps": 40000,
+        "batch_size": 512
     }
 }

@@ -25,6 +25,7 @@ local path_dataset = "../ml-20m/";
     "params": {
         "max_steps": 40000,
         "batch_size": 512,
+        "num_negatives": 100,
         "vocab_size": {
             "type": "deepr.vocab.size",
             "path": path_dataset + "unique_sid.txt"

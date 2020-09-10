@@ -50,6 +50,8 @@ You can jump to the notebook on `Colab <https://colab.research.google.com/github
     cd deepr/examples/movielens/configs
     wget http://files.grouplens.org/datasets/movielens/ml-20m.zip
     unzip ml-20m.zip
+    rm ml-20m.zip
+    cd wan
     deepr run config.json macros.json
 
 

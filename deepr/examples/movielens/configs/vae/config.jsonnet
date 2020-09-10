@@ -40,22 +40,6 @@
                 }
             },
             {
-                "type": "deepr.examples.movielens.jobs.BuildRecords",
-                "path_ratings": "$paths:path_ratings",
-                "path_mapping": "$paths:path_mapping",
-                "path_train": "$paths:path_train",
-                "path_eval": "$paths:path_eval",
-                "path_test": "$paths:path_test",
-                "min_rating": 4,
-                "min_length": 5,
-                "num_negatives": 8,
-                "target_ratio": 0.2,
-                "size_test": 10000,
-                "size_eval": 10000,
-                "shuffle_timelines": true,
-                "seed": 2020
-            },
-            {
                 "type": "deepr.jobs.YarnTrainer",
                 "config": {
                     "type": "deepr.jobs.YarnTrainerConfig"
@@ -66,46 +50,36 @@
                     "eval": null,
                     "path_model": "$paths:path_model",
                     "pred_fn": {
-                        "type": "deepr.examples.movielens.layers.AverageModel",
-                        "vocab_size": {
-                            "type": "deepr.vocab.size",
-                            "path": "$paths:path_mapping"
-                        },
-                        "dim": "$params:dim"
+                        "type": "deepr.examples.movielens.layers.VAEModel",
+                        "vocab_size": "$params:vocab_size",
+                        "dims_encode": [600, 200],
+                        "dims_decode": [200, 600],
+                        "keep_prob": 0.5,
                     },
                     "loss_fn": {
-                        "type": "deepr.examples.movielens.layers.BPRLoss",
-                        "vocab_size": {
-                            "type": "deepr.vocab.size",
-                            "path": "$paths:path_mapping"
-                        },
-                        "dim": "$params:dim"
+                        "type": "deepr.examples.movielens.layers.VAELoss",
+                        "beta_start": 0,
+                        "beta_end": 0.2,
+                        "beta_steps": "$params:max_steps",
                     },
                     "optimizer_fn": {
                         "type": "deepr.optimizers.TensorflowOptimizer",
-                        "optimizer": "LazyAdam",
+                        "optimizer": "Adam",
                         "learning_rate": 0.001
                     },
                     "train_input_fn": {
-                        "type": "deepr.readers.TFRecordReader",
-                        "path": "$paths:path_train",
-                        "num_parallel_reads": 8,
-                        "num_parallel_calls": 8,
-                        "shuffle": true
+                        "type": "deepr.examples.movielens.readers.CSVReader",
+                        "path_csv": "$paths:path_train",
+                        "vocab_size": "$params:vocab_size"
                     },
                     "eval_input_fn": {
-                        "type": "deepr.readers.TFRecordReader",
-                        "path": "$paths:path_eval",
-                        "num_parallel_reads": 8,
-                        "num_parallel_calls": 8,
-                        "shuffle": false
+                        "type": "deepr.examples.movielens.readers.CSVReader",
+                        "path_csv": "$paths:path_eval_tr",
+                        "vocab_size": "$params:vocab_size"
                     },
                     "prepro_fn": {
-                        "type": "deepr.examples.movielens.prepros.RecordPrepro",
-                        "min_input_size": 3,
-                        "min_target_size": 3,
-                        "max_input_size": 50,
-                        "max_target_size": 50,
+                        "type": "deepr.examples.movielens.prepros.CSVPrepro",
+                        "vocab_size": "$params:vocab_size",
                         "buffer_size": 1024,
                         "batch_size": "$params:batch_size",
                         "repeat_size": null,
@@ -113,11 +87,6 @@
                         "num_parallel_calls": 8
                     },
                     "exporters": [
-                        {
-                            "type": "deepr.exporters.BestCheckpoint",
-                            "metric": "triplet_precision",
-                            "mode": "increase"
-                        },
                         {
                             "type": "deepr.exporters.SaveVariables",
                             "path_variables": "$paths:path_variables",
@@ -153,27 +122,20 @@
                         {
                             "type": "deepr.metrics.DecayMean",
                             "decay": 0.98,
-                            "tensors": [
-                                "loss"
-                            ]
+                            "pattern": "loss*",
+                            "tensors": ["beta"]
                         }
                     ],
                     "eval_metrics": [
                         {
                             "type": "deepr.metrics.Mean",
-                            "tensors": [
-                                "loss",
-                                "triplet_precision"
-                            ]
+                            "pattern": "loss*"
                         }
                     ],
                     "final_metrics": [
                         {
                             "type": "deepr.metrics.Mean",
-                            "tensors": [
-                                "loss",
-                                "triplet_precision"
-                            ]
+                            "pattern": "loss*"
                         }
                     ],
                     "train_hooks": [
@@ -191,12 +153,12 @@
                             },
                             "name": "training",
                             "skip_after_step": "$params:max_steps",
-                            "every_n_iter": 300,
+                            "every_n_iter": 100,
                             "use_mlflow": "$mlflow:use_mlflow"
                         },
                         {
                             "type": "deepr.hooks.SummarySaverHookFactory",
-                            "save_steps": 300
+                            "save_steps": 100
                         },
                         {
                             "type": "deepr.hooks.NumParamsHook",
@@ -210,16 +172,7 @@
                             "batch_size": "$params:batch_size",
                             "name": "training",
                             "use_mlflow": "$mlflow:use_mlflow",
-                            "skip_after_step": 100000
-                        },
-                        {
-                            "type": "deepr.hooks.EarlyStoppingHookFactory",
-                            "metric": "triplet_precision",
-                            "max_steps_without_improvement": 1000,
-                            "min_steps": 5000,
-                            "mode": "increase",
-                            "run_every_steps": 300,
-                            "final_step": 100000
+                            "skip_after_step": "$params:max_steps"
                         }
                     ],
                     "eval_hooks": [
@@ -254,7 +207,7 @@
                         "save_checkpoints_steps": 300,
                         "save_summary_steps": 300,
                         "keep_checkpoint_max": null,
-                        "log_step_count_steps": 300
+                        "log_step_count_steps": 100
                     },
                     "config_proto": {
                         "type": "deepr.jobs.ConfigProto",
@@ -271,15 +224,21 @@
                 "path_saved_model": "$paths:path_saved_model",
                 "path_predictions": "$paths:path_predictions",
                 "input_fn": {
-                    "type": "deepr.readers.TFRecordReader",
-                    "path": "$paths:path_test",
-                    "num_parallel_reads": 8,
-                    "num_parallel_calls": 8,
-                    "shuffle": false
+                    "type": "deepr.examples.movielens.readers.TestCSVReader",
+                    "path_csv_tr": "$paths:path_test_tr",
+                    "path_csv_te": "$paths:path_test_te",
+                    "vocab_size": "$params:vocab_size"
                 },
                 "prepro_fn": {
-                    "type": "deepr.examples.movielens.prepros.RecordPrepro"
-                }
+                    "type": "deepr.examples.movielens.prepros.CSVPrepro",
+                    "vocab_size": "$params:vocab_size",
+                    "buffer_size": 1024,
+                    "batch_size": "$params:batch_size",
+                    "repeat_size": null,
+                    "prefetch_size": 1,
+                    "num_parallel_calls": 8,
+                    "test": true
+                },
             },
             {
                 "type": "deepr.examples.movielens.jobs.Evaluate",

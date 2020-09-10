@@ -21,7 +21,12 @@ LOGGER = logging.getLogger(__name__)
 
 @dataclass
 class Evaluate(dpr.jobs.Job):
-    """Evaluate MovieLens."""
+    """Evaluate MovieLens using a Faiss Index.
+
+    For each user embedding, the top num_queries items are retrieved.
+    The input items are removed from the results, then we compare the
+    remaining top-K results to the target items.
+    """
 
     path_predictions: str
     path_embeddings: str
