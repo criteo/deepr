@@ -12,13 +12,11 @@ LOGGER = logging.getLogger(__name__)
 
 
 def VAELossSample(beta_start: float, beta_end: float, beta_steps: int, num_negatives: int, vocab_size: int, dim: int):
+    """Build Layer for Multi VAE loss with Complementarity Sampling."""
     return dpr.layers.Sequential(
         dpr.layers.Select(inputs=("userEmbeddings", "inputPositives", "inputMask", "KL")),
         RandomNegatives(
-            inputs="inputPositives",
-            outputs="inputNegatives",
-            num_negatives=num_negatives,
-            vocab_size=vocab_size,
+            inputs="inputPositives", outputs="inputNegatives", num_negatives=num_negatives, vocab_size=vocab_size,
         ),
         dpr.layers.Embedding(
             inputs="inputPositives",
@@ -36,7 +34,7 @@ def VAELossSample(beta_start: float, beta_end: float, beta_steps: int, num_negat
         ),
         dpr.layers.Embedding(
             inputs="inputPositives",
-            outputs="inputPositivesBiases",
+            outputs="inputPositiveBiases",
             variable_name="biases",
             shape=(vocab_size,),
             reuse=True,
@@ -50,13 +48,13 @@ def VAELossSample(beta_start: float, beta_end: float, beta_steps: int, num_negat
         ),
         dpr.layers.DotProduct(inputs=("userEmbeddings", "inputPositiveEmbeddings"), outputs="inputPositiveProduct"),
         dpr.layers.DotProduct(inputs=("userEmbeddings", "inputNegativeEmbeddings"), outputs="inputNegativeProduct"),
-        dpr.layers.Add(inputs=("inputPositiveProduct", "inputPositivesBiases"), outputs="inputPositiveLogits"),
+        dpr.layers.Add(inputs=("inputPositiveProduct", "inputPositiveBiases"), outputs="inputPositiveLogits"),
         dpr.layers.Add(inputs=("inputNegativeProduct", "inputNegativeBiases"), outputs="inputNegativeLogits"),
         SampledMultiLoss(
             inputs=("inputPositiveLogits", "inputNegativeLogits", "inputMask"),
             outputs="loss_multi",
             vocab_size=vocab_size,
-            num_negatives=num_negatives
+            num_negatives=num_negatives,
         ),
         AddKL(
             inputs=("loss_multi", "KL"),
@@ -74,19 +72,8 @@ def RandomNegatives(tensors, num_negatives, vocab_size):
     return tf.random.uniform(shape=[tf.shape(tensors)[0], num_negatives], maxval=vocab_size, dtype=tf.int64)
 
 
-@dpr.layers.layer(n_in=1, n_out=1)
-def EmbedWithBias(tensors: tf.Tensor, vocab_size: int, dim: int):
-    indices = tensors
-    with tf.variable_scope(tf.get_variable_scope(), reuse=True):
-        embeddings = tf.get_variable(name="embeddings", shape=(vocab_size, dim))
-        biases = tf.get_variable(name="biases", shape=(vocab_size,), initializer=tf.zeros_initializer())
-    indices = tf.maximum(indices, 0)
-    embedded = tf.nn.embedding_lookup(embeddings, indices) + tf.expand_dims(tf.nn.embedding_lookup(biases, indices), axis=-1)
-    return embedded
-
-
 @dpr.layers.layer(n_in=3, n_out=1)
-def SampledMultiLoss(tensors: Tuple[tf.Tensor], vocab_size, num_negatives):
+def SampledMultiLoss(tensors: Tuple[tf.Tensor, tf.Tensor, tf.Tensor], vocab_size, num_negatives):
     """Sampled Multi loss with Complementary Sum Sampling.
 
     See http://proceedings.mlr.press/v54/botev17a/botev17a.pdf
@@ -112,11 +99,11 @@ def SampledMultiLoss(tensors: Tuple[tf.Tensor], vocab_size, num_negatives):
     # Sum (Multinomial Log Likelihood) over positives
     multi_likelihood = tf.reduce_sum(log_p, axis=-1)
 
-    return - tf.reduce_mean(multi_likelihood)
+    return -tf.reduce_mean(multi_likelihood)
 
 
 @dpr.layers.layer(n_in=2, n_out=2)
-def AddKL(tensors: Tuple[tf.Tensor], beta_start: float, beta_end: float, beta_steps: int):
+def AddKL(tensors: Tuple[tf.Tensor, tf.Tensor], beta_start: float, beta_end: float, beta_steps: int):
     """Compute loss + beta * KL, decay beta linearly during training."""
     loss, KL = tensors
     beta = tf.train.polynomial_decay(

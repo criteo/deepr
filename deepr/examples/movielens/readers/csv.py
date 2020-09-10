@@ -1,13 +1,23 @@
 # pylint: disable=invalid-name
 """CSV Reader for MovieLens."""
 
-import pandas as pd
-from scipy import sparse
 import tensorflow as tf
 import numpy as np
 import deepr as dpr
 
 from deepr.examples.movielens.utils import fields
+
+
+try:
+    import pandas as pd
+except ImportError as e:
+    print(f"Pandas needs to be installed for MovieLens {e}")
+
+
+try:
+    from scipy import sparse
+except ImportError as e:
+    print(f"Scipy needs to be installed for MovieLens {e}")
 
 
 class CSVReader(dpr.readers.Reader):

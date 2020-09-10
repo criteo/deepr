@@ -28,7 +28,7 @@ def VAELoss(beta_start: float, beta_end: float, beta_steps: int):
 
 
 @dpr.layers.layer(n_in=2, n_out=1)
-def MultiLoss(tensors: Tuple[tf.Tensor]):
+def MultiLoss(tensors: Tuple[tf.Tensor, tf.Tensor]):
     """Multinomial loss."""
     logits, one_hot = tensors
     log_softmax = tf.nn.log_softmax(logits)
@@ -36,7 +36,7 @@ def MultiLoss(tensors: Tuple[tf.Tensor]):
 
 
 @dpr.layers.layer(n_in=2, n_out=2)
-def AddKL(tensors: Tuple[tf.Tensor], beta_start: float, beta_end: float, beta_steps: int):
+def AddKL(tensors: Tuple[tf.Tensor, tf.Tensor], beta_start: float, beta_end: float, beta_steps: int):
     """Compute loss + beta * KL, decay beta linearly during training."""
     loss, KL = tensors
     beta = tf.train.polynomial_decay(

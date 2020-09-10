@@ -12,7 +12,10 @@ LOGGER = logging.getLogger(__name__)
 
 
 def VAEModel(
-    vocab_size: int, dims_encode: Tuple[int] = (600, 200), dims_decode: Tuple[int] = (200, 600), keep_prob: float = 0.5,
+    vocab_size: int,
+    dims_encode: Tuple[int, ...] = (600, 200),
+    dims_decode: Tuple[int, ...] = (200, 600),
+    keep_prob: float = 0.5,
 ) -> dpr.layers.Layer:
     """VAE Model."""
     if dims_encode[-1] != dims_decode[0]:
@@ -44,14 +47,14 @@ def VAEModel(
 @dpr.layers.layer(n_in=1, n_out=1)
 def RandomMask(tensors: tf.Tensor, mode: str, keep_prob: float):
     if mode == dpr.TRAIN:
-        LOGGER.info("Applying random mask to inputs")
+        LOGGER.info("Applying random mask to inputs (TRAIN only)")
         mask = tf.random.uniform(tf.shape(tensors)) <= keep_prob
         return tf.logical_and(tensors, mask)
     return tensors
 
 
 @dpr.layers.layer(n_in=2, n_out=1)
-def Average(tensors: Tuple[tf.Tensor]):
+def Average(tensors: Tuple[tf.Tensor, tf.Tensor]):
     vectors, weights = tensors
     vectors *= tf.expand_dims(weights, axis=-1)
     return tf.div_no_nan(tf.reduce_sum(vectors, axis=-2), tf.sqrt(tf.reduce_sum(weights, axis=-1, keepdims=True)))
@@ -87,7 +90,7 @@ def Encode(tensors: tf.Tensor, dims: Tuple, activation=tf.nn.tanh):
 
 
 @dpr.layers.layer(n_in=2, n_out=1)
-def GaussianNoise(tensors: Tuple[tf.Tensor], mode: str = None):
+def GaussianNoise(tensors: Tuple[tf.Tensor, tf.Tensor], mode: str = None):
     mu, std = tensors
     if mode == dpr.TRAIN:
         LOGGER.info("Sampling latent variable (TRAIN only).")

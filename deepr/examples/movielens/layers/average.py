@@ -15,7 +15,7 @@ def AverageModel(vocab_size: int, dim: int):
         dpr.layers.ToFloat(inputs="inputMask", outputs="inputWeights"),
         dpr.layers.WeightedAverage(inputs=("inputEmbeddings", "inputWeights"), outputs="userEmbeddings"),
         Logits(inputs="userEmbeddings", outputs="logits"),
-        dpr.layers.Select(inputs=("userEmbeddings", "logits"))
+        dpr.layers.Select(inputs=("userEmbeddings", "logits")),
     )
 
 
