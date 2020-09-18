@@ -1,7 +1,6 @@
 # pylint: disable=no-value-for-parameter,invalid-name,unexpected-keyword-arg
 """Multinomial Loss for the Multi-VAE."""
 
-from typing import Tuple
 import logging
 
 import tensorflow as tf
@@ -11,102 +10,61 @@ import deepr as dpr
 LOGGER = logging.getLogger(__name__)
 
 
-def VAELossSample(beta_start: float, beta_end: float, beta_steps: int, num_negatives: int, vocab_size: int, dim: int):
+def VAELossSample(
+    beta_start: float, beta_end: float, beta_steps: int, num_negatives: int, vocab_size: int, loss: str = "multi"
+):
     """Build Layer for Multi VAE loss with Complementarity Sampling."""
+    if loss not in {"bpr", "multi"}:
+        raise ValueError(f"Got loss = {loss} (should be either 'bpr' or 'multi')")
     return dpr.layers.Sequential(
         dpr.layers.Select(inputs=("userEmbeddings", "inputPositives", "inputMask", "KL")),
+        dpr.layers.ToFloat(inputs="inputMask", outputs="inputWeight"),
         RandomNegatives(
-            inputs="inputPositives", outputs="inputNegatives", num_negatives=num_negatives, vocab_size=vocab_size,
-        ),
-        dpr.layers.Embedding(
-            inputs="inputPositives",
-            outputs="inputPositiveEmbeddings",
-            variable_name="embeddings",
-            shape=(vocab_size, dim),
-            reuse=True,
-        ),
-        dpr.layers.Embedding(
-            inputs="inputNegatives",
-            outputs="inputNegativeEmbeddings",
-            variable_name="embeddings",
-            shape=(vocab_size, dim),
-            reuse=True,
-        ),
-        dpr.layers.Embedding(
-            inputs="inputPositives",
-            outputs="inputPositiveBiases",
-            variable_name="biases",
-            shape=(vocab_size,),
-            reuse=True,
-        ),
-        dpr.layers.Embedding(
-            inputs="inputNegatives",
-            outputs="inputNegativeBiases",
-            variable_name="biases",
-            shape=(vocab_size,),
-            reuse=True,
-        ),
-        dpr.layers.DotProduct(inputs=("userEmbeddings", "inputPositiveEmbeddings"), outputs="inputPositiveProduct"),
-        dpr.layers.DotProduct(inputs=("userEmbeddings", "inputNegativeEmbeddings"), outputs="inputNegativeProduct"),
-        dpr.layers.Add(inputs=("inputPositiveProduct", "inputPositiveBiases"), outputs="inputPositiveLogits"),
-        dpr.layers.Add(inputs=("inputNegativeProduct", "inputNegativeBiases"), outputs="inputNegativeLogits"),
-        SampledMultiLoss(
-            inputs=("inputPositiveLogits", "inputNegativeLogits", "inputMask"),
-            outputs="loss_multi",
-            vocab_size=vocab_size,
+            inputs=("inputPositives", "inputMask"),
+            outputs=("inputNegatives", "inputNegativeMask"),
             num_negatives=num_negatives,
+            vocab_size=vocab_size,
         ),
-        AddKL(
-            inputs=("loss_multi", "KL"),
-            outputs=("loss", "beta"),
-            beta_start=beta_start,
-            beta_end=beta_end,
-            beta_steps=beta_steps,
+        dpr.layers.DenseIndex(
+            inputs=("userEmbeddings", "inputPositives"),
+            outputs="inputPositiveLogits",
+            units=vocab_size,
+            kernel_name="embeddings",
+            bias_name="biases",
+            reuse=True,
         ),
-        dpr.layers.Select(inputs=("loss", "loss_multi", "beta")),
+        dpr.layers.DenseIndex(
+            inputs=("userEmbeddings", "inputNegatives"),
+            outputs="inputNegativeLogits",
+            units=vocab_size,
+            kernel_name="embeddings",
+            bias_name="biases",
+            reuse=True,
+        ),
+        (
+            dpr.layers.MultiLogLikelihoodCSS(
+                inputs=("inputPositiveLogits", "inputNegativeLogits", "inputMask", "inputNegativeMask"),
+                outputs="loss_multi",
+                vocab_size=vocab_size,
+            )
+            if loss == "multi"
+            else dpr.layers.MaskedBPR(
+                inputs=("inputPositiveLogits", "inputNegativeLogits", "inputNegativeMask", "inputWeight"),
+                outputs="loss_bpr",
+            )
+        ),
+        dpr.layers.AddWithWeight(
+            inputs=(f"loss_{loss}", "KL"), outputs="loss", start=beta_start, end=beta_end, steps=beta_steps
+        ),
+        dpr.layers.Select(inputs=("loss", f"loss_{loss}")),
     )
-
-
-@dpr.layers.layer(n_in=1, n_out=1)
-def RandomNegatives(tensors, num_negatives, vocab_size):
-    return tf.random.uniform(shape=[tf.shape(tensors)[0], num_negatives], maxval=vocab_size, dtype=tf.int64)
-
-
-@dpr.layers.layer(n_in=3, n_out=1)
-def SampledMultiLoss(tensors: Tuple[tf.Tensor, tf.Tensor, tf.Tensor], vocab_size, num_negatives):
-    """Sampled Multi loss with Complementary Sum Sampling.
-
-    See http://proceedings.mlr.press/v54/botev17a/botev17a.pdf
-    """
-    positives, negatives, mask = tensors
-
-    # Exponential of positive and negative logits
-    # TODO: -max for numerical stability
-    u_p = tf.exp(positives)
-    u_ns = tf.exp(negatives)
-
-    # Approximate partition function using negatives
-    Z_c = tf.reduce_sum(u_ns, axis=-1)
-    if len(Z_c.shape) == 1:
-        Z_c = tf.expand_dims(Z_c, axis=-1)
-
-    Z = u_p + Z_c * (vocab_size - 1) / num_negatives
-
-    # Compute Approximate Log Softmax
-    log_p = positives - tf.log(Z)
-    log_p *= tf.cast(mask, tf.float32)
-
-    # Sum (Multinomial Log Likelihood) over positives
-    multi_likelihood = tf.reduce_sum(log_p, axis=-1)
-
-    return -tf.reduce_mean(multi_likelihood)
 
 
 @dpr.layers.layer(n_in=2, n_out=2)
-def AddKL(tensors: Tuple[tf.Tensor, tf.Tensor], beta_start: float, beta_end: float, beta_steps: int):
-    """Compute loss + beta * KL, decay beta linearly during training."""
-    loss, KL = tensors
-    beta = tf.train.polynomial_decay(
-        float(beta_start), tf.train.get_global_step(), beta_steps, float(beta_end), power=1.0, cycle=False
+def RandomNegatives(tensors, num_negatives, vocab_size):
+    positives, mask = tensors
+    negatives = tf.random.uniform(
+        shape=[tf.shape(positives)[0], 1, num_negatives], maxval=vocab_size, dtype=tf.int64
     )
-    return loss + beta * KL, beta
+    mask = tf.logical_and(tf.ones_like(negatives, dtype=tf.bool), tf.expand_dims(mask, axis=-1))
+    return negatives, mask

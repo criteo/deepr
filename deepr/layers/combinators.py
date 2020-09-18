@@ -1,11 +1,15 @@
 """Combinators layers"""
 
 from typing import Dict, List, Union, Tuple, Generator
+import logging
 
 import tensorflow as tf
 
 from deepr.layers.base import Layer
 from deepr.utils.datastruct import to_flat_tuple
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 class Sequential(Layer):
@@ -162,6 +166,7 @@ class ActiveMode(Layer):
         mode: Union[str, Tuple[str, ...]] = None,
         inputs: Union[str, Tuple[str, ...], List[str]] = None,
         outputs: Union[str, Tuple[str, ...], List[str]] = None,
+        verbose: bool = False,
     ):
         if inputs is None:
             inputs = layer.inputs
@@ -170,13 +175,18 @@ class ActiveMode(Layer):
         super().__init__(n_in=layer.n_in, n_out=layer.n_out, inputs=inputs, outputs=outputs, name=layer.name)
         self.layer = layer
         self.mode = to_flat_tuple(mode)
+        self.verbose = verbose
         if self.n_in != self.n_out:
             raise ValueError("Number of inputs / outputs must be the same/")
 
     def forward(self, tensors, mode: str = None):
         """Forward method of the layer"""
         if self.mode is not None and mode is not None and mode not in self.mode:
+            if self.verbose:
+                LOGGER.info(f"Not applying {self.layer}")
             return tensors
+        if self.verbose:
+            LOGGER.info(f"Applying {self.layer}")
         return self.layer.forward(tensors, mode)
 
 

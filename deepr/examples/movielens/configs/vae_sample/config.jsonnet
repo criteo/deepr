@@ -63,7 +63,7 @@
                         "beta_steps": "$params:max_steps",
                         "num_negatives": "$params:num_negatives",
                         "vocab_size": "$params:vocab_size",
-                        "dim": 600
+                        "loss": "$params:loss"
                     },
                     "optimizer_fn": {
                         "type": "deepr.optimizers.TensorflowOptimizer",
@@ -126,21 +126,21 @@
                             "type": "deepr.metrics.DecayMean",
                             "decay": 0.98,
                             "pattern": "loss*",
-                            "tensors": ["beta", "KL"]
+                            "tensors": ["KL"]
                         }
                     ],
                     "eval_metrics": [
                         {
                             "type": "deepr.metrics.Mean",
                             "pattern": "loss*",
-                            "tensors": ["beta", "KL"]
+                            "tensors": ["KL"]
                         }
                     ],
                     "final_metrics": [
                         {
                             "type": "deepr.metrics.Mean",
                             "pattern": "loss*",
-                            "tensors": ["beta", "KL"]
+                            "tensors": ["KL"]
                         }
                     ],
                     "train_hooks": [

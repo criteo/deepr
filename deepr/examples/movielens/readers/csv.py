@@ -80,14 +80,10 @@ class TestCSVReader(dpr.readers.Reader):
         rows_te, cols_te = tp_te["uid"] - start_idx, tp_te["sid"]
 
         data_tr = sparse.csr_matrix(
-            (np.ones_like(rows_tr), (rows_tr, cols_tr)),
-            dtype="int64",
-            shape=(end_idx - start_idx + 1, self.vocab_size),
+            (np.ones_like(rows_tr), (rows_tr, cols_tr)), dtype="int64", shape=(end_idx - start_idx + 1, self.vocab_size)
         )
         data_te = sparse.csr_matrix(
-            (np.ones_like(rows_te), (rows_te, cols_te)),
-            dtype="int64",
-            shape=(end_idx - start_idx + 1, self.vocab_size),
+            (np.ones_like(rows_te), (rows_te, cols_te)), dtype="int64", shape=(end_idx - start_idx + 1, self.vocab_size)
         )
 
         def _gen():

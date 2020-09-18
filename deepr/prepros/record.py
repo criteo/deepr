@@ -113,7 +113,7 @@ def arrays_to_example(arrays: List, fields: List[Field], sequence: bool = None):
 
     if feature_list or sequence:
         example = tf.train.SequenceExample(
-            context=tf.train.Features(feature=feature), feature_lists=tf.train.FeatureLists(feature_list=feature_list),
+            context=tf.train.Features(feature=feature), feature_lists=tf.train.FeatureLists(feature_list=feature_list)
         )
     else:
         example = tf.train.Example(features=tf.train.Features(feature=feature))

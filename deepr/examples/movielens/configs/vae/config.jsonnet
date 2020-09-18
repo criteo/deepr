@@ -123,21 +123,21 @@
                             "type": "deepr.metrics.DecayMean",
                             "decay": 0.98,
                             "pattern": "loss*",
-                            "tensors": ["beta", "KL"]
+                            "tensors": ["KL"]
                         }
                     ],
                     "eval_metrics": [
                         {
                             "type": "deepr.metrics.Mean",
                             "pattern": "loss*",
-                            "tensors": ["beta", "KL"]
+                            "tensors": ["KL"]
                         }
                     ],
                     "final_metrics": [
                         {
                             "type": "deepr.metrics.Mean",
                             "pattern": "loss*",
-                            "tensors": ["beta", "KL"]
+                            "tensors": ["KL"]
                         }
                     ],
                     "train_hooks": [

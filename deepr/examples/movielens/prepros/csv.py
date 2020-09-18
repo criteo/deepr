@@ -19,12 +19,7 @@ def CSVPrepro(
     num_parallel_calls: int = 8,
 ):
     """CSV Preprocessing for MovieLens."""
-    fields = [
-        F.UID,
-        F.INPUT_POSITIVES,
-        F.INPUT_MASK,
-        F.INPUT_POSITIVES_ONE_HOT(vocab_size),
-    ]
+    fields = [F.UID, F.INPUT_POSITIVES, F.INPUT_MASK, F.INPUT_POSITIVES_ONE_HOT(vocab_size)]
     if test:
         fields += [F.TARGET_POSITIVES, F.TARGET_MASK]
     return dpr.prepros.Serial(

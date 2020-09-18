@@ -46,7 +46,7 @@ def Transformer(
             else Select(inputs="inputEmbeddingsDropout", outputs="inputEnc")
         ),
         (
-            PositionalEncoding(inputs="inputEnc", outputs="inputEnc", trainable=trainable_positional_encoding,)
+            PositionalEncoding(inputs="inputEnc", outputs="inputEnc", trainable=trainable_positional_encoding)
             if use_positional_encoding
             else []
         ),
@@ -91,9 +91,7 @@ def Transformer(
     )
 
 
-def FeedForward(
-    inputs: str, outputs: str, units_inner: int, units_readout: int, dim: int, dropout_rate: float,
-):
+def FeedForward(inputs: str, outputs: str, units_inner: int, units_readout: int, dim: int, dropout_rate: float):
     """FeedForward Layer."""
     if inputs == "_x":
         raise ValueError("Cannot use name '_x' for inputs (used as intermediary node).")
@@ -211,9 +209,7 @@ class SelfMultiheadAttention(base.Layer):
         If True, add input to output (residual connection)
     """
 
-    def __init__(
-        self, num_heads: int, dim_head: int, residual_connection: bool, **kwargs,
-    ):
+    def __init__(self, num_heads: int, dim_head: int, residual_connection: bool, **kwargs):
         super().__init__(n_in=2, n_out=1, **kwargs)
         self.num_heads = num_heads
         self.dim_head = dim_head
