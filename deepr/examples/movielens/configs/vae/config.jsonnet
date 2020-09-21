@@ -58,6 +58,8 @@
                     },
                     "loss_fn": {
                         "type": "deepr.examples.movielens.layers.VAELoss",
+                        "loss": "$params:loss",
+                        "vocab_size": "$params:vocab_size",
                         "beta_start": 0,
                         "beta_end": 0.2,
                         "beta_steps": "$params:max_steps",
@@ -68,13 +70,15 @@
                         "learning_rate": 0.001
                     },
                     "train_input_fn": {
-                        "type": "deepr.examples.movielens.readers.CSVReader",
+                        "type": "deepr.examples.movielens.readers.TrainCSVReader",
                         "path_csv": "$paths:path_train",
-                        "vocab_size": "$params:vocab_size"
+                        "vocab_size": "$params:vocab_size",
+                        "target_ratio": "$params:target_ratio",
                     },
                     "eval_input_fn": {
-                        "type": "deepr.examples.movielens.readers.CSVReader",
-                        "path_csv": "$paths:path_eval_tr",
+                        "type": "deepr.examples.movielens.readers.TestCSVReader",
+                        "path_csv_tr": "$paths:path_eval_tr",
+                        "path_csv_te": "$paths:path_eval_te",
                         "vocab_size": "$params:vocab_size"
                     },
                     "prepro_fn": {
@@ -84,9 +88,15 @@
                         "batch_size": "$params:batch_size",
                         "repeat_size": null,
                         "prefetch_size": 1,
-                        "num_parallel_calls": 8
+                        "num_parallel_calls": 8,
+                        "num_negatives": "$params:num_negatives",
                     },
                     "exporters": [
+                        {
+                            "type": "deepr.exporters.BestCheckpoint",
+                            "metric": "loss",
+                            "mode": "decrease"
+                        },
                         {
                             "type": "deepr.exporters.SaveVariables",
                             "path_variables": "$paths:path_variables",
@@ -175,6 +185,15 @@
                             "name": "training",
                             "use_mlflow": "$mlflow:use_mlflow",
                             "skip_after_step": "$params:max_steps"
+                        },
+                        {
+                            "type": "deepr.hooks.EarlyStoppingHookFactory",
+                            "metric": "loss",
+                            "max_steps_without_improvement": 1000,
+                            "min_steps": 5000,
+                            "mode": "decrease",
+                            "run_every_steps": 300,
+                            "final_step": "$params:max_steps"
                         }
                     ],
                     "eval_hooks": [
@@ -239,7 +258,6 @@
                     "repeat_size": null,
                     "prefetch_size": 1,
                     "num_parallel_calls": 8,
-                    "test": true
                 },
             },
             {

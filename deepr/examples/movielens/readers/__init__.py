@@ -1,3 +1,3 @@
 # pylint: disable=unused-import,missing-docstring
 
-from deepr.examples.movielens.readers.csv import CSVReader, TestCSVReader
+from deepr.examples.movielens.readers.csv import TrainCSVReader, TestCSVReader

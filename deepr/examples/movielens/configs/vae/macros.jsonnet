@@ -23,11 +23,14 @@ local path_dataset = "../ml-20m/";
         "artifact_location": null
     },
     "params": {
-        "max_steps": 40000,
+        "max_steps": 20,
         "batch_size": 512,
         "vocab_size": {
             "type": "deepr.vocab.size",
             "path": path_dataset + "unique_sid.txt"
         },
+        "target_ratio": null,
+        "num_negatives": 100,
+        "loss": "multi",
     }
 }

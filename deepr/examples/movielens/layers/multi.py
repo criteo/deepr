@@ -1,11 +1,16 @@
-# pylint: disable=unexpected-keyword-arg,no-value-for-parameter,invalid-name
-"""BPR Loss with biases."""
+# pylint: disable=no-value-for-parameter,invalid-name,unexpected-keyword-arg
+"""Multinomial Loss for the Multi-VAE."""
+
+import logging
 
 import deepr as dpr
 
 
-def BPRLoss(vocab_size: int):
-    """BPR Loss with biases."""
+LOGGER = logging.getLogger(__name__)
+
+
+def MultiLogLikelihoodCSS(vocab_size: int):
+    """Build Layer for Multi VAE loss with Complementarity Sampling."""
     return dpr.layers.Sequential(
         dpr.layers.Select(inputs=("userEmbeddings", "targetPositives", "targetNegatives", "targetMask")),
         dpr.layers.DenseIndex(
@@ -25,12 +30,14 @@ def BPRLoss(vocab_size: int):
             reuse=True,
         ),
         dpr.layers.ToFloat(inputs="targetMask", outputs="targetWeight"),
-        dpr.layers.ExpandDims(inputs="targetMask", outputs="targetMask"),
-        dpr.layers.MaskedBPR(
-            inputs=("targetPositiveLogits", "targetNegativeLogits", "targetMask", "targetWeight"), outputs="loss"
+        dpr.layers.ExpandDims(inputs="targetMask", outputs="targetNegativeMask"),
+        dpr.layers.MultiLogLikelihoodCSS(
+            inputs=("targetPositiveLogits", "targetNegativeLogits", "targetMask", "targetNegativeMask"),
+            outputs="loss",
+            vocab_size=vocab_size,
         ),
         dpr.layers.TripletPrecision(
-            inputs=("targetPositiveLogits", "targetNegativeLogits", "targetMask", "targetWeight"),
+            inputs=("targetPositiveLogits", "targetNegativeLogits", "targetNegativeMask", "targetWeight"),
             outputs="triplet_precision",
         ),
         dpr.layers.Select(inputs=("loss", "triplet_precision")),

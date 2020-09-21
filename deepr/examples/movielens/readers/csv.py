@@ -20,16 +20,22 @@ except ImportError as e:
     print(f"Scipy needs to be installed for MovieLens {e}")
 
 
-class CSVReader(dpr.readers.Reader):
+class TrainCSVReader(dpr.readers.Reader):
     """Reader of MovieLens CSV files of the Multi-VAE paper.
 
     See https://github.com/dawenl/vae_cf
     """
 
-    def __init__(self, path_csv: str, vocab_size: int):
+    def __init__(self, path_csv: str, vocab_size: int, target_ratio: float = None):
         self.path_csv = path_csv
         self.vocab_size = vocab_size
-        self.fields = [fields.UID, fields.INPUT_POSITIVES, fields.INPUT_POSITIVES_ONE_HOT(vocab_size)]
+        self.target_ratio = target_ratio
+        self.fields = [
+            fields.UID,
+            fields.INPUT_POSITIVES,
+            fields.TARGET_POSITIVES,
+            fields.TARGET_POSITIVES_ONE_HOT(vocab_size),
+        ]
 
     def as_dataset(self):
         tp = pd.read_csv(self.path_csv)
@@ -43,7 +49,24 @@ class CSVReader(dpr.readers.Reader):
                 if sparse.isspmatrix(X):
                     X = X.toarray()
                 X = X.astype("int64")
-                yield {"uid": idx, "inputPositives": np.nonzero(X[0])[0], "inputPositivesOneHot": X[0]}
+                indices = np.nonzero(X[0])[0]
+                if self.target_ratio is not None:
+                    np.random.shuffle(indices)
+                    size = int(len(indices) * (1 - self.target_ratio))
+                    input_positives = indices[:size]
+                    target_positives = indices[size:]
+                    target_one_hot = np.zeros((self.vocab_size,), dtype=np.int64)
+                    target_one_hot[target_positives] = 1
+                else:
+                    input_positives = indices
+                    target_positives = indices
+                    target_one_hot = X[0]
+                yield {
+                    "uid": idx,
+                    "inputPositives": input_positives,
+                    "targetPositives": target_positives,
+                    "targetPositivesOneHot": target_one_hot,
+                }
 
         return tf.data.Dataset.from_generator(
             _gen,
@@ -65,8 +88,8 @@ class TestCSVReader(dpr.readers.Reader):
         self.fields = [
             fields.UID,
             fields.INPUT_POSITIVES,
-            fields.INPUT_POSITIVES_ONE_HOT(vocab_size),
             fields.TARGET_POSITIVES,
+            fields.TARGET_POSITIVES_ONE_HOT(vocab_size),
         ]
 
     def as_dataset(self):
@@ -99,8 +122,8 @@ class TestCSVReader(dpr.readers.Reader):
                 yield {
                     "uid": idx,
                     "inputPositives": np.nonzero(X[0])[0],
-                    "inputPositivesOneHot": X[0],
                     "targetPositives": np.nonzero(y[0])[0],
+                    "targetPositivesOneHot": X[0],
                 }
 
         return tf.data.Dataset.from_generator(
