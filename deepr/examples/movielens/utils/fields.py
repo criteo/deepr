@@ -18,6 +18,11 @@ INPUT_MASK = dpr.Field(name="inputMask", dtype=tf.bool, shape=(None,), default=F
 TARGET_MASK = dpr.Field(name="targetMask", dtype=tf.bool, shape=(None,), default=False)
 
 
+def INPUT_POSITIVES_ONE_HOT(vocab_size):
+    # pylint: disable=invalid-name
+    return dpr.Field(name="inputPositivesOneHot", shape=(vocab_size,), dtype=tf.int64)
+
+
 def TARGET_POSITIVES_ONE_HOT(vocab_size):
     # pylint: disable=invalid-name
     return dpr.Field(name="targetPositivesOneHot", shape=(vocab_size,), dtype=tf.int64)

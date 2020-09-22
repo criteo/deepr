@@ -25,12 +25,13 @@ def CSVPrepro(
         F.INPUT_MASK,
         F.TARGET_POSITIVES,
         F.TARGET_MASK,
+        F.INPUT_POSITIVES_ONE_HOT(vocab_size),
         F.TARGET_POSITIVES_ONE_HOT(vocab_size),
     ]
     return dpr.prepros.Serial(
+        dpr.prepros.Shuffle(buffer_size=buffer_size, modes=[dpr.TRAIN]),
         dpr.prepros.Map(SequenceMask(inputs="inputPositives", outputs="inputMask")),
         dpr.prepros.Map(SequenceMask(inputs="targetPositives", outputs="targetMask")),
-        dpr.prepros.Shuffle(buffer_size=buffer_size, modes=[dpr.TRAIN]),
         dpr.prepros.PaddedBatch(batch_size=batch_size, fields=fields),
         dpr.prepros.Map(
             RandomNegatives(

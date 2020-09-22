@@ -36,15 +36,7 @@ def VAELoss(loss: str, vocab_size: int, beta_start: float, beta_end: float, beta
         raise ValueError(f"Unknown loss option {loss} (must be 'multi', 'multi_css' or 'bpr')")
     return dpr.layers.Sequential(
         dpr.layers.Select(
-            inputs=(
-                "userEmbeddings",
-                "logits",
-                "KL",
-                "targetPositives",
-                "targetNegatives",
-                "targetMask",
-                "targetPositivesOneHot",
-            )
+            inputs=tuple(list(layer.inputs) + ["KL"])
         ),
         layer,
         dpr.layers.AddWithWeight(

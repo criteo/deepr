@@ -1,6 +1,8 @@
 # pylint: disable=invalid-name
 """CSV Reader for MovieLens."""
 
+import random
+
 import tensorflow as tf
 import numpy as np
 import deepr as dpr
@@ -26,25 +28,31 @@ class TrainCSVReader(dpr.readers.Reader):
     See https://github.com/dawenl/vae_cf
     """
 
-    def __init__(self, path_csv: str, vocab_size: int, target_ratio: float = None):
+    def __init__(self, path_csv: str, vocab_size: int, target_ratio: float = None, shuffle: bool = True):
         self.path_csv = path_csv
         self.vocab_size = vocab_size
         self.target_ratio = target_ratio
+        self.shuffle = shuffle
         self.fields = [
             fields.UID,
             fields.INPUT_POSITIVES,
             fields.TARGET_POSITIVES,
+            fields.INPUT_POSITIVES_ONE_HOT(vocab_size),
             fields.TARGET_POSITIVES_ONE_HOT(vocab_size),
         ]
 
     def as_dataset(self):
-        tp = pd.read_csv(self.path_csv)
+        with dpr.io.Path(self.path_csv).open() as file:
+            tp = pd.read_csv(file)
         n_users = tp["uid"].max() + 1
         rows, cols = tp["uid"], tp["sid"]
         data = sparse.csr_matrix((np.ones_like(rows), (rows, cols)), dtype="int64", shape=(n_users, self.vocab_size))
 
         def _gen():
-            for idx in range(data.shape[0]):
+            idxlist = list(range(data.shape[0]))
+            if self.shuffle:
+                random.shuffle(idxlist)
+            for idx in idxlist:
                 X = data[idx]
                 if sparse.isspmatrix(X):
                     X = X.toarray()
@@ -55,15 +63,19 @@ class TrainCSVReader(dpr.readers.Reader):
                     size = int(len(indices) * (1 - self.target_ratio))
                     input_positives = indices[:size]
                     target_positives = indices[size:]
+                    input_one_hot = np.zeros((self.vocab_size,), dtype=np.int64)
+                    input_one_hot[input_positives] = 1
                     target_one_hot = np.zeros((self.vocab_size,), dtype=np.int64)
                     target_one_hot[target_positives] = 1
                 else:
                     input_positives = indices
                     target_positives = indices
+                    input_one_hot = X[0]
                     target_one_hot = X[0]
                 yield {
                     "uid": idx,
                     "inputPositives": input_positives,
+                    "inputPositivesOneHot": input_one_hot,
                     "targetPositives": target_positives,
                     "targetPositivesOneHot": target_one_hot,
                 }
@@ -89,12 +101,15 @@ class TestCSVReader(dpr.readers.Reader):
             fields.UID,
             fields.INPUT_POSITIVES,
             fields.TARGET_POSITIVES,
+            fields.INPUT_POSITIVES_ONE_HOT(vocab_size),
             fields.TARGET_POSITIVES_ONE_HOT(vocab_size),
         ]
 
     def as_dataset(self):
-        tp_tr = pd.read_csv(self.path_csv_tr)
-        tp_te = pd.read_csv(self.path_csv_te)
+        with dpr.io.Path(self.path_csv_tr).open() as file:
+            tp_tr = pd.read_csv(file)
+        with dpr.io.Path(self.path_csv_te).open() as file:
+            tp_te = pd.read_csv(file)
 
         start_idx = min(tp_tr["uid"].min(), tp_te["uid"].min())
         end_idx = max(tp_tr["uid"].max(), tp_te["uid"].max())
@@ -122,8 +137,9 @@ class TestCSVReader(dpr.readers.Reader):
                 yield {
                     "uid": idx,
                     "inputPositives": np.nonzero(X[0])[0],
+                    "inputPositivesOneHot": X[0],
                     "targetPositives": np.nonzero(y[0])[0],
-                    "targetPositivesOneHot": X[0],
+                    "targetPositivesOneHot": y[0],
                 }
 
         return tf.data.Dataset.from_generator(
