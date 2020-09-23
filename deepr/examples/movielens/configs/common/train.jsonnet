@@ -68,29 +68,15 @@
                 logits: "logits",
                 inputs: "inputPositivesOneHot",
                 targets: "targetPositives",
-            }
-        ],
-        final_metrics: [
-            {
-                type: "deepr.metrics.Mean",
-                pattern: "loss*",
             },
             {
-                type: "deepr.examples.movielens.metrics.RecallAtK",
-                name: "recall_at_20",
-                k: 20,
+                type: "deepr.examples.movielens.metrics.NDCGAtK",
+                name: "ndcg_at_100",
+                k: 100,
                 logits: "logits",
                 inputs: "inputPositivesOneHot",
                 targets: "targetPositives",
             },
-            {
-                type: "deepr.examples.movielens.metrics.RecallAtK",
-                name: "recall_at_50",
-                k: 50,
-                logits: "logits",
-                inputs: "inputPositivesOneHot",
-                targets: "targetPositives",
-            }
         ],
         train_hooks: [
             {
@@ -127,15 +113,6 @@
                 name: "training",
                 use_mlflow: "$mlflow:use_mlflow",
                 skip_after_step: "$params:max_steps"
-            },
-            {
-                type: "deepr.hooks.EarlyStoppingHookFactory",
-                metric: "recall_at_20",
-                max_steps_without_improvement: 1000,
-                min_steps: 5000,
-                mode: "increase",
-                run_every_steps: 300,
-                final_step: "$params:max_steps"
             }
         ],
         eval_hooks: [
@@ -183,8 +160,9 @@
         exporters: [
             {
                 type: "deepr.exporters.BestCheckpoint",
-                metric: "recall_at_20",
-                mode: "increase"
+                metric: "ndcg_at_100",
+                mode: "increase",
+                use_mlflow: "$mlflow:use_mlflow"
             },
             {
                 type: "deepr.exporters.SaveVariables",

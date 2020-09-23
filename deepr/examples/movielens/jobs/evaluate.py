@@ -3,7 +3,7 @@
 
 import logging
 from dataclasses import dataclass
-from typing import List
+from typing import List, Union
 
 import numpy as np
 
@@ -31,7 +31,7 @@ class Evaluate(dpr.jobs.Job):
     path_predictions: str
     path_embeddings: str
     path_biases: str
-    k: int
+    k: Union[int, List[int]]
     use_mlflow: bool = False
     num_queries: int = 1000
 
@@ -55,33 +55,53 @@ class Evaluate(dpr.jobs.Job):
         index = faiss.IndexFlatIP(embeddings_with_biases.shape[-1])
         index.add(np.ascontiguousarray(embeddings_with_biases))
         _, indices = index.search(users_with_ones, k=self.num_queries)
-        precision, recall, f1 = self.compute_metrics(predictions["input"], predictions["target"], indices)
-        LOGGER.info(f"precision@{self.k} = {precision}\n" f"recall@{self.k} = {recall}\n" f"f1@{self.k} = {f1}")
-        if self.use_mlflow:
-            mlflow.log_metric(key=f"precision_at_{self.k}", value=precision)
-            mlflow.log_metric(key=f"recall_at_{self.k}", value=recall)
-            mlflow.log_metric(key=f"f1_at_{self.k}", value=f1)
 
-    def compute_metrics(self, inputs: List[np.ndarray], targets: List[np.ndarray], predictions: List[np.ndarray]):
-        """Compute Recall, Precision and F1."""
-        recalls = []
-        precisions = []
-        f1s = []
-        for inp, tgt, pred in zip(inputs, targets, predictions):
-            # Remove indices that are in the input and take top k
-            pred = [idx for idx in pred if idx not in inp][: self.k]
-            p, r, f1 = self.precision_recall_f1(tgt, pred)
-            recalls.append(r)
-            precisions.append(p)
-            f1s.append(f1)
-        return np.mean(precisions), np.mean(recalls), np.mean(f1s)
+        k_values = [self.k] if isinstance(self.k, int) else self.k
+        for k in k_values:
+            precision, recall, f1, ndcg = compute_metrics(predictions["input"], predictions["target"], indices, k=k)
+            LOGGER.info(
+                f"precision@{k} = {precision}\n" f"recall@{k} = {recall}\n" f"f1@{k} = {f1}\n" f"NDCG@{k} = {ndcg}"
+            )
+            if self.use_mlflow:
+                mlflow.log_metric(key=f"precision_at_{k}", value=precision)
+                mlflow.log_metric(key=f"recall_at_{k}", value=recall)
+                mlflow.log_metric(key=f"f1_at_{k}", value=f1)
+                mlflow.log_metric(key=f"ndcg_at_{k}", value=ndcg)
 
-    def precision_recall_f1(self, true: np.ndarray, pred: np.ndarray):
-        """Compute precision, recall and f1_score."""
-        num_predicted = np.unique(pred).size
-        num_intersect = np.intersect1d(pred, true).size
-        num_observed = np.unique(true).size
-        p = num_intersect / min(num_predicted, self.k)
-        r = num_intersect / min(num_observed, self.k)
-        f1 = 2 * p * r / (p + r) if p != 0 or r != 0 else 0
-        return p, r, f1
+
+def compute_metrics(inputs: List[np.ndarray], targets: List[np.ndarray], predictions: List[np.ndarray], k: int):
+    """Compute Recall, Precision and F1."""
+    recalls = []
+    precisions = []
+    f1s = []
+    ndcgs = []
+    for inp, tgt, pred in zip(inputs, targets, predictions):
+        # Remove indices that are in the input and take top k
+        pred = [idx for idx in pred if idx not in inp][:k]
+        p, r, f1 = precision_recall_f1(tgt, pred, k=k)
+        ndcg = ndcg_score(tgt, pred, k=k)
+        recalls.append(r)
+        precisions.append(p)
+        f1s.append(f1)
+        ndcgs.append(ndcg)
+    return np.mean(precisions), np.mean(recalls), np.mean(f1s), np.mean(ndcgs)
+
+
+def precision_recall_f1(true: np.ndarray, pred: np.ndarray, k: int):
+    """Compute precision, recall and f1_score."""
+    num_predicted = np.unique(pred).size
+    num_intersect = np.intersect1d(pred, true).size
+    num_observed = np.unique(true).size
+    p = num_intersect / min(num_predicted, k)
+    r = num_intersect / min(num_observed, k)
+    f1 = 2 * p * r / (p + r) if p != 0 or r != 0 else 0
+    return p, r, f1
+
+
+def ndcg_score(true: np.ndarray, pred: np.ndarray, k: int):
+    """Compute Normalized Discounted Cumulative Gain."""
+    tp = 1.0 / np.log2(np.arange(2, k + 2))
+    correct = [1 if p in true else 0 for p in pred]
+    dcg = np.sum(correct * tp)
+    idcg = np.sum(tp[: min(len(true), k)])
+    return dcg / idcg

@@ -26,15 +26,7 @@
             path_predictions: "$paths:path_predictions",
             path_embeddings: "$paths:path_embeddings",
             path_biases: "$paths:path_biases",
-            k: 20,
-            use_mlflow: "$mlflow:use_mlflow"
-        },
-        {
-            type: "deepr.examples.movielens.jobs.Evaluate",
-            path_predictions: "$paths:path_predictions",
-            path_embeddings: "$paths:path_embeddings",
-            path_biases: "$paths:path_biases",
-            k: 50,
+            k: [20, 50, 100],
             use_mlflow: "$mlflow:use_mlflow"
         }
     ]

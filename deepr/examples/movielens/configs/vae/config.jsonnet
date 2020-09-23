@@ -11,11 +11,12 @@ local end = import '../common/end.jsonnet';
             "viewfs://root",
             "viewfs://prod-am6",
         ],
-        path_pex_cpu: "viewfs://root/user/g.genthial/envs/cpu/yarn-launcher-2020-09-21-14-35-16.pex",
+        path_pex_cpu: "viewfs://root/user/g.genthial/envs/cpu/yarn-launcher-2020-09-22-17-39-04.pex",
     },
     run_on_yarn: "$run:run_on_yarn",
     job: {
         type: "deepr.jobs.Pipeline",
+        eval: null,
         jobs: [
             start,
             train + {

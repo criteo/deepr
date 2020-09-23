@@ -291,7 +291,7 @@ class Trainer(TrainerBase):
                 optimizer_fn=self.optimizer_fn,
                 initializer_fn=self.initializer_fn,
                 train_metrics=self.train_metrics,
-                eval_metrics=self.final_metrics,
+                eval_metrics=self.final_metrics or self.eval_metrics,
                 train_hooks=[hook for hook in self.train_hooks if isinstance(hook, TensorHookFactory)],
                 eval_hooks=[hook for hook in self.final_hooks if isinstance(hook, TensorHookFactory)],
             ),

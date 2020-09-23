@@ -12,6 +12,7 @@ local path_dataset = "viewfs://root/user/g.genthial/movielens/ml-20m/";
         path_eval_te: path_dataset + "validation_te.csv",
         path_test_tr: path_dataset + "test_tr.csv",
         path_test_te: path_dataset + "test_te.csv",
+        path_root: null
     },
     mlflow: {
         type: "deepr.macros.MLFlowInit",
