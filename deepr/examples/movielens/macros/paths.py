@@ -13,6 +13,8 @@ class Paths(dict):
         if run_name is None:
             run_name = f"movielens.{now}"
         path_model = f"{path_root}/model"
+        path_embeddings_svd = f"{path_root}/embeddings_svd.npz"
+        path_init_ckpt = f"{path_root}/init_ckpt"
         path_mapping = f"{path_root}/data/mapping.txt"
         path_record_train = f"{path_root}/data/train.tfrecord.gz"
         path_record_eval = f"{path_root}/data/eval.tfrecord.gz"
@@ -26,6 +28,8 @@ class Paths(dict):
             run_name=run_name,
             path_root=path_root,
             path_model=path_model,
+            path_embeddings_svd=path_embeddings_svd,
+            path_init_ckpt=path_init_ckpt,
             path_mapping=path_mapping,
             path_record_train=path_record_train,
             path_record_eval=path_record_eval,

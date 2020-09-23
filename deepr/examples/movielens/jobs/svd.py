@@ -36,7 +36,6 @@ class SVD(dpr.jobs.Job):
     vocab_size: int
     dim: int = 100
     min_count: int = 10
-    n_iter: int = 2
 
     def run(self):
         # Read user-item matrix
@@ -59,11 +58,12 @@ class SVD(dpr.jobs.Job):
 
         # Compute Truncated SVD
         LOGGER.info("Computing Truncated SVD from PMI matrix")
-        svd = TruncatedSVD(n_components=self.dim, n_iter=self.n_iter, algorithm="arpack", random_state=42)
+        svd = TruncatedSVD(n_components=self.dim, algorithm="arpack", random_state=42)
         svd.fit(pmi)
         LOGGER.info(f"Explained variance: {svd.explained_variance_ratio_.sum()}")
 
         LOGGER.info(f"Saving embeddings to {self.path_embeddings}")
+        dpr.io.Path(self.path_embeddings).parent.mkdir(parents=True, exist_ok=True)
         embeddings = svd.transform(pmi)
         with dpr.io.Path(self.path_embeddings).open("wb") as file:
             np.save(file, embeddings)

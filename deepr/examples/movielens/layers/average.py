@@ -10,13 +10,18 @@ import deepr as dpr
 LOGGER = logging.getLogger(__name__)
 
 
-def AverageModel(vocab_size: int, dim: int, keep_prob: float):
+def AverageModel(vocab_size: int, dim: int, keep_prob: float, train_embeddings: bool = True):
     """Average Model."""
     return dpr.layers.Sequential(
         dpr.layers.Select(inputs=("inputPositives", "inputMask")),
         RandomMask(inputs="inputMask", outputs="inputMask", keep_prob=keep_prob),
         dpr.layers.Embedding(
-            inputs="inputPositives", outputs="inputEmbeddings", variable_name="embeddings", shape=(vocab_size, dim)
+            inputs="inputPositives",
+            outputs="inputEmbeddings",
+            variable_name="embeddings",
+            shape=(vocab_size, dim),
+            trainable=train_embeddings,
+            initializer=tf.zeros_initializer() if train_embeddings else None,
         ),
         dpr.layers.ToFloat(inputs="inputMask", outputs="inputWeights"),
         dpr.layers.WeightedAverage(inputs=("inputEmbeddings", "inputWeights"), outputs="userEmbeddings"),
