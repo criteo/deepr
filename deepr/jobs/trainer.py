@@ -220,6 +220,7 @@ class Trainer(TrainerBase):
     run_config: Dict = field(default_factory=RunConfig)
     config_proto: Dict = field(default_factory=ConfigProto)
     random_seed: int = 42
+    preds: List[str] = field(default_factory=list)
 
     def __post_init__(self):
         # Automatically replace None values by the default field value
@@ -253,6 +254,7 @@ class Trainer(TrainerBase):
                 eval_metrics=self.eval_metrics,
                 train_hooks=[hook for hook in self.train_hooks if isinstance(hook, TensorHookFactory)],
                 eval_hooks=[hook for hook in self.eval_hooks if isinstance(hook, TensorHookFactory)],
+                preds=self.preds,
             ),
             model_dir=model_dir,
             config=tf.estimator.RunConfig(
@@ -294,6 +296,7 @@ class Trainer(TrainerBase):
                 eval_metrics=self.final_metrics or self.eval_metrics,
                 train_hooks=[hook for hook in self.train_hooks if isinstance(hook, TensorHookFactory)],
                 eval_hooks=[hook for hook in self.final_hooks if isinstance(hook, TensorHookFactory)],
+                preds=self.preds,
             ),
             model_dir=model_dir,
         )
@@ -324,11 +327,14 @@ def model_fn(
     eval_metrics: Iterable[Callable],
     train_hooks: Iterable,
     eval_hooks: Iterable,
+    preds: List[str],
 ):
     """Model Function"""
     predictions = pred_fn(features, mode)
     if mode == tf.estimator.ModeKeys.PREDICT:
-        return tf.estimator.EstimatorSpec(mode, predictions=predictions)
+        return tf.estimator.EstimatorSpec(
+            mode, predictions=predictions if not preds else {key: predictions[key] for key in preds}
+        )
 
     losses = loss_fn({**features, **predictions}, mode)
     loss = losses["loss"]

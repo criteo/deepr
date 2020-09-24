@@ -16,6 +16,9 @@ def VAEModel(
     dims_encode: Tuple[int, ...] = (600, 200),
     dims_decode: Tuple[int, ...] = (200, 600),
     keep_prob: float = 0.5,
+    train_embeddings: bool = True,
+    project: bool = False,
+    share_embeddings: bool = False,
 ) -> dpr.layers.Layer:
     """VAE Model."""
     if dims_encode[-1] != dims_decode[0]:
@@ -27,11 +30,15 @@ def VAEModel(
         dpr.layers.Embedding(
             inputs="inputPositives",
             outputs="inputEmbeddings",
-            variable_name="encoder/embeddings",
+            variable_name="embeddings" if share_embeddings else "encoder/embeddings",
             shape=(vocab_size, dims_encode[0]),
+            trainable=train_embeddings,
         ),
         dpr.layers.ToFloat(inputs="inputMask", outputs="inputWeights"),
         Average(inputs=("inputEmbeddings", "inputWeights"), outputs="averageEmbeddings"),
+        Projection(inputs="averageEmbeddings", outputs="averageEmbeddings", variable_name="encoder/projection")
+        if project
+        else [],
         AddBias(inputs="averageEmbeddings", outputs="averageEmbeddings", variable_name="encoder/bias"),
         dpr.layers.Lambda(
             lambda tensors, _: tf.nn.tanh(tensors), inputs="averageEmbeddings", outputs="averageEmbeddings"
@@ -39,7 +46,17 @@ def VAEModel(
         Encode(inputs="averageEmbeddings", outputs=("mu", "std", "KL"), dims=dims_encode[1:]),
         GaussianNoise(inputs=("mu", "std"), outputs="latent"),
         Decode(inputs="latent", outputs="userEmbeddings", dims=dims_decode[1:]),
-        Logits(inputs="userEmbeddings", outputs="logits", vocab_size=vocab_size, dim=dims_decode[-1]),
+        Projection(inputs="userEmbeddings", outputs="userEmbeddings", variable_name="decoder/projection")
+        if project
+        else [],
+        Logits(
+            inputs="userEmbeddings",
+            outputs="logits",
+            vocab_size=vocab_size,
+            dim=dims_decode[-1],
+            trainable=train_embeddings,
+            reuse=share_embeddings,
+        ),
         dpr.layers.Select(inputs=("userEmbeddings", "logits", "mu", "std", "KL")),
     )
 
@@ -53,6 +70,21 @@ def RandomMask(tensors: tf.Tensor, mode: str, keep_prob: float):
     return tensors
 
 
+@dpr.layers.layer(n_in=1, n_out=1)
+def Projection(tensors: tf.Tensor, variable_name: str):
+    """Apply symmetric transform to non-projected user embeddings."""
+    # Resolve embeddings dimension
+    dim = int(tensors.shape[-1])
+    if not isinstance(dim, int):
+        raise TypeError(f"Expected static shape for {tensors} but got {dim} (must be INT)")
+
+    # Retrieve projection matrix
+    with tf.variable_scope(tf.get_variable_scope(), reuse=False):
+        projection_matrix = tf.get_variable(name=variable_name, shape=[dim, dim])
+
+    return tf.matmul(tensors, projection_matrix)
+
+
 @dpr.layers.layer(n_in=2, n_out=1)
 def Average(tensors: Tuple[tf.Tensor, tf.Tensor]):
     vectors, weights = tensors
@@ -63,7 +95,9 @@ def Average(tensors: Tuple[tf.Tensor, tf.Tensor]):
 @dpr.layers.layer(n_in=1, n_out=1)
 def AddBias(tensors: tf.Tensor, variable_name: str):
     dim = tensors.shape[-1]
-    biases = tf.get_variable(name=variable_name, shape=(dim,), initializer=tf.zeros_initializer())
+    biases = tf.get_variable(
+        name=variable_name, shape=(dim,), initializer=tf.truncated_normal_initializer(stddev=0.001)
+    )
     return tensors + tf.expand_dims(biases, axis=0)
 
 
@@ -109,8 +143,11 @@ def Decode(tensors: tf.Tensor, dims: Tuple, activation=tf.nn.tanh):
 
 
 @dpr.layers.layer(n_in=1, n_out=1)
-def Logits(tensors: tf.Tensor, vocab_size: int, dim: int):
-    embeddings = tf.get_variable(name="embeddings", shape=(vocab_size, dim))
-    biases = tf.get_variable(name="biases", shape=(vocab_size,), initializer=tf.zeros_initializer())
+def Logits(tensors: tf.Tensor, vocab_size: int, dim: int, trainable: bool = True, reuse: bool = False):
+    with tf.variable_scope(tf.get_variable_scope(), reuse=reuse):
+        embeddings = tf.get_variable(name="embeddings", shape=(vocab_size, dim), trainable=trainable)
+    biases = tf.get_variable(
+        name="biases", shape=(vocab_size,), initializer=tf.truncated_normal_initializer(stddev=0.001)
+    )
     logits = tf.linalg.matmul(tensors, embeddings, transpose_b=True) + tf.expand_dims(biases, axis=0)
     return logits

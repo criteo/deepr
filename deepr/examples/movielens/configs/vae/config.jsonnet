@@ -30,7 +30,8 @@ local end = import '../common/end.jsonnet';
                         beta_start: 0,
                         beta_end: 0.2,
                         beta_steps: 40000,
-                    }
+                    },
+                    preds: ["userEmbeddings"]
                 }
             },
             evaluate,

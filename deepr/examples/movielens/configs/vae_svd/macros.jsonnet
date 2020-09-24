@@ -9,10 +9,11 @@ macros + {
     },
     params+: {
         target_ratio: null,
-        num_negatives: null,
-        loss: "multi",
-        dim: 100,
-        train_embeddings: true,
-        normalize_embeddings: false,
+        normalize_embeddings: true,
+        share_embeddings: true,
+        num_negatives: 1000,
+        loss: "multi_css",
+        train_embeddings: false,
+        project: false,
     }
 }

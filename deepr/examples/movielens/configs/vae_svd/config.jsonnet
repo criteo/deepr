@@ -20,9 +20,8 @@ local end = import '../common/end.jsonnet';
                 path_csv: "$paths:path_train",
                 path_embeddings: "$paths:path_embeddings_svd",
                 vocab_size: "$params:vocab_size",
-                dim: "$params:dim",
+                dim: 600,
                 min_count: 10,
-                n_iter: 2,
             },
             {
                 type: "deepr.examples.movielens.jobs.InitCheckpoint",
@@ -33,22 +32,31 @@ local end = import '../common/end.jsonnet';
             train + {
                 trainer+: {
                     pred_fn: {
-                        type: "deepr.examples.movielens.layers.AverageModel",
+                        type: "deepr.examples.movielens.layers.VAEModel",
                         vocab_size: "$params:vocab_size",
-                        dim: "$params:dim",
+                        dims_encode: [600, 200],
+                        dims_decode: [200, 600],
                         keep_prob: 0.5,
-                        train_embeddings: "$params:train_embeddings"
+                        train_embeddings: "$params:train_embeddings",
+                        project: "$params:project",
+                        share_embeddings: "$params:share_embeddings"
                     },
                     loss_fn: {
-                        type: "deepr.examples.movielens.layers.Loss",
+                        type: "deepr.examples.movielens.layers.VAELoss",
                         loss: "$params:loss",
                         vocab_size: "$params:vocab_size",
+                        beta_start: 0,
+                        beta_end: 0.2,
+                        beta_steps: 40000,
                     },
                     initializer_fn: {
                         type: "deepr.initializers.CheckpointInitializer",
-                        assignment_map: {"embeddings": "embeddings"},
+                        assignment_map: {
+                            "embeddings": "embeddings",
+                        },
                         path_init_ckpt: "$paths:path_init_ckpt"
                     },
+                    preds: ["userEmbeddings"]
                 }
             },
             evaluate,
