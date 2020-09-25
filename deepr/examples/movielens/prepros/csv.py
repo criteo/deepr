@@ -11,7 +11,6 @@ from deepr.examples.movielens.utils import fields as F
 
 def CSVPrepro(
     vocab_size: int,
-    buffer_size: int = 1024,
     batch_size: int = 512,
     repeat_size: Optional[int] = None,
     prefetch_size: int = 1,
@@ -29,7 +28,6 @@ def CSVPrepro(
         F.TARGET_POSITIVES_ONE_HOT(vocab_size),
     ]
     return dpr.prepros.Serial(
-        dpr.prepros.Shuffle(buffer_size=buffer_size, modes=[dpr.TRAIN]),
         dpr.prepros.Map(SequenceMask(inputs="inputPositives", outputs="inputMask")),
         dpr.prepros.Map(SequenceMask(inputs="targetPositives", outputs="targetMask")),
         dpr.prepros.PaddedBatch(batch_size=batch_size, fields=fields),

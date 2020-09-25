@@ -6,7 +6,6 @@ from typing import Tuple
 import tensorflow as tf
 
 from deepr.layers import base
-from deepr.layers.reduce import Average
 
 
 class MultiLogLikelihood(base.Layer):
@@ -32,4 +31,4 @@ class MultiLogLikelihood(base.Layer):
         """
         logits, classes = tensors
         log_softmax = tf.nn.log_softmax(logits)
-        return -Average()(tf.reduce_sum(log_softmax * tf.cast(classes, tf.float32), axis=-1))
+        return -tf.reduce_mean(tf.reduce_sum(log_softmax * tf.cast(classes, tf.float32), axis=-1))

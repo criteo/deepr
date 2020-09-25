@@ -26,14 +26,7 @@ def Loss(loss: str, vocab_size: int):
 
 def VAELoss(loss: str, vocab_size: int, beta_start: float, beta_end: float, beta_steps: int):
     """Compute Multinomial loss."""
-    if loss == "multi":
-        layer = dpr.layers.MultiLogLikelihood(inputs=("logits", "targetPositivesOneHot"), outputs="loss")
-    elif loss == "multi_css":
-        layer = MultiLogLikelihoodCSS(vocab_size=vocab_size)
-    elif loss == "bpr":
-        layer = BPRLoss(vocab_size=vocab_size)
-    else:
-        raise ValueError(f"Unknown loss option {loss} (must be 'multi', 'multi_css' or 'bpr')")
+    layer = Loss(loss=loss, vocab_size=vocab_size)
     return dpr.layers.Sequential(
         dpr.layers.Select(inputs=tuple(list(layer.inputs) + ["KL"])),
         layer,

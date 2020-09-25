@@ -1,8 +1,6 @@
 # pylint: disable=invalid-name
 """CSV Reader for MovieLens."""
 
-import random
-
 import tensorflow as tf
 import numpy as np
 import deepr as dpr
@@ -28,11 +26,14 @@ class TrainCSVReader(dpr.readers.Reader):
     See https://github.com/dawenl/vae_cf
     """
 
-    def __init__(self, path_csv: str, vocab_size: int, target_ratio: float = None, shuffle: bool = True):
+    def __init__(
+        self, path_csv: str, vocab_size: int, target_ratio: float = None, shuffle: bool = True, seed: int = 98765
+    ):
         self.path_csv = path_csv
         self.vocab_size = vocab_size
         self.target_ratio = target_ratio
         self.shuffle = shuffle
+        self.seed = seed
         self.fields = [
             fields.UID,
             fields.INPUT_POSITIVES,
@@ -47,11 +48,12 @@ class TrainCSVReader(dpr.readers.Reader):
         n_users = tp["uid"].max() + 1
         rows, cols = tp["uid"], tp["sid"]
         data = sparse.csr_matrix((np.ones_like(rows), (rows, cols)), dtype="int64", shape=(n_users, self.vocab_size))
+        np.random.seed(self.seed)
 
         def _gen():
             idxlist = list(range(data.shape[0]))
             if self.shuffle:
-                random.shuffle(idxlist)
+                np.random.shuffle(idxlist)
             for idx in idxlist:
                 X = data[idx]
                 if sparse.isspmatrix(X):

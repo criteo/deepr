@@ -14,7 +14,6 @@
             prepro_fn: {
                 type: "deepr.examples.movielens.prepros.CSVPrepro",
                 vocab_size: "$params:vocab_size",
-                buffer_size: 1024,
                 batch_size: "$params:batch_size",
                 repeat_size: null,
                 prefetch_size: 1,

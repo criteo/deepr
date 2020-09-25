@@ -20,6 +20,7 @@
             path_csv: "$paths:path_train",
             vocab_size: "$params:vocab_size",
             target_ratio: "$params:target_ratio",
+            seed: 42
         },
         eval_input_fn: {
             type: "deepr.examples.movielens.readers.TestCSVReader",
@@ -30,7 +31,6 @@
         prepro_fn: {
             type: "deepr.examples.movielens.prepros.CSVPrepro",
             vocab_size: "$params:vocab_size",
-            buffer_size: 1024,
             batch_size: "$params:batch_size",
             repeat_size: null,
             prefetch_size: 1,
