@@ -6,7 +6,8 @@ local end = import '../common/end.jsonnet';
 {
     type: "deepr.jobs.YarnLauncher",
     config: {
-        type: "deepr.jobs.YarnLauncherConfig"
+        type: "deepr.jobs.YarnLauncherConfig",
+        path_pex_cpu: "viewfs://root/user/g.genthial/envs/cpu/yarn-launcher-2020-09-23-16-20-48.pex"
     },
     run_on_yarn: "$run:run_on_yarn",
     job: {
@@ -38,7 +39,8 @@ local end = import '../common/end.jsonnet';
                         keep_prob: 0.5,
                         train_embeddings: "$params:train_embeddings",
                         project: "$params:project",
-                        share_embeddings: "$params:share_embeddings"
+                        share_embeddings: "$params:share_embeddings",
+                        seed: 42,
                     },
                     loss_fn: {
                         type: "deepr.examples.movielens.layers.VAELoss",

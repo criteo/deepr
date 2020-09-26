@@ -144,8 +144,8 @@
         },
         run_config: {
             type: "deepr.jobs.RunConfig",
-            save_checkpoints_steps: 300,
-            save_summary_steps: 300,
+            save_checkpoints_steps: 230,
+            save_summary_steps: 100,
             keep_checkpoint_max: null,
             log_step_count_steps: 100
         },

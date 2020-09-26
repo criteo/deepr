@@ -9,11 +9,11 @@ macros + {
     },
     params+: {
         target_ratio: 0.2,
-        num_negatives: 100,
+        num_negatives: 1000,
         loss: "bpr",
+        normalize_embeddings: true,
         dim: 600,
         train_embeddings: false,
-        normalize_embeddings: true,
         project: false
     }
 }

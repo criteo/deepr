@@ -9,7 +9,7 @@ macros + {
     },
     params+: {
         target_ratio: 0.2,
-        num_negatives: null,
-        loss: "multi"
+        num_negatives: 1000,
+        loss: "bpr"
     }
 }

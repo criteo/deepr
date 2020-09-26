@@ -168,9 +168,9 @@ def AddWithWeight(tensors: Tuple[tf.Tensor, tf.Tensor], start: float, end: float
             float(start), tf.train.get_global_step(), steps, float(end), power=1.0, cycle=False
         )
         return t1 + beta * t2
-    elif start:
-        LOGGER.info(f"Adding {t1} + {float(beta)} {t2} (no decay).")
-        return t1 + float(beta) * t2
+    elif start is not None:
+        LOGGER.info(f"Adding {t1} + {float(start)} {t2} (no decay).")
+        return t1 + float(start) * t2
     else:
         LOGGER.info(f"Skipping addition, returning only {t1}")
         return t1

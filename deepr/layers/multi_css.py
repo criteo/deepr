@@ -37,8 +37,14 @@ class MultiLogLikelihoodCSS(base.Layer):
         """
         positive_logits, negative_logits, positive_mask, negative_mask = tensors
 
+        # Remove -max for numerical stability
+        max_negative_logits = tf.reduce_max(negative_logits, axis=-1)
+        max_positive_logits = tf.maximum(positive_logits, max_negative_logits)
+        max_logits = tf.reduce_max(max_positive_logits, axis=-1)
+        positive_logits -= tf.expand_dims(max_logits, axis=-1)
+        negative_logits -= tf.expand_dims(tf.expand_dims(max_logits, axis=-1), axis=-1)
+
         # Exponential of positive and negative logits
-        # TODO: -max for numerical stability
         u_p = tf.exp(positive_logits)
         u_ns = tf.exp(negative_logits)
         u_ns *= tf.cast(negative_mask, tf.float32)
