@@ -34,6 +34,7 @@ from deepr.layers.lookup import (
 )
 from deepr.layers.lstm import LSTM
 from deepr.layers.mask import Equal, NotEqual, BooleanMask, BooleanReduceMode
+from deepr.layers.multi import MultiLogLikelihood
 from deepr.layers.nce_loss import NegativeSampling, MaskedNegativeSampling
 from deepr.layers.reduce import Average, WeightedAverage
 from deepr.layers.size import IsMinSize
