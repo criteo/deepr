@@ -7,6 +7,7 @@ from deepr.layers.click_rank import ClickRank
 from deepr.layers.combinators import Sequential, Select, Rename, Parallel, ActiveMode, Scope
 from deepr.layers.core import (
     Add,
+    AddWithWeight,
     Concat,
     Conv1d,
     Dense,
