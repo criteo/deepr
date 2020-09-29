@@ -19,10 +19,17 @@ except ImportError as e:
 LOGGER = logging.getLogger(__name__)
 
 
-COLUMNS = ["uid", "user", "target"]
+COLUMNS = ["uid", "user", "input", "target"]
 
 
-SCHEMA = pa.schema([("uid", pa.int64()), ("user", pa.list_(pa.float32())), ("target", pa.list_(pa.int64()))])
+SCHEMA = pa.schema(
+    [
+        ("uid", pa.int64()),
+        ("user", pa.list_(pa.float32())),
+        ("input", pa.list_(pa.int64())),
+        ("target", pa.list_(pa.int64())),
+    ]
+)
 
 
 @dataclass
@@ -41,10 +48,22 @@ class Predict(dpr.jobs.Job):
         )
         predictions = []
         for preds in predictor(lambda: self.prepro_fn(self.input_fn(), tf.estimator.ModeKeys.PREDICT)):
-            for uid, user, target, mask in zip(
-                preds["uid"], preds["userEmbeddings"], preds["targetPositives"], preds["targetMask"]
+            for uid, user, input_idx, input_mask, target_idx, target_mask in zip(
+                preds["uid"],
+                preds["userEmbeddings"],
+                preds["inputPositives"],
+                preds["inputMask"],
+                preds["targetPositives"],
+                preds["targetMask"],
             ):
-                predictions.append((uid, user.astype(np.float32).tolist(), target[mask].astype(np.int64).tolist()))
+                predictions.append(
+                    (
+                        uid,
+                        user.astype(np.float32).tolist(),
+                        input_idx[input_mask].astype(np.int64).tolist(),
+                        target_idx[target_mask].astype(np.int64).tolist(),
+                    )
+                )
 
         with dpr.io.ParquetDataset(self.path_predictions).open() as ds:
             df = pd.DataFrame(data=predictions, columns=COLUMNS)
