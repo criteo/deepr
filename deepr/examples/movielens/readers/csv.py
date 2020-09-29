@@ -1,74 +1,151 @@
+# pylint: disable=invalid-name
 """CSV Reader for MovieLens."""
 
-import random
-import json
-
-import pandas as pd
 import tensorflow as tf
-
+import numpy as np
 import deepr as dpr
 
 from deepr.examples.movielens.utils import fields
 
 
-FIELDS = [fields.UID, fields.INPUT_POSITIVES, fields.TARGET_POSITIVES, fields.TARGET_NEGATIVES]
+try:
+    import pandas as pd
+except ImportError as e:
+    print(f"Pandas needs to be installed for MovieLens {e}")
 
 
-class CSVReader(dpr.readers.Reader):
-    """CSV Reader for MovieLens."""
+try:
+    from scipy import sparse
+except ImportError as e:
+    print(f"Scipy needs to be installed for MovieLens {e}")
+
+
+class TrainCSVReader(dpr.readers.Reader):
+    """Reader of MovieLens CSV files of the Multi-VAE paper.
+
+    See https://github.com/dawenl/vae_cf
+    """
 
     def __init__(
-        self,
-        path_csv: str,
-        path_mapping: str,
-        target_ratio: float = 0.2,
-        num_negatives: int = 8,
-        next_movie: int = None,
-        num_shuffle: int = None,
+        self, path_csv: str, vocab_size: int, target_ratio: float = None, shuffle: bool = True, seed: int = 98765
     ):
         self.path_csv = path_csv
-        self.path_mapping = path_mapping
+        self.vocab_size = vocab_size
         self.target_ratio = target_ratio
-        self.num_negatives = num_negatives
-        self.next_movie = next_movie
-        self.num_shuffle = num_shuffle
+        self.shuffle = shuffle
+        self.seed = seed
+        self.fields = [
+            fields.UID,
+            fields.INPUT_POSITIVES,
+            fields.TARGET_POSITIVES,
+            fields.INPUT_POSITIVES_ONE_HOT(vocab_size),
+            fields.TARGET_POSITIVES_ONE_HOT(vocab_size),
+        ]
 
     def as_dataset(self):
-        # Read vocabulary and movies
         with dpr.io.Path(self.path_csv).open() as file:
-            df = pd.read_csv(file)
-            df.movieIds = df.movieIds.apply(json.loads)
-        vocab = dpr.vocab.read(self.path_mapping)
-        mapping = {int(movie): idx for idx, movie in enumerate(vocab)}
-        sample_indices = [idx for movie, idx in mapping.items() if movie != self.next_movie]
-
-        def _to_record(uid, indices):
-            split = int(len(indices) * (1 - self.target_ratio))
-            input_positives = indices[:split]
-            target_positives = indices[split:]
-            if self.next_movie:
-                input_positives.append(mapping[self.next_movie])
-            return {
-                "uid": uid,
-                "inputPositives": input_positives,
-                "targetPositives": target_positives,
-                "targetNegatives": [
-                    random.sample(sample_indices, self.num_negatives) for _ in range(len(target_positives))
-                ],
-            }
+            tp = pd.read_csv(file)
+        n_users = tp["uid"].max() + 1
+        rows, cols = tp["uid"], tp["sid"]
+        data = sparse.csr_matrix((np.ones_like(rows), (rows, cols)), dtype="int64", shape=(n_users, self.vocab_size))
+        np.random.seed(self.seed)
 
         def _gen():
-            for _, row in df.iterrows():
-                indices = [mapping[int(movie)] for movie in row.movieIds if int(movie) in mapping]
-                if self.num_shuffle is not None:
-                    for _ in range(self.num_shuffle):
-                        random.shuffle(indices)
-                        yield _to_record(row.uid, indices)
+            idxlist = list(range(data.shape[0]))
+            if self.shuffle:
+                np.random.shuffle(idxlist)
+            for idx in idxlist:
+                X = data[idx]
+                if sparse.isspmatrix(X):
+                    X = X.toarray()
+                X = X.astype("int64")
+                indices = np.nonzero(X[0])[0]
+                if self.target_ratio is not None:
+                    np.random.shuffle(indices)
+                    size = int(len(indices) * (1 - self.target_ratio))
+                    input_positives = indices[:size]
+                    target_positives = indices[size:]
+                    input_one_hot = np.zeros((self.vocab_size,), dtype=np.int64)
+                    input_one_hot[input_positives] = 1
+                    target_one_hot = np.zeros((self.vocab_size,), dtype=np.int64)
+                    target_one_hot[target_positives] = 1
                 else:
-                    yield _to_record(row.uid, indices)
+                    input_positives = indices
+                    target_positives = indices
+                    input_one_hot = X[0]
+                    target_one_hot = X[0]
+                yield {
+                    "uid": idx,
+                    "inputPositives": input_positives,
+                    "inputPositivesOneHot": input_one_hot,
+                    "targetPositives": target_positives,
+                    "targetPositivesOneHot": target_one_hot,
+                }
 
         return tf.data.Dataset.from_generator(
             _gen,
-            output_types={field.name: field.dtype for field in FIELDS},
-            output_shapes={field.name: field.shape for field in FIELDS},
+            output_types={field.name: field.dtype for field in self.fields},
+            output_shapes={field.name: field.shape for field in self.fields},
+        )
+
+
+class TestCSVReader(dpr.readers.Reader):
+    """Reader of MovieLens test CSV files of the Multi-VAE paper.
+
+    See https://github.com/dawenl/vae_cf
+    """
+
+    def __init__(self, path_csv_tr: str, path_csv_te: str, vocab_size: int):
+        self.path_csv_tr = path_csv_tr
+        self.path_csv_te = path_csv_te
+        self.vocab_size = vocab_size
+        self.fields = [
+            fields.UID,
+            fields.INPUT_POSITIVES,
+            fields.TARGET_POSITIVES,
+            fields.INPUT_POSITIVES_ONE_HOT(vocab_size),
+            fields.TARGET_POSITIVES_ONE_HOT(vocab_size),
+        ]
+
+    def as_dataset(self):
+        with dpr.io.Path(self.path_csv_tr).open() as file:
+            tp_tr = pd.read_csv(file)
+        with dpr.io.Path(self.path_csv_te).open() as file:
+            tp_te = pd.read_csv(file)
+
+        start_idx = min(tp_tr["uid"].min(), tp_te["uid"].min())
+        end_idx = max(tp_tr["uid"].max(), tp_te["uid"].max())
+
+        rows_tr, cols_tr = tp_tr["uid"] - start_idx, tp_tr["sid"]
+        rows_te, cols_te = tp_te["uid"] - start_idx, tp_te["sid"]
+
+        data_tr = sparse.csr_matrix(
+            (np.ones_like(rows_tr), (rows_tr, cols_tr)), dtype="int64", shape=(end_idx - start_idx + 1, self.vocab_size)
+        )
+        data_te = sparse.csr_matrix(
+            (np.ones_like(rows_te), (rows_te, cols_te)), dtype="int64", shape=(end_idx - start_idx + 1, self.vocab_size)
+        )
+
+        def _gen():
+            for idx in range(data_tr.shape[0]):
+                X = data_tr[idx]
+                y = data_te[idx]
+                if sparse.isspmatrix(X):
+                    X = X.toarray()
+                if sparse.isspmatrix(y):
+                    y = y.toarray()
+                X = X.astype("int64")
+                y = y.astype("int64")
+                yield {
+                    "uid": idx,
+                    "inputPositives": np.nonzero(X[0])[0],
+                    "inputPositivesOneHot": X[0],
+                    "targetPositives": np.nonzero(y[0])[0],
+                    "targetPositivesOneHot": y[0],
+                }
+
+        return tf.data.Dataset.from_generator(
+            _gen,
+            output_types={field.name: field.dtype for field in self.fields},
+            output_shapes={field.name: field.shape for field in self.fields},
         )
