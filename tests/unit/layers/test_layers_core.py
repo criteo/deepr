@@ -67,6 +67,27 @@ def test_layers_dense():
         np.testing.assert_equal(got, got2)
 
 
+def test_layers_dense_index():
+    """Test for DenseIndex."""
+    x = np.random.random([8, 16])
+    indices = np.random.randint(32, size=[8, 4])
+    x_tf, indices_tf = tf.constant(x, dtype=tf.float32), tf.constant(indices, dtype=tf.int64)
+    kernel = tf.get_variable("kernel", shape=(32, 16))
+    bias = tf.get_variable("bias", shape=(32,))
+    layer = dpr.layers.DenseIndex(units=32, kernel_name="kernel", bias_name="bias", reuse=True)
+    result = layer((x_tf, indices_tf))
+    result2 = tf.matmul(x_tf, kernel, transpose_b=True) + tf.expand_dims(bias, axis=0)
+    with tf.Session() as sess:
+        sess.run(tf.global_variables_initializer())
+        got = sess.run(result)
+        got2 = sess.run(result2)
+        assert got.shape == (8, 4)
+        assert got2.shape == (8, 32)
+        for batch in range(8):
+            for idx in range(4):
+                np.testing.assert_allclose(got[batch, idx], got2[batch, indices[batch, idx]], 1e-4)
+
+
 def test_layers_conv1d():
     """Test for Conv1d"""
     layer = dpr.layers.Conv1d(filters=5, kernel_size=1)
