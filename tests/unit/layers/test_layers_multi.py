@@ -34,4 +34,4 @@ def test_layers_multi():
     result = log_likelihood(inputs)
     with tf.Session() as sess:
         result_eval = sess.run(result["log_likelihood"])
-        np.testing.assert_allclose(result_eval, expected, 1e-4)
+        np.testing.assert_allclose(result_eval, expected)
