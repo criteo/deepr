@@ -20,6 +20,14 @@ deepr.examples.movielens.jobs.evaluate module
    :undoc-members:
    :show-inheritance:
 
+deepr.examples.movielens.jobs.init module
+-----------------------------------------
+
+.. automodule:: deepr.examples.movielens.jobs.init
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 deepr.examples.movielens.jobs.predict module
 --------------------------------------------
 
