@@ -324,6 +324,29 @@ class Layer(ABC):
             raise e
 
 
+class Lambda(Layer):
+    """Lambda layer.
+
+    Example
+    -------
+    >>> from deepr.layers import Lambda
+    >>> add_one = Lambda(lambda tensors, _: tensors + 1, inputs="x", outputs="y")
+    >>> add_one(1)
+    2
+    >>> add_one({"x": 1})
+    {'y': 2}
+    """
+
+    def __init__(self, fn: Callable, **kwargs):
+        super().__init__(**kwargs)
+        self.fn = fn
+
+    def forward(
+        self, tensors: Union[tf.Tensor, Tuple[tf.Tensor, ...]], mode: str = None
+    ) -> Union[tf.Tensor, Tuple[tf.Tensor, ...]]:
+        return self.fn(tensors, mode)
+
+
 def layer(
     fn: Callable = None,
     n_in: int = None,

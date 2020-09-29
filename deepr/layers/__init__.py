@@ -1,6 +1,6 @@
 # pylint: disable=unused-import,missing-docstring
 
-from deepr.layers.base import Layer, layer
+from deepr.layers.base import Layer, layer, Lambda
 from deepr.layers.bpr import BPR, MaskedBPR
 from deepr.layers.bpr_max import BPRMax, MaskedBPRMax
 from deepr.layers.click_rank import ClickRank
