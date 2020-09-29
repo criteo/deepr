@@ -36,6 +36,14 @@ deepr.examples.movielens.jobs.predict module
    :undoc-members:
    :show-inheritance:
 
+deepr.examples.movielens.jobs.svd module
+----------------------------------------
+
+.. automodule:: deepr.examples.movielens.jobs.svd
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 
