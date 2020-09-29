@@ -11,7 +11,10 @@ import tensorflow as tf
 import deepr as dpr
 from deepr.examples.movielens.utils import fields
 
-from .build_utils import get_timelines
+try:
+    import pandas as pd
+except ImportError as e:
+    print(f"Pandas needs to be installed for MovieLens {e}")
 
 
 LOGGER = logging.getLogger(__name__)
@@ -22,7 +25,19 @@ FIELDS = [fields.UID, fields.INPUT_POSITIVES, fields.TARGET_POSITIVES, fields.TA
 
 @dataclass
 class BuildRecords(dpr.jobs.Job):
-    """Build MovieLens dataset as TFRecords."""
+    """Build MovieLens dataset as TFRecords.
+
+    It aggregates movie ratings by user and build timelines of movies.
+    The users are split into train / validation / test sets. Each
+    timeline is split in two sub-timelines: one input, one target. For
+    each item in the target, n negatives are sampled.
+
+    The resulting tfrecords have the following fields
+    - "uid": ()
+    - "inputPositives": [size_input]
+    - "targetPositives": [size_target]
+    - "targetNegatives": [size_target, num_negatives]
+    """
 
     path_ratings: str
     path_mapping: str
@@ -80,6 +95,37 @@ class BuildRecords(dpr.jobs.Job):
                 ),
                 path,
             )
+
+
+def get_timelines(path_ratings: str, min_rating: float, min_length: int) -> List[Tuple[str, List[int]]]:
+    """Build timelines from MovieLens Dataset.
+
+    Apply the following filters
+        keep movies with ratings > min_rating
+        keep users with number of movies > min_length
+    """
+    # Open path_ratings from HDFS / Local FileSystem
+    LOGGER.info(f"Reading ratings from {path_ratings}")
+    with dpr.io.Path(path_ratings).open() as file:
+        ratings_data = pd.read_csv(file)
+    LOGGER.info(f"Number of timelines before filtration is {len(set(ratings_data.userId))}")
+    LOGGER.info(f"Number of movies before filtration is {len(set(ratings_data.movieId))}")
+
+    # Group and aggregate ratings per user
+    LOGGER.info("Grouping ratings by user")
+    ratings_data = ratings_data[ratings_data.rating >= min_rating]
+    grouped_data = ratings_data.groupby("userId").agg(list).reset_index()
+    grouped_data = grouped_data[grouped_data.rating.map(len) >= min_length]
+    LOGGER.info(f"Number of timelines after filtration is {len(grouped_data)}")
+
+    # Sort ratings by timestamp
+    LOGGER.info("Building timelines (sort by timestamp).")
+    timelines = []
+    for _, row in dpr.utils.progress(grouped_data.iterrows(), secs=10):
+        uid = str(row.userId)
+        movies = [movie for _, movie in sorted(zip(row.timestamp, row.movieId))]
+        timelines.append((uid, movies))
+    return timelines
 
 
 def write_records(gen: Callable, path: str):
