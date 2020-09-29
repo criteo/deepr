@@ -986,6 +986,57 @@ correctly named nodes are defined.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt id="deepr.layers.core.DenseIndex">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.core.</code><code class="sig-name descname">DenseIndex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">units</span></em>, <em class="sig-param"><span class="n">kernel_name</span></em>, <em class="sig-param"><span class="n">bias_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">reuse</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">trainable</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#DenseIndex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.DenseIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Dense Index layer.</p>
+<p>Given a matrix A, and biases, a classical dense layer computes
+d = activation(Ax + b), which is a vector of dimension units.</p>
+<p>The DenseIndex layer computes only some entries of the resulting
+vector. In other words, if</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>indices : shape = [batch, num_indices]</p></li>
+<li><p>x : shape = [batch, d]</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>then, DenseIndex()(x, indices) returns</dt><dd><ul class="simple">
+<li><p>h : shape = [batch, num_indices] with h[b, i] = d[b, indices[b, i]]</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="deepr.layers.core.DenseIndex.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#DenseIndex.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.DenseIndex.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>Union</em><em>[</em><em>tf.Tensor</em><em>, </em><em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>..</em><em>]</em><em>]</em>) – <ul>
+<li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_in &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_out &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[tf.Tensor, Tuple[tf.Tensor, ..]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="deepr.layers.core.DotProduct">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.core.</code><code class="sig-name descname">DotProduct</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_in</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#DotProduct"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.DotProduct" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
@@ -1659,6 +1710,39 @@ each key to its corresponding line index as an tf.int64.</p>
 <dt id="deepr.layers.mask.NotEqual.forward">
 <code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/mask.html#NotEqual.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.mask.NotEqual.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward method of the layer</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.layers.multi">
+<span id="deepr-layers-multi-module"></span><h2>deepr.layers.multi module<a class="headerlink" href="#module-deepr.layers.multi" title="Permalink to this headline">¶</a></h2>
+<p>Negative Multinomial Log Likelihood.</p>
+<dl class="py class">
+<dt id="deepr.layers.multi.MultiLogLikelihood">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.multi.</code><code class="sig-name descname">MultiLogLikelihood</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/multi.html#MultiLogLikelihood"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.multi.MultiLogLikelihood" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Negative Multinomial Log Likelihood.</p>
+<dl class="py method">
+<dt id="deepr.layers.multi.MultiLogLikelihood.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/multi.html#MultiLogLikelihood.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.multi.MultiLogLikelihood.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multinomial Log Likelihood</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tensors</strong> (<em>Tuple</em><em>[</em><em>tf.Tensor</em><em>]</em>) – <ul class="simple">
+<li><p>logits : shape = (batch, num_classes), tf.float32</p></li>
+<li><p>classes : shape = (batch, num_classes), tf.int64 as a</p></li>
+</ul>
+<p>one-hot vector</p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Negative Multinomial Log Likelihood, scalar</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Tensor</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

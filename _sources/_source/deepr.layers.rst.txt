@@ -92,6 +92,14 @@ deepr.layers.mask module
    :undoc-members:
    :show-inheritance:
 
+deepr.layers.multi module
+-------------------------
+
+.. automodule:: deepr.layers.multi
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 deepr.layers.nce\_loss module
 -----------------------------
 

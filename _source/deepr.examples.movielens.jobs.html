@@ -360,17 +360,20 @@ keep users with number of movies &gt; min_length</p>
 <p>Evaluate MovieLens.</p>
 <dl class="py class">
 <dt id="deepr.examples.movielens.jobs.evaluate.Evaluate">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.jobs.evaluate.</code><code class="sig-name descname">Evaluate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_predictions</span></em>, <em class="sig-param"><span class="n">path_embeddings</span></em>, <em class="sig-param"><span class="n">path_biases</span></em>, <em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">use_mlflow</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/evaluate.html#Evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.jobs.evaluate.</code><code class="sig-name descname">Evaluate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_predictions</span></em>, <em class="sig-param"><span class="n">path_embeddings</span></em>, <em class="sig-param"><span class="n">path_biases</span></em>, <em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">use_mlflow</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">num_queries</span><span class="o">=</span><span class="default_value">1000</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/evaluate.html#Evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="deepr.jobs.html#deepr.jobs.base.Job" title="deepr.jobs.base.Job"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.jobs.base.Job</span></code></a></p>
-<p>Evaluate MovieLens.</p>
-<dl class="py method">
-<dt id="deepr.examples.movielens.jobs.evaluate.Evaluate.compute_metrics">
-<code class="sig-name descname">compute_metrics</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">actuals</span></em>, <em class="sig-param"><span class="n">predictions</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/evaluate.html#Evaluate.compute_metrics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.compute_metrics" title="Permalink to this definition">¶</a></dt>
+<p>Evaluate MovieLens using a Faiss Index.</p>
+<p>For each user embedding, the top num_queries items are retrieved.
+The input items are removed from the results, then we compare the
+remaining top-K results to the target items.</p>
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.evaluate.Evaluate.k">
+<code class="sig-name descname">k</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">, </span>List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span><span class="p">]</span></em><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.k" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.examples.movielens.jobs.evaluate.Evaluate.k">
-<code class="sig-name descname">k</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.k" title="Permalink to this definition">¶</a></dt>
+<dt id="deepr.examples.movielens.jobs.evaluate.Evaluate.num_queries">
+<code class="sig-name descname">num_queries</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></em><em class="property"> = 1000</em><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.num_queries" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -389,12 +392,6 @@ keep users with number of movies &gt; min_length</p>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="deepr.examples.movielens.jobs.evaluate.Evaluate.precision_recall_f1">
-<em class="property">static </em><code class="sig-name descname">precision_recall_f1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">true</span></em>, <em class="sig-param"><span class="n">pred</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/evaluate.html#Evaluate.precision_recall_f1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.precision_recall_f1" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute precision, recall and f1_score.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt id="deepr.examples.movielens.jobs.evaluate.Evaluate.run">
 <code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/evaluate.html#Evaluate.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run Job</p>
@@ -405,6 +402,24 @@ keep users with number of movies &gt; min_length</p>
 <code class="sig-name descname">use_mlflow</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></em><em class="property"> = False</em><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.use_mlflow" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.examples.movielens.jobs.evaluate.compute_metrics">
+<code class="sig-prename descclassname">deepr.examples.movielens.jobs.evaluate.</code><code class="sig-name descname">compute_metrics</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inputs</span></em>, <em class="sig-param"><span class="n">targets</span></em>, <em class="sig-param"><span class="n">predictions</span></em>, <em class="sig-param"><span class="n">k</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/evaluate.html#compute_metrics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.compute_metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute Recall, Precision and F1.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.examples.movielens.jobs.evaluate.ndcg_score">
+<code class="sig-prename descclassname">deepr.examples.movielens.jobs.evaluate.</code><code class="sig-name descname">ndcg_score</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">true</span></em>, <em class="sig-param"><span class="n">pred</span></em>, <em class="sig-param"><span class="n">k</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/evaluate.html#ndcg_score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.ndcg_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute Normalized Discounted Cumulative Gain.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="deepr.examples.movielens.jobs.evaluate.precision_recall_f1">
+<code class="sig-prename descclassname">deepr.examples.movielens.jobs.evaluate.</code><code class="sig-name descname">precision_recall_f1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">true</span></em>, <em class="sig-param"><span class="n">pred</span></em>, <em class="sig-param"><span class="n">k</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/evaluate.html#precision_recall_f1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.precision_recall_f1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute precision, recall and f1_score.</p>
 </dd></dl>
 
 </div>

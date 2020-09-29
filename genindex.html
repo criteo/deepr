@@ -630,7 +630,7 @@
 </li>
       <li><a href="_source/deepr.readers.html#deepr.readers.record.TFRecordReader.compression_type">compression_type() (deepr.readers.record.TFRecordReader property)</a>
 </li>
-      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate.compute_metrics">compute_metrics() (deepr.examples.movielens.jobs.evaluate.Evaluate method)</a>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.compute_metrics">compute_metrics() (in module deepr.examples.movielens.jobs.evaluate)</a>
 </li>
       <li><a href="API/_autosummary/deepr.layers.Concat.html#deepr.layers.Concat">Concat (class in deepr.layers)</a>
 
@@ -1356,6 +1356,13 @@
 </li>
       </ul></li>
       <li>
+    deepr.layers.multi
+
+      <ul>
+        <li><a href="_source/deepr.layers.html#module-deepr.layers.multi">module</a>
+</li>
+      </ul></li>
+      <li>
     deepr.layers.nce_loss
 
       <ul>
@@ -1784,6 +1791,8 @@
         <li><a href="_source/deepr.layers.html#deepr.layers.core.Dense">(class in deepr.layers.core)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.core.DenseIndex">DenseIndex (class in deepr.layers.core)</a>
+</li>
       <li><a href="API/_autosummary/deepr.utils.dict_to_item.html#deepr.utils.dict_to_item">dict_to_item() (in module deepr.utils)</a>
 
       <ul>
@@ -2105,6 +2114,8 @@
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.core.Dense.forward">(deepr.layers.core.Dense method)</a>
 </li>
+        <li><a href="_source/deepr.layers.html#deepr.layers.core.DenseIndex.forward">(deepr.layers.core.DenseIndex method)</a>
+</li>
         <li><a href="_source/deepr.layers.html#deepr.layers.core.DotProduct.forward">(deepr.layers.core.DotProduct method)</a>
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.core.ExpandDims.forward">(deepr.layers.core.ExpandDims method)</a>
@@ -2142,6 +2153,8 @@
         <li><a href="_source/deepr.layers.html#deepr.layers.mask.Equal.forward">(deepr.layers.mask.Equal method)</a>
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.mask.NotEqual.forward">(deepr.layers.mask.NotEqual method)</a>
+</li>
+        <li><a href="_source/deepr.layers.html#deepr.layers.multi.MultiLogLikelihood.forward">(deepr.layers.multi.MultiLogLikelihood method)</a>
 </li>
         <li><a href="_source/deepr.layers.html#deepr.layers.nce_loss.MaskedNegativeSampling.forward">(deepr.layers.nce_loss.MaskedNegativeSampling method)</a>
 </li>
@@ -2970,6 +2983,8 @@
 </li>
         <li><a href="_source/deepr.layers.html#module-deepr.layers.mask">deepr.layers.mask</a>
 </li>
+        <li><a href="_source/deepr.layers.html#module-deepr.layers.multi">deepr.layers.multi</a>
+</li>
         <li><a href="_source/deepr.layers.html#module-deepr.layers.nce_loss">deepr.layers.nce_loss</a>
 </li>
         <li><a href="_source/deepr.layers.html#module-deepr.layers.reduce">deepr.layers.reduce</a>
@@ -3093,6 +3108,8 @@
         <li><a href="_source/deepr.utils.html#deepr.utils.uuid.msb_lsb_to_str">(in module deepr.utils.uuid)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.layers.html#deepr.layers.multi.MultiLogLikelihood">MultiLogLikelihood (class in deepr.layers.multi)</a>
+</li>
       <li><a href="_source/deepr.examples.multiply.layers.html#deepr.examples.multiply.layers.model.Multiply">Multiply (class in deepr.examples.multiply.layers.model)</a>
 </li>
   </ul></td>
@@ -3145,6 +3162,8 @@
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.nb_workers">nb_workers (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
 </li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.ndcg_score">ndcg_score() (in module deepr.examples.movielens.jobs.evaluate)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.layers.html#deepr.layers.nce_loss.NegativeSampling">NegativeSampling (class in deepr.layers.nce_loss)</a>
@@ -3191,6 +3210,8 @@
         <li><a href="API/_autosummary/deepr.readers.TFRecordReader.html#deepr.readers.TFRecordReader.num_parallel_reads">(deepr.readers.TFRecordReader attribute)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate.num_queries">num_queries (deepr.examples.movielens.jobs.evaluate.Evaluate attribute)</a>
+</li>
       <li><a href="_source/deepr.hooks.html#deepr.hooks.num_params.NumParamsHook">NumParamsHook (class in deepr.hooks.num_params)</a>
 </li>
   </ul></td>
@@ -3451,7 +3472,7 @@
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.pre_script_hook">pre_script_hook (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
 </li>
-      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate.precision_recall_f1">precision_recall_f1() (deepr.examples.movielens.jobs.evaluate.Evaluate static method)</a>
+      <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.precision_recall_f1">precision_recall_f1() (in module deepr.examples.movielens.jobs.evaluate)</a>
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.evaluate.Evaluate.pred_fn">pred_fn (deepr.jobs.evaluate.Evaluate attribute)</a>
 
