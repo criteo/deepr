@@ -925,6 +925,41 @@ correctly named nodes are defined.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt id="deepr.layers.core.AddWithWeight">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.core.</code><code class="sig-name descname">AddWithWeight</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">end</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">steps</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#AddWithWeight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.AddWithWeight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Compute loss + beta * KL, decay beta linearly during training.</p>
+<dl class="py method">
+<dt id="deepr.layers.core.AddWithWeight.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.layers.core.AddWithWeight.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>Union</em><em>[</em><em>tf.Tensor</em><em>, </em><em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>..</em><em>]</em><em>]</em>) – <ul>
+<li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_in &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_out &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[tf.Tensor, Tuple[tf.Tensor, ..]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="deepr.layers.core.Concat">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.core.</code><code class="sig-name descname">Concat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">axis</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#Concat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.Concat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
