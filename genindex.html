@@ -468,9 +468,11 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.prepros.html#deepr.prepros.record.arrays_to_example">arrays_to_example() (in module deepr.prepros.record)</a>
 </li>
-      <li><a href="_source/deepr.examples.movielens.readers.html#deepr.examples.movielens.readers.csv.CSVReader.as_dataset">as_dataset() (deepr.examples.movielens.readers.csv.CSVReader method)</a>
+      <li><a href="_source/deepr.examples.movielens.readers.html#deepr.examples.movielens.readers.csv.TestCSVReader.as_dataset">as_dataset() (deepr.examples.movielens.readers.csv.TestCSVReader method)</a>
 
       <ul>
+        <li><a href="_source/deepr.examples.movielens.readers.html#deepr.examples.movielens.readers.csv.TrainCSVReader.as_dataset">(deepr.examples.movielens.readers.csv.TrainCSVReader method)</a>
+</li>
         <li><a href="_source/deepr.readers.html#deepr.readers.base.DatasetReader.as_dataset">(deepr.readers.base.DatasetReader method)</a>
 </li>
         <li><a href="_source/deepr.readers.html#deepr.readers.base.Reader.as_dataset">(deepr.readers.base.Reader method)</a>
@@ -638,6 +640,8 @@
         <li><a href="_source/deepr.layers.html#deepr.layers.core.Concat">(class in deepr.layers.core)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.mlflow_save_configs.MLFlowSaveConfigs.config">config (deepr.jobs.mlflow_save_configs.MLFlowSaveConfigs attribute)</a>
 
       <ul>
@@ -646,8 +650,6 @@
         <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainer.config">(deepr.jobs.yarn_trainer.YarnTrainer attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="API/_autosummary/deepr.jobs.Trainer.html#deepr.jobs.Trainer.config_proto">config_proto (deepr.jobs.Trainer attribute)</a>
 
       <ul>
@@ -695,8 +697,6 @@
 </li>
       </ul></li>
       <li><a href="_source/deepr.examples.movielens.prepros.html#deepr.examples.movielens.prepros.csv.CSVPrepro">CSVPrepro() (in module deepr.examples.movielens.prepros.csv)</a>
-</li>
-      <li><a href="_source/deepr.examples.movielens.readers.html#deepr.examples.movielens.readers.csv.CSVReader">CSVReader (class in deepr.examples.movielens.readers.csv)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -2399,16 +2399,18 @@
         <li><a href="_source/deepr.jobs.html#deepr.jobs.save_dataset.SaveDataset.input_fn">(deepr.jobs.save_dataset.SaveDataset attribute)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.examples.movielens.utils.html#deepr.examples.movielens.utils.fields.INPUT_POSITIVES_ONE_HOT">INPUT_POSITIVES_ONE_HOT() (in module deepr.examples.movielens.utils.fields)</a>
+</li>
       <li><a href="_source/deepr.layers.html#deepr.layers.base.Layer.inputs">inputs (deepr.layers.base.Layer attribute)</a>
 
       <ul>
         <li><a href="API/_autosummary/deepr.layers.Layer.html#deepr.layers.Layer.inputs">(deepr.layers.Layer attribute)</a>
 </li>
       </ul></li>
-      <li><a href="_source/deepr.readers.html#deepr.readers.record.int64_feature">int64_feature() (in module deepr.readers.record)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_source/deepr.readers.html#deepr.readers.record.int64_feature">int64_feature() (in module deepr.readers.record)</a>
+</li>
       <li><a href="_source/deepr.readers.html#deepr.readers.record.int64_feature_list">int64_feature_list() (in module deepr.readers.record)</a>
 </li>
       <li><a href="_source/deepr.macros.html#deepr.macros.mlflow_init.internal_url_formatter">internal_url_formatter() (in module deepr.macros.mlflow_init)</a>
@@ -4018,6 +4020,8 @@
       </ul></li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.copy_dir.CopyDir.target">target (deepr.jobs.copy_dir.CopyDir attribute)</a>
 </li>
+      <li><a href="_source/deepr.examples.movielens.utils.html#deepr.examples.movielens.utils.fields.TARGET_POSITIVES_ONE_HOT">TARGET_POSITIVES_ONE_HOT() (in module deepr.examples.movielens.utils.fields)</a>
+</li>
       <li><a href="_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.target_ratio">target_ratio (deepr.examples.movielens.jobs.build_records.BuildRecords attribute)</a>
 </li>
       <li><a href="API/_autosummary/deepr.optimizers.TensorflowOptimizer.html#deepr.optimizers.TensorflowOptimizer">TensorflowOptimizer (class in deepr.optimizers)</a>
@@ -4046,6 +4050,8 @@
         <li><a href="_source/deepr.utils.html#deepr.utils.field.TensorType">(in module deepr.utils.field)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.examples.movielens.readers.html#deepr.examples.movielens.readers.csv.TestCSVReader">TestCSVReader (class in deepr.examples.movielens.readers.csv)</a>
+</li>
       <li><a href="_source/deepr.prepros.html#deepr.prepros.core.Map.tf_map_func">tf_map_func() (deepr.prepros.core.Map property)</a>
 </li>
       <li><a href="_source/deepr.prepros.html#deepr.prepros.core.Filter.tf_predicate">tf_predicate() (deepr.prepros.core.Filter property)</a>
@@ -4060,10 +4066,10 @@
 </li>
       <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.tf_yarn_evaluator_memory">tf_yarn_evaluator_memory (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
 </li>
-      <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.tf_yarn_tensorboard_memory">tf_yarn_tensorboard_memory (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_source/deepr.jobs.html#deepr.jobs.yarn_trainer.YarnTrainerConfig.tf_yarn_tensorboard_memory">tf_yarn_tensorboard_memory (deepr.jobs.yarn_trainer.YarnTrainerConfig attribute)</a>
+</li>
       <li><a href="API/_autosummary/deepr.readers.TFRecordReader.html#deepr.readers.TFRecordReader">TFRecordReader (class in deepr.readers)</a>
 
       <ul>
@@ -4146,6 +4152,8 @@
         <li><a href="_source/deepr.jobs.html#deepr.jobs.trainer_keras.TrainerKeras.train_spec">(deepr.jobs.trainer_keras.TrainerKeras attribute)</a>
 </li>
       </ul></li>
+      <li><a href="_source/deepr.examples.movielens.readers.html#deepr.examples.movielens.readers.csv.TrainCSVReader">TrainCSVReader (class in deepr.examples.movielens.readers.csv)</a>
+</li>
       <li><a href="API/_autosummary/deepr.jobs.Trainer.html#deepr.jobs.Trainer">Trainer (class in deepr.jobs)</a>
 
       <ul>
