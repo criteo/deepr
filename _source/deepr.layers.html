@@ -1792,6 +1792,41 @@ each key to its corresponding line index as an tf.int64.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-deepr.layers.multi_css">
+<span id="deepr-layers-multi-css-module"></span><h2>deepr.layers.multi_css module<a class="headerlink" href="#module-deepr.layers.multi_css" title="Permalink to this headline">¶</a></h2>
+<p>Multinomial Log Likelihood with Complementarity Sum Sampling.</p>
+<dl class="py class">
+<dt id="deepr.layers.multi_css.MultiLogLikelihoodCSS">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.multi_css.</code><code class="sig-name descname">MultiLogLikelihoodCSS</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vocab_size</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/multi_css.html#MultiLogLikelihoodCSS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.multi_css.MultiLogLikelihoodCSS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Multinomial Log Likelihood with Complementarity Sum Sampling.</p>
+<p><a class="reference external" href="http://proceedings.mlr.press/v54/botev17a/botev17a.pdf">http://proceedings.mlr.press/v54/botev17a/botev17a.pdf</a></p>
+<dl class="py method">
+<dt id="deepr.layers.multi_css.MultiLogLikelihoodCSS.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/multi_css.html#MultiLogLikelihoodCSS.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.multi_css.MultiLogLikelihoodCSS.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multinomial Log Likelihood with Complementarity Sum Sampling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tensors</strong> (<em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>tf.Tensor</em><em>, </em><em>tf.Tensor</em><em>, </em><em>tf.Tensor</em><em>]</em>) – <ul class="simple">
+<li><p>positive_logits: (batch, num_positives)</p></li>
+<li><p>negative_logits: (batch, num_positives or 1, num_negatives)</p></li>
+<li><p>positive_mask: same shape as positive logits</p></li>
+<li><p>negative_mask: same shape as negative logits</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Multinomial Log-Likelihood with Complementarity Sampling</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="module-deepr.layers.nce_loss">
 <span id="deepr-layers-nce-loss-module"></span><h2>deepr.layers.nce_loss module<a class="headerlink" href="#module-deepr.layers.nce_loss" title="Permalink to this headline">¶</a></h2>
 <p>Negative Sampling Loss Layer</p>

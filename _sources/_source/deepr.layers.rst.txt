@@ -100,6 +100,14 @@ deepr.layers.multi module
    :undoc-members:
    :show-inheritance:
 
+deepr.layers.multi\_css module
+------------------------------
+
+.. automodule:: deepr.layers.multi_css
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 deepr.layers.nce\_loss module
 -----------------------------
 
