@@ -1,11 +1,15 @@
 """Core Layers"""
 
-from typing import Tuple, List, Union
+import logging
+from typing import Tuple, List, Union, Callable
 
 import tensorflow as tf
 
 from deepr.layers import base
 from deepr.utils.broadcasting import make_same_shape
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 class Sum(base.Layer):
@@ -84,7 +88,7 @@ class Dense(base.Layer):
         inputs: Union[str, Tuple[str, ...], List[str]] = None,
         outputs: Union[str, Tuple[str, ...], List[str]] = None,
         name: str = None,
-        **kwargs
+        **kwargs,
     ):
         super().__init__(n_in=1, n_out=1, inputs=inputs, outputs=outputs, name=name)
         self.units = units
@@ -92,6 +96,57 @@ class Dense(base.Layer):
 
     def forward(self, tensors, mode: str = None):
         return tf.layers.dense(tensors, units=self.units, **self._kwargs)
+
+
+class DenseIndex(base.Layer):
+    """Dense Index layer.
+
+    Given a matrix A, and biases, a classical dense layer computes
+    d = activation(Ax + b), which is a vector of dimension units.
+
+    The DenseIndex layer computes only some entries of the resulting
+    vector. In other words, if
+        - indices : shape = [batch, num_indices]
+        - x : shape = [batch, d]
+    then, DenseIndex()(x, indices) returns
+        - h : shape = [batch, num_indices] with h[b, i] = d[b, indices[b, i]]
+    """
+
+    def __init__(
+        self,
+        units: int,
+        kernel_name: str,
+        bias_name: str = None,
+        activation: Callable = None,
+        reuse: bool = None,
+        trainable: bool = True,
+        **kwargs,
+    ):
+        self.units = units
+        self.kernel_name = kernel_name
+        self.bias_name = bias_name
+        self.activation = activation
+        self.reuse = reuse
+        self.trainable = trainable
+        super().__init__(n_in=2, n_out=1, **kwargs)
+
+    def forward(self, tensors, mode: str = None):
+        # pylint: disable=no-value-for-parameter
+        x, indices = tensors
+        input_dim = int(x.shape[-1])
+        shape = (self.units, input_dim)
+
+        with tf.variable_scope(tf.get_variable_scope(), reuse=self.reuse):
+            kernel_var = tf.get_variable(name=self.kernel_name, shape=shape, trainable=self.trainable)
+            rows = tf.nn.embedding_lookup(kernel_var, tf.maximum(indices, 0))
+            res = DotProduct()((x, rows))
+            if self.bias_name:
+                bias_var = tf.get_variable(name=self.bias_name, shape=(self.units,), trainable=self.trainable)
+                biases = tf.nn.embedding_lookup(bias_var, tf.maximum(indices, 0))
+                res = Add()((res, biases))
+            if self.activation is not None:
+                res = self.activation(res)
+        return res
 
 
 @base.layer(n_in=2, n_out=1)
@@ -160,7 +215,7 @@ class Conv1d(base.Layer):
         inputs: Union[str, Tuple[str, ...], List[str]] = None,
         outputs: Union[str, Tuple[str, ...], List[str]] = None,
         name: str = None,
-        **kwargs
+        **kwargs,
     ):
         super().__init__(n_in=1, n_out=1, inputs=inputs, outputs=outputs, name=name)
         self.filters = filters
@@ -176,7 +231,7 @@ class Conv1d(base.Layer):
             kernel_size=self.kernel_size,
             activation=self.activation,
             use_bias=self.use_bias,
-            **self._kwargs
+            **self._kwargs,
         )
 
 

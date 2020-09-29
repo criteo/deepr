@@ -10,6 +10,7 @@ from deepr.layers.core import (
     Concat,
     Conv1d,
     Dense,
+    DenseIndex,
     DotProduct,
     ExpandDims,
     Identity,
