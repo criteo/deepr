@@ -157,6 +157,26 @@ def Add(tensors):
 
 
 @base.layer(n_in=2, n_out=1)
+def AddWithWeight(tensors: Tuple[tf.Tensor, tf.Tensor], start: float, end: float = None, steps: int = None):
+    """Compute loss + beta * KL, decay beta linearly during training."""
+    t1, t2 = tensors
+    if end is not None:
+        if steps is None:
+            raise ValueError(f"end = {end} but steps is None (should specify steps)")
+        LOGGER.info(f"Adding {t1} + beta * {t2} with beta decaying from {start} to {end} in {steps} steps.")
+        beta = tf.train.polynomial_decay(
+            float(start), tf.train.get_global_step(), steps, float(end), power=1.0, cycle=False
+        )
+        return t1 + beta * t2
+    elif start is not None:
+        LOGGER.info(f"Adding {t1} + {float(start)} {t2} (no decay).")
+        return t1 + float(start) * t2
+    else:
+        LOGGER.info(f"Skipping addition, returning only {t1}")
+        return t1
+
+
+@base.layer(n_in=2, n_out=1)
 def Concat(tensors, axis: int = -1):
     """Concatenate tensors on axis"""
     return tf.concat(tensors, axis=axis)
