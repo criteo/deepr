@@ -45,7 +45,7 @@ def RecordPrepro(
         dpr.prepros.Map(SequenceMask(inputs="inputPositives", outputs="inputMask")),
         dpr.prepros.Map(SequenceMask(inputs="targetPositives", outputs="targetMask")),
         dpr.prepros.Shuffle(buffer_size=buffer_size, modes=[dpr.TRAIN]),
-        (dpr.prepros.PaddedBatch(batch_size=batch_size, fields=FIELDS_RECORD + FIELDS_PREPRO)),
+        dpr.prepros.PaddedBatch(batch_size=batch_size, fields=FIELDS_RECORD + FIELDS_PREPRO),
         dpr.prepros.Repeat(repeat_size, modes=[dpr.TRAIN]),
         dpr.prepros.Prefetch(prefetch_size),
         num_parallel_calls=num_parallel_calls,
