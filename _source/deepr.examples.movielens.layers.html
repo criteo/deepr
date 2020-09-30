@@ -241,24 +241,181 @@
 <p>Average Model.</p>
 <dl class="py function">
 <dt id="deepr.examples.movielens.layers.average.AverageModel">
-<code class="sig-prename descclassname">deepr.examples.movielens.layers.average.</code><code class="sig-name descname">AverageModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vocab_size</span></em>, <em class="sig-param"><span class="n">dim</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/average.html#AverageModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.average.AverageModel" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">deepr.examples.movielens.layers.average.</code><code class="sig-name descname">AverageModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vocab_size</span></em>, <em class="sig-param"><span class="n">dim</span></em>, <em class="sig-param"><span class="n">keep_prob</span></em>, <em class="sig-param"><span class="n">train_embeddings</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">project</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/average.html#AverageModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.average.AverageModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Average Model.</p>
 </dd></dl>
 
+<dl class="py class">
+<dt id="deepr.examples.movielens.layers.average.Logits">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.layers.average.</code><code class="sig-name descname">Logits</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vocab_size</span></em>, <em class="sig-param"><span class="n">dim</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/average.html#Logits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.average.Logits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="deepr.layers.html#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<dl class="py method">
+<dt id="deepr.examples.movielens.layers.average.Logits.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.examples.movielens.layers.average.Logits.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>Union</em><em>[</em><em>tf.Tensor</em><em>, </em><em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>..</em><em>]</em><em>]</em>) – <ul>
+<li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_in &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_out &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[tf.Tensor, Tuple[tf.Tensor, ..]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.examples.movielens.layers.average.Projection">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.layers.average.</code><code class="sig-name descname">Projection</code><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/average.html#Projection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.average.Projection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="deepr.layers.html#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Apply symmetric transform to non-projected user embeddings.</p>
+<dl class="py method">
+<dt id="deepr.examples.movielens.layers.average.Projection.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.examples.movielens.layers.average.Projection.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>Union</em><em>[</em><em>tf.Tensor</em><em>, </em><em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>..</em><em>]</em><em>]</em>) – <ul>
+<li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_in &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_out &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[tf.Tensor, Tuple[tf.Tensor, ..]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.examples.movielens.layers.average.RandomMask">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.layers.average.</code><code class="sig-name descname">RandomMask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mode</span></em>, <em class="sig-param"><span class="n">keep_prob</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/average.html#RandomMask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.average.RandomMask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="deepr.layers.html#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<dl class="py method">
+<dt id="deepr.examples.movielens.layers.average.RandomMask.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.examples.movielens.layers.average.RandomMask.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>Union</em><em>[</em><em>tf.Tensor</em><em>, </em><em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>..</em><em>]</em><em>]</em>) – <ul>
+<li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_in &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_out &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[tf.Tensor, Tuple[tf.Tensor, ..]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="module-deepr.examples.movielens.layers.loss">
-<span id="deepr-examples-movielens-layers-loss-module"></span><h2>deepr.examples.movielens.layers.loss module<a class="headerlink" href="#module-deepr.examples.movielens.layers.loss" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-deepr.examples.movielens.layers.bpr">
+<span id="deepr-examples-movielens-layers-bpr-module"></span><h2>deepr.examples.movielens.layers.bpr module<a class="headerlink" href="#module-deepr.examples.movielens.layers.bpr" title="Permalink to this headline">¶</a></h2>
 <p>BPR Loss with biases.</p>
 <dl class="py function">
-<dt id="deepr.examples.movielens.layers.loss.BPRLoss">
-<code class="sig-prename descclassname">deepr.examples.movielens.layers.loss.</code><code class="sig-name descname">BPRLoss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vocab_size</span></em>, <em class="sig-param"><span class="n">dim</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/loss.html#BPRLoss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.loss.BPRLoss" title="Permalink to this definition">¶</a></dt>
+<dt id="deepr.examples.movielens.layers.bpr.BPRLoss">
+<code class="sig-prename descclassname">deepr.examples.movielens.layers.bpr.</code><code class="sig-name descname">BPRLoss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vocab_size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/bpr.html#BPRLoss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.bpr.BPRLoss" title="Permalink to this definition">¶</a></dt>
 <dd><p>BPR Loss with biases.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.examples.movielens.layers.losses">
+<span id="deepr-examples-movielens-layers-losses-module"></span><h2>deepr.examples.movielens.layers.losses module<a class="headerlink" href="#module-deepr.examples.movielens.layers.losses" title="Permalink to this headline">¶</a></h2>
+<p>Losses.</p>
+<dl class="py function">
+<dt id="deepr.examples.movielens.layers.losses.Loss">
+<code class="sig-prename descclassname">deepr.examples.movielens.layers.losses.</code><code class="sig-name descname">Loss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">loss</span></em>, <em class="sig-param"><span class="n">vocab_size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/losses.html#Loss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.losses.Loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the relevant loss layer.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.examples.movielens.layers.multi">
+<span id="deepr-examples-movielens-layers-multi-module"></span><h2>deepr.examples.movielens.layers.multi module<a class="headerlink" href="#module-deepr.examples.movielens.layers.multi" title="Permalink to this headline">¶</a></h2>
+<p>MultiLogLikelihood Loss with Complementarity Sampling.</p>
+<dl class="py function">
+<dt id="deepr.examples.movielens.layers.multi.MultiLogLikelihoodCSS">
+<code class="sig-prename descclassname">deepr.examples.movielens.layers.multi.</code><code class="sig-name descname">MultiLogLikelihoodCSS</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vocab_size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/multi.html#MultiLogLikelihoodCSS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.multi.MultiLogLikelihoodCSS" title="Permalink to this definition">¶</a></dt>
+<dd><p>MultiLogLikelihood Loss with Complementarity Sampling.</p>
 </dd></dl>
 
 </div>
 <div class="section" id="module-deepr.examples.movielens.layers.transformer">
 <span id="deepr-examples-movielens-layers-transformer-module"></span><h2>deepr.examples.movielens.layers.transformer module<a class="headerlink" href="#module-deepr.examples.movielens.layers.transformer" title="Permalink to this headline">¶</a></h2>
 <p>Transformer Model.</p>
+<dl class="py class">
+<dt id="deepr.examples.movielens.layers.transformer.Logits">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.layers.transformer.</code><code class="sig-name descname">Logits</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vocab_size</span></em>, <em class="sig-param"><span class="n">dim</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/transformer.html#Logits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.transformer.Logits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="deepr.layers.html#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<dl class="py method">
+<dt id="deepr.examples.movielens.layers.transformer.Logits.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.examples.movielens.layers.transformer.Logits.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>Union</em><em>[</em><em>tf.Tensor</em><em>, </em><em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>..</em><em>]</em><em>]</em>) – <ul>
+<li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_in &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_out &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[tf.Tensor, Tuple[tf.Tensor, ..]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt id="deepr.examples.movielens.layers.transformer.TransformerModel">
 <code class="sig-prename descclassname">deepr.examples.movielens.layers.transformer.</code><code class="sig-name descname">TransformerModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vocab_size</span></em>, <em class="sig-param"><span class="n">dim</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/transformer.html#TransformerModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.transformer.TransformerModel" title="Permalink to this definition">¶</a></dt>

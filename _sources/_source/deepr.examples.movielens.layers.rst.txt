@@ -12,10 +12,26 @@ deepr.examples.movielens.layers.average module
    :undoc-members:
    :show-inheritance:
 
-deepr.examples.movielens.layers.loss module
--------------------------------------------
+deepr.examples.movielens.layers.bpr module
+------------------------------------------
 
-.. automodule:: deepr.examples.movielens.layers.loss
+.. automodule:: deepr.examples.movielens.layers.bpr
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.examples.movielens.layers.losses module
+---------------------------------------------
+
+.. automodule:: deepr.examples.movielens.layers.losses
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.examples.movielens.layers.multi module
+--------------------------------------------
+
+.. automodule:: deepr.examples.movielens.layers.multi
    :members:
    :undoc-members:
    :show-inheritance:

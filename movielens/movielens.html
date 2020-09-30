@@ -486,7 +486,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -495,13 +495,13 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">dataset_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;/ml-20m&quot;</span>
 <span class="n">path_ratings</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dataset_path</span><span class="si">}</span><span class="s2">/ratings.csv&quot;</span>
-<span class="n">path_root</span> <span class="o">=</span> <span class="s2">&quot;wan&quot;</span>
+<span class="n">path_root</span> <span class="o">=</span> <span class="s2">&quot;average&quot;</span>
 <span class="n">path_model</span> <span class="o">=</span> <span class="n">path_root</span> <span class="o">+</span> <span class="s2">&quot;/model&quot;</span>
 <span class="n">path_data</span> <span class="o">=</span> <span class="n">path_root</span> <span class="o">+</span> <span class="s2">&quot;/data&quot;</span>
 <span class="n">path_variables</span> <span class="o">=</span> <span class="n">path_root</span> <span class="o">+</span> <span class="s2">&quot;/variables&quot;</span>
@@ -524,7 +524,7 @@ div.rendered_html tbody tr:hover {
 <p>The job takes as input the csv ratings and create 3 tfrecords files (train, validation, test).</p>
 <p>Each file contains timeline of user ratings split into input and target.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -563,14 +563,14 @@ div.rendered_html tbody tr:hover {
 <p>This defines a training job to build a model that transform a timeline of movies embedding to an user embedding. It takes as input the tf records and upon completion writes 3 artifacts : * dataframe of the biases and the embeddings * saved model : protobuf containing the model definition and weights</p>
 <p>In this specific instance we train an average model with a BPR loss and compute a triple precision on the validation set.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">train</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span>
     <span class="n">path_model</span><span class="o">=</span><span class="n">path_model</span><span class="p">,</span>
-    <span class="n">pred_fn</span><span class="o">=</span><span class="n">movielens</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">AverageModel</span><span class="p">(</span><span class="n">vocab_size</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">path_mapping</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
-    <span class="n">loss_fn</span><span class="o">=</span><span class="n">movielens</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BPRLoss</span><span class="p">(</span><span class="n">vocab_size</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">path_mapping</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+    <span class="n">pred_fn</span><span class="o">=</span><span class="n">movielens</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">AverageModel</span><span class="p">(</span><span class="n">vocab_size</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">path_mapping</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">keep_prob</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span>
+    <span class="n">loss_fn</span><span class="o">=</span><span class="n">movielens</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Loss</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;bpr&quot;</span><span class="p">,</span> <span class="n">vocab_size</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">path_mapping</span><span class="p">)),</span>
     <span class="n">optimizer_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">TensorflowOptimizer</span><span class="p">(</span><span class="s2">&quot;LazyAdam&quot;</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">),</span>
     <span class="n">train_input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path_train</span><span class="p">),</span>
     <span class="n">eval_input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path_eval</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
@@ -655,7 +655,7 @@ div.rendered_html tbody tr:hover {
 <h2>Step 3 - Predict job<a class="headerlink" href="#Step-3---Predict-job" title="Permalink to this headline">¶</a></h2>
 <p>The predict job reloads the test dataset and the saved model, performs the inference and writes the user embeddings in a dataframe to be reused later by the validation job.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -673,7 +673,7 @@ div.rendered_html tbody tr:hover {
 <h2>Step 4 - Evaluation job<a class="headerlink" href="#Step-4---Evaluation-job" title="Permalink to this headline">¶</a></h2>
 <p>This job takes user embedding, and uses faiss to retrieve the k nearest neighboors in the product embedding space, and compute metrics using the target timelines.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -694,7 +694,7 @@ div.rendered_html tbody tr:hover {
 <h2>Run the pipeline<a class="headerlink" href="#Run-the-pipeline" title="Permalink to this headline">¶</a></h2>
 <p>All the jobs definition are lazy, and so is the pipeline. Calling run on it will actually perform all these steps.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -702,8 +702,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -711,28 +711,28 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
+<p>You should expecte the following metrics</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span><span class="n">deepr</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">movielens</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">evaluate</span><span class="p">:</span><span class="n">precision</span><span class="o">@</span><span class="mi">10</span> <span class="o">=</span> <span class="mf">0.15774000000000002</span>
+<span class="n">recall</span><span class="o">@</span><span class="mi">10</span> <span class="o">=</span> <span class="mf">0.22966825396825397</span>
+<span class="n">f1</span><span class="o">@</span><span class="mi">10</span> <span class="o">=</span> <span class="mf">0.17782589040302665</span>
+<span class="n">NDCG</span><span class="o">@</span><span class="mi">10</span> <span class="o">=</span> <span class="mf">0.218460915855854</span>
+<span class="n">INFO</span><span class="p">:</span><span class="n">deepr</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">movielens</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">evaluate</span><span class="p">:</span><span class="n">precision</span><span class="o">@</span><span class="mi">20</span> <span class="o">=</span> <span class="mf">0.12564500000000003</span>
+<span class="n">recall</span><span class="o">@</span><span class="mi">20</span> <span class="o">=</span> <span class="mf">0.29865131767226577</span>
+<span class="n">f1</span><span class="o">@</span><span class="mi">20</span> <span class="o">=</span> <span class="mf">0.16083200785947185</span>
+<span class="n">NDCG</span><span class="o">@</span><span class="mi">20</span> <span class="o">=</span> <span class="mf">0.24568841120719748</span>
+<span class="n">INFO</span><span class="p">:</span><span class="n">deepr</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">movielens</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">evaluate</span><span class="p">:</span><span class="n">precision</span><span class="o">@</span><span class="mi">50</span> <span class="o">=</span> <span class="mf">0.08614800000000002</span>
+<span class="n">recall</span><span class="o">@</span><span class="mi">50</span> <span class="o">=</span> <span class="mf">0.44487653142758526</span>
+<span class="n">f1</span><span class="o">@</span><span class="mi">50</span> <span class="o">=</span> <span class="mf">0.1303801216635994</span>
+<span class="n">NDCG</span><span class="o">@</span><span class="mi">50</span> <span class="o">=</span> <span class="mf">0.3022301157999229</span>
+</pre></div>
 </div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-INFO:deepr.examples.movielens.jobs.evaluate:precision@10 = 0.09155
-recall@10 = 0.11125661123870513
-f1@10 = 0.08535778342371855
-INFO:deepr.examples.movielens.jobs.evaluate:precision@20 = 0.08529500000000001
-recall@20 = 0.20106905522924376
-f1@20 = 0.103350595200071
-INFO:deepr.examples.movielens.jobs.evaluate:precision@50 = 0.06869600000000001
-recall@50 = 0.37075841696015943
-f1@50 = 0.10448758409036087
-</pre></div></div>
-</div>
+<p>You can find configs on <a class="reference external" href="https://github.com/criteo/deepr/tree/master/deepr/examples/movielens/configs">github</a> that achieve better performance.</p>
 </div>
 <div class="section" id="Visualize-embeddings-with-a-KNN">
 <h2>Visualize embeddings with a KNN<a class="headerlink" href="#Visualize-embeddings-with-a-KNN" title="Permalink to this headline">¶</a></h2>
 <p>Let’s check if the movie embeddings produce make sense * load the movie embeddings * load the movie title * build a knn index on that * do a query with a known movie to check that its closest neighboors make sense</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -746,12 +746,12 @@ f1@50 = 0.10448758409036087
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">embeddings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">pq</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s2">&quot;wan/variables/embeddings&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
-<span class="n">mapp</span> <span class="o">=</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">movie_id</span><span class="p">):</span><span class="n">indice</span> <span class="k">for</span> <span class="n">indice</span><span class="p">,</span> <span class="n">movie_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;wan/data/mapping.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">))}</span>
+<span></span><span class="n">embeddings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">pq</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s2">&quot;average/variables/embeddings&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+<span class="n">mapp</span> <span class="o">=</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">movie_id</span><span class="p">):</span><span class="n">indice</span> <span class="k">for</span> <span class="n">indice</span><span class="p">,</span> <span class="n">movie_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;average/data/mapping.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">))}</span>
 <span class="n">inversed_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">indice</span><span class="p">:</span><span class="n">movie_id</span> <span class="k">for</span> <span class="n">movie_id</span><span class="p">,</span> <span class="n">indice</span> <span class="ow">in</span> <span class="n">mapp</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 <span class="n">index</span> <span class="o">=</span> <span class="n">faiss</span><span class="o">.</span><span class="n">IndexFlatIP</span><span class="p">(</span><span class="n">embeddings</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">index</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">embeddings</span><span class="p">))</span>
@@ -780,7 +780,7 @@ f1@50 = 0.10448758409036087
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -876,31 +876,31 @@ Knn results
       <th>0</th>
       <td>Action|Adventure|Sci-Fi</td>
       <td>Star Wars: Episode IV - A New Hope (1977)</td>
-      <td>20.254013</td>
+      <td>16.765795</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Action|Adventure|Sci-Fi</td>
       <td>Star Wars: Episode VI - Return of the Jedi (1983)</td>
-      <td>18.168583</td>
+      <td>14.477997</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Action|Adventure|Sci-Fi</td>
       <td>Star Wars: Episode V - The Empire Strikes Back...</td>
-      <td>17.663177</td>
+      <td>13.837748</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Action|Adventure</td>
-      <td>Raiders of the Lost Ark (Indiana Jones and the...</td>
-      <td>15.748468</td>
+      <td>Action|Adventure|Sci-Fi|Thriller</td>
+      <td>Star Trek: First Contact (1996)</td>
+      <td>13.092430</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Action|Adventure|Sci-Fi|Thriller</td>
-      <td>Star Trek: First Contact (1996)</td>
-      <td>14.745905</td>
+      <td>Children|Comedy|Fantasy|Musical</td>
+      <td>Willy Wonka &amp; the Chocolate Factory (1971)</td>
+      <td>11.858896</td>
     </tr>
   </tbody>
 </table>

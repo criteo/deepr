@@ -175,36 +175,40 @@
 <div class="viewcode-block" id="Paths"><a class="viewcode-back" href="../../../../../_source/deepr.examples.movielens.macros.html#deepr.examples.movielens.macros.paths.Paths">[docs]</a><span class="k">class</span> <span class="nc">Paths</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Macro that generates new path_model based on date.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path_ratings</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path_root</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">run_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path_root</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">run_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">-%H-%M-%S&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">path_root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">path_root</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;viewfs://root/user/deepr/dev/movielens/models/</span><span class="si">{</span><span class="n">now</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">if</span> <span class="n">run_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">run_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;movielens.</span><span class="si">{</span><span class="n">now</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="n">path_model</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_root</span><span class="si">}</span><span class="s2">/model&quot;</span>
+        <span class="n">path_embeddings_svd</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_root</span><span class="si">}</span><span class="s2">/embeddings_svd.npz&quot;</span>
+        <span class="n">path_init_ckpt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_root</span><span class="si">}</span><span class="s2">/init_ckpt&quot;</span>
         <span class="n">path_mapping</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_root</span><span class="si">}</span><span class="s2">/data/mapping.txt&quot;</span>
-        <span class="n">path_train</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_root</span><span class="si">}</span><span class="s2">/data/train.tfrecord.gz&quot;</span>
-        <span class="n">path_eval</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_root</span><span class="si">}</span><span class="s2">/data/eval.tfrecord.gz&quot;</span>
-        <span class="n">path_test</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_root</span><span class="si">}</span><span class="s2">/data/test.tfrecord.gz&quot;</span>
+        <span class="n">path_record_train</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_root</span><span class="si">}</span><span class="s2">/data/train.tfrecord.gz&quot;</span>
+        <span class="n">path_record_eval</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_root</span><span class="si">}</span><span class="s2">/data/eval.tfrecord.gz&quot;</span>
+        <span class="n">path_record_test</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_root</span><span class="si">}</span><span class="s2">/data/test.tfrecord.gz&quot;</span>
         <span class="n">path_variables</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_root</span><span class="si">}</span><span class="s2">/variables&quot;</span>
         <span class="n">path_embeddings</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_variables</span><span class="si">}</span><span class="s2">/embeddings&quot;</span>
         <span class="n">path_biases</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_variables</span><span class="si">}</span><span class="s2">/biases&quot;</span>
         <span class="n">path_saved_model</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_root</span><span class="si">}</span><span class="s2">/saved_model&quot;</span>
         <span class="n">path_predictions</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_root</span><span class="si">}</span><span class="s2">/predictions.parquet.snappy&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-            <span class="n">path_ratings</span><span class="o">=</span><span class="n">path_ratings</span><span class="p">,</span>
             <span class="n">run_name</span><span class="o">=</span><span class="n">run_name</span><span class="p">,</span>
             <span class="n">path_root</span><span class="o">=</span><span class="n">path_root</span><span class="p">,</span>
             <span class="n">path_model</span><span class="o">=</span><span class="n">path_model</span><span class="p">,</span>
+            <span class="n">path_embeddings_svd</span><span class="o">=</span><span class="n">path_embeddings_svd</span><span class="p">,</span>
+            <span class="n">path_init_ckpt</span><span class="o">=</span><span class="n">path_init_ckpt</span><span class="p">,</span>
             <span class="n">path_mapping</span><span class="o">=</span><span class="n">path_mapping</span><span class="p">,</span>
-            <span class="n">path_train</span><span class="o">=</span><span class="n">path_train</span><span class="p">,</span>
-            <span class="n">path_eval</span><span class="o">=</span><span class="n">path_eval</span><span class="p">,</span>
-            <span class="n">path_test</span><span class="o">=</span><span class="n">path_test</span><span class="p">,</span>
+            <span class="n">path_record_train</span><span class="o">=</span><span class="n">path_record_train</span><span class="p">,</span>
+            <span class="n">path_record_eval</span><span class="o">=</span><span class="n">path_record_eval</span><span class="p">,</span>
+            <span class="n">path_record_test</span><span class="o">=</span><span class="n">path_record_test</span><span class="p">,</span>
             <span class="n">path_variables</span><span class="o">=</span><span class="n">path_variables</span><span class="p">,</span>
             <span class="n">path_embeddings</span><span class="o">=</span><span class="n">path_embeddings</span><span class="p">,</span>
             <span class="n">path_biases</span><span class="o">=</span><span class="n">path_biases</span><span class="p">,</span>
             <span class="n">path_saved_model</span><span class="o">=</span><span class="n">path_saved_model</span><span class="p">,</span>
             <span class="n">path_predictions</span><span class="o">=</span><span class="n">path_predictions</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
         <span class="p">)</span></div>
 </pre></div>
 

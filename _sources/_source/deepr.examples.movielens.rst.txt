@@ -10,6 +10,7 @@ Subpackages
    deepr.examples.movielens.jobs
    deepr.examples.movielens.layers
    deepr.examples.movielens.macros
+   deepr.examples.movielens.metrics
    deepr.examples.movielens.prepros
    deepr.examples.movielens.readers
    deepr.examples.movielens.utils

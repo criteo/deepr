@@ -38,7 +38,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="deepr.examples.movielens.readers package" href="deepr.examples.movielens.readers.html" />
-    <link rel="prev" title="deepr.examples.movielens.macros package" href="deepr.examples.movielens.macros.html" /> 
+    <link rel="prev" title="deepr.examples.movielens.metrics package" href="deepr.examples.movielens.metrics.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -241,8 +241,42 @@
 <p>CSV Preprocessing for MovieLens.</p>
 <dl class="py function">
 <dt id="deepr.examples.movielens.prepros.csv.CSVPrepro">
-<code class="sig-prename descclassname">deepr.examples.movielens.prepros.csv.</code><code class="sig-name descname">CSVPrepro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">min_input_size</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">min_target_size</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">max_input_size</span><span class="o">=</span><span class="default_value">50</span></em>, <em class="sig-param"><span class="n">max_target_size</span><span class="o">=</span><span class="default_value">50</span></em>, <em class="sig-param"><span class="n">buffer_size</span><span class="o">=</span><span class="default_value">1024</span></em>, <em class="sig-param"><span class="n">batch_size</span><span class="o">=</span><span class="default_value">128</span></em>, <em class="sig-param"><span class="n">repeat_size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">prefetch_size</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">num_parallel_calls</span><span class="o">=</span><span class="default_value">8</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/prepros/csv.html#CSVPrepro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.prepros.csv.CSVPrepro" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">deepr.examples.movielens.prepros.csv.</code><code class="sig-name descname">CSVPrepro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vocab_size</span></em>, <em class="sig-param"><span class="n">batch_size</span><span class="o">=</span><span class="default_value">512</span></em>, <em class="sig-param"><span class="n">repeat_size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">prefetch_size</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">num_parallel_calls</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">num_negatives</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/prepros/csv.html#CSVPrepro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.prepros.csv.CSVPrepro" title="Permalink to this definition">¶</a></dt>
 <dd><p>CSV Preprocessing for MovieLens.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="deepr.examples.movielens.prepros.csv.RandomNegatives">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.prepros.csv.</code><code class="sig-name descname">RandomNegatives</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/prepros/csv.html#RandomNegatives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.prepros.csv.RandomNegatives" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="deepr.layers.html#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<dl class="py method">
+<dt id="deepr.examples.movielens.prepros.csv.RandomNegatives.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.examples.movielens.prepros.csv.RandomNegatives.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>Union</em><em>[</em><em>tf.Tensor</em><em>, </em><em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>..</em><em>]</em><em>]</em>) – <ul>
+<li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_in &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_out &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[tf.Tensor, Tuple[tf.Tensor, ..]]</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -340,7 +374,7 @@
         <a href="deepr.examples.movielens.readers.html" class="btn btn-neutral float-right" title="deepr.examples.movielens.readers package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="deepr.examples.movielens.macros.html" class="btn btn-neutral float-left" title="deepr.examples.movielens.macros package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="deepr.examples.movielens.metrics.html" class="btn btn-neutral float-left" title="deepr.examples.movielens.metrics package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

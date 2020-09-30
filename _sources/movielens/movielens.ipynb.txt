@@ -68,7 +68,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 2,
+   "execution_count": 3,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -77,13 +77,13 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": 4,
    "metadata": {},
    "outputs": [],
    "source": [
     "dataset_path = os.getcwd() + \"/ml-20m\"\n",
     "path_ratings = f\"{dataset_path}/ratings.csv\"\n",
-    "path_root = \"wan\"\n",
+    "path_root = \"average\"\n",
     "path_model = path_root + \"/model\"\n",
     "path_data = path_root + \"/data\"\n",
     "path_variables = path_root + \"/variables\"\n",
@@ -112,7 +112,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 4,
+   "execution_count": 5,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -167,14 +167,14 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 7,
+   "execution_count": 9,
    "metadata": {},
    "outputs": [],
    "source": [
     "train = dpr.jobs.Trainer(\n",
     "    path_model=path_model,\n",
-    "    pred_fn=movielens.layers.AverageModel(vocab_size=dpr.vocab.size(path_mapping), dim=100),\n",
-    "    loss_fn=movielens.layers.BPRLoss(vocab_size=dpr.vocab.size(path_mapping), dim=100),\n",
+    "    pred_fn=movielens.layers.AverageModel(vocab_size=dpr.vocab.size(path_mapping), dim=100, keep_prob=0.5),\n",
+    "    loss_fn=movielens.layers.Loss(loss=\"bpr\", vocab_size=dpr.vocab.size(path_mapping)),\n",
     "    optimizer_fn=dpr.optimizers.TensorflowOptimizer(\"LazyAdam\", 0.001),\n",
     "    train_input_fn=dpr.readers.TFRecordReader(path_train),\n",
     "    eval_input_fn=dpr.readers.TFRecordReader(path_eval, shuffle=False),\n",
@@ -264,7 +264,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 8,
+   "execution_count": 10,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -288,7 +288,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 9,
+   "execution_count": 11,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -314,7 +314,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 18,
+   "execution_count": 12,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -323,27 +323,35 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 19,
+   "execution_count": null,
    "metadata": {},
-   "outputs": [
-    {
-     "name": "stderr",
-     "output_type": "stream",
-     "text": [
-      "INFO:deepr.examples.movielens.jobs.evaluate:precision@10 = 0.09155\n",
-      "recall@10 = 0.11125661123870513\n",
-      "f1@10 = 0.08535778342371855\n",
-      "INFO:deepr.examples.movielens.jobs.evaluate:precision@20 = 0.08529500000000001\n",
-      "recall@20 = 0.20106905522924376\n",
-      "f1@20 = 0.103350595200071\n",
-      "INFO:deepr.examples.movielens.jobs.evaluate:precision@50 = 0.06869600000000001\n",
-      "recall@50 = 0.37075841696015943\n",
-      "f1@50 = 0.10448758409036087\n"
-     ]
-    }
-   ],
+   "outputs": [],
    "source": [
     "pipeline.run()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "You should expecte the following metrics\n",
+    "\n",
+    "```\n",
+    "INFO:deepr.examples.movielens.jobs.evaluate:precision@10 = 0.15774000000000002\n",
+    "recall@10 = 0.22966825396825397\n",
+    "f1@10 = 0.17782589040302665\n",
+    "NDCG@10 = 0.218460915855854\n",
+    "INFO:deepr.examples.movielens.jobs.evaluate:precision@20 = 0.12564500000000003\n",
+    "recall@20 = 0.29865131767226577\n",
+    "f1@20 = 0.16083200785947185\n",
+    "NDCG@20 = 0.24568841120719748\n",
+    "INFO:deepr.examples.movielens.jobs.evaluate:precision@50 = 0.08614800000000002\n",
+    "recall@50 = 0.44487653142758526\n",
+    "f1@50 = 0.1303801216635994\n",
+    "NDCG@50 = 0.3022301157999229\n",
+    "```\n",
+    "\n",
+    "You can find configs on [github](https://github.com/criteo/deepr/tree/master/deepr/examples/movielens/configs) that achieve better performance."
    ]
   },
   {
@@ -361,7 +369,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 15,
+   "execution_count": 14,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -375,12 +383,12 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 16,
+   "execution_count": 17,
    "metadata": {},
    "outputs": [],
    "source": [
-    "embeddings = np.vstack(pq.read_table(\"wan/variables/embeddings\").to_pandas().to_numpy())\n",
-    "mapp = {int(movie_id):indice for indice, movie_id in enumerate(open(\"wan/data/mapping.txt\", \"r\").read().split(\"\\n\"))}\n",
+    "embeddings = np.vstack(pq.read_table(\"average/variables/embeddings\").to_pandas().to_numpy())\n",
+    "mapp = {int(movie_id):indice for indice, movie_id in enumerate(open(\"average/data/mapping.txt\", \"r\").read().split(\"\\n\"))}\n",
     "inversed_map = {indice:movie_id for movie_id, indice in mapp.items()}\n",
     "index = faiss.IndexFlatIP(embeddings.shape[-1])\n",
     "index.add(np.ascontiguousarray(embeddings))\n",
@@ -409,7 +417,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 17,
+   "execution_count": 18,
    "metadata": {},
    "outputs": [
     {
@@ -500,31 +508,31 @@
        "      <th>0</th>\n",
        "      <td>Action|Adventure|Sci-Fi</td>\n",
        "      <td>Star Wars: Episode IV - A New Hope (1977)</td>\n",
-       "      <td>20.254013</td>\n",
+       "      <td>16.765795</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>1</th>\n",
        "      <td>Action|Adventure|Sci-Fi</td>\n",
        "      <td>Star Wars: Episode VI - Return of the Jedi (1983)</td>\n",
-       "      <td>18.168583</td>\n",
+       "      <td>14.477997</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>2</th>\n",
        "      <td>Action|Adventure|Sci-Fi</td>\n",
        "      <td>Star Wars: Episode V - The Empire Strikes Back...</td>\n",
-       "      <td>17.663177</td>\n",
+       "      <td>13.837748</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>3</th>\n",
-       "      <td>Action|Adventure</td>\n",
-       "      <td>Raiders of the Lost Ark (Indiana Jones and the...</td>\n",
-       "      <td>15.748468</td>\n",
+       "      <td>Action|Adventure|Sci-Fi|Thriller</td>\n",
+       "      <td>Star Trek: First Contact (1996)</td>\n",
+       "      <td>13.092430</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>4</th>\n",
-       "      <td>Action|Adventure|Sci-Fi|Thriller</td>\n",
-       "      <td>Star Trek: First Contact (1996)</td>\n",
-       "      <td>14.745905</td>\n",
+       "      <td>Children|Comedy|Fantasy|Musical</td>\n",
+       "      <td>Willy Wonka &amp; the Chocolate Factory (1971)</td>\n",
+       "      <td>11.858896</td>\n",
        "    </tr>\n",
        "  </tbody>\n",
        "</table>\n",
@@ -535,15 +543,15 @@
        "0           Action|Adventure|Sci-Fi   \n",
        "1           Action|Adventure|Sci-Fi   \n",
        "2           Action|Adventure|Sci-Fi   \n",
-       "3                  Action|Adventure   \n",
-       "4  Action|Adventure|Sci-Fi|Thriller   \n",
+       "3  Action|Adventure|Sci-Fi|Thriller   \n",
+       "4   Children|Comedy|Fantasy|Musical   \n",
        "\n",
        "                                               Title   Distance  \n",
-       "0          Star Wars: Episode IV - A New Hope (1977)  20.254013  \n",
-       "1  Star Wars: Episode VI - Return of the Jedi (1983)  18.168583  \n",
-       "2  Star Wars: Episode V - The Empire Strikes Back...  17.663177  \n",
-       "3  Raiders of the Lost Ark (Indiana Jones and the...  15.748468  \n",
-       "4                    Star Trek: First Contact (1996)  14.745905  "
+       "0          Star Wars: Episode IV - A New Hope (1977)  16.765795  \n",
+       "1  Star Wars: Episode VI - Return of the Jedi (1983)  14.477997  \n",
+       "2  Star Wars: Episode V - The Empire Strikes Back...  13.837748  \n",
+       "3                    Star Trek: First Contact (1996)  13.092430  \n",
+       "4         Willy Wonka & the Chocolate Factory (1971)  11.858896  "
       ]
      },
      "metadata": {},

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>deepr.examples.movielens.layers.loss &mdash; deepr 2.8.2 documentation</title>
+  <title>deepr.examples.movielens.layers.bpr &mdash; deepr 2.8.2 documentation</title>
   
 
   
@@ -151,7 +151,7 @@
         
           <li><a href="../../../../index.html">Module code</a> &raquo;</li>
         
-      <li>deepr.examples.movielens.layers.loss</li>
+      <li>deepr.examples.movielens.layers.bpr</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -166,51 +166,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for deepr.examples.movielens.layers.loss</h1><div class="highlight"><pre>
-<span></span><span class="c1"># pylint: disable=unexpected-keyword-arg,no-value-for-parameter</span>
+  <h1>Source code for deepr.examples.movielens.layers.bpr</h1><div class="highlight"><pre>
+<span></span><span class="c1"># pylint: disable=unexpected-keyword-arg,no-value-for-parameter,invalid-name</span>
 <span class="sd">&quot;&quot;&quot;BPR Loss with biases.&quot;&quot;&quot;</span>
-
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 
 <span class="kn">import</span> <span class="nn">deepr</span> <span class="k">as</span> <span class="nn">dpr</span>
 
 
-<div class="viewcode-block" id="BPRLoss"><a class="viewcode-back" href="../../../../../_source/deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.loss.BPRLoss">[docs]</a><span class="k">def</span> <span class="nf">BPRLoss</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="viewcode-block" id="BPRLoss"><a class="viewcode-back" href="../../../../../_source/deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.bpr.BPRLoss">[docs]</a><span class="k">def</span> <span class="nf">BPRLoss</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;BPR Loss with biases.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
         <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;userEmbeddings&quot;</span><span class="p">,</span> <span class="s2">&quot;targetPositives&quot;</span><span class="p">,</span> <span class="s2">&quot;targetNegatives&quot;</span><span class="p">,</span> <span class="s2">&quot;targetMask&quot;</span><span class="p">)),</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span>
-            <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;targetPositives&quot;</span><span class="p">,</span>
-            <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;targetPositiveEmbeddings&quot;</span><span class="p">,</span>
-            <span class="n">variable_name</span><span class="o">=</span><span class="s2">&quot;embeddings&quot;</span><span class="p">,</span>
-            <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">dim</span><span class="p">),</span>
+        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DenseIndex</span><span class="p">(</span>
+            <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;userEmbeddings&quot;</span><span class="p">,</span> <span class="s2">&quot;targetPositives&quot;</span><span class="p">),</span>
+            <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;targetPositiveLogits&quot;</span><span class="p">,</span>
+            <span class="n">units</span><span class="o">=</span><span class="n">vocab_size</span><span class="p">,</span>
+            <span class="n">kernel_name</span><span class="o">=</span><span class="s2">&quot;embeddings&quot;</span><span class="p">,</span>
+            <span class="n">bias_name</span><span class="o">=</span><span class="s2">&quot;biases&quot;</span><span class="p">,</span>
             <span class="n">reuse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">),</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span>
-            <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;targetNegatives&quot;</span><span class="p">,</span>
-            <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;targetNegativeEmbeddings&quot;</span><span class="p">,</span>
-            <span class="n">variable_name</span><span class="o">=</span><span class="s2">&quot;embeddings&quot;</span><span class="p">,</span>
-            <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">dim</span><span class="p">),</span>
+        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DenseIndex</span><span class="p">(</span>
+            <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;userEmbeddings&quot;</span><span class="p">,</span> <span class="s2">&quot;targetNegatives&quot;</span><span class="p">),</span>
+            <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;targetNegativeLogits&quot;</span><span class="p">,</span>
+            <span class="n">units</span><span class="o">=</span><span class="n">vocab_size</span><span class="p">,</span>
+            <span class="n">kernel_name</span><span class="o">=</span><span class="s2">&quot;embeddings&quot;</span><span class="p">,</span>
+            <span class="n">bias_name</span><span class="o">=</span><span class="s2">&quot;biases&quot;</span><span class="p">,</span>
             <span class="n">reuse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">),</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span>
-            <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;targetPositives&quot;</span><span class="p">,</span>
-            <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;targetPositiveBiases&quot;</span><span class="p">,</span>
-            <span class="n">variable_name</span><span class="o">=</span><span class="s2">&quot;biases&quot;</span><span class="p">,</span>
-            <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,),</span>
-            <span class="n">initializer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros_initializer</span><span class="p">(),</span>
-        <span class="p">),</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span>
-            <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;targetNegatives&quot;</span><span class="p">,</span>
-            <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;targetNegativeBiases&quot;</span><span class="p">,</span>
-            <span class="n">variable_name</span><span class="o">=</span><span class="s2">&quot;biases&quot;</span><span class="p">,</span>
-            <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,),</span>
-            <span class="n">reuse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="p">),</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DotProduct</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;userEmbeddings&quot;</span><span class="p">,</span> <span class="s2">&quot;targetPositiveEmbeddings&quot;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;targetPositiveProduct&quot;</span><span class="p">),</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DotProduct</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;userEmbeddings&quot;</span><span class="p">,</span> <span class="s2">&quot;targetNegativeEmbeddings&quot;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;targetNegativeProduct&quot;</span><span class="p">),</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;targetPositiveBiases&quot;</span><span class="p">,</span> <span class="s2">&quot;targetPositiveProduct&quot;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;targetPositiveLogits&quot;</span><span class="p">),</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;targetNegativeBiases&quot;</span><span class="p">,</span> <span class="s2">&quot;targetNegativeProduct&quot;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;targetNegativeLogits&quot;</span><span class="p">),</span>
         <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">ToFloat</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;targetMask&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;targetWeight&quot;</span><span class="p">),</span>
         <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">ExpandDims</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;targetMask&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;targetMask&quot;</span><span class="p">),</span>
         <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">MaskedBPR</span><span class="p">(</span>

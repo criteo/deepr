@@ -1,0 +1,29 @@
+deepr.examples.movielens.metrics package
+========================================
+
+Submodules
+----------
+
+deepr.examples.movielens.metrics.ndcg module
+--------------------------------------------
+
+.. automodule:: deepr.examples.movielens.metrics.ndcg
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+deepr.examples.movielens.metrics.recall module
+----------------------------------------------
+
+.. automodule:: deepr.examples.movielens.metrics.recall
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: deepr.examples.movielens.metrics
+   :members:
+   :undoc-members:
+   :show-inheritance:
