@@ -191,6 +191,19 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown loss option </span><span class="si">{</span><span class="n">loss</span><span class="si">}</span><span class="s2"> (must be &#39;multi&#39;, &#39;multi_css&#39; or &#39;bpr&#39;)&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">layer</span></div>
+
+
+<div class="viewcode-block" id="VAELoss"><a class="viewcode-back" href="../../../../../_source/deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.losses.VAELoss">[docs]</a><span class="k">def</span> <span class="nf">VAELoss</span><span class="p">(</span><span class="n">loss</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">beta_start</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">beta_end</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">beta_steps</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add beta * KL to the loss and return relevant loss layer.&quot;&quot;&quot;</span>
+    <span class="n">layer</span> <span class="o">=</span> <span class="n">Loss</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span> <span class="n">vocab_size</span><span class="o">=</span><span class="n">vocab_size</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;KL&quot;</span><span class="p">])),</span>
+        <span class="n">layer</span><span class="p">,</span>
+        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">AddWithWeight</span><span class="p">(</span>
+            <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;loss&quot;</span><span class="p">,</span> <span class="s2">&quot;KL&quot;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;loss&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">beta_start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">beta_end</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="n">beta_steps</span>
+        <span class="p">),</span>
+        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">layer</span><span class="o">.</span><span class="n">outputs</span><span class="p">),</span>
+    <span class="p">)</span></div>
 </pre></div>
 
            </div>

@@ -44,6 +44,14 @@ deepr.examples.movielens.layers.transformer module
    :undoc-members:
    :show-inheritance:
 
+deepr.examples.movielens.layers.vae module
+------------------------------------------
+
+.. automodule:: deepr.examples.movielens.layers.vae
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 
