@@ -31,7 +31,7 @@ class WeightedAverage(base.Layer):
         # Values and weights need to have the same shape up to axis
         # and compatible after axis
         axis = len(weights.shape) - 1
-        weights = tf.broadcast_to(weights, tf.shape(values)[: len(weights.shape)])
+        weights = tf.broadcast_to(weights, tf.maximum(tf.shape(weights), tf.shape(values)[: len(weights.shape)]))
         values, weights = make_same_shape([values, weights], broadcast=False)
 
         # Reduce weighted values and weights

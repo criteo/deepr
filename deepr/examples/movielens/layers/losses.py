@@ -8,6 +8,7 @@ import tensorflow as tf
 
 from deepr.examples.movielens.layers.multi import MultiLogLikelihoodCSS
 from deepr.examples.movielens.layers.bpr import BPRLoss
+from deepr.examples.movielens.layers.ns import NegativeSampling
 
 
 LOGGER = logging.getLogger(__name__)
@@ -23,6 +24,8 @@ def Loss(loss: str, vocab_size: int):
         layer = BPRLoss(vocab_size=vocab_size)
     elif loss == "l2":
         layer = L2Loss(inputs=("logits", "targetPositivesOneHot"), outputs="loss")
+    elif loss == "ns":
+        layer = NegativeSampling(vocab_size=vocab_size)
     else:
         raise ValueError(f"Unknown loss option {loss} (must be 'multi', 'multi_css' or 'bpr')")
     return layer

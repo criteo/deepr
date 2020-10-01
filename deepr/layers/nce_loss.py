@@ -3,11 +3,14 @@
 import tensorflow as tf
 
 from deepr.layers import base
-from deepr.layers.reduce import Average
+from deepr.layers.reduce import Average, WeightedAverage
 
 
 class NegativeSampling(base.Layer):
-    """Vanilla Negative Sampling Loss Layer"""
+    """Vanilla Negative Sampling Loss Layer.Loss
+
+    Expected value at beginning of training : -2 * log(0.5) = 1.38
+    """
 
     def __init__(self, **kwargs):
         super().__init__(n_in=2, n_out=1, **kwargs)
@@ -37,7 +40,10 @@ class NegativeSampling(base.Layer):
 
 
 class MaskedNegativeSampling(base.Layer):
-    """Masked Negative Sampling Loss Layer"""
+    """Masked Negative Sampling Loss Layer.Loss
+
+    Expected value at beginning of training : -2 * log(0.5) = 1.38
+    """
 
     def __init__(self, **kwargs):
         super().__init__(n_in=4, n_out=1, **kwargs)
@@ -61,18 +67,6 @@ class MaskedNegativeSampling(base.Layer):
         positives, negatives, mask, weights = tensors
         true_losses = tf.nn.sigmoid_cross_entropy_with_logits(labels=tf.ones_like(positives), logits=positives)
         sampled_losses = tf.nn.sigmoid_cross_entropy_with_logits(labels=tf.zeros_like(negatives), logits=negatives)
-        # filter the values that correspond to mask
-        negative_number = tf.reduce_sum(tf.to_float(mask), -1)
-        sampled_losses = tf.multiply(sampled_losses, tf.to_float(mask))
-        sampled_losses = tf.reduce_sum(sampled_losses, axis=2)
-        sampled_losses = tf.div_no_nan(sampled_losses, negative_number)
-
-        losses = tf.add(true_losses, sampled_losses)
-        # One loss per event, average of scores : (batch, num_events)
-        # TODO: fix this line, it seems it's doing averaging twice
-        # event_scores = WeightedAverage()((losses, tf.to_float(mask)))
-        event_scores = losses
-        # Each event contributes according to its weight
+        event_scores = true_losses + WeightedAverage()((sampled_losses, tf.to_float(mask)))
         event_weights = weights * tf.to_float(tf.reduce_any(mask, axis=-1))
-        event_losses = event_scores * event_weights
-        return tf.div_no_nan(tf.reduce_sum(event_losses), tf.reduce_sum(event_weights))
+        return tf.div_no_nan(tf.reduce_sum(event_scores * event_weights), tf.reduce_sum(event_weights))

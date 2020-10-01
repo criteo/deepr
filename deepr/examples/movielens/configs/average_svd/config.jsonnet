@@ -16,9 +16,11 @@ local end = import '../common/end.jsonnet';
             start,
             {
                 type: "deepr.examples.movielens.jobs.SVD",
-                path_csv: "$paths:path_train",
+                path_ratings: "$paths:path_ratings",
+                path_train: "$paths:path_train",
+                path_unique_sid: "$paths:path_unique_sid",
+                path_unique_uid: "$paths:path_unique_uid",
                 path_embeddings: "$paths:path_embeddings_svd",
-                vocab_size: "$params:vocab_size",
                 dim: "$params:dim",
                 min_count: 10,
             },

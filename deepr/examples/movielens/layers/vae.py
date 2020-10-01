@@ -16,10 +16,10 @@ def VAEModel(
     dims_encode: Tuple[int, ...] = (600, 200),
     dims_decode: Tuple[int, ...] = (200, 600),
     keep_prob: float = 0.5,
+    share_embeddings: bool = False,
     train_embeddings: bool = True,
     project: bool = False,
-    share_embeddings: bool = False,
-    seed: int = 42,
+    seed: int = None,
 ) -> dpr.layers.Layer:
     """VAE Model."""
     if dims_encode[-1] != dims_decode[0]:
