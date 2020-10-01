@@ -23,6 +23,22 @@ Fixed
 Security
 ~~~~~~~~
 
+[2.9.0] - 2020-10-01
+--------------------
+
+Added
+~~~~~
+- SVD jobs and configs to MovieLens
+- VAE model to MovieLens
+- NDCG@K and Recall@K metrics to MovieLens
+- CSVReader to MovieLens
+- AddWithWeight, DenseIndex, MultiLogLikelihoodCSS, MultiLogLikelihood layers
+- Lambda layer to layers.base
+- preds option to Trainer
+
+Changed
+~~~~~~~
+
 
 [2.8.2] - 2020-09-07
 --------------------
