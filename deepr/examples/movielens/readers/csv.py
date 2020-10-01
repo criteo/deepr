@@ -1,6 +1,8 @@
 # pylint: disable=invalid-name
 """CSV Reader for MovieLens."""
 
+import collections
+
 import tensorflow as tf
 import numpy as np
 import deepr as dpr
@@ -27,11 +29,18 @@ class TrainCSVReader(dpr.readers.Reader):
     """
 
     def __init__(
-        self, path_csv: str, vocab_size: int, target_ratio: float = None, shuffle: bool = True, seed: int = 98765
+        self,
+        path_csv: str,
+        vocab_size: int,
+        target_ratio: float = None,
+        bucket_size: int = 16 * 512,
+        shuffle: bool = True,
+        seed: int = 42,
     ):
         self.path_csv = path_csv
         self.vocab_size = vocab_size
         self.target_ratio = target_ratio
+        self.bucket_size = bucket_size
         self.shuffle = shuffle
         self.seed = seed
         self.fields = [
@@ -49,17 +58,42 @@ class TrainCSVReader(dpr.readers.Reader):
         rows, cols = tp["uid"], tp["sid"]
         data = sparse.csr_matrix((np.ones_like(rows), (rows, cols)), dtype="int64", shape=(n_users, self.vocab_size))
         np.random.seed(self.seed)
+        counts = np.array(data.sum(axis=1)).flatten()
+        if self.bucket_size:
+            buckets = collections.defaultdict(list)
+            for bucket, (_, idx) in enumerate(sorted(zip(counts, range(data.shape[0])))):
+                buckets[bucket // self.bucket_size].append(idx)
 
         def _gen():
-            idxlist = list(range(data.shape[0]))
+            # Resolve idxlist (shuffle + buckets)
             if self.shuffle:
-                np.random.shuffle(idxlist)
+                if self.bucket_size:
+                    idxlist = []
+                    # Shuffle buckets
+                    bucket_idx = list(range(len(buckets)))
+                    np.random.shuffle(bucket_idx)
+                    for idx in bucket_idx:
+                        # Shuffle bucket indices
+                        bucket_idxlist = buckets[idx]
+                        np.random.shuffle(bucket_idxlist)
+                        idxlist.extend(bucket_idxlist)
+                else:
+                    idxlist = list(range(data.shape[0]))
+                    np.random.shuffle(idxlist)
+            else:
+                if self.bucket_size:
+                    idxlist = [idx for _, idx in sorted(zip(counts, range(data.shape[0])))]
+                else:
+                    idxlist = list(range(data.shape[0]))
+
+            # Iterate over items in the sparse matrix
             for idx in idxlist:
                 X = data[idx]
                 if sparse.isspmatrix(X):
                     X = X.toarray()
                 X = X.astype("int64")
                 indices = np.nonzero(X[0])[0]
+                # Split into input / target
                 if self.target_ratio is not None:
                     np.random.shuffle(indices)
                     size = int(len(indices) * (1 - self.target_ratio))
@@ -69,6 +103,7 @@ class TrainCSVReader(dpr.readers.Reader):
                     input_one_hot[input_positives] = 1
                     target_one_hot = np.zeros((self.vocab_size,), dtype=np.int64)
                     target_one_hot[target_positives] = 1
+                # Same input / target
                 else:
                     input_positives = indices
                     target_positives = indices
