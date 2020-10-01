@@ -8,8 +8,8 @@ macros + {
         use_mlflow: false
     },
     params+: {
-        target_ratio: 0.2,
-        num_negatives: 1000,
-        loss: "bpr"
+        target_ratio: null,
+        num_negatives: null,
+        loss: "l2"
     }
 }

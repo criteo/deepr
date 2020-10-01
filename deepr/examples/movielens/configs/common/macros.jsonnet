@@ -1,4 +1,4 @@
-local path_dataset = "path/to/dataset/";
+local path_dataset = "viewfs://root/user/g.genthial/movielens/ml-20m/";
 
 {
     run: {
