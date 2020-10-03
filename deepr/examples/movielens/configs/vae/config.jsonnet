@@ -6,7 +6,8 @@ local end = import '../common/end.jsonnet';
 {
     type: "deepr.jobs.YarnLauncher",
     config: {
-        type: "deepr.jobs.YarnLauncherConfig"
+        type: "deepr.jobs.YarnLauncherConfig",
+        path_pex_cpu: "viewfs://root/user/g.genthial/envs/cpu/yarn-launcher-2020-10-01-17-54-40.pex"
     },
     run_on_yarn: "$run:run_on_yarn",
     job: {
@@ -19,8 +20,8 @@ local end = import '../common/end.jsonnet';
                     pred_fn: {
                         type: "deepr.examples.movielens.layers.VAEModel",
                         vocab_size: "$params:vocab_size",
-                        dims_encode: [600, 200],
-                        dims_decode: [200, 600],
+                        dims_encode: [600],
+                        dims_decode: [600],
                         keep_prob: 0.5,
                         seed: 42
                     },

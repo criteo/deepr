@@ -9,7 +9,7 @@ import deepr as dpr
 LOGGER = logging.getLogger(__name__)
 
 
-def MultiLogLikelihoodCSS(vocab_size: int):
+def MultiLogLikelihoodCSS(vocab_size: int, normalize: bool = False):
     """MultiLogLikelihood Loss with Complementarity Sampling."""
     return dpr.layers.Sequential(
         dpr.layers.Select(inputs=("userEmbeddings", "targetPositives", "targetNegatives", "targetMask")),
@@ -30,6 +30,7 @@ def MultiLogLikelihoodCSS(vocab_size: int):
             reuse=True,
         ),
         dpr.layers.ToFloat(inputs="targetMask", outputs="targetWeight"),
+        dpr.layers.Normalize(inputs="targetWeight", outputs="targetWeight", norm=1, axis=1) if normalize else [],
         dpr.layers.ExpandDims(inputs="targetMask", outputs="targetNegativeMask"),
         dpr.layers.MultiLogLikelihoodCSS(
             inputs=("targetPositiveLogits", "targetNegativeLogits", "targetMask", "targetNegativeMask"),

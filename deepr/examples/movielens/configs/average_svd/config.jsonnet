@@ -6,7 +6,8 @@ local end = import '../common/end.jsonnet';
 {
     type: "deepr.jobs.YarnLauncher",
     config: {
-        type: "deepr.jobs.YarnLauncherConfig"
+        type: "deepr.jobs.YarnLauncherConfig",
+        path_pex_cpu: "viewfs://root/user/g.genthial/envs/cpu/yarn-launcher-2020-10-01-17-54-40.pex"
     },
     run_on_yarn: "$run:run_on_yarn",
     job: {
@@ -15,12 +16,10 @@ local end = import '../common/end.jsonnet';
         jobs: [
             start,
             {
-                type: "deepr.examples.movielens.jobs.SVD",
-                path_ratings: "$paths:path_ratings",
-                path_train: "$paths:path_train",
-                path_unique_sid: "$paths:path_unique_sid",
-                path_unique_uid: "$paths:path_unique_uid",
+                type: "deepr.examples.movielens.jobs.SVDPMI",
+                path_csv: "$paths:path_train",
                 path_embeddings: "$paths:path_embeddings_svd",
+                vocab_size: "$params:vocab_size",
                 dim: "$params:dim",
                 min_count: 10,
             },
@@ -38,7 +37,8 @@ local end = import '../common/end.jsonnet';
                         dim: "$params:dim",
                         keep_prob: 0.5,
                         train_embeddings: "$params:train_embeddings",
-                        project: "$params:project"
+                        project: "$params:project",
+                        reduce_mode: "$params:reduce_mode",
                     },
                     loss_fn: {
                         type: "deepr.examples.movielens.layers.Loss",

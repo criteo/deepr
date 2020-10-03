@@ -6,7 +6,8 @@ local end = import '../common/end.jsonnet';
 {
     type: "deepr.jobs.YarnLauncher",
     config: {
-        type: "deepr.jobs.YarnLauncherConfig"
+        type: "deepr.jobs.YarnLauncherConfig",
+        path_pex_cpu: "viewfs://root/user/g.genthial/envs/cpu/yarn-launcher-2020-10-01-17-54-40.pex"
     },
     run_on_yarn: "$run:run_on_yarn",
     job: {
@@ -23,11 +24,13 @@ local end = import '../common/end.jsonnet';
                         keep_prob: 0.5,
                         share_embeddings: "$params:share_embeddings",
                         average_with_bias: "$params:average_with_bias",
+                        reduce_mode: "$params:reduce_mode",
                     },
                     loss_fn: {
                         type: "deepr.examples.movielens.layers.Loss",
                         loss: "$params:loss",
                         vocab_size: "$params:vocab_size",
+                        normalize: false
                     }
                 }
             },

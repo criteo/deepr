@@ -14,14 +14,14 @@ from deepr.examples.movielens.layers.ns import NegativeSampling
 LOGGER = logging.getLogger(__name__)
 
 
-def Loss(loss: str, vocab_size: int):
+def Loss(loss: str, vocab_size: int, normalize: bool = False):
     """Return the relevant loss layer."""
     if loss == "multi":
         layer = dpr.layers.MultiLogLikelihood(inputs=("logits", "targetPositivesOneHot"), outputs="loss")
     elif loss == "multi_css":
-        layer = MultiLogLikelihoodCSS(vocab_size=vocab_size)
+        layer = MultiLogLikelihoodCSS(vocab_size=vocab_size, normalize=normalize)
     elif loss == "bpr":
-        layer = BPRLoss(vocab_size=vocab_size)
+        layer = BPRLoss(vocab_size=vocab_size, normalize=normalize)
     elif loss == "l2":
         layer = L2Loss(inputs=("logits", "targetPositivesOneHot"), outputs="loss")
     elif loss == "ns":
@@ -31,9 +31,9 @@ def Loss(loss: str, vocab_size: int):
     return layer
 
 
-def VAELoss(loss: str, vocab_size: int, beta_start: float, beta_end: float, beta_steps: int):
+def VAELoss(loss: str, vocab_size: int, beta_start: float, beta_end: float, beta_steps: int, normalize: bool = False):
     """Add beta * KL to the loss and return relevant loss layer."""
-    layer = Loss(loss=loss, vocab_size=vocab_size)
+    layer = Loss(loss=loss, vocab_size=vocab_size, normalize=normalize)
     return dpr.layers.Sequential(
         dpr.layers.Select(inputs=tuple(list(layer.inputs) + ["KL"])),
         layer,

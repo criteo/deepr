@@ -46,16 +46,16 @@ def VAEModel(
         AddBias(inputs="averageEmbeddings", outputs="averageEmbeddings", variable_name="encoder/bias", seed=seed),
         dpr.layers.Lambda(
             lambda tensors, _: tf.nn.tanh(tensors), inputs="averageEmbeddings", outputs="averageEmbeddings"
-        ),
+        ) if len(dims_encode) > 1 else [],
         Encode(
             inputs="averageEmbeddings",
             outputs=("mu", "std", "KL"),
-            dims=dims_encode[1:],
+            dims=dims_encode,
             activation=tf.nn.tanh,
             seed=seed,
         ),
         GaussianNoise(inputs=("mu", "std"), outputs="latent", seed=seed),
-        Decode(inputs="latent", outputs="userEmbeddings", dims=dims_decode[1:], activation=tf.nn.tanh, seed=seed),
+        Decode(inputs="latent", outputs="userEmbeddings", dims=dims_decode, activation=tf.nn.tanh, seed=seed),
         Projection(inputs="userEmbeddings", outputs="userEmbeddings", variable_name="decoder/projection", seed=seed)
         if project
         else [],
@@ -116,31 +116,41 @@ def AddBias(tensors: tf.Tensor, variable_name: str, seed: int):
 def Encode(tensors: tf.Tensor, dims: Tuple, activation, seed: int):
     """Encode tensor, apply KL constraint."""
     with tf.variable_scope("encoder"):
-        # Hidden layers
-        for dim in dims[:-1]:
+        if len(dims) > 1:
+            # Hidden layers
+            for dim in dims[1:-1]:
+                tensors = tf.layers.dense(
+                    inputs=tensors,
+                    units=dim,
+                    activation=activation,
+                    kernel_initializer=tf.contrib.layers.xavier_initializer(seed=seed),
+                    bias_initializer=tf.truncated_normal_initializer(stddev=0.001, seed=seed),
+                )
+
+            # Last layer predicts mean and log variance of the latent user
             tensors = tf.layers.dense(
                 inputs=tensors,
-                units=dim,
-                activation=activation,
+                units=2 * dims[-1],
+                activation=None,
                 kernel_initializer=tf.contrib.layers.xavier_initializer(seed=seed),
                 bias_initializer=tf.truncated_normal_initializer(stddev=0.001, seed=seed),
             )
 
-        # Last layer predicts mean and log variance of the latent user
-        tensors = tf.layers.dense(
-            inputs=tensors,
-            units=2 * dims[-1],
-            activation=None,
-            kernel_initializer=tf.contrib.layers.xavier_initializer(seed=seed),
-            bias_initializer=tf.truncated_normal_initializer(stddev=0.001, seed=seed),
-        )
-
-        # Predict prior statistics
-        mu = tensors[:, : dims[-1]]
-        logvar = tensors[:, dims[-1] :]
-        std = tf.exp(0.5 * logvar)
+            # Predict prior statistics
+            mu = tensors[:, : dims[-1]]
+            logvar = tensors[:, dims[-1] :]
+        else:
+            mu = tensors
+            logvar = tf.layers.dense(
+                inputs=tensors,
+                units=dims[-1],
+                activation=None,
+                kernel_initializer=tf.contrib.layers.xavier_initializer(seed=seed),
+                bias_initializer=tf.truncated_normal_initializer(stddev=0.001, seed=seed),
+            )
 
         # KL divergence with standard normal
+        std = tf.exp(0.5 * logvar)
         KL = tf.reduce_mean(tf.reduce_sum(0.5 * (-logvar + tf.exp(logvar) + mu ** 2 - 1), axis=1))
 
         return mu, std, KL
@@ -160,14 +170,15 @@ def GaussianNoise(tensors: Tuple[tf.Tensor, tf.Tensor], mode: str, seed: int):
 def Decode(tensors: tf.Tensor, dims: Tuple, activation, seed: int):
     """Decode tensor."""
     with tf.variable_scope("decoder"):
-        for dim in dims:
-            tensors = tf.layers.dense(
-                inputs=tensors,
-                units=dim,
-                activation=activation,
-                kernel_initializer=tf.contrib.layers.xavier_initializer(seed=seed),
-                bias_initializer=tf.truncated_normal_initializer(stddev=0.001, seed=seed),
-            )
+        if len(dims) > 1:
+            for dim in dims[1:]:
+                tensors = tf.layers.dense(
+                    inputs=tensors,
+                    units=dim,
+                    activation=activation,
+                    kernel_initializer=tf.contrib.layers.xavier_initializer(seed=seed),
+                    bias_initializer=tf.truncated_normal_initializer(stddev=0.001, seed=seed),
+                )
     return tensors
 
 

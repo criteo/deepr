@@ -21,9 +21,9 @@ local path_dataset = "viewfs://root/user/g.genthial/movielens/ml-20m/";
         type: "deepr.macros.MLFlowInit",
         use_mlflow: false,
         run_name: "$paths:run_name",
-        tracking_uri: null,
-        experiment_name: null,
-        artifact_location: null
+        tracking_uri: "https://mlflow.par.prod.crto.in",
+        experiment_name: "deepr-nn",
+        artifact_location: "viewfs://root/user/deepr/dev/mlflow_artifacts"
     },
     params: {
         max_steps: 50000,
@@ -33,6 +33,8 @@ local path_dataset = "viewfs://root/user/g.genthial/movielens/ml-20m/";
             path: "$paths:path_unique_sid"
         },
         target_ratio: null,
+        save_checkpoints_steps: 230,
+        take_ratio: null,
         num_negatives: null,
         loss: null,
     }

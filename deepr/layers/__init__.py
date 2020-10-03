@@ -17,6 +17,7 @@ from deepr.layers.core import (
     Identity,
     LogicalAnd,
     LogicalOr,
+    Normalize,
     Product,
     Scale,
     Softmax,

@@ -20,6 +20,7 @@ except ImportError as e:
 
 try:
     from sklearn.decomposition import TruncatedSVD
+    from sklearn import preprocessing
 except ImportError as e:
     print(f"sklearn needs to be installed for MovieLens {e}")
 
@@ -28,45 +29,24 @@ LOGGER = logging.getLogger(__name__)
 
 
 @dataclass
-class SVD(dpr.jobs.Job):
+class SVDPMI(dpr.jobs.Job):
     """Build SVD embeddings."""
 
-    path_ratings: str
-    path_train: str
-    path_unique_uid: str
-    path_unique_sid: str
+    path_csv: str
     path_embeddings: str
-    dim: int = 100
+    vocab_size: int
+    dim: int = 600
     min_count: int = 10
 
     def run(self):
-        # Read user and movie vocabularies
-        LOGGER.info(f"Reading vocabularies from {self.path_unique_sid} and {self.path_unique_uid}")
-        movie_to_sid = {int(movie): sid for sid, movie in enumerate(dpr.vocab.read(self.path_unique_sid))}
-        user_to_uid = {int(user): uid for uid, user in enumerate(dpr.vocab.read(self.path_unique_uid))}
-        uid_to_user = {uid: user for user, uid in user_to_uid.items()}
-
-        # Read train dataset
-        LOGGER.info(f"Reading train users from {self.path_train}")
-        with dpr.io.Path(self.path_train).open() as file:
-            train = pd.read_csv(file)
-            train_users = {uid_to_user[user] for user in train["uid"]}
-
-        # Read ratings
-        LOGGER.info(f"Reading global ratings from {self.path_ratings}")
-        with dpr.io.Path(self.path_ratings).open() as file:
-            ratings = pd.read_csv(file)
-
-        # Build uid and sid
-        LOGGER.info("Building unfiltered user-item matrix")
-        uids, sids = [], []
-        for user, movie in zip(ratings["userId"], ratings["movieId"]):
-            if user in train_users:
-                if movie in movie_to_sid:
-                    uids.append(user_to_uid[user])
-                    sids.append(movie_to_sid[movie])
+        # Read user-item matrix
+        LOGGER.info(f"Reading user-item rankings from {self.path_csv}")
+        with dpr.io.Path(self.path_csv).open() as file:
+            tp = pd.read_csv(file)
+        n_users = tp["uid"].max() + 1
+        rows, cols = tp["uid"], tp["sid"]
         user_item = sparse.csr_matrix(
-            (np.ones_like(uids), (uids, sids)), dtype="int64", shape=(len(user_to_uid), len(movie_to_sid))
+            (np.ones_like(rows), (rows, cols)), dtype="int64", shape=(n_users, self.vocab_size)
         )
 
         # Computing co-occurrence matrix
@@ -75,17 +55,53 @@ class SVD(dpr.jobs.Job):
 
         # Compute PMI from co-occurrence
         LOGGER.info("Computing PMI matrix")
-        pmi = compute_pmi(item_item)
+        item_item = compute_pmi(item_item)
 
         # Compute Truncated SVD
         LOGGER.info("Computing Truncated SVD from PMI matrix")
         svd = TruncatedSVD(n_components=self.dim, algorithm="arpack", random_state=42)
-        svd.fit(pmi)
+        embeddings = svd.fit_transform(item_item)
         LOGGER.info(f"Explained variance: {svd.explained_variance_ratio_.sum()}")
 
         LOGGER.info(f"Saving embeddings to {self.path_embeddings}")
         dpr.io.Path(self.path_embeddings).parent.mkdir(parents=True, exist_ok=True)
-        embeddings = svd.transform(pmi)
+        with dpr.io.Path(self.path_embeddings).open("wb") as file:
+            np.save(file, embeddings)
+
+
+@dataclass
+class SVD(dpr.jobs.Job):
+    """Build SVD embeddings."""
+
+    path_csv: str
+    path_embeddings: str
+    vocab_size: int
+    dim: int = 600
+    min_count: int = 10
+    normalize: bool = False
+
+    def run(self):
+        # Read user-item matrix
+        LOGGER.info(f"Reading user-item rankings from {self.path_csv}")
+        with dpr.io.Path(self.path_csv).open() as file:
+            tp = pd.read_csv(file)
+        n_users = tp["uid"].max() + 1
+        rows, cols = tp["uid"], tp["sid"]
+        user_item = sparse.csr_matrix(
+            (np.ones_like(rows), (rows, cols)), dtype="int64", shape=(n_users, self.vocab_size)
+        )
+        if self.normalize:
+            user_item = preprocessing.normalize(user_item, norm="l1", axis=1)
+
+        # Compute Truncated SVD
+        LOGGER.info("Computing Truncated SVD from user-item matrix")
+        svd = TruncatedSVD(n_components=self.dim, algorithm="arpack", random_state=42)
+        svd.fit(user_item.asfptype())
+        LOGGER.info(f"Explained variance: {svd.explained_variance_ratio_.sum()}")
+        embeddings = np.transpose(svd.components_)
+
+        LOGGER.info(f"Saving embeddings to {self.path_embeddings}")
+        dpr.io.Path(self.path_embeddings).parent.mkdir(parents=True, exist_ok=True)
         with dpr.io.Path(self.path_embeddings).open("wb") as file:
             np.save(file, embeddings)
 

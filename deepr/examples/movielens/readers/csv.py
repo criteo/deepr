@@ -1,6 +1,7 @@
 # pylint: disable=invalid-name
 """CSV Reader for MovieLens."""
 
+import logging
 import collections
 
 import tensorflow as tf
@@ -22,6 +23,9 @@ except ImportError as e:
     print(f"Scipy needs to be installed for MovieLens {e}")
 
 
+LOGGER = logging.getLogger(__name__)
+
+
 class TrainCSVReader(dpr.readers.Reader):
     """Reader of MovieLens CSV files of the Multi-VAE paper.
 
@@ -36,6 +40,7 @@ class TrainCSVReader(dpr.readers.Reader):
         bucket_size: int = 16 * 512,
         shuffle: bool = True,
         seed: int = 42,
+        take_ratio: float = None
     ):
         self.path_csv = path_csv
         self.vocab_size = vocab_size
@@ -43,6 +48,7 @@ class TrainCSVReader(dpr.readers.Reader):
         self.bucket_size = bucket_size
         self.shuffle = shuffle
         self.seed = seed
+        self.take_ratio = take_ratio
         self.fields = [
             fields.UID,
             fields.INPUT_POSITIVES,
@@ -54,9 +60,13 @@ class TrainCSVReader(dpr.readers.Reader):
     def as_dataset(self):
         with dpr.io.Path(self.path_csv).open() as file:
             tp = pd.read_csv(file)
-        n_users = tp["uid"].max() + 1
         rows, cols = tp["uid"], tp["sid"]
+        n_users = rows.max() + 1
         data = sparse.csr_matrix((np.ones_like(rows), (rows, cols)), dtype="int64", shape=(n_users, self.vocab_size))
+        LOGGER.info(f"Reloaded user-item matrix of shape {data.shape} with num_events={len(rows)}")
+        if self.take_ratio is not None:
+            data = data[:int(self.take_ratio * n_users)]
+            LOGGER.info(f"Sliced user-item matrix, new shape = {data.shape}, num_events={data.sum()}")
         np.random.seed(self.seed)
         counts = np.array(data.sum(axis=1)).flatten()
         if self.bucket_size:

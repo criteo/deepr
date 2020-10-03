@@ -18,11 +18,11 @@ def AverageModel(
     train_embeddings: bool = True,
     average_with_bias: bool = False,
     project: bool = False,
+    reduce_mode: bool = "average",
 ):
     """Average Model."""
     return dpr.layers.Sequential(
         dpr.layers.Select(inputs=("inputPositives", "inputMask")),
-        RandomMask(inputs="inputMask", outputs="inputMask", keep_prob=keep_prob),
         dpr.layers.Embedding(
             inputs="inputPositives",
             outputs="inputEmbeddings",
@@ -30,12 +30,16 @@ def AverageModel(
             shape=(vocab_size, dim),
             trainable=train_embeddings,
         ),
-        dpr.layers.ToFloat(inputs="inputMask", outputs="inputWeights"),
-        dpr.layers.WeightedAverage(inputs=("inputEmbeddings", "inputWeights"), outputs="userEmbeddings"),
+        UserEmbedding(
+            inputs=("inputEmbeddings", "inputMask"),
+            outputs="userEmbeddings",
+            keep_prob=keep_prob,
+            reduce_mode=reduce_mode,
+        ),
         Projection(
             inputs="userEmbeddings",
             outputs="userEmbeddings",
-            name="projection" if share_embeddings else "encoder/projection",
+            variable_name="projection" if share_embeddings else "encoder/projection",
             reuse=False,
             transpose=False,
         )
@@ -45,7 +49,7 @@ def AverageModel(
         Projection(
             inputs="userEmbeddings",
             outputs="userEmbeddings",
-            name="projection",
+            variable_name="projection",
             reuse=share_embeddings,
             transpose=True,
         )
@@ -56,13 +60,30 @@ def AverageModel(
     )
 
 
-@dpr.layers.layer(n_in=1, n_out=1)
-def RandomMask(tensors: tf.Tensor, mode: str, keep_prob: float):
-    if mode == dpr.TRAIN and keep_prob is not None:
+@dpr.layers.layer(n_in=2, n_out=1)
+def UserEmbedding(tensors: tf.Tensor, mode: str, keep_prob: float, reduce_mode: str = "average"):
+    """Compute Weighted Sum (randomly masking inputs in TRAIN mode)."""
+    embeddings, mask = tensors
+
+    # Drop entries without re-scaling (not classical dropout)
+    if mode == dpr.TRAIN:
         LOGGER.info("Applying random mask to inputs (TRAIN only)")
-        mask = tf.random.uniform(tf.shape(tensors)) <= keep_prob
-        return tf.logical_and(tensors, mask)
-    return tensors
+        mask_random = tf.random.uniform(tf.shape(mask)) <= keep_prob
+        mask = tf.logical_and(mask, mask_random)
+
+    weights = tf.cast(mask, tf.float32)
+
+    # Scale the weights depending on the reduce mode
+    if reduce_mode == "l2":
+        weights = tf.nn.l2_normalize(weights, axis=-1)
+    elif reduce_mode == "average":
+        weights = tf.div_no_nan(weights, tf.reduce_sum(weights, axis=-1, keepdims=True))
+    elif reduce_mode == "sum":
+        pass
+    else:
+        raise ValueError(f"Reduce mode {reduce_mode} unknown (must be 'l2', 'average' or 'sum')")
+
+    return tf.reduce_sum(embeddings * tf.expand_dims(weights, axis=-1), axis=-2)
 
 
 @dpr.layers.layer(n_in=1, n_out=1)
@@ -75,13 +96,13 @@ def AddBias(tensors: tf.Tensor):
 
 
 @dpr.layers.layer(n_in=1, n_out=1)
-def Projection(tensors: tf.Tensor, name: str, reuse: bool = False, transpose: bool = False):
+def Projection(tensors: tf.Tensor, variable_name: str, reuse: bool = False, transpose: bool = False):
     """Apply symmetric transform to non-projected user embeddings."""
     dim = int(tensors.shape[-1])
     if not isinstance(dim, int):
         raise TypeError(f"Expected static shape for {tensors} but got {dim} (must be INT)")
     with tf.variable_scope(tf.get_variable_scope(), reuse=reuse):
-        projection_matrix = tf.get_variable(name=name, shape=[dim, dim])
+        projection_matrix = tf.get_variable(name=variable_name, shape=[dim, dim])
 
     return tf.matmul(tensors, projection_matrix, transpose_b=transpose)
 
