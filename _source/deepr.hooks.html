@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>deepr.hooks package &mdash; deepr 2.9.0 documentation</title>
+  <title>deepr.hooks package &mdash; deepr 2.9.1 documentation</title>
   
 
   
@@ -244,14 +244,14 @@ runtime.</p>
 <dl class="py class">
 <dt id="deepr.hooks.base.EstimatorHookFactory">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.hooks.base.</code><code class="sig-name descname">EstimatorHookFactory</code><a class="reference internal" href="../_modules/deepr/hooks/base.html#EstimatorHookFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.hooks.base.EstimatorHookFactory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
 <p>Estimator Hook Factory</p>
 </dd></dl>
 
 <dl class="py class">
 <dt id="deepr.hooks.base.TensorHookFactory">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.hooks.base.</code><code class="sig-name descname">TensorHookFactory</code><a class="reference internal" href="../_modules/deepr/hooks/base.html#TensorHookFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.hooks.base.TensorHookFactory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
 <p>Tensor Hook Factory</p>
 </dd></dl>
 
@@ -270,7 +270,7 @@ runtime.</p>
 <dd><p>Name of the metric to read from evaluation checkpoints.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -281,7 +281,7 @@ runtime.</p>
 <dd><p>If no improvement in metric for this many step, stop.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -292,7 +292,7 @@ runtime.</p>
 <dd><p>Do not attempt to early stop for this many steps.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -314,7 +314,7 @@ runtime.</p>
 <dd><p>If given, run early stopping hook every given seconds.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a>, Optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -326,7 +326,7 @@ runtime.</p>
 <p>Either <cite>run_every_secs</cite> or <cite>run_every_step</cite> should be given.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a>, Optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -341,7 +341,7 @@ evaluator in the case of distributed training (early stopping
 causes issues with <cite>train_and_evaluate</cite>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a>, Optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -389,7 +389,7 @@ causes issues with <cite>train_and_evaluate</cite>).</p>
 all scalars.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>], Optional</p>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>], Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -400,7 +400,7 @@ all scalars.</p>
 <dd><p>Additional “python” metrics. Each function should return a float</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, Callable[[], <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a>]], Optional</p>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, Callable[[], <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a>]], Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -411,7 +411,7 @@ all scalars.</p>
 <dd><p>Name used as prefix of tags when sending to MLFlow / Graphite</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, Optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -422,7 +422,7 @@ all scalars.</p>
 <dd><p>If True, send metrics to MLFlow. Default is False.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a>, Optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -433,7 +433,7 @@ all scalars.</p>
 <dd><p>If True, send metrics to Graphite. Default is False.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a>, Optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -446,7 +446,7 @@ all scalars.</p>
 stopping hook that overrides the global_step.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a>, Optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -457,7 +457,7 @@ stopping hook that overrides the global_step.</p>
 <dd><p>Formatter for logging, default uses 7 digits precision.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Callable[[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, Any], <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>], Optional</p>
+<dd class="field-odd"><p>Callable[[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, Any], <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>], Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -474,7 +474,7 @@ stopping hook that overrides the global_step.</p>
 <dl class="py class">
 <dt id="deepr.hooks.logging_tensor.ResidentMemory">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.hooks.logging_tensor.</code><code class="sig-name descname">ResidentMemory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unit</span><span class="o">=</span><span class="default_value">'gb'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/logging_tensor.html#ResidentMemory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.hooks.logging_tensor.ResidentMemory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Measure resident memory of the current process</p>
 </dd></dl>
 
@@ -526,7 +526,7 @@ has two essential differences with the situation in which <cite>begin</cite> is 
 <dd class="field-odd"><p>num_global, num_trainable</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>Tuple[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a>]</p>
+<dd class="field-even"><p>Tuple[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -546,7 +546,7 @@ has two essential differences with the situation in which <cite>begin</cite> is 
 <dd><p>Batch Size</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -557,7 +557,7 @@ has two essential differences with the situation in which <cite>begin</cite> is 
 <dd><p>Prefix of tags when sending to MLFlow / Graphite</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, Optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -568,7 +568,7 @@ has two essential differences with the situation in which <cite>begin</cite> is 
 <dd><p>If True, send metrics to MLFlow. Default is False.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a>, Optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -579,7 +579,7 @@ has two essential differences with the situation in which <cite>begin</cite> is 
 <dd><p>If True, send metrics to Graphite. Default is False.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a>, Optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -590,7 +590,7 @@ has two essential differences with the situation in which <cite>begin</cite> is 
 <dd><p>If not None, do not run the hooks after this step.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a>, Optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>

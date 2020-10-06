@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>deepr.io package &mdash; deepr 2.9.0 documentation</title>
+  <title>deepr.io package &mdash; deepr 2.9.1 documentation</title>
   
 
   
@@ -238,7 +238,7 @@
 <dl class="py class">
 <dt id="deepr.io.hdfs.HDFSFile">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.io.hdfs.</code><code class="sig-name descname">HDFSFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filesystem</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'rb'</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">'utf-8'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/hdfs.html#HDFSFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.hdfs.HDFSFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>FileSystemFile, support of “r”, “w” modes, readlines and iter.</p>
 <p>Makes it easier to read or write file from any filesystem. For
 example, if you use HDFS you can do</p>
@@ -268,7 +268,7 @@ buffer.</p>
 <dd><p>Path to file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -279,7 +279,7 @@ buffer.</p>
 <dd><p>Write / read mode. Supported: “r”, “rb” (default), “w”, “wb”.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, Optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -304,7 +304,7 @@ buffer.</p>
 <dl class="py class">
 <dt id="deepr.io.hdfs.HDFSFileSystem">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.io.hdfs.</code><code class="sig-name descname">HDFSFileSystem</code><a class="reference internal" href="../_modules/deepr/io/hdfs.html#HDFSFileSystem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.hdfs.HDFSFileSystem" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Context aware HDFSFileSystem using pyarrow.hdfs.</p>
 <p>Open and closes connection to HDFS thanks to a context manager</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr.io</span> <span class="kn">import</span> <span class="n">HDFSFileSystem</span>
@@ -324,7 +324,7 @@ buffer.</p>
 <dd><p>Return True if data is a valid json string else False</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -341,7 +341,7 @@ buffer.</p>
 <dd><p>Read json or jsonnet file into dictionary</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -359,7 +359,7 @@ buffer.</p>
 <dl class="py class">
 <dt id="deepr.io.parquet.ParquetDataset">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.io.parquet.</code><code class="sig-name descname">ParquetDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_or_paths</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metadata</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">schema</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">split_row_groups</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">validate_schema</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">filters</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metadata_nthreads</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">memory_map</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Context aware ParquetDataset with support for chunk writing.</p>
 <p>Makes it easier to read / write <a class="reference internal" href="#deepr.io.parquet.ParquetDataset" title="deepr.io.parquet.ParquetDataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParquetDataset</span></code></a>. For example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr.io</span> <span class="kn">import</span> <span class="n">ParquetDataset</span>
@@ -376,7 +376,7 @@ as well as the connection to the FileSystem.</p>
 <dd><p>Path to parquet dataset (directory or file), or list of files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, <a class="reference internal" href="../API/_autosummary/deepr.io.Path.html#deepr.io.Path" title="deepr.io.Path">Path</a>, List[Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, <a class="reference internal" href="../API/_autosummary/deepr.io.Path.html#deepr.io.Path" title="deepr.io.Path">Path</a>]]]</p>
+<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, <a class="reference internal" href="../API/_autosummary/deepr.io.Path.html#deepr.io.Path" title="deepr.io.Path">Path</a>, List[Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, <a class="reference internal" href="../API/_autosummary/deepr.io.Path.html#deepr.io.Path" title="deepr.io.Path">Path</a>]]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -397,7 +397,7 @@ as well as the connection to the FileSystem.</p>
 <em class="property">property </em><code class="sig-name descname">is_hdfs</code><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.is_hdfs" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -407,7 +407,7 @@ as well as the connection to the FileSystem.</p>
 <em class="property">property </em><code class="sig-name descname">is_local</code><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.is_local" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -453,7 +453,7 @@ as well as the connection to the FileSystem.</p>
 <dl class="py class">
 <dt id="deepr.io.path.Path">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.io.path.</code><code class="sig-name descname">Path</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Equivalent of pathlib.Path for local and HDFS FileSystem</p>
 <p>Automatically opens and closes an HDFS connection if the path is
 an HDFS path.</p>
@@ -498,7 +498,7 @@ an HDFS path.</p>
 <dd><p>Return True if the path points to an existing file or dir.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -509,7 +509,7 @@ an HDFS path.</p>
 <dd><p>Retrieve directory content matching pattern</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generator" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a>[<a class="reference internal" href="#deepr.io.path.Path" title="deepr.io.path.Path"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>, <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">None</span></code>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generator" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a>[<a class="reference internal" href="#deepr.io.path.Path" title="deepr.io.path.Path"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>, <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">None</span></code>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -520,7 +520,7 @@ an HDFS path.</p>
 <dd><p>Return True if the path points to a regular directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -531,7 +531,7 @@ an HDFS path.</p>
 <dd><p>Return True if the path points to a regular file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -542,7 +542,7 @@ an HDFS path.</p>
 <dd><p>Return True if the path points to an HDFS location</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -553,7 +553,7 @@ an HDFS path.</p>
 <dd><p>Return True if the path points to a local file or dir.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -564,7 +564,7 @@ an HDFS path.</p>
 <dd><p>Retrieve directory content.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generator" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a>[<a class="reference internal" href="#deepr.io.path.Path" title="deepr.io.path.Path"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>, <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">None</span></code>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generator" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a>[<a class="reference internal" href="#deepr.io.path.Path" title="deepr.io.path.Path"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>, <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">None</span></code>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -581,7 +581,7 @@ an HDFS path.</p>
 <dd><p>Final path component.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>

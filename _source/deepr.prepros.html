@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>deepr.prepros package &mdash; deepr 2.9.0 documentation</title>
+  <title>deepr.prepros package &mdash; deepr 2.9.1 documentation</title>
   
 
   
@@ -238,7 +238,7 @@
 <dl class="py class">
 <dt id="deepr.prepros.base.Prepro">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.base.</code><code class="sig-name descname">Prepro</code><a class="reference internal" href="../_modules/deepr/prepros/base.html#Prepro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.base.Prepro" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
 <p>Base class for composable preprocessing functions.</p>
 <p><cite>Prepro</cite> are the basic building blocks of a preprocessing pipeline.
 A <cite>Prepro</cite> defines a function on a tf.data.Dataset.</p>
@@ -376,7 +376,7 @@ by <cite>offset</cite>:</p>
 of the function IN THIS ORDER.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -419,7 +419,7 @@ operations into single <cite>tf.data</cite> calls.</p>
 <dd><p>If True (default), will fuse <code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a>, Optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -431,7 +431,7 @@ operations into single <cite>tf.data</cite> calls.</p>
 Generator of prepro instances</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[<a class="reference internal" href="../API/_autosummary/deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro">Prepro</a>, Tuple[<a class="reference internal" href="../API/_autosummary/deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro">Prepro</a>], List[<a class="reference internal" href="../API/_autosummary/deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro">Prepro</a>], Generator[<a class="reference internal" href="../API/_autosummary/deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro">Prepro</a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a>]]</p>
+<dd class="field-odd"><p>Union[<a class="reference internal" href="../API/_autosummary/deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro">Prepro</a>, Tuple[<a class="reference internal" href="../API/_autosummary/deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro">Prepro</a>], List[<a class="reference internal" href="../API/_autosummary/deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro">Prepro</a>], Generator[<a class="reference internal" href="../API/_autosummary/deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro">Prepro</a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a>]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -464,7 +464,7 @@ Generator of prepro instances</p>
 <dd><p>Number of dataset repeat</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -476,7 +476,7 @@ Generator of prepro instances</p>
 Default is None (all modes are considered active modes).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>], Optional</p>
+<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>], Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -504,7 +504,7 @@ to 100x compared to tfrecords), and reloading seems brittle.</p>
 <code class="sig-name descname">filename</code><a class="headerlink" href="#deepr.prepros.core.Cache.filename" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -576,7 +576,7 @@ with one key.</p>
 <dd><p>If True (default), assumes dataset yields dictionaries</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a>, Optional</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -588,7 +588,7 @@ with one key.</p>
 Default is None (all modes are considered active modes).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>], Optional</p>
+<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>], Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -689,7 +689,7 @@ transformation should apply. For example:</p>
 Default is None (all modes are considered active modes).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>], Optional</p>
+<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>], Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -700,7 +700,7 @@ Default is None (all modes are considered active modes).</p>
 <dd><p>Number of threads.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -711,7 +711,7 @@ Default is None (all modes are considered active modes).</p>
 <dd><p>If True (default), assumes dataset yields dictionaries</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -722,7 +722,7 @@ Default is None (all modes are considered active modes).</p>
 <dd><p>If True (default), combine element and map_func(element)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -761,7 +761,7 @@ implementation. For example:</p>
 <dd><p>Size of batches</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -784,7 +784,7 @@ implementation. For example:</p>
 Default is None (all modes are considered active modes).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>], Optional</p>
+<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>], Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -810,7 +810,7 @@ High values may lead to high memory consumption, it is
 recommended to use a buffer_size of 1.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -834,7 +834,7 @@ recommended to use a buffer_size of 1.</p>
 <dd><p>Number of dataset repeat, if None or -1, repeat forever.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -846,7 +846,7 @@ recommended to use a buffer_size of 1.</p>
 Default is None (all modes are considered active modes).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>], Optional</p>
+<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>], Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -870,7 +870,7 @@ Default is None (all modes are considered active modes).</p>
 <dd><p>Buffer size for the shuffle buffer</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -882,7 +882,7 @@ Default is None (all modes are considered active modes).</p>
 Default is None (all modes are considered active modes).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>], Optional</p>
+<dd class="field-odd"><p>Iterable[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>], Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -907,7 +907,7 @@ Default is None (all modes are considered active modes).</p>
 None means no capping (will not apply the take transformation).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
