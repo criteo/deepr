@@ -23,6 +23,14 @@ Fixed
 Security
 ~~~~~~~~
 
+[2.9.1] - 2020-10-01
+--------------------
+
+Fixed
+~~~~~
+- move tf-yarn dependency to gpu / cpu additional packages.
+
+
 [2.9.0] - 2020-10-01
 --------------------
 

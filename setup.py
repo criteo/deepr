@@ -20,7 +20,6 @@ if __name__ == "__main__":
         author=metadata["author"],
         version=metadata["version"],
         install_requires=[
-            "tf-yarn>=0.4.20",
             "cluster-pack>=0.0.7",
             "fire>=0.3",
             "graphyte>=1,<2",
@@ -32,7 +31,10 @@ if __name__ == "__main__":
             "pyarrow>=0.14",
             "skein>=0.8",
         ],
-        extras_require={"cpu": ["tensorflow>=1.15,<2"], "gpu": ["tensorflow-gpu>=1.15,<2"]},
+        extras_require={
+            "cpu": ["tensorflow>=1.15,<2", "tf-yarn>=0.4.20"],
+            "gpu": ["tensorflow-gpu>=1.15,<2", "tf-yarn-gpu>=0.4.20"],
+        },
         tests_require=["pytest"],
         dependency_links=[],
         entry_points={"console_scripts": ["deepr = deepr.cli.main:main"]},
