@@ -1,10 +1,12 @@
-tensorflow-gpu>=1,<2
 cluster-pack==0.0.11
 dataclasses
 fire==0.3.1
 graphyte==1.6.0
 jsonnet==0.16.0
+mlflow==1.11.0
 numpy==1.18.5
 psutil==5.7.2
 pyarrow==0.17.1
-tf-yarn==0.5.1
+skein==0.8.0
+tensorflow-gpu>=1.15,<2
+tf-yarn-gpu==0.5.1
