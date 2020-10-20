@@ -116,9 +116,7 @@ def Projection(tensors: tf.Tensor, variable_name: str, reuse: bool = False, tran
 
 
 @dpr.layers.layer(n_in=1, n_out=1)
-def Logits(
-    tensors: tf.Tensor, vocab_size: int, dim: int, reuse: bool = True, trainable: bool = True
-):
+def Logits(tensors: tf.Tensor, vocab_size: int, dim: int, reuse: bool = True, trainable: bool = True):
     """Computes logits as <u, i> + b_i."""
     # Retrieve variables (embeddings and biases)
     with tf.variable_scope(tf.get_variable_scope(), reuse=reuse):

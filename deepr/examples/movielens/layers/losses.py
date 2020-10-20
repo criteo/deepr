@@ -31,13 +31,7 @@ def Loss(loss: str, vocab_size: int):
     return layer
 
 
-def VAELoss(
-    loss: str,
-    vocab_size: int,
-    beta_start: float,
-    beta_end: float,
-    beta_steps: int,
-):
+def VAELoss(loss: str, vocab_size: int, beta_start: float, beta_end: float, beta_steps: int):
     """Add beta * KL to the loss and return relevant loss layer."""
     layer = Loss(loss=loss, vocab_size=vocab_size)
     return dpr.layers.Sequential(
