@@ -4,7 +4,7 @@
 import deepr as dpr
 
 
-def BPRLoss(vocab_size: int, normalize: bool = False):
+def BPRLoss(vocab_size: int):
     """BPR Loss with biases."""
     return dpr.layers.Sequential(
         dpr.layers.Select(inputs=("userEmbeddings", "targetPositives", "targetNegatives", "targetMask")),
@@ -25,7 +25,6 @@ def BPRLoss(vocab_size: int, normalize: bool = False):
             reuse=True,
         ),
         dpr.layers.ToFloat(inputs="targetMask", outputs="targetWeight"),
-        dpr.layers.Normalize(inputs="targetWeight", outputs="targetWeight", norm=1, axis=1) if normalize else [],
         dpr.layers.ExpandDims(inputs="targetMask", outputs="targetMask"),
         dpr.layers.MaskedBPR(
             inputs=("targetPositiveLogits", "targetNegativeLogits", "targetMask", "targetWeight"), outputs="loss"

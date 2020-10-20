@@ -29,7 +29,6 @@ local end = import '../common/end.jsonnet';
                         type: "deepr.examples.movielens.layers.Loss",
                         loss: "$params:loss",
                         vocab_size: "$params:vocab_size",
-                        normalize: false
                     }
                 }
             },
