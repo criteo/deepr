@@ -19,7 +19,7 @@ def AverageModel(
     train_biases: bool = True,
     average_with_bias: bool = False,
     project: bool = False,
-    reduce_mode: bool = "average",
+    reduce_mode: str = "average",
 ):
     """Average Model."""
     return dpr.layers.Sequential(
