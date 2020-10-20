@@ -16,6 +16,7 @@ def AverageModel(
     keep_prob: float,
     share_embeddings: bool = True,
     train_embeddings: bool = True,
+    train_biases: bool = True,
     average_with_bias: bool = False,
     project: bool = False,
     reduce_mode: bool = "average",
@@ -55,7 +56,14 @@ def AverageModel(
         )
         if project
         else [],
-        Logits(inputs="userEmbeddings", outputs="logits", vocab_size=vocab_size, dim=dim, reuse=share_embeddings),
+        Logits(
+            inputs="userEmbeddings",
+            outputs="logits",
+            vocab_size=vocab_size,
+            dim=dim,
+            reuse=share_embeddings,
+            trainable=train_biases,
+        ),
         dpr.layers.Select(inputs=("userEmbeddings", "logits")),
     )
 
@@ -108,11 +116,23 @@ def Projection(tensors: tf.Tensor, variable_name: str, reuse: bool = False, tran
 
 
 @dpr.layers.layer(n_in=1, n_out=1)
-def Logits(tensors: tf.Tensor, vocab_size: int, dim: int, reuse: bool = True):
+def Logits(
+    tensors: tf.Tensor, vocab_size: int, dim: int, reuse: bool = True, trainable: bool = True
+):
+    """Computes logits as <u, i> + b_i."""
+    # Retrieve variables (embeddings and biases)
     with tf.variable_scope(tf.get_variable_scope(), reuse=reuse):
         embeddings = tf.get_variable(name="embeddings", shape=(vocab_size, dim))
     biases = tf.get_variable(
-        name="biases", shape=(vocab_size,), initializer=tf.truncated_normal_initializer(stddev=0.001)
+        name="biases",
+        shape=(vocab_size,),
+        initializer=tf.truncated_normal_initializer(stddev=0.001),
+        trainable=trainable,
     )
-    logits = tf.linalg.matmul(tensors, embeddings, transpose_b=True) + tf.expand_dims(biases, axis=0)
+
+    # Compute inner product between user and product embeddings
+    logits = tf.linalg.matmul(tensors, embeddings, transpose_b=True)
+
+    # Add bias
+    logits += tf.expand_dims(biases, axis=0)
     return logits

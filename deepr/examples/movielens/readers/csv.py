@@ -40,7 +40,7 @@ class TrainCSVReader(dpr.readers.Reader):
         bucket_size: int = 16 * 512,
         shuffle: bool = True,
         seed: int = 42,
-        take_ratio: float = None
+        take_ratio: float = None,
     ):
         self.path_csv = path_csv
         self.vocab_size = vocab_size
@@ -65,7 +65,7 @@ class TrainCSVReader(dpr.readers.Reader):
         data = sparse.csr_matrix((np.ones_like(rows), (rows, cols)), dtype="int64", shape=(n_users, self.vocab_size))
         LOGGER.info(f"Reloaded user-item matrix of shape {data.shape} with num_events={len(rows)}")
         if self.take_ratio is not None:
-            data = data[:int(self.take_ratio * n_users)]
+            data = data[: int(self.take_ratio * n_users)]
             LOGGER.info(f"Sliced user-item matrix, new shape = {data.shape}, num_events={data.sum()}")
         np.random.seed(self.seed)
         counts = np.array(data.sum(axis=1)).flatten()

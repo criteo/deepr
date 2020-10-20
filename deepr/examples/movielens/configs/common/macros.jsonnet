@@ -37,5 +37,7 @@ local path_dataset = "viewfs://root/user/g.genthial/movielens/ml-20m/";
         take_ratio: null,
         num_negatives: null,
         loss: null,
+        dim: 600,
+        alpha: null
     }
 }

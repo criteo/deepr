@@ -9,13 +9,14 @@ macros + {
     },
     params+: {
         take_ratio: null,
-        target_ratio: null,
-        num_negatives: null,
-        loss: "multi",
+        target_ratio: 0.2,
+        num_negatives: 1000,
+        loss: "bpr",
         normalize_embeddings: true,
         dim: 600,
         train_embeddings: false,
+        train_biases: true,
         project: true,
-        reduce_mode: "l2"
+        reduce_mode: "average",
     }
 }

@@ -2,19 +2,19 @@ local macros = import '../common/macros.jsonnet';
 
 macros + {
     run+: {
-        run_on_yarn: false
+        run_on_yarn: true
     },
     mlflow+: {
-        use_mlflow: false
+        use_mlflow: true
     },
     params+: {
-        max_steps: 50000,
+        dim: 600,
         take_ratio: null,
-        target_ratio: null,
-        num_negatives: 10,
-        loss: "multi_css",
+        target_ratio: 0.2,
+        num_negatives: 1000,
+        loss: "bpr",
         share_embeddings: true,
         average_with_bias: false,
-        reduce_mode: "l2"
+        reduce_mode: "average"
     }
 }

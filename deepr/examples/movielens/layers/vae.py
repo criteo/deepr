@@ -46,13 +46,11 @@ def VAEModel(
         AddBias(inputs="averageEmbeddings", outputs="averageEmbeddings", variable_name="encoder/bias", seed=seed),
         dpr.layers.Lambda(
             lambda tensors, _: tf.nn.tanh(tensors), inputs="averageEmbeddings", outputs="averageEmbeddings"
-        ) if len(dims_encode) > 1 else [],
+        )
+        if len(dims_encode) > 1
+        else [],
         Encode(
-            inputs="averageEmbeddings",
-            outputs=("mu", "std", "KL"),
-            dims=dims_encode,
-            activation=tf.nn.tanh,
-            seed=seed,
+            inputs="averageEmbeddings", outputs=("mu", "std", "KL"), dims=dims_encode, activation=tf.nn.tanh, seed=seed,
         ),
         GaussianNoise(inputs=("mu", "std"), outputs="latent", seed=seed),
         Decode(inputs="latent", outputs="userEmbeddings", dims=dims_decode, activation=tf.nn.tanh, seed=seed),

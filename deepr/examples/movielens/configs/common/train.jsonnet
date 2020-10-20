@@ -168,10 +168,7 @@
             {
                 type: "deepr.exporters.SaveVariables",
                 path_variables: "$paths:path_variables",
-                variable_names: [
-                    "biases",
-                    "embeddings"
-                ]
+                variable_names: ["embeddings", "biases"]
             },
             {
                 type: "deepr.exporters.SavedModel",
