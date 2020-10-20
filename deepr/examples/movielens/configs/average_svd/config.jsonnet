@@ -54,17 +54,6 @@ local end = import '../common/end.jsonnet';
                         assignment_map: {"embeddings": "embeddings", "biases": "biases"},
                         path_init_ckpt: "$paths:path_init_ckpt"
                     },
-                    train_metrics: [
-                        {
-                            type: "deepr.metrics.StepCounter",
-                            name: "num_steps"
-                        },
-                        {
-                            type: "deepr.metrics.DecayMean",
-                            decay: 0.98,
-                            pattern: "loss*"
-                        },
-                    ],
                 }
             },
             evaluate,
