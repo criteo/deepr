@@ -239,16 +239,51 @@
 <div class="section" id="module-deepr.examples.movielens.layers.average">
 <span id="deepr-examples-movielens-layers-average-module"></span><h2>deepr.examples.movielens.layers.average module<a class="headerlink" href="#module-deepr.examples.movielens.layers.average" title="Permalink to this headline">¶</a></h2>
 <p>Average Model.</p>
+<dl class="py class">
+<dt id="deepr.examples.movielens.layers.average.AddBias">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.layers.average.</code><code class="sig-name descname">AddBias</code><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/average.html#AddBias"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.average.AddBias" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="deepr.layers.html#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<dl class="py method">
+<dt id="deepr.examples.movielens.layers.average.AddBias.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.examples.movielens.layers.average.AddBias.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>Union</em><em>[</em><em>tf.Tensor</em><em>, </em><em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>..</em><em>]</em><em>]</em>) – <ul>
+<li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_in &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – Description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_out &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[tf.Tensor, Tuple[tf.Tensor, ..]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt id="deepr.examples.movielens.layers.average.AverageModel">
-<code class="sig-prename descclassname">deepr.examples.movielens.layers.average.</code><code class="sig-name descname">AverageModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vocab_size</span></em>, <em class="sig-param"><span class="n">dim</span></em>, <em class="sig-param"><span class="n">keep_prob</span></em>, <em class="sig-param"><span class="n">train_embeddings</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">project</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/average.html#AverageModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.average.AverageModel" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">deepr.examples.movielens.layers.average.</code><code class="sig-name descname">AverageModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vocab_size</span></em>, <em class="sig-param"><span class="n">dim</span></em>, <em class="sig-param"><span class="n">keep_prob</span></em>, <em class="sig-param"><span class="n">share_embeddings</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">train_embeddings</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">train_biases</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">average_with_bias</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">project</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">reduce_mode</span><span class="o">=</span><span class="default_value">'average'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/average.html#AverageModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.average.AverageModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Average Model.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt id="deepr.examples.movielens.layers.average.Logits">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.layers.average.</code><code class="sig-name descname">Logits</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vocab_size</span></em>, <em class="sig-param"><span class="n">dim</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/average.html#Logits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.average.Logits" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.layers.average.</code><code class="sig-name descname">Logits</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vocab_size</span></em>, <em class="sig-param"><span class="n">dim</span></em>, <em class="sig-param"><span class="n">reuse</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">trainable</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/average.html#Logits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.average.Logits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="deepr.layers.html#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Computes logits as &lt;u, i&gt; + b_i.</p>
 <dl class="py method">
 <dt id="deepr.examples.movielens.layers.average.Logits.forward">
 <code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.examples.movielens.layers.average.Logits.forward" title="Permalink to this definition">¶</a></dt>
@@ -281,7 +316,7 @@
 
 <dl class="py class">
 <dt id="deepr.examples.movielens.layers.average.Projection">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.layers.average.</code><code class="sig-name descname">Projection</code><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/average.html#Projection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.average.Projection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.layers.average.</code><code class="sig-name descname">Projection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">variable_name</span></em>, <em class="sig-param"><span class="n">reuse</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">transpose</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/average.html#Projection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.average.Projection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="deepr.layers.html#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
 <p>Apply symmetric transform to non-projected user embeddings.</p>
 <dl class="py method">
@@ -315,12 +350,13 @@
 </dd></dl>
 
 <dl class="py class">
-<dt id="deepr.examples.movielens.layers.average.RandomMask">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.layers.average.</code><code class="sig-name descname">RandomMask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mode</span></em>, <em class="sig-param"><span class="n">keep_prob</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/average.html#RandomMask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.average.RandomMask" title="Permalink to this definition">¶</a></dt>
+<dt id="deepr.examples.movielens.layers.average.UserEmbedding">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.layers.average.</code><code class="sig-name descname">UserEmbedding</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mode</span></em>, <em class="sig-param"><span class="n">keep_prob</span></em>, <em class="sig-param"><span class="n">reduce_mode</span><span class="o">=</span><span class="default_value">'average'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/average.html#UserEmbedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.average.UserEmbedding" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="deepr.layers.html#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<p>Compute Weighted Sum (randomly masking inputs in TRAIN mode).</p>
 <dl class="py method">
-<dt id="deepr.examples.movielens.layers.average.RandomMask.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.examples.movielens.layers.average.RandomMask.forward" title="Permalink to this definition">¶</a></dt>
+<dt id="deepr.examples.movielens.layers.average.UserEmbedding.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.examples.movielens.layers.average.UserEmbedding.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -362,6 +398,40 @@
 <div class="section" id="module-deepr.examples.movielens.layers.losses">
 <span id="deepr-examples-movielens-layers-losses-module"></span><h2>deepr.examples.movielens.layers.losses module<a class="headerlink" href="#module-deepr.examples.movielens.layers.losses" title="Permalink to this headline">¶</a></h2>
 <p>Losses.</p>
+<dl class="py class">
+<dt id="deepr.examples.movielens.layers.losses.L2Loss">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.layers.losses.</code><code class="sig-name descname">L2Loss</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/losses.html#L2Loss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.losses.L2Loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="deepr.layers.html#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<dl class="py method">
+<dt id="deepr.examples.movielens.layers.losses.L2Loss.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.examples.movielens.layers.losses.L2Loss.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>Union</em><em>[</em><em>tf.Tensor</em><em>, </em><em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>..</em><em>]</em><em>]</em>) – <ul>
+<li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_in &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – Description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_out &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[tf.Tensor, Tuple[tf.Tensor, ..]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt id="deepr.examples.movielens.layers.losses.Loss">
 <code class="sig-prename descclassname">deepr.examples.movielens.layers.losses.</code><code class="sig-name descname">Loss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">loss</span></em>, <em class="sig-param"><span class="n">vocab_size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/losses.html#Loss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.losses.Loss" title="Permalink to this definition">¶</a></dt>
@@ -382,6 +452,16 @@
 <dt id="deepr.examples.movielens.layers.multi.MultiLogLikelihoodCSS">
 <code class="sig-prename descclassname">deepr.examples.movielens.layers.multi.</code><code class="sig-name descname">MultiLogLikelihoodCSS</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vocab_size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/multi.html#MultiLogLikelihoodCSS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.multi.MultiLogLikelihoodCSS" title="Permalink to this definition">¶</a></dt>
 <dd><p>MultiLogLikelihood Loss with Complementarity Sampling.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-deepr.examples.movielens.layers.ns">
+<span id="deepr-examples-movielens-layers-ns-module"></span><h2>deepr.examples.movielens.layers.ns module<a class="headerlink" href="#module-deepr.examples.movielens.layers.ns" title="Permalink to this headline">¶</a></h2>
+<p>Negative Sampling Loss with biases.</p>
+<dl class="py function">
+<dt id="deepr.examples.movielens.layers.ns.NegativeSampling">
+<code class="sig-prename descclassname">deepr.examples.movielens.layers.ns.</code><code class="sig-name descname">NegativeSampling</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vocab_size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/layers/ns.html#NegativeSampling"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.layers.ns.NegativeSampling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Negative Sampling Loss with biases.</p>
 </dd></dl>
 
 </div>

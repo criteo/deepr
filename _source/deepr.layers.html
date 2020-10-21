@@ -541,7 +541,8 @@ of the function IN THIS ORDER.</p>
 <dt id="deepr.layers.bpr.BPR">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.bpr.</code><code class="sig-name descname">BPR</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/bpr.html#BPR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.bpr.BPR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
-<p>Vanilla BPR Loss Layer</p>
+<p>Vanilla BPR Loss Layer.</p>
+<p>Expected value at beginning of training : -log(0.5) = 0.69</p>
 <dl class="py method">
 <dt id="deepr.layers.bpr.BPR.forward">
 <code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/bpr.html#BPR.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.bpr.BPR.forward" title="Permalink to this definition">¶</a></dt>
@@ -570,7 +571,8 @@ of the function IN THIS ORDER.</p>
 <dt id="deepr.layers.bpr.MaskedBPR">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.bpr.</code><code class="sig-name descname">MaskedBPR</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/bpr.html#MaskedBPR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.bpr.MaskedBPR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
-<p>Masked BPR Loss Layer</p>
+<p>Masked BPR Loss Layer.</p>
+<p>Expected value at beginning of training : -log(0.5) = 0.69</p>
 <dl class="py method">
 <dt id="deepr.layers.bpr.MaskedBPR.forward">
 <code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/bpr.html#MaskedBPR.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.bpr.MaskedBPR.forward" title="Permalink to this definition">¶</a></dt>
@@ -1286,6 +1288,40 @@ example, if</p>
 </dd></dl>
 
 <dl class="py class">
+<dt id="deepr.layers.core.Normalize">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.core.</code><code class="sig-name descname">Normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">norm</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">axis</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#Normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.Normalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
+<dl class="py method">
+<dt id="deepr.layers.core.Normalize.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.layers.core.Normalize.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tensors</strong> (<em>Union</em><em>[</em><em>tf.Tensor</em><em>, </em><em>Tuple</em><em>[</em><em>tf.Tensor</em><em>, </em><em>..</em><em>]</em><em>]</em>) – <ul>
+<li><p>n_in = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_in &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – Description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>n_out = 1: one tensor (NOT wrapped in a tuple)</p></li>
+<li><p>n_out &gt; 1: a tuple of tensors</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[tf.Tensor, Tuple[tf.Tensor, ..]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="deepr.layers.core.Product">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.core.</code><code class="sig-name descname">Product</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_in</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/core.html#Product"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.core.Product" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
@@ -1869,7 +1905,8 @@ each key to its corresponding line index as an tf.int64.</p>
 <dt id="deepr.layers.nce_loss.MaskedNegativeSampling">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.nce_loss.</code><code class="sig-name descname">MaskedNegativeSampling</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/nce_loss.html#MaskedNegativeSampling"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.nce_loss.MaskedNegativeSampling" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
-<p>Masked Negative Sampling Loss Layer</p>
+<p>Masked Negative Sampling Loss Layer.Loss</p>
+<p>Expected value at beginning of training : -2 * log(0.5) = 1.38</p>
 <dl class="py method">
 <dt id="deepr.layers.nce_loss.MaskedNegativeSampling.forward">
 <code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/nce_loss.html#MaskedNegativeSampling.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.nce_loss.MaskedNegativeSampling.forward" title="Permalink to this definition">¶</a></dt>
@@ -1899,7 +1936,8 @@ each key to its corresponding line index as an tf.int64.</p>
 <dt id="deepr.layers.nce_loss.NegativeSampling">
 <em class="property">class </em><code class="sig-prename descclassname">deepr.layers.nce_loss.</code><code class="sig-name descname">NegativeSampling</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/nce_loss.html#NegativeSampling"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.nce_loss.NegativeSampling" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
-<p>Vanilla Negative Sampling Loss Layer</p>
+<p>Vanilla Negative Sampling Loss Layer.Loss</p>
+<p>Expected value at beginning of training : -2 * log(0.5) = 1.38</p>
 <dl class="py method">
 <dt id="deepr.layers.nce_loss.NegativeSampling.forward">
 <code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/layers/nce_loss.html#NegativeSampling.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.nce_loss.NegativeSampling.forward" title="Permalink to this definition">¶</a></dt>

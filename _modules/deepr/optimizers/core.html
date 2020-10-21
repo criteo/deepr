@@ -264,7 +264,7 @@
                 <span class="n">non_skipped_grad_and_vars</span><span class="p">,</span> <span class="n">global_step</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">get_global_step</span><span class="p">()</span>
             <span class="p">)</span>
             <span class="n">train_op</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span>
-                <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">get_global_step</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_steps</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">non_skipped_train_op</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">train_op</span><span class="p">,</span>
+                <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">get_global_step</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_steps</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">non_skipped_train_op</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">train_op</span>
             <span class="p">)</span>
 
         <span class="c1"># Compute gradients global norm for names in self.grad_norms</span>

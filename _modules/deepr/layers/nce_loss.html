@@ -172,11 +172,14 @@
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 
 <span class="kn">from</span> <span class="nn">deepr.layers</span> <span class="kn">import</span> <span class="n">base</span>
-<span class="kn">from</span> <span class="nn">deepr.layers.reduce</span> <span class="kn">import</span> <span class="n">Average</span>
+<span class="kn">from</span> <span class="nn">deepr.layers.reduce</span> <span class="kn">import</span> <span class="n">Average</span><span class="p">,</span> <span class="n">WeightedAverage</span>
 
 
 <div class="viewcode-block" id="NegativeSampling"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.nce_loss.NegativeSampling">[docs]</a><span class="k">class</span> <span class="nc">NegativeSampling</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Layer</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Vanilla Negative Sampling Loss Layer&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Vanilla Negative Sampling Loss Layer.Loss</span>
+
+<span class="sd">    Expected value at beginning of training : -2 * log(0.5) = 1.38</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -206,7 +209,10 @@
 
 
 <div class="viewcode-block" id="MaskedNegativeSampling"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.nce_loss.MaskedNegativeSampling">[docs]</a><span class="k">class</span> <span class="nc">MaskedNegativeSampling</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Layer</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Masked Negative Sampling Loss Layer&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Masked Negative Sampling Loss Layer.Loss</span>
+
+<span class="sd">    Expected value at beginning of training : -2 * log(0.5) = 1.38</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -230,21 +236,9 @@
         <span class="n">positives</span><span class="p">,</span> <span class="n">negatives</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">tensors</span>
         <span class="n">true_losses</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">sigmoid_cross_entropy_with_logits</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">positives</span><span class="p">),</span> <span class="n">logits</span><span class="o">=</span><span class="n">positives</span><span class="p">)</span>
         <span class="n">sampled_losses</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">sigmoid_cross_entropy_with_logits</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">negatives</span><span class="p">),</span> <span class="n">logits</span><span class="o">=</span><span class="n">negatives</span><span class="p">)</span>
-        <span class="c1"># filter the values that correspond to mask</span>
-        <span class="n">negative_number</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">to_float</span><span class="p">(</span><span class="n">mask</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">sampled_losses</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">sampled_losses</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">to_float</span><span class="p">(</span><span class="n">mask</span><span class="p">))</span>
-        <span class="n">sampled_losses</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">sampled_losses</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">sampled_losses</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">div_no_nan</span><span class="p">(</span><span class="n">sampled_losses</span><span class="p">,</span> <span class="n">negative_number</span><span class="p">)</span>
-
-        <span class="n">losses</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">true_losses</span><span class="p">,</span> <span class="n">sampled_losses</span><span class="p">)</span>
-        <span class="c1"># One loss per event, average of scores : (batch, num_events)</span>
-        <span class="c1"># TODO: fix this line, it seems it&#39;s doing averaging twice</span>
-        <span class="c1"># event_scores = WeightedAverage()((losses, tf.to_float(mask)))</span>
-        <span class="n">event_scores</span> <span class="o">=</span> <span class="n">losses</span>
-        <span class="c1"># Each event contributes according to its weight</span>
+        <span class="n">event_scores</span> <span class="o">=</span> <span class="n">true_losses</span> <span class="o">+</span> <span class="n">WeightedAverage</span><span class="p">()((</span><span class="n">sampled_losses</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">to_float</span><span class="p">(</span><span class="n">mask</span><span class="p">)))</span>
         <span class="n">event_weights</span> <span class="o">=</span> <span class="n">weights</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">to_float</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_any</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
-        <span class="n">event_losses</span> <span class="o">=</span> <span class="n">event_scores</span> <span class="o">*</span> <span class="n">event_weights</span>
-        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">div_no_nan</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">event_losses</span><span class="p">),</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">event_weights</span><span class="p">))</span></div></div>
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">div_no_nan</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">event_scores</span> <span class="o">*</span> <span class="n">event_weights</span><span class="p">),</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">event_weights</span><span class="p">))</span></div></div>
 </pre></div>
 
            </div>

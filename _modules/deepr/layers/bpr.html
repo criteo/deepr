@@ -177,7 +177,10 @@
 
 
 <div class="viewcode-block" id="BPR"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.BPR">[docs]</a><span class="k">class</span> <span class="nc">BPR</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Layer</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Vanilla BPR Loss Layer&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Vanilla BPR Loss Layer.</span>
+
+<span class="sd">    Expected value at beginning of training : -log(0.5) = 0.69</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="BPR.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.layers.BPR.html#deepr.layers.BPR.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
@@ -204,7 +207,10 @@
 
 
 <div class="viewcode-block" id="MaskedBPR"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.MaskedBPR">[docs]</a><span class="k">class</span> <span class="nc">MaskedBPR</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Layer</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Masked BPR Loss Layer&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Masked BPR Loss Layer.</span>
+
+<span class="sd">    Expected value at beginning of training : -log(0.5) = 0.69</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="MaskedBPR.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.layers.MaskedBPR.html#deepr.layers.MaskedBPR.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>

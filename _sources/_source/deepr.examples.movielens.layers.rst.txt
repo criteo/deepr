@@ -36,6 +36,14 @@ deepr.examples.movielens.layers.multi module
    :undoc-members:
    :show-inheritance:
 
+deepr.examples.movielens.layers.ns module
+-----------------------------------------
+
+.. automodule:: deepr.examples.movielens.layers.ns
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 deepr.examples.movielens.layers.transformer module
 --------------------------------------------------
 

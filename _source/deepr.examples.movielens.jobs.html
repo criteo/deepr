@@ -360,7 +360,7 @@ keep users with number of movies &gt; min_length</p>
 <p>Evaluate MovieLens.</p>
 <dl class="py class">
 <dt id="deepr.examples.movielens.jobs.evaluate.Evaluate">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.jobs.evaluate.</code><code class="sig-name descname">Evaluate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_predictions</span></em>, <em class="sig-param"><span class="n">path_embeddings</span></em>, <em class="sig-param"><span class="n">path_biases</span></em>, <em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">use_mlflow</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">num_queries</span><span class="o">=</span><span class="default_value">1000</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/evaluate.html#Evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.jobs.evaluate.</code><code class="sig-name descname">Evaluate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_predictions</span></em>, <em class="sig-param"><span class="n">path_embeddings</span></em>, <em class="sig-param"><span class="n">path_biases</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">k</span><span class="o">=</span><span class="default_value">50</span></em>, <em class="sig-param"><span class="n">use_mlflow</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">num_queries</span><span class="o">=</span><span class="default_value">1000</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/evaluate.html#Evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="deepr.jobs.html#deepr.jobs.base.Job" title="deepr.jobs.base.Job"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.jobs.base.Job</span></code></a></p>
 <p>Evaluate MovieLens using a Faiss Index.</p>
 <p>For each user embedding, the top num_queries items are retrieved.
@@ -368,7 +368,7 @@ The input items are removed from the results, then we compare the
 remaining top-K results to the target items.</p>
 <dl class="py attribute">
 <dt id="deepr.examples.movielens.jobs.evaluate.Evaluate.k">
-<code class="sig-name descname">k</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">, </span>List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span><span class="p">]</span></em><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.k" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">k</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">, </span>List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span><span class="p">]</span></em><em class="property"> = 50</em><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.k" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -378,7 +378,7 @@ remaining top-K results to the target items.</p>
 
 <dl class="py attribute">
 <dt id="deepr.examples.movielens.jobs.evaluate.Evaluate.path_biases">
-<code class="sig-name descname">path_biases</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.path_biases" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">path_biases</code><em class="property">: Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></em><em class="property"> = None</em><a class="headerlink" href="#deepr.examples.movielens.jobs.evaluate.Evaluate.path_biases" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -428,12 +428,22 @@ remaining top-K results to the target items.</p>
 <p>Init Checkpoint with SVD embeddings.</p>
 <dl class="py class">
 <dt id="deepr.examples.movielens.jobs.init.InitCheckpoint">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.jobs.init.</code><code class="sig-name descname">InitCheckpoint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_embeddings</span></em>, <em class="sig-param"><span class="n">path_init_ckpt</span></em>, <em class="sig-param"><span class="n">normalize</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/init.html#InitCheckpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.init.InitCheckpoint" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.jobs.init.</code><code class="sig-name descname">InitCheckpoint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_embeddings</span></em>, <em class="sig-param"><span class="n">path_init_ckpt</span></em>, <em class="sig-param"><span class="n">normalize</span></em>, <em class="sig-param"><span class="n">path_counts</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_log_counts</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">normalize_counts</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/init.html#InitCheckpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.init.InitCheckpoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="deepr.jobs.html#deepr.jobs.base.Job" title="deepr.jobs.base.Job"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.jobs.base.Job</span></code></a></p>
 <p>Init Checkpoint with SVD embeddings.</p>
 <dl class="py attribute">
 <dt id="deepr.examples.movielens.jobs.init.InitCheckpoint.normalize">
 <code class="sig-name descname">normalize</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.init.InitCheckpoint.normalize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.init.InitCheckpoint.normalize_counts">
+<code class="sig-name descname">normalize_counts</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></em><em class="property"> = True</em><a class="headerlink" href="#deepr.examples.movielens.jobs.init.InitCheckpoint.normalize_counts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.init.InitCheckpoint.path_counts">
+<code class="sig-name descname">path_counts</code><em class="property">: Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></em><em class="property"> = None</em><a class="headerlink" href="#deepr.examples.movielens.jobs.init.InitCheckpoint.path_counts" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -451,6 +461,11 @@ remaining top-K results to the target items.</p>
 <code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/init.html#InitCheckpoint.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.init.InitCheckpoint.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run Job</p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.init.InitCheckpoint.use_log_counts">
+<code class="sig-name descname">use_log_counts</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></em><em class="property"> = True</em><a class="headerlink" href="#deepr.examples.movielens.jobs.init.InitCheckpoint.use_log_counts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -497,17 +512,22 @@ remaining top-K results to the target items.</p>
 <p>Build MovieLens dataset as TFRecords.</p>
 <dl class="py class">
 <dt id="deepr.examples.movielens.jobs.svd.SVD">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.jobs.svd.</code><code class="sig-name descname">SVD</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_csv</span></em>, <em class="sig-param"><span class="n">path_embeddings</span></em>, <em class="sig-param"><span class="n">vocab_size</span></em>, <em class="sig-param"><span class="n">dim</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">min_count</span><span class="o">=</span><span class="default_value">10</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/svd.html#SVD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.svd.SVD" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.jobs.svd.</code><code class="sig-name descname">SVD</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_csv</span></em>, <em class="sig-param"><span class="n">path_embeddings</span></em>, <em class="sig-param"><span class="n">path_counts</span></em>, <em class="sig-param"><span class="n">vocab_size</span></em>, <em class="sig-param"><span class="n">dim</span><span class="o">=</span><span class="default_value">600</span></em>, <em class="sig-param"><span class="n">min_count</span><span class="o">=</span><span class="default_value">10</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/jobs/svd.html#SVD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.jobs.svd.SVD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="deepr.jobs.html#deepr.jobs.base.Job" title="deepr.jobs.base.Job"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.jobs.base.Job</span></code></a></p>
 <p>Build SVD embeddings.</p>
 <dl class="py attribute">
 <dt id="deepr.examples.movielens.jobs.svd.SVD.dim">
-<code class="sig-name descname">dim</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></em><em class="property"> = 100</em><a class="headerlink" href="#deepr.examples.movielens.jobs.svd.SVD.dim" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dim</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></em><em class="property"> = 600</em><a class="headerlink" href="#deepr.examples.movielens.jobs.svd.SVD.dim" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="deepr.examples.movielens.jobs.svd.SVD.min_count">
 <code class="sig-name descname">min_count</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></em><em class="property"> = 10</em><a class="headerlink" href="#deepr.examples.movielens.jobs.svd.SVD.min_count" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="deepr.examples.movielens.jobs.svd.SVD.path_counts">
+<code class="sig-name descname">path_counts</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></em><a class="headerlink" href="#deepr.examples.movielens.jobs.svd.SVD.path_counts" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">

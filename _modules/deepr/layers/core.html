@@ -382,6 +382,12 @@
     <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="Normalize"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.Normalize">[docs]</a><span class="nd">@base</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">Normalize</span><span class="p">(</span><span class="n">tensors</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">norm</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
 <div class="viewcode-block" id="Identity"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.Identity">[docs]</a><span class="k">class</span> <span class="nc">Identity</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Layer</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Identity Layer&quot;&quot;&quot;</span>
 
