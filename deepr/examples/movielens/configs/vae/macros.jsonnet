@@ -9,7 +9,7 @@ macros + {
     },
     params+: {
         target_ratio: null,
-        num_negatives: null,
-        loss: "multi"
+        num_negatives: 100,
+        loss: "multi_css"
     }
 }

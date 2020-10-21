@@ -16,12 +16,16 @@ LOGGER = logging.getLogger(__name__)
 
 
 def _default_formatter(tag, value):
+    """Convert to float / int if relevant."""
     try:
         value = float(value)
         if value == int(value):
             value = int(value)
     except ValueError:
         pass
+    except Exception as e:
+        LOGGER.info(f"Exception on {tag}={value}")
+        raise e
     return f"{tag} = {value:.7f}" if isinstance(value, float) else f"{tag} = {value}"
 
 

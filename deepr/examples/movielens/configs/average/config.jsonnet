@@ -19,8 +19,11 @@ local end = import '../common/end.jsonnet';
                     pred_fn: {
                         type: "deepr.examples.movielens.layers.AverageModel",
                         vocab_size: "$params:vocab_size",
-                        dim: 600,
-                        keep_prob: 0.5
+                        dim: "$params:dim",
+                        keep_prob: 0.5,
+                        share_embeddings: "$params:share_embeddings",
+                        average_with_bias: "$params:average_with_bias",
+                        reduce_mode: "$params:reduce_mode",
                     },
                     loss_fn: {
                         type: "deepr.examples.movielens.layers.Loss",

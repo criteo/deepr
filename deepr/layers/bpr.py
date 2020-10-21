@@ -8,7 +8,10 @@ from deepr.utils.broadcasting import make_same_shape
 
 
 class BPR(base.Layer):
-    """Vanilla BPR Loss Layer"""
+    """Vanilla BPR Loss Layer.
+
+    Expected value at beginning of training : -log(0.5) = 0.69
+    """
 
     def __init__(self, **kwargs):
         super().__init__(n_in=2, n_out=1, **kwargs)
@@ -35,7 +38,10 @@ class BPR(base.Layer):
 
 
 class MaskedBPR(base.Layer):
-    """Masked BPR Loss Layer"""
+    """Masked BPR Loss Layer.
+
+    Expected value at beginning of training : -log(0.5) = 0.69
+    """
 
     def __init__(self, **kwargs):
         super().__init__(n_in=4, n_out=1, **kwargs)

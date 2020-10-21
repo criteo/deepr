@@ -213,6 +213,12 @@ def Scale(tensors: tf.Tensor, multiplier: float):
     return tf.multiply(tensors, multiplier)
 
 
+@base.layer(n_in=1, n_out=1)
+def Normalize(tensors: tf.Tensor, norm: int = 2, axis: int = None):
+    result, _ = tf.linalg.normalize(tensors, ord=norm, axis=axis)
+    return result
+
+
 class Identity(base.Layer):
     """Identity Layer"""
 

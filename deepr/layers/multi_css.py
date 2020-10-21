@@ -36,10 +36,10 @@ class MultiLogLikelihoodCSS(base.Layer):
 
         # Remove -max for numerical stability
         max_negative_logits = tf.reduce_max(negative_logits, axis=-1)
-        max_positive_logits = tf.maximum(positive_logits, max_negative_logits)
-        max_logits = tf.reduce_max(max_positive_logits, axis=-1)
-        positive_logits -= tf.expand_dims(max_logits, axis=-1)
-        negative_logits -= tf.expand_dims(tf.expand_dims(max_logits, axis=-1), axis=-1)
+        max_logits = tf.maximum(positive_logits, max_negative_logits)
+        max_logits = tf.stop_gradient(tf.where(tf.is_finite(max_logits), max_logits, tf.zeros_like(max_logits)))
+        positive_logits -= max_logits
+        negative_logits -= tf.expand_dims(max_logits, axis=-1)
 
         # Exponential of positive and negative logits
         u_p = tf.exp(positive_logits)

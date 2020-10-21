@@ -20,6 +20,7 @@
             path_csv: "$paths:path_train",
             vocab_size: "$params:vocab_size",
             target_ratio: "$params:target_ratio",
+            take_ratio: "$params:take_ratio",
             seed: 42
         },
         eval_input_fn: {
@@ -144,7 +145,7 @@
         },
         run_config: {
             type: "deepr.jobs.RunConfig",
-            save_checkpoints_steps: 230,
+            save_checkpoints_steps: "$params:save_checkpoints_steps",
             save_summary_steps: 100,
             keep_checkpoint_max: null,
             log_step_count_steps: 100
@@ -167,10 +168,7 @@
             {
                 type: "deepr.exporters.SaveVariables",
                 path_variables: "$paths:path_variables",
-                variable_names: [
-                    "biases",
-                    "embeddings"
-                ]
+                variable_names: ["embeddings", "biases"]
             },
             {
                 type: "deepr.exporters.SavedModel",

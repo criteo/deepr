@@ -95,7 +95,7 @@ class TensorflowOptimizer(base.Optimizer):
                 non_skipped_grad_and_vars, global_step=tf.train.get_global_step()
             )
             train_op = tf.cond(
-                tf.train.get_global_step() <= self.skip_steps, lambda: non_skipped_train_op, lambda: train_op,
+                tf.train.get_global_step() <= self.skip_steps, lambda: non_skipped_train_op, lambda: train_op
             )
 
         # Compute gradients global norm for names in self.grad_norms

@@ -14,6 +14,7 @@ class Paths(dict):
             run_name = f"movielens.{now}"
         path_model = f"{path_root}/model"
         path_embeddings_svd = f"{path_root}/embeddings_svd.npz"
+        path_counts = f"{path_root}/counts.npz"
         path_init_ckpt = f"{path_root}/init_ckpt"
         path_mapping = f"{path_root}/data/mapping.txt"
         path_record_train = f"{path_root}/data/train.tfrecord.gz"
@@ -29,6 +30,7 @@ class Paths(dict):
             path_root=path_root,
             path_model=path_model,
             path_embeddings_svd=path_embeddings_svd,
+            path_counts=path_counts,
             path_init_ckpt=path_init_ckpt,
             path_mapping=path_mapping,
             path_record_train=path_record_train,

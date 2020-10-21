@@ -10,58 +10,127 @@ import deepr as dpr
 LOGGER = logging.getLogger(__name__)
 
 
-def AverageModel(vocab_size: int, dim: int, keep_prob: float, train_embeddings: bool = True, project: bool = False):
+def AverageModel(
+    vocab_size: int,
+    dim: int,
+    keep_prob: float,
+    share_embeddings: bool = True,
+    train_embeddings: bool = True,
+    train_biases: bool = True,
+    average_with_bias: bool = False,
+    project: bool = False,
+    reduce_mode: str = "average",
+):
     """Average Model."""
     return dpr.layers.Sequential(
         dpr.layers.Select(inputs=("inputPositives", "inputMask")),
-        RandomMask(inputs="inputMask", outputs="inputMask", keep_prob=keep_prob),
         dpr.layers.Embedding(
             inputs="inputPositives",
             outputs="inputEmbeddings",
-            variable_name="embeddings",
+            variable_name="embeddings" if share_embeddings else "encoder/embeddings",
             shape=(vocab_size, dim),
             trainable=train_embeddings,
         ),
-        dpr.layers.ToFloat(inputs="inputMask", outputs="inputWeights"),
-        dpr.layers.WeightedAverage(inputs=("inputEmbeddings", "inputWeights"), outputs="userEmbeddings"),
-        Projection(inputs="userEmbeddings", outputs="userEmbeddings") if project else [],
-        Logits(inputs="userEmbeddings", outputs="logits", vocab_size=vocab_size, dim=dim),
+        UserEmbedding(
+            inputs=("inputEmbeddings", "inputMask"),
+            outputs="userEmbeddings",
+            keep_prob=keep_prob,
+            reduce_mode=reduce_mode,
+        ),
+        Projection(
+            inputs="userEmbeddings",
+            outputs="userEmbeddings",
+            variable_name="projection" if share_embeddings else "encoder/projection",
+            reuse=False,
+            transpose=False,
+        )
+        if project
+        else [],
+        AddBias(inputs="userEmbeddings", outputs="userEmbeddings") if average_with_bias else [],
+        Projection(
+            inputs="userEmbeddings",
+            outputs="userEmbeddings",
+            variable_name="projection",
+            reuse=share_embeddings,
+            transpose=True,
+        )
+        if project
+        else [],
+        Logits(
+            inputs="userEmbeddings",
+            outputs="logits",
+            vocab_size=vocab_size,
+            dim=dim,
+            reuse=share_embeddings,
+            trainable=train_biases,
+        ),
         dpr.layers.Select(inputs=("userEmbeddings", "logits")),
     )
 
 
-@dpr.layers.layer(n_in=1, n_out=1)
-def RandomMask(tensors: tf.Tensor, mode: str, keep_prob: float):
-    if mode == dpr.TRAIN and keep_prob is not None:
+@dpr.layers.layer(n_in=2, n_out=1)
+def UserEmbedding(tensors: tf.Tensor, mode: str, keep_prob: float, reduce_mode: str = "average"):
+    """Compute Weighted Sum (randomly masking inputs in TRAIN mode)."""
+    embeddings, mask = tensors
+
+    # Drop entries without re-scaling (not classical dropout)
+    if mode == dpr.TRAIN:
         LOGGER.info("Applying random mask to inputs (TRAIN only)")
-        mask = tf.random.uniform(tf.shape(tensors)) <= keep_prob
-        return tf.logical_and(tensors, mask)
-    return tensors
+        mask_random = tf.random.uniform(tf.shape(mask)) <= keep_prob
+        mask = tf.logical_and(mask, mask_random)
+
+    weights = tf.cast(mask, tf.float32)
+
+    # Scale the weights depending on the reduce mode
+    if reduce_mode == "l2":
+        weights = tf.nn.l2_normalize(weights, axis=-1)
+    elif reduce_mode == "average":
+        weights = tf.div_no_nan(weights, tf.reduce_sum(weights, axis=-1, keepdims=True))
+    elif reduce_mode == "sum":
+        pass
+    else:
+        raise ValueError(f"Reduce mode {reduce_mode} unknown (must be 'l2', 'average' or 'sum')")
+
+    return tf.reduce_sum(embeddings * tf.expand_dims(weights, axis=-1), axis=-2)
 
 
 @dpr.layers.layer(n_in=1, n_out=1)
-def Projection(tensors: tf.Tensor):
+def AddBias(tensors: tf.Tensor):
+    dim = tensors.shape[-1]
+    biases = tf.get_variable(
+        name="encoder/biases", shape=(dim,), initializer=tf.truncated_normal_initializer(stddev=0.001)
+    )
+    return tensors + tf.expand_dims(biases, axis=0)
+
+
+@dpr.layers.layer(n_in=1, n_out=1)
+def Projection(tensors: tf.Tensor, variable_name: str, reuse: bool = False, transpose: bool = False):
     """Apply symmetric transform to non-projected user embeddings."""
-    # Resolve embeddings dimension
     dim = int(tensors.shape[-1])
     if not isinstance(dim, int):
         raise TypeError(f"Expected static shape for {tensors} but got {dim} (must be INT)")
+    with tf.variable_scope(tf.get_variable_scope(), reuse=reuse):
+        projection_matrix = tf.get_variable(name=variable_name, shape=[dim, dim])
 
-    # Retrieve projection matrix
-    with tf.variable_scope(tf.get_variable_scope(), reuse=False):
-        projection_matrix = tf.get_variable(name="projection_matrix", shape=[dim, dim])
-
-    # During training, applies symmetric transform
-    S = tf.matmul(projection_matrix, projection_matrix, transpose_b=True)
-    return tf.matmul(tensors, S)
+    return tf.matmul(tensors, projection_matrix, transpose_b=transpose)
 
 
 @dpr.layers.layer(n_in=1, n_out=1)
-def Logits(tensors: tf.Tensor, vocab_size: int, dim: int):
-    with tf.variable_scope(tf.get_variable_scope(), reuse=True):
+def Logits(tensors: tf.Tensor, vocab_size: int, dim: int, reuse: bool = True, trainable: bool = True):
+    """Computes logits as <u, i> + b_i."""
+    # Retrieve variables (embeddings and biases)
+    with tf.variable_scope(tf.get_variable_scope(), reuse=reuse):
         embeddings = tf.get_variable(name="embeddings", shape=(vocab_size, dim))
     biases = tf.get_variable(
-        name="biases", shape=(vocab_size,), initializer=tf.truncated_normal_initializer(stddev=0.001)
+        name="biases",
+        shape=(vocab_size,),
+        initializer=tf.truncated_normal_initializer(stddev=0.001),
+        trainable=trainable,
     )
-    logits = tf.linalg.matmul(tensors, embeddings, transpose_b=True) + tf.expand_dims(biases, axis=0)
+
+    # Compute inner product between user and product embeddings
+    logits = tf.linalg.matmul(tensors, embeddings, transpose_b=True)
+
+    # Add bias
+    logits += tf.expand_dims(biases, axis=0)
     return logits
