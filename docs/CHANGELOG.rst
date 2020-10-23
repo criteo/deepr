@@ -12,6 +12,8 @@ and this project adheres to `Semantic Versioning <http://semver.org/>`_.
 
 Added
 ~~~~~
+- Log yarn launcher app id with mlflow.
+
 Changed
 ~~~~~~~
 Deprecated
