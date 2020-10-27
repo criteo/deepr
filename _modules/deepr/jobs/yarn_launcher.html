@@ -201,6 +201,9 @@
     <span class="n">num_cores</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">48</span></div>
 
 
+<span class="n">YARN_LAUNCHER_APP_ID_MLFLOW_KEY</span> <span class="o">=</span> <span class="s2">&quot;yarn_launcher_app_id&quot;</span>
+
+
 <div class="viewcode-block" id="YarnLauncher"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.YarnLauncher">[docs]</a><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">YarnLauncher</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Packages current environment, upload `.pex` and run yarn job.&quot;&quot;&quot;</span>
@@ -208,6 +211,7 @@
     <span class="n">job</span><span class="p">:</span> <span class="n">Dict</span>
     <span class="n">config</span><span class="p">:</span> <span class="n">YarnLauncherConfig</span>
     <span class="n">run_on_yarn</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">use_mlflow</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 
 <div class="viewcode-block" id="YarnLauncher.run"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.YarnLauncher.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_on_yarn</span><span class="p">:</span>
@@ -234,6 +238,10 @@
                 <span class="p">)</span>
                 <span class="n">report</span> <span class="o">=</span> <span class="n">skein_client</span><span class="o">.</span><span class="n">application_report</span><span class="p">(</span><span class="n">app_id</span><span class="p">)</span>
                 <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TRACKING_URL: </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">tracking_url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_mlflow</span><span class="p">:</span>
+                <span class="n">mlflow</span><span class="o">.</span><span class="n">log_param</span><span class="p">(</span><span class="n">YARN_LAUNCHER_APP_ID_MLFLOW_KEY</span><span class="p">,</span> <span class="n">app_id</span><span class="p">)</span>
+
             <span class="n">mlflow</span><span class="o">.</span><span class="n">clear_run</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Not running on yarn.&quot;</span><span class="p">)</span>
