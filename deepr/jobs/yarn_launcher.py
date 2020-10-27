@@ -32,6 +32,9 @@ class YarnLauncherConfig(YarnConfig):
     num_cores: int = 48
 
 
+YARN_LAUNCHER_APP_ID_MLFLOW_KEY = "yarn_launcher_app_id"
+
+
 @dataclass
 class YarnLauncher(base.Job):
     """Packages current environment, upload `.pex` and run yarn job."""
@@ -39,6 +42,7 @@ class YarnLauncher(base.Job):
     job: Dict
     config: YarnLauncherConfig
     run_on_yarn: bool = True
+    use_mlflow: bool = False
 
     def run(self):
         if self.run_on_yarn:
@@ -65,6 +69,10 @@ class YarnLauncher(base.Job):
                 )
                 report = skein_client.application_report(app_id)
                 LOGGER.info(f"TRACKING_URL: {report.tracking_url}")
+
+            if self.use_mlflow:
+                mlflow.log_param(YARN_LAUNCHER_APP_ID_MLFLOW_KEY, app_id)
+
             mlflow.clear_run()
         else:
             LOGGER.info("Not running on yarn.")
