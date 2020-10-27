@@ -5,7 +5,7 @@ graphyte==1.6.0
 jsonnet==0.16.0
 mlflow==1.11.0
 numpy==1.18.5
-psutil==5.7.2
+psutil==5.7.3
 pyarrow==0.17.1
 skein==0.8.0
 tensorflow>=1.15,<2
