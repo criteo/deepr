@@ -23,7 +23,7 @@ copyright = "2020, Criteo"
 author = "Criteo"
 
 # The full version, including alpha/beta/rc tags
-release = "2.9.1"
+release = "2.10.0"
 
 
 # -- General configuration ---------------------------------------------------
