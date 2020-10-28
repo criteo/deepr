@@ -12,8 +12,6 @@ and this project adheres to `Semantic Versioning <http://semver.org/>`_.
 
 Added
 ~~~~~
-- Log yarn launcher app id with mlflow.
-
 Changed
 ~~~~~~~
 Deprecated
@@ -24,6 +22,13 @@ Fixed
 ~~~~~
 Security
 ~~~~~~~~
+
+[2.10.0] - 2020-10-28
+---------------------
+Added
+~~~~~
+- Log yarn launcher app id with mlflow.
+
 
 [2.9.1] - 2020-10-01
 --------------------
