@@ -162,10 +162,8 @@ def rename_nodes(graph_def: tf.GraphDef, new_names: Dict[str, str]) -> tf.GraphD
         new_node = tf.NodeDef()
         new_node.CopyFrom(node)
         nodes.append(new_node)
-        match = re.match(r"^(?:cond(?:_\d+)?/)?(.+?)(?:_\d+)?$", node.name)
-        if match and match.groups()[0] in new_names:
-            new_name = new_names[match.groups()[0]]
-            new_node.name = new_name
+        if node.name in new_names:
+            new_node.name = new_names[node.name]
             LOGGER.info(f"Node renamed: {node.name} -> {new_node.name}")
 
     # Check that all new names were used
