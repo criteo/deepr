@@ -119,15 +119,35 @@ class DenseIndex(base.Layer):
         bias_name: str = None,
         activation: Callable = None,
         reuse: bool = None,
+        kernel_reuse: bool = None,
+        bias_reuse: bool = None,
         trainable: bool = True,
+        kernel_trainable: bool = None,
+        bias_trainable: bool = None,
+        initializer: Callable = None,
+        kernel_initializer: Callable = None,
+        bias_initializer: Callable = None,
         **kwargs,
     ):
         self.units = units
         self.kernel_name = kernel_name
         self.bias_name = bias_name
         self.activation = activation
+
+        # Reuse is used by default (if kernel / bias are None)
         self.reuse = reuse
+        self.kernel_reuse = kernel_reuse if kernel_reuse is not None else reuse
+        self.bias_reuse = bias_reuse if bias_reuse is not None else reuse
+
+        # Trainable is used by default (if kernel / bias are None)
         self.trainable = trainable
+        self.kernel_trainable = kernel_trainable if kernel_trainable is not None else trainable
+        self.bias_trainable = bias_trainable if bias_trainable is not None else trainable
+
+        # Initializer is used by default (if kernel / bias are None)
+        self.initializer = initializer
+        self.kernel_initializer = kernel_initializer if kernel_initializer is not None else initializer
+        self.bias_initializer = bias_initializer if bias_initializer is not None else initializer
         super().__init__(n_in=2, n_out=1, **kwargs)
 
     def forward(self, tensors, mode: str = None):
@@ -136,16 +156,24 @@ class DenseIndex(base.Layer):
         input_dim = int(x.shape[-1])
         shape = (self.units, input_dim)
 
-        with tf.variable_scope(tf.get_variable_scope(), reuse=self.reuse):
-            kernel_var = tf.get_variable(name=self.kernel_name, shape=shape, trainable=self.trainable)
+        with tf.variable_scope(tf.get_variable_scope(), reuse=self.kernel_reuse):
+            kernel_var = tf.get_variable(
+                name=self.kernel_name, shape=shape, trainable=self.kernel_trainable, initializer=self.kernel_initializer
+            )
             rows = tf.nn.embedding_lookup(kernel_var, tf.maximum(indices, 0))
             res = DotProduct()((x, rows))
-            if self.bias_name:
-                bias_var = tf.get_variable(name=self.bias_name, shape=(self.units,), trainable=self.trainable)
+        if self.bias_name:
+            with tf.variable_scope(tf.get_variable_scope(), reuse=self.bias_reuse):
+                bias_var = tf.get_variable(
+                    name=self.bias_name,
+                    shape=(self.units,),
+                    trainable=self.bias_trainable,
+                    initializer=self.bias_initializer,
+                )
                 biases = tf.nn.embedding_lookup(bias_var, tf.maximum(indices, 0))
                 res = Add()((res, biases))
-            if self.activation is not None:
-                res = self.activation(res)
+        if self.activation is not None:
+            res = self.activation(res)
         return res
 
 

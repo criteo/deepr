@@ -4,7 +4,7 @@ from deepr.layers.base import Layer, layer, Lambda
 from deepr.layers.bpr import BPR, MaskedBPR
 from deepr.layers.bpr_max import BPRMax, MaskedBPRMax
 from deepr.layers.click_rank import ClickRank
-from deepr.layers.combinators import Sequential, Select, Rename, Parallel, ActiveMode, Scope
+from deepr.layers.combinators import DAG, Sequential, Select, Rename, Parallel, ActiveMode, Scope
 from deepr.layers.core import (
     Add,
     AddWithWeight,
