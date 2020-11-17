@@ -23,7 +23,6 @@ class Mean(base.Metric):
 
     def __call__(self, tensors: Dict[str, tf.Tensor]) -> Dict[str, Tuple]:
         tensors = base.get_scalars(tensors, names=self.tensors, pattern=self.pattern)
-        LOGGER.info(f"{self} -> {', '.join(tensors.keys())}")
         return {name: tf.metrics.mean(value) for name, value in tensors.items()}
 
 
@@ -39,7 +38,6 @@ class FiniteMean(base.Metric):
 
     def __call__(self, tensors: Dict[str, tf.Tensor]) -> Dict[str, Tuple]:
         tensors = base.get_scalars(tensors, names=self.tensors, pattern=self.pattern)
-        LOGGER.info(f"{self} -> {', '.join(tensors.keys())}")
         return {name: finite_mean_metric(value, name) for name, value in tensors.items()}
 
 
@@ -76,7 +74,6 @@ class DecayMean(base.Metric):
 
     def __call__(self, tensors: Dict[str, tf.Tensor]) -> Dict[str, Tuple]:
         tensors = base.get_scalars(tensors, names=self.tensors, pattern=self.pattern)
-        LOGGER.info(f"{self} -> {', '.join(tensors.keys())}")
         return {name: decay_mean_metric(value, self.decay, name) for name, value in tensors.items()}
 
 
