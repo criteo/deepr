@@ -7,7 +7,7 @@ from typing import List, Union, Optional
 
 import numpy as np
 
-import deepr as dpr
+import deepr
 from deepr.utils import mlflow
 
 try:
@@ -20,7 +20,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 @dataclass
-class Evaluate(dpr.jobs.Job):
+class Evaluate(deepr.jobs.Job):
     """Evaluate MovieLens using a Faiss Index.
 
     For each user embedding, the top num_queries items are retrieved.
@@ -36,22 +36,22 @@ class Evaluate(dpr.jobs.Job):
     num_queries: int = 1000
 
     def run(self):
-        with dpr.io.ParquetDataset(self.path_predictions).open() as ds:
+        with deepr.io.ParquetDataset(self.path_predictions).open() as ds:
             predictions = ds.read_pandas().to_pandas()
             users = np.stack(predictions["user"])
 
-        if dpr.io.Path(self.path_embeddings).suffix == ".npz":
-            with dpr.io.Path(self.path_embeddings).open("rb") as file:
+        if deepr.io.Path(self.path_embeddings).suffix == ".npz":
+            with deepr.io.Path(self.path_embeddings).open("rb") as file:
                 embeddings = np.load(file)
                 embeddings = embeddings.astype(np.float32)
         else:
-            with dpr.io.ParquetDataset(self.path_embeddings).open() as ds:
+            with deepr.io.ParquetDataset(self.path_embeddings).open() as ds:
                 embeddings = ds.read_pandas().to_pandas()
                 embeddings = embeddings.to_numpy()
 
         if self.path_biases is not None:
             # Concatenate biases to product embeddings
-            with dpr.io.ParquetDataset(self.path_biases).open() as ds:
+            with deepr.io.ParquetDataset(self.path_biases).open() as ds:
                 biases = ds.read_pandas().to_pandas()
                 biases = biases.to_numpy()
             embeddings = np.concatenate([embeddings, biases], axis=-1)

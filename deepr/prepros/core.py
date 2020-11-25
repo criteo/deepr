@@ -285,7 +285,7 @@ class PaddedBatch(base.Prepro):
     need to create your own padded batch prepro wrapping the tensorflow
     implementation. For example::
 
-        @dpr.prepros.prepro
+        @deepr.prepros.prepro
         def PaddedBatchDefault(dataset, batch_size, padded_shapes, padding_values):
             return dataset.padded_batch(bath_size, padded_shapes, padding_values)
 

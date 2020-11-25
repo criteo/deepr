@@ -2,7 +2,7 @@
 
 import pytest
 
-import deepr as dpr
+import deepr
 
 
 @pytest.mark.parametrize(
@@ -18,7 +18,7 @@ import deepr as dpr
     ],
 )
 def test_config_fill_macros(item, macros, expected):
-    assert dpr.config.fill_macros(item, macros) == expected
+    assert deepr.config.fill_macros(item, macros) == expected
 
 
 @pytest.mark.parametrize(
@@ -32,7 +32,7 @@ def test_config_fill_macros(item, macros, expected):
     ],
 )
 def test_find_macro_params(item, macro, expected):
-    assert set(dpr.config.find_macro_params(item, macro)) == set(expected)
+    assert set(deepr.config.find_macro_params(item, macro)) == set(expected)
 
 
 @pytest.mark.parametrize(
@@ -40,14 +40,14 @@ def test_find_macro_params(item, macro, expected):
 )
 def test_ismacro(item, expected):
     if expected is not None:
-        assert dpr.config.ismacro(item) == expected
+        assert deepr.config.ismacro(item) == expected
     else:
         with pytest.raises(ValueError):
-            dpr.config.ismacro(item)
+            deepr.config.ismacro(item)
 
 
 def test_get_macro_and_param():
-    assert dpr.config.get_macro_and_param("$macro:param") == ("macro", "param")
+    assert deepr.config.get_macro_and_param("$macro:param") == ("macro", "param")
 
 
 @pytest.mark.parametrize(
@@ -68,9 +68,9 @@ def test_get_macro_and_param():
 def test_config_assert_no_macros(item, error: bool):
     if error:
         with pytest.raises(ValueError):
-            dpr.config.assert_no_macros(item)
+            deepr.config.assert_no_macros(item)
     else:
-        dpr.config.assert_no_macros(item)
+        deepr.config.assert_no_macros(item)
 
 
 @pytest.mark.parametrize(
@@ -79,7 +79,7 @@ def test_config_assert_no_macros(item, error: bool):
 )
 def test_macros_eval_order(macros, expected):
     if expected is not None:
-        assert dpr.config.macros_eval_order(macros) == expected
+        assert deepr.config.macros_eval_order(macros) == expected
     else:
         with pytest.raises(ValueError):
-            dpr.config.macros_eval_order(macros)
+            deepr.config.macros_eval_order(macros)

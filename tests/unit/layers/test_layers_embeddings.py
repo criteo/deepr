@@ -3,13 +3,13 @@
 import numpy as np
 import tensorflow as tf
 
-import deepr as dpr
+import deepr
 
 
 def test_layers_embeddings():
     """Test for Embedding"""
-    layer = dpr.layers.Embedding(variable_name="embeddings", shape=(2, 10))
-    layer2 = dpr.layers.Embedding(variable_name="embeddings", shape=(2, 10), reuse=True)
+    layer = deepr.layers.Embedding(variable_name="embeddings", shape=(2, 10))
+    layer2 = deepr.layers.Embedding(variable_name="embeddings", shape=(2, 10), reuse=True)
     result = layer(tf.constant([0, 1, -1]))
     result2 = layer(tf.constant([0, 1, -1]), reuse=True)
     result3 = layer2(tf.constant([0, 1, -1]))

@@ -5,7 +5,7 @@ from dataclasses import dataclass
 
 import pytest
 
-import deepr as dpr
+import deepr
 
 
 @dataclass
@@ -40,7 +40,7 @@ class C:
     ],
 )
 def test_config_parse_config(config, macros, expected):
-    assert dpr.parse_config(config, macros) == expected
+    assert deepr.parse_config(config, macros) == expected
 
 
 @pytest.mark.parametrize(
@@ -61,7 +61,7 @@ def test_config_parse_config(config, macros, expected):
     ],
 )
 def test_config_from_config(item, expected):
-    assert dpr.from_config(item) == expected
+    assert deepr.from_config(item) == expected
 
 
 @pytest.mark.parametrize(
@@ -72,6 +72,6 @@ def test_config_from_config(item, expected):
     ],
 )
 def test_config_from_config_constructor(item, kwargs, expected):
-    constructor = dpr.from_config(item)
+    constructor = deepr.from_config(item)
     instance = constructor(**kwargs)
     assert instance == expected

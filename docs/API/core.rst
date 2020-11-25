@@ -147,6 +147,7 @@ It takes as input / returns a dictionary of :class:`~tf.Tensor`. This means that
    Product
    Rename
    Select
+   DAG
    Sequential
    Slice
    SliceFirst

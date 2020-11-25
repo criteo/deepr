@@ -2,7 +2,7 @@
 
 import tensorflow as tf
 
-import deepr as dpr
+import deepr
 
 
 def test_readers_generator():
@@ -12,5 +12,5 @@ def test_readers_generator():
         for idx in range(5):
             yield idx, 2 * idx
 
-    reader = dpr.readers.GeneratorReader(generator_fn, output_types=(tf.int32, tf.int32), output_shapes=((), ()))
+    reader = deepr.readers.GeneratorReader(generator_fn, output_types=(tf.int32, tf.int32), output_shapes=((), ()))
     assert list(generator_fn()) == list(reader)

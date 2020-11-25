@@ -8,7 +8,7 @@ import numpy as np
 import tensorflow as tf
 
 from deepr.layers import base
-from deepr.layers.combinators import Sequential, Select, Scope
+from deepr.layers.combinators import DAG, Select, Scope
 from deepr.layers.dropout import SpatialDropout1D, Dropout
 from deepr.layers.slice import SliceLastPadded
 from deepr.layers.core import Conv1d, Dense, Add, Scale
@@ -36,7 +36,7 @@ def Transformer(
     outputs: str = "userEmbeddings",
 ) -> base.Layer:
     """Transformer Model."""
-    return Sequential(
+    return DAG(
         Select(n_in=2, inputs=inputs, outputs=("inputEmbeddings", "inputMask")),
         SpatialDropout1D(inputs="inputEmbeddings", outputs="inputEmbeddingsDropout", dropout_rate=event_dropout_rate),
         AttentionMask(inputs="inputMask", outputs="mask", use_look_ahead_mask=use_look_ahead_mask),
@@ -52,7 +52,7 @@ def Transformer(
         ),
         [
             Scope(
-                Sequential(
+                DAG(
                     SelfMultiheadAttention(
                         inputs=("inputEnc", "mask"),
                         outputs="inputEnc",
@@ -96,7 +96,7 @@ def FeedForward(inputs: str, outputs: str, units_inner: int, units_readout: int,
     if inputs == "_x":
         raise ValueError("Cannot use name '_x' for inputs (used as intermediary node).")
 
-    return Sequential(
+    return DAG(
         Select(inputs=inputs, outputs="_x"),
         Dropout(inputs="_x", outputs="_x", dropout_rate=dropout_rate),
         Conv1d(inputs="_x", outputs="_x", filters=units_inner, kernel_size=1, activation=tf.nn.relu, use_bias=True),

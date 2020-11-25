@@ -24,7 +24,7 @@ from deepr.utils import Field
 from deepr.version import __author__, __version__
 
 
-# Make ModeKeys accessible via dpr.TRAIN, dpr.EVAL and dpr.PREDICT
+# Make ModeKeys accessible via deepr.TRAIN, deepr.EVAL and deepr.PREDICT
 TRAIN = tf.estimator.ModeKeys.TRAIN
 EVAL = tf.estimator.ModeKeys.EVAL
 PREDICT = tf.estimator.ModeKeys.PREDICT

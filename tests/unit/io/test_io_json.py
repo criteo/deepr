@@ -3,7 +3,7 @@
 import pytest
 import json
 
-import deepr as dpr
+import deepr
 
 
 @pytest.mark.parametrize(
@@ -11,4 +11,4 @@ import deepr as dpr
 )
 def test_io_is_json(data, is_json):
     """Test for io.is_json"""
-    assert dpr.io.is_json(data) == is_json
+    assert deepr.io.is_json(data) == is_json

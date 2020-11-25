@@ -6,14 +6,14 @@ from dataclasses import dataclass
 
 import tensorflow as tf
 
-import deepr as dpr
+import deepr
 
 
 LOGGER = logging.getLogger(__name__)
 
 
 @dataclass
-class PredictProto(dpr.jobs.Job):
+class PredictProto(deepr.jobs.Job):
     """Compute predictions from a single .pb file."""
 
     path_model: str
@@ -24,7 +24,7 @@ class PredictProto(dpr.jobs.Job):
     fetches: Union[str, List[str]]
 
     def run(self):
-        predictor = dpr.predictors.ProtoPredictor(
+        predictor = deepr.predictors.ProtoPredictor(
             path=f"{self.path_model}/{self.graph_name}", feeds=self.feeds, fetches=self.fetches
         )
         for preds in predictor(lambda: self.prepro_fn(self.input_fn(), tf.estimator.ModeKeys.PREDICT)):
@@ -32,7 +32,7 @@ class PredictProto(dpr.jobs.Job):
 
 
 @dataclass
-class PredictSavedModel(dpr.jobs.Job):
+class PredictSavedModel(deepr.jobs.Job):
     """Compute predictions from a directory containing saved models."""
 
     path_saved_model: str
@@ -42,8 +42,8 @@ class PredictSavedModel(dpr.jobs.Job):
     fetches: Optional[Union[str, List[str]]] = None
 
     def run(self):
-        predictor = dpr.predictors.SavedModelPredictor(
-            path=dpr.predictors.get_latest_saved_model(self.path_saved_model), feeds=self.feeds, fetches=self.fetches
+        predictor = deepr.predictors.SavedModelPredictor(
+            path=deepr.predictors.get_latest_saved_model(self.path_saved_model), feeds=self.feeds, fetches=self.fetches
         )
         for preds in predictor(lambda: self.prepro_fn(self.input_fn(), tf.estimator.ModeKeys.PREDICT)):
             LOGGER.info(preds)

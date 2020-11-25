@@ -23,22 +23,21 @@ class Serial(Prepro):
 
     For an example, see the following snippet::
 
-        import deepr.layers as dprl
-        import deepr.prepros as dprp
+        import deepr
 
         def gen():
             yield {"a": [0], "b": [0, 1]}
             yield {"a": [0, 1], "b": [0]}
             yield {"a": [0, 1], "b": [0, 1]}
 
-        prepro_fn = dprp.Serial(
-            dprp.Map(dprl.Sum(inputs=("a", "b"), outputs="c")),
-            dprp.Filter(dprl.IsMinSize(inputs="a", outputs="a_size", size=2)),
-            dprp.Filter(dprl.IsMinSize(inputs="b", outputs="b_size", size=2)),
+        prepro_fn = deepr.prepros.Serial(
+            deepr.prepros.Map(deepr.layers.Sum(inputs=("a", "b"), outputs="c")),
+            deepr.prepros.Filter(deepr.layers.IsMinSize(inputs="a", outputs="a_size", size=2)),
+            deepr.prepros.Filter(deepr.layers.IsMinSize(inputs="b", outputs="b_size", size=2)),
         )
 
         dataset = tf.data.Dataset.from_generator(gen, {"a": tf.int32, "b": tf.int32}, {"a": (None,), "b": (None,)})
-        reader = dpr.readers.from_dataset(prepro_fn(dataset))
+        reader = deepr.readers.from_dataset(prepro_fn(dataset))
         expected = [{"a": [0, 1], "b": [0, 1], "c": [0, 2]}]
 
 

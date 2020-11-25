@@ -5,7 +5,7 @@ import logging
 from typing import Tuple
 
 import tensorflow as tf
-import deepr as dpr
+import deepr
 
 
 LOGGER = logging.getLogger(__name__)
@@ -20,14 +20,14 @@ def VAEModel(
     project: bool = False,
     share_embeddings: bool = False,
     seed: int = 42,
-) -> dpr.layers.Layer:
+) -> deepr.layers.Layer:
     """VAE Model."""
     if dims_encode[-1] != dims_decode[0]:
         msg = f"Encoder's latent dim != decoder's ({dims_encode[-1]} != {dims_decode[0]})"
         raise ValueError(msg)
-    return dpr.layers.Sequential(
-        dpr.layers.Select(inputs=("inputPositives", "inputMask")),
-        dpr.layers.Embedding(
+    return deepr.layers.DAG(
+        deepr.layers.Select(inputs=("inputPositives", "inputMask")),
+        deepr.layers.Embedding(
             inputs="inputPositives",
             outputs="inputEmbeddings",
             variable_name="embeddings" if share_embeddings else "encoder/embeddings",
@@ -44,7 +44,7 @@ def VAEModel(
         if project
         else [],
         AddBias(inputs="averageEmbeddings", outputs="averageEmbeddings", variable_name="encoder/bias", seed=seed),
-        dpr.layers.Lambda(
+        deepr.layers.Lambda(
             lambda tensors, _: tf.nn.tanh(tensors), inputs="averageEmbeddings", outputs="averageEmbeddings"
         ),
         Encode(
@@ -68,17 +68,17 @@ def VAEModel(
             reuse=share_embeddings,
             seed=seed,
         ),
-        dpr.layers.Select(inputs=("userEmbeddings", "logits", "mu", "std", "KL")),
+        deepr.layers.Select(inputs=("userEmbeddings", "logits", "mu", "std", "KL")),
     )
 
 
-@dpr.layers.layer(n_in=2, n_out=1)
+@deepr.layers.layer(n_in=2, n_out=1)
 def WeightedSum(tensors: tf.Tensor, mode: str, keep_prob: float, seed: int):
     """Compute Weighted Sum (randomly masking inputs in TRAIN mode)."""
     embeddings, mask = tensors
     weights = tf.cast(mask, tf.float32)
     weights = tf.nn.l2_normalize(weights, axis=-1)
-    if mode == dpr.TRAIN:
+    if mode == deepr.TRAIN:
         LOGGER.info("Applying random mask to inputs (TRAIN only)")
         weights = tf.nn.dropout(weights, keep_prob=keep_prob, seed=seed)
 
@@ -86,7 +86,7 @@ def WeightedSum(tensors: tf.Tensor, mode: str, keep_prob: float, seed: int):
     return tf.reduce_sum(embeddings, axis=-2)
 
 
-@dpr.layers.layer(n_in=1, n_out=1)
+@deepr.layers.layer(n_in=1, n_out=1)
 def Projection(tensors: tf.Tensor, variable_name: str, seed: int):
     """Apply symmetric transform to non-projected user embeddings."""
     # Resolve embeddings dimension
@@ -103,7 +103,7 @@ def Projection(tensors: tf.Tensor, variable_name: str, seed: int):
     return tf.matmul(tensors, projection_matrix)
 
 
-@dpr.layers.layer(n_in=1, n_out=1)
+@deepr.layers.layer(n_in=1, n_out=1)
 def AddBias(tensors: tf.Tensor, variable_name: str, seed: int):
     dim = tensors.shape[-1]
     biases = tf.get_variable(
@@ -112,7 +112,7 @@ def AddBias(tensors: tf.Tensor, variable_name: str, seed: int):
     return tensors + tf.expand_dims(biases, axis=0)
 
 
-@dpr.layers.layer(n_in=1, n_out=3)
+@deepr.layers.layer(n_in=1, n_out=3)
 def Encode(tensors: tf.Tensor, dims: Tuple, activation, seed: int):
     """Encode tensor, apply KL constraint."""
     with tf.variable_scope("encoder"):
@@ -146,17 +146,17 @@ def Encode(tensors: tf.Tensor, dims: Tuple, activation, seed: int):
         return mu, std, KL
 
 
-@dpr.layers.layer(n_in=2, n_out=1)
+@deepr.layers.layer(n_in=2, n_out=1)
 def GaussianNoise(tensors: Tuple[tf.Tensor, tf.Tensor], mode: str, seed: int):
     mu, std = tensors
-    if mode == dpr.TRAIN:
+    if mode == deepr.TRAIN:
         LOGGER.info("Sampling latent variable (TRAIN only).")
         epsilon = tf.random_normal(tf.shape(std), seed=seed)
         return mu + std * epsilon
     return mu
 
 
-@dpr.layers.layer(n_in=1, n_out=1)
+@deepr.layers.layer(n_in=1, n_out=1)
 def Decode(tensors: tf.Tensor, dims: Tuple, activation, seed: int):
     """Decode tensor."""
     with tf.variable_scope("decoder"):
@@ -171,7 +171,7 @@ def Decode(tensors: tf.Tensor, dims: Tuple, activation, seed: int):
     return tensors
 
 
-@dpr.layers.layer(n_in=1, n_out=1)
+@deepr.layers.layer(n_in=1, n_out=1)
 def Logits(tensors: tf.Tensor, vocab_size: int, dim: int, trainable: bool, reuse: bool, seed: int):
     """Compute logits given user and create target item embeddings."""
     with tf.variable_scope(tf.get_variable_scope(), reuse=reuse):

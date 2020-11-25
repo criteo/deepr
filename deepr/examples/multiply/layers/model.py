@@ -5,13 +5,13 @@ import logging
 
 import tensorflow as tf
 
-import deepr.layers as dprl
+import deepr
 
 
 LOGGER = logging.getLogger(__name__)
 
 
-@dprl.layer(inputs="x", outputs="y_pred")
+@deepr.layers.layer(inputs="x", outputs="y_pred")
 def Multiply(tensors):
     alpha = tf.get_variable(name="alpha", shape=(), dtype=tf.float32)
     return tf.multiply(alpha, tensors, name="y_pred")

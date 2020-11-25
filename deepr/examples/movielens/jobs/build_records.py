@@ -8,7 +8,7 @@ from dataclasses import dataclass
 
 import tensorflow as tf
 
-import deepr as dpr
+import deepr
 from deepr.examples.movielens.utils import fields
 
 try:
@@ -24,7 +24,7 @@ FIELDS = [fields.UID, fields.INPUT_POSITIVES, fields.TARGET_POSITIVES, fields.TA
 
 
 @dataclass
-class BuildRecords(dpr.jobs.Job):
+class BuildRecords(deepr.jobs.Job):
     """Build MovieLens dataset as TFRecords.
 
     It aggregates movie ratings by user and build timelines of movies.
@@ -73,15 +73,15 @@ class BuildRecords(dpr.jobs.Job):
             movies.update(ids)
         vocab = sorted(movies)
         mapping = {movie: idx for idx, movie in enumerate(vocab)}
-        dpr.io.Path(self.path_mapping).parent.mkdir(parents=True, exist_ok=True)
-        dpr.vocab.write(self.path_mapping, [str(movie) for movie in vocab])
+        deepr.io.Path(self.path_mapping).parent.mkdir(parents=True, exist_ok=True)
+        deepr.vocab.write(self.path_mapping, [str(movie) for movie in vocab])
         LOGGER.info(f"Number of movies after filtration is: {len(vocab)}")
 
         # Write datasets
         for timelines, path in zip(
             [timelines_train, timelines_test, timelines_eval], [self.path_train, self.path_test, self.path_eval]
         ):
-            dpr.io.Path(path).parent.mkdir(parents=True, exist_ok=True)
+            deepr.io.Path(path).parent.mkdir(parents=True, exist_ok=True)
             LOGGER.info(f"Writing {len(timelines)} timelines to {path}")
             LOGGER.info(f"shuffle_timelines = {self.shuffle_timelines}, num_negatives = {self.num_negatives}")
             write_records(
@@ -106,7 +106,7 @@ def get_timelines(path_ratings: str, min_rating: float, min_length: int) -> List
     """
     # Open path_ratings from HDFS / Local FileSystem
     LOGGER.info(f"Reading ratings from {path_ratings}")
-    with dpr.io.Path(path_ratings).open() as file:
+    with deepr.io.Path(path_ratings).open() as file:
         ratings_data = pd.read_csv(file)
     LOGGER.info(f"Number of timelines before filtration is {len(set(ratings_data.userId))}")
     LOGGER.info(f"Number of movies before filtration is {len(set(ratings_data.movieId))}")
@@ -121,7 +121,7 @@ def get_timelines(path_ratings: str, min_rating: float, min_length: int) -> List
     # Sort ratings by timestamp
     LOGGER.info("Building timelines (sort by timestamp).")
     timelines = []
-    for _, row in dpr.utils.progress(grouped_data.iterrows(), secs=10):
+    for _, row in deepr.utils.progress(grouped_data.iterrows(), secs=10):
         uid = str(row.userId)
         movies = [movie for _, movie in sorted(zip(row.timestamp, row.movieId))]
         timelines.append((uid, movies))
@@ -135,8 +135,8 @@ def write_records(gen: Callable, path: str):
         output_types={field.name: field.dtype for field in FIELDS},
         output_shapes={field.name: field.shape for field in FIELDS},
     )
-    to_example = dpr.prepros.ToExample(fields=FIELDS)
-    writer = dpr.writers.TFRecordWriter(path=path)
+    to_example = deepr.prepros.ToExample(fields=FIELDS)
+    writer = deepr.writers.TFRecordWriter(path=path)
     writer.write(to_example(dataset))
 
 
@@ -148,7 +148,7 @@ def records_generator(
     mapping: Dict[int, int],
 ):
     """Convert Timelines to list of Records with negative samples."""
-    for uid, movies in dpr.utils.progress(timelines, secs=10):
+    for uid, movies in deepr.utils.progress(timelines, secs=10):
         # Remap movies to index and shuffle
         indices = [mapping[movie] for movie in movies if movie in mapping]
         if shuffle_timelines:

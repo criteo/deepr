@@ -3,17 +3,17 @@
 import pytest
 import tensorflow as tf
 
-import deepr as dpr
+import deepr
 
 
 @pytest.mark.parametrize(
     "field, expected",
     [
-        (dpr.Field(name="name", shape=[None, None], dtype=tf.int64), tf.io.VarLenFeature(dtype=tf.int64)),
-        (dpr.Field(name="name", shape=[None], dtype=tf.int64), tf.io.VarLenFeature(dtype=tf.int64)),
-        (dpr.Field(name="name", shape=[2], dtype=tf.int64), tf.io.FixedLenFeature(shape=(2,), dtype=tf.int64)),
+        (deepr.Field(name="name", shape=[None, None], dtype=tf.int64), tf.io.VarLenFeature(dtype=tf.int64)),
+        (deepr.Field(name="name", shape=[None], dtype=tf.int64), tf.io.VarLenFeature(dtype=tf.int64)),
+        (deepr.Field(name="name", shape=[2], dtype=tf.int64), tf.io.FixedLenFeature(shape=(2,), dtype=tf.int64)),
         (
-            dpr.Field(name="name", shape=[None, 2], dtype=tf.int64),
+            deepr.Field(name="name", shape=[None, 2], dtype=tf.int64),
             tf.io.FixedLenSequenceFeature(shape=(2,), dtype=tf.int64),
         ),
     ],
@@ -25,4 +25,4 @@ def test_feature_specs(field, expected):
 
 def test_startswith():
     """Test startswith method"""
-    assert dpr.Field(name="inputPositive", shape=[None, None], dtype=tf.int32).startswith("input")
+    assert deepr.Field(name="inputPositive", shape=[None, None], dtype=tf.int32).startswith("input")

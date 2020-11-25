@@ -18,17 +18,17 @@ class TableInitializer(base.Prepro):
     First, create a ``table_initializer_fn`` that uses the
     ``tf.AUTO_REUSE`` argument.
 
-    >>> import deepr as dpr
+    >>> import deepr
     >>> def table_initializer_fn():
-    ...     return dpr.utils.table_from_mapping(
+    ...     return deepr.utils.table_from_mapping(
     ...         name="partner_table", mapping={1: 2}, reuse=tf.AUTO_REUSE
     ... )
 
     Then, define your preprocessing pipeline as follows
 
-    >>> prepro_fn = dpr.prepros.Serial(
-    ...     dpr.prepros.TableInitializer(table_initializer_fn),
-    ...     dpr.prepros.Map(dpr.layers.Lookup(table_initializer_fn)),
+    >>> prepro_fn = deepr.prepros.Serial(
+    ...     deepr.prepros.TableInitializer(table_initializer_fn),
+    ...     deepr.prepros.Map(deepr.layers.Lookup(table_initializer_fn)),
     ... )
 
     When applying the ``prepro_fn`` on a ``tf.data.Dataset``, it will

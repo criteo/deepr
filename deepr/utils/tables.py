@@ -20,15 +20,15 @@ class TableContext:
 
     Example
     -------
-    >>> import deepr as dpr
-    >>> with dpr.utils.TableContext() as tables:
-    ...     table = dpr.utils.table_from_mapping(name="my_table", mapping={1: 2})
+    >>> import deepr
+    >>> with deepr.utils.TableContext() as tables:
+    ...     table = deepr.utils.table_from_mapping(name="my_table", mapping={1: 2})
     ...     tables.get("my_table") is table
     True
 
-    >>> with dpr.utils.TableContext():
-    ...     table = dpr.utils.table_from_mapping(name="my_table", mapping={1: 2})
-    ...     reused = dpr.utils.table_from_mapping(name="my_table", reuse=True)
+    >>> with deepr.utils.TableContext():
+    ...     table = deepr.utils.table_from_mapping(name="my_table", mapping={1: 2})
+    ...     reused = deepr.utils.table_from_mapping(name="my_table", reuse=True)
     ...     table is reused
     True
     """

@@ -4,7 +4,7 @@
 import numpy as np
 import tensorflow as tf
 
-import deepr as dpr
+import deepr
 
 
 def test_layers_multi_css():
@@ -14,7 +14,7 @@ def test_layers_multi_css():
     num_negatives = 8
     vocab_size = 10
 
-    log_likelihood = dpr.layers.MultiLogLikelihoodCSS(
+    log_likelihood = deepr.layers.MultiLogLikelihoodCSS(
         inputs=("positive_logits", "negative_logits", "positive_mask", "negative_mask"),
         outputs="log_likelihood",
         vocab_size=vocab_size,

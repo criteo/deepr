@@ -4,7 +4,7 @@
 import logging
 
 import tensorflow as tf
-import deepr as dpr
+import deepr
 
 
 LOGGER = logging.getLogger(__name__)
@@ -22,9 +22,9 @@ def AverageModel(
     reduce_mode: str = "average",
 ):
     """Average Model."""
-    return dpr.layers.Sequential(
-        dpr.layers.Select(inputs=("inputPositives", "inputMask")),
-        dpr.layers.Embedding(
+    return deepr.layers.DAG(
+        deepr.layers.Select(inputs=("inputPositives", "inputMask")),
+        deepr.layers.Embedding(
             inputs="inputPositives",
             outputs="inputEmbeddings",
             variable_name="embeddings" if share_embeddings else "encoder/embeddings",
@@ -64,17 +64,17 @@ def AverageModel(
             reuse=share_embeddings,
             trainable=train_biases,
         ),
-        dpr.layers.Select(inputs=("userEmbeddings", "logits")),
+        deepr.layers.Select(inputs=("userEmbeddings", "logits")),
     )
 
 
-@dpr.layers.layer(n_in=2, n_out=1)
+@deepr.layers.layer(n_in=2, n_out=1)
 def UserEmbedding(tensors: tf.Tensor, mode: str, keep_prob: float, reduce_mode: str = "average"):
     """Compute Weighted Sum (randomly masking inputs in TRAIN mode)."""
     embeddings, mask = tensors
 
     # Drop entries without re-scaling (not classical dropout)
-    if mode == dpr.TRAIN:
+    if mode == deepr.TRAIN:
         LOGGER.info("Applying random mask to inputs (TRAIN only)")
         mask_random = tf.random.uniform(tf.shape(mask)) <= keep_prob
         mask = tf.logical_and(mask, mask_random)
@@ -94,7 +94,7 @@ def UserEmbedding(tensors: tf.Tensor, mode: str, keep_prob: float, reduce_mode: 
     return tf.reduce_sum(embeddings * tf.expand_dims(weights, axis=-1), axis=-2)
 
 
-@dpr.layers.layer(n_in=1, n_out=1)
+@deepr.layers.layer(n_in=1, n_out=1)
 def AddBias(tensors: tf.Tensor):
     dim = tensors.shape[-1]
     biases = tf.get_variable(
@@ -103,7 +103,7 @@ def AddBias(tensors: tf.Tensor):
     return tensors + tf.expand_dims(biases, axis=0)
 
 
-@dpr.layers.layer(n_in=1, n_out=1)
+@deepr.layers.layer(n_in=1, n_out=1)
 def Projection(tensors: tf.Tensor, variable_name: str, reuse: bool = False, transpose: bool = False):
     """Apply symmetric transform to non-projected user embeddings."""
     dim = int(tensors.shape[-1])
@@ -115,7 +115,7 @@ def Projection(tensors: tf.Tensor, variable_name: str, reuse: bool = False, tran
     return tf.matmul(tensors, projection_matrix, transpose_b=transpose)
 
 
-@dpr.layers.layer(n_in=1, n_out=1)
+@deepr.layers.layer(n_in=1, n_out=1)
 def Logits(tensors: tf.Tensor, vocab_size: int, dim: int, reuse: bool = True, trainable: bool = True):
     """Computes logits as <u, i> + b_i."""
     # Retrieve variables (embeddings and biases)

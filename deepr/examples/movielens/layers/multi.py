@@ -3,7 +3,7 @@
 
 import logging
 
-import deepr as dpr
+import deepr
 
 
 LOGGER = logging.getLogger(__name__)
@@ -11,9 +11,9 @@ LOGGER = logging.getLogger(__name__)
 
 def MultiLogLikelihoodCSS(vocab_size: int):
     """MultiLogLikelihood Loss with Complementarity Sampling."""
-    return dpr.layers.Sequential(
-        dpr.layers.Select(inputs=("userEmbeddings", "targetPositives", "targetNegatives", "targetMask")),
-        dpr.layers.DenseIndex(
+    return deepr.layers.DAG(
+        deepr.layers.Select(inputs=("userEmbeddings", "targetPositives", "targetNegatives", "targetMask")),
+        deepr.layers.DenseIndex(
             inputs=("userEmbeddings", "targetPositives"),
             outputs="targetPositiveLogits",
             units=vocab_size,
@@ -21,7 +21,7 @@ def MultiLogLikelihoodCSS(vocab_size: int):
             bias_name="biases",
             reuse=True,
         ),
-        dpr.layers.DenseIndex(
+        deepr.layers.DenseIndex(
             inputs=("userEmbeddings", "targetNegatives"),
             outputs="targetNegativeLogits",
             units=vocab_size,
@@ -29,16 +29,16 @@ def MultiLogLikelihoodCSS(vocab_size: int):
             bias_name="biases",
             reuse=True,
         ),
-        dpr.layers.ToFloat(inputs="targetMask", outputs="targetWeight"),
-        dpr.layers.ExpandDims(inputs="targetMask", outputs="targetNegativeMask"),
-        dpr.layers.MultiLogLikelihoodCSS(
+        deepr.layers.ToFloat(inputs="targetMask", outputs="targetWeight"),
+        deepr.layers.ExpandDims(inputs="targetMask", outputs="targetNegativeMask"),
+        deepr.layers.MultiLogLikelihoodCSS(
             inputs=("targetPositiveLogits", "targetNegativeLogits", "targetMask", "targetNegativeMask"),
             outputs="loss",
             vocab_size=vocab_size,
         ),
-        dpr.layers.TripletPrecision(
+        deepr.layers.TripletPrecision(
             inputs=("targetPositiveLogits", "targetNegativeLogits", "targetNegativeMask", "targetWeight"),
             outputs="triplet_precision",
         ),
-        dpr.layers.Select(inputs=("loss", "triplet_precision")),
+        deepr.layers.Select(inputs=("loss", "triplet_precision")),
     )

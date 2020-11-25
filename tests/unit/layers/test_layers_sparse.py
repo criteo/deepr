@@ -3,12 +3,12 @@
 import numpy as np
 import tensorflow as tf
 
-import deepr as dpr
+import deepr
 
 
 def test_layers_sparse_to_dense():
     """Test for ToDense"""
-    layer = dpr.layers.ToDense(default_value=-1)
+    layer = deepr.layers.ToDense(default_value=-1)
     tensors = tf.sparse.SparseTensor(indices=[[0, 1], [1, 0]], values=[1, 1], dense_shape=[2, 2])
     result = layer(tensors)
     with tf.Session() as sess:

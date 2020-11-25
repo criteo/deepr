@@ -4,7 +4,7 @@
 import pytest
 import tensorflow as tf
 
-import deepr as dpr
+import deepr
 
 
 @pytest.fixture
@@ -13,27 +13,27 @@ def session():
         yield sess
 
 
-@dpr.layers.layer(n_in=2, n_out=1)
+@deepr.layers.layer(n_in=2, n_out=1)
 def Add(tensors):
     """Add"""
     x, y = tensors
     return x + y
 
 
-@dpr.layers.layer(n_in=2, n_out=2)
+@deepr.layers.layer(n_in=2, n_out=2)
 def Swap(tensors):
     """Swap"""
     x, y = tensors
     return y, x
 
 
-@dpr.layers.layer(n_in=1, n_out=1)
+@deepr.layers.layer(n_in=1, n_out=1)
 def AddOffset(tensors, offset):
     """AddOffset"""
     return tensors + offset
 
 
-@dpr.layers.layer(n_in=1, n_out=1)
+@deepr.layers.layer(n_in=1, n_out=1)
 def AddOne(tensors):
     return tensors + 1
 
@@ -41,7 +41,7 @@ def AddOne(tensors):
 def test_layers_call(session):
     """Test layer ability to operate on dictionaries and tuples."""
     offset_layer = AddOffset(inputs="x", outputs="y", offset=1)
-    assert isinstance(offset_layer, dpr.layers.Layer)
+    assert isinstance(offset_layer, deepr.layers.Layer)
     result = offset_layer(tf.constant(1))
     result_dict = offset_layer({"x": tf.constant(1)})
     assert session.run(result) == 2
@@ -86,7 +86,7 @@ def test_layers_inputs_outputs(cls, inputs, outputs, error, inputs_exp, outputs_
 def test_layers_decorator_from_forward(session):
     """Test decorator on forward function."""
     # Check decorated function properties
-    assert issubclass(AddOffset, dpr.layers.Layer)
+    assert issubclass(AddOffset, deepr.layers.Layer)
     assert AddOffset.__name__ == "AddOffset"
     assert AddOffset.__doc__ == "AddOffset"
     assert AddOffset.__module__ == __name__
@@ -101,7 +101,7 @@ def test_layers_decorator_from_forward(session):
 def test_layers_decorator_from_forward_laziness():
     """Test decorator laziness."""
 
-    @dpr.layers.layer(n_in=1, n_out=1)
+    @deepr.layers.layer(n_in=1, n_out=1)
     def RaiseForward(tensors):
         raise RuntimeError()
 
@@ -116,17 +116,17 @@ def test_layers_decorator_from_forward_wrong_order():
     # pylint: disable=unused-variable
     with pytest.raises(TypeError):
 
-        @dpr.layers.layer(n_in=1, n_out=1)
+        @deepr.layers.layer(n_in=1, n_out=1)
         def WrongOrder(offset, tensors):
             return tensors + offset
 
 
-@dpr.layers.layer(n_in=1, n_out=1)
+@deepr.layers.layer(n_in=1, n_out=1)
 def Identity(tensors) -> tf.data.Dataset:
     return tensors
 
 
-@dpr.layers.layer(n_in=1, n_out=1)
+@deepr.layers.layer(n_in=1, n_out=1)
 def Typical(tensors, mode, foo, bar=1):
     # pylint: disable=unused-argument
     return tensors + foo + bar
@@ -157,4 +157,4 @@ def test_layers_decorator_instantiation(cls, args, kwargs, error):
             cls(*args, **kwargs)
     else:
         instance = cls(*args, **kwargs)
-        assert isinstance(instance, dpr.layers.Layer)
+        assert isinstance(instance, deepr.layers.Layer)

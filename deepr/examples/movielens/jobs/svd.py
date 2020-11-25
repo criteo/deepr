@@ -5,7 +5,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-import deepr as dpr
+import deepr
 
 try:
     import pandas as pd
@@ -28,7 +28,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 @dataclass
-class SVD(dpr.jobs.Job):
+class SVD(deepr.jobs.Job):
     """Build SVD embeddings."""
 
     path_csv: str
@@ -41,7 +41,7 @@ class SVD(dpr.jobs.Job):
     def run(self):
         # Read user-item matrix
         LOGGER.info(f"Reading user-item rankings from {self.path_csv}")
-        with dpr.io.Path(self.path_csv).open() as file:
+        with deepr.io.Path(self.path_csv).open() as file:
             tp = pd.read_csv(file)
         n_users = tp["uid"].max() + 1
         rows, cols = tp["uid"], tp["sid"]
@@ -52,7 +52,7 @@ class SVD(dpr.jobs.Job):
         # Computing counts
         LOGGER.info(f"Saving counts to {self.path_counts}")
         item_counts = np.asarray(user_item.sum(axis=0)).flatten()
-        with dpr.io.Path(self.path_counts).open("wb") as file:
+        with deepr.io.Path(self.path_counts).open("wb") as file:
             np.save(file, item_counts)
 
         # Computing co-occurrence matrix
@@ -70,8 +70,8 @@ class SVD(dpr.jobs.Job):
         LOGGER.info(f"Explained variance: {svd.explained_variance_ratio_.sum()}")
 
         LOGGER.info(f"Saving embeddings to {self.path_embeddings}")
-        dpr.io.Path(self.path_embeddings).parent.mkdir(parents=True, exist_ok=True)
-        with dpr.io.Path(self.path_embeddings).open("wb") as file:
+        deepr.io.Path(self.path_embeddings).parent.mkdir(parents=True, exist_ok=True)
+        with deepr.io.Path(self.path_embeddings).open("wb") as file:
             np.save(file, embeddings)
 
 

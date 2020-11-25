@@ -5,7 +5,7 @@ import pytest
 import tensorflow as tf
 import numpy as np
 
-import deepr as dpr
+import deepr
 
 
 @pytest.fixture
@@ -17,13 +17,13 @@ def dataset():
     return tf.data.Dataset.from_generator(_gen, {"a": tf.int32}, {"a": (None,)})
 
 
-@dpr.prepros.prepro
+@deepr.prepros.prepro
 def AddOffset(dataset, offset):
     """AddOffset"""
     return dataset.map(lambda x: {"b": x["a"] + offset})
 
 
-@dpr.prepros.prepro
+@deepr.prepros.prepro
 def AddOne(dataset):
     """AddOne"""
     return dataset.map(lambda x: {"b": x["a"] + 1})
@@ -32,14 +32,14 @@ def AddOne(dataset):
 def test_prepros_decorator_from_apply(dataset):
     """Create preprocessor from an apply function"""
     # Check decorated function properties
-    assert issubclass(AddOffset, dpr.prepros.Prepro)
+    assert issubclass(AddOffset, deepr.prepros.Prepro)
     assert AddOffset.__name__ == "AddOffset"
     assert AddOffset.__doc__ == "AddOffset"
     assert AddOffset.__module__ == __name__
 
     # Check instance properties
     add_one = AddOffset(offset=1)
-    reader = dpr.readers.from_dataset(add_one(dataset))
+    reader = deepr.readers.from_dataset(add_one(dataset))
     expected = [{"b": [1]}, {"b": [1, 2]}]
     np.testing.assert_equal(list(reader), expected)
 
@@ -47,7 +47,7 @@ def test_prepros_decorator_from_apply(dataset):
 def test_prepros_decorator_from_apply_laziness(dataset):
     """Laziness is especially useful if custom prepro use hash tables"""
 
-    @dpr.prepros.prepro
+    @deepr.prepros.prepro
     def RaiseApply(dataset):
         raise RuntimeError()
 
@@ -61,18 +61,18 @@ def test_prepros_decorator_from_apply_wrong_order():
     # pylint: disable=unused-variable
     with pytest.raises(TypeError):
 
-        @dpr.prepros.prepro
+        @deepr.prepros.prepro
         def WrongOrder(offset, dataset):
             return dataset.map(lambda x: {"b": x["a"] + offset})
 
 
-@dpr.prepros.prepro
+@deepr.prepros.prepro
 def Identity(dataset) -> tf.data.Dataset:
     return dataset
 
 
-@dpr.prepros.prepro
-def Typical(dataset, foo, bar=1) -> dpr.prepros.Prepro:
+@deepr.prepros.prepro
+def Typical(dataset, foo, bar=1) -> deepr.prepros.Prepro:
     return dataset.map(lambda x: {"b": x["a"] + foo + 2 * bar})
 
 
@@ -101,4 +101,4 @@ def test_prepros_decorator_instantiation(cls, args, kwargs, error):
             cls(*args, **kwargs)
     else:
         instance = cls(*args, **kwargs)
-        assert isinstance(instance, dpr.prepros.Prepro)
+        assert isinstance(instance, deepr.prepros.Prepro)
