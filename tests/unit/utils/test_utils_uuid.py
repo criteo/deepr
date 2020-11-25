@@ -3,7 +3,7 @@
 
 import pytest
 
-import deepr as dpr
+import deepr
 
 
 @pytest.fixture
@@ -22,8 +22,8 @@ def uuid():
 
 
 def test_msb_lsb_to_str(msb, lsb, uuid):
-    assert dpr.utils.msb_lsb_to_str(msb, lsb) == uuid
+    assert deepr.utils.msb_lsb_to_str(msb, lsb) == uuid
 
 
 def test_str_to_msb_lsb(msb, lsb, uuid):
-    assert dpr.utils.str_to_msb_lsb(uuid) == (msb, lsb)
+    assert deepr.utils.str_to_msb_lsb(uuid) == (msb, lsb)

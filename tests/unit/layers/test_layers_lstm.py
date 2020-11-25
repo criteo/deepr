@@ -6,7 +6,7 @@ import tensorflow as tf
 
 import pytest
 
-import deepr as dpr
+import deepr
 
 
 @pytest.mark.parametrize("bidirectional", [False, True])
@@ -16,7 +16,7 @@ def test_layers_lstm(bidirectional):
     with tf.Session() as sess:
         words_tf = tf.constant(np.random.random([batch, nwords, dim]), dtype=tf.float32)
         nwords_tf = tf.constant(np.random.randint(8, size=[batch]), dtype=tf.int32)
-        layer = dpr.layers.LSTM(units, bidirectional=bidirectional)
+        layer = deepr.layers.LSTM(units, bidirectional=bidirectional)
         outputs_tf, hidden_tf, output_tf = layer((words_tf, nwords_tf))
         sess.run(tf.global_variables_initializer())
         outputs, hidden, output = sess.run((outputs_tf, hidden_tf, output_tf))

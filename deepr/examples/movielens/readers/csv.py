@@ -6,7 +6,7 @@ import collections
 
 import tensorflow as tf
 import numpy as np
-import deepr as dpr
+import deepr
 
 from deepr.examples.movielens.utils import fields
 
@@ -26,7 +26,7 @@ except ImportError as e:
 LOGGER = logging.getLogger(__name__)
 
 
-class TrainCSVReader(dpr.readers.Reader):
+class TrainCSVReader(deepr.readers.Reader):
     """Reader of MovieLens CSV files of the Multi-VAE paper.
 
     See https://github.com/dawenl/vae_cf
@@ -58,7 +58,7 @@ class TrainCSVReader(dpr.readers.Reader):
         ]
 
     def as_dataset(self):
-        with dpr.io.Path(self.path_csv).open() as file:
+        with deepr.io.Path(self.path_csv).open() as file:
             tp = pd.read_csv(file)
         rows, cols = tp["uid"], tp["sid"]
         n_users = rows.max() + 1
@@ -134,7 +134,7 @@ class TrainCSVReader(dpr.readers.Reader):
         )
 
 
-class TestCSVReader(dpr.readers.Reader):
+class TestCSVReader(deepr.readers.Reader):
     """Reader of MovieLens test CSV files of the Multi-VAE paper.
 
     See https://github.com/dawenl/vae_cf
@@ -153,9 +153,9 @@ class TestCSVReader(dpr.readers.Reader):
         ]
 
     def as_dataset(self):
-        with dpr.io.Path(self.path_csv_tr).open() as file:
+        with deepr.io.Path(self.path_csv_tr).open() as file:
             tp_tr = pd.read_csv(file)
-        with dpr.io.Path(self.path_csv_te).open() as file:
+        with deepr.io.Path(self.path_csv_te).open() as file:
             tp_te = pd.read_csv(file)
 
         start_idx = min(tp_tr["uid"].min(), tp_te["uid"].min())

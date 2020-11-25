@@ -4,7 +4,7 @@ import numpy as np
 import tensorflow as tf
 import pytest
 
-import deepr as dpr
+import deepr
 
 
 @pytest.mark.parametrize("shape", [[1], [2], [2, 3], [None, 3], [2, 3, 4], [None, 3, 4]])
@@ -26,15 +26,15 @@ def test_writers_record_simple(tmpdir, shape, dtype, chunk_size):
     dataset = tf.data.Dataset.from_generator(_gen, output_types={"x": dtype}, output_shapes={"x": shape})
 
     # Write dataset
-    field = dpr.Field(name="x", shape=shape, dtype=dtype)
-    prepro_fn = dpr.prepros.ToExample([field])
-    writer = dpr.writers.TFRecordWriter(path=path, chunk_size=chunk_size)
+    field = deepr.Field(name="x", shape=shape, dtype=dtype)
+    prepro_fn = deepr.prepros.ToExample([field])
+    writer = deepr.writers.TFRecordWriter(path=path, chunk_size=chunk_size)
     writer.write(prepro_fn(dataset))
 
     # Read dataset
-    reader = dpr.readers.TFRecordReader(path=path, shuffle=False, num_parallel_reads=None, num_parallel_calls=None)
-    prepro_fn = dpr.prepros.FromExample([field])
+    reader = deepr.readers.TFRecordReader(path=path, shuffle=False, num_parallel_reads=None, num_parallel_calls=None)
+    prepro_fn = deepr.prepros.FromExample([field])
     idx = 0
-    for idx, (got, expected) in enumerate(zip(dpr.readers.from_dataset(prepro_fn(reader())), _gen())):
+    for idx, (got, expected) in enumerate(zip(deepr.readers.from_dataset(prepro_fn(reader())), _gen())):
         np.testing.assert_equal(got, expected)
     assert idx == 4

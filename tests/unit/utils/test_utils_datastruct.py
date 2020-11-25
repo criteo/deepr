@@ -2,7 +2,7 @@
 
 import pytest
 
-import deepr as dpr
+import deepr
 
 
 class DummyIterable:
@@ -29,4 +29,4 @@ class DummyIterable:
 )
 def test_utils_to_flat_tuple(items, expected):
     """Test to_float_tuple function"""
-    assert dpr.utils.to_flat_tuple(items) == expected
+    assert deepr.utils.to_flat_tuple(items) == expected

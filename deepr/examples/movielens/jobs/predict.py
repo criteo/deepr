@@ -8,7 +8,7 @@ import numpy as np
 import tensorflow as tf
 import pyarrow as pa
 
-import deepr as dpr
+import deepr
 
 try:
     import pandas as pd
@@ -33,7 +33,7 @@ SCHEMA = pa.schema(
 
 
 @dataclass
-class Predict(dpr.jobs.Job):
+class Predict(deepr.jobs.Job):
     """Compute MovieLens predictions."""
 
     path_saved_model: str
@@ -43,8 +43,8 @@ class Predict(dpr.jobs.Job):
 
     def run(self):
         LOGGER.info(f"Computing predictions from {self.path_saved_model}")
-        predictor = dpr.predictors.SavedModelPredictor(
-            path=dpr.predictors.get_latest_saved_model(self.path_saved_model)
+        predictor = deepr.predictors.SavedModelPredictor(
+            path=deepr.predictors.get_latest_saved_model(self.path_saved_model)
         )
         predictions = []
         for preds in predictor(lambda: self.prepro_fn(self.input_fn(), tf.estimator.ModeKeys.PREDICT)):
@@ -65,7 +65,7 @@ class Predict(dpr.jobs.Job):
                     )
                 )
 
-        with dpr.io.ParquetDataset(self.path_predictions).open() as ds:
+        with deepr.io.ParquetDataset(self.path_predictions).open() as ds:
             df = pd.DataFrame(data=predictions, columns=COLUMNS)
             ds.write_pandas(df, compression="snappy", schema=SCHEMA)
         LOGGER.info(f"Wrote predictions to {self.path_predictions}")

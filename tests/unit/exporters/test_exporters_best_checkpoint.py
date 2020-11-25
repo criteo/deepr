@@ -8,7 +8,7 @@ import re
 import tensorflow as tf
 import pytest
 
-import deepr as dpr
+import deepr
 from deepr.exporters.best_checkpoint import read_eval_metrics
 
 
@@ -19,21 +19,21 @@ class MockEstimator:
     model_dir: str
 
     def __post_init__(self):
-        dpr.io.Path(self.model_dir).mkdir()
+        deepr.io.Path(self.model_dir).mkdir()
 
     def set_step(self, step):
-        with dpr.io.Path(self.model_dir, "checkpoint").open("w") as file:
+        with deepr.io.Path(self.model_dir, "checkpoint").open("w") as file:
             file.write(f'model_checkpoint_path: "model.ckpt-{step}"')
 
     def add_checkpoint(self, step):
-        dpr.io.write_json({"global_step": step}, f"{self.model_dir}/model.ckpt-{step}.index")
+        deepr.io.write_json({"global_step": step}, f"{self.model_dir}/model.ckpt-{step}.index")
         self.set_step(step)
 
     def eval_dir(self):
         return self.model_dir
 
     def get_variable_value(self, _):
-        with dpr.io.Path(self.model_dir, "checkpoint").open() as file:
+        with deepr.io.Path(self.model_dir, "checkpoint").open() as file:
             return int(re.findall(r"-(\d+)", file.read())[0])
 
 
@@ -66,10 +66,10 @@ def test_read_eval_metrics(eval_dir):
 @pytest.mark.parametrize(
     "exporter, step",
     [
-        (dpr.exporters.BestCheckpoint(metric="loss"), 20),
-        (dpr.exporters.BestCheckpoint(metric="loss", mode="decrease"), 20),
-        (dpr.exporters.BestCheckpoint(metric="loss", mode="increase"), 10),
-        (dpr.exporters.BestCheckpoint(metric="accuracy", mode="increase"), KeyError),
+        (deepr.exporters.BestCheckpoint(metric="loss"), 20),
+        (deepr.exporters.BestCheckpoint(metric="loss", mode="decrease"), 20),
+        (deepr.exporters.BestCheckpoint(metric="loss", mode="increase"), 10),
+        (deepr.exporters.BestCheckpoint(metric="accuracy", mode="increase"), KeyError),
     ],
 )
 def test_best_checkpoint(tmpdir, exporter, step):

@@ -3,7 +3,7 @@
 import numpy as np
 import tensorflow as tf
 
-import deepr as dpr
+import deepr
 
 
 def test_layers_top_one():
@@ -13,11 +13,11 @@ def test_layers_top_one():
     num_negatives = 8
     dim = 16
 
-    bpr_layer = dpr.layers.Sequential(
-        dpr.layers.Select(inputs=("preds", "positives", "negatives", "mask", "weights")),
-        dpr.layers.DotProduct(inputs=("preds", "positives"), outputs="positive_logits"),
-        dpr.layers.DotProduct(inputs=("preds", "negatives"), outputs="negative_logits"),
-        dpr.layers.MaskedTopOne(inputs=("positive_logits", "negative_logits", "mask", "weights"), outputs="loss"),
+    bpr_layer = deepr.layers.DAG(
+        deepr.layers.Select(inputs=("preds", "positives", "negatives", "mask", "weights")),
+        deepr.layers.DotProduct(inputs=("preds", "positives"), outputs="positive_logits"),
+        deepr.layers.DotProduct(inputs=("preds", "negatives"), outputs="negative_logits"),
+        deepr.layers.MaskedTopOne(inputs=("positive_logits", "negative_logits", "mask", "weights"), outputs="loss"),
     )
 
     np.random.seed(2020)

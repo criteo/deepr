@@ -3,7 +3,7 @@
 
 import pytest
 
-import deepr as dpr
+import deepr
 
 
 @pytest.mark.parametrize(
@@ -17,5 +17,5 @@ import deepr as dpr
 )
 def test_jobs_mlflow_formatter(include_keys, params, expected):
     """Test MLFlowFormatter"""
-    formatter = dpr.jobs.MLFlowFormatter(include_keys)
+    formatter = deepr.jobs.MLFlowFormatter(include_keys)
     assert expected == formatter(params)

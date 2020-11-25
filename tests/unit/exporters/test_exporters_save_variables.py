@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 
-import deepr as dpr
+import deepr
 
 
 class MockEstimator:
@@ -21,10 +21,10 @@ class MockEstimator:
 def test_exporters_save_variables(tmpdir):
     """Test SaveVariables exporter"""
     path_variables = str(tmpdir.join("variables"))
-    exporter = dpr.exporters.SaveVariables(path_variables, ["x", "y"])
+    exporter = deepr.exporters.SaveVariables(path_variables, ["x", "y"])
     exporter(MockEstimator())
     for variable in ["x", "y"]:
-        with dpr.io.ParquetDataset(dpr.io.Path(path_variables, variable)).open() as ds:
+        with deepr.io.ParquetDataset(deepr.io.Path(path_variables, variable)).open() as ds:
             got = ds.read_pandas().to_pandas()
             expected = pd.DataFrame(MockEstimator().get_variable_value(variable))
             np.testing.assert_allclose(got, expected)

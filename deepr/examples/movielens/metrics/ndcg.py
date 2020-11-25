@@ -4,10 +4,10 @@ from typing import Dict, Tuple
 
 import tensorflow as tf
 
-import deepr as dpr
+import deepr
 
 
-class NDCGAtK(dpr.metrics.Metric):
+class NDCGAtK(deepr.metrics.Metric):
     """Normalized Discounted Cumulative Gain at K
 
     Attributes

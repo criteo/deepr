@@ -2,7 +2,7 @@
 
 import pytest
 
-import deepr as dpr
+import deepr
 
 
 def _gen():
@@ -20,7 +20,7 @@ class Custom:
 @pytest.mark.parametrize("iterable", [_gen(), LIST, Custom()])
 def test_utils_progress(iterable):
     idx = 0
-    for idx, item in enumerate(dpr.utils.progress(iterable)):
+    for idx, item in enumerate(deepr.utils.progress(iterable)):
         assert item == idx
     assert idx == 4
 
@@ -28,7 +28,7 @@ def test_utils_progress(iterable):
 @pytest.mark.parametrize("iterable", [_gen(), LIST, Custom()])
 def test_utils_chunk(iterable, chunk_size: int = 2):
     chunk_id, idx = 0, 0
-    for chunk_id, chunk in enumerate(dpr.utils.chunks(iterable, chunk_size)):
+    for chunk_id, chunk in enumerate(deepr.utils.chunks(iterable, chunk_size)):
         for idx, item in enumerate(chunk):
             assert chunk_size * chunk_id + idx == item
     assert chunk_size * chunk_id + idx == 4

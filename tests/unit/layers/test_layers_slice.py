@@ -3,12 +3,12 @@
 import numpy as np
 import tensorflow as tf
 
-import deepr as dpr
+import deepr
 
 
 def test_layers_slice():
     """Test for Slice"""
-    layer = dpr.layers.Slice(begin=1, end=2)
+    layer = deepr.layers.Slice(begin=1, end=2)
     result = layer(tf.constant([1, 2, 3]))
     with tf.Session() as sess:
         got = sess.run(result)
@@ -17,7 +17,7 @@ def test_layers_slice():
 
 def test_layers_slice_first():
     """Test for SliceFirst"""
-    layer = dpr.layers.SliceFirst(2)
+    layer = deepr.layers.SliceFirst(2)
     result = layer(tf.constant([1, 2, 3]))
     with tf.Session() as sess:
         got = sess.run(result)
@@ -26,7 +26,7 @@ def test_layers_slice_first():
 
 def test_layers_slice_last():
     """Test for SliceLast"""
-    layer = dpr.layers.SliceLast(2)
+    layer = deepr.layers.SliceLast(2)
     result = layer(tf.constant([1, 2, 3]))
     with tf.Session() as sess:
         got = sess.run(result)
@@ -35,7 +35,7 @@ def test_layers_slice_last():
 
 def test_layers_slice_last_padded():
     """Test for SliceLastPadded"""
-    layer = dpr.layers.SliceLastPadded()
+    layer = deepr.layers.SliceLastPadded()
     tensor = tf.constant(
         [
             [[1, 1, 1], [2, 2, 2], [3, 3, 3], [4, 4, 4]],

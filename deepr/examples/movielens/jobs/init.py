@@ -6,14 +6,14 @@ from typing import Optional
 
 import numpy as np
 
-import deepr as dpr
+import deepr
 
 
 LOGGER = logging.getLogger(__name__)
 
 
 @dataclass
-class InitCheckpoint(dpr.jobs.Job):
+class InitCheckpoint(deepr.jobs.Job):
     """Init Checkpoint with SVD embeddings."""
 
     path_embeddings: str
@@ -26,7 +26,7 @@ class InitCheckpoint(dpr.jobs.Job):
     def run(self):
         # Reload NumPy embeddings
         LOGGER.info(f"Reloading embeddings from {self.path_embeddings}")
-        with dpr.io.Path(self.path_embeddings).open("rb") as file:
+        with deepr.io.Path(self.path_embeddings).open("rb") as file:
             embeddings = np.load(file)
             embeddings = embeddings.astype(np.float32)
 
@@ -39,7 +39,7 @@ class InitCheckpoint(dpr.jobs.Job):
         # Reload counts, transform with log, add to variables
         if self.path_counts is not None:
             LOGGER.info(f"Reloading counts from {self.path_counts}")
-            with dpr.io.Path(self.path_counts).open("rb") as file:
+            with deepr.io.Path(self.path_counts).open("rb") as file:
                 counts = np.load(file)
                 counts = counts.astype(np.float32)
                 if self.normalize_counts:
@@ -50,5 +50,5 @@ class InitCheckpoint(dpr.jobs.Job):
 
         # Save variables dictionary in checkpoint
         LOGGER.info(f"Saving embeddings in checkpoint {self.path_init_ckpt}")
-        dpr.io.Path(self.path_init_ckpt).parent.mkdir(parents=True, exist_ok=True)
-        dpr.utils.save_variables_in_ckpt(path=self.path_init_ckpt, variables=variables)
+        deepr.io.Path(self.path_init_ckpt).parent.mkdir(parents=True, exist_ok=True)
+        deepr.utils.save_variables_in_ckpt(path=self.path_init_ckpt, variables=variables)

@@ -12,14 +12,23 @@ and this project adheres to `Semantic Versioning <http://semver.org/>`_.
 
 Added
 ~~~~~
+- Add new name for ``layers.Sequential`` (now ``layers.DAG`` for Directed Acyclic Graph), kept old name for legacy reasons
+- Add new argument options to ``layers.DenseIndex`` (reuse, trainable and initializer)
+
 Changed
 ~~~~~~~
+- Remove shortened imports ``import deepr as dpr`` as it is useless.
+
 Deprecated
 ~~~~~~~~~~
 Removed
 ~~~~~~~
+- Unnecessary logging in metrics tensors' names resolution
+
 Fixed
 ~~~~~
+- Incorrect numpy requirement (incompatible with Tensorflow requirements)
+
 Security
 ~~~~~~~~
 

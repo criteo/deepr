@@ -6,14 +6,14 @@ from dataclasses import dataclass
 import tensorflow as tf
 import numpy as np
 
-import deepr as dpr
+import deepr
 
 
 LOGGER = logging.getLogger(__name__)
 
 
 @dataclass
-class Build(dpr.jobs.Job):
+class Build(deepr.jobs.Job):
     """Build a dummy dataset of random (x, 2*x) as a tfrecord file"""
 
     path_dataset: str
@@ -26,7 +26,7 @@ class Build(dpr.jobs.Job):
                 yield {"x": x, "y": 2 * x}
 
         def _dict_to_example(data):
-            features = {"x": dpr.readers.float_feature([data["x"]]), "y": dpr.readers.float_feature([data["y"]])}
+            features = {"x": deepr.readers.float_feature([data["x"]]), "y": deepr.readers.float_feature([data["y"]])}
             example = tf.train.Example(features=tf.train.Features(feature=features))
             return example
 

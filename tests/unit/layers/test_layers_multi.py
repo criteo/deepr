@@ -4,7 +4,7 @@
 import numpy as np
 import tensorflow as tf
 
-import deepr as dpr
+import deepr
 
 
 def test_layers_multi():
@@ -12,7 +12,7 @@ def test_layers_multi():
     batch_size = 2
     num_classes = 10
 
-    log_likelihood = dpr.layers.MultiLogLikelihood(inputs=("logits", "classes"), outputs="log_likelihood")
+    log_likelihood = deepr.layers.MultiLogLikelihood(inputs=("logits", "classes"), outputs="log_likelihood")
 
     np.random.seed(2020)
 

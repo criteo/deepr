@@ -4,10 +4,10 @@ from typing import Dict, Tuple
 
 import tensorflow as tf
 
-import deepr as dpr
+import deepr
 
 
-class RecallAtK(dpr.metrics.Metric):
+class RecallAtK(deepr.metrics.Metric):
     """Recall at k.
 
     Attributes

@@ -4,7 +4,7 @@ import pytest
 import numpy as np
 import tensorflow as tf
 
-import deepr as dpr
+import deepr
 
 
 @pytest.mark.parametrize(
@@ -17,7 +17,7 @@ import deepr as dpr
 def test_utils_make_same_shape(tensors, broadcast, expected):
     """Test make_same_shape"""
     tensors = [tf.constant(t) for t in tensors]
-    got_tf = dpr.utils.make_same_shape(tensors, broadcast=broadcast)
+    got_tf = deepr.utils.make_same_shape(tensors, broadcast=broadcast)
     with tf.Session() as sess:
         got = sess.run(got_tf)
         np.testing.assert_equal(expected, got)

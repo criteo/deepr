@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import pyarrow as pa
 
-import deepr as dpr
+import deepr
 
 
 def test_io_parquet_dataset_read(tmpdir):
@@ -12,7 +12,7 @@ def test_io_parquet_dataset_read(tmpdir):
     path = str(tmpdir.join("df.parquet.snappy"))
     df = pd.DataFrame(data={"x": [0, 1], "y": [0, 2]})
     df.to_parquet(path)
-    with dpr.io.ParquetDataset(path).open() as ds:
+    with deepr.io.ParquetDataset(path).open() as ds:
         got = ds.read_pandas().to_pandas()
     assert df.equals(got)
 
@@ -22,8 +22,8 @@ def test_io_parquet_dataset_schema(tmpdir):
     path = str(tmpdir.join("df.parquet.snappy"))
     df = pd.DataFrame(data={"embedding": [np.random.random([5]).astype(np.float32).tolist()]})
     schema = pa.schema([("embedding", pa.list_(pa.float32()))])
-    with dpr.io.ParquetDataset(path).open() as ds:
+    with deepr.io.ParquetDataset(path).open() as ds:
         ds.write_pandas(df, schema=schema)
-    with dpr.io.ParquetDataset(path).open() as ds:
+    with deepr.io.ParquetDataset(path).open() as ds:
         reloaded = ds.read_pandas().to_pandas()
     assert reloaded.iloc[0].embedding.dtype == np.dtype("float32")

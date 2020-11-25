@@ -3,7 +3,7 @@
 
 from typing import Optional
 
-import deepr as dpr
+import deepr
 import tensorflow as tf
 
 from deepr.examples.movielens.utils import fields
@@ -26,33 +26,37 @@ def RecordPrepro(
     num_parallel_calls: int = 8,
 ):
     """Default Preprocessing for MovieLens."""
-    return dpr.prepros.Serial(
-        dpr.prepros.FromExample(FIELDS_RECORD),
+    return deepr.prepros.Serial(
+        deepr.prepros.FromExample(FIELDS_RECORD),
         (
-            dpr.prepros.Map(dpr.layers.ToDense(field.default, inputs=field.name, outputs=field.name))
+            deepr.prepros.Map(deepr.layers.ToDense(field.default, inputs=field.name, outputs=field.name))
             for field in FIELDS_RECORD
             if field.is_sparse()
         ),
-        dpr.prepros.Filter(
-            dpr.layers.IsMinSize(inputs="inputPositives", size=min_input_size), modes=[dpr.TRAIN, dpr.EVAL]
+        deepr.prepros.Filter(
+            deepr.layers.IsMinSize(inputs="inputPositives", size=min_input_size), modes=[deepr.TRAIN, deepr.EVAL]
         ),
-        dpr.prepros.Filter(
-            dpr.layers.IsMinSize(inputs="targetPositives", size=min_target_size), modes=[dpr.TRAIN, dpr.EVAL]
+        deepr.prepros.Filter(
+            deepr.layers.IsMinSize(inputs="targetPositives", size=min_target_size), modes=[deepr.TRAIN, deepr.EVAL]
         ),
-        dpr.prepros.Map(dpr.layers.SliceLast(max_input_size, inputs="inputPositives", outputs="inputPositives")),
-        dpr.prepros.Map(dpr.layers.SliceFirst(max_target_size, inputs="targetPositives", outputs="targetPositives")),
-        dpr.prepros.Map(dpr.layers.SliceFirst(max_target_size, inputs="targetNegatives", outputs="targetNegatives")),
-        dpr.prepros.Map(SequenceMask(inputs="inputPositives", outputs="inputMask")),
-        dpr.prepros.Map(SequenceMask(inputs="targetPositives", outputs="targetMask")),
-        dpr.prepros.Shuffle(buffer_size=buffer_size, modes=[dpr.TRAIN]),
-        dpr.prepros.PaddedBatch(batch_size=batch_size, fields=FIELDS_RECORD + FIELDS_PREPRO),
-        dpr.prepros.Repeat(repeat_size, modes=[dpr.TRAIN]),
-        dpr.prepros.Prefetch(prefetch_size),
+        deepr.prepros.Map(deepr.layers.SliceLast(max_input_size, inputs="inputPositives", outputs="inputPositives")),
+        deepr.prepros.Map(
+            deepr.layers.SliceFirst(max_target_size, inputs="targetPositives", outputs="targetPositives")
+        ),
+        deepr.prepros.Map(
+            deepr.layers.SliceFirst(max_target_size, inputs="targetNegatives", outputs="targetNegatives")
+        ),
+        deepr.prepros.Map(SequenceMask(inputs="inputPositives", outputs="inputMask")),
+        deepr.prepros.Map(SequenceMask(inputs="targetPositives", outputs="targetMask")),
+        deepr.prepros.Shuffle(buffer_size=buffer_size, modes=[deepr.TRAIN]),
+        deepr.prepros.PaddedBatch(batch_size=batch_size, fields=FIELDS_RECORD + FIELDS_PREPRO),
+        deepr.prepros.Repeat(repeat_size, modes=[deepr.TRAIN]),
+        deepr.prepros.Prefetch(prefetch_size),
         num_parallel_calls=num_parallel_calls,
     )
 
 
-@dpr.layers.layer(n_in=1, n_out=1)
+@deepr.layers.layer(n_in=1, n_out=1)
 def SequenceMask(tensors):
     size = tf.size(tensors)
     return tf.sequence_mask(size)

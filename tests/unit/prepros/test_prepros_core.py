@@ -5,7 +5,7 @@ import pytest
 import numpy as np
 import tensorflow as tf
 
-import deepr as dpr
+import deepr
 
 
 @pytest.fixture
@@ -29,8 +29,8 @@ def dataset():
 )
 def test_prepros_map(dataset, update, modes, mode, expected):
     """Test Map behavior with update and modes"""
-    prepro_fn = dpr.prepros.Map(lambda x: {"b": x["a"] + 1}, update=update, modes=modes)
-    reader = dpr.readers.from_dataset(prepro_fn(dataset, mode))
+    prepro_fn = deepr.prepros.Map(lambda x: {"b": x["a"] + 1}, update=update, modes=modes)
+    reader = deepr.readers.from_dataset(prepro_fn(dataset, mode))
     np.testing.assert_equal(list(reader), expected)
 
 
@@ -45,15 +45,15 @@ def test_prepros_map(dataset, update, modes, mode, expected):
 )
 def test_prepros_filter(dataset, modes, mode, expected):
     """Test Filter behavior with different modes"""
-    prepro_fn = dpr.prepros.Filter(lambda x: {"y": tf.greater(tf.reduce_sum(x["a"]), 0)}, modes=modes)
-    reader = dpr.readers.from_dataset(prepro_fn(dataset, mode))
+    prepro_fn = deepr.prepros.Filter(lambda x: {"y": tf.greater(tf.reduce_sum(x["a"]), 0)}, modes=modes)
+    reader = deepr.readers.from_dataset(prepro_fn(dataset, mode))
     np.testing.assert_equal(list(reader), expected)
 
 
 def test_prepros_padded_batch(dataset):
     """Test Padded Batch"""
-    fields = [dpr.Field(name="a", shape=[None], dtype=tf.int32, default=-1)]
-    prepro_fn = dpr.prepros.PaddedBatch(2, fields)
-    reader = dpr.readers.from_dataset(prepro_fn(dataset))
+    fields = [deepr.Field(name="a", shape=[None], dtype=tf.int32, default=-1)]
+    prepro_fn = deepr.prepros.PaddedBatch(2, fields)
+    reader = deepr.readers.from_dataset(prepro_fn(dataset))
     expected = [{"a": [[0, -1], [0, 1]]}]
     np.testing.assert_equal(list(reader), expected)

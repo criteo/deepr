@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 import pytest
 
-import deepr as dpr
+import deepr
 
 
 @dataclass
@@ -42,7 +42,7 @@ class C(A):
 )
 def test_to_config(obj, cfg):
     """Test to_config"""
-    assert dpr.config.experimental.to_config(obj) == cfg
+    assert deepr.config.experimental.to_config(obj) == cfg
 
 
 @pytest.mark.parametrize(
@@ -58,10 +58,10 @@ def test_to_config(obj, cfg):
 )
 def test_add_macro_params(config, params, expected):
     if expected is not None:
-        assert dpr.config.experimental.add_macro_params(config, macro="params", params=params) == expected
+        assert deepr.config.experimental.add_macro_params(config, macro="params", params=params) == expected
     else:
         with pytest.raises(ValueError):
-            dpr.config.experimental.add_macro_params(config, macro="params", params=params)
+            deepr.config.experimental.add_macro_params(config, macro="params", params=params)
 
 
 @pytest.mark.parametrize(
@@ -79,10 +79,10 @@ def test_add_macro_params(config, params, expected):
 )
 def test_replace_values(item, values, expected):
     if expected is not None:
-        assert dpr.config.experimental.replace_values(item, values=values) == expected
+        assert deepr.config.experimental.replace_values(item, values=values) == expected
     else:
         with pytest.raises(ValueError):
-            dpr.config.experimental.replace_values(item, values=values)
+            deepr.config.experimental.replace_values(item, values=values)
 
 
 @pytest.mark.parametrize(
@@ -99,7 +99,7 @@ def test_replace_values(item, values, expected):
 )
 def test_find_values(item, keys, expected):
     if expected is not None:
-        assert dpr.config.experimental.find_values(item, keys=keys) == expected
+        assert deepr.config.experimental.find_values(item, keys=keys) == expected
     else:
         with pytest.raises(ValueError):
-            dpr.config.experimental.find_values(item, keys=keys)
+            deepr.config.experimental.find_values(item, keys=keys)
