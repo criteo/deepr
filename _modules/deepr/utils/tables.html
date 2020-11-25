@@ -189,15 +189,15 @@
 
 <span class="sd">    Example</span>
 <span class="sd">    -------</span>
-<span class="sd">    &gt;&gt;&gt; import deepr as dpr</span>
-<span class="sd">    &gt;&gt;&gt; with dpr.utils.TableContext() as tables:</span>
-<span class="sd">    ...     table = dpr.utils.table_from_mapping(name=&quot;my_table&quot;, mapping={1: 2})</span>
+<span class="sd">    &gt;&gt;&gt; import deepr</span>
+<span class="sd">    &gt;&gt;&gt; with deepr.utils.TableContext() as tables:</span>
+<span class="sd">    ...     table = deepr.utils.table_from_mapping(name=&quot;my_table&quot;, mapping={1: 2})</span>
 <span class="sd">    ...     tables.get(&quot;my_table&quot;) is table</span>
 <span class="sd">    True</span>
 
-<span class="sd">    &gt;&gt;&gt; with dpr.utils.TableContext():</span>
-<span class="sd">    ...     table = dpr.utils.table_from_mapping(name=&quot;my_table&quot;, mapping={1: 2})</span>
-<span class="sd">    ...     reused = dpr.utils.table_from_mapping(name=&quot;my_table&quot;, reuse=True)</span>
+<span class="sd">    &gt;&gt;&gt; with deepr.utils.TableContext():</span>
+<span class="sd">    ...     table = deepr.utils.table_from_mapping(name=&quot;my_table&quot;, mapping={1: 2})</span>
+<span class="sd">    ...     reused = deepr.utils.table_from_mapping(name=&quot;my_table&quot;, reuse=True)</span>
 <span class="sd">    ...     table is reused</span>
 <span class="sd">    True</span>
 <span class="sd">    &quot;&quot;&quot;</span>

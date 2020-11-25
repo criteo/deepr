@@ -503,7 +503,7 @@ div.rendered_html tbody tr:hover {
 
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">deepr</span> <span class="k">as</span> <span class="nn">dpr</span>
+<span class="kn">import</span> <span class="nn">deepr</span>
 </pre></div>
 </div>
 </div>
@@ -512,8 +512,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">if</span> <span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
-    <span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">delete_dir</span><span class="p">()</span>
+<span></span><span class="k">if</span> <span class="n">deepr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+    <span class="n">deepr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">delete_dir</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -530,7 +530,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">Build</span><span class="p">(</span><span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Build</span><span class="p">(</span><span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Build a dummy dataset of random (x, 2*x) as a tfrecord file&quot;&quot;&quot;</span>
 
     <span class="n">path_dataset</span><span class="p">:</span> <span class="nb">str</span>
@@ -545,8 +545,8 @@ div.rendered_html tbody tr:hover {
 
         <span class="k">def</span> <span class="nf">_dict_to_example</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
             <span class="n">features</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">float_feature</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]]),</span>
-                <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">float_feature</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]])</span>
+                <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">deepr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">float_feature</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]]),</span>
+                <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">deepr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">float_feature</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]])</span>
             <span class="p">}</span>
             <span class="n">example</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Example</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Features</span><span class="p">(</span><span class="n">feature</span><span class="o">=</span><span class="n">features</span><span class="p">))</span>
             <span class="k">return</span> <span class="n">example</span>
@@ -598,19 +598,19 @@ Wrote dataset to &#39;data.tfrecord&#39;
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="k">def</span> <span class="nf">DefaultPrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">repeat_size</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">TFRecordSequenceExample</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span>
-            <span class="n">dpr</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
-            <span class="n">dpr</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">deepr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span>
+        <span class="n">deepr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">TFRecordSequenceExample</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">deepr</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
+            <span class="n">deepr</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
         <span class="p">]),</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Batch</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">),</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Repeat</span><span class="p">(</span><span class="n">repeat_size</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">]),</span>
+        <span class="n">deepr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Batch</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">),</span>
+        <span class="n">deepr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Repeat</span><span class="p">(</span><span class="n">repeat_size</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">]),</span>
     <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">&#64;prepro</span></code> decorator creates a class from the function that would be equivalent to</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DefaultPrepro</span><span class="p">(</span><span class="n">dprp</span><span class="o">.</span><span class="n">Prepro</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DefaultPrepro</span><span class="p">(</span><span class="n">deepr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Prepro</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">repeat_size</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -618,13 +618,13 @@ Wrote dataset to &#39;data.tfrecord&#39;
         <span class="bp">self</span><span class="o">.</span><span class="n">repeat_size</span> <span class="o">=</span> <span class="n">repeat_size</span>
 
     <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
-        <span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span>
-            <span class="n">dprp</span><span class="o">.</span><span class="n">TFRecordSequenceExample</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span>
-                <span class="n">dpr</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
-                <span class="n">dpr</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span>
+            <span class="n">deepr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">TFRecordSequenceExample</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">deepr</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
+                <span class="n">deepr</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
             <span class="p">]),</span>
-            <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Batch</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">),</span>
-            <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Repeat</span><span class="p">(</span><span class="n">repeat_size</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">]),</span>
+            <span class="n">deepr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Batch</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">),</span>
+            <span class="n">deepr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Repeat</span><span class="p">(</span><span class="n">repeat_size</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">]),</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">prepro_fn</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
 </pre></div>
@@ -650,7 +650,7 @@ Wrote dataset to &#39;data.tfrecord&#39;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">reader</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">)</span>
+<span></span><span class="n">reader</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -659,7 +659,7 @@ Wrote dataset to &#39;data.tfrecord&#39;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">from_dataset</span><span class="p">(</span><span class="n">prepro_fn</span><span class="p">(</span><span class="n">reader</span><span class="p">())):</span>
+<span></span><span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">deepr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">from_dataset</span><span class="p">(</span><span class="n">prepro_fn</span><span class="p">(</span><span class="n">reader</span><span class="p">())):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
     <span class="k">break</span>
 </pre></div>
@@ -747,13 +747,13 @@ INFO:faiss:Loading faiss.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">trainer_job</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span>
+<span></span><span class="n">trainer_job</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span>
     <span class="n">path_model</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">,</span>
     <span class="n">pred_fn</span><span class="o">=</span><span class="n">multiply</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Multiply</span><span class="p">(),</span>
     <span class="n">loss_fn</span><span class="o">=</span><span class="n">multiply</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">SquaredL2</span><span class="p">(),</span>
-    <span class="n">optimizer_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">TensorflowOptimizer</span><span class="p">(</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
-    <span class="n">train_input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
-    <span class="n">eval_input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
+    <span class="n">optimizer_fn</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">TensorflowOptimizer</span><span class="p">(</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
+    <span class="n">train_input_fn</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
+    <span class="n">eval_input_fn</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
     <span class="n">prepro_fn</span><span class="o">=</span><span class="n">multiply</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">DefaultPrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">repeat_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
@@ -764,7 +764,7 @@ INFO:faiss:Loading faiss.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">([</span><span class="n">build_job</span><span class="p">,</span> <span class="n">trainer_job</span><span class="p">])</span>
+<span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">([</span><span class="n">build_job</span><span class="p">,</span> <span class="n">trainer_job</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -911,7 +911,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 320}
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">build_job</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">build_job_config</span><span class="p">)</span>
+<span></span><span class="n">build_job</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">build_job_config</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -920,7 +920,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 320}
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">trainer_job</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">trainer_job_config</span><span class="p">)</span>
+<span></span><span class="n">trainer_job</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">trainer_job_config</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -930,7 +930,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 320}
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">([</span><span class="n">build_job</span><span class="p">,</span> <span class="n">trainer_job</span><span class="p">])</span>
+<span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">([</span><span class="n">build_job</span><span class="p">,</span> <span class="n">trainer_job</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -951,7 +951,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 320}
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">yarn_launcher_config</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">YarnLauncherConfig</span><span class="p">(</span>
+<span></span><span class="n">yarn_launcher_config</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">YarnLauncherConfig</span><span class="p">(</span>
     <span class="n">path_pex_prefix</span><span class="o">=</span><span class="s2">&quot;viewfs://root/user/deepr/dev/example/envs&quot;</span>
 <span class="p">)</span>
 <span class="n">job_config</span> <span class="o">=</span> <span class="p">{</span>
@@ -970,7 +970,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 320}
         <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">}</span>
-<span class="n">pipeline_yarn</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">YarnLauncher</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">yarn_launcher_config</span><span class="p">,</span> <span class="n">job</span><span class="o">=</span><span class="n">job_config</span><span class="p">)</span>
+<span class="n">pipeline_yarn</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">YarnLauncher</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">yarn_launcher_config</span><span class="p">,</span> <span class="n">job</span><span class="o">=</span><span class="n">job_config</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1003,7 +1003,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 320}
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="k">if</span> <span class="n">HAS_HADOOP</span><span class="p">:</span>
-    <span class="nb">list</span><span class="p">(</span><span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;viewfs://root/user/deepr/dev/example&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">))</span>
+    <span class="nb">list</span><span class="p">(</span><span class="n">deepr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;viewfs://root/user/deepr/dev/example&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1023,7 +1023,7 @@ INFO:deepr.jobs.trainer:{&#39;loss&#39;: 0.0, &#39;global_step&#39;: 320}
 <p>and import it into our pipline config file <code class="docutils literal notranslate"><span class="pre">config.jsonnet</span></code> with</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span>local build = import &#39;build.jsonnet&#39;;
 {
-    &quot;type&quot;: &quot;dpr.jobs.YarnLauncher&quot;,
+    &quot;type&quot;: &quot;deepr.jobs.YarnLauncher&quot;,
     &quot;config&quot;: {
         &quot;type&quot;: &quot;deepr.jobs.YarnLauncherConfig&quot;,
     },

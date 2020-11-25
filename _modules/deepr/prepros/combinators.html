@@ -192,22 +192,21 @@
 
 <span class="sd">    For an example, see the following snippet::</span>
 
-<span class="sd">        import deepr.layers as dprl</span>
-<span class="sd">        import deepr.prepros as dprp</span>
+<span class="sd">        import deepr</span>
 
 <span class="sd">        def gen():</span>
 <span class="sd">            yield {&quot;a&quot;: [0], &quot;b&quot;: [0, 1]}</span>
 <span class="sd">            yield {&quot;a&quot;: [0, 1], &quot;b&quot;: [0]}</span>
 <span class="sd">            yield {&quot;a&quot;: [0, 1], &quot;b&quot;: [0, 1]}</span>
 
-<span class="sd">        prepro_fn = dprp.Serial(</span>
-<span class="sd">            dprp.Map(dprl.Sum(inputs=(&quot;a&quot;, &quot;b&quot;), outputs=&quot;c&quot;)),</span>
-<span class="sd">            dprp.Filter(dprl.IsMinSize(inputs=&quot;a&quot;, outputs=&quot;a_size&quot;, size=2)),</span>
-<span class="sd">            dprp.Filter(dprl.IsMinSize(inputs=&quot;b&quot;, outputs=&quot;b_size&quot;, size=2)),</span>
+<span class="sd">        prepro_fn = deepr.prepros.Serial(</span>
+<span class="sd">            deepr.prepros.Map(deepr.layers.Sum(inputs=(&quot;a&quot;, &quot;b&quot;), outputs=&quot;c&quot;)),</span>
+<span class="sd">            deepr.prepros.Filter(deepr.layers.IsMinSize(inputs=&quot;a&quot;, outputs=&quot;a_size&quot;, size=2)),</span>
+<span class="sd">            deepr.prepros.Filter(deepr.layers.IsMinSize(inputs=&quot;b&quot;, outputs=&quot;b_size&quot;, size=2)),</span>
 <span class="sd">        )</span>
 
 <span class="sd">        dataset = tf.data.Dataset.from_generator(gen, {&quot;a&quot;: tf.int32, &quot;b&quot;: tf.int32}, {&quot;a&quot;: (None,), &quot;b&quot;: (None,)})</span>
-<span class="sd">        reader = dpr.readers.from_dataset(prepro_fn(dataset))</span>
+<span class="sd">        reader = deepr.readers.from_dataset(prepro_fn(dataset))</span>
 <span class="sd">        expected = [{&quot;a&quot;: [0, 1], &quot;b&quot;: [0, 1], &quot;c&quot;: [0, 2]}]</span>
 
 

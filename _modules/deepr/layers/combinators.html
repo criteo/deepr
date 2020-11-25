@@ -177,7 +177,7 @@
 <span class="kn">from</span> <span class="nn">deepr.utils.datastruct</span> <span class="kn">import</span> <span class="n">to_flat_tuple</span>
 
 
-<div class="viewcode-block" id="Sequential"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.Sequential">[docs]</a><span class="k">class</span> <span class="nc">Sequential</span><span class="p">(</span><span class="n">Layer</span><span class="p">):</span>
+<div class="viewcode-block" id="DAG"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.DAG">[docs]</a><span class="k">class</span> <span class="nc">DAG</span><span class="p">(</span><span class="n">Layer</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Class to easily compose layers in a deep learning network.</span>
 
 <span class="sd">    A Deep Learning Network is a Directed Acyclic Graph (DAG) of layers.</span>
@@ -186,11 +186,11 @@
 
 <span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        @dprl.layer(n_in=1, n_out=1)</span>
+<span class="sd">        @deepr.layers.layer(n_in=1, n_out=1)</span>
 <span class="sd">        def OffsetLayer(tensors, mode, offset):</span>
 <span class="sd">            return tensors + offset</span>
 
-<span class="sd">        layer = dprl.Sequential(</span>
+<span class="sd">        layer = deepr.layers.DAG(</span>
 <span class="sd">            OffsetLayer(offset=1, inputs=&quot;x&quot;),</span>
 <span class="sd">            OffsetLayer(offset=2, outputs=&quot;y&quot;)</span>
 <span class="sd">        )</span>
@@ -203,12 +203,12 @@
 
 <span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        @dprl.layer(n_in=2, n_out=1)</span>
+<span class="sd">        @deepr.layers.layer(n_in=2, n_out=1)</span>
 <span class="sd">        def Add(tensors, mode):</span>
 <span class="sd">            x, y = tensors</span>
 <span class="sd">            return x + y</span>
 
-<span class="sd">        layer = dprl.Sequential(</span>
+<span class="sd">        layer = deepr.layers.DAG(</span>
 <span class="sd">            OffsetLayer(offset=2, inputs=&quot;x&quot;, outputs=&quot;y&quot;),</span>
 <span class="sd">            OffsetLayer(offset=2, inputs=&quot;x&quot;, outputs=&quot;z&quot;),</span>
 <span class="sd">            Add(inputs=&quot;y, z&quot;, outputs=&quot;total&quot;),</span>
@@ -217,7 +217,7 @@
 <span class="sd">        layer({&quot;x&quot;: 1})  # {&quot;total&quot;: 6}</span>
 
 <span class="sd">    As always, the resulting layer can be operated on Tensors or</span>
-<span class="sd">    dictionaries of Tensors. The inputs / outputs of the :class:`~Sequential`</span>
+<span class="sd">    dictionaries of Tensors. The inputs / outputs of the :class:`~DAG`</span>
 <span class="sd">    layer corresponds to the inputs of the first layer and the outputs</span>
 <span class="sd">    of the last layer in the stack (intermediary nodes that are not</span>
 <span class="sd">    returned by the last layer will not be returned).</span>
@@ -227,12 +227,12 @@
 
 <span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        layer = dprl.Sequential(</span>
-<span class="sd">            dprl.Select(&quot;x1, x2&quot;),</span>
+<span class="sd">        layer = deepr.layers.DAG(</span>
+<span class="sd">            deepr.layers.Select(&quot;x1, x2&quot;),</span>
 <span class="sd">            OffsetLayer(offset=2, inputs=&quot;x1&quot;, outputs=&quot;y1&quot;),</span>
 <span class="sd">            OffsetLayer(offset=2, inputs=&quot;x2&quot;, outputs=&quot;y2&quot;),</span>
 <span class="sd">            Add(inputs=&quot;y1, y2&quot;, outputs=&quot;y3&quot;),</span>
-<span class="sd">            dprl.Select(&quot;y1, y2, y3&quot;),</span>
+<span class="sd">            deepr.layers.Select(&quot;y1, y2, y3&quot;),</span>
 <span class="sd">        )</span>
 <span class="sd">        layer((1, 2))  # (3, 4, 7)</span>
 <span class="sd">        layer({&quot;x1&quot;: 1, &quot;x2&quot;: 2})  # {&quot;y1&quot;: 3, &quot;y2&quot;: 4, &quot;y3&quot;: 7}</span>
@@ -243,8 +243,8 @@
 
 <span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        layer = dprl.Sequential(</span>
-<span class="sd">            dprl.Select(n_in=2),  # Defines &quot;t_0&quot; and &quot;t_1&quot; nodes</span>
+<span class="sd">        layer = deepr.layers.DAG(</span>
+<span class="sd">            deepr.layers.Select(n_in=2),  # Defines &quot;t_0&quot; and &quot;t_1&quot; nodes</span>
 <span class="sd">            OffsetLayer(offset=2),  # Replace &quot;t_0&quot; &lt;- &quot;t_0&quot; + 2</span>
 <span class="sd">            Add(),  # Returns &quot;t_0&quot; + &quot;t_1&quot;</span>
 <span class="sd">        )</span>
@@ -253,7 +253,7 @@
 <span class="sd">            assert sess.run(result) == 6</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Sequential.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.layers.Sequential.html#deepr.layers.Sequential.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">layers</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Layer</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Layer</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Layer</span><span class="p">],</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Layer</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]]):</span>
+<div class="viewcode-block" id="DAG.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.layers.DAG.html#deepr.layers.DAG.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">layers</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Layer</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Layer</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Layer</span><span class="p">],</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Layer</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]]):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="n">to_flat_tuple</span><span class="p">(</span><span class="n">layers</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">n_in</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">to_flat_tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">inputs</span><span class="p">)),</span>
@@ -269,13 +269,17 @@
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input &#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&#39; of layer </span><span class="si">{</span><span class="n">layer</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
             <span class="n">keys</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">to_flat_tuple</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">outputs</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Sequential.forward_as_dict"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.Sequential.forward_as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">forward_as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<div class="viewcode-block" id="DAG.forward_as_dict"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.DAG.forward_as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">forward_as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Forward method of the layer&quot;&quot;&quot;</span>
         <span class="n">new_tensors</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>  <span class="c1"># type: Dict</span>
         <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
             <span class="n">outputs</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">forward_as_dict</span><span class="p">({</span><span class="o">**</span><span class="n">tensors</span><span class="p">,</span> <span class="o">**</span><span class="n">new_tensors</span><span class="p">},</span> <span class="n">mode</span><span class="p">)</span>
             <span class="n">new_tensors</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">outputs</span></div></div>
+
+
+<span class="c1"># For Legacy purposes</span>
+<span class="n">Sequential</span> <span class="o">=</span> <span class="n">DAG</span>
 
 
 <div class="viewcode-block" id="Select"><a class="viewcode-back" href="../../../_source/deepr.layers.html#deepr.layers.Select">[docs]</a><span class="k">class</span> <span class="nc">Select</span><span class="p">(</span><span class="n">Layer</span><span class="p">):</span>
@@ -287,11 +291,11 @@
 
 <span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        layer = dprl.Select(inputs=(&quot;x&quot;, &quot;y&quot;), outputs=&quot;z&quot;, n_in=2, indices=1)</span>
+<span class="sd">        layer = deepr.layers.Select(inputs=(&quot;x&quot;, &quot;y&quot;), outputs=&quot;z&quot;, n_in=2, indices=1)</span>
 <span class="sd">        layer((1, 2))  # 2</span>
 <span class="sd">        layer({&quot;x&quot;: 1, &quot;y&quot;: 2})  # {&quot;z&quot;: 2}</span>
 
-<span class="sd">    See :class:`~Sequential` documentation for more precisions.</span>
+<span class="sd">    See :class:`~DAG` documentation for more precisions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Select.__init__"><a class="viewcode-back" href="../../../API/_autosummary/deepr.layers.Select.html#deepr.layers.Select.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -378,25 +382,25 @@
 
 <span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        @dprl.layer(n_in=2, n_out=1)</span>
+<span class="sd">        @deepr.layers.layer(n_in=2, n_out=1)</span>
 <span class="sd">        def Add(tensors):</span>
 <span class="sd">            x, y = tensors</span>
 <span class="sd">            return x + y</span>
 
 <span class="sd">        add = Add(inputs=&quot;a, b&quot;, outputs=&quot;c&quot;)</span>
-<span class="sd">        layer = dprl.Rename(layer=add, inputs=&quot;x, y&quot;, outputs=&quot;z&quot;)</span>
+<span class="sd">        layer = deepr.layers.Rename(layer=add, inputs=&quot;x, y&quot;, outputs=&quot;z&quot;)</span>
 <span class="sd">        layer((1, 1))  # 2</span>
 <span class="sd">        layer({&quot;x&quot;: 1, &quot;y&quot;: 1})  # {&quot;z&quot;: 2}</span>
 
 <span class="sd">    Note that the same behavior can be achieved using :class:`~Select`</span>
-<span class="sd">    and :class:`~Sequential` as follows:</span>
+<span class="sd">    and :class:`~DAG` as follows:</span>
 
 <span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        layer = dprl.Sequential(</span>
-<span class="sd">            dprl.Select(inputs=(&quot;x&quot;, &quot;y&quot;), outputs=(&quot;a&quot;, &quot;b&quot;)),</span>
+<span class="sd">        layer = deepr.layers.DAG(</span>
+<span class="sd">            deepr.layers.Select(inputs=(&quot;x&quot;, &quot;y&quot;), outputs=(&quot;a&quot;, &quot;b&quot;)),</span>
 <span class="sd">            Add(inputs=(&quot;a&quot;, &quot;b&quot;), outputs=&quot;c&quot;),</span>
-<span class="sd">            dprl.Select(&quot;c&quot;, &quot;z&quot;),</span>
+<span class="sd">            deepr.layers.Select(&quot;c&quot;, &quot;z&quot;),</span>
 <span class="sd">        )</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -428,7 +432,7 @@
 
 <span class="sd">        layer1 = Add(inputs=&quot;x1, x2&quot;, outputs=&quot;y1&quot;)</span>
 <span class="sd">        layer2 = OffsetLayer(offset=1, inputs=&quot;x3&quot;, outputs=&quot;y2&quot;)</span>
-<span class="sd">        layer = dprl.Parallel(layer1, layer2)</span>
+<span class="sd">        layer = deepr.layers.Parallel(layer1, layer2)</span>
 <span class="sd">        layer((1, 1, 2))  # (2, 3)</span>
 <span class="sd">        layer({&quot;x1&quot;: 1, &quot;x2&quot;: 1, &quot;x3&quot;: 2})  # {&quot;y1&quot;: 2, &quot;y2&quot;: 3}</span>
 <span class="sd">    &quot;&quot;&quot;</span>

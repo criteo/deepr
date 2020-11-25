@@ -61,7 +61,7 @@
     "logging.basicConfig(level=logging.INFO, stream=sys.stdout)\n",
     "logging.getLogger(\"tensorflow\").setLevel(logging.CRITICAL)\n",
     "\n",
-    "import deepr as dpr"
+    "import deepr"
    ]
   },
   {
@@ -107,8 +107,8 @@
     "    \"learning_rate\": 0.1\n",
     "}\n",
     "\n",
-    "parsed = dpr.parse_config(config)\n",
-    "model = dpr.from_config(parsed)\n",
+    "parsed = deepr.parse_config(config)\n",
+    "model = deepr.from_config(parsed)\n",
     "model.learning_rate"
    ]
   },
@@ -151,7 +151,7 @@
     "    \"learning_rate\": \"$params:learning_rate\"\n",
     "}\n",
     "\n",
-    "print(dpr.parse_config(config, macros))"
+    "print(deepr.parse_config(config, macros))"
    ]
   },
   {
@@ -201,9 +201,9 @@
     "    \"type\": \"__main__.Job\",\n",
     "    \"year\": \"$date:year\"\n",
     "}\n",
-    "parsed = dpr.parse_config(config, macros)\n",
+    "parsed = deepr.parse_config(config, macros)\n",
     "print(parsed)\n",
-    "job = dpr.from_config(parsed)\n",
+    "job = deepr.from_config(parsed)\n",
     "print(job.year)"
    ]
   },
@@ -240,8 +240,8 @@
     "    \"type\": \"__main__.Model\",\n",
     "    \"*\": [1, 2, 3]\n",
     "}\n",
-    "parsed = dpr.parse_config(config)\n",
-    "model = dpr.from_config(parsed)\n",
+    "parsed = deepr.parse_config(config)\n",
+    "model = deepr.from_config(parsed)\n",
     "print(model.layers)"
    ]
   },
@@ -293,8 +293,8 @@
     "     }\n",
     "}\n",
     "\n",
-    "parsed = dpr.parse_config(config)\n",
-    "job = dpr.from_config(parsed)\n",
+    "parsed = deepr.parse_config(config)\n",
+    "job = deepr.from_config(parsed)\n",
     "print(job.model_config)"
    ]
   },
@@ -347,7 +347,7 @@
     "    \"macros_eval\": \"@macros_eval\"\n",
     "}\n",
     "\n",
-    "parsed = dpr.parse_config(config, macros)\n",
+    "parsed = deepr.parse_config(config, macros)\n",
     "print(parsed[\"config\"])\n",
     "print(parsed[\"macros\"])\n",
     "print(parsed[\"macros_eval\"])"

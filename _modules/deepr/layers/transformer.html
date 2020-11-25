@@ -177,7 +177,7 @@
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 
 <span class="kn">from</span> <span class="nn">deepr.layers</span> <span class="kn">import</span> <span class="n">base</span>
-<span class="kn">from</span> <span class="nn">deepr.layers.combinators</span> <span class="kn">import</span> <span class="n">Sequential</span><span class="p">,</span> <span class="n">Select</span><span class="p">,</span> <span class="n">Scope</span>
+<span class="kn">from</span> <span class="nn">deepr.layers.combinators</span> <span class="kn">import</span> <span class="n">DAG</span><span class="p">,</span> <span class="n">Select</span><span class="p">,</span> <span class="n">Scope</span>
 <span class="kn">from</span> <span class="nn">deepr.layers.dropout</span> <span class="kn">import</span> <span class="n">SpatialDropout1D</span><span class="p">,</span> <span class="n">Dropout</span>
 <span class="kn">from</span> <span class="nn">deepr.layers.slice</span> <span class="kn">import</span> <span class="n">SliceLastPadded</span>
 <span class="kn">from</span> <span class="nn">deepr.layers.core</span> <span class="kn">import</span> <span class="n">Conv1d</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Scale</span>
@@ -205,7 +205,7 @@
     <span class="n">outputs</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;userEmbeddings&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">base</span><span class="o">.</span><span class="n">Layer</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Transformer Model.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">Sequential</span><span class="p">(</span>
+    <span class="k">return</span> <span class="n">DAG</span><span class="p">(</span>
         <span class="n">Select</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;inputEmbeddings&quot;</span><span class="p">,</span> <span class="s2">&quot;inputMask&quot;</span><span class="p">)),</span>
         <span class="n">SpatialDropout1D</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;inputEmbeddings&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;inputEmbeddingsDropout&quot;</span><span class="p">,</span> <span class="n">dropout_rate</span><span class="o">=</span><span class="n">event_dropout_rate</span><span class="p">),</span>
         <span class="n">AttentionMask</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;inputMask&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;mask&quot;</span><span class="p">,</span> <span class="n">use_look_ahead_mask</span><span class="o">=</span><span class="n">use_look_ahead_mask</span><span class="p">),</span>
@@ -221,7 +221,7 @@
         <span class="p">),</span>
         <span class="p">[</span>
             <span class="n">Scope</span><span class="p">(</span>
-                <span class="n">Sequential</span><span class="p">(</span>
+                <span class="n">DAG</span><span class="p">(</span>
                     <span class="n">SelfMultiheadAttention</span><span class="p">(</span>
                         <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;inputEnc&quot;</span><span class="p">,</span> <span class="s2">&quot;mask&quot;</span><span class="p">),</span>
                         <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;inputEnc&quot;</span><span class="p">,</span>
@@ -265,7 +265,7 @@
     <span class="k">if</span> <span class="n">inputs</span> <span class="o">==</span> <span class="s2">&quot;_x&quot;</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot use name &#39;_x&#39; for inputs (used as intermediary node).&quot;</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">Sequential</span><span class="p">(</span>
+    <span class="k">return</span> <span class="n">DAG</span><span class="p">(</span>
         <span class="n">Select</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;_x&quot;</span><span class="p">),</span>
         <span class="n">Dropout</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;_x&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;_x&quot;</span><span class="p">,</span> <span class="n">dropout_rate</span><span class="o">=</span><span class="n">dropout_rate</span><span class="p">),</span>
         <span class="n">Conv1d</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;_x&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;_x&quot;</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="n">units_inner</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>

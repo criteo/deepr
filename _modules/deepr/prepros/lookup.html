@@ -187,17 +187,17 @@
 <span class="sd">    First, create a ``table_initializer_fn`` that uses the</span>
 <span class="sd">    ``tf.AUTO_REUSE`` argument.</span>
 
-<span class="sd">    &gt;&gt;&gt; import deepr as dpr</span>
+<span class="sd">    &gt;&gt;&gt; import deepr</span>
 <span class="sd">    &gt;&gt;&gt; def table_initializer_fn():</span>
-<span class="sd">    ...     return dpr.utils.table_from_mapping(</span>
+<span class="sd">    ...     return deepr.utils.table_from_mapping(</span>
 <span class="sd">    ...         name=&quot;partner_table&quot;, mapping={1: 2}, reuse=tf.AUTO_REUSE</span>
 <span class="sd">    ... )</span>
 
 <span class="sd">    Then, define your preprocessing pipeline as follows</span>
 
-<span class="sd">    &gt;&gt;&gt; prepro_fn = dpr.prepros.Serial(</span>
-<span class="sd">    ...     dpr.prepros.TableInitializer(table_initializer_fn),</span>
-<span class="sd">    ...     dpr.prepros.Map(dpr.layers.Lookup(table_initializer_fn)),</span>
+<span class="sd">    &gt;&gt;&gt; prepro_fn = deepr.prepros.Serial(</span>
+<span class="sd">    ...     deepr.prepros.TableInitializer(table_initializer_fn),</span>
+<span class="sd">    ...     deepr.prepros.Map(deepr.layers.Lookup(table_initializer_fn)),</span>
 <span class="sd">    ... )</span>
 
 <span class="sd">    When applying the ``prepro_fn`` on a ``tf.data.Dataset``, it will</span>

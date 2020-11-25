@@ -240,17 +240,17 @@ transformation (all tables must be created outside the <code class="docutils lit
 <p>To remedy this, follow this example</p>
 <p>First, create a <code class="docutils literal notranslate"><span class="pre">table_initializer_fn</span></code> that uses the
 <code class="docutils literal notranslate"><span class="pre">tf.AUTO_REUSE</span></code> argument.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">deepr</span> <span class="k">as</span> <span class="nn">dpr</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">deepr</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">table_initializer_fn</span><span class="p">():</span>
-<span class="gp">... </span>    <span class="k">return</span> <span class="n">dpr</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">table_from_mapping</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">deepr</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">table_from_mapping</span><span class="p">(</span>
 <span class="gp">... </span>        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;partner_table&quot;</span><span class="p">,</span> <span class="n">mapping</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="n">reuse</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">AUTO_REUSE</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Then, define your preprocessing pipeline as follows</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">TableInitializer</span><span class="p">(</span><span class="n">table_initializer_fn</span><span class="p">),</span>
-<span class="gp">... </span>    <span class="n">dpr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Lookup</span><span class="p">(</span><span class="n">table_initializer_fn</span><span class="p">)),</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prepro_fn</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">deepr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">TableInitializer</span><span class="p">(</span><span class="n">table_initializer_fn</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">deepr</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Lookup</span><span class="p">(</span><span class="n">table_initializer_fn</span><span class="p">)),</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>

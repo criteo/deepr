@@ -483,7 +483,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">deepr</span> <span class="k">as</span> <span class="nn">dpr</span>
+<span class="kn">import</span> <span class="nn">deepr</span>
 </pre></div>
 </div>
 </div>
@@ -496,7 +496,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <p>Note that you can also use it in python with</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dpr</span><span class="o">.</span><span class="n">cli</span><span class="o">.</span><span class="n">download_config_and_macros_from_mlflow</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">deepr</span><span class="o">.</span><span class="n">cli</span><span class="o">.</span><span class="n">download_config_and_macros_from_mlflow</span><span class="p">(</span>
     <span class="n">run_id</span><span class="o">=</span><span class="n">run_id</span><span class="p">,</span>
     <span class="n">path_config</span><span class="o">=</span><span class="s2">&quot;config.json&quot;</span><span class="p">,</span>
     <span class="n">path_macros</span><span class="o">=</span><span class="s2">&quot;macros.json&quot;</span><span class="p">,</span>
@@ -510,7 +510,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <p>Note that you can also use it in python with</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dpr</span><span class="o">.</span><span class="n">cli</span><span class="o">.</span><span class="n">add_macro</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">deepr</span><span class="o">.</span><span class="n">cli</span><span class="o">.</span><span class="n">add_macro</span><span class="p">(</span>
     <span class="n">config</span><span class="o">=</span><span class="s2">&quot;config.json&quot;</span><span class="p">,</span>
     <span class="n">macros</span><span class="o">=</span><span class="s2">&quot;macros.json&quot;</span><span class="p">,</span>
     <span class="n">params</span><span class="o">=</span><span class="n">param_grid</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span>
@@ -521,20 +521,20 @@ div.rendered_html tbody tr:hover {
 <li><p>Create a short script <code class="docutils literal notranslate"><span class="pre">my_seeded_study_name.py</span></code> that looks like</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">deepr</span> <span class="k">as</span> <span class="nn">dpr</span>
+<span class="kn">import</span> <span class="nn">deepr</span>
 
 <span class="c1"># Create sampler</span>
 <span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="n">start</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> <span class="n">stop</span><span class="o">=-</span><span class="mi">3</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
 <span class="p">}</span>
-<span class="n">sampler</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">ParamsSampler</span><span class="p">(</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">sampler</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">ParamsSampler</span><span class="p">(</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
 <span class="c1"># Read job config and macros</span>
-<span class="n">job</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s2">&quot;config.json&quot;</span><span class="p">)</span>
-<span class="n">macros</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s2">&quot;macros.json&quot;</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s2">&quot;config.json&quot;</span><span class="p">)</span>
+<span class="n">macros</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s2">&quot;macros.json&quot;</span><span class="p">)</span>
 
 <span class="c1"># Create tuner and run it</span>
-<span class="n">tuner</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">ParamsTuner</span><span class="p">(</span><span class="n">job</span><span class="o">=</span><span class="n">job</span><span class="p">,</span> <span class="n">macros</span><span class="o">=</span><span class="n">macros</span><span class="p">,</span> <span class="n">sampler</span><span class="o">=</span><span class="n">sampler</span><span class="p">)</span>
+<span class="n">tuner</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">ParamsTuner</span><span class="p">(</span><span class="n">job</span><span class="o">=</span><span class="n">job</span><span class="p">,</span> <span class="n">macros</span><span class="o">=</span><span class="n">macros</span><span class="p">,</span> <span class="n">sampler</span><span class="o">=</span><span class="n">sampler</span><span class="p">)</span>
 <span class="n">tuner</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -659,7 +659,7 @@ div.rendered_html tbody tr:hover {
         <span class="s2">&quot;batch_size&quot;</span><span class="p">:</span> <span class="mi">16</span>
     <span class="p">}</span>
 <span class="p">}</span>
-<span class="n">parsed</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">macros</span><span class="p">)</span>
+<span class="n">parsed</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">macros</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">parsed</span><span class="p">[</span><span class="s2">&quot;job&quot;</span><span class="p">][</span><span class="s2">&quot;jobs&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;trainer&quot;</span><span class="p">][</span><span class="s2">&quot;path_model&quot;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">parsed</span><span class="p">[</span><span class="s2">&quot;job&quot;</span><span class="p">][</span><span class="s2">&quot;jobs&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;trainer&quot;</span><span class="p">][</span><span class="s2">&quot;optimizer_fn&quot;</span><span class="p">][</span><span class="s2">&quot;learning_rate&quot;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">parsed</span><span class="p">[</span><span class="s2">&quot;job&quot;</span><span class="p">][</span><span class="s2">&quot;jobs&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;trainer&quot;</span><span class="p">][</span><span class="s2">&quot;prepro_fn&quot;</span><span class="p">][</span><span class="s2">&quot;batch_size&quot;</span><span class="p">])</span>
@@ -692,7 +692,7 @@ viewfs://root/user/deepr/dev/example/models/2020-06-03-15-45-13
     <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="n">start</span><span class="o">=-</span><span class="mi">3</span><span class="p">,</span> <span class="n">stop</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
     <span class="s2">&quot;batch_size&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">],</span>
 <span class="p">}</span>
-<span class="n">sampler</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">ParamsSampler</span><span class="p">(</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">sampler</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">ParamsSampler</span><span class="p">(</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -736,7 +736,7 @@ INFO:deepr.jobs.params_tuner:Sampled 5 parameters from a total of 40
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="k">if</span> <span class="n">HAS_HADOOP</span><span class="p">:</span>
-    <span class="n">tuner</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">ParamsTuner</span><span class="p">(</span><span class="n">job</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">macros</span><span class="o">=</span><span class="n">macros</span><span class="p">,</span> <span class="n">sampler</span><span class="o">=</span><span class="n">sampler</span><span class="p">)</span>
+    <span class="n">tuner</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">ParamsTuner</span><span class="p">(</span><span class="n">job</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">macros</span><span class="o">=</span><span class="n">macros</span><span class="p">,</span> <span class="n">sampler</span><span class="o">=</span><span class="n">sampler</span><span class="p">)</span>
     <span class="n">tuner</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>

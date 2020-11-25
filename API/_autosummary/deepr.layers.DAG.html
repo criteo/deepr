@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>deepr.layers.Rename &mdash; deepr 2.10.0 documentation</title>
+  <title>deepr.layers.DAG &mdash; deepr 2.10.0 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="deepr.layers.Select" href="deepr.layers.Select.html" />
-    <link rel="prev" title="deepr.layers.Product" href="deepr.layers.Product.html" /> 
+    <link rel="next" title="deepr.layers.Sequential" href="deepr.layers.Sequential.html" />
+    <link rel="prev" title="deepr.layers.Select" href="deepr.layers.Select.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -134,9 +134,9 @@
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.NotEqual.html">deepr.layers.NotEqual</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Parallel.html">deepr.layers.Parallel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Product.html">deepr.layers.Product</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">deepr.layers.Rename</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.layers.Rename.html">deepr.layers.Rename</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Select.html">deepr.layers.Select</a></li>
-<li class="toctree-l3"><a class="reference internal" href="deepr.layers.DAG.html">deepr.layers.DAG</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">deepr.layers.DAG</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Sequential.html">deepr.layers.Sequential</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.Slice.html">deepr.layers.Slice</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.layers.SliceFirst.html">deepr.layers.SliceFirst</a></li>
@@ -207,13 +207,13 @@
         
           <li><a href="../core.html">DeepR</a> &raquo;</li>
         
-      <li>deepr.layers.Rename</li>
+      <li>deepr.layers.DAG</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/API/_autosummary/deepr.layers.Rename.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/API/_autosummary/deepr.layers.DAG.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -250,40 +250,78 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="deepr-layers-rename">
-<h1>deepr.layers.Rename<a class="headerlink" href="#deepr-layers-rename" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="deepr-layers-dag">
+<h1>deepr.layers.DAG<a class="headerlink" href="#deepr-layers-dag" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="deepr.layers.Rename">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.</code><code class="sig-name descname">Rename</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">layer</span></em>, <em class="sig-param"><span class="n">inputs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outputs</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/combinators.html#Rename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.Rename" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wrap Layer in a Node to rename inputs / outputs.</p>
-<p>Allows you to rename inputs / outputs nodes of a <a class="reference internal" href="deepr.layers.Layer.html#deepr.layers.Layer" title="deepr.layers.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a>
-instance. This can be useful if you end up with a <a class="reference internal" href="deepr.layers.Layer.html#deepr.layers.Layer" title="deepr.layers.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a>
-instance with inputs and outputs name that are not suitable for your
-needs.</p>
-<p>For example:</p>
+<dt id="deepr.layers.DAG">
+<em class="property">class </em><code class="sig-prename descclassname">deepr.layers.</code><code class="sig-name descname">DAG</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">layers</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/combinators.html#DAG"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.DAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to easily compose layers in a deep learning network.</p>
+<p>A Deep Learning Network is a Directed Acyclic Graph (DAG) of layers.
+The easiest way to define a DAG is by stacking layers on top of each
+others. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">OffsetLayer</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tensors</span> <span class="o">+</span> <span class="n">offset</span>
+
+<span class="n">layer</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DAG</span><span class="p">(</span>
+    <span class="n">OffsetLayer</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">),</span>
+    <span class="n">OffsetLayer</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">layer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># (1 + 1) + 2 = 4</span>
+<span class="n">layer</span><span class="p">({</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>  <span class="c1"># {&quot;y&quot;: 4}</span>
+</pre></div>
+</div>
+<p>Because in some cases your model is more complicated (branches etc.)
+you can exploit the inputs / outputs naming capability of the base
+<a class="reference internal" href="deepr.layers.Layer.html#deepr.layers.Layer" title="deepr.layers.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> class. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">tensors</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">tensors</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 
-<span class="n">add</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;a, b&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">)</span>
-<span class="n">layer</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Rename</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="n">add</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;x, y&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">)</span>
-<span class="n">layer</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># 2</span>
-<span class="n">layer</span><span class="p">({</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>  <span class="c1"># {&quot;z&quot;: 2}</span>
+<span class="n">layer</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DAG</span><span class="p">(</span>
+    <span class="n">OffsetLayer</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">),</span>
+    <span class="n">OffsetLayer</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">),</span>
+    <span class="n">Add</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;y, z&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;total&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">layer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># (1 + 2) + (1 + 2) = 6</span>
+<span class="n">layer</span><span class="p">({</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>  <span class="c1"># {&quot;total&quot;: 6}</span>
 </pre></div>
 </div>
-<p>Note that the same behavior can be achieved using <a class="reference internal" href="deepr.layers.Select.html#deepr.layers.Select" title="deepr.layers.Select"><code class="xref py py-class docutils literal notranslate"><span class="pre">Select</span></code></a>
-and <a class="reference internal" href="deepr.layers.DAG.html#deepr.layers.DAG" title="deepr.layers.DAG"><code class="xref py py-class docutils literal notranslate"><span class="pre">DAG</span></code></a> as follows:</p>
+<p>As always, the resulting layer can be operated on Tensors or
+dictionaries of Tensors. The inputs / outputs of the <a class="reference internal" href="#deepr.layers.DAG" title="deepr.layers.DAG"><code class="xref py py-class docutils literal notranslate"><span class="pre">DAG</span></code></a>
+layer corresponds to the inputs of the first layer and the outputs
+of the last layer in the stack (intermediary nodes that are not
+returned by the last layer will not be returned).</p>
+<p>An easy way to define arbitrary inputs / outputs nodes is to use the
+<a class="reference internal" href="deepr.layers.Select.html#deepr.layers.Select" title="deepr.layers.Select"><code class="xref py py-class docutils literal notranslate"><span class="pre">Select</span></code></a> class. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DAG</span><span class="p">(</span>
-    <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)),</span>
-    <span class="n">Add</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">),</span>
-    <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">),</span>
+    <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="s2">&quot;x1, x2&quot;</span><span class="p">),</span>
+    <span class="n">OffsetLayer</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;y1&quot;</span><span class="p">),</span>
+    <span class="n">OffsetLayer</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;x2&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;y2&quot;</span><span class="p">),</span>
+    <span class="n">Add</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;y1, y2&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;y3&quot;</span><span class="p">),</span>
+    <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="s2">&quot;y1, y2, y3&quot;</span><span class="p">),</span>
 <span class="p">)</span>
+<span class="n">layer</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># (3, 4, 7)</span>
+<span class="n">layer</span><span class="p">({</span><span class="s2">&quot;x1&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;x2&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>  <span class="c1"># {&quot;y1&quot;: 3, &quot;y2&quot;: 4, &quot;y3&quot;: 7}</span>
+</pre></div>
+</div>
+<p>Note that default naming still applies, so it won’t raise an error
+if you try stacking layers with incoherent shapes, as long as the
+correctly named nodes are defined.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DAG</span><span class="p">(</span>
+    <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>  <span class="c1"># Defines &quot;t_0&quot; and &quot;t_1&quot; nodes</span>
+    <span class="n">OffsetLayer</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>  <span class="c1"># Replace &quot;t_0&quot; &lt;- &quot;t_0&quot; + 2</span>
+    <span class="n">Add</span><span class="p">(),</span>  <span class="c1"># Returns &quot;t_0&quot; + &quot;t_1&quot;</span>
+<span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">layer</span><span class="p">((</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span>
 </pre></div>
 </div>
 <dl class="py method">
-<dt id="deepr.layers.Rename.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">layer</span></em>, <em class="sig-param"><span class="n">inputs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outputs</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/combinators.html#Rename.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.Rename.__init__" title="Permalink to this definition">¶</a></dt>
+<dt id="deepr.layers.DAG.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">layers</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/combinators.html#DAG.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.layers.DAG.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
@@ -294,14 +332,14 @@ and <a class="reference internal" href="deepr.layers.DAG.html#deepr.layers.DAG" 
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.layers.Rename.__init__" title="deepr.layers.Rename.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(layer[, inputs, outputs])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.layers.DAG.__init__" title="deepr.layers.DAG.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(*layers)</p></td>
 <td><p>Initialize self.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code>(tensors[, mode])</p></td>
-<td><p>Forward method of the layer</p></td>
+<td><p>Forward method on one Tensor or a tuple of Tensors.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward_as_dict</span></code>(tensors[, mode])</p></td>
-<td><p>Forward method on a dictionary of Tensors.</p></td>
+<td><p>Forward method of the layer</p></td>
 </tr>
 </tbody>
 </table>
@@ -317,10 +355,10 @@ and <a class="reference internal" href="deepr.layers.DAG.html#deepr.layers.DAG" 
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="deepr.layers.Select.html" class="btn btn-neutral float-right" title="deepr.layers.Select" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="deepr.layers.Sequential.html" class="btn btn-neutral float-right" title="deepr.layers.Sequential" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="deepr.layers.Product.html" class="btn btn-neutral float-left" title="deepr.layers.Product" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="deepr.layers.Select.html" class="btn btn-neutral float-left" title="deepr.layers.Select" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -498,7 +498,7 @@ div.rendered_html tbody tr:hover {
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;tensorflow&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">deepr</span> <span class="k">as</span> <span class="nn">dpr</span>
+<span class="kn">import</span> <span class="nn">deepr</span>
 </pre></div>
 </div>
 </div>
@@ -526,8 +526,8 @@ div.rendered_html tbody tr:hover {
     <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="mf">0.1</span>
 <span class="p">}</span>
 
-<span class="n">parsed</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span>
+<span class="n">parsed</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">learning_rate</span>
 </pre></div>
 </div>
@@ -563,7 +563,7 @@ div.rendered_html tbody tr:hover {
     <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="s2">&quot;$params:learning_rate&quot;</span>
 <span class="p">}</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">dpr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">macros</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">deepr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">macros</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -606,9 +606,9 @@ div.rendered_html tbody tr:hover {
     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.Job&quot;</span><span class="p">,</span>
     <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;$date:year&quot;</span>
 <span class="p">}</span>
-<span class="n">parsed</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">macros</span><span class="p">)</span>
+<span class="n">parsed</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">macros</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span>
-<span class="n">job</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -640,8 +640,8 @@ div.rendered_html tbody tr:hover {
     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.Model&quot;</span><span class="p">,</span>
     <span class="s2">&quot;*&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 <span class="p">}</span>
-<span class="n">parsed</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span>
+<span class="n">parsed</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">layers</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -690,8 +690,8 @@ div.rendered_html tbody tr:hover {
      <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">parsed</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
-<span class="n">job</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span>
+<span class="n">parsed</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">model_config</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -734,7 +734,7 @@ div.rendered_html tbody tr:hover {
     <span class="s2">&quot;macros_eval&quot;</span><span class="p">:</span> <span class="s2">&quot;@macros_eval&quot;</span>
 <span class="p">}</span>
 
-<span class="n">parsed</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">macros</span><span class="p">)</span>
+<span class="n">parsed</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">macros</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">parsed</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">parsed</span><span class="p">[</span><span class="s2">&quot;macros&quot;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">parsed</span><span class="p">[</span><span class="s2">&quot;macros_eval&quot;</span><span class="p">])</span>

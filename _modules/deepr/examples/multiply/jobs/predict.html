@@ -175,14 +175,14 @@
 
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 
-<span class="kn">import</span> <span class="nn">deepr</span> <span class="k">as</span> <span class="nn">dpr</span>
+<span class="kn">import</span> <span class="nn">deepr</span>
 
 
 <span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="PredictProto"><a class="viewcode-back" href="../../../../../_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictProto">[docs]</a><span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">PredictProto</span><span class="p">(</span><span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">PredictProto</span><span class="p">(</span><span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute predictions from a single .pb file.&quot;&quot;&quot;</span>
 
     <span class="n">path_model</span><span class="p">:</span> <span class="nb">str</span>
@@ -193,7 +193,7 @@
     <span class="n">fetches</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
 
 <div class="viewcode-block" id="PredictProto.run"><a class="viewcode-back" href="../../../../../_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictProto.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">predictor</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">predictors</span><span class="o">.</span><span class="n">ProtoPredictor</span><span class="p">(</span>
+        <span class="n">predictor</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">predictors</span><span class="o">.</span><span class="n">ProtoPredictor</span><span class="p">(</span>
             <span class="n">path</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path_model</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">graph_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">feeds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feeds</span><span class="p">,</span> <span class="n">fetches</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fetches</span>
         <span class="p">)</span>
         <span class="k">for</span> <span class="n">preds</span> <span class="ow">in</span> <span class="n">predictor</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepro_fn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_fn</span><span class="p">(),</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">)):</span>
@@ -201,7 +201,7 @@
 
 
 <div class="viewcode-block" id="PredictSavedModel"><a class="viewcode-back" href="../../../../../_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictSavedModel">[docs]</a><span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">PredictSavedModel</span><span class="p">(</span><span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">PredictSavedModel</span><span class="p">(</span><span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute predictions from a directory containing saved models.&quot;&quot;&quot;</span>
 
     <span class="n">path_saved_model</span><span class="p">:</span> <span class="nb">str</span>
@@ -211,8 +211,8 @@
     <span class="n">fetches</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="PredictSavedModel.run"><a class="viewcode-back" href="../../../../../_source/deepr.examples.multiply.jobs.html#deepr.examples.multiply.jobs.predict.PredictSavedModel.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">predictor</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">predictors</span><span class="o">.</span><span class="n">SavedModelPredictor</span><span class="p">(</span>
-            <span class="n">path</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">predictors</span><span class="o">.</span><span class="n">get_latest_saved_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_saved_model</span><span class="p">),</span> <span class="n">feeds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feeds</span><span class="p">,</span> <span class="n">fetches</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fetches</span>
+        <span class="n">predictor</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">predictors</span><span class="o">.</span><span class="n">SavedModelPredictor</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">predictors</span><span class="o">.</span><span class="n">get_latest_saved_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_saved_model</span><span class="p">),</span> <span class="n">feeds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feeds</span><span class="p">,</span> <span class="n">fetches</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fetches</span>
         <span class="p">)</span>
         <span class="k">for</span> <span class="n">preds</span> <span class="ow">in</span> <span class="n">predictor</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepro_fn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_fn</span><span class="p">(),</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">)):</span>
             <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">preds</span><span class="p">)</span></div></div>

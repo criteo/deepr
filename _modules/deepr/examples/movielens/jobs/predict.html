@@ -177,7 +177,7 @@
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">pyarrow</span> <span class="k">as</span> <span class="nn">pa</span>
 
-<span class="kn">import</span> <span class="nn">deepr</span> <span class="k">as</span> <span class="nn">dpr</span>
+<span class="kn">import</span> <span class="nn">deepr</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -202,7 +202,7 @@
 
 
 <div class="viewcode-block" id="Predict"><a class="viewcode-back" href="../../../../../_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.predict.Predict">[docs]</a><span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">Predict</span><span class="p">(</span><span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Predict</span><span class="p">(</span><span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute MovieLens predictions.&quot;&quot;&quot;</span>
 
     <span class="n">path_saved_model</span><span class="p">:</span> <span class="nb">str</span>
@@ -212,8 +212,8 @@
 
 <div class="viewcode-block" id="Predict.run"><a class="viewcode-back" href="../../../../../_source/deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.predict.Predict.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Computing predictions from </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path_saved_model</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">predictor</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">predictors</span><span class="o">.</span><span class="n">SavedModelPredictor</span><span class="p">(</span>
-            <span class="n">path</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">predictors</span><span class="o">.</span><span class="n">get_latest_saved_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_saved_model</span><span class="p">)</span>
+        <span class="n">predictor</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">predictors</span><span class="o">.</span><span class="n">SavedModelPredictor</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">predictors</span><span class="o">.</span><span class="n">get_latest_saved_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_saved_model</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="n">predictions</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">preds</span> <span class="ow">in</span> <span class="n">predictor</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepro_fn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_fn</span><span class="p">(),</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">)):</span>
@@ -234,7 +234,7 @@
                     <span class="p">)</span>
                 <span class="p">)</span>
 
-        <span class="k">with</span> <span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">ParquetDataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_predictions</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">deepr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">ParquetDataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_predictions</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
             <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">predictions</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">COLUMNS</span><span class="p">)</span>
             <span class="n">ds</span><span class="o">.</span><span class="n">write_pandas</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;snappy&quot;</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">SCHEMA</span><span class="p">)</span>
         <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wrote predictions to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path_predictions</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div></div>

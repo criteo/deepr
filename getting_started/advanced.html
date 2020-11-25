@@ -484,7 +484,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">deepr</span> <span class="k">as</span> <span class="nn">dpr</span>
+<span></span><span class="kn">import</span> <span class="nn">deepr</span>
 <span class="kn">import</span> <span class="nn">deepr.examples.multiply</span> <span class="k">as</span> <span class="nn">multiply</span>
 </pre></div>
 </div>
@@ -502,8 +502,8 @@ INFO:faiss:Loading faiss.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">if</span> <span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
-    <span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">delete_dir</span><span class="p">()</span>
+<span></span><span class="k">if</span> <span class="n">deepr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+    <span class="n">deepr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">delete_dir</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -525,13 +525,13 @@ INFO:faiss:Loading faiss.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">original_trainer_job</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span>
+<span></span><span class="n">original_trainer_job</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span>
     <span class="n">path_model</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">,</span>
     <span class="n">pred_fn</span><span class="o">=</span><span class="n">multiply</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Multiply</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;y_pred&quot;</span><span class="p">),</span>
     <span class="n">loss_fn</span><span class="o">=</span><span class="n">multiply</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">SquaredL2</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;y_pred&quot;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;loss&quot;</span><span class="p">),</span>
-    <span class="n">optimizer_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">TensorflowOptimizer</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
-    <span class="n">train_input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
-    <span class="n">eval_input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
+    <span class="n">optimizer_fn</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">TensorflowOptimizer</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
+    <span class="n">train_input_fn</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
+    <span class="n">eval_input_fn</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
     <span class="n">prepro_fn</span><span class="o">=</span><span class="n">multiply</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">DefaultPrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">repeat_size</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
@@ -549,10 +549,10 @@ INFO:faiss:Loading faiss.
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Train our model on 1000 batches of data</span>
-<span class="n">train_spec</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">TrainSpec</span><span class="p">(</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">train_spec</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">TrainSpec</span><span class="p">(</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 
 <span class="c1"># Run evaluation (in non-distributed mode), every 10 seconds if a new checkpoint is available.</span>
-<span class="n">eval_spec</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">EvalSpec</span><span class="p">(</span>
+<span class="n">eval_spec</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">EvalSpec</span><span class="p">(</span>
     <span class="n">throttle_secs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
     <span class="n">start_delay_secs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
     <span class="n">steps</span><span class="o">=</span><span class="kc">None</span>  <span class="c1"># None means &quot;use all the validation set&quot;</span>
@@ -577,11 +577,11 @@ INFO:faiss:Loading faiss.
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">train_metrics</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">dpr</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">StepCounter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;num_steps&quot;</span><span class="p">),</span>
-    <span class="n">dpr</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">DecayMean</span><span class="p">(</span><span class="n">tensors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">],</span> <span class="n">decay</span><span class="o">=</span><span class="mf">0.98</span><span class="p">)</span>
+    <span class="n">deepr</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">StepCounter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;num_steps&quot;</span><span class="p">),</span>
+    <span class="n">deepr</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">DecayMean</span><span class="p">(</span><span class="n">tensors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">],</span> <span class="n">decay</span><span class="o">=</span><span class="mf">0.98</span><span class="p">)</span>
 <span class="p">]</span>
-<span class="n">eval_metrics</span> <span class="o">=</span> <span class="p">[</span><span class="n">dpr</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">Mean</span><span class="p">(</span><span class="n">tensors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">])]</span>
-<span class="n">final_metrics</span> <span class="o">=</span> <span class="p">[</span><span class="n">dpr</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">Mean</span><span class="p">(</span><span class="n">tensors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">])]</span>
+<span class="n">eval_metrics</span> <span class="o">=</span> <span class="p">[</span><span class="n">deepr</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">Mean</span><span class="p">(</span><span class="n">tensors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">])]</span>
+<span class="n">final_metrics</span> <span class="o">=</span> <span class="p">[</span><span class="n">deepr</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">Mean</span><span class="p">(</span><span class="n">tensors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">])]</span>
 </pre></div>
 </div>
 </div>
@@ -618,20 +618,20 @@ INFO:faiss:Loading faiss.
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">train_hooks</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">LoggingTensorHookFactory</span><span class="p">(</span>
+    <span class="n">deepr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">LoggingTensorHookFactory</span><span class="p">(</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;training&quot;</span><span class="p">,</span>
         <span class="n">functions</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;memory_gb&quot;</span><span class="p">:</span> <span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">ResidentMemory</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s2">&quot;gb&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;max_memory_gb&quot;</span><span class="p">:</span> <span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">MaxResidentMemory</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s2">&quot;gb&quot;</span><span class="p">)</span>
+            <span class="s2">&quot;memory_gb&quot;</span><span class="p">:</span> <span class="n">deepr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">ResidentMemory</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s2">&quot;gb&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;max_memory_gb&quot;</span><span class="p">:</span> <span class="n">deepr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">MaxResidentMemory</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s2">&quot;gb&quot;</span><span class="p">)</span>
         <span class="p">},</span>
         <span class="n">every_n_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
         <span class="n">use_graphite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">use_mlflow</span><span class="o">=</span><span class="kc">False</span>
     <span class="p">),</span>
-    <span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">SummarySaverHookFactory</span><span class="p">(</span><span class="n">save_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
-    <span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">NumParamsHook</span><span class="p">(</span><span class="n">use_mlflow</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
-    <span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">LogVariablesInitHook</span><span class="p">(</span><span class="n">use_mlflow</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
-    <span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">StepsPerSecHook</span><span class="p">(</span>
+    <span class="n">deepr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">SummarySaverHookFactory</span><span class="p">(</span><span class="n">save_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+    <span class="n">deepr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">NumParamsHook</span><span class="p">(</span><span class="n">use_mlflow</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+    <span class="n">deepr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">LogVariablesInitHook</span><span class="p">(</span><span class="n">use_mlflow</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+    <span class="n">deepr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">StepsPerSecHook</span><span class="p">(</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;training&quot;</span><span class="p">,</span>
         <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
         <span class="n">every_n_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
@@ -639,7 +639,7 @@ INFO:faiss:Loading faiss.
         <span class="n">use_mlflow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">use_graphite</span><span class="o">=</span><span class="kc">False</span>
     <span class="p">),</span>
-    <span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">EarlyStoppingHookFactory</span><span class="p">(</span>
+    <span class="n">deepr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">EarlyStoppingHookFactory</span><span class="p">(</span>
         <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;loss&quot;</span><span class="p">,</span>
         <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;decrease&quot;</span><span class="p">,</span>
         <span class="n">max_steps_without_improvement</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
@@ -648,8 +648,8 @@ INFO:faiss:Loading faiss.
         <span class="n">final_step</span><span class="o">=</span><span class="mi">1000</span>
     <span class="p">)</span>
 <span class="p">]</span>
-<span class="n">eval_hooks</span> <span class="o">=</span> <span class="p">[</span><span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">LoggingTensorHookFactory</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;validation&quot;</span><span class="p">,</span> <span class="n">at_end</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
-<span class="n">final_hooks</span> <span class="o">=</span> <span class="p">[</span><span class="n">dpr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">LoggingTensorHookFactory</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;final_validation&quot;</span><span class="p">,</span> <span class="n">at_end</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
+<span class="n">eval_hooks</span> <span class="o">=</span> <span class="p">[</span><span class="n">deepr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">LoggingTensorHookFactory</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;validation&quot;</span><span class="p">,</span> <span class="n">at_end</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
+<span class="n">final_hooks</span> <span class="o">=</span> <span class="p">[</span><span class="n">deepr</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">LoggingTensorHookFactory</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;final_validation&quot;</span><span class="p">,</span> <span class="n">at_end</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -670,11 +670,11 @@ INFO:faiss:Loading faiss.
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">exporters</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">dpr</span><span class="o">.</span><span class="n">exporters</span><span class="o">.</span><span class="n">BestCheckpoint</span><span class="p">(</span><span class="n">metric</span><span class="o">=</span><span class="s2">&quot;loss&quot;</span><span class="p">),</span>
-    <span class="n">dpr</span><span class="o">.</span><span class="n">exporters</span><span class="o">.</span><span class="n">SavedModel</span><span class="p">(</span>
+    <span class="n">deepr</span><span class="o">.</span><span class="n">exporters</span><span class="o">.</span><span class="n">BestCheckpoint</span><span class="p">(</span><span class="n">metric</span><span class="o">=</span><span class="s2">&quot;loss&quot;</span><span class="p">),</span>
+    <span class="n">deepr</span><span class="o">.</span><span class="n">exporters</span><span class="o">.</span><span class="n">SavedModel</span><span class="p">(</span>
         <span class="n">path_saved_model</span><span class="o">=</span><span class="s2">&quot;model/saved_model&quot;</span><span class="p">,</span>
         <span class="n">fields</span><span class="o">=</span><span class="p">[</span>
-            <span class="n">dpr</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+            <span class="n">deepr</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
         <span class="p">]</span>
     <span class="p">)</span>
 <span class="p">]</span>
@@ -690,13 +690,13 @@ INFO:faiss:Loading faiss.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">trainer_job</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span>
+<span></span><span class="n">trainer_job</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span>
     <span class="n">path_model</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">,</span>
     <span class="n">pred_fn</span><span class="o">=</span><span class="n">multiply</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Multiply</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;y_pred&quot;</span><span class="p">),</span>
     <span class="n">loss_fn</span><span class="o">=</span><span class="n">multiply</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">SquaredL2</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;y_pred&quot;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;loss&quot;</span><span class="p">),</span>
-    <span class="n">optimizer_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">TensorflowOptimizer</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
-    <span class="n">train_input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
-    <span class="n">eval_input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
+    <span class="n">optimizer_fn</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">TensorflowOptimizer</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
+    <span class="n">train_input_fn</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
+    <span class="n">eval_input_fn</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
     <span class="n">prepro_fn</span><span class="o">=</span><span class="n">multiply</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">DefaultPrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">repeat_size</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
     <span class="n">train_spec</span><span class="o">=</span><span class="n">train_spec</span><span class="p">,</span>
     <span class="n">eval_spec</span><span class="o">=</span><span class="n">eval_spec</span><span class="p">,</span>
@@ -721,7 +721,7 @@ INFO:faiss:Loading faiss.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">cleanup_checkpoints</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">CleanupCheckpoints</span><span class="p">(</span><span class="n">path_model</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
+<span></span><span class="n">cleanup_checkpoints</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">CleanupCheckpoints</span><span class="p">(</span><span class="n">path_model</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -742,7 +742,7 @@ INFO:faiss:Loading faiss.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">optimize_saved_model</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">OptimizeSavedModel</span><span class="p">(</span>
+<span></span><span class="n">optimize_saved_model</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">OptimizeSavedModel</span><span class="p">(</span>
     <span class="n">path_saved_model</span><span class="o">=</span><span class="s2">&quot;model/saved_model&quot;</span><span class="p">,</span>
     <span class="n">path_optimized_model</span><span class="o">=</span><span class="s2">&quot;model/optimized_saved_model&quot;</span><span class="p">,</span>
     <span class="n">graph_name</span><span class="o">=</span><span class="s2">&quot;_model.pb&quot;</span><span class="p">,</span>
@@ -764,7 +764,7 @@ INFO:faiss:Loading faiss.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">export_xla_model_metadata</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">ExportXlaModelMetadata</span><span class="p">(</span>
+<span></span><span class="n">export_xla_model_metadata</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">ExportXlaModelMetadata</span><span class="p">(</span>
     <span class="n">path_optimized_model</span><span class="o">=</span> <span class="s2">&quot;model/optimized_saved_model&quot;</span><span class="p">,</span>
     <span class="n">path_metadata</span><span class="o">=</span><span class="s2">&quot;model/optimized_saved_model&quot;</span><span class="p">,</span>
     <span class="n">graph_name</span><span class="o">=</span><span class="s2">&quot;_model.pb&quot;</span><span class="p">,</span>
@@ -792,7 +792,7 @@ INFO:faiss:Loading faiss.
 <span></span><span class="n">predict_proto</span> <span class="o">=</span> <span class="n">multiply</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">PredictProto</span><span class="p">(</span>
     <span class="n">path_model</span><span class="o">=</span><span class="s2">&quot;model/optimized_saved_model&quot;</span><span class="p">,</span>
     <span class="n">graph_name</span><span class="o">=</span><span class="s2">&quot;_model.pb&quot;</span><span class="p">,</span>
-    <span class="n">input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
+    <span class="n">input_fn</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
     <span class="n">prepro_fn</span><span class="o">=</span><span class="n">multiply</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">InferencePrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;inputs/x&quot;</span><span class="p">),</span>
     <span class="n">feeds</span><span class="o">=</span><span class="s2">&quot;inputs/x&quot;</span><span class="p">,</span>
     <span class="n">fetches</span><span class="o">=</span><span class="s2">&quot;y_pred&quot;</span><span class="p">,</span>
@@ -807,7 +807,7 @@ INFO:faiss:Loading faiss.
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">predict_saved_model</span> <span class="o">=</span> <span class="n">multiply</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">PredictSavedModel</span><span class="p">(</span>
     <span class="n">path_saved_model</span><span class="o">=</span><span class="s2">&quot;model/saved_model&quot;</span><span class="p">,</span>
-    <span class="n">input_fn</span><span class="o">=</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
+    <span class="n">input_fn</span><span class="o">=</span><span class="n">deepr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">TFRecordReader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data.tfrecord&quot;</span><span class="p">),</span>
     <span class="n">prepro_fn</span><span class="o">=</span><span class="n">multiply</span><span class="o">.</span><span class="n">prepros</span><span class="o">.</span><span class="n">InferencePrepro</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">),</span>
     <span class="n">feeds</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
     <span class="n">fetches</span><span class="o">=</span><span class="s2">&quot;y_pred&quot;</span><span class="p">,</span>
@@ -824,7 +824,7 @@ INFO:faiss:Loading faiss.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">dpr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">([</span>
+<span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">deepr</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">([</span>
     <span class="n">build_job</span><span class="p">,</span>
     <span class="n">trainer_job</span><span class="p">,</span>
     <span class="n">cleanup_checkpoints</span><span class="p">,</span>

@@ -346,18 +346,31 @@ and this project adheres to <a class="reference external" href="http://semver.or
 <h2>[Unreleased]<a class="headerlink" href="#unreleased" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="added">
 <h3>Added<a class="headerlink" href="#added" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Add new name for <code class="docutils literal notranslate"><span class="pre">layers.Sequential</span></code> (now <code class="docutils literal notranslate"><span class="pre">layers.DAG</span></code> for Directed Acyclic Graph), kept old name for legacy reasons</p></li>
+<li><p>Add new argument options to <code class="docutils literal notranslate"><span class="pre">layers.DenseIndex</span></code> (reuse, trainable and initializer)</p></li>
+</ul>
 </div>
 <div class="section" id="changed">
 <h3>Changed<a class="headerlink" href="#changed" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Remove shortened imports <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">deepr</span> <span class="pre">as</span> <span class="pre">dpr</span></code> as it is useless.</p></li>
+</ul>
 </div>
 <div class="section" id="deprecated">
 <h3>Deprecated<a class="headerlink" href="#deprecated" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="removed">
 <h3>Removed<a class="headerlink" href="#removed" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Unnecessary logging in metrics tensors’ names resolution</p></li>
+</ul>
 </div>
 <div class="section" id="fixed">
 <h3>Fixed<a class="headerlink" href="#fixed" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Incorrect numpy requirement (incompatible with Tensorflow requirements)</p></li>
+</ul>
 </div>
 <div class="section" id="security">
 <h3>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h3>

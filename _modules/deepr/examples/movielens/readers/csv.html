@@ -175,7 +175,7 @@
 
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">deepr</span> <span class="k">as</span> <span class="nn">dpr</span>
+<span class="kn">import</span> <span class="nn">deepr</span>
 
 <span class="kn">from</span> <span class="nn">deepr.examples.movielens.utils</span> <span class="kn">import</span> <span class="n">fields</span>
 
@@ -195,7 +195,7 @@
 <span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="TrainCSVReader"><a class="viewcode-back" href="../../../../../_source/deepr.examples.movielens.readers.html#deepr.examples.movielens.readers.csv.TrainCSVReader">[docs]</a><span class="k">class</span> <span class="nc">TrainCSVReader</span><span class="p">(</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">Reader</span><span class="p">):</span>
+<div class="viewcode-block" id="TrainCSVReader"><a class="viewcode-back" href="../../../../../_source/deepr.examples.movielens.readers.html#deepr.examples.movielens.readers.csv.TrainCSVReader">[docs]</a><span class="k">class</span> <span class="nc">TrainCSVReader</span><span class="p">(</span><span class="n">deepr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">Reader</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Reader of MovieLens CSV files of the Multi-VAE paper.</span>
 
 <span class="sd">    See https://github.com/dawenl/vae_cf</span>
@@ -227,7 +227,7 @@
         <span class="p">]</span>
 
 <div class="viewcode-block" id="TrainCSVReader.as_dataset"><a class="viewcode-back" href="../../../../../_source/deepr.examples.movielens.readers.html#deepr.examples.movielens.readers.csv.TrainCSVReader.as_dataset">[docs]</a>    <span class="k">def</span> <span class="nf">as_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">with</span> <span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_csv</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">deepr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_csv</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
             <span class="n">tp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
         <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">tp</span><span class="p">[</span><span class="s2">&quot;uid&quot;</span><span class="p">],</span> <span class="n">tp</span><span class="p">[</span><span class="s2">&quot;sid&quot;</span><span class="p">]</span>
         <span class="n">n_users</span> <span class="o">=</span> <span class="n">rows</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
@@ -303,7 +303,7 @@
         <span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="TestCSVReader"><a class="viewcode-back" href="../../../../../_source/deepr.examples.movielens.readers.html#deepr.examples.movielens.readers.csv.TestCSVReader">[docs]</a><span class="k">class</span> <span class="nc">TestCSVReader</span><span class="p">(</span><span class="n">dpr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">Reader</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCSVReader"><a class="viewcode-back" href="../../../../../_source/deepr.examples.movielens.readers.html#deepr.examples.movielens.readers.csv.TestCSVReader">[docs]</a><span class="k">class</span> <span class="nc">TestCSVReader</span><span class="p">(</span><span class="n">deepr</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">Reader</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Reader of MovieLens test CSV files of the Multi-VAE paper.</span>
 
 <span class="sd">    See https://github.com/dawenl/vae_cf</span>
@@ -322,9 +322,9 @@
         <span class="p">]</span>
 
 <div class="viewcode-block" id="TestCSVReader.as_dataset"><a class="viewcode-back" href="../../../../../_source/deepr.examples.movielens.readers.html#deepr.examples.movielens.readers.csv.TestCSVReader.as_dataset">[docs]</a>    <span class="k">def</span> <span class="nf">as_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">with</span> <span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_csv_tr</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">deepr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_csv_tr</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
             <span class="n">tp_tr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-        <span class="k">with</span> <span class="n">dpr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_csv_te</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">deepr</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_csv_te</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
             <span class="n">tp_te</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 
         <span class="n">start_idx</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">tp_tr</span><span class="p">[</span><span class="s2">&quot;uid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">tp_te</span><span class="p">[</span><span class="s2">&quot;uid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>

@@ -189,6 +189,7 @@
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Product.html">deepr.layers.Product</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Rename.html">deepr.layers.Rename</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Select.html">deepr.layers.Select</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.DAG.html">deepr.layers.DAG</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Sequential.html">deepr.layers.Sequential</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.Slice.html">deepr.layers.Slice</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/deepr.layers.SliceFirst.html">deepr.layers.SliceFirst</a></li>
@@ -650,31 +651,34 @@ It takes as input / returns a dictionary of <code class="xref py py-class docuti
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Select.html#deepr.layers.Select" title="deepr.layers.Select"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Select</span></code></a>([inputs, outputs, indices, n_in])</p></td>
 <td><p>Layer to extract inputs / outputs from previous layers</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Sequential.html#deepr.layers.Sequential" title="deepr.layers.Sequential"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sequential</span></code></a>(*layers)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.DAG.html#deepr.layers.DAG" title="deepr.layers.DAG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DAG</span></code></a>(*layers)</p></td>
 <td><p>Class to easily compose layers in a deep learning network.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Slice.html#deepr.layers.Slice" title="deepr.layers.Slice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Slice</span></code></a>(begin, end, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Sequential.html#deepr.layers.Sequential" title="deepr.layers.Sequential"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sequential</span></code></a></p></td>
+<td><p>alias of <a class="reference internal" href="../_source/deepr.layers.html#deepr.layers.combinators.DAG" title="deepr.layers.combinators.DAG"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.combinators.DAG</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Slice.html#deepr.layers.Slice" title="deepr.layers.Slice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Slice</span></code></a>(begin, end, **kwargs)</p></td>
 <td><p>Slice Layer</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.SliceFirst.html#deepr.layers.SliceFirst" title="deepr.layers.SliceFirst"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SliceFirst</span></code></a>(size, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.SliceFirst.html#deepr.layers.SliceFirst" title="deepr.layers.SliceFirst"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SliceFirst</span></code></a>(size, **kwargs)</p></td>
 <td><p>Slice First Layer</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.SliceLast.html#deepr.layers.SliceLast" title="deepr.layers.SliceLast"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SliceLast</span></code></a>(size, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.SliceLast.html#deepr.layers.SliceLast" title="deepr.layers.SliceLast"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SliceLast</span></code></a>(size, **kwargs)</p></td>
 <td><p>Slice First Layer</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.StringJoin.html#deepr.layers.StringJoin" title="deepr.layers.StringJoin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StringJoin</span></code></a>([n_in, separator])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.StringJoin.html#deepr.layers.StringJoin" title="deepr.layers.StringJoin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StringJoin</span></code></a>([n_in, separator])</p></td>
 <td><p>String Join Layer</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Sum.html#deepr.layers.Sum" title="deepr.layers.Sum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sum</span></code></a>([n_in])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Sum.html#deepr.layers.Sum" title="deepr.layers.Sum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sum</span></code></a>([n_in])</p></td>
 <td><p>Sum Layer</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.ToDense.html#deepr.layers.ToDense" title="deepr.layers.ToDense"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ToDense</span></code></a>(default_value, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.ToDense.html#deepr.layers.ToDense" title="deepr.layers.ToDense"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ToDense</span></code></a>(default_value, **kwargs)</p></td>
 <td><p>Sparse to Dense Layer</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.ToFloat.html#deepr.layers.ToFloat" title="deepr.layers.ToFloat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ToFloat</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.ToFloat.html#deepr.layers.ToFloat" title="deepr.layers.ToFloat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ToFloat</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Cast tensor to float32</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.WeightedAverage.html#deepr.layers.WeightedAverage" title="deepr.layers.WeightedAverage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WeightedAverage</span></code></a>([default])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.WeightedAverage.html#deepr.layers.WeightedAverage" title="deepr.layers.WeightedAverage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WeightedAverage</span></code></a>([default])</p></td>
 <td><p>Weighted Average Layer</p></td>
 </tr>
 </tbody>

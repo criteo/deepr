@@ -174,13 +174,13 @@
 
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 
-<span class="kn">import</span> <span class="nn">deepr.layers</span> <span class="k">as</span> <span class="nn">dprl</span>
+<span class="kn">import</span> <span class="nn">deepr</span>
 
 
 <span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="Multiply"><a class="viewcode-back" href="../../../../../_source/deepr.examples.multiply.layers.html#deepr.examples.multiply.layers.model.Multiply">[docs]</a><span class="nd">@dprl</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;y_pred&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="Multiply"><a class="viewcode-back" href="../../../../../_source/deepr.examples.multiply.layers.html#deepr.examples.multiply.layers.model.Multiply">[docs]</a><span class="nd">@deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;y_pred&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">Multiply</span><span class="p">(</span><span class="n">tensors</span><span class="p">):</span>
     <span class="n">alpha</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;alpha&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">tensors</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;y_pred&quot;</span><span class="p">)</span></div>

@@ -172,7 +172,7 @@
 
 <span class="kn">import</span> <span class="nn">logging</span>
 
-<span class="kn">import</span> <span class="nn">deepr</span> <span class="k">as</span> <span class="nn">dpr</span>
+<span class="kn">import</span> <span class="nn">deepr</span>
 
 
 <span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -180,9 +180,9 @@
 
 <div class="viewcode-block" id="MultiLogLikelihoodCSS"><a class="viewcode-back" href="../../../../../_source/deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.multi.MultiLogLikelihoodCSS">[docs]</a><span class="k">def</span> <span class="nf">MultiLogLikelihoodCSS</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;MultiLogLikelihood Loss with Complementarity Sampling.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;userEmbeddings&quot;</span><span class="p">,</span> <span class="s2">&quot;targetPositives&quot;</span><span class="p">,</span> <span class="s2">&quot;targetNegatives&quot;</span><span class="p">,</span> <span class="s2">&quot;targetMask&quot;</span><span class="p">)),</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DenseIndex</span><span class="p">(</span>
+    <span class="k">return</span> <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DAG</span><span class="p">(</span>
+        <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;userEmbeddings&quot;</span><span class="p">,</span> <span class="s2">&quot;targetPositives&quot;</span><span class="p">,</span> <span class="s2">&quot;targetNegatives&quot;</span><span class="p">,</span> <span class="s2">&quot;targetMask&quot;</span><span class="p">)),</span>
+        <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DenseIndex</span><span class="p">(</span>
             <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;userEmbeddings&quot;</span><span class="p">,</span> <span class="s2">&quot;targetPositives&quot;</span><span class="p">),</span>
             <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;targetPositiveLogits&quot;</span><span class="p">,</span>
             <span class="n">units</span><span class="o">=</span><span class="n">vocab_size</span><span class="p">,</span>
@@ -190,7 +190,7 @@
             <span class="n">bias_name</span><span class="o">=</span><span class="s2">&quot;biases&quot;</span><span class="p">,</span>
             <span class="n">reuse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">),</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DenseIndex</span><span class="p">(</span>
+        <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DenseIndex</span><span class="p">(</span>
             <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;userEmbeddings&quot;</span><span class="p">,</span> <span class="s2">&quot;targetNegatives&quot;</span><span class="p">),</span>
             <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;targetNegativeLogits&quot;</span><span class="p">,</span>
             <span class="n">units</span><span class="o">=</span><span class="n">vocab_size</span><span class="p">,</span>
@@ -198,18 +198,18 @@
             <span class="n">bias_name</span><span class="o">=</span><span class="s2">&quot;biases&quot;</span><span class="p">,</span>
             <span class="n">reuse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">),</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">ToFloat</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;targetMask&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;targetWeight&quot;</span><span class="p">),</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">ExpandDims</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;targetMask&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;targetNegativeMask&quot;</span><span class="p">),</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">MultiLogLikelihoodCSS</span><span class="p">(</span>
+        <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">ToFloat</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;targetMask&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;targetWeight&quot;</span><span class="p">),</span>
+        <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">ExpandDims</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="s2">&quot;targetMask&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;targetNegativeMask&quot;</span><span class="p">),</span>
+        <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">MultiLogLikelihoodCSS</span><span class="p">(</span>
             <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;targetPositiveLogits&quot;</span><span class="p">,</span> <span class="s2">&quot;targetNegativeLogits&quot;</span><span class="p">,</span> <span class="s2">&quot;targetMask&quot;</span><span class="p">,</span> <span class="s2">&quot;targetNegativeMask&quot;</span><span class="p">),</span>
             <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;loss&quot;</span><span class="p">,</span>
             <span class="n">vocab_size</span><span class="o">=</span><span class="n">vocab_size</span><span class="p">,</span>
         <span class="p">),</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">TripletPrecision</span><span class="p">(</span>
+        <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">TripletPrecision</span><span class="p">(</span>
             <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;targetPositiveLogits&quot;</span><span class="p">,</span> <span class="s2">&quot;targetNegativeLogits&quot;</span><span class="p">,</span> <span class="s2">&quot;targetNegativeMask&quot;</span><span class="p">,</span> <span class="s2">&quot;targetWeight&quot;</span><span class="p">),</span>
             <span class="n">outputs</span><span class="o">=</span><span class="s2">&quot;triplet_precision&quot;</span><span class="p">,</span>
         <span class="p">),</span>
-        <span class="n">dpr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;loss&quot;</span><span class="p">,</span> <span class="s2">&quot;triplet_precision&quot;</span><span class="p">)),</span>
+        <span class="n">deepr</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;loss&quot;</span><span class="p">,</span> <span class="s2">&quot;triplet_precision&quot;</span><span class="p">)),</span>
     <span class="p">)</span></div>
 </pre></div>
 
