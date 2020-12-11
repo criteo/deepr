@@ -7,8 +7,8 @@ The format is based on `Keep a Changelog <http://keepachangelog.com/>`_
 and this project adheres to `Semantic Versioning <http://semver.org/>`_.
 
 
-[Unreleased]
-------------
+[2.11.0] - 2020-12-11
+---------------------
 
 Added
 ~~~~~
