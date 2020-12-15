@@ -99,7 +99,7 @@ class LoggingTensorHookFactory(TensorHookFactory):
         )
 
 
-class LoggingTensorHook(tf.train.LoggingTensorHook):
+class LoggingTensorHook(tf.estimator.LoggingTensorHook):
     """Logging Hook (tensors and custom metrics as functions)"""
 
     def __init__(
@@ -116,7 +116,7 @@ class LoggingTensorHook(tf.train.LoggingTensorHook):
         formatter: Callable[[str, Any], str] = _default_formatter,
     ):
         if "global_step" not in tensors:
-            tensors["global_step"] = tf.train.get_global_step()
+            tensors["global_step"] = tf.compat.v1.train.get_global_step()
         super().__init__(tensors=tensors, every_n_iter=every_n_iter, every_n_secs=every_n_secs, at_end=at_end)
         self.functions = functions
         self.name = name

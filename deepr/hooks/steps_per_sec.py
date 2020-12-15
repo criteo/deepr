@@ -11,7 +11,7 @@ from deepr.utils import graphite
 LOGGER = logging.getLogger(__name__)
 
 
-class StepsPerSecHook(tf.train.StepCounterHook):
+class StepsPerSecHook(tf.estimator.StepCounterHook):
     """Logs steps per seconds and num_examples_per_sec.
 
     Attributes

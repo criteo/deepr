@@ -51,9 +51,9 @@ class SliceLastPadded(base.Layer):
     def forward(self, tensors, mode: str = None):
         """Forward method of the layer"""
         vectors, mask = tensors
-        batch_size, sequence_length = tf.shape(vectors)[0], tf.shape(vectors)[1]
+        batch_size, sequence_length = tf.shape(input=vectors)[0], tf.shape(input=vectors)[1]
         indices = tf.tile(tf.expand_dims(tf.range(sequence_length), 0), [batch_size, 1])
         indices *= tf.cast(mask, tf.int32)
-        lengths = tf.reduce_max(indices, axis=-1)
+        lengths = tf.reduce_max(input_tensor=indices, axis=-1)
         positions = tf.stack([tf.range(0, batch_size), lengths], axis=1)
         return tf.gather_nd(vectors, tf.cast(positions, tf.int64))

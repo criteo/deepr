@@ -239,7 +239,7 @@ class Trainer(TrainerBase):
             train_spec : tf.estimator.TrainSpec
             eval_spec : tf.estimator.EvalSpec
         """
-        tf.set_random_seed(self.random_seed)
+        tf.compat.v1.set_random_seed(self.random_seed)
 
         # Create Estimator
         model_dir = self.path_model + "/checkpoints"
@@ -258,7 +258,7 @@ class Trainer(TrainerBase):
             ),
             model_dir=model_dir,
             config=tf.estimator.RunConfig(
-                session_config=tf.ConfigProto(**self.config_proto), model_dir=model_dir, **self.run_config
+                session_config=tf.compat.v1.ConfigProto(**self.config_proto), model_dir=model_dir, **self.run_config
             ),
         )
 

@@ -22,7 +22,7 @@ def import_graph_def(path_pb: str, name: str = ""):
         Path to .pb file
     """
     with gfile.FastGFile(f"{path_pb}", "rb") as f:
-        graph_def = tf.GraphDef()
+        graph_def = tf.compat.v1.GraphDef()
         graph_def.ParseFromString(f.read())
         tf.import_graph_def(graph_def, name=name)
 

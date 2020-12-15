@@ -65,7 +65,7 @@ class TrainerKeras(TrainerBase):
             train_spec : tf.estimator.TrainSpec
             eval_spec : tf.estimator.EvalSpec
         """
-        tf.set_random_seed(self.random_seed)
+        tf.compat.v1.set_random_seed(self.random_seed)
 
         # Create Estimator
         LOGGER.info("Converting Keras model to Estimator.")

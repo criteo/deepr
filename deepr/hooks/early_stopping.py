@@ -116,13 +116,13 @@ def _no_metric_improvement_fn(
 
 
 def _get_or_create_stop_var():
-    with tf.variable_scope(name_or_scope="signal_early_stopping", values=[], reuse=tf.AUTO_REUSE):
-        return tf.get_variable(
+    with tf.compat.v1.variable_scope(name_or_scope="signal_early_stopping", values=[], reuse=tf.compat.v1.AUTO_REUSE):
+        return tf.compat.v1.get_variable(
             name="STOP",
             shape=[],
             dtype=tf.bool,
-            initializer=tf.constant_initializer(False),
-            collections=[tf.GraphKeys.GLOBAL_VARIABLES],
+            initializer=tf.compat.v1.constant_initializer(False),
+            collections=[tf.compat.v1.GraphKeys.GLOBAL_VARIABLES],
             trainable=False,
         )
 
@@ -145,10 +145,10 @@ class _StopOnPredicateHook(tf.estimator.SessionRunHook):
         self._final_step = final_step
 
     def begin(self):
-        self._global_step_tensor = tf.train.get_global_step()
+        self._global_step_tensor = tf.compat.v1.train.get_global_step()
         self._stop_var = _get_or_create_stop_var()
-        self._stop_op = tf.assign(self._stop_var, True)
-        self._final_step_op = tf.assign(self._global_step_tensor, self._final_step) if self._final_step else None
+        self._stop_op = tf.compat.v1.assign(self._stop_var, True)
+        self._final_step_op = tf.compat.v1.assign(self._global_step_tensor, self._final_step) if self._final_step else None
 
     def before_run(self, run_context):
         del run_context

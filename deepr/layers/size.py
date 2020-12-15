@@ -14,4 +14,4 @@ class IsMinSize(base.Layer):
 
     def forward(self, tensors, mode: str = None):
         """Forward method of the layer"""
-        return tf.greater_equal(tf.size(tensors), self.size)
+        return tf.greater_equal(tf.size(input=tensors), self.size)

@@ -17,11 +17,11 @@ class Lookup(base.Layer):
 
     Attributes
     ----------
-    table_initializer_fn : Callable[[], tf.contrib.lookup.HashTable]
+    table_initializer_fn : Callable[[], tf.lookup.StaticHashTable]
         Function that creates a table
     """
 
-    def __init__(self, table_initializer_fn: Callable[[], tf.contrib.lookup.HashTable], **kwargs):
+    def __init__(self, table_initializer_fn: Callable[[], tf.lookup.StaticHashTable], **kwargs):
         super().__init__(n_in=1, n_out=1, **kwargs)
         self.table_initializer_fn = table_initializer_fn
 

@@ -197,7 +197,7 @@ class Scope(Layer):
 
     def forward(self, tensors, mode: str = None):
         """Forward method of the layer"""
-        with tf.variable_scope(self.name_or_scope, **self._kwargs):
+        with tf.compat.v1.variable_scope(self.name_or_scope, **self._kwargs):
             return self.layer.forward(tensors, mode)
 
 

@@ -19,5 +19,5 @@ class StepCounter(base.Metric):
     def __call__(self, tensors: Dict[str, tf.Tensor]) -> Dict[str, Tuple]:
         # pylint: disable=unused-argument
         value = base.get_metric_variable(name=self.name, shape=(), dtype=tf.int64)
-        update_op = tf.assign(value, value + 1)
+        update_op = tf.compat.v1.assign(value, value + 1)
         return {self.name: (value, update_op)}

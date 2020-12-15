@@ -45,5 +45,5 @@ class MaxValue(base.Metric):
 
 def max_value_metric(value, name):
     max_value = base.get_metric_variable(name=f"{name}_max", shape=(), dtype=value.dtype)
-    update_op = tf.assign(max_value, tf.maximum(value, max_value))
+    update_op = tf.compat.v1.assign(max_value, tf.maximum(value, max_value))
     return (max_value, update_op)

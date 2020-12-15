@@ -5,6 +5,7 @@ from typing import Dict, List
 import logging
 
 import tensorflow as tf
+import tensorflow_addons as tfa
 
 from deepr.optimizers import base
 
@@ -27,11 +28,11 @@ class TensorflowOptimizer(base.Optimizer):
     """
 
     OPTIMIZERS = {
-        "adam": tf.train.AdamOptimizer,
-        "adagrad": tf.train.AdagradOptimizer,
-        "lazyadam": tf.contrib.opt.LazyAdamOptimizer,
-        "sgd": tf.train.GradientDescentOptimizer,
-        "momentum": tf.train.MomentumOptimizer,
+        "adam": tf.compat.v1.train.AdamOptimizer,
+        "adagrad": tf.compat.v1.train.AdagradOptimizer,
+        "lazyadam": tfa.optimizers.LazyAdam,
+        "sgd": tf.compat.v1.train.GradientDescentOptimizer,
+        "momentum": tf.compat.v1.train.MomentumOptimizer,
     }
 
     def __init__(
@@ -81,7 +82,7 @@ class TensorflowOptimizer(base.Optimizer):
             grad_and_vars = zip(grads, variables)
 
         # Train op on all variables
-        train_op = optimizer.apply_gradients(grad_and_vars, global_step=tf.train.get_global_step())
+        train_op = optimizer.apply_gradients(grad_and_vars, global_step=tf.compat.v1.train.get_global_step())
 
         # Train op that skip some variables for a few steps
         if self.skip_vars and self.skip_steps:
@@ -92,10 +93,10 @@ class TensorflowOptimizer(base.Optimizer):
                     continue
                 non_skipped_grad_and_vars.append((grad, var))
             non_skipped_train_op = optimizer.apply_gradients(
-                non_skipped_grad_and_vars, global_step=tf.train.get_global_step()
+                non_skipped_grad_and_vars, global_step=tf.compat.v1.train.get_global_step()
             )
             train_op = tf.cond(
-                tf.train.get_global_step() <= self.skip_steps, lambda: non_skipped_train_op, lambda: train_op
+                pred=tf.compat.v1.train.get_global_step() <= self.skip_steps, true_fn=lambda: non_skipped_train_op, false_fn=lambda: train_op
             )
 
         # Compute gradients global norm for names in self.grad_norms
@@ -106,9 +107,9 @@ class TensorflowOptimizer(base.Optimizer):
                     if name in var.name:
                         if self.skip_vars and self.skip_steps and any(name in var.name for name in self.skip_vars):
                             grad = tf.cond(
-                                tf.train.get_global_step() <= self.skip_steps, lambda: tf.zeros_like(grad), lambda: grad
+                                pred=tf.compat.v1.train.get_global_step() <= self.skip_steps, true_fn=lambda: tf.zeros_like(grad), false_fn=lambda: grad
                             )
                         name_to_grads[name].append(grad)
-        grad_norms = {f"grad_norm_{name}": tf.global_norm(grads) for name, grads in name_to_grads.items()}
+        grad_norms = {f"grad_norm_{name}": tf.linalg.global_norm(grads) for name, grads in name_to_grads.items()}
 
         return {**grad_norms, "train_op": train_op}

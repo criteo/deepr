@@ -13,5 +13,5 @@ LOGGER = logging.getLogger(__name__)
 
 @deepr.layers.layer(inputs="x", outputs="y_pred")
 def Multiply(tensors):
-    alpha = tf.get_variable(name="alpha", shape=(), dtype=tf.float32)
+    alpha = tf.compat.v1.get_variable(name="alpha", shape=(), dtype=tf.float32)
     return tf.multiply(alpha, tensors, name="y_pred")

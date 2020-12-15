@@ -18,10 +18,10 @@ class Reader(ABC):
 
     def __iter__(self):
         dataset = self.as_dataset()
-        iterator = tf.data.make_initializable_iterator(dataset)
+        iterator = tf.compat.v1.data.make_initializable_iterator(dataset)
         next_element = iterator.get_next()
-        sess = tf.Session()
-        sess.run(tf.tables_initializer())
+        sess = tf.compat.v1.Session()
+        sess.run(tf.compat.v1.tables_initializer())
         sess.run(iterator.initializer)
         try:
             while True:

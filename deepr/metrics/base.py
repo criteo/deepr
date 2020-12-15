@@ -108,11 +108,11 @@ def sanitize_metric_name(name: str) -> str:
 
 
 def get_metric_variable(name: str, shape: Tuple, dtype) -> tf.Variable:
-    return tf.get_variable(
+    return tf.compat.v1.get_variable(
         name=sanitize_metric_name(name),
         shape=shape,
         dtype=dtype,
-        initializer=tf.constant_initializer(value=0),
-        collections=[tf.GraphKeys.LOCAL_VARIABLES, tf.GraphKeys.METRIC_VARIABLES],
+        initializer=tf.compat.v1.constant_initializer(value=0),
+        collections=[tf.compat.v1.GraphKeys.LOCAL_VARIABLES, tf.compat.v1.GraphKeys.METRIC_VARIABLES],
         trainable=False,
     )

@@ -76,7 +76,7 @@ def UserEmbedding(tensors: tf.Tensor, mode: str, keep_prob: float, reduce_mode: 
     # Drop entries without re-scaling (not classical dropout)
     if mode == deepr.TRAIN:
         LOGGER.info("Applying random mask to inputs (TRAIN only)")
-        mask_random = tf.random.uniform(tf.shape(mask)) <= keep_prob
+        mask_random = tf.random.uniform(tf.shape(input=mask)) <= keep_prob
         mask = tf.logical_and(mask, mask_random)
 
     weights = tf.cast(mask, tf.float32)
@@ -85,20 +85,20 @@ def UserEmbedding(tensors: tf.Tensor, mode: str, keep_prob: float, reduce_mode: 
     if reduce_mode == "l2":
         weights = tf.nn.l2_normalize(weights, axis=-1)
     elif reduce_mode == "average":
-        weights = tf.div_no_nan(weights, tf.reduce_sum(weights, axis=-1, keepdims=True))
+        weights = tf.math.divide_no_nan(weights, tf.reduce_sum(input_tensor=weights, axis=-1, keepdims=True))
     elif reduce_mode == "sum":
         pass
     else:
         raise ValueError(f"Reduce mode {reduce_mode} unknown (must be 'l2', 'average' or 'sum')")
 
-    return tf.reduce_sum(embeddings * tf.expand_dims(weights, axis=-1), axis=-2)
+    return tf.reduce_sum(input_tensor=embeddings * tf.expand_dims(weights, axis=-1), axis=-2)
 
 
 @deepr.layers.layer(n_in=1, n_out=1)
 def AddBias(tensors: tf.Tensor):
     dim = tensors.shape[-1]
-    biases = tf.get_variable(
-        name="encoder/biases", shape=(dim,), initializer=tf.truncated_normal_initializer(stddev=0.001)
+    biases = tf.compat.v1.get_variable(
+        name="encoder/biases", shape=(dim,), initializer=tf.compat.v1.truncated_normal_initializer(stddev=0.001)
     )
     return tensors + tf.expand_dims(biases, axis=0)
 
@@ -109,8 +109,8 @@ def Projection(tensors: tf.Tensor, variable_name: str, reuse: bool = False, tran
     dim = int(tensors.shape[-1])
     if not isinstance(dim, int):
         raise TypeError(f"Expected static shape for {tensors} but got {dim} (must be INT)")
-    with tf.variable_scope(tf.get_variable_scope(), reuse=reuse):
-        projection_matrix = tf.get_variable(name=variable_name, shape=[dim, dim])
+    with tf.compat.v1.variable_scope(tf.compat.v1.get_variable_scope(), reuse=reuse):
+        projection_matrix = tf.compat.v1.get_variable(name=variable_name, shape=[dim, dim])
 
     return tf.matmul(tensors, projection_matrix, transpose_b=transpose)
 
@@ -119,12 +119,12 @@ def Projection(tensors: tf.Tensor, variable_name: str, reuse: bool = False, tran
 def Logits(tensors: tf.Tensor, vocab_size: int, dim: int, reuse: bool = True, trainable: bool = True):
     """Computes logits as <u, i> + b_i."""
     # Retrieve variables (embeddings and biases)
-    with tf.variable_scope(tf.get_variable_scope(), reuse=reuse):
-        embeddings = tf.get_variable(name="embeddings", shape=(vocab_size, dim))
-    biases = tf.get_variable(
+    with tf.compat.v1.variable_scope(tf.compat.v1.get_variable_scope(), reuse=reuse):
+        embeddings = tf.compat.v1.get_variable(name="embeddings", shape=(vocab_size, dim))
+    biases = tf.compat.v1.get_variable(
         name="biases",
         shape=(vocab_size,),
-        initializer=tf.truncated_normal_initializer(stddev=0.001),
+        initializer=tf.compat.v1.truncated_normal_initializer(stddev=0.001),
         trainable=trainable,
     )
 

@@ -84,4 +84,4 @@ class BooleanMask(base.Layer):
     def forward(self, tensors, mode: str = None):
         """Forward method of the layer"""
         tensor, mask = tensors
-        return tf.boolean_mask(tensor, mask)
+        return tf.boolean_mask(tensor=tensor, mask=mask)

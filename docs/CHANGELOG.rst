@@ -6,6 +6,18 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog <http://keepachangelog.com/>`_
 and this project adheres to `Semantic Versioning <http://semver.org/>`_.
 
+[3.1] - 2020-12-15
+------------------
+
+Added
+~~~~~
+- Add import of tensorflow-addons
+
+Changed
+~~~~~~~
+- Ran tf_upgrade_v2 script to make repo compatible with tensorflow-2
+- Manually replaced tf.contrib functions with corresponding functions in tensorflow-2
+
 
 [2.11.0] - 2020-12-11
 ---------------------

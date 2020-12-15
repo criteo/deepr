@@ -16,7 +16,7 @@ class Accuracy(base.Metric):
         self.name = name
 
     def __call__(self, tensors: Dict[str, tf.Tensor]) -> Dict[str, Tuple]:
-        return {self.name: tf.metrics.accuracy(labels=tensors[self.gold], predictions=tensors[self.pred])}
+        return {self.name: tf.compat.v1.metrics.accuracy(labels=tensors[self.gold], predictions=tensors[self.pred])}
 
 
 class AccuracyAtK(base.Metric):
@@ -30,5 +30,5 @@ class AccuracyAtK(base.Metric):
 
     def __call__(self, tensors: Dict[str, tf.Tensor]) -> Dict[str, Tuple]:
         in_top_k = tf.math.in_top_k(targets=tensors[self.gold], predictions=tensors[self.logits], k=self.k)
-        prop_in_top_k = tf.reduce_mean(tf.cast(in_top_k, tf.float32))
-        return {self.name: tf.metrics.mean(prop_in_top_k)}
+        prop_in_top_k = tf.reduce_mean(input_tensor=tf.cast(in_top_k, tf.float32))
+        return {self.name: tf.compat.v1.metrics.mean(prop_in_top_k)}

@@ -49,11 +49,11 @@ class SavedModelPredictor(base.Predictor):
         self.fetches = fetches.split(",") if isinstance(fetches, str) else fetches
 
         # Create session and import graph
-        session = tf.Session(graph=tf.Graph())
+        session = tf.compat.v1.Session(graph=tf.Graph())
         with session.graph.as_default():
-            metagraph_def = tf.saved_model.load(session, ("serve",), path)
+            metagraph_def = tf.compat.v1.saved_model.load(session, ("serve",), path)
             signature_def = metagraph_def.signature_def[
-                tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY
+                tf.saved_model.DEFAULT_SERVING_SIGNATURE_DEF_KEY
             ]
 
         # Retrieve feed tensors

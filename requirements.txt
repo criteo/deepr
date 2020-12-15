@@ -8,5 +8,6 @@ numpy==1.19.4
 psutil==5.7.3
 pyarrow==2.0.0
 skein==0.8.0
-tensorflow>=1.15,<2
+tensorflow==2.3
+tensorflow-addons==0.11.2
 tf-yarn==0.6.0

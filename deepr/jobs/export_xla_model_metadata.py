@@ -43,7 +43,7 @@ class ExportXlaModelMetadata(base.Job):
 
     def run(self):
         # Create session and import graph under scope "model"
-        session = tf.Session(graph=tf.Graph())
+        session = tf.compat.v1.Session(graph=tf.Graph())
         with session.graph.as_default():
             import_graph_def(f"{self.path_optimized_model}/{self.graph_name}", name="")
 
@@ -61,7 +61,7 @@ class ExportXlaModelMetadata(base.Job):
             LOGGER.info(f"Metadata successfully saved to {self.path_metadata}/{self.metadata_name}")
 
 
-def get_nodes(graph_def: tf.GraphDef, names):
+def get_nodes(graph_def: tf.compat.v1.GraphDef, names):
     nodes = {}
     for node in graph_def.node:
         if node.name in names:

@@ -24,7 +24,7 @@ class Predictor(abc.ABC):
         Tensorflow session
     """
 
-    def __init__(self, session: tf.Session, feed_tensors: Dict[str, tf.Tensor], fetch_tensors: Dict[str, tf.Tensor]):
+    def __init__(self, session: tf.compat.v1.Session, feed_tensors: Dict[str, tf.Tensor], fetch_tensors: Dict[str, tf.Tensor]):
         self.session = session
         self.feed_tensors = feed_tensors
         self.fetch_tensors = fetch_tensors
@@ -47,9 +47,9 @@ class Predictor(abc.ABC):
             def _gen():
                 with self.session.graph.as_default():
                     dataset = inputs()
-                    iterator = dataset.make_initializable_iterator()
+                    iterator = tf.compat.v1.data.make_initializable_iterator(dataset)
                     next_element = iterator.get_next()
-                    self.session.run(tf.tables_initializer())
+                    self.session.run(tf.compat.v1.tables_initializer())
                     self.session.run(iterator.initializer)
                     try:
                         while True:

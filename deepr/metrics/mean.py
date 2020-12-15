@@ -23,7 +23,7 @@ class Mean(base.Metric):
 
     def __call__(self, tensors: Dict[str, tf.Tensor]) -> Dict[str, Tuple]:
         tensors = base.get_scalars(tensors, names=self.tensors, pattern=self.pattern)
-        return {name: tf.metrics.mean(value) for name, value in tensors.items()}
+        return {name: tf.compat.v1.metrics.mean(value) for name, value in tensors.items()}
 
 
 class FiniteMean(base.Metric):
@@ -49,12 +49,12 @@ def finite_mean_metric(value, name):
 
     # New Variables Values
     is_finite = tf.math.is_finite(value)
-    new_acc = tf.cond(is_finite, lambda: acc + value, lambda: acc)
-    new_num = tf.cond(is_finite, lambda: num + 1, lambda: num)
+    new_acc = tf.cond(pred=is_finite, true_fn=lambda: acc + value, false_fn=lambda: acc)
+    new_num = tf.cond(pred=is_finite, true_fn=lambda: num + 1, false_fn=lambda: num)
 
     # Return value and update op
-    update_op = tf.group(tf.assign(acc, new_acc), tf.assign(num, new_num))
-    val = tf.div_no_nan(acc, tf.to_float(num))
+    update_op = tf.group(tf.compat.v1.assign(acc, new_acc), tf.compat.v1.assign(num, new_num))
+    val = tf.math.divide_no_nan(acc, tf.cast(num, dtype=tf.float32))
     return (val, update_op)
 
 
@@ -79,6 +79,6 @@ class DecayMean(base.Metric):
 
 def decay_mean_metric(value, decay: float, name: str):
     last = base.get_metric_variable(name=f"{name}_decayed_mean", shape=(), dtype=value.dtype)
-    new_value = tf.cond(tf.equal(last, 0), lambda: value, lambda: decay * last + (1.0 - decay) * value)
-    update_op = tf.assign(last, new_value)
+    new_value = tf.cond(pred=tf.equal(last, 0), true_fn=lambda: value, false_fn=lambda: decay * last + (1.0 - decay) * value)
+    update_op = tf.compat.v1.assign(last, new_value)
     return (last, update_op)

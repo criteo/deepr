@@ -49,18 +49,18 @@ class NDCGAtK(deepr.metrics.Metric):
         equal_topk = tf.equal(tf.cast(indices, tf.int64), tf.expand_dims(targets, axis=-1))
 
         # Discounted cumulative gain
-        pos_in_target = tf.reduce_sum(tf.cast(equal_topk, tf.float32), axis=-2)
+        pos_in_target = tf.reduce_sum(input_tensor=tf.cast(equal_topk, tf.float32), axis=-2)
         discount = tf.math.log(2.0) / tf.math.log(tf.range(2, self.k + 2, dtype=tf.float32))
         for _ in range(ndims + 1):
             discount = tf.expand_dims(discount, axis=0)
-        dcg = tf.reduce_sum(discount * pos_in_target, axis=-1)
+        dcg = tf.reduce_sum(input_tensor=discount * pos_in_target, axis=-1)
 
         # Ideal discounted cumulative gain
-        num_targets = tf.reduce_sum(tf.cast(tf.not_equal(targets, -1), tf.int64), axis=-1)
+        num_targets = tf.reduce_sum(input_tensor=tf.cast(tf.not_equal(targets, -1), tf.int64), axis=-1)
         num_targets = tf.math.minimum(num_targets, self.k)
         all_in_target = tf.cast(tf.sequence_mask(num_targets, maxlen=self.k), tf.float32)
-        idcg = tf.reduce_sum(discount * all_in_target, axis=-1)
+        idcg = tf.reduce_sum(input_tensor=discount * all_in_target, axis=-1)
 
         # Normalized DCG
-        ndcg = tf.div_no_nan(dcg, idcg)
-        return {self.name: tf.metrics.mean(ndcg)}
+        ndcg = tf.math.divide_no_nan(dcg, idcg)
+        return {self.name: tf.compat.v1.metrics.mean(ndcg)}

@@ -61,8 +61,8 @@ class MaskedTopOne(base.Layer):
         positives, negatives, mask, weights = tensors
         positives, negatives = make_same_shape([positives, negatives], broadcast=False)
         losses = tf.nn.sigmoid(negatives - positives) + tf.nn.sigmoid(tf.square(negatives))
-        event_scores = WeightedAverage()((losses, tf.to_float(mask)))
+        event_scores = WeightedAverage()((losses, tf.cast(mask, dtype=tf.float32)))
         # Each event contributes according to its weight
-        event_weights = weights * tf.to_float(tf.reduce_any(mask, axis=-1))
+        event_weights = weights * tf.cast(tf.reduce_any(input_tensor=mask, axis=-1), dtype=tf.float32)
         event_losses = event_scores * event_weights
-        return tf.div_no_nan(tf.reduce_sum(event_losses), tf.reduce_sum(event_weights))
+        return tf.math.divide_no_nan(tf.reduce_sum(input_tensor=event_losses), tf.reduce_sum(input_tensor=event_weights))
