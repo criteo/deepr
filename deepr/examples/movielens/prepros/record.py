@@ -58,5 +58,5 @@ def RecordPrepro(
 
 @deepr.layers.layer(n_in=1, n_out=1)
 def SequenceMask(tensors):
-    size = tf.size(tensors)
+    size = tf.size(input=tensors)
     return tf.sequence_mask(size)

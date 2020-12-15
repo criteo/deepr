@@ -30,7 +30,7 @@ class Build(deepr.jobs.Job):
             example = tf.train.Example(features=tf.train.Features(feature=features))
             return example
 
-        with tf.python_io.TFRecordWriter(self.path_dataset) as writer:
+        with tf.io.TFRecordWriter(self.path_dataset) as writer:
             for data in _generator_fn():
                 example = _dict_to_example(data)
                 writer.write(example.SerializeToString())

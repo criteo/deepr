@@ -35,13 +35,13 @@ class SummarySaverHookFactory(TensorHookFactory):
 
         # Define summaries
         for name, tensor in tensors.items():
-            tf.summary.scalar(name, tensor)
+            tf.compat.v1.summary.scalar(name, tensor)
 
-        return tf.train.SummarySaverHook(
+        return tf.estimator.SummarySaverHook(
             save_steps=self.save_steps,
             save_secs=self.save_secs,
             output_dir=self.output_dir,
             summary_writer=self.summary_writer,
             scaffold=self.scaffold,
-            summary_op=tf.summary.merge_all(),
+            summary_op=tf.compat.v1.summary.merge_all(),
         )

@@ -31,11 +31,11 @@ class VariableValue(base.Metric):
 
     def __call__(self, tensors: Dict[str, tf.Tensor]) -> Dict[str, Tuple]:
         # pylint: disable=unused-argument
-        with tf.variable_scope(tf.get_variable_scope(), reuse=True):
-            variable = tf.get_variable(self.name)
+        with tf.compat.v1.variable_scope(tf.compat.v1.get_variable_scope(), reuse=True):
+            variable = tf.compat.v1.get_variable(self.name)
             if variable.shape == ():
                 metric = variable
             else:
                 LOGGER.info(f"Variable {self.name} has shape {variable.shape}, computing norm instead")
-                metric = tf.global_norm([variable])
+                metric = tf.linalg.global_norm([variable])
         return {self.name: (metric, tf.no_op())}

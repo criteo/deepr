@@ -35,9 +35,9 @@ class MultiLogLikelihoodCSS(base.Layer):
         positive_logits, negative_logits, positive_mask, negative_mask = tensors
 
         # Remove -max for numerical stability
-        max_negative_logits = tf.reduce_max(negative_logits, axis=-1)
+        max_negative_logits = tf.reduce_max(input_tensor=negative_logits, axis=-1)
         max_logits = tf.maximum(positive_logits, max_negative_logits)
-        max_logits = tf.stop_gradient(tf.where(tf.is_finite(max_logits), max_logits, tf.zeros_like(max_logits)))
+        max_logits = tf.stop_gradient(tf.compat.v1.where(tf.math.is_finite(max_logits), max_logits, tf.zeros_like(max_logits)))
         positive_logits -= max_logits
         negative_logits -= tf.expand_dims(max_logits, axis=-1)
 
@@ -47,15 +47,15 @@ class MultiLogLikelihoodCSS(base.Layer):
         u_ns *= tf.cast(negative_mask, tf.float32)
 
         # Approximate partition function using negatives
-        Z_c = tf.reduce_sum(u_ns, axis=-1)
-        num_negatives = tf.reduce_sum(tf.cast(negative_mask, tf.float32), axis=-1)
-        Z = u_p + (self.vocab_size - 1) * tf.div_no_nan(Z_c, num_negatives)
+        Z_c = tf.reduce_sum(input_tensor=u_ns, axis=-1)
+        num_negatives = tf.reduce_sum(input_tensor=tf.cast(negative_mask, tf.float32), axis=-1)
+        Z = u_p + (self.vocab_size - 1) * tf.math.divide_no_nan(Z_c, num_negatives)
 
         # Compute Approximate Log Softmax
-        log_p = positive_logits - tf.log(Z)
+        log_p = positive_logits - tf.math.log(Z)
         log_p *= tf.cast(positive_mask, tf.float32)
 
         # Sum (Multinomial Log Likelihood) over positives
-        multi_likelihood = tf.reduce_sum(log_p, axis=-1)
+        multi_likelihood = tf.reduce_sum(input_tensor=log_p, axis=-1)
 
-        return -tf.reduce_mean(multi_likelihood)
+        return -tf.reduce_mean(input_tensor=multi_likelihood)

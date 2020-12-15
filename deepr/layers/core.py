@@ -95,7 +95,7 @@ class Dense(base.Layer):
         self._kwargs = kwargs
 
     def forward(self, tensors, mode: str = None):
-        return tf.layers.dense(tensors, units=self.units, **self._kwargs)
+        return tf.compat.v1.layers.dense(tensors, units=self.units, **self._kwargs)
 
 
 class DenseIndex(base.Layer):
@@ -156,21 +156,21 @@ class DenseIndex(base.Layer):
         input_dim = int(x.shape[-1])
         shape = (self.units, input_dim)
 
-        with tf.variable_scope(tf.get_variable_scope(), reuse=self.kernel_reuse):
-            kernel_var = tf.get_variable(
+        with tf.compat.v1.variable_scope(tf.compat.v1.get_variable_scope(), reuse=self.kernel_reuse):
+            kernel_var = tf.compat.v1.get_variable(
                 name=self.kernel_name, shape=shape, trainable=self.kernel_trainable, initializer=self.kernel_initializer
             )
-            rows = tf.nn.embedding_lookup(kernel_var, tf.maximum(indices, 0))
+            rows = tf.nn.embedding_lookup(params=kernel_var, ids=tf.maximum(indices, 0))
             res = DotProduct()((x, rows))
         if self.bias_name:
-            with tf.variable_scope(tf.get_variable_scope(), reuse=self.bias_reuse):
-                bias_var = tf.get_variable(
+            with tf.compat.v1.variable_scope(tf.compat.v1.get_variable_scope(), reuse=self.bias_reuse):
+                bias_var = tf.compat.v1.get_variable(
                     name=self.bias_name,
                     shape=(self.units,),
                     trainable=self.bias_trainable,
                     initializer=self.bias_initializer,
                 )
-                biases = tf.nn.embedding_lookup(bias_var, tf.maximum(indices, 0))
+                biases = tf.nn.embedding_lookup(params=bias_var, ids=tf.maximum(indices, 0))
                 res = Add()((res, biases))
         if self.activation is not None:
             res = self.activation(res)
@@ -192,8 +192,8 @@ def AddWithWeight(tensors: Tuple[tf.Tensor, tf.Tensor], start: float, end: float
         if steps is None:
             raise ValueError(f"end = {end} but steps is None (should specify steps)")
         LOGGER.info(f"Adding {t1} + beta * {t2} with beta decaying from {start} to {end} in {steps} steps.")
-        beta = tf.train.polynomial_decay(
-            float(start), tf.train.get_global_step(), steps, float(end), power=1.0, cycle=False
+        beta = tf.compat.v1.train.polynomial_decay(
+            float(start), tf.compat.v1.train.get_global_step(), steps, float(end), power=1.0, cycle=False
         )
         return t1 + beta * t2
     elif start is not None:
@@ -279,7 +279,7 @@ class Conv1d(base.Layer):
         self._kwargs = kwargs
 
     def forward(self, tensors, mode: str = None):
-        return tf.layers.conv1d(
+        return tf.compat.v1.layers.conv1d(
             inputs=tensors,
             filters=self.filters,
             kernel_size=self.kernel_size,
@@ -299,6 +299,6 @@ class Softmax(base.Layer):
         """Forward method of the layer"""
         tensor, mask = tensors
         mask = tf.cast(mask, tf.float32)
-        tensor_exp = tf.exp(tensor - tf.reduce_max(tensor * mask, axis=-1, keepdims=True))
-        sum_tensor_exp = tf.reduce_sum(tf.multiply(tensor_exp, mask), axis=-1, keepdims=True)
-        return tf.div_no_nan(tensor_exp, sum_tensor_exp) * mask
+        tensor_exp = tf.exp(tensor - tf.reduce_max(input_tensor=tensor * mask, axis=-1, keepdims=True))
+        sum_tensor_exp = tf.reduce_sum(input_tensor=tf.multiply(tensor_exp, mask), axis=-1, keepdims=True)
+        return tf.math.divide_no_nan(tensor_exp, sum_tensor_exp) * mask

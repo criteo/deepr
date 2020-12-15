@@ -91,9 +91,9 @@ class Field:
     def startswith(self, prefix: str):
         return self.name.startswith(prefix)
 
-    def as_placeholder(self, batch: bool = False) -> tf.placeholder:
+    def as_placeholder(self, batch: bool = False) -> tf.compat.v1.placeholder:
         shape = tuple([None] + list(self.shape)) if batch else self.shape
-        return tf.placeholder(dtype=self.dtype, shape=shape, name=self.name)
+        return tf.compat.v1.placeholder(dtype=self.dtype, shape=shape, name=self.name)
 
     def to_feature(self, value: np.array) -> Union[tf.train.Feature, tf.train.FeatureList]:
         """Convert value to tf.train.Feature or tf.train.FeatureList.

@@ -14,7 +14,7 @@ from deepr.utils import mlflow
 LOGGER = logging.getLogger(__name__)
 
 
-class LogVariablesInitHook(tf.train.SessionRunHook):
+class LogVariablesInitHook(tf.estimator.SessionRunHook):
     """Log Variables Statistics after initialization."""
 
     def __init__(
@@ -34,7 +34,7 @@ class LogVariablesInitHook(tf.train.SessionRunHook):
         # Compute norms and num_zeros for each variable in the graph
         average_norms = defaultdict(list)
         num_zeros = defaultdict(list)
-        for var in tf.global_variables():
+        for var in tf.compat.v1.global_variables():
             if self.whitelist is not None and not any(name in var.name.lower() for name in self.whitelist):
                 continue
             if self.blacklist is not None and any(name in var.name.lower() for name in self.blacklist):

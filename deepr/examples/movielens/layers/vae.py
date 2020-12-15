@@ -33,7 +33,7 @@ def VAEModel(
             variable_name="embeddings" if share_embeddings else "encoder/embeddings",
             shape=(vocab_size, dims_encode[0]),
             trainable=train_embeddings,
-            initializer=tf.contrib.layers.xavier_initializer(seed=seed),
+            initializer=tf.compat.v1.keras.initializers.VarianceScaling(scale=1.0, mode="fan_avg", distribution="uniform", seed=seed),
         ),
         WeightedSum(
             inputs=("inputEmbeddings", "inputMask"), outputs="averageEmbeddings", keep_prob=keep_prob, seed=seed
@@ -80,10 +80,10 @@ def WeightedSum(tensors: tf.Tensor, mode: str, keep_prob: float, seed: int):
     weights = tf.nn.l2_normalize(weights, axis=-1)
     if mode == deepr.TRAIN:
         LOGGER.info("Applying random mask to inputs (TRAIN only)")
-        weights = tf.nn.dropout(weights, keep_prob=keep_prob, seed=seed)
+        weights = tf.nn.dropout(weights, rate=1 - (keep_prob), seed=seed)
 
     embeddings *= tf.expand_dims(weights, axis=-1)
-    return tf.reduce_sum(embeddings, axis=-2)
+    return tf.reduce_sum(input_tensor=embeddings, axis=-2)
 
 
 @deepr.layers.layer(n_in=1, n_out=1)
@@ -95,9 +95,9 @@ def Projection(tensors: tf.Tensor, variable_name: str, seed: int):
         raise TypeError(f"Expected static shape for {tensors} but got {dim} (must be INT)")
 
     # Retrieve projection matrix
-    with tf.variable_scope(tf.get_variable_scope(), reuse=False):
-        projection_matrix = tf.get_variable(
-            name=variable_name, shape=[dim, dim], initializer=tf.contrib.layers.xavier_initializer(seed=seed)
+    with tf.compat.v1.variable_scope(tf.compat.v1.get_variable_scope(), reuse=False):
+        projection_matrix = tf.compat.v1.get_variable(
+            name=variable_name, shape=[dim, dim], initializer=tf.compat.v1.keras.initializers.VarianceScaling(scale=1.0, mode="fan_avg", distribution="uniform", seed=seed)
         )
 
     return tf.matmul(tensors, projection_matrix)
@@ -106,8 +106,8 @@ def Projection(tensors: tf.Tensor, variable_name: str, seed: int):
 @deepr.layers.layer(n_in=1, n_out=1)
 def AddBias(tensors: tf.Tensor, variable_name: str, seed: int):
     dim = tensors.shape[-1]
-    biases = tf.get_variable(
-        name=variable_name, shape=(dim,), initializer=tf.truncated_normal_initializer(stddev=0.001, seed=seed)
+    biases = tf.compat.v1.get_variable(
+        name=variable_name, shape=(dim,), initializer=tf.compat.v1.truncated_normal_initializer(stddev=0.001, seed=seed)
     )
     return tensors + tf.expand_dims(biases, axis=0)
 
@@ -115,24 +115,24 @@ def AddBias(tensors: tf.Tensor, variable_name: str, seed: int):
 @deepr.layers.layer(n_in=1, n_out=3)
 def Encode(tensors: tf.Tensor, dims: Tuple, activation, seed: int):
     """Encode tensor, apply KL constraint."""
-    with tf.variable_scope("encoder"):
+    with tf.compat.v1.variable_scope("encoder"):
         # Hidden layers
         for dim in dims[:-1]:
-            tensors = tf.layers.dense(
+            tensors = tf.compat.v1.layers.dense(
                 inputs=tensors,
                 units=dim,
                 activation=activation,
-                kernel_initializer=tf.contrib.layers.xavier_initializer(seed=seed),
-                bias_initializer=tf.truncated_normal_initializer(stddev=0.001, seed=seed),
+                kernel_initializer=tf.compat.v1.keras.initializers.VarianceScaling(scale=1.0, mode="fan_avg", distribution="uniform", seed=seed),
+                bias_initializer=tf.compat.v1.truncated_normal_initializer(stddev=0.001, seed=seed),
             )
 
         # Last layer predicts mean and log variance of the latent user
-        tensors = tf.layers.dense(
+        tensors = tf.compat.v1.layers.dense(
             inputs=tensors,
             units=2 * dims[-1],
             activation=None,
-            kernel_initializer=tf.contrib.layers.xavier_initializer(seed=seed),
-            bias_initializer=tf.truncated_normal_initializer(stddev=0.001, seed=seed),
+            kernel_initializer=tf.compat.v1.keras.initializers.VarianceScaling(scale=1.0, mode="fan_avg", distribution="uniform", seed=seed),
+            bias_initializer=tf.compat.v1.truncated_normal_initializer(stddev=0.001, seed=seed),
         )
 
         # Predict prior statistics
@@ -141,7 +141,7 @@ def Encode(tensors: tf.Tensor, dims: Tuple, activation, seed: int):
         std = tf.exp(0.5 * logvar)
 
         # KL divergence with standard normal
-        KL = tf.reduce_mean(tf.reduce_sum(0.5 * (-logvar + tf.exp(logvar) + mu ** 2 - 1), axis=1))
+        KL = tf.reduce_mean(input_tensor=tf.reduce_sum(input_tensor=0.5 * (-logvar + tf.exp(logvar) + mu ** 2 - 1), axis=1))
 
         return mu, std, KL
 
@@ -151,7 +151,7 @@ def GaussianNoise(tensors: Tuple[tf.Tensor, tf.Tensor], mode: str, seed: int):
     mu, std = tensors
     if mode == deepr.TRAIN:
         LOGGER.info("Sampling latent variable (TRAIN only).")
-        epsilon = tf.random_normal(tf.shape(std), seed=seed)
+        epsilon = tf.random.normal(tf.shape(input=std), seed=seed)
         return mu + std * epsilon
     return mu
 
@@ -159,14 +159,14 @@ def GaussianNoise(tensors: Tuple[tf.Tensor, tf.Tensor], mode: str, seed: int):
 @deepr.layers.layer(n_in=1, n_out=1)
 def Decode(tensors: tf.Tensor, dims: Tuple, activation, seed: int):
     """Decode tensor."""
-    with tf.variable_scope("decoder"):
+    with tf.compat.v1.variable_scope("decoder"):
         for dim in dims:
-            tensors = tf.layers.dense(
+            tensors = tf.compat.v1.layers.dense(
                 inputs=tensors,
                 units=dim,
                 activation=activation,
-                kernel_initializer=tf.contrib.layers.xavier_initializer(seed=seed),
-                bias_initializer=tf.truncated_normal_initializer(stddev=0.001, seed=seed),
+                kernel_initializer=tf.compat.v1.keras.initializers.VarianceScaling(scale=1.0, mode="fan_avg", distribution="uniform", seed=seed),
+                bias_initializer=tf.compat.v1.truncated_normal_initializer(stddev=0.001, seed=seed),
             )
     return tensors
 
@@ -174,15 +174,15 @@ def Decode(tensors: tf.Tensor, dims: Tuple, activation, seed: int):
 @deepr.layers.layer(n_in=1, n_out=1)
 def Logits(tensors: tf.Tensor, vocab_size: int, dim: int, trainable: bool, reuse: bool, seed: int):
     """Compute logits given user and create target item embeddings."""
-    with tf.variable_scope(tf.get_variable_scope(), reuse=reuse):
-        embeddings = tf.get_variable(
+    with tf.compat.v1.variable_scope(tf.compat.v1.get_variable_scope(), reuse=reuse):
+        embeddings = tf.compat.v1.get_variable(
             name="embeddings",
             shape=(vocab_size, dim),
             trainable=trainable,
-            initializer=tf.contrib.layers.xavier_initializer(seed=seed),
+            initializer=tf.compat.v1.keras.initializers.VarianceScaling(scale=1.0, mode="fan_avg", distribution="uniform", seed=seed),
         )
-    biases = tf.get_variable(
-        name="biases", shape=(vocab_size,), initializer=tf.truncated_normal_initializer(stddev=0.001, seed=seed)
+    biases = tf.compat.v1.get_variable(
+        name="biases", shape=(vocab_size,), initializer=tf.compat.v1.truncated_normal_initializer(stddev=0.001, seed=seed)
     )
     logits = tf.linalg.matmul(tensors, embeddings, transpose_b=True) + tf.expand_dims(biases, axis=0)
     return logits

@@ -29,4 +29,4 @@ class MultiLogLikelihood(base.Layer):
         """
         logits, classes = tensors
         log_softmax = tf.nn.log_softmax(logits)
-        return -tf.reduce_mean(tf.reduce_sum(log_softmax * tf.cast(classes, tf.float32), axis=-1))
+        return -tf.reduce_mean(input_tensor=tf.reduce_sum(input_tensor=log_softmax * tf.cast(classes, tf.float32), axis=-1))

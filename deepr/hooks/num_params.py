@@ -11,7 +11,7 @@ from deepr.utils import mlflow
 LOGGER = logging.getLogger(__name__)
 
 
-class NumParamsHook(tf.train.SessionRunHook):
+class NumParamsHook(tf.estimator.SessionRunHook):
     """Log Number of Parameters after session creation"""
 
     def __init__(self, use_mlflow: bool = False):
@@ -45,6 +45,6 @@ def get_num_params() -> Tuple[int, int]:
             total += var_params
         return total
 
-    num_global = _count(tf.global_variables())
-    num_trainable = _count(tf.trainable_variables())
+    num_global = _count(tf.compat.v1.global_variables())
+    num_trainable = _count(tf.compat.v1.trainable_variables())
     return num_global, num_trainable

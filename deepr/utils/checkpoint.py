@@ -25,32 +25,32 @@ def save_variables_in_ckpt(path: str, variables: Dict[str, Optional[np.ndarray]]
     variables_tf = {}
     variables_to_save = []
     with tf.Graph().as_default():
-        with tf.variable_scope(tf.get_variable_scope(), reuse=tf.AUTO_REUSE):
+        with tf.compat.v1.variable_scope(tf.compat.v1.get_variable_scope(), reuse=tf.compat.v1.AUTO_REUSE):
             for name, value in variables.items():
                 if value is not None:
                     # We create placeholders and assignment ops here to
                     # get over the 2GB GraphDef limit and not put the
                     # variable values directly in the graph
-                    var = tf.get_variable(
+                    var = tf.compat.v1.get_variable(
                         name=name,
                         shape=value.shape,
                         dtype=NUMPY_TO_TF_DTYPES[value.dtype],
-                        partitioner=tf.fixed_size_partitioner(num_shards=num_shards_embeddings, axis=0)
+                        partitioner=tf.compat.v1.fixed_size_partitioner(num_shards=num_shards_embeddings, axis=0)
                         if num_shards_embeddings is not None
                         else None,
                     )
-                    placeholder = tf.placeholder(dtype=value.dtype, shape=value.shape)
+                    placeholder = tf.compat.v1.placeholder(dtype=value.dtype, shape=value.shape)
                     assign = var.assign(placeholder)
                     variables_tf[name] = (assign, placeholder, value)
                     variables_to_save.append(var)
 
-        saver = tf.train.Saver(variables_to_save)
+        saver = tf.compat.v1.train.Saver(variables_to_save)
         full_path = os.path.join(path, "initial_variables.ckpt")
 
         # There is no reason to use GPU for getting variable values
         LOGGER.info("Saving TF Variables %s to %s", list(variables.keys()), full_path)
-        with tf.Session(config=tf.ConfigProto(device_count={"GPU": 0})) as sess:
-            sess.run(tf.global_variables_initializer())
+        with tf.compat.v1.Session(config=tf.compat.v1.ConfigProto(device_count={"GPU": 0})) as sess:
+            sess.run(tf.compat.v1.global_variables_initializer())
             for name, (assign, placeholder, value) in variables_tf.items():
                 LOGGER.info("Assigning variable %s with shape %s", name, value.shape)
                 sess.run(assign, {placeholder: value})

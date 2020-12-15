@@ -92,15 +92,15 @@ class OptimizeSavedModel(base.Job):
         LOGGER.info(f"Using SavedModel {latest}")
 
         # Reload SavedModel Graph, optimize and export
-        with tf.Session(graph=tf.Graph()) as sess:
-            meta_graph_def = tf.saved_model.loader.load(sess, ["serve"], latest)
+        with tf.compat.v1.Session(graph=tf.Graph()) as sess:
+            meta_graph_def = tf.compat.v1.saved_model.loader.load(sess, ["serve"], latest)
             graph_def = meta_graph_def.graph_def
 
             # Add table initializer if present, or create it
             if INIT_ALL_TABLES in {node.name for node in graph_def.node}:
                 fetch.append(INIT_ALL_TABLES)
             else:
-                table_initializers = tf.get_collection(tf.GraphKeys.TABLE_INITIALIZERS)
+                table_initializers = tf.compat.v1.get_collection(tf.compat.v1.GraphKeys.TABLE_INITIALIZERS)
                 if table_initializers:
                     LOGGER.info(f"Adding {INIT_ALL_TABLES} Node to the graph")
                     table_init_op = tf.group(*table_initializers, name=INIT_ALL_TABLES)
@@ -136,7 +136,7 @@ class OptimizeSavedModel(base.Job):
             LOGGER.info(f"Optimized Model successfully exported to {self.path_optimized_model}/{self.graph_name}")
 
 
-def rename_nodes(graph_def: tf.GraphDef, new_names: Dict[str, str]) -> tf.GraphDef:
+def rename_nodes(graph_def: tf.compat.v1.GraphDef, new_names: Dict[str, str]) -> tf.compat.v1.GraphDef:
     """Rename items in the graph to new ones defined in new_names
 
     Parameters
@@ -159,7 +159,7 @@ def rename_nodes(graph_def: tf.GraphDef, new_names: Dict[str, str]) -> tf.GraphD
     # Create copy of each node with a new name
     nodes = []
     for node in graph_def.node:
-        new_node = tf.NodeDef()
+        new_node = tf.compat.v1.NodeDef()
         new_node.CopyFrom(node)
         nodes.append(new_node)
         if node.name in new_names:
@@ -184,12 +184,12 @@ def rename_nodes(graph_def: tf.GraphDef, new_names: Dict[str, str]) -> tf.GraphD
                     attr.list.s[idx] = f"loc:@{new_name}".encode()
 
     # Create Graph with renamed nodes
-    new_graph = tf.GraphDef()
+    new_graph = tf.compat.v1.GraphDef()
     new_graph.node.extend(nodes)
     return new_graph
 
 
-def make_placeholders(graph_def: tf.GraphDef, names: List[str]) -> tf.GraphDef:
+def make_placeholders(graph_def: tf.compat.v1.GraphDef, names: List[str]) -> tf.compat.v1.GraphDef:
     """Create placeholders for names and remove other placeholders
 
     Parameters
@@ -215,12 +215,12 @@ def make_placeholders(graph_def: tf.GraphDef, names: List[str]) -> tf.GraphDef:
         if node.name not in names and node.op == "Placeholder":
             LOGGER.info(f"Removing placeholder {node.name}")
             continue
-        new_node = tf.NodeDef()
+        new_node = tf.compat.v1.NodeDef()
         if node.name in names and node.op != "Placeholder":
             LOGGER.info(f"Creating placeholder {node.name}")
             new_node.name = node.name
             new_node.op = "Placeholder"
-            new_node.attr["shape"].CopyFrom(tf.AttrValue(shape=node.attr["_output_shapes"].list.shape[0]))
+            new_node.attr["shape"].CopyFrom(tf.compat.v1.AttrValue(shape=node.attr["_output_shapes"].list.shape[0]))
             new_node.attr["dtype"].CopyFrom(node.attr["T"])
         else:
             new_node.CopyFrom(node)
@@ -232,6 +232,6 @@ def make_placeholders(graph_def: tf.GraphDef, names: List[str]) -> tf.GraphDef:
         raise TensorsNotFoundError(missing)
 
     # Create Graph with renamed nodes
-    new_graph = tf.GraphDef()
+    new_graph = tf.compat.v1.GraphDef()
     new_graph.node.extend(nodes)
     return new_graph

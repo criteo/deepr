@@ -32,11 +32,11 @@ class BPRMax(base.Layer):
         positives, negatives = tensors
         positives, negatives = make_same_shape([positives, negatives], broadcast=False)
         softmax_scores = Softmax()((negatives, tf.ones_like(negatives)))
-        losses = -tf.log(tf.reduce_sum(tf.multiply(softmax_scores, tf.nn.sigmoid(positives - negatives)), -1))
+        losses = -tf.math.log(tf.reduce_sum(input_tensor=tf.multiply(softmax_scores, tf.nn.sigmoid(positives - negatives)), axis=-1))
         # add bpr_max regularisation
         bpr_regularization = tf.multiply(
             tf.constant(self.bpr_max_regularizer, dtype=tf.float32),
-            tf.reduce_sum(tf.multiply(softmax_scores, tf.square(negatives)), -1),
+            tf.reduce_sum(input_tensor=tf.multiply(softmax_scores, tf.square(negatives)), axis=-1),
         )
         scores = losses + bpr_regularization
         return Average()(scores, mode)
@@ -69,20 +69,20 @@ class MaskedBPRMax(base.Layer):
         positives, negatives, mask, weights = tensors
         mask = tf.cast(mask, tf.float32)
         positives, negatives = make_same_shape([positives, negatives], broadcast=False)
-        no_sampled_logits = tf.cast(tf.greater_equal(tf.reduce_sum(mask, -1), 0), tf.float32)
+        no_sampled_logits = tf.cast(tf.greater_equal(tf.reduce_sum(input_tensor=mask, axis=-1), 0), tf.float32)
         softmax_scores = Softmax()((negatives, mask))
         # compute bpr_max losses
         losses = -tf.multiply(
             no_sampled_logits,
-            tf.log(
-                tf.reduce_sum(tf.multiply(tf.multiply(softmax_scores, tf.nn.sigmoid(positives - negatives)), mask), 2)
+            tf.math.log(
+                tf.reduce_sum(input_tensor=tf.multiply(tf.multiply(softmax_scores, tf.nn.sigmoid(positives - negatives)), mask), axis=2)
                 + 1e-8
             ),
         )
         # compute regularization part
         bpr_regularization = tf.multiply(
             tf.constant(self.bpr_max_regularizer, dtype=tf.float32),
-            tf.reduce_sum(tf.multiply(tf.multiply(softmax_scores, tf.square(negatives)), mask), 2),
+            tf.reduce_sum(input_tensor=tf.multiply(tf.multiply(softmax_scores, tf.square(negatives)), mask), axis=2),
         )
         losses_with_regularization = losses + bpr_regularization
         # One loss per event, average of scores : (batch, num_events)
@@ -90,6 +90,6 @@ class MaskedBPRMax(base.Layer):
         # event_scores = WeightedAverage()((losses_with_regularization, mask))
         event_scores = losses_with_regularization
         # Each event contributes according to its weight
-        event_weights = weights * tf.to_float(tf.reduce_any(tf.cast(mask, tf.bool), axis=-1))
+        event_weights = weights * tf.cast(tf.reduce_any(input_tensor=tf.cast(mask, tf.bool), axis=-1), dtype=tf.float32)
         event_losses = event_scores * event_weights
-        return tf.div_no_nan(tf.reduce_sum(event_losses), tf.reduce_sum(event_weights))
+        return tf.math.divide_no_nan(tf.reduce_sum(input_tensor=event_losses), tf.reduce_sum(input_tensor=event_weights))

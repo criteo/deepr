@@ -46,9 +46,9 @@ class FromExample(core.Map):
                 tensors = {**context, **sequence}
             else:
                 if self.batched:
-                    tensors = tf.io.parse_example(serialized, features=features)
+                    tensors = tf.io.parse_example(serialized=serialized, features=features)
                 else:
-                    tensors = tf.io.parse_single_example(serialized, features=features)
+                    tensors = tf.io.parse_single_example(serialized=serialized, features=features)
 
             return {
                 field.name: (

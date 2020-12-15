@@ -62,11 +62,11 @@ class MaskedTopOneMax(base.Layer):
         """
         positives, negatives, mask, weights = tensors
         positives, negatives = make_same_shape([positives, negatives], broadcast=False)
-        softmax_scores = Softmax()((negatives, tf.to_float(mask)))
+        softmax_scores = Softmax()((negatives, tf.cast(mask, dtype=tf.float32)))
         losses = tf.multiply(softmax_scores, tf.nn.sigmoid(negatives - positives) + tf.nn.sigmoid(tf.square(negatives)))
         # One loss per event, average of scores : (batch, num_events)
-        event_scores = WeightedAverage()((losses, tf.to_float(mask)))
+        event_scores = WeightedAverage()((losses, tf.cast(mask, dtype=tf.float32)))
         # Each event contributes according to its weight
-        event_weights = weights * tf.to_float(tf.reduce_any(mask, axis=-1))
+        event_weights = weights * tf.cast(tf.reduce_any(input_tensor=mask, axis=-1), dtype=tf.float32)
         event_losses = event_scores * event_weights
-        return tf.div_no_nan(tf.reduce_sum(event_losses), tf.reduce_sum(event_weights))
+        return tf.math.divide_no_nan(tf.reduce_sum(input_tensor=event_losses), tf.reduce_sum(input_tensor=event_weights))

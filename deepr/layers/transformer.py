@@ -112,9 +112,9 @@ def FeedForward(inputs: str, outputs: str, units_inner: int, units_readout: int,
 def Normalization(tensors: tf.Tensor, epsilon=1e-8):
     """Normalization Layer."""
     params_shape = tensors.get_shape()[-1:]
-    mean, variance = tf.nn.moments(tensors, [-1], keep_dims=True)
-    beta = tf.get_variable("beta", shape=params_shape, initializer=tf.zeros_initializer())
-    gamma = tf.get_variable("gamma", shape=params_shape, initializer=tf.ones_initializer())
+    mean, variance = tf.nn.moments(x=tensors, axes=[-1], keepdims=True)
+    beta = tf.compat.v1.get_variable("beta", shape=params_shape, initializer=tf.compat.v1.zeros_initializer())
+    gamma = tf.compat.v1.get_variable("gamma", shape=params_shape, initializer=tf.compat.v1.ones_initializer())
     normalized = (tensors - mean) / ((variance + epsilon) ** 0.5)
     return gamma * normalized + beta
 
@@ -135,7 +135,7 @@ def PositionalEncoding(tensors: tf.Tensor, max_sequence_length=10000, trainable=
     trainable : bool
         Train / not train position encoding
     """
-    with tf.variable_scope("positional_encoding"):
+    with tf.compat.v1.variable_scope("positional_encoding"):
         emb_dim = tensors.get_shape().as_list()[-1]
 
         if trainable:
@@ -149,20 +149,20 @@ def PositionalEncoding(tensors: tf.Tensor, max_sequence_length=10000, trainable=
             )
             position_embeddings_np[:, 0::2] = np.sin(position_embeddings_np[:, 0::2])
             position_embeddings_np[:, 1::2] = np.cos(position_embeddings_np[:, 1::2])
-            initializer = tf.constant_initializer(position_embeddings_np)
+            initializer = tf.compat.v1.constant_initializer(position_embeddings_np)
 
-        position_embeddings = tf.get_variable(
+        position_embeddings = tf.compat.v1.get_variable(
             "position_embeddings",
             dtype=tf.float32,
             shape=[max_sequence_length, emb_dim],
-            regularizer=tf.contrib.layers.l2_regularizer(0.0) if trainable else None,
+            regularizer=tf.keras.regularizers.l2(0.5 * (0.0)) if trainable else None,
             initializer=initializer,
             trainable=trainable,
         )
 
-        batch_size, sequence_length = tf.shape(tensors)[0], tf.shape(tensors)[1]
+        batch_size, sequence_length = tf.shape(input=tensors)[0], tf.shape(input=tensors)[1]
         position_indices = tf.tile(tf.expand_dims(tf.range(sequence_length), 0), [batch_size, 1])
-        return tensors + tf.nn.embedding_lookup(position_embeddings, position_indices)
+        return tensors + tf.nn.embedding_lookup(params=position_embeddings, ids=position_indices)
 
 
 @base.layer(n_in=1, n_out=1)
@@ -188,7 +188,7 @@ def AttentionMask(tensors: tf.Tensor, use_look_ahead_mask: bool):
     if not use_look_ahead_mask:
         return attention_mask
 
-    sequence_length = tf.shape(tensors)[1]
+    sequence_length = tf.shape(input=tensors)[1]
     sub_diag_ones = tf.linalg.band_part(tf.ones((sequence_length, sequence_length), dtype=tf.bool), -1, 0)
     sub_diag_ones = tf.expand_dims(sub_diag_ones, axis=0)
     return tf.logical_and(attention_mask, sub_diag_ones)
@@ -234,11 +234,11 @@ class SelfMultiheadAttention(base.Layer):
         x, mask = tensors
         dim = x.get_shape().as_list()[-1]
 
-        with tf.variable_scope("multihead_attention"):
+        with tf.compat.v1.variable_scope("multihead_attention"):
             # Shape = [batch_size, sequence_length, d_model]
-            query = tf.layers.dense(x, self.num_heads * self.dim_head, use_bias=False, name="query")
-            key = tf.layers.dense(x, self.num_heads * self.dim_head, use_bias=False, name="key")
-            value = tf.layers.dense(x, self.num_heads * self.dim_head, use_bias=False, name="values")
+            query = tf.compat.v1.layers.dense(x, self.num_heads * self.dim_head, use_bias=False, name="query")
+            key = tf.compat.v1.layers.dense(x, self.num_heads * self.dim_head, use_bias=False, name="key")
+            value = tf.compat.v1.layers.dense(x, self.num_heads * self.dim_head, use_bias=False, name="values")
 
             # Shape = [batch_size, num_heads, sequence_length, dim_head]
             query_heads = self.split_heads(query)
@@ -252,7 +252,7 @@ class SelfMultiheadAttention(base.Layer):
             outputs = self.join_heads(scaled_attention)
 
             # Shape = [batch_size, sequence_length, dim]
-            outputs = tf.layers.dense(outputs, dim)
+            outputs = tf.compat.v1.layers.dense(outputs, dim)
 
             if self.residual_connection:
                 outputs += x
@@ -261,15 +261,15 @@ class SelfMultiheadAttention(base.Layer):
 
     def split_heads(self, x):
         """Split the last dimension into heads."""
-        batch_size = tf.shape(x)[0]
+        batch_size = tf.shape(input=x)[0]
         x = tf.reshape(x, (batch_size, -1, self.num_heads, self.dim_head))
-        x = tf.transpose(x, perm=[0, 2, 1, 3])
+        x = tf.transpose(a=x, perm=[0, 2, 1, 3])
         return x
 
     def join_heads(self, x):
         """Join head split tensor (Inverse of split_heads)."""
-        batch_size = tf.shape(x)[0]
-        x = tf.transpose(x, perm=[0, 2, 1, 3])
+        batch_size = tf.shape(input=x)[0]
+        x = tf.transpose(a=x, perm=[0, 2, 1, 3])
         x = tf.reshape(x, (batch_size, -1, self.num_heads * self.dim_head))
         return x
 

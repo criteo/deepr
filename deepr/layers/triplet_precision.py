@@ -37,5 +37,5 @@ class TripletPrecision(base.Layer):
         event_triplet = WeightedAverage()((tf.cast(positives > negatives, tf.float32), tf.cast(mask, tf.float32)), mode)
 
         # Each event contributes according to its weight
-        event_weights = weights * tf.to_float(tf.reduce_any(mask, axis=-1))
-        return tf.div_no_nan(tf.reduce_sum(event_triplet * event_weights), tf.reduce_sum(event_weights))
+        event_weights = weights * tf.cast(tf.reduce_any(input_tensor=mask, axis=-1), dtype=tf.float32)
+        return tf.math.divide_no_nan(tf.reduce_sum(input_tensor=event_triplet * event_weights), tf.reduce_sum(input_tensor=event_weights))

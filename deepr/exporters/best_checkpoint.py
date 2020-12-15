@@ -106,7 +106,7 @@ def read_eval_metrics(eval_dir: str) -> Dict:
         return dict()
     summaries = defaultdict(dict)  # type: Dict[int, Dict[str, float]]
     for path in Path(eval_dir).glob(_SUMMARY_PATTERN):
-        for event in tf.train.summary_iterator(str(path)):
+        for event in tf.compat.v1.train.summary_iterator(str(path)):
             if not event.HasField("summary"):
                 continue
             metrics = {}

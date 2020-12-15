@@ -237,7 +237,7 @@ class Layer(ABC):
         reuse : bool, optional
             Encapsulates layer call in a variable scope with reuse=reuse
         """
-        with tf.variable_scope(tf.get_variable_scope(), reuse=reuse):
+        with tf.compat.v1.variable_scope(tf.compat.v1.get_variable_scope(), reuse=reuse):
             if isinstance(tensors, dict):
                 # Check that tensors is coherent with self.inputs
                 if not set(to_flat_tuple(self.inputs)) <= set(tensors):

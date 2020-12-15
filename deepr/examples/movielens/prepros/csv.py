@@ -46,11 +46,11 @@ def CSVPrepro(
 
 @deepr.layers.layer(n_in=1, n_out=1)
 def SequenceMask(tensors):
-    size = tf.size(tensors)
+    size = tf.size(input=tensors)
     return tf.sequence_mask(size)
 
 
 @deepr.layers.layer(n_in=1, n_out=1)
 def RandomNegatives(tensors, num_negatives, vocab_size):
-    negatives = tf.random.uniform(shape=[tf.shape(tensors)[0], 1, num_negatives], maxval=vocab_size, dtype=tf.int64)
+    negatives = tf.random.uniform(shape=[tf.shape(input=tensors)[0], 1, num_negatives], maxval=vocab_size, dtype=tf.int64)
     return negatives

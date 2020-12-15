@@ -28,5 +28,5 @@ def make_same_shape(tensors: List[tf.Tensor], broadcast: bool = True) -> List[tf
 
     tensors = [_add_missing_dims(t, len(biggest.shape) - len(t.shape)) for t in tensors]
     if broadcast:
-        tensors = [tf.broadcast_to(t, tf.shape(biggest)) for t in tensors]
+        tensors = [tf.broadcast_to(t, tf.shape(input=biggest)) for t in tensors]
     return tensors

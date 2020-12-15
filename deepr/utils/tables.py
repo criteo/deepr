@@ -81,14 +81,16 @@ class TableContext:
 
 def table_from_file(name: str, path: str = None, key_dtype=None, reuse: bool = False, default_value: int = -1):
     """Create table from file"""
-    if reuse is True or (reuse is tf.AUTO_REUSE and name in TableContext.active()):
+    if reuse is True or (reuse is tf.compat.v1.AUTO_REUSE and name in TableContext.active()):
         return TableContext.active().get(name)
     else:
         LOGGER.info(f"Creating table {name} from {path}")
         if path is None:
             raise ValueError("Path cannot be None")
-        table = tf.contrib.lookup.index_table_from_file(
-            vocabulary_file=path, name=name, key_dtype=key_dtype, default_value=default_value
+        table = tf.lookup.StaticVocabularyTable(
+            tf.lookup.TextFileInitializer(
+                filename=path, name=name, key_dtype=key_dtype, default_value=default_value
+            )
         )
         if TableContext.is_active():
             TableContext.active().set(name=name, table=table)
@@ -99,14 +101,16 @@ def index_to_string_table_from_file(
     name: str, path: str = None, vocab_size: int = None, default_value="UNK", reuse: bool = False
 ):
     """Create reverse table from file"""
-    if reuse is True or (reuse is tf.AUTO_REUSE and name in TableContext.active()):
+    if reuse is True or (reuse is tf.compat.v1.AUTO_REUSE and name in TableContext.active()):
         return TableContext.active().get(name)
     else:
         LOGGER.info(f"Creating reverse table {name} from {path}")
         if path is None:
             raise ValueError("Path cannot be None")
-        table = tf.contrib.lookup.index_to_string_table_from_file(
-            vocabulary_file=path, name=name, vocab_size=vocab_size, default_value=default_value
+        table = tf.lookup.StaticVocabularyTable(
+            tf.lookup.TextFileInitializer(
+                filename=path, name=name, key_dtype=key_dtype, default_value=default_value
+            )
         )
         if TableContext.is_active():
             TableContext.active().set(name=name, table=table)
@@ -117,7 +121,7 @@ def table_from_mapping(
     name: str, mapping: Dict = None, default_value=None, key_dtype=None, value_dtype=None, reuse: bool = False
 ):
     """Create table from mapping"""
-    if reuse is True or (reuse is tf.AUTO_REUSE and name in TableContext.active()):
+    if reuse is True or (reuse is tf.compat.v1.AUTO_REUSE and name in TableContext.active()):
         return TableContext.active().get(name)
     else:
         LOGGER.info(f"Creating table {name} from mapping.")
@@ -140,8 +144,8 @@ def table_from_mapping(
             value_dtype = TensorType(type(values_np[0].item())).tf
 
         # Create table
-        table = tf.contrib.lookup.HashTable(
-            tf.contrib.lookup.KeyValueTensorInitializer(
+        table = table = tf.lookup.StaticHashTable(
+            tf.lookup.KeyValueTensorInitializer(
                 keys=keys_np, values=values_np, key_dtype=key_dtype, value_dtype=value_dtype
             ),
             name=name,

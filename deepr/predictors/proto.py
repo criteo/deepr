@@ -38,7 +38,7 @@ class ProtoPredictor(base.Predictor):
         self.fetches = fetches.split(",") if isinstance(fetches, str) else fetches
 
         # Create session and import graph
-        session = tf.Session(graph=tf.Graph())
+        session = tf.compat.v1.Session(graph=tf.Graph())
         with session.graph.as_default():
             import_graph_def(path)
 

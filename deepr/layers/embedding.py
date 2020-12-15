@@ -37,18 +37,18 @@ class Embedding(base.Layer):
 
     def forward(self, tensors, mode: str = None):
         """Forward method of the layer"""
-        with tf.variable_scope(tf.get_variable_scope(), reuse=self.reuse):
-            embeddings_var = tf.get_variable(
+        with tf.compat.v1.variable_scope(tf.compat.v1.get_variable_scope(), reuse=self.reuse):
+            embeddings_var = tf.compat.v1.get_variable(
                 name=self.variable_name,
                 trainable=self.trainable,
                 shape=self.shape,
                 initializer=self.initializer,
-                partitioner=tf.fixed_size_partitioner(num_shards=self.num_shards, axis=0)
+                partitioner=tf.compat.v1.fixed_size_partitioner(num_shards=self.num_shards, axis=0)
                 if self.num_shards is not None
                 else None,
             )
             return tf.nn.embedding_lookup(
-                embeddings_var, tf.maximum(tensors, 0), partition_strategy=self.partition_strategy
+                params=embeddings_var, ids=tf.maximum(tensors, 0), partition_strategy=self.partition_strategy
             )
 
 

@@ -39,7 +39,7 @@ class TableInitializer(base.Prepro):
     created by the ``TableInitializer``.
     """
 
-    def __init__(self, table_initializer_fn: Callable[[], tf.contrib.lookup.HashTable]):
+    def __init__(self, table_initializer_fn: Callable[[], tf.lookup.StaticHashTable]):
         self.table_initializer_fn = table_initializer_fn
 
     def apply(self, dataset: tf.data.Dataset, mode: str = None) -> tf.data.Dataset:

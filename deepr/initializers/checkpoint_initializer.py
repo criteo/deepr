@@ -13,4 +13,4 @@ class CheckpointInitializer:
         self.assignment_map = assignment_map
 
     def __call__(self):
-        tf.train.init_from_checkpoint(self.path_init_ckpt, self.assignment_map)
+        tf.compat.v1.train.init_from_checkpoint(self.path_init_ckpt, self.assignment_map)

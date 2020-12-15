@@ -47,4 +47,4 @@ def VAELoss(loss: str, vocab_size: int, beta_start: float, beta_end: float, beta
 @deepr.layers.layer(n_in=2, n_out=1)
 def L2Loss(tensors):
     logits, targets = tensors
-    return tf.reduce_mean(tf.reduce_sum(tf.square(logits - tf.cast(targets, tf.float32)), axis=-1))
+    return tf.reduce_mean(input_tensor=tf.reduce_sum(input_tensor=tf.square(logits - tf.cast(targets, tf.float32)), axis=-1))

@@ -51,8 +51,8 @@ class RecallAtK(deepr.metrics.Metric):
         equal_topk = tf.equal(tf.cast(indices, tf.int64), tf.expand_dims(targets, axis=-1))
 
         # Compute number of items in top k
-        num_in_topk = tf.reduce_sum(tf.reduce_sum(tf.cast(equal_topk, tf.int64), axis=-1), axis=-1)
-        num_targets = tf.reduce_sum(tf.cast(tf.not_equal(targets, -1), tf.int64), axis=-1)
+        num_in_topk = tf.reduce_sum(input_tensor=tf.reduce_sum(input_tensor=tf.cast(equal_topk, tf.int64), axis=-1), axis=-1)
+        num_targets = tf.reduce_sum(input_tensor=tf.cast(tf.not_equal(targets, -1), tf.int64), axis=-1)
         num_targets = tf.math.minimum(num_targets, self.k)
-        recall_at_k = tf.div_no_nan(tf.cast(num_in_topk, tf.float32), tf.cast(num_targets, tf.float32))
-        return {self.name: tf.metrics.mean(recall_at_k)}
+        recall_at_k = tf.math.divide_no_nan(tf.cast(num_in_topk, tf.float32), tf.cast(num_targets, tf.float32))
+        return {self.name: tf.compat.v1.metrics.mean(recall_at_k)}
