@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>DeepR &mdash; deepr 2.11.0 documentation</title>
   
@@ -16,7 +16,10 @@
 
   
   
+
   
+  
+
   
 
   
@@ -29,7 +32,6 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -52,7 +54,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> deepr
+            <a href="../index.html" class="icon icon-home"> deepr
           
 
           
@@ -320,6 +322,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -331,7 +335,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/API/core.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -579,7 +583,7 @@ It takes as input / returns a dictionary of <code class="xref py py-class docuti
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.ActiveMode.html#deepr.layers.ActiveMode" title="deepr.layers.ActiveMode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ActiveMode</span></code></a>(layer[, mode, inputs, outputs])</p></td>
 <td><p>Active Mode Layer.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Add.html#deepr.layers.Add" title="deepr.layers.Add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Add</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Add.html#deepr.layers.Add" title="deepr.layers.Add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Add</span></code></a>()</p></td>
 <td><p>Add two tensors of any compatible shapes.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Average.html#deepr.layers.Average" title="deepr.layers.Average"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Average</span></code></a>(**kwargs)</p></td>
@@ -618,7 +622,7 @@ It takes as input / returns a dictionary of <code class="xref py py-class docuti
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Layer.html#deepr.layers.Layer" title="deepr.layers.Layer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Layer</span></code></a>([n_in, n_out, inputs, outputs, name])</p></td>
 <td><p>Base class for composable layers in a deep learning network.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.LogicalAnd.html#deepr.layers.LogicalAnd" title="deepr.layers.LogicalAnd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LogicalAnd</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.LogicalAnd.html#deepr.layers.LogicalAnd" title="deepr.layers.LogicalAnd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LogicalAnd</span></code></a>()</p></td>
 <td><p>Perform logical_and on two tensors of compatible shapes.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.Lookup.html#deepr.layers.Lookup" title="deepr.layers.Lookup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Lookup</span></code></a>(table_initializer_fn, **kwargs)</p></td>
@@ -675,7 +679,7 @@ It takes as input / returns a dictionary of <code class="xref py py-class docuti
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.ToDense.html#deepr.layers.ToDense" title="deepr.layers.ToDense"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ToDense</span></code></a>(default_value, **kwargs)</p></td>
 <td><p>Sparse to Dense Layer</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.ToFloat.html#deepr.layers.ToFloat" title="deepr.layers.ToFloat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ToFloat</span></code></a>(*args, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/deepr.layers.ToFloat.html#deepr.layers.ToFloat" title="deepr.layers.ToFloat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ToFloat</span></code></a>()</p></td>
 <td><p>Cast tensor to float32</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/deepr.layers.WeightedAverage.html#deepr.layers.WeightedAverage" title="deepr.layers.WeightedAverage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WeightedAverage</span></code></a>([default])</p></td>
@@ -944,37 +948,29 @@ It takes as input / returns a dictionary of <code class="xref py py-class docuti
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="_autosummary/deepr.config.assert_no_macros.html" class="btn btn-neutral float-right" title="deepr.config.assert_no_macros" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../CHANGELOG.html" class="btn btn-neutral float-left" title="Changelog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="_autosummary/deepr.config.assert_no_macros.html" class="btn btn-neutral float-right" title="deepr.config.assert_no_macros" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../CHANGELOG.html" class="btn btn-neutral float-left" title="Changelog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Criteo
+        &#169; Copyright 2020, Criteo.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

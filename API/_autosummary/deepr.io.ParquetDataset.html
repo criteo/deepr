@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>deepr.io.ParquetDataset &mdash; deepr 2.11.0 documentation</title>
   
@@ -16,7 +16,10 @@
 
   
   
+
   
+  
+
   
 
   
@@ -29,7 +32,6 @@
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
@@ -52,7 +54,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> deepr
+            <a href="../../index.html" class="icon icon-home"> deepr
           
 
           
@@ -168,6 +170,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -181,7 +185,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../../_sources/API/_autosummary/deepr.io.ParquetDataset.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -223,7 +227,7 @@
 <h1>deepr.io.ParquetDataset<a class="headerlink" href="#deepr-io-parquetdataset" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="deepr.io.ParquetDataset">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.io.</code><code class="sig-name descname">ParquetDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_or_paths</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metadata</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">schema</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">split_row_groups</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">validate_schema</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">filters</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metadata_nthreads</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">memory_map</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/io/parquet.html#ParquetDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.ParquetDataset" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.io.</span></code><code class="sig-name descname"><span class="pre">ParquetDataset</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_or_paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesystem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split_row_groups</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate_schema</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_nthreads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/io/parquet.html#ParquetDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.ParquetDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Context aware ParquetDataset with support for chunk writing.</p>
 <p>Makes it easier to read / write <a class="reference internal" href="#deepr.io.ParquetDataset" title="deepr.io.ParquetDataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParquetDataset</span></code></a>. For example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepr.io</span> <span class="kn">import</span> <span class="n">ParquetDataset</span>
@@ -236,7 +240,7 @@
 as well as the connection to the FileSystem.</p>
 <dl class="py attribute">
 <dt id="deepr.io.ParquetDataset.path_or_paths">
-<code class="sig-name descname">path_or_paths</code><a class="headerlink" href="#deepr.io.ParquetDataset.path_or_paths" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">path_or_paths</span></code><a class="headerlink" href="#deepr.io.ParquetDataset.path_or_paths" title="Permalink to this definition">¶</a></dt>
 <dd><p>Path to parquet dataset (directory or file), or list of files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -247,7 +251,7 @@ as well as the connection to the FileSystem.</p>
 
 <dl class="py attribute">
 <dt id="deepr.io.ParquetDataset.filesystem">
-<code class="sig-name descname">filesystem</code><a class="headerlink" href="#deepr.io.ParquetDataset.filesystem" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">filesystem</span></code><a class="headerlink" href="#deepr.io.ParquetDataset.filesystem" title="Permalink to this definition">¶</a></dt>
 <dd><p>FileSystem, if None, will be inferred automatically later.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -258,7 +262,7 @@ as well as the connection to the FileSystem.</p>
 
 <dl class="py method">
 <dt id="deepr.io.ParquetDataset.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_or_paths</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metadata</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">schema</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">split_row_groups</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">validate_schema</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">filters</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metadata_nthreads</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">memory_map</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/io/parquet.html#ParquetDataset.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.ParquetDataset.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_or_paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesystem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split_row_groups</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate_schema</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_nthreads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/io/parquet.html#ParquetDataset.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.ParquetDataset.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
@@ -326,37 +330,29 @@ as well as the connection to the FileSystem.</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="deepr.io.Path.html" class="btn btn-neutral float-right" title="deepr.io.Path" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="deepr.io.HDFSFileSystem.html" class="btn btn-neutral float-left" title="deepr.io.HDFSFileSystem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="deepr.io.Path.html" class="btn btn-neutral float-right" title="deepr.io.Path" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="deepr.io.HDFSFileSystem.html" class="btn btn-neutral float-left" title="deepr.io.HDFSFileSystem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Criteo
+        &#169; Copyright 2020, Criteo.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

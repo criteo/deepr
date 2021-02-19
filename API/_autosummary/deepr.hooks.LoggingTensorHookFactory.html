@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>deepr.hooks.LoggingTensorHookFactory &mdash; deepr 2.11.0 documentation</title>
   
@@ -16,7 +16,10 @@
 
   
   
+
   
+  
+
   
 
   
@@ -29,7 +32,6 @@
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
@@ -52,7 +54,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> deepr
+            <a href="../../index.html" class="icon icon-home"> deepr
           
 
           
@@ -172,6 +174,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -185,7 +189,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../../_sources/API/_autosummary/deepr.hooks.LoggingTensorHookFactory.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -227,12 +231,12 @@
 <h1>deepr.hooks.LoggingTensorHookFactory<a class="headerlink" href="#deepr-hooks-loggingtensorhookfactory" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="deepr.hooks.LoggingTensorHookFactory">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.hooks.</code><code class="sig-name descname">LoggingTensorHookFactory</code><span class="sig-paren">(</span><em class="sig-param">tensors=None</em>, <em class="sig-param">functions=None</em>, <em class="sig-param">name=None</em>, <em class="sig-param">use_mlflow=False</em>, <em class="sig-param">use_graphite=False</em>, <em class="sig-param">skip_after_step=None</em>, <em class="sig-param">every_n_iter=None</em>, <em class="sig-param">every_n_secs=None</em>, <em class="sig-param">at_end=False</em>, <em class="sig-param">formatter=&lt;function _default_formatter&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/hooks/logging_tensor.html#LoggingTensorHookFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.hooks.</span></code><code class="sig-name descname"><span class="pre">LoggingTensorHookFactory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tensors=None</span></em>, <em class="sig-param"><span class="pre">functions=None</span></em>, <em class="sig-param"><span class="pre">name=None</span></em>, <em class="sig-param"><span class="pre">use_mlflow=False</span></em>, <em class="sig-param"><span class="pre">use_graphite=False</span></em>, <em class="sig-param"><span class="pre">skip_after_step=None</span></em>, <em class="sig-param"><span class="pre">every_n_iter=None</span></em>, <em class="sig-param"><span class="pre">every_n_secs=None</span></em>, <em class="sig-param"><span class="pre">at_end=False</span></em>, <em class="sig-param"><span class="pre">formatter=&lt;function</span> <span class="pre">_default_formatter&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/hooks/logging_tensor.html#LoggingTensorHookFactory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parametrize the creation of a LoggingTensorHook factory.</p>
 <p>Arguments for instantiation should be provided as keyword arguments.</p>
 <dl class="py attribute">
 <dt id="deepr.hooks.LoggingTensorHookFactory.tensors">
-<code class="sig-name descname">tensors</code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.tensors" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">tensors</span></code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.tensors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the tensors to use at runtime. If None (default), log
 all scalars.</p>
 <dl class="field-list simple">
@@ -244,7 +248,7 @@ all scalars.</p>
 
 <dl class="py attribute">
 <dt id="deepr.hooks.LoggingTensorHookFactory.functions">
-<code class="sig-name descname">functions</code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.functions" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">functions</span></code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.functions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Additional “python” metrics. Each function should return a float</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -255,7 +259,7 @@ all scalars.</p>
 
 <dl class="py attribute">
 <dt id="deepr.hooks.LoggingTensorHookFactory.name">
-<code class="sig-name descname">name</code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">name</span></code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name used as prefix of tags when sending to MLFlow / Graphite</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -266,7 +270,7 @@ all scalars.</p>
 
 <dl class="py attribute">
 <dt id="deepr.hooks.LoggingTensorHookFactory.use_mlflow">
-<code class="sig-name descname">use_mlflow</code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.use_mlflow" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">use_mlflow</span></code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.use_mlflow" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True, send metrics to MLFlow. Default is False.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -277,7 +281,7 @@ all scalars.</p>
 
 <dl class="py attribute">
 <dt id="deepr.hooks.LoggingTensorHookFactory.use_graphite">
-<code class="sig-name descname">use_graphite</code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.use_graphite" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">use_graphite</span></code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.use_graphite" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True, send metrics to Graphite. Default is False.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -288,7 +292,7 @@ all scalars.</p>
 
 <dl class="py attribute">
 <dt id="deepr.hooks.LoggingTensorHookFactory.skip_after_step">
-<code class="sig-name descname">skip_after_step</code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.skip_after_step" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">skip_after_step</span></code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.skip_after_step" title="Permalink to this definition">¶</a></dt>
 <dd><p>If not None, do not run the hooks after this step.</p>
 <p>Prevents outliers when used in conjunction with an early
 stopping hook that overrides the global_step.</p>
@@ -301,7 +305,7 @@ stopping hook that overrides the global_step.</p>
 
 <dl class="py attribute">
 <dt id="deepr.hooks.LoggingTensorHookFactory.formatter">
-<code class="sig-name descname">formatter</code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.formatter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">formatter</span></code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.formatter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Formatter for logging, default uses 7 digits precision.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -312,7 +316,7 @@ stopping hook that overrides the global_step.</p>
 
 <dl class="py method">
 <dt id="deepr.hooks.LoggingTensorHookFactory.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">tensors=None</em>, <em class="sig-param">functions=None</em>, <em class="sig-param">name=None</em>, <em class="sig-param">use_mlflow=False</em>, <em class="sig-param">use_graphite=False</em>, <em class="sig-param">skip_after_step=None</em>, <em class="sig-param">every_n_iter=None</em>, <em class="sig-param">every_n_secs=None</em>, <em class="sig-param">at_end=False</em>, <em class="sig-param">formatter=&lt;function _default_formatter&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/hooks/logging_tensor.html#LoggingTensorHookFactory.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tensors=None</span></em>, <em class="sig-param"><span class="pre">functions=None</span></em>, <em class="sig-param"><span class="pre">name=None</span></em>, <em class="sig-param"><span class="pre">use_mlflow=False</span></em>, <em class="sig-param"><span class="pre">use_graphite=False</span></em>, <em class="sig-param"><span class="pre">skip_after_step=None</span></em>, <em class="sig-param"><span class="pre">every_n_iter=None</span></em>, <em class="sig-param"><span class="pre">every_n_secs=None</span></em>, <em class="sig-param"><span class="pre">at_end=False</span></em>, <em class="sig-param"><span class="pre">formatter=&lt;function</span> <span class="pre">_default_formatter&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/hooks/logging_tensor.html#LoggingTensorHookFactory.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
@@ -337,37 +341,29 @@ stopping hook that overrides the global_step.</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="deepr.hooks.MaxResidentMemory.html" class="btn btn-neutral float-right" title="deepr.hooks.MaxResidentMemory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="deepr.hooks.EstimatorHookFactory.html" class="btn btn-neutral float-left" title="deepr.hooks.EstimatorHookFactory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="deepr.hooks.MaxResidentMemory.html" class="btn btn-neutral float-right" title="deepr.hooks.MaxResidentMemory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="deepr.hooks.EstimatorHookFactory.html" class="btn btn-neutral float-left" title="deepr.hooks.EstimatorHookFactory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Criteo
+        &#169; Copyright 2020, Criteo.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

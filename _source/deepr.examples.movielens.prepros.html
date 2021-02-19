@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>deepr.examples.movielens.prepros package &mdash; deepr 2.11.0 documentation</title>
   
@@ -16,7 +16,10 @@
 
   
   
+
   
+  
+
   
 
   
@@ -29,7 +32,6 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -52,7 +54,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> deepr
+            <a href="../index.html" class="icon icon-home"> deepr
           
 
           
@@ -174,6 +176,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -193,7 +197,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/_source/deepr.examples.movielens.prepros.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -241,17 +245,17 @@
 <p>CSV Preprocessing for MovieLens.</p>
 <dl class="py function">
 <dt id="deepr.examples.movielens.prepros.csv.CSVPrepro">
-<code class="sig-prename descclassname">deepr.examples.movielens.prepros.csv.</code><code class="sig-name descname">CSVPrepro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vocab_size</span></em>, <em class="sig-param"><span class="n">batch_size</span><span class="o">=</span><span class="default_value">512</span></em>, <em class="sig-param"><span class="n">repeat_size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">prefetch_size</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">num_parallel_calls</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">num_negatives</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/prepros/csv.html#CSVPrepro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.prepros.csv.CSVPrepro" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">deepr.examples.movielens.prepros.csv.</span></code><code class="sig-name descname"><span class="pre">CSVPrepro</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vocab_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">512</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repeat_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefetch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_negatives</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/prepros/csv.html#CSVPrepro"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.examples.movielens.prepros.csv.CSVPrepro" title="Permalink to this definition">¶</a></dt>
 <dd><p>CSV Preprocessing for MovieLens.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt id="deepr.examples.movielens.prepros.csv.RandomNegatives">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.prepros.csv.</code><code class="sig-name descname">RandomNegatives</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/prepros/csv.html#RandomNegatives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.prepros.csv.RandomNegatives" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.examples.movielens.prepros.csv.</span></code><code class="sig-name descname"><span class="pre">RandomNegatives</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_negatives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vocab_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/prepros/csv.html#RandomNegatives"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.examples.movielens.prepros.csv.RandomNegatives" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="deepr.layers.html#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
 <dl class="py method">
 <dt id="deepr.examples.movielens.prepros.csv.RandomNegatives.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.examples.movielens.prepros.csv.RandomNegatives.forward" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.examples.movielens.prepros.csv.RandomNegatives.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -281,11 +285,11 @@
 
 <dl class="py class">
 <dt id="deepr.examples.movielens.prepros.csv.SequenceMask">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.prepros.csv.</code><code class="sig-name descname">SequenceMask</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/prepros/csv.html#SequenceMask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.prepros.csv.SequenceMask" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.examples.movielens.prepros.csv.</span></code><code class="sig-name descname"><span class="pre">SequenceMask</span></code><a class="reference internal" href="../_modules/deepr/examples/movielens/prepros/csv.html#SequenceMask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.examples.movielens.prepros.csv.SequenceMask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="deepr.layers.html#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
 <dl class="py method">
 <dt id="deepr.examples.movielens.prepros.csv.SequenceMask.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.examples.movielens.prepros.csv.SequenceMask.forward" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.examples.movielens.prepros.csv.SequenceMask.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -319,17 +323,17 @@
 <p>TF Record Preprocessing for MovieLens.</p>
 <dl class="py function">
 <dt id="deepr.examples.movielens.prepros.record.RecordPrepro">
-<code class="sig-prename descclassname">deepr.examples.movielens.prepros.record.</code><code class="sig-name descname">RecordPrepro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">min_input_size</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">min_target_size</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">max_input_size</span><span class="o">=</span><span class="default_value">50</span></em>, <em class="sig-param"><span class="n">max_target_size</span><span class="o">=</span><span class="default_value">50</span></em>, <em class="sig-param"><span class="n">buffer_size</span><span class="o">=</span><span class="default_value">1024</span></em>, <em class="sig-param"><span class="n">batch_size</span><span class="o">=</span><span class="default_value">128</span></em>, <em class="sig-param"><span class="n">repeat_size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">prefetch_size</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">num_parallel_calls</span><span class="o">=</span><span class="default_value">8</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/prepros/record.html#RecordPrepro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.prepros.record.RecordPrepro" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">deepr.examples.movielens.prepros.record.</span></code><code class="sig-name descname"><span class="pre">RecordPrepro</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_input_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_target_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_input_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_target_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffer_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1024</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repeat_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefetch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/prepros/record.html#RecordPrepro"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.examples.movielens.prepros.record.RecordPrepro" title="Permalink to this definition">¶</a></dt>
 <dd><p>Default Preprocessing for MovieLens.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt id="deepr.examples.movielens.prepros.record.SequenceMask">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.examples.movielens.prepros.record.</code><code class="sig-name descname">SequenceMask</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/prepros/record.html#SequenceMask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.examples.movielens.prepros.record.SequenceMask" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.examples.movielens.prepros.record.</span></code><code class="sig-name descname"><span class="pre">SequenceMask</span></code><a class="reference internal" href="../_modules/deepr/examples/movielens/prepros/record.html#SequenceMask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.examples.movielens.prepros.record.SequenceMask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="deepr.layers.html#deepr.layers.base.Layer" title="deepr.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.layers.base.Layer</span></code></a></p>
 <dl class="py method">
 <dt id="deepr.examples.movielens.prepros.record.SequenceMask.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tensors</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.examples.movielens.prepros.record.SequenceMask.forward" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.examples.movielens.prepros.record.SequenceMask.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forward method on one Tensor or a tuple of Tensors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -368,37 +372,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="deepr.examples.movielens.readers.html" class="btn btn-neutral float-right" title="deepr.examples.movielens.readers package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="deepr.examples.movielens.metrics.html" class="btn btn-neutral float-left" title="deepr.examples.movielens.metrics package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="deepr.examples.movielens.readers.html" class="btn btn-neutral float-right" title="deepr.examples.movielens.readers package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="deepr.examples.movielens.metrics.html" class="btn btn-neutral float-left" title="deepr.examples.movielens.metrics package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Criteo
+        &#169; Copyright 2020, Criteo.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

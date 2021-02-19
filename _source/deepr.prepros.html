@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>deepr.prepros package &mdash; deepr 2.11.0 documentation</title>
   
@@ -16,7 +16,10 @@
 
   
   
+
   
+  
+
   
 
   
@@ -29,7 +32,6 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -52,7 +54,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> deepr
+            <a href="../index.html" class="icon icon-home"> deepr
           
 
           
@@ -174,6 +176,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -189,7 +193,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/_source/deepr.prepros.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -237,7 +241,7 @@
 <p>Abstract Base Class for preprocessing</p>
 <dl class="py class">
 <dt id="deepr.prepros.base.Prepro">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.base.</code><code class="sig-name descname">Prepro</code><a class="reference internal" href="../_modules/deepr/prepros/base.html#Prepro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.base.Prepro" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.prepros.base.</span></code><code class="sig-name descname"><span class="pre">Prepro</span></code><a class="reference internal" href="../_modules/deepr/prepros/base.html#Prepro"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.base.Prepro" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
 <p>Base class for composable preprocessing functions.</p>
 <p><cite>Prepro</cite> are the basic building blocks of a preprocessing pipeline.
@@ -296,7 +300,7 @@ method of the base <a class="reference internal" href="#deepr.prepros.base.Prepr
 <cite>prepro</cite> decorator (see documentation).</p>
 <dl class="py method">
 <dt id="deepr.prepros.base.Prepro.apply">
-<em class="property">abstract </em><code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/base.html#Prepro.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.base.Prepro.apply" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/base.html#Prepro.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.base.Prepro.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pre-process a dataset</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -309,12 +313,12 @@ method of the base <a class="reference internal" href="#deepr.prepros.base.Prepr
 
 <dl class="py class">
 <dt id="deepr.prepros.base.PreproFn">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.base.</code><code class="sig-name descname">PreproFn</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">prepro_fn</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/base.html#PreproFn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.base.PreproFn" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.prepros.base.</span></code><code class="sig-name descname"><span class="pre">PreproFn</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prepro_fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/base.html#PreproFn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.base.PreproFn" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
 <p>Prepro from function.</p>
 <dl class="py method">
 <dt id="deepr.prepros.base.PreproFn.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/base.html#PreproFn.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.base.PreproFn.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/base.html#PreproFn.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.base.PreproFn.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pre-process a dataset</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -327,7 +331,7 @@ method of the base <a class="reference internal" href="#deepr.prepros.base.Prepr
 
 <dl class="py function">
 <dt id="deepr.prepros.base.prepro">
-<code class="sig-prename descclassname">deepr.prepros.base.</code><code class="sig-name descname">prepro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fn</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/base.html#prepro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.base.prepro" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">deepr.prepros.base.</span></code><code class="sig-name descname"><span class="pre">prepro</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/base.html#prepro"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.base.prepro" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator that creates a <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a> class from a function.</p>
 <p>For example, the following snippet defines a subclass of
 <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a> whose <cite>apply</cite> offsets each element of the dataset
@@ -387,7 +391,7 @@ of the function IN THIS ORDER.</p>
 <p>Combine Preprocessors</p>
 <dl class="py class">
 <dt id="deepr.prepros.combinators.Serial">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.combinators.</code><code class="sig-name descname">Serial</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">preprocessors</span></em>, <em class="sig-param"><span class="n">fuse</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">num_parallel_calls</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/combinators.html#Serial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.combinators.Serial" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.prepros.combinators.</span></code><code class="sig-name descname"><span class="pre">Serial</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">preprocessors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fuse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/combinators.html#Serial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.combinators.Serial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
 <p>Chain preprocessors to define complex preprocessing pipelines.</p>
 <p>It will apply each preprocessing step one after the other on each
@@ -414,7 +418,7 @@ operations into single <cite>tf.data</cite> calls.</p>
 </div>
 <dl class="py attribute">
 <dt id="deepr.prepros.combinators.Serial.fuse">
-<code class="sig-name descname">fuse</code><a class="headerlink" href="#deepr.prepros.combinators.Serial.fuse" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">fuse</span></code><a class="headerlink" href="#deepr.prepros.combinators.Serial.fuse" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True (default), will fuse <code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -425,7 +429,7 @@ operations into single <cite>tf.data</cite> calls.</p>
 
 <dl class="py attribute">
 <dt id="deepr.prepros.combinators.Serial.preprocessors">
-<code class="sig-name descname">preprocessors</code><a class="headerlink" href="#deepr.prepros.combinators.Serial.preprocessors" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">preprocessors</span></code><a class="headerlink" href="#deepr.prepros.combinators.Serial.preprocessors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Positional arguments of <code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code> instance or Tuple / List /
 Generator of prepro instances</p>
 <dl class="field-list simple">
@@ -437,7 +441,7 @@ Generator of prepro instances</p>
 
 <dl class="py method">
 <dt id="deepr.prepros.combinators.Serial.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/combinators.html#Serial.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.combinators.Serial.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/combinators.html#Serial.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.combinators.Serial.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pre-process a dataset</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -454,12 +458,12 @@ Generator of prepro instances</p>
 <p>Core Classes for preprocessing</p>
 <dl class="py class">
 <dt id="deepr.prepros.core.Batch">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">Batch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">batch_size</span></em>, <em class="sig-param"><span class="n">drop_remainder</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Batch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Batch" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.prepros.core.</span></code><code class="sig-name descname"><span class="pre">Batch</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_remainder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Batch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.core.Batch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
 <p>Combines consecutive elements of a dataset into batches.</p>
 <dl class="py attribute">
 <dt id="deepr.prepros.core.Batch.count">
-<code class="sig-name descname">count</code><a class="headerlink" href="#deepr.prepros.core.Batch.count" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">count</span></code><a class="headerlink" href="#deepr.prepros.core.Batch.count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of dataset repeat</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -470,7 +474,7 @@ Generator of prepro instances</p>
 
 <dl class="py attribute">
 <dt id="deepr.prepros.core.Batch.modes">
-<code class="sig-name descname">modes</code><a class="headerlink" href="#deepr.prepros.core.Batch.modes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">modes</span></code><a class="headerlink" href="#deepr.prepros.core.Batch.modes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Active modes for the map (will skip modes not in modes).
 Default is None (all modes are considered active modes).</p>
 <dl class="field-list simple">
@@ -482,7 +486,7 @@ Default is None (all modes are considered active modes).</p>
 
 <dl class="py method">
 <dt id="deepr.prepros.core.Batch.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Batch.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Batch.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Batch.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.core.Batch.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pre-process a dataset</p>
 </dd></dl>
 
@@ -490,7 +494,7 @@ Default is None (all modes are considered active modes).</p>
 
 <dl class="py class">
 <dt id="deepr.prepros.core.Cache">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">Cache</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">modes</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Cache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Cache" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.prepros.core.</span></code><code class="sig-name descname"><span class="pre">Cache</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.core.Cache" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
 <p>Cache Dataset in memory, unless a file is provided.</p>
 <p>You must iterate over the dataset completely to cache it (i.e. a
@@ -500,7 +504,7 @@ to 100x compared to tfrecords), and reloading seems brittle.</p>
 <p>Prefer writing preprocessed data to tfrecord instead.</p>
 <dl class="py attribute">
 <dt id="deepr.prepros.core.Cache.filename">
-<code class="sig-name descname">filename</code><a class="headerlink" href="#deepr.prepros.core.Cache.filename" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">filename</span></code><a class="headerlink" href="#deepr.prepros.core.Cache.filename" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
@@ -510,7 +514,7 @@ to 100x compared to tfrecords), and reloading seems brittle.</p>
 
 <dl class="py method">
 <dt id="deepr.prepros.core.Cache.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Cache.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Cache.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Cache.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.core.Cache.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pre-process a dataset</p>
 </dd></dl>
 
@@ -518,7 +522,7 @@ to 100x compared to tfrecords), and reloading seems brittle.</p>
 
 <dl class="py class">
 <dt id="deepr.prepros.core.Filter">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">Filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">predicate</span></em>, <em class="sig-param"><span class="n">on_dict</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">modes</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Filter" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.prepros.core.</span></code><code class="sig-name descname"><span class="pre">Filter</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predicate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.core.Filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
 <p>Filter a dataset keeping only elements on which predicate is True</p>
 <p>A <a class="reference internal" href="#deepr.prepros.core.Filter" title="deepr.prepros.core.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a> instance applies a <code class="docutils literal notranslate"><span class="pre">predicate</span></code> to all elements of a
@@ -559,7 +563,7 @@ transformation should apply. For example:</p>
 </div>
 <dl class="py attribute">
 <dt id="deepr.prepros.core.Filter.predicate">
-<code class="sig-name descname">predicate</code><a class="headerlink" href="#deepr.prepros.core.Filter.predicate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">predicate</span></code><a class="headerlink" href="#deepr.prepros.core.Filter.predicate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Predicate function, returns either a tf.bool or a dictionary
 with one key.</p>
 <dl class="field-list simple">
@@ -571,7 +575,7 @@ with one key.</p>
 
 <dl class="py attribute">
 <dt id="deepr.prepros.core.Filter.on_dict">
-<code class="sig-name descname">on_dict</code><a class="headerlink" href="#deepr.prepros.core.Filter.on_dict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">on_dict</span></code><a class="headerlink" href="#deepr.prepros.core.Filter.on_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True (default), assumes dataset yields dictionaries</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -582,7 +586,7 @@ with one key.</p>
 
 <dl class="py attribute">
 <dt id="deepr.prepros.core.Filter.modes">
-<code class="sig-name descname">modes</code><a class="headerlink" href="#deepr.prepros.core.Filter.modes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">modes</span></code><a class="headerlink" href="#deepr.prepros.core.Filter.modes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Active modes for the map (will skip modes not in modes).
 Default is None (all modes are considered active modes).</p>
 <dl class="field-list simple">
@@ -594,13 +598,13 @@ Default is None (all modes are considered active modes).</p>
 
 <dl class="py method">
 <dt id="deepr.prepros.core.Filter.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Filter.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Filter.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Filter.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.core.Filter.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pre-process a dataset</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="deepr.prepros.core.Filter.tf_predicate">
-<em class="property">property </em><code class="sig-name descname">tf_predicate</code><a class="headerlink" href="#deepr.prepros.core.Filter.tf_predicate" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">tf_predicate</span></code><a class="headerlink" href="#deepr.prepros.core.Filter.tf_predicate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return final predicate function.</p>
 </dd></dl>
 
@@ -608,7 +612,7 @@ Default is None (all modes are considered active modes).</p>
 
 <dl class="py class">
 <dt id="deepr.prepros.core.Map">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">Map</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">map_func</span></em>, <em class="sig-param"><span class="n">on_dict</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">update</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">modes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_parallel_calls</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Map" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.prepros.core.</span></code><code class="sig-name descname"><span class="pre">Map</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.core.Map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
 <p>Map a function on each element of a tf.data.Dataset.</p>
 <p>A <a class="reference internal" href="#deepr.prepros.core.Map" title="deepr.prepros.core.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code></a> instance applies a <code class="docutils literal notranslate"><span class="pre">map_func</span></code> to all elements of a
@@ -672,7 +676,7 @@ transformation should apply. For example:</p>
 </div>
 <dl class="py attribute">
 <dt id="deepr.prepros.core.Map.map_func">
-<code class="sig-name descname">map_func</code><a class="headerlink" href="#deepr.prepros.core.Map.map_func" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">map_func</span></code><a class="headerlink" href="#deepr.prepros.core.Map.map_func" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to map to each element</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -683,7 +687,7 @@ transformation should apply. For example:</p>
 
 <dl class="py attribute">
 <dt id="deepr.prepros.core.Map.modes">
-<code class="sig-name descname">modes</code><a class="headerlink" href="#deepr.prepros.core.Map.modes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">modes</span></code><a class="headerlink" href="#deepr.prepros.core.Map.modes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Active modes for the map (will skip modes not in modes).
 Default is None (all modes are considered active modes).</p>
 <dl class="field-list simple">
@@ -695,7 +699,7 @@ Default is None (all modes are considered active modes).</p>
 
 <dl class="py attribute">
 <dt id="deepr.prepros.core.Map.num_parallel_calls">
-<code class="sig-name descname">num_parallel_calls</code><a class="headerlink" href="#deepr.prepros.core.Map.num_parallel_calls" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">num_parallel_calls</span></code><a class="headerlink" href="#deepr.prepros.core.Map.num_parallel_calls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of threads.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -706,7 +710,7 @@ Default is None (all modes are considered active modes).</p>
 
 <dl class="py attribute">
 <dt id="deepr.prepros.core.Map.on_dict">
-<code class="sig-name descname">on_dict</code><a class="headerlink" href="#deepr.prepros.core.Map.on_dict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">on_dict</span></code><a class="headerlink" href="#deepr.prepros.core.Map.on_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True (default), assumes dataset yields dictionaries</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -717,7 +721,7 @@ Default is None (all modes are considered active modes).</p>
 
 <dl class="py attribute">
 <dt id="deepr.prepros.core.Map.update">
-<code class="sig-name descname">update</code><a class="headerlink" href="#deepr.prepros.core.Map.update" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">update</span></code><a class="headerlink" href="#deepr.prepros.core.Map.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True (default), combine element and map_func(element)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -728,13 +732,13 @@ Default is None (all modes are considered active modes).</p>
 
 <dl class="py method">
 <dt id="deepr.prepros.core.Map.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Map.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Map.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Map.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.core.Map.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pre-process a dataset</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="deepr.prepros.core.Map.tf_map_func">
-<em class="property">property </em><code class="sig-name descname">tf_map_func</code><a class="headerlink" href="#deepr.prepros.core.Map.tf_map_func" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">tf_map_func</span></code><a class="headerlink" href="#deepr.prepros.core.Map.tf_map_func" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return final map function.</p>
 </dd></dl>
 
@@ -742,7 +746,7 @@ Default is None (all modes are considered active modes).</p>
 
 <dl class="py class">
 <dt id="deepr.prepros.core.PaddedBatch">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">PaddedBatch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">batch_size</span></em>, <em class="sig-param"><span class="n">fields</span></em>, <em class="sig-param"><span class="n">drop_remainder</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#PaddedBatch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.PaddedBatch" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.prepros.core.</span></code><code class="sig-name descname"><span class="pre">PaddedBatch</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_remainder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#PaddedBatch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.core.PaddedBatch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
 <p>Combines consecutive elements of a dataset into padded batches.</p>
 <p>NOTE: this applies on dataset yielding dictionaries ONLY.</p>
@@ -756,7 +760,7 @@ implementation. For example:</p>
 </div>
 <dl class="py attribute">
 <dt id="deepr.prepros.core.PaddedBatch.batch_size">
-<code class="sig-name descname">batch_size</code><a class="headerlink" href="#deepr.prepros.core.PaddedBatch.batch_size" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">batch_size</span></code><a class="headerlink" href="#deepr.prepros.core.PaddedBatch.batch_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Size of batches</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -767,7 +771,7 @@ implementation. For example:</p>
 
 <dl class="py attribute">
 <dt id="deepr.prepros.core.PaddedBatch.fields">
-<code class="sig-name descname">fields</code><a class="headerlink" href="#deepr.prepros.core.PaddedBatch.fields" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">fields</span></code><a class="headerlink" href="#deepr.prepros.core.PaddedBatch.fields" title="Permalink to this definition">¶</a></dt>
 <dd><p>Field information for each key of yielded dictionaries</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -778,7 +782,7 @@ implementation. For example:</p>
 
 <dl class="py attribute">
 <dt id="deepr.prepros.core.PaddedBatch.modes">
-<code class="sig-name descname">modes</code><a class="headerlink" href="#deepr.prepros.core.PaddedBatch.modes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">modes</span></code><a class="headerlink" href="#deepr.prepros.core.PaddedBatch.modes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Active modes for the map (will skip modes not in modes).
 Default is None (all modes are considered active modes).</p>
 <dl class="field-list simple">
@@ -790,7 +794,7 @@ Default is None (all modes are considered active modes).</p>
 
 <dl class="py method">
 <dt id="deepr.prepros.core.PaddedBatch.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#PaddedBatch.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.PaddedBatch.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#PaddedBatch.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.core.PaddedBatch.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pre-process a dataset</p>
 </dd></dl>
 
@@ -798,12 +802,12 @@ Default is None (all modes are considered active modes).</p>
 
 <dl class="py class">
 <dt id="deepr.prepros.core.Prefetch">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">Prefetch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buffer_size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Prefetch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Prefetch" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.prepros.core.</span></code><code class="sig-name descname"><span class="pre">Prefetch</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buffer_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Prefetch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.core.Prefetch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
 <p>Creates a dataset that prefetch element on CPU / GPU.</p>
 <dl class="py attribute">
 <dt id="deepr.prepros.core.Prefetch.buffer_size">
-<code class="sig-name descname">buffer_size</code><a class="headerlink" href="#deepr.prepros.core.Prefetch.buffer_size" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">buffer_size</span></code><a class="headerlink" href="#deepr.prepros.core.Prefetch.buffer_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of element to prefetch.
 High values may lead to high memory consumption, it is
 recommended to use a buffer_size of 1.</p>
@@ -816,7 +820,7 @@ recommended to use a buffer_size of 1.</p>
 
 <dl class="py method">
 <dt id="deepr.prepros.core.Prefetch.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Prefetch.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Prefetch.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Prefetch.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.core.Prefetch.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pre-process a dataset</p>
 </dd></dl>
 
@@ -824,12 +828,12 @@ recommended to use a buffer_size of 1.</p>
 
 <dl class="py class">
 <dt id="deepr.prepros.core.Repeat">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">Repeat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">count</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">modes</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Repeat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Repeat" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.prepros.core.</span></code><code class="sig-name descname"><span class="pre">Repeat</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Repeat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.core.Repeat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
 <p>Repeats a dataset so each original value is seen count times.</p>
 <dl class="py attribute">
 <dt id="deepr.prepros.core.Repeat.count">
-<code class="sig-name descname">count</code><a class="headerlink" href="#deepr.prepros.core.Repeat.count" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">count</span></code><a class="headerlink" href="#deepr.prepros.core.Repeat.count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of dataset repeat, if None or -1, repeat forever.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -840,7 +844,7 @@ recommended to use a buffer_size of 1.</p>
 
 <dl class="py attribute">
 <dt id="deepr.prepros.core.Repeat.modes">
-<code class="sig-name descname">modes</code><a class="headerlink" href="#deepr.prepros.core.Repeat.modes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">modes</span></code><a class="headerlink" href="#deepr.prepros.core.Repeat.modes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Active modes for the map (will skip modes not in modes).
 Default is None (all modes are considered active modes).</p>
 <dl class="field-list simple">
@@ -852,7 +856,7 @@ Default is None (all modes are considered active modes).</p>
 
 <dl class="py method">
 <dt id="deepr.prepros.core.Repeat.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Repeat.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Repeat.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Repeat.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.core.Repeat.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pre-process a dataset</p>
 </dd></dl>
 
@@ -860,12 +864,12 @@ Default is None (all modes are considered active modes).</p>
 
 <dl class="py class">
 <dt id="deepr.prepros.core.Shuffle">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">Shuffle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buffer_size</span></em>, <em class="sig-param"><span class="n">modes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">reshuffle_each_iteration</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Shuffle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Shuffle" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.prepros.core.</span></code><code class="sig-name descname"><span class="pre">Shuffle</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buffer_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reshuffle_each_iteration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Shuffle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.core.Shuffle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
 <p>Randomly shuffles the elements of a dataset.</p>
 <dl class="py attribute">
 <dt id="deepr.prepros.core.Shuffle.buffer_size">
-<code class="sig-name descname">buffer_size</code><a class="headerlink" href="#deepr.prepros.core.Shuffle.buffer_size" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">buffer_size</span></code><a class="headerlink" href="#deepr.prepros.core.Shuffle.buffer_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Buffer size for the shuffle buffer</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -876,7 +880,7 @@ Default is None (all modes are considered active modes).</p>
 
 <dl class="py attribute">
 <dt id="deepr.prepros.core.Shuffle.modes">
-<code class="sig-name descname">modes</code><a class="headerlink" href="#deepr.prepros.core.Shuffle.modes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">modes</span></code><a class="headerlink" href="#deepr.prepros.core.Shuffle.modes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Active modes for the map (will skip modes not in modes).
 Default is None (all modes are considered active modes).</p>
 <dl class="field-list simple">
@@ -888,7 +892,7 @@ Default is None (all modes are considered active modes).</p>
 
 <dl class="py method">
 <dt id="deepr.prepros.core.Shuffle.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Shuffle.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Shuffle.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Shuffle.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.core.Shuffle.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pre-process a dataset</p>
 </dd></dl>
 
@@ -896,12 +900,12 @@ Default is None (all modes are considered active modes).</p>
 
 <dl class="py class">
 <dt id="deepr.prepros.core.Take">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.core.</code><code class="sig-name descname">Take</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">count</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Take"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Take" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.prepros.core.</span></code><code class="sig-name descname"><span class="pre">Take</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Take"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.core.Take" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
 <p>Creates a dataset with at most count elements.</p>
 <dl class="py attribute">
 <dt id="deepr.prepros.core.Take.count">
-<code class="sig-name descname">count</code><a class="headerlink" href="#deepr.prepros.core.Take.count" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">count</span></code><a class="headerlink" href="#deepr.prepros.core.Take.count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cap the number of elements of a dataset to this number. Using
 None means no capping (will not apply the take transformation).</p>
 <dl class="field-list simple">
@@ -913,7 +917,7 @@ None means no capping (will not apply the take transformation).</p>
 
 <dl class="py method">
 <dt id="deepr.prepros.core.Take.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Take.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.core.Take.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/core.html#Take.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.core.Take.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pre-process a dataset</p>
 </dd></dl>
 
@@ -925,7 +929,7 @@ None means no capping (will not apply the take transformation).</p>
 <p>Lookup Preprocessing Utilities.</p>
 <dl class="py class">
 <dt id="deepr.prepros.lookup.TableInitializer">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.lookup.</code><code class="sig-name descname">TableInitializer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_initializer_fn</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/lookup.html#TableInitializer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.lookup.TableInitializer" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.prepros.lookup.</span></code><code class="sig-name descname"><span class="pre">TableInitializer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_initializer_fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/lookup.html#TableInitializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.lookup.TableInitializer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.prepros.base.Prepro" title="deepr.prepros.base.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.base.Prepro</span></code></a></p>
 <p>Table Initializer.</p>
 <p>Tensorflow does not allow tables initialization inside a <code class="docutils literal notranslate"><span class="pre">map</span></code>
@@ -955,7 +959,7 @@ instead of creating a new table, it will simply reuse the table
 created by the <code class="docutils literal notranslate"><span class="pre">TableInitializer</span></code>.</p>
 <dl class="py method">
 <dt id="deepr.prepros.lookup.TableInitializer.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/lookup.html#TableInitializer.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.lookup.TableInitializer.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/lookup.html#TableInitializer.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.lookup.TableInitializer.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pre-process a dataset</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -972,27 +976,27 @@ created by the <code class="docutils literal notranslate"><span class="pre">Tabl
 <p>Parse TF Records</p>
 <dl class="py class">
 <dt id="deepr.prepros.record.FromExample">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.record.</code><code class="sig-name descname">FromExample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fields</span></em>, <em class="sig-param"><span class="n">sequence</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">modes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_parallel_calls</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">batched</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/record.html#FromExample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.record.FromExample" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.prepros.record.</span></code><code class="sig-name descname"><span class="pre">FromExample</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batched</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/record.html#FromExample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.record.FromExample" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.prepros.core.Map" title="deepr.prepros.core.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.core.Map</span></code></a></p>
 <p>Parse TF Record Sequence Example</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="deepr.prepros.record.TFRecordSequenceExample">
-<code class="sig-prename descclassname">deepr.prepros.record.</code><code class="sig-name descname">TFRecordSequenceExample</code><a class="headerlink" href="#deepr.prepros.record.TFRecordSequenceExample" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">deepr.prepros.record.</span></code><code class="sig-name descname"><span class="pre">TFRecordSequenceExample</span></code><a class="headerlink" href="#deepr.prepros.record.TFRecordSequenceExample" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <a class="reference internal" href="#deepr.prepros.record.FromExample" title="deepr.prepros.record.FromExample"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.record.FromExample</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
 <dt id="deepr.prepros.record.ToExample">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.prepros.record.</code><code class="sig-name descname">ToExample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fields</span></em>, <em class="sig-param"><span class="n">sequence</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">modes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_parallel_calls</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/record.html#ToExample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.record.ToExample" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.prepros.record.</span></code><code class="sig-name descname"><span class="pre">ToExample</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/record.html#ToExample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.record.ToExample" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.prepros.core.Map" title="deepr.prepros.core.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.prepros.core.Map</span></code></a></p>
 <p>Convert dictionary of Tensors to tf.SequenceExample.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="deepr.prepros.record.arrays_to_example">
-<code class="sig-prename descclassname">deepr.prepros.record.</code><code class="sig-name descname">arrays_to_example</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arrays</span></em>, <em class="sig-param"><span class="n">fields</span></em>, <em class="sig-param"><span class="n">sequence</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/record.html#arrays_to_example"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.prepros.record.arrays_to_example" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">deepr.prepros.record.</span></code><code class="sig-name descname"><span class="pre">arrays_to_example</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arrays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/prepros/record.html#arrays_to_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.record.arrays_to_example" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert NumPy arrays to a tf.train.Example.</p>
 </dd></dl>
 
@@ -1007,37 +1011,29 @@ created by the <code class="docutils literal notranslate"><span class="pre">Tabl
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="deepr.readers.html" class="btn btn-neutral float-right" title="deepr.readers package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="deepr.predictors.html" class="btn btn-neutral float-left" title="deepr.predictors package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="deepr.readers.html" class="btn btn-neutral float-right" title="deepr.readers package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="deepr.predictors.html" class="btn btn-neutral float-left" title="deepr.predictors package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Criteo
+        &#169; Copyright 2020, Criteo.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

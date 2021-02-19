@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>deepr.io package &mdash; deepr 2.11.0 documentation</title>
   
@@ -16,7 +16,10 @@
 
   
   
+
   
+  
+
   
 
   
@@ -29,7 +32,6 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -52,7 +54,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> deepr
+            <a href="../index.html" class="icon icon-home"> deepr
           
 
           
@@ -174,6 +176,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -189,7 +193,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/_source/deepr.io.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -237,7 +241,7 @@
 <p>HDFS Utilities</p>
 <dl class="py class">
 <dt id="deepr.io.hdfs.HDFSFile">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.io.hdfs.</code><code class="sig-name descname">HDFSFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filesystem</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'rb'</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">'utf-8'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/hdfs.html#HDFSFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.hdfs.HDFSFile" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.io.hdfs.</span></code><code class="sig-name descname"><span class="pre">HDFSFile</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filesystem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rb'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/hdfs.html#HDFSFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.hdfs.HDFSFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>FileSystemFile, support of “r”, “w” modes, readlines and iter.</p>
 <p>Makes it easier to read or write file from any filesystem. For
@@ -253,7 +257,7 @@ filesystem is automatically opened / closed, as well as the file
 buffer.</p>
 <dl class="py attribute">
 <dt id="deepr.io.hdfs.HDFSFile.filesystem">
-<code class="sig-name descname">filesystem</code><a class="headerlink" href="#deepr.io.hdfs.HDFSFile.filesystem" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">filesystem</span></code><a class="headerlink" href="#deepr.io.hdfs.HDFSFile.filesystem" title="Permalink to this definition">¶</a></dt>
 <dd><p>FileSystem instance</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -264,7 +268,7 @@ buffer.</p>
 
 <dl class="py attribute">
 <dt id="deepr.io.hdfs.HDFSFile.path">
-<code class="sig-name descname">path</code><a class="headerlink" href="#deepr.io.hdfs.HDFSFile.path" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">path</span></code><a class="headerlink" href="#deepr.io.hdfs.HDFSFile.path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Path to file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -275,7 +279,7 @@ buffer.</p>
 
 <dl class="py attribute">
 <dt id="deepr.io.hdfs.HDFSFile.mode">
-<code class="sig-name descname">mode</code><a class="headerlink" href="#deepr.io.hdfs.HDFSFile.mode" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">mode</span></code><a class="headerlink" href="#deepr.io.hdfs.HDFSFile.mode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write / read mode. Supported: “r”, “rb” (default), “w”, “wb”.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -286,24 +290,24 @@ buffer.</p>
 
 <dl class="py method">
 <dt id="deepr.io.hdfs.HDFSFile.read">
-<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/hdfs.html#HDFSFile.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.hdfs.HDFSFile.read" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">read</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/hdfs.html#HDFSFile.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.hdfs.HDFSFile.read" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="deepr.io.hdfs.HDFSFile.readlines">
-<code class="sig-name descname">readlines</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/hdfs.html#HDFSFile.readlines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.hdfs.HDFSFile.readlines" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">readlines</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/hdfs.html#HDFSFile.readlines"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.hdfs.HDFSFile.readlines" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="deepr.io.hdfs.HDFSFile.write">
-<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/hdfs.html#HDFSFile.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.hdfs.HDFSFile.write" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">write</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/hdfs.html#HDFSFile.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.hdfs.HDFSFile.write" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="deepr.io.hdfs.HDFSFileSystem">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.io.hdfs.</code><code class="sig-name descname">HDFSFileSystem</code><a class="reference internal" href="../_modules/deepr/io/hdfs.html#HDFSFileSystem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.hdfs.HDFSFileSystem" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.io.hdfs.</span></code><code class="sig-name descname"><span class="pre">HDFSFileSystem</span></code><a class="reference internal" href="../_modules/deepr/io/hdfs.html#HDFSFileSystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.hdfs.HDFSFileSystem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Context aware HDFSFileSystem using pyarrow.hdfs.</p>
 <p>Open and closes connection to HDFS thanks to a context manager</p>
@@ -320,7 +324,7 @@ buffer.</p>
 <p>Json IO</p>
 <dl class="py function">
 <dt id="deepr.io.json.is_json">
-<code class="sig-prename descclassname">deepr.io.json.</code><code class="sig-name descname">is_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/json.html#is_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.json.is_json" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">deepr.io.json.</span></code><code class="sig-name descname"><span class="pre">is_json</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/json.html#is_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.json.is_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return True if data is a valid json string else False</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -331,13 +335,13 @@ buffer.</p>
 
 <dl class="py function">
 <dt id="deepr.io.json.load_json">
-<code class="sig-prename descclassname">deepr.io.json.</code><code class="sig-name descname">load_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/json.html#load_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.json.load_json" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">deepr.io.json.</span></code><code class="sig-name descname"><span class="pre">load_json</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/json.html#load_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.json.load_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load json from a json file or json string</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="deepr.io.json.read_json">
-<code class="sig-prename descclassname">deepr.io.json.</code><code class="sig-name descname">read_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/json.html#read_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.json.read_json" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">deepr.io.json.</span></code><code class="sig-name descname"><span class="pre">read_json</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/json.html#read_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.json.read_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read json or jsonnet file into dictionary</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -348,7 +352,7 @@ buffer.</p>
 
 <dl class="py function">
 <dt id="deepr.io.json.write_json">
-<code class="sig-prename descclassname">deepr.io.json.</code><code class="sig-name descname">write_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/json.html#write_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.json.write_json" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">deepr.io.json.</span></code><code class="sig-name descname"><span class="pre">write_json</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/json.html#write_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.json.write_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write data to path</p>
 </dd></dl>
 
@@ -358,7 +362,7 @@ buffer.</p>
 <p>Utilities for parquet</p>
 <dl class="py class">
 <dt id="deepr.io.parquet.ParquetDataset">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.io.parquet.</code><code class="sig-name descname">ParquetDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_or_paths</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metadata</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">schema</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">split_row_groups</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">validate_schema</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">filters</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metadata_nthreads</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">memory_map</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.io.parquet.</span></code><code class="sig-name descname"><span class="pre">ParquetDataset</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_or_paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesystem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split_row_groups</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate_schema</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_nthreads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Context aware ParquetDataset with support for chunk writing.</p>
 <p>Makes it easier to read / write <a class="reference internal" href="#deepr.io.parquet.ParquetDataset" title="deepr.io.parquet.ParquetDataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParquetDataset</span></code></a>. For example</p>
@@ -372,7 +376,7 @@ buffer.</p>
 as well as the connection to the FileSystem.</p>
 <dl class="py attribute">
 <dt id="deepr.io.parquet.ParquetDataset.path_or_paths">
-<code class="sig-name descname">path_or_paths</code><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.path_or_paths" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">path_or_paths</span></code><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.path_or_paths" title="Permalink to this definition">¶</a></dt>
 <dd><p>Path to parquet dataset (directory or file), or list of files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -383,7 +387,7 @@ as well as the connection to the FileSystem.</p>
 
 <dl class="py attribute">
 <dt id="deepr.io.parquet.ParquetDataset.filesystem">
-<code class="sig-name descname">filesystem</code><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.filesystem" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">filesystem</span></code><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.filesystem" title="Permalink to this definition">¶</a></dt>
 <dd><p>FileSystem, if None, will be inferred automatically later.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -394,7 +398,7 @@ as well as the connection to the FileSystem.</p>
 
 <dl class="py method">
 <dt id="deepr.io.parquet.ParquetDataset.is_hdfs">
-<em class="property">property </em><code class="sig-name descname">is_hdfs</code><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.is_hdfs" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">is_hdfs</span></code><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.is_hdfs" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
@@ -404,7 +408,7 @@ as well as the connection to the FileSystem.</p>
 
 <dl class="py method">
 <dt id="deepr.io.parquet.ParquetDataset.is_local">
-<em class="property">property </em><code class="sig-name descname">is_local</code><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.is_local" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">is_local</span></code><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.is_local" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
@@ -414,33 +418,33 @@ as well as the connection to the FileSystem.</p>
 
 <dl class="py method">
 <dt id="deepr.io.parquet.ParquetDataset.open">
-<code class="sig-name descname">open</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset.open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.open" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">open</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.open" title="Permalink to this definition">¶</a></dt>
 <dd><p>Open HDFS Filesystem if dataset on HDFS</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="deepr.io.parquet.ParquetDataset.pq_dataset">
-<em class="property">property </em><code class="sig-name descname">pq_dataset</code><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.pq_dataset" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">pq_dataset</span></code><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.pq_dataset" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="deepr.io.parquet.ParquetDataset.read">
-<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">columns</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_threads</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">use_pandas_metadata</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.read" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">read</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_pandas_metadata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.read" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="deepr.io.parquet.ParquetDataset.read_pandas">
-<code class="sig-name descname">read_pandas</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">columns</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_threads</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset.read_pandas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.read_pandas" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">read_pandas</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset.read_pandas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.read_pandas" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="deepr.io.parquet.ParquetDataset.write">
-<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table</span></em>, <em class="sig-param"><span class="n">compression</span><span class="o">=</span><span class="default_value">'snappy'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.write" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">write</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'snappy'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.write" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="deepr.io.parquet.ParquetDataset.write_pandas">
-<code class="sig-name descname">write_pandas</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">compression</span><span class="o">=</span><span class="default_value">'snappy'</span></em>, <em class="sig-param"><span class="n">num_chunks</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">chunk_size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">schema</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset.write_pandas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.write_pandas" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">write_pandas</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'snappy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_chunks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/parquet.html#ParquetDataset.write_pandas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.parquet.ParquetDataset.write_pandas" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write DataFrame as Parquet Dataset</p>
 </dd></dl>
 
@@ -452,7 +456,7 @@ as well as the connection to the FileSystem.</p>
 <p>Path Utilities</p>
 <dl class="py class">
 <dt id="deepr.io.path.Path">
-<em class="property">class </em><code class="sig-prename descclassname">deepr.io.path.</code><code class="sig-name descname">Path</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.io.path.</span></code><code class="sig-name descname"><span class="pre">Path</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.path.Path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Equivalent of pathlib.Path for local and HDFS FileSystem</p>
 <p>Automatically opens and closes an HDFS connection if the path is
@@ -470,31 +474,31 @@ an HDFS path.</p>
 </div>
 <dl class="py method">
 <dt id="deepr.io.path.Path.copy_dir">
-<code class="sig-name descname">copy_dir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dest</span></em>, <em class="sig-param"><span class="n">recursive</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.copy_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.copy_dir" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">copy_dir</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesystem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.copy_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.path.Path.copy_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy current files and directories if recursive to dest.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="deepr.io.path.Path.copy_file">
-<code class="sig-name descname">copy_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dest</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.copy_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.copy_file" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">copy_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesystem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.copy_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.path.Path.copy_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy current file to dest (target directory must exist).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="deepr.io.path.Path.delete">
-<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.delete" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">delete</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filesystem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.path.Path.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete file from filesystem</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="deepr.io.path.Path.delete_dir">
-<code class="sig-name descname">delete_dir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.delete_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.delete_dir" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">delete_dir</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filesystem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.delete_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.path.Path.delete_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete dir from filesystem</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="deepr.io.path.Path.exists">
-<code class="sig-name descname">exists</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.exists" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">exists</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filesystem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.exists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.path.Path.exists" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return True if the path points to an existing file or dir.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -505,7 +509,7 @@ an HDFS path.</p>
 
 <dl class="py method">
 <dt id="deepr.io.path.Path.glob">
-<code class="sig-name descname">glob</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pattern</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.glob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.glob" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">glob</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.glob"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.path.Path.glob" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve directory content matching pattern</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -516,7 +520,7 @@ an HDFS path.</p>
 
 <dl class="py method">
 <dt id="deepr.io.path.Path.is_dir">
-<code class="sig-name descname">is_dir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.is_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.is_dir" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">is_dir</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filesystem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.is_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.path.Path.is_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return True if the path points to a regular directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -527,7 +531,7 @@ an HDFS path.</p>
 
 <dl class="py method">
 <dt id="deepr.io.path.Path.is_file">
-<code class="sig-name descname">is_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.is_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.is_file" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">is_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filesystem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.is_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.path.Path.is_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return True if the path points to a regular file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -538,7 +542,7 @@ an HDFS path.</p>
 
 <dl class="py method">
 <dt id="deepr.io.path.Path.is_hdfs">
-<em class="property">property </em><code class="sig-name descname">is_hdfs</code><a class="headerlink" href="#deepr.io.path.Path.is_hdfs" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">is_hdfs</span></code><a class="headerlink" href="#deepr.io.path.Path.is_hdfs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return True if the path points to an HDFS location</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -549,7 +553,7 @@ an HDFS path.</p>
 
 <dl class="py method">
 <dt id="deepr.io.path.Path.is_local">
-<em class="property">property </em><code class="sig-name descname">is_local</code><a class="headerlink" href="#deepr.io.path.Path.is_local" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">is_local</span></code><a class="headerlink" href="#deepr.io.path.Path.is_local" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return True if the path points to a local file or dir.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -560,7 +564,7 @@ an HDFS path.</p>
 
 <dl class="py method">
 <dt id="deepr.io.path.Path.iterdir">
-<code class="sig-name descname">iterdir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.iterdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.iterdir" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">iterdir</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filesystem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.iterdir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.path.Path.iterdir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve directory content.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -571,13 +575,13 @@ an HDFS path.</p>
 
 <dl class="py method">
 <dt id="deepr.io.path.Path.mkdir">
-<code class="sig-name descname">mkdir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parents</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">exist_ok</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.mkdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.mkdir" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">mkdir</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exist_ok</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesystem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.mkdir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.path.Path.mkdir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create directory</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="deepr.io.path.Path.name">
-<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#deepr.io.path.Path.name" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">name</span></code><a class="headerlink" href="#deepr.io.path.Path.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Final path component.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -588,7 +592,7 @@ an HDFS path.</p>
 
 <dl class="py method">
 <dt id="deepr.io.path.Path.open">
-<code class="sig-name descname">open</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'r'</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">'utf-8'</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deepr.io.path.Path.open" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">open</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesystem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/io/path.html#Path.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.io.path.Path.open" title="Permalink to this definition">¶</a></dt>
 <dd><p>Open file on both HDFS and Local File Systems.</p>
 <p class="rubric">Example</p>
 <p>Use a context manager like so</p>
@@ -601,13 +605,13 @@ an HDFS path.</p>
 
 <dl class="py method">
 <dt id="deepr.io.path.Path.parent">
-<em class="property">property </em><code class="sig-name descname">parent</code><a class="headerlink" href="#deepr.io.path.Path.parent" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">parent</span></code><a class="headerlink" href="#deepr.io.path.Path.parent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Path to the parent of the current path</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="deepr.io.path.Path.suffix">
-<em class="property">property </em><code class="sig-name descname">suffix</code><a class="headerlink" href="#deepr.io.path.Path.suffix" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">suffix</span></code><a class="headerlink" href="#deepr.io.path.Path.suffix" title="Permalink to this definition">¶</a></dt>
 <dd><p>File extension of the file if any.</p>
 </dd></dl>
 
@@ -624,37 +628,29 @@ an HDFS path.</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="deepr.jobs.html" class="btn btn-neutral float-right" title="deepr.jobs package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="deepr.initializers.html" class="btn btn-neutral float-left" title="deepr.initializers package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="deepr.jobs.html" class="btn btn-neutral float-right" title="deepr.jobs package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="deepr.initializers.html" class="btn btn-neutral float-left" title="deepr.initializers package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Criteo
+        &#169; Copyright 2020, Criteo.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
