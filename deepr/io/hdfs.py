@@ -3,9 +3,7 @@
 from typing import Optional
 import logging
 
-import pyarrow
-from pyarrow.filesystem import FileSystem
-
+from pyarrow.fs import FileSystem, HadoopFileSystem
 
 LOGGER = logging.getLogger(__name__)
 
@@ -20,16 +18,20 @@ class HDFSFileSystem:
     ...     fs.open("path/to/file")  # doctest: +SKIP
     """
 
-    def __init__(self):
+    def __init__(self, *args, host="viewfs://root", port=0, **kwargs):
+        self._host = host
+        self._port = port
         self._hdfs = None
+        self._args = args
+        self._kwargs = kwargs
 
     def __enter__(self):
-        self._hdfs = pyarrow.hdfs.connect()
+        self._hdfs = HadoopFileSystem(self._host, self._port, *self._args, **self._kwargs)
         return self._hdfs
 
     def __exit__(self, type, value, traceback):
         # pylint: disable=redefined-builtin
-        self._hdfs.close()
+        self._hdfs = None
 
     def __getattr__(self, name):
         # Expose self._hdfs methods and attributes (mimic inheritance)
@@ -61,12 +63,18 @@ class HDFSFile:
         Write / read mode. Supported: "r", "rb" (default), "w", "wb".
     """
 
+    DEFAULT_BUFFER_SIZE = 2 ** 16  # 64K
+
     def __init__(self, filesystem: FileSystem, path: str, mode: str = "rb", encoding: Optional[str] = "utf-8"):
         self.filesystem = filesystem
         self.path = path
         self.mode = mode
         self.encoding = None if "b" in mode else encoding
-        self._file = filesystem.open(self.path, mode={"r": "rb", "w": "wb"}.get(mode, mode))
+        self._file = (
+            filesystem.open_input_stream(path, compression="detect", buffer_size=HDFSFile.DEFAULT_BUFFER_SIZE)
+            if "r" in mode
+            else filesystem.open_output_stream(path, compression="detect", buffer_size=HDFSFile.DEFAULT_BUFFER_SIZE)
+        )
 
     def __iter__(self):
         yield from self.readlines()
@@ -76,17 +84,19 @@ class HDFSFile:
 
     def __exit__(self, type, value, traceback):
         # pylint: disable=redefined-builtin
-        return self._file.__exit__(type, value, traceback)
+        self._file.close()
 
     def __getattr__(self, name):
         # Expose self._file methods and attributes (mimic inheritance)
         return getattr(self._file, name)
 
     def write(self, data, *args, **kwargs):
+        # pylint: disable=unused-argument
+        # TODO: remove arguments
         if self.mode == "w":
-            self._file.write(data.encode(encoding=self.encoding), *args, **kwargs)
+            self._file.write(data.encode(encoding=self.encoding))
         elif self.mode == "wb":
-            self._file.write(data, *args, **kwargs)
+            self._file.write(data)
         else:
             raise ValueError(f"Mode {self.mode} unkown (must be 'w' or 'wb').")
 

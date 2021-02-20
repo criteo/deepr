@@ -9,7 +9,8 @@ import shutil
 import logging
 
 import tensorflow as tf
-from pyarrow.filesystem import FileSystem
+import pyarrow.fs as pfs
+from pyarrow.fs import FileSystem
 
 from deepr.io.hdfs import HDFSFileSystem, HDFSFile
 from deepr.utils.datastruct import to_flat_tuple
@@ -85,33 +86,33 @@ class Path:
     def exists(self, filesystem: FileSystem = None) -> bool:
         """Return True if the path points to an existing file or dir."""
         if filesystem is not None:
-            return filesystem.exists(str(self))
+            return filesystem.get_file_info(str(self)).type != pfs.FileType.NotFound
         else:
             if self.is_hdfs:
                 with HDFSFileSystem() as hdfs:
-                    return hdfs.exists(str(self))
+                    return hdfs.get_file_info(str(self)).type != pfs.FileType.NotFound
             else:
-                return pathlib.Path(str(self)).exists()
+                return pathlib.Path(str(self)).exists()  # replace to LocalFileSystem?
 
     def is_dir(self, filesystem: FileSystem = None) -> bool:
         """Return True if the path points to a regular directory."""
         if filesystem is not None:
-            return filesystem.isdir(str(self))
+            return filesystem.get_file_info(str(self)).type == pfs.FileType.Directory
         else:
             if self.is_hdfs:
                 with HDFSFileSystem() as hdfs:
-                    return hdfs.isdir(str(self))
+                    return hdfs.get_file_info(str(self)).type == pfs.FileType.Directory
             else:
                 return pathlib.Path(str(self)).is_dir()
 
     def is_file(self, filesystem: FileSystem = None) -> bool:
         """Return True if the path points to a regular file."""
         if filesystem is not None:
-            return filesystem.isfile(str(self))
+            return filesystem.get_file_info(str(self)).type == pfs.FileType.File
         else:
             if self.is_hdfs:
                 with HDFSFileSystem() as hdfs:
-                    return hdfs.isfile(str(self))
+                    return hdfs.get_file_info(str(self)).type == pfs.FileType.File
             else:
                 return pathlib.Path(str(self)).is_file()
 
@@ -123,11 +124,11 @@ class Path:
             else:
                 raise Exception(f"Directory {self} already exists.")
         if filesystem is not None:
-            filesystem.mkdir(str(self))
+            filesystem.create_dir(str(self), recursive=parents)
         else:
             if self.is_hdfs:
                 with HDFSFileSystem() as hdfs:
-                    hdfs.mkdir(str(self))
+                    hdfs.create_dir(str(self), recursive=parents)
             else:
                 pathlib.Path(str(self)).mkdir(parents=parents, exist_ok=exist_ok)
 
@@ -136,11 +137,11 @@ class Path:
         if not self.is_dir(filesystem=filesystem):
             raise FileNotFoundError(str(self))
         if filesystem is not None:
-            filesystem.rm(str(self), recursive=True)
+            filesystem.delete_dir(str(self))
         else:
             if self.is_hdfs:
                 with HDFSFileSystem() as hdfs:
-                    hdfs.rm(str(self), recursive=True)
+                    hdfs.delete_dir(str(self))
             else:
                 shutil.rmtree(str(self))
 
@@ -149,11 +150,11 @@ class Path:
         if not self.is_file(filesystem=filesystem):
             raise FileNotFoundError(str(self))
         if filesystem is not None:
-            filesystem.delete(str(self))
+            filesystem.delete_file(str(self))
         else:
             if self.is_hdfs:
                 with HDFSFileSystem() as hdfs:
-                    hdfs.delete(str(self))
+                    hdfs.delete_file(str(self))
             else:
                 pathlib.Path(str(self)).unlink()
 
@@ -185,11 +186,12 @@ class Path:
     def iterdir(self, filesystem: FileSystem = None) -> Generator["Path", None, None]:
         """Retrieve directory content."""
         if filesystem is not None:
-            return (Path(path) for path in list(filesystem.ls(str(self))))
+            return (Path(item.path) for item in filesystem.get_file_info(pfs.FileSelector(str(self), recursive=False)))
         else:
             if self.is_hdfs:
                 with HDFSFileSystem() as hdfs:
-                    return (Path(path) for path in list(hdfs.ls(str(self))))
+                    contents = hdfs.get_file_info(pfs.FileSelector(str(self), recursive=False))
+                    return (Path(item.path) for item in contents)
             else:
                 return (Path(str(path)) for path in pathlib.Path(str(self)).iterdir())
 
