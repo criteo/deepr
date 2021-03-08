@@ -7,6 +7,6 @@ mlflow==1.13.1
 numpy==1.19.4
 psutil==5.8.0
 pyarrow==3.0.0
-skein==0.8.0
+skein==0.8.1
 tensorflow>=1.15,<2
 tf-yarn==0.6.1
