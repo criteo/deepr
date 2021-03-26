@@ -1,8 +1,8 @@
 {
     "paths": {
         "type": "deepr.examples.multiply.macros.Paths",
-        "path_model": null,
-        "path_dataset": null
+        "path_model": "model",
+        "path_dataset": "dataset"
     },
     "params": {
         "learning_rate": 0.01,

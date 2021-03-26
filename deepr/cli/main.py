@@ -12,14 +12,18 @@ Available commands::
 
 """
 
+import json
 import logging
 from typing import List, Union
+from pathlib import Path
 
 import fire
+import fromconfig
 
 from deepr.config.base import parse_config, from_config
 from deepr.config.experimental import add_macro_params, find_values
 from deepr.config.macros import ismacro
+from deepr.config.parser import DeeprParser
 from deepr.jobs.base import Job
 from deepr.io.json import load_json, read_json, write_json
 from deepr.utils import mlflow
@@ -28,7 +32,32 @@ from deepr.utils import mlflow
 LOGGER = logging.getLogger(__name__)
 
 
-def run(job: str, macros: str = None):
+def run(job: str, macros: str = None, legacy: bool = False):
+    """New run command using fromconfig as backend.
+
+    Parameters
+    ----------
+    job : str
+        Path to json file or json string
+    macros : str, optional
+        Path to json file or json string
+    legacy : bool, optional
+        If True, use legacy implementation
+    """
+    if legacy:
+        return run_legacy(job=job, macros=macros)
+
+    config = {"config": fromconfig.load(job) if Path(job).is_file() else json.loads(job)}
+    if macros is not None:
+        config["macros"] = fromconfig.load(macros) if Path(macros).is_file() else json.loads(macros)
+
+    parser = DeeprParser()
+    parsed = parser(config)
+    job = fromconfig.fromconfig(parsed)
+    return job.run()
+
+
+def run_legacy(job: str, macros: str = None):
     """Instantiate job from job configs and macros and run.
 
     Parameters
@@ -173,6 +202,7 @@ def main():
     fire.Fire(
         {
             "run": run,
+            "run_legacy": run_legacy,
             "from_config": _from_config,
             "from_config_and_macros": from_config_and_macros,
             "download_config_and_macros_from_mlflow": download_config_and_macros_from_mlflow,

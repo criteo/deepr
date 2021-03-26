@@ -6,10 +6,10 @@ import datetime
 import json
 import logging
 
+import fromconfig
 from cluster_pack.skein import skein_launcher
 import skein
 
-from deepr.config.base import from_config
 from deepr.jobs import base
 from deepr.jobs.yarn_config import YarnConfig
 from deepr.utils import mlflow
@@ -76,5 +76,5 @@ class YarnLauncher(base.Job):
             mlflow.clear_run()
         else:
             LOGGER.info("Not running on yarn.")
-            job = from_config(self.job)
+            job = fromconfig.fromconfig(self.job)
             job.run()

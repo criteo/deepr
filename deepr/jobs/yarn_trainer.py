@@ -10,8 +10,8 @@ from cluster_pack.packaging import get_editable_requirements
 import mlflow
 import skein
 import tf_yarn
+import fromconfig
 
-from deepr.config.base import from_config
 from deepr.jobs import base
 from deepr.jobs.yarn_config import YarnConfig
 
@@ -73,7 +73,7 @@ class YarnTrainer(base.Job):
                 # Remove auto-termination of active MLFlow runs from
                 # inside the chief / evaluator
                 atexit.unregister(mlflow.end_run)
-                return from_config(self.trainer).create_experiment()
+                return fromconfig.fromconfig(self.trainer).create_experiment()
 
             tf_yarn.run_on_yarn(
                 acls=skein.model.ACLs(enable=True, ui_users=["*"], view_users=["*"]),
@@ -89,12 +89,12 @@ class YarnTrainer(base.Job):
             )
 
             # Run exporters and final evaluation
-            trainer = from_config(self.trainer)
+            trainer = fromconfig.fromconfig(self.trainer)
             experiment = trainer.create_experiment()
             for exporter in trainer.exporters:
                 exporter(experiment.estimator)
             trainer.run_final_evaluation()
         else:
             LOGGER.info("Not training on yarn.")
-            trainer = from_config(self.trainer)
+            trainer = fromconfig.fromconfig(self.trainer)
             trainer.run()
