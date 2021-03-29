@@ -1,4 +1,4 @@
-cluster-pack==0.2.4
+cluster-pack==0.2.5
 dataclasses
 fire==0.4.0
 graphyte==1.6.0
