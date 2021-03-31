@@ -30,6 +30,7 @@ if __name__ == "__main__":
             "psutil>=5,<6",
             "pyarrow>=0.14",
             "skein>=0.8",
+            "fromconfig",
         ],
         extras_require={
             "cpu": ["tensorflow>=1.15,<2", "tf-yarn>=0.4.20"],

@@ -1,6 +1,6 @@
 # pylint: disable=unused-import,missing-docstring
 
-from deepr.config.base import parse_config, from_config
+from deepr.config.base import is_deepr_config, parse_config, from_config
 from deepr.config.macros import (
     ismacro,
     fill_macros,
