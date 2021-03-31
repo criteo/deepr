@@ -14,18 +14,27 @@ Available commands::
 
 import logging
 from typing import List, Union
+import json
 
 import fire
+import fromconfig
 
 from deepr.config.base import parse_config, from_config
 from deepr.config.experimental import add_macro_params, find_values
 from deepr.config.macros import ismacro
 from deepr.jobs.base import Job
-from deepr.io.json import load_json, read_json, write_json
+from deepr.io.json import is_json, read_json, write_json
 from deepr.utils import mlflow
 
 
 LOGGER = logging.getLogger(__name__)
+
+
+def _load(data: str):
+    """Parse json string or load config (yaml, json or jsonnet)"""
+    if is_json(data):
+        return json.loads(data)
+    return fromconfig.load(data)
 
 
 def run(job: str, macros: str = None):
@@ -59,7 +68,7 @@ def from_config_and_macros(config: str, macros: str = None):
     Instance
         Defined by config
     """
-    parsed = parse_config(load_json(config), load_json(macros) if macros else None)
+    parsed = parse_config(_load(config), _load(macros) if macros else None)
     return from_config(parsed)
 
 
@@ -71,7 +80,7 @@ def _from_config(config: str):
     config : str
         Path to json file or json string
     """
-    return from_config(load_json(config))
+    return from_config(_load(config))
 
 
 def download_config_and_macros_from_mlflow(
