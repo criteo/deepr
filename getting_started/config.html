@@ -488,7 +488,7 @@ div.rendered_html tbody tr:hover {
 </ul>
 <p>Don’t support</p>
 <ul class="simple">
-<li><p>Classes : objects in config are necessarily instances of classes or literals, i.e. <code class="docutils literal notranslate"><span class="pre">dict</span></code>, <code class="docutils literal notranslate"><span class="pre">tuple</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">int</span></code>, etc.</p></li>
+<li><p>Classes : objects in config are necessarily instances of classes or literals, i.e. <code class="docutils literal notranslate"><span class="pre">dict</span></code>, <code class="docutils literal notranslate"><span class="pre">tuple</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">int</span></code>, etc.</p></li>
 <li><p>Object references and scoping : don’t allow references to other objects defined in the config as it might lead to confusions (singleton issue). It will also break unicity as there would be mutiple ways to define the “same” config.</p></li>
 <li><p>Singletons : the singleton problem can be (and should be) solved in the code rather than in the config.</p></li>
 </ul>

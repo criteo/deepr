@@ -719,7 +719,7 @@ INFO:faiss:Loading faiss.
 <div class="section" id="Cleanup-Job">
 <h2>Cleanup Job<a class="headerlink" href="#Cleanup-Job" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have a more powerful <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> job, let’s also review some additional jobs that might be added at the end of the training pipeline.</p>
-<p>One of them is the <code class="docutils literal notranslate"><span class="pre">CleanupCheckpoints</span></code> job : it does what it says it does, i.e. deleting the model’s checkpoints (which can save you a lot of disk usage if you run thousands of experiments and have no need to reuse the checkpoints). Because we exported our model as a <code class="docutils literal notranslate"><span class="pre">SavedModel</span></code>, we probably don’t need those.</p>
+<p>One of them is the <code class="docutils literal notranslate"><span class="pre">CleanupCheckpoints</span></code> job : it does what it says it does, i.e. deleting the model’s checkpoints (which can save you a lot of disk usage if you run thousands of experiments and have no need to reuse the checkpoints). Because we exported our model as a <code class="docutils literal notranslate"><span class="pre">SavedModel</span></code>, we probably don’t need those.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>

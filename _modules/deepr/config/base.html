@@ -171,14 +171,21 @@
            <div itemprop="articleBody">
             
   <h1>Source code for deepr.config.base</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Evaluate objects from arbitrary nested dictionaries.&quot;&quot;&quot;</span>
+<span></span><span class="sd">&quot;&quot;&quot;Evaluate objects from arbitrary nested dictionaries.</span>
+
+<span class="sd">Two formats are supported, deepr and fromconfig. You can configure the</span>
+<span class="sd">format using the &quot;config_format&quot; argument. An &quot;auto&quot; mode automatically</span>
+<span class="sd">infers the format.</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">functools</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
 
-<span class="kn">from</span> <span class="nn">deepr.config.macros</span> <span class="kn">import</span> <span class="n">fill_macros</span><span class="p">,</span> <span class="n">find_macro_params</span><span class="p">,</span> <span class="n">assert_no_macros</span><span class="p">,</span> <span class="n">macros_eval_order</span>
+<span class="kn">from</span> <span class="nn">deepr.config.macros</span> <span class="kn">import</span> <span class="n">fill_macros</span><span class="p">,</span> <span class="n">find_macro_params</span><span class="p">,</span> <span class="n">assert_no_macros</span><span class="p">,</span> <span class="n">macros_eval_order</span><span class="p">,</span> <span class="n">ismacro</span>
 <span class="kn">from</span> <span class="nn">deepr.config.references</span> <span class="kn">import</span> <span class="n">fill_references</span><span class="p">,</span> <span class="n">default_references</span>
+
+<span class="kn">import</span> <span class="nn">fromconfig</span>
 
 
 <span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -194,8 +201,35 @@
 <span class="n">POSITIONAL</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span>
 
 
-<div class="viewcode-block" id="parse_config"><a class="viewcode-back" href="../../../_source/deepr.config.html#deepr.config.parse_config">[docs]</a><span class="k">def</span> <span class="nf">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">macros</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<div class="viewcode-block" id="is_deepr_config"><a class="viewcode-back" href="../../../_source/deepr.config.html#deepr.config.is_deepr_config">[docs]</a><span class="k">def</span> <span class="nf">is_deepr_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Return true if a config is a deepr config.&quot;&quot;&quot;</span>
+
+    <span class="n">deepr_keys</span> <span class="o">=</span> <span class="p">{</span><span class="n">TYPE</span><span class="p">,</span> <span class="n">EVAL</span><span class="p">,</span> <span class="n">POSITIONAL</span><span class="p">}</span>
+    <span class="n">fromconfig_keys</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;_attr_&quot;</span><span class="p">,</span> <span class="s2">&quot;_args_&quot;</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_has_deepr_key</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">deepr_keys</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">fromconfig_keys</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">_has_deepr_key</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">_has_deepr_key</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">item</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ismacro</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="ow">or</span> <span class="n">item</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;@self&quot;</span><span class="p">,</span> <span class="s2">&quot;@macros&quot;</span><span class="p">,</span> <span class="s2">&quot;@macros_eval&quot;</span><span class="p">}</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="n">_has_deepr_key</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="parse_config"><a class="viewcode-back" href="../../../_source/deepr.config.html#deepr.config.parse_config">[docs]</a><span class="k">def</span> <span class="nf">parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">macros</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">config_format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Fill macro parameters and references in config from macros.</span>
+
+<span class="sd">    Infers config format automatically. Supported format : deepr and</span>
+<span class="sd">    fromconfig.</span>
+
+<span class="sd">    If the config format is fromconfig, macros should be None.</span>
 
 <span class="sd">    Example</span>
 <span class="sd">    -------</span>
@@ -223,13 +257,62 @@
 <span class="sd">        If some macro parameter in config not found in macros.</span>
 <span class="sd">        If some references not found.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">config_format</span> <span class="o">==</span> <span class="s2">&quot;auto&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">macros</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Config format : deepr (macros is not None)&quot;</span><span class="p">)</span>
+            <span class="n">config_format</span> <span class="o">=</span> <span class="s2">&quot;deepr&quot;</span>
+        <span class="k">elif</span> <span class="n">is_deepr_config</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+            <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Config format : deepr (special keys in config)&quot;</span><span class="p">)</span>
+            <span class="n">config_format</span> <span class="o">=</span> <span class="s2">&quot;deepr&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Config format : fromconfig&quot;</span><span class="p">)</span>
+            <span class="n">config_format</span> <span class="o">=</span> <span class="s2">&quot;fromconfig&quot;</span>
+
+    <span class="k">if</span> <span class="n">config_format</span> <span class="o">==</span> <span class="s2">&quot;fromconfig&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">macros</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;macros are not supported when the config format is fromconfig&quot;</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="n">parser</span> <span class="o">=</span> <span class="n">fromconfig</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">DefaultParser</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">parser</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">config_format</span> <span class="o">==</span> <span class="s2">&quot;deepr&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">macros</span><span class="p">)</span>
+
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Format </span><span class="si">{</span><span class="n">config_format</span><span class="si">}</span><span class="s2"> not recognized (should be auto, deepr or fromconfig)&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="from_config"><a class="viewcode-back" href="../../../_source/deepr.config.html#deepr.config.from_config">[docs]</a><span class="k">def</span> <span class="nf">from_config</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">config_format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Instantiate item from config.</span>
+
+<span class="sd">    Infers config format automatically. Supported format : deepr and</span>
+<span class="sd">    fromconfig.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If item is not a valid config (unexpected eval method)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">config_format</span> <span class="o">==</span> <span class="s2">&quot;auto&quot;</span><span class="p">:</span>
+        <span class="n">config_format</span> <span class="o">=</span> <span class="s2">&quot;deepr&quot;</span> <span class="k">if</span> <span class="n">is_deepr_config</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;fromconfig&quot;</span>
+
+    <span class="k">if</span> <span class="n">config_format</span> <span class="o">==</span> <span class="s2">&quot;fromconfig&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">fromconfig</span><span class="o">.</span><span class="n">fromconfig</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">config_format</span> <span class="o">==</span> <span class="s2">&quot;deepr&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_from_config</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Format </span><span class="si">{</span><span class="n">config_format</span><span class="si">}</span><span class="s2"> not recognized (should be auto, deepr or fromconfig)&quot;</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_parse_config</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">macros</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Private implementation of from_config for the deepr format.&quot;&quot;&quot;</span>
     <span class="c1"># Evaluate macros in order to account for inter macro params</span>
     <span class="k">if</span> <span class="n">macros</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">macros_eval</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
         <span class="k">for</span> <span class="n">macro</span> <span class="ow">in</span> <span class="n">macros_eval_order</span><span class="p">(</span><span class="n">macros</span><span class="p">):</span>
             <span class="n">macro_eval</span> <span class="o">=</span> <span class="n">fill_macros</span><span class="p">(</span><span class="n">macros</span><span class="p">[</span><span class="n">macro</span><span class="p">],</span> <span class="n">macros_eval</span><span class="p">)</span>
             <span class="n">assert_no_macros</span><span class="p">(</span><span class="n">macro_eval</span><span class="p">)</span>
-            <span class="n">macros_eval</span><span class="p">[</span><span class="n">macro</span><span class="p">]</span> <span class="o">=</span> <span class="n">from_config</span><span class="p">(</span><span class="n">macro_eval</span><span class="p">)</span>
+            <span class="n">macros_eval</span><span class="p">[</span><span class="n">macro</span><span class="p">]</span> <span class="o">=</span> <span class="n">_from_config</span><span class="p">(</span><span class="n">macro_eval</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">macros_eval</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: ignore</span>
 
@@ -246,17 +329,11 @@
             <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">used</span><span class="p">):</span>
                 <span class="n">LOGGER</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- MACRO PARAM NOT USED: macro = &#39;</span><span class="si">{</span><span class="n">macro</span><span class="si">}</span><span class="s2">&#39;, param = &#39;</span><span class="si">{</span><span class="n">param</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">parsed</span></div>
+    <span class="k">return</span> <span class="n">parsed</span>
 
 
-<div class="viewcode-block" id="from_config"><a class="viewcode-back" href="../../../_source/deepr.config.html#deepr.config.from_config">[docs]</a><span class="k">def</span> <span class="nf">from_config</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Instantiate item from config.</span>
-
-<span class="sd">    Raises</span>
-<span class="sd">    ------</span>
-<span class="sd">    ValueError</span>
-<span class="sd">        If item is not a valid config (unexpected eval method)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">_from_config</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Private implementation of from_config for the deepr format.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="c1"># Get eval_mode from item, default is EVAL_MODE_INSTANCE</span>
         <span class="n">mode</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">EVAL</span><span class="p">,</span> <span class="n">CALL</span><span class="p">)</span>
@@ -266,24 +343,24 @@
         <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">CALL</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">TYPE</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
                 <span class="n">cls_or_fn</span> <span class="o">=</span> <span class="n">_import</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="n">TYPE</span><span class="p">])</span>
-                <span class="n">args</span> <span class="o">=</span> <span class="n">from_config</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">POSITIONAL</span><span class="p">))</span>
-                <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">from_config</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="n">TYPE</span><span class="p">,</span> <span class="n">POSITIONAL</span><span class="p">}}</span>
+                <span class="n">args</span> <span class="o">=</span> <span class="n">_from_config</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">POSITIONAL</span><span class="p">))</span>
+                <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">_from_config</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="n">TYPE</span><span class="p">,</span> <span class="n">POSITIONAL</span><span class="p">}}</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">cls_or_fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span> <span class="k">else</span> <span class="n">cls_or_fn</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
                 <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)(</span><span class="sa">f</span><span class="s2">&quot;Error while calling </span><span class="si">{</span><span class="n">cls_or_fn</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">from_config</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+                <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">_from_config</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 
         <span class="c1"># Return partial class or function with provided arguments</span>
         <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">PARTIAL</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">TYPE</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
                 <span class="n">cls_or_fn</span> <span class="o">=</span> <span class="n">_import</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="n">TYPE</span><span class="p">])</span>
-                <span class="n">args</span> <span class="o">=</span> <span class="n">from_config</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">POSITIONAL</span><span class="p">))</span>
-                <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">from_config</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="n">TYPE</span><span class="p">,</span> <span class="n">POSITIONAL</span><span class="p">}}</span>
+                <span class="n">args</span> <span class="o">=</span> <span class="n">_from_config</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">POSITIONAL</span><span class="p">))</span>
+                <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">_from_config</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="n">TYPE</span><span class="p">,</span> <span class="n">POSITIONAL</span><span class="p">}}</span>
                 <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">cls_or_fn</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span> <span class="k">else</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">cls_or_fn</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">instantiated</span> <span class="o">=</span> <span class="n">from_config</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+                <span class="n">instantiated</span> <span class="o">=</span> <span class="n">_from_config</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
 
                 <span class="k">def</span> <span class="nf">_partial</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
                     <span class="k">return</span> <span class="p">{</span><span class="o">**</span><span class="n">instantiated</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">}</span>
@@ -297,10 +374,10 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected evaluation mode: &#39;</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&#39; in item </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">from_config</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">item</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">_from_config</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">item</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">from_config</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">item</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">item</span></div>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">_from_config</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">item</span>
 
 
 <span class="k">def</span> <span class="nf">_import</span><span class="p">(</span><span class="n">import_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
