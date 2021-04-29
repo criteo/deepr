@@ -1,6 +1,6 @@
 """Pipeline"""
 
-from typing import List
+from typing import List, Union, Callable
 from dataclasses import dataclass
 import logging
 
@@ -14,13 +14,16 @@ LOGGER = logging.getLogger(__name__)
 class Pipeline(base.Job):
     """Pipeline, executes list of jobs in order"""
 
-    jobs: List[base.Job]
+    jobs: List[Union[base.Job, Callable]]
 
     def __post_init__(self):
         for job in self.jobs:
-            if not isinstance(job, base.Job):
-                raise TypeError(f"Expected `base.Job`, but got {job}")
+            if not (hasattr(job, "run") or callable(job)):
+                raise TypeError(f"Expected `base.Job` or function, but got {job}")
 
     def run(self):
         for job in self.jobs:
-            job.run()
+            if callable(job):
+                job()
+            else:
+                job.run()

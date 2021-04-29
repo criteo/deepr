@@ -7,6 +7,25 @@ The format is based on `Keep a Changelog <http://keepachangelog.com/>`_
 and this project adheres to `Semantic Versioning <http://semver.org/>`_.
 
 
+[2.12.0] - 2021-04-29
+---------------------
+
+Added
+~~~~~
+- function support for ``Pipeline``
+
+Changed
+~~~~~~~
+Deprecated
+~~~~~~~~~~
+Removed
+~~~~~~~
+Fixed
+~~~~~
+Security
+~~~~~~~~
+
+
 [2.11.0] - 2020-12-11
 ---------------------
 
