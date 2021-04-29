@@ -173,7 +173,7 @@
   <h1>Source code for deepr.jobs.combinators</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Pipeline&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Callable</span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
@@ -187,16 +187,19 @@
 <span class="k">class</span> <span class="nc">Pipeline</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Pipeline, executes list of jobs in order&quot;&quot;&quot;</span>
 
-    <span class="n">jobs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">base</span><span class="o">.</span><span class="n">Job</span><span class="p">]</span>
+    <span class="n">jobs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">base</span><span class="o">.</span><span class="n">Job</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]]</span>
 
     <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobs</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">base</span><span class="o">.</span><span class="n">Job</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected `base.Job`, but got </span><span class="si">{</span><span class="n">job</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">callable</span><span class="p">(</span><span class="n">job</span><span class="p">)):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected `base.Job` or function, but got </span><span class="si">{</span><span class="n">job</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Pipeline.run"><a class="viewcode-back" href="../../../_source/deepr.jobs.html#deepr.jobs.Pipeline.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobs</span><span class="p">:</span>
-            <span class="n">job</span><span class="o">.</span><span class="n">run</span><span class="p">()</span></div></div>
+            <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">job</span><span class="p">):</span>
+                <span class="n">job</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">job</span><span class="o">.</span><span class="n">run</span><span class="p">()</span></div></div>
 </pre></div>
 
            </div>
