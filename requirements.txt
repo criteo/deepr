@@ -9,4 +9,4 @@ psutil==5.8.0
 pyarrow==3.0.0
 skein==0.8.1
 tensorflow>=1.15,<2
-tf-yarn==0.6.1
+tf-yarn==0.6.2
