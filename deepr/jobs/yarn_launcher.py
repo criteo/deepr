@@ -49,8 +49,7 @@ class YarnLauncher(base.Job):
             # Dump job and base as local json files for yarn_launcher
             job_name = f"job-{self.config.name}.json"
             with open(job_name, "w") as file:
-                # Support custom mappings with default=dict
-                json.dump(self.job, file, indent=4, default=dict)
+                json.dump(self.job, file, indent=4)
 
             # Launch job on yarn
             pex_path = self.config.upload_pex_cpu()

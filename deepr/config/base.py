@@ -1,18 +1,11 @@
-"""Evaluate objects from arbitrary nested dictionaries.
-
-Two formats are supported, deepr and fromconfig. You can configure the
-format using the "config_format" argument. An "auto" mode automatically
-infers the format.
-"""
+"""Evaluate objects from arbitrary nested dictionaries."""
 
 import functools
 import logging
 from typing import Dict, Any
 
-from deepr.config.macros import fill_macros, find_macro_params, assert_no_macros, macros_eval_order, ismacro
+from deepr.config.macros import fill_macros, find_macro_params, assert_no_macros, macros_eval_order
 from deepr.config.references import fill_references, default_references
-
-import fromconfig
 
 
 LOGGER = logging.getLogger(__name__)
@@ -28,35 +21,8 @@ PARTIAL = "partial"
 POSITIONAL = "*"
 
 
-def is_deepr_config(config) -> bool:
-    """Return true if a config is a deepr config."""
-
-    deepr_keys = {TYPE, EVAL, POSITIONAL}
-    fromconfig_keys = {"_attr_", "_args_"}
-
-    def _has_deepr_key(item):
-        if isinstance(item, dict):
-            if any(key in deepr_keys for key in item.keys()):
-                return True
-            if any(key in fromconfig_keys for key in item.keys()):
-                return False
-            return any(_has_deepr_key(val) for val in item.values())
-        if isinstance(item, (list, tuple)):
-            return any(_has_deepr_key(val) for val in item)
-        if isinstance(item, str):
-            return ismacro(item) or item in {"@self", "@macros", "@macros_eval"}
-        return False
-
-    return _has_deepr_key(config)
-
-
-def parse_config(config: Dict, macros: Dict = None, config_format: str = "auto") -> Dict:
+def parse_config(config: Dict, macros: Dict = None) -> Dict:
     """Fill macro parameters and references in config from macros.
-
-    Infers config format automatically. Supported format : deepr and
-    fromconfig.
-
-    If the config format is fromconfig, macros should be None.
 
     Example
     -------
@@ -84,62 +50,13 @@ def parse_config(config: Dict, macros: Dict = None, config_format: str = "auto")
         If some macro parameter in config not found in macros.
         If some references not found.
     """
-    if config_format == "auto":
-        if macros is not None:
-            LOGGER.info("Config format : deepr (macros is not None)")
-            config_format = "deepr"
-        elif is_deepr_config(config):
-            LOGGER.info("Config format : deepr (special keys in config)")
-            config_format = "deepr"
-        else:
-            LOGGER.info("Config format : fromconfig")
-            config_format = "fromconfig"
-
-    if config_format == "fromconfig":
-        if macros is not None:
-            msg = "macros are not supported when the config format is fromconfig"
-            raise ValueError(msg)
-        parser = fromconfig.parser.DefaultParser()
-        return parser(config)
-
-    if config_format == "deepr":
-        return _parse_config(config, macros)
-
-    raise ValueError(f"Format {config_format} not recognized (should be auto, deepr or fromconfig)")
-
-
-def from_config(item: Any, config_format: str = "auto") -> Any:
-    """Instantiate item from config.
-
-    Infers config format automatically. Supported format : deepr and
-    fromconfig.
-
-    Raises
-    ------
-    ValueError
-        If item is not a valid config (unexpected eval method)
-    """
-    if config_format == "auto":
-        config_format = "deepr" if is_deepr_config(item) else "fromconfig"
-
-    if config_format == "fromconfig":
-        return fromconfig.fromconfig(item)
-
-    if config_format == "deepr":
-        return _from_config(item)
-
-    raise ValueError(f"Format {config_format} not recognized (should be auto, deepr or fromconfig)")
-
-
-def _parse_config(config: Dict, macros: Dict = None):
-    """Private implementation of from_config for the deepr format."""
     # Evaluate macros in order to account for inter macro params
     if macros is not None:
         macros_eval = dict()  # type: ignore
         for macro in macros_eval_order(macros):
             macro_eval = fill_macros(macros[macro], macros_eval)
             assert_no_macros(macro_eval)
-            macros_eval[macro] = _from_config(macro_eval)
+            macros_eval[macro] = from_config(macro_eval)
     else:
         macros_eval = None  # type: ignore
 
@@ -159,8 +76,14 @@ def _parse_config(config: Dict, macros: Dict = None):
     return parsed
 
 
-def _from_config(item: Any):
-    """Private implementation of from_config for the deepr format."""
+def from_config(item: Any) -> Any:
+    """Instantiate item from config.
+
+    Raises
+    ------
+    ValueError
+        If item is not a valid config (unexpected eval method)
+    """
     if isinstance(item, dict):
         # Get eval_mode from item, default is EVAL_MODE_INSTANCE
         mode = item.get(EVAL, CALL)
@@ -170,24 +93,24 @@ def _from_config(item: Any):
         if mode == CALL:
             if TYPE in params:
                 cls_or_fn = _import(params[TYPE])
-                args = _from_config(params.get(POSITIONAL))
-                kwargs = {key: _from_config(value) for key, value in params.items() if key not in {TYPE, POSITIONAL}}
+                args = from_config(params.get(POSITIONAL))
+                kwargs = {key: from_config(value) for key, value in params.items() if key not in {TYPE, POSITIONAL}}
                 try:
                     return cls_or_fn(*args, **kwargs) if args else cls_or_fn(**kwargs)
                 except (ValueError, TypeError) as e:
                     raise type(e)(f"Error while calling {cls_or_fn})") from e
             else:
-                return {key: _from_config(value) for key, value in params.items()}
+                return {key: from_config(value) for key, value in params.items()}
 
         # Return partial class or function with provided arguments
         if mode == PARTIAL:
             if TYPE in params:
                 cls_or_fn = _import(params[TYPE])
-                args = _from_config(params.get(POSITIONAL))
-                kwargs = {key: _from_config(value) for key, value in params.items() if key not in {TYPE, POSITIONAL}}
+                args = from_config(params.get(POSITIONAL))
+                kwargs = {key: from_config(value) for key, value in params.items() if key not in {TYPE, POSITIONAL}}
                 return functools.partial(cls_or_fn, *args, **kwargs) if args else functools.partial(cls_or_fn, **kwargs)
             else:
-                instantiated = _from_config(params)
+                instantiated = from_config(params)
 
                 def _partial(**kwargs):
                     return {**instantiated, **kwargs}
@@ -201,9 +124,9 @@ def _from_config(item: Any):
         raise ValueError(f"Unexpected evaluation mode: '{mode}' in item {item}")
 
     if isinstance(item, list):
-        return [_from_config(it) for it in item]
+        return [from_config(it) for it in item]
     if isinstance(item, tuple):
-        return tuple(_from_config(it) for it in item)
+        return tuple(from_config(it) for it in item)
     return item
 
 
