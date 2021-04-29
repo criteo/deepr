@@ -187,27 +187,18 @@
 
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
-<span class="kn">import</span> <span class="nn">json</span>
 
 <span class="kn">import</span> <span class="nn">fire</span>
-<span class="kn">import</span> <span class="nn">fromconfig</span>
 
 <span class="kn">from</span> <span class="nn">deepr.config.base</span> <span class="kn">import</span> <span class="n">parse_config</span><span class="p">,</span> <span class="n">from_config</span>
 <span class="kn">from</span> <span class="nn">deepr.config.experimental</span> <span class="kn">import</span> <span class="n">add_macro_params</span><span class="p">,</span> <span class="n">find_values</span>
 <span class="kn">from</span> <span class="nn">deepr.config.macros</span> <span class="kn">import</span> <span class="n">ismacro</span>
 <span class="kn">from</span> <span class="nn">deepr.jobs.base</span> <span class="kn">import</span> <span class="n">Job</span>
-<span class="kn">from</span> <span class="nn">deepr.io.json</span> <span class="kn">import</span> <span class="n">is_json</span><span class="p">,</span> <span class="n">read_json</span><span class="p">,</span> <span class="n">write_json</span>
+<span class="kn">from</span> <span class="nn">deepr.io.json</span> <span class="kn">import</span> <span class="n">load_json</span><span class="p">,</span> <span class="n">read_json</span><span class="p">,</span> <span class="n">write_json</span>
 <span class="kn">from</span> <span class="nn">deepr.utils</span> <span class="kn">import</span> <span class="n">mlflow</span>
 
 
 <span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">_load</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Parse json string or load config (yaml, json or jsonnet)&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">is_json</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">fromconfig</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../_source/deepr.cli.html#deepr.cli.main.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">job</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">macros</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
@@ -241,7 +232,7 @@
 <span class="sd">    Instance</span>
 <span class="sd">        Defined by config</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">parsed</span> <span class="o">=</span> <span class="n">parse_config</span><span class="p">(</span><span class="n">_load</span><span class="p">(</span><span class="n">config</span><span class="p">),</span> <span class="n">_load</span><span class="p">(</span><span class="n">macros</span><span class="p">)</span> <span class="k">if</span> <span class="n">macros</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">parsed</span> <span class="o">=</span> <span class="n">parse_config</span><span class="p">(</span><span class="n">load_json</span><span class="p">(</span><span class="n">config</span><span class="p">),</span> <span class="n">load_json</span><span class="p">(</span><span class="n">macros</span><span class="p">)</span> <span class="k">if</span> <span class="n">macros</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">from_config</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span></div>
 
 
@@ -253,7 +244,7 @@
 <span class="sd">    config : str</span>
 <span class="sd">        Path to json file or json string</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">from_config</span><span class="p">(</span><span class="n">_load</span><span class="p">(</span><span class="n">config</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">from_config</span><span class="p">(</span><span class="n">load_json</span><span class="p">(</span><span class="n">config</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="download_config_and_macros_from_mlflow"><a class="viewcode-back" href="../../../_source/deepr.cli.html#deepr.cli.main.download_config_and_macros_from_mlflow">[docs]</a><span class="k">def</span> <span class="nf">download_config_and_macros_from_mlflow</span><span class="p">(</span>

@@ -222,8 +222,7 @@
             <span class="c1"># Dump job and base as local json files for yarn_launcher</span>
             <span class="n">job_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;job-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.json&quot;</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">job_name</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-                <span class="c1"># Support custom mappings with default=dict</span>
-                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">job</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">job</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
             <span class="c1"># Launch job on yarn</span>
             <span class="n">pex_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">upload_pex_cpu</span><span class="p">()</span>
