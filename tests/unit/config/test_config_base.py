@@ -75,23 +75,3 @@ def test_config_from_config_constructor(item, kwargs, expected):
     constructor = deepr.from_config(item)
     instance = constructor(**kwargs)
     assert instance == expected
-
-
-@pytest.mark.parametrize(
-    "config, expected",
-    [
-        ({"type": "foo"}, True),
-        ({"eval": "partial"}, True),
-        ({"*": []}, True),
-        ("$params:macro", True),
-        ({"foo": {"type": "bar"}}, True),
-        ([{"type": "foo"}], True),
-        ([{"foo": {"type": "bar"}}], True),
-        ({"_attr_": "foo"}, False),
-        ({"foo": {"_attr_": "bar"}}, False),
-        ([{"_attr_": "foo"}], False),
-        ([{"foo": {"_attr_": "bar"}}, False]),
-    ],
-)
-def test_config_is_deepr_config(config, expected):
-    assert deepr.config.is_deepr_config(config) == expected
