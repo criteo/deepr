@@ -1,0 +1,47 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: tensorflow
+    versions:
+    - ">= 2.a, < 3"
+  - dependency-name: tensorflow-gpu
+    versions:
+    - ">= 2.a, < 3"
+  - dependency-name: black
+    versions:
+    - 21.4b0
+    - 21.4b1
+  - dependency-name: pylint
+    versions:
+    - 2.7.0
+    - 2.7.1
+    - 2.7.3
+    - 2.7.4
+    - 2.8.1
+  - dependency-name: mlflow
+    versions:
+    - 1.13.1
+    - 1.14.0
+    - 1.14.1
+    - 1.15.0
+  - dependency-name: cluster-pack
+    versions:
+    - 0.2.3
+    - 0.2.5
+  - dependency-name: numpy
+    versions:
+    - 1.19.5
+    - 1.20.0
+    - 1.20.1
+  - dependency-name: mypy
+    versions:
+    - "0.800"
+  - dependency-name: pytest-xdist
+    versions:
+    - 2.2.0
