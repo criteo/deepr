@@ -6,7 +6,7 @@ jsonnet==0.17.0
 mlflow==1.14.1
 numpy==1.19.4
 psutil==5.8.0
-pyarrow==3.0.0
+pyarrow==4.0.1
 skein==0.8.1
 tensorflow-gpu>=1.15,<2
 tf-yarn-gpu==0.5.1
