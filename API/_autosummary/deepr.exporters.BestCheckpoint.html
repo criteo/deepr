@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -226,15 +229,15 @@
 <div class="section" id="deepr-exporters-bestcheckpoint">
 <h1>deepr.exporters.BestCheckpoint<a class="headerlink" href="#deepr-exporters-bestcheckpoint" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="deepr.exporters.BestCheckpoint">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.exporters.</span></code><code class="sig-name descname"><span class="pre">BestCheckpoint</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">metric</span></em>, <em class="sig-param"><span class="pre">mode=&lt;BestMode.DECREASE:</span> <span class="pre">'decrease'&gt;</span></em>, <em class="sig-param"><span class="pre">use_mlflow=False</span></em>, <em class="sig-param"><span class="pre">tag='training_best_step'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/exporters/best_checkpoint.html#BestCheckpoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.BestCheckpoint" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.BestCheckpoint">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.exporters.</span></span><span class="sig-name descname"><span class="pre">BestCheckpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">metric</span></em>, <em class="sig-param"><span class="pre">mode=&lt;BestMode.DECREASE:</span> <span class="pre">'decrease'&gt;</span></em>, <em class="sig-param"><span class="pre">use_mlflow=False</span></em>, <em class="sig-param"><span class="pre">tag='training_best_step'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/exporters/best_checkpoint.html#BestCheckpoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.BestCheckpoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overrides Checkpoint Information to point to the best checkpoint.</p>
 <p>The best checkpoint is the one whose step is closest to the step of
 the best evaluation metric. The evaluation metrics are retrieved
 from the evaluation summaries (located in <cite>eval</cite>).</p>
 <dl class="py attribute">
-<dt id="deepr.exporters.BestCheckpoint.metric">
-<code class="sig-name descname"><span class="pre">metric</span></code><a class="headerlink" href="#deepr.exporters.BestCheckpoint.metric" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.BestCheckpoint.metric">
+<span class="sig-name descname"><span class="pre">metric</span></span><a class="headerlink" href="#deepr.exporters.BestCheckpoint.metric" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the metric used to select the best checkpoint</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -244,8 +247,8 @@ from the evaluation summaries (located in <cite>eval</cite>).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.exporters.BestCheckpoint.mode">
-<code class="sig-name descname"><span class="pre">mode</span></code><a class="headerlink" href="#deepr.exporters.BestCheckpoint.mode" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.BestCheckpoint.mode">
+<span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#deepr.exporters.BestCheckpoint.mode" title="Permalink to this definition">¶</a></dt>
 <dd><p>If ‘decrease’, means lower is better.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -255,8 +258,8 @@ from the evaluation summaries (located in <cite>eval</cite>).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.exporters.BestCheckpoint.tag">
-<code class="sig-name descname"><span class="pre">tag</span></code><a class="headerlink" href="#deepr.exporters.BestCheckpoint.tag" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.BestCheckpoint.tag">
+<span class="sig-name descname"><span class="pre">tag</span></span><a class="headerlink" href="#deepr.exporters.BestCheckpoint.tag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tag for MLFlow</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -266,8 +269,8 @@ from the evaluation summaries (located in <cite>eval</cite>).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.exporters.BestCheckpoint.use_mlflow">
-<code class="sig-name descname"><span class="pre">use_mlflow</span></code><a class="headerlink" href="#deepr.exporters.BestCheckpoint.use_mlflow" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.BestCheckpoint.use_mlflow">
+<span class="sig-name descname"><span class="pre">use_mlflow</span></span><a class="headerlink" href="#deepr.exporters.BestCheckpoint.use_mlflow" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True, will log the best checkpoint step as tag to MLFlow</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -277,8 +280,8 @@ from the evaluation summaries (located in <cite>eval</cite>).</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.exporters.BestCheckpoint.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">metric</span></em>, <em class="sig-param"><span class="pre">mode=&lt;BestMode.DECREASE:</span> <span class="pre">'decrease'&gt;</span></em>, <em class="sig-param"><span class="pre">use_mlflow=False</span></em>, <em class="sig-param"><span class="pre">tag='training_best_step'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/exporters/best_checkpoint.html#BestCheckpoint.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.BestCheckpoint.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.BestCheckpoint.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">metric</span></em>, <em class="sig-param"><span class="pre">mode=&lt;BestMode.DECREASE:</span> <span class="pre">'decrease'&gt;</span></em>, <em class="sig-param"><span class="pre">use_mlflow=False</span></em>, <em class="sig-param"><span class="pre">tag='training_best_step'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/exporters/best_checkpoint.html#BestCheckpoint.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.BestCheckpoint.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 

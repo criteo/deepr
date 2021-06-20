@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -236,8 +239,8 @@
 <div class="section" id="deepr-prepros-tableinitializer">
 <h1>deepr.prepros.TableInitializer<a class="headerlink" href="#deepr-prepros-tableinitializer" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="deepr.prepros.TableInitializer">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.prepros.</span></code><code class="sig-name descname"><span class="pre">TableInitializer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_initializer_fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/prepros/lookup.html#TableInitializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.TableInitializer" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.prepros.TableInitializer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.prepros.</span></span><span class="sig-name descname"><span class="pre">TableInitializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_initializer_fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/prepros/lookup.html#TableInitializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.TableInitializer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Table Initializer.</p>
 <p>Tensorflow does not allow tables initialization inside a <code class="docutils literal notranslate"><span class="pre">map</span></code>
 transformation (all tables must be created outside the <code class="docutils literal notranslate"><span class="pre">map</span></code>).</p>
@@ -265,8 +268,8 @@ same <code class="docutils literal notranslate"><span class="pre">table_initiali
 instead of creating a new table, it will simply reuse the table
 created by the <code class="docutils literal notranslate"><span class="pre">TableInitializer</span></code>.</p>
 <dl class="py method">
-<dt id="deepr.prepros.TableInitializer.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_initializer_fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/prepros/lookup.html#TableInitializer.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.TableInitializer.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.prepros.TableInitializer.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_initializer_fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/prepros/lookup.html#TableInitializer.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.TableInitializer.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 

@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -236,8 +239,8 @@
 <div class="section" id="deepr-prepros-map">
 <h1>deepr.prepros.Map<a class="headerlink" href="#deepr-prepros-map" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="deepr.prepros.Map">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.prepros.</span></code><code class="sig-name descname"><span class="pre">Map</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/prepros/core.html#Map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.Map" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.prepros.Map">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.prepros.</span></span><span class="sig-name descname"><span class="pre">Map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/prepros/core.html#Map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.Map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Map a function on each element of a tf.data.Dataset.</p>
 <p>A <a class="reference internal" href="#deepr.prepros.Map" title="deepr.prepros.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code></a> instance applies a <code class="docutils literal notranslate"><span class="pre">map_func</span></code> to all elements of a
 dataset. By default, elements are expected to be dictionaries. You
@@ -299,8 +302,8 @@ transformation should apply. For example:</p>
 </pre></div>
 </div>
 <dl class="py attribute">
-<dt id="deepr.prepros.Map.map_func">
-<code class="sig-name descname"><span class="pre">map_func</span></code><a class="headerlink" href="#deepr.prepros.Map.map_func" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.prepros.Map.map_func">
+<span class="sig-name descname"><span class="pre">map_func</span></span><a class="headerlink" href="#deepr.prepros.Map.map_func" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to map to each element</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -310,8 +313,8 @@ transformation should apply. For example:</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.prepros.Map.modes">
-<code class="sig-name descname"><span class="pre">modes</span></code><a class="headerlink" href="#deepr.prepros.Map.modes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.prepros.Map.modes">
+<span class="sig-name descname"><span class="pre">modes</span></span><a class="headerlink" href="#deepr.prepros.Map.modes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Active modes for the map (will skip modes not in modes).
 Default is None (all modes are considered active modes).</p>
 <dl class="field-list simple">
@@ -322,8 +325,8 @@ Default is None (all modes are considered active modes).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.prepros.Map.num_parallel_calls">
-<code class="sig-name descname"><span class="pre">num_parallel_calls</span></code><a class="headerlink" href="#deepr.prepros.Map.num_parallel_calls" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.prepros.Map.num_parallel_calls">
+<span class="sig-name descname"><span class="pre">num_parallel_calls</span></span><a class="headerlink" href="#deepr.prepros.Map.num_parallel_calls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of threads.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -333,8 +336,8 @@ Default is None (all modes are considered active modes).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.prepros.Map.on_dict">
-<code class="sig-name descname"><span class="pre">on_dict</span></code><a class="headerlink" href="#deepr.prepros.Map.on_dict" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.prepros.Map.on_dict">
+<span class="sig-name descname"><span class="pre">on_dict</span></span><a class="headerlink" href="#deepr.prepros.Map.on_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True (default), assumes dataset yields dictionaries</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -344,8 +347,8 @@ Default is None (all modes are considered active modes).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.prepros.Map.update">
-<code class="sig-name descname"><span class="pre">update</span></code><a class="headerlink" href="#deepr.prepros.Map.update" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.prepros.Map.update">
+<span class="sig-name descname"><span class="pre">update</span></span><a class="headerlink" href="#deepr.prepros.Map.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True (default), combine element and map_func(element)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -355,8 +358,8 @@ Default is None (all modes are considered active modes).</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.prepros.Map.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/prepros/core.html#Map.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.Map.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.prepros.Map.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/prepros/core.html#Map.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.Map.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 

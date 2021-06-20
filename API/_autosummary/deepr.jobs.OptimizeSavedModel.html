@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -239,8 +242,8 @@
 <div class="section" id="deepr-jobs-optimizesavedmodel">
 <h1>deepr.jobs.OptimizeSavedModel<a class="headerlink" href="#deepr-jobs-optimizesavedmodel" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="deepr.jobs.OptimizeSavedModel">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.jobs.</span></code><code class="sig-name descname"><span class="pre">OptimizeSavedModel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">path_saved_model</span></em>, <em class="sig-param"><span class="pre">path_optimized_model</span></em>, <em class="sig-param"><span class="pre">graph_name</span></em>, <em class="sig-param"><span class="pre">feeds</span></em>, <em class="sig-param"><span class="pre">fetch</span></em>, <em class="sig-param"><span class="pre">new_names=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">blacklisted_variables=&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/jobs/optimize_saved_model.html#OptimizeSavedModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.jobs.OptimizeSavedModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.jobs.</span></span><span class="sig-name descname"><span class="pre">OptimizeSavedModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">path_saved_model</span></em>, <em class="sig-param"><span class="pre">path_optimized_model</span></em>, <em class="sig-param"><span class="pre">graph_name</span></em>, <em class="sig-param"><span class="pre">feeds</span></em>, <em class="sig-param"><span class="pre">fetch</span></em>, <em class="sig-param"><span class="pre">new_names=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">blacklisted_variables=&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/jobs/optimize_saved_model.html#OptimizeSavedModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts SavedModel into an optimized protobuf for inference</p>
 <p>This job reads the input SavedModel, rename some nodes using the
 <code class="docutils literal notranslate"><span class="pre">new_names</span></code> argument (raises an error if some renames cannot be
@@ -254,8 +257,8 @@ fetches.</p>
 exported Graph is correct. It is recommended to test the export in
 a separate job.</p>
 <dl class="py attribute">
-<dt id="deepr.jobs.OptimizeSavedModel.path_saved_model">
-<code class="sig-name descname"><span class="pre">path_saved_model</span></code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.path_saved_model" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.jobs.OptimizeSavedModel.path_saved_model">
+<span class="sig-name descname"><span class="pre">path_saved_model</span></span><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.path_saved_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Path to directory containing SavedModel exports to convert</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -265,8 +268,8 @@ a separate job.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.jobs.OptimizeSavedModel.path_optimized_model">
-<code class="sig-name descname"><span class="pre">path_optimized_model</span></code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.path_optimized_model" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.jobs.OptimizeSavedModel.path_optimized_model">
+<span class="sig-name descname"><span class="pre">path_optimized_model</span></span><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.path_optimized_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Path to directory that will contain the export</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -276,8 +279,8 @@ a separate job.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.jobs.OptimizeSavedModel.graph_name">
-<code class="sig-name descname"><span class="pre">graph_name</span></code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.graph_name" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.jobs.OptimizeSavedModel.graph_name">
+<span class="sig-name descname"><span class="pre">graph_name</span></span><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.graph_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the output graph (name of the protobuf file)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -287,8 +290,8 @@ a separate job.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.jobs.OptimizeSavedModel.new_names">
-<code class="sig-name descname"><span class="pre">new_names</span></code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.new_names" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.jobs.OptimizeSavedModel.new_names">
+<span class="sig-name descname"><span class="pre">new_names</span></span><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.new_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mapping old names (SavedModel nodes) -&gt; new names (export)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -298,8 +301,8 @@ a separate job.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.jobs.OptimizeSavedModel.blacklisted_variables">
-<code class="sig-name descname"><span class="pre">blacklisted_variables</span></code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.blacklisted_variables" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.jobs.OptimizeSavedModel.blacklisted_variables">
+<span class="sig-name descname"><span class="pre">blacklisted_variables</span></span><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.blacklisted_variables" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of variable names not to include in the export</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -309,8 +312,8 @@ a separate job.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.jobs.OptimizeSavedModel.feeds">
-<code class="sig-name descname"><span class="pre">feeds</span></code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.feeds" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.jobs.OptimizeSavedModel.feeds">
+<span class="sig-name descname"><span class="pre">feeds</span></span><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.feeds" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of nodes to use as inputs, or comma separated string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -320,8 +323,8 @@ a separate job.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.jobs.OptimizeSavedModel.fetch">
-<code class="sig-name descname"><span class="pre">fetch</span></code><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.fetch" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.jobs.OptimizeSavedModel.fetch">
+<span class="sig-name descname"><span class="pre">fetch</span></span><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.fetch" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of nodes to use as output, or comma separated string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -331,8 +334,8 @@ a separate job.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.jobs.OptimizeSavedModel.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">path_saved_model</span></em>, <em class="sig-param"><span class="pre">path_optimized_model</span></em>, <em class="sig-param"><span class="pre">graph_name</span></em>, <em class="sig-param"><span class="pre">feeds</span></em>, <em class="sig-param"><span class="pre">fetch</span></em>, <em class="sig-param"><span class="pre">new_names=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">blacklisted_variables=&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.jobs.OptimizeSavedModel.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">path_saved_model</span></em>, <em class="sig-param"><span class="pre">path_optimized_model</span></em>, <em class="sig-param"><span class="pre">graph_name</span></em>, <em class="sig-param"><span class="pre">feeds</span></em>, <em class="sig-param"><span class="pre">fetch</span></em>, <em class="sig-param"><span class="pre">new_names=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">blacklisted_variables=&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.jobs.OptimizeSavedModel.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 

@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -250,8 +253,8 @@
 </pre></div>
 </div>
 <dl class="py function">
-<dt id="deepr.cli.main.add_macro">
-<code class="sig-prename descclassname"><span class="pre">deepr.cli.main.</span></code><code class="sig-name descname"><span class="pre">add_macro</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">macros</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">macro</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'params'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/cli/main.html#add_macro"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.cli.main.add_macro" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.cli.main.add_macro">
+<span class="sig-prename descclassname"><span class="pre">deepr.cli.main.</span></span><span class="sig-name descname"><span class="pre">add_macro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">macros</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">macro</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'params'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/cli/main.html#add_macro"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.cli.main.add_macro" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create new params macro, infer new references in config.</p>
 <p>Look for keys in dictionaries of both macros and config that are in
 params, and for each param, store the existing value, replace it by
@@ -278,8 +281,8 @@ to manually inspect the resulting config.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="deepr.cli.main.download_config_and_macros_from_mlflow">
-<code class="sig-prename descclassname"><span class="pre">deepr.cli.main.</span></code><code class="sig-name descname"><span class="pre">download_config_and_macros_from_mlflow</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tracking_uri</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config_no_static.json'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">macros</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'macros_no_static.json'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config.json'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_macros</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'macros.json'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/cli/main.html#download_config_and_macros_from_mlflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.cli.main.download_config_and_macros_from_mlflow" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.cli.main.download_config_and_macros_from_mlflow">
+<span class="sig-prename descclassname"><span class="pre">deepr.cli.main.</span></span><span class="sig-name descname"><span class="pre">download_config_and_macros_from_mlflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tracking_uri</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config_no_static.json'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">macros</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'macros_no_static.json'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config.json'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_macros</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'macros.json'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/cli/main.html#download_config_and_macros_from_mlflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.cli.main.download_config_and_macros_from_mlflow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Download config and macros from MLFlow.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -296,8 +299,8 @@ to manually inspect the resulting config.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="deepr.cli.main.from_config_and_macros">
-<code class="sig-prename descclassname"><span class="pre">deepr.cli.main.</span></code><code class="sig-name descname"><span class="pre">from_config_and_macros</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">macros</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/cli/main.html#from_config_and_macros"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.cli.main.from_config_and_macros" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.cli.main.from_config_and_macros">
+<span class="sig-prename descclassname"><span class="pre">deepr.cli.main.</span></span><span class="sig-name descname"><span class="pre">from_config_and_macros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">macros</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/cli/main.html#from_config_and_macros"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.cli.main.from_config_and_macros" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instantiate object from config and macros.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -316,14 +319,14 @@ to manually inspect the resulting config.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="deepr.cli.main.main">
-<code class="sig-prename descclassname"><span class="pre">deepr.cli.main.</span></code><code class="sig-name descname"><span class="pre">main</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/cli/main.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.cli.main.main" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.cli.main.main">
+<span class="sig-prename descclassname"><span class="pre">deepr.cli.main.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/cli/main.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.cli.main.main" title="Permalink to this definition">¶</a></dt>
 <dd><p>Main entry point</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="deepr.cli.main.run">
-<code class="sig-prename descclassname"><span class="pre">deepr.cli.main.</span></code><code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">job</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">macros</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/cli/main.html#run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.cli.main.run" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.cli.main.run">
+<span class="sig-prename descclassname"><span class="pre">deepr.cli.main.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">job</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">macros</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/cli/main.html#run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.cli.main.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instantiate job from job configs and macros and run.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

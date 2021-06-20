@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -230,12 +233,12 @@
 <div class="section" id="deepr-hooks-earlystoppinghookfactory">
 <h1>deepr.hooks.EarlyStoppingHookFactory<a class="headerlink" href="#deepr-hooks-earlystoppinghookfactory" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="deepr.hooks.EarlyStoppingHookFactory">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.hooks.</span></code><code class="sig-name descname"><span class="pre">EarlyStoppingHookFactory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">metric</span></em>, <em class="sig-param"><span class="pre">max_steps_without_improvement</span></em>, <em class="sig-param"><span class="pre">min_steps=0</span></em>, <em class="sig-param"><span class="pre">mode=&lt;BestMode.DECREASE:</span> <span class="pre">'decrease'&gt;</span></em>, <em class="sig-param"><span class="pre">run_every_secs=None</span></em>, <em class="sig-param"><span class="pre">run_every_steps=None</span></em>, <em class="sig-param"><span class="pre">final_step=None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/hooks/early_stopping.html#EarlyStoppingHookFactory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.EarlyStoppingHookFactory" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.EarlyStoppingHookFactory">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.</span></span><span class="sig-name descname"><span class="pre">EarlyStoppingHookFactory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">metric</span></em>, <em class="sig-param"><span class="pre">max_steps_without_improvement</span></em>, <em class="sig-param"><span class="pre">min_steps=0</span></em>, <em class="sig-param"><span class="pre">mode=&lt;BestMode.DECREASE:</span> <span class="pre">'decrease'&gt;</span></em>, <em class="sig-param"><span class="pre">run_every_secs=None</span></em>, <em class="sig-param"><span class="pre">run_every_steps=None</span></em>, <em class="sig-param"><span class="pre">final_step=None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/hooks/early_stopping.html#EarlyStoppingHookFactory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.EarlyStoppingHookFactory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Early Stopping Hook Factory</p>
 <dl class="py attribute">
-<dt id="deepr.hooks.EarlyStoppingHookFactory.metric">
-<code class="sig-name descname"><span class="pre">metric</span></code><a class="headerlink" href="#deepr.hooks.EarlyStoppingHookFactory.metric" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.EarlyStoppingHookFactory.metric">
+<span class="sig-name descname"><span class="pre">metric</span></span><a class="headerlink" href="#deepr.hooks.EarlyStoppingHookFactory.metric" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the metric to read from evaluation checkpoints.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -245,8 +248,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.hooks.EarlyStoppingHookFactory.max_steps_without_improvement">
-<code class="sig-name descname"><span class="pre">max_steps_without_improvement</span></code><a class="headerlink" href="#deepr.hooks.EarlyStoppingHookFactory.max_steps_without_improvement" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.EarlyStoppingHookFactory.max_steps_without_improvement">
+<span class="sig-name descname"><span class="pre">max_steps_without_improvement</span></span><a class="headerlink" href="#deepr.hooks.EarlyStoppingHookFactory.max_steps_without_improvement" title="Permalink to this definition">¶</a></dt>
 <dd><p>If no improvement in metric for this many step, stop.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -256,8 +259,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.hooks.EarlyStoppingHookFactory.min_steps">
-<code class="sig-name descname"><span class="pre">min_steps</span></code><a class="headerlink" href="#deepr.hooks.EarlyStoppingHookFactory.min_steps" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.EarlyStoppingHookFactory.min_steps">
+<span class="sig-name descname"><span class="pre">min_steps</span></span><a class="headerlink" href="#deepr.hooks.EarlyStoppingHookFactory.min_steps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Do not attempt to early stop for this many steps.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -267,8 +270,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.hooks.EarlyStoppingHookFactory.mode">
-<code class="sig-name descname"><span class="pre">mode</span></code><a class="headerlink" href="#deepr.hooks.EarlyStoppingHookFactory.mode" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.EarlyStoppingHookFactory.mode">
+<span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#deepr.hooks.EarlyStoppingHookFactory.mode" title="Permalink to this definition">¶</a></dt>
 <dd><p>INCREASE or DECREASE. If DECREASE, lower metric is better.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -278,8 +281,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.hooks.EarlyStoppingHookFactory.run_every_secs">
-<code class="sig-name descname"><span class="pre">run_every_secs</span></code><a class="headerlink" href="#deepr.hooks.EarlyStoppingHookFactory.run_every_secs" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.EarlyStoppingHookFactory.run_every_secs">
+<span class="sig-name descname"><span class="pre">run_every_secs</span></span><a class="headerlink" href="#deepr.hooks.EarlyStoppingHookFactory.run_every_secs" title="Permalink to this definition">¶</a></dt>
 <dd><p>If given, run early stopping hook every given seconds.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -289,8 +292,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.hooks.EarlyStoppingHookFactory.run_every_steps">
-<code class="sig-name descname"><span class="pre">run_every_steps</span></code><a class="headerlink" href="#deepr.hooks.EarlyStoppingHookFactory.run_every_steps" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.EarlyStoppingHookFactory.run_every_steps">
+<span class="sig-name descname"><span class="pre">run_every_steps</span></span><a class="headerlink" href="#deepr.hooks.EarlyStoppingHookFactory.run_every_steps" title="Permalink to this definition">¶</a></dt>
 <dd><p>If given, run early stopping hook every given steps.</p>
 <p>Either <cite>run_every_secs</cite> or <cite>run_every_step</cite> should be given.</p>
 <dl class="field-list simple">
@@ -301,8 +304,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.hooks.EarlyStoppingHookFactory.final_step">
-<code class="sig-name descname"><span class="pre">final_step</span></code><a class="headerlink" href="#deepr.hooks.EarlyStoppingHookFactory.final_step" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.EarlyStoppingHookFactory.final_step">
+<span class="sig-name descname"><span class="pre">final_step</span></span><a class="headerlink" href="#deepr.hooks.EarlyStoppingHookFactory.final_step" title="Permalink to this definition">¶</a></dt>
 <dd><p>If given, will set the global_step to this value when early
 stopping.</p>
 <p>This is a useful way to signal the end of training to the
@@ -316,8 +319,8 @@ causes issues with <cite>train_and_evaluate</cite>).</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.hooks.EarlyStoppingHookFactory.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">metric</span></em>, <em class="sig-param"><span class="pre">max_steps_without_improvement</span></em>, <em class="sig-param"><span class="pre">min_steps=0</span></em>, <em class="sig-param"><span class="pre">mode=&lt;BestMode.DECREASE:</span> <span class="pre">'decrease'&gt;</span></em>, <em class="sig-param"><span class="pre">run_every_secs=None</span></em>, <em class="sig-param"><span class="pre">run_every_steps=None</span></em>, <em class="sig-param"><span class="pre">final_step=None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/hooks/early_stopping.html#EarlyStoppingHookFactory.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.EarlyStoppingHookFactory.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.EarlyStoppingHookFactory.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">metric</span></em>, <em class="sig-param"><span class="pre">max_steps_without_improvement</span></em>, <em class="sig-param"><span class="pre">min_steps=0</span></em>, <em class="sig-param"><span class="pre">mode=&lt;BestMode.DECREASE:</span> <span class="pre">'decrease'&gt;</span></em>, <em class="sig-param"><span class="pre">run_every_secs=None</span></em>, <em class="sig-param"><span class="pre">run_every_steps=None</span></em>, <em class="sig-param"><span class="pre">final_step=None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/hooks/early_stopping.html#EarlyStoppingHookFactory.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.EarlyStoppingHookFactory.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 

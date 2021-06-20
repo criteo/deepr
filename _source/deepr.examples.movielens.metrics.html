@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -244,13 +247,13 @@
 <span id="deepr-examples-movielens-metrics-ndcg-module"></span><h2>deepr.examples.movielens.metrics.ndcg module<a class="headerlink" href="#module-deepr.examples.movielens.metrics.ndcg" title="Permalink to this headline">¶</a></h2>
 <p>NDCG metrics.</p>
 <dl class="py class">
-<dt id="deepr.examples.movielens.metrics.ndcg.NDCGAtK">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.examples.movielens.metrics.ndcg.</span></code><code class="sig-name descname"><span class="pre">NDCGAtK</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logits</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/metrics/ndcg.html#NDCGAtK"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.examples.movielens.metrics.ndcg.NDCGAtK" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.examples.movielens.metrics.ndcg.NDCGAtK">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.examples.movielens.metrics.ndcg.</span></span><span class="sig-name descname"><span class="pre">NDCGAtK</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logits</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/metrics/ndcg.html#NDCGAtK"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.examples.movielens.metrics.ndcg.NDCGAtK" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="deepr.metrics.html#deepr.metrics.base.Metric" title="deepr.metrics.base.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.metrics.base.Metric</span></code></a></p>
 <p>Normalized Discounted Cumulative Gain at K</p>
 <dl class="py attribute">
-<dt id="deepr.examples.movielens.metrics.ndcg.NDCGAtK.name">
-<code class="sig-name descname"><span class="pre">name</span></code><a class="headerlink" href="#deepr.examples.movielens.metrics.ndcg.NDCGAtK.name" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.examples.movielens.metrics.ndcg.NDCGAtK.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#deepr.examples.movielens.metrics.ndcg.NDCGAtK.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the metric</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -260,8 +263,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.examples.movielens.metrics.ndcg.NDCGAtK.logits">
-<code class="sig-name descname"><span class="pre">logits</span></code><a class="headerlink" href="#deepr.examples.movielens.metrics.ndcg.NDCGAtK.logits" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.examples.movielens.metrics.ndcg.NDCGAtK.logits">
+<span class="sig-name descname"><span class="pre">logits</span></span><a class="headerlink" href="#deepr.examples.movielens.metrics.ndcg.NDCGAtK.logits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tensor with logits, shape = (batch, num_classes)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -271,8 +274,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.examples.movielens.metrics.ndcg.NDCGAtK.targets">
-<code class="sig-name descname"><span class="pre">targets</span></code><a class="headerlink" href="#deepr.examples.movielens.metrics.ndcg.NDCGAtK.targets" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.examples.movielens.metrics.ndcg.NDCGAtK.targets">
+<span class="sig-name descname"><span class="pre">targets</span></span><a class="headerlink" href="#deepr.examples.movielens.metrics.ndcg.NDCGAtK.targets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tensor with indices, shape = (batch, …, num_target)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -282,8 +285,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.examples.movielens.metrics.ndcg.NDCGAtK.k">
-<code class="sig-name descname"><span class="pre">k</span></code><a class="headerlink" href="#deepr.examples.movielens.metrics.ndcg.NDCGAtK.k" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.examples.movielens.metrics.ndcg.NDCGAtK.k">
+<span class="sig-name descname"><span class="pre">k</span></span><a class="headerlink" href="#deepr.examples.movielens.metrics.ndcg.NDCGAtK.k" title="Permalink to this definition">¶</a></dt>
 <dd><p>Top k logits for recall</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -293,8 +296,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.examples.movielens.metrics.ndcg.NDCGAtK.inputs">
-<code class="sig-name descname"><span class="pre">inputs</span></code><a class="headerlink" href="#deepr.examples.movielens.metrics.ndcg.NDCGAtK.inputs" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.examples.movielens.metrics.ndcg.NDCGAtK.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><a class="headerlink" href="#deepr.examples.movielens.metrics.ndcg.NDCGAtK.inputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>One-hot tensor of “masked” classes, shape = (batch, num_casses)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -310,13 +313,13 @@
 <span id="deepr-examples-movielens-metrics-recall-module"></span><h2>deepr.examples.movielens.metrics.recall module<a class="headerlink" href="#module-deepr.examples.movielens.metrics.recall" title="Permalink to this headline">¶</a></h2>
 <p>Recall metrics.</p>
 <dl class="py class">
-<dt id="deepr.examples.movielens.metrics.recall.RecallAtK">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.examples.movielens.metrics.recall.</span></code><code class="sig-name descname"><span class="pre">RecallAtK</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logits</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/metrics/recall.html#RecallAtK"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.examples.movielens.metrics.recall.RecallAtK" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.examples.movielens.metrics.recall.RecallAtK">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.examples.movielens.metrics.recall.</span></span><span class="sig-name descname"><span class="pre">RecallAtK</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logits</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/metrics/recall.html#RecallAtK"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.examples.movielens.metrics.recall.RecallAtK" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="deepr.metrics.html#deepr.metrics.base.Metric" title="deepr.metrics.base.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.metrics.base.Metric</span></code></a></p>
 <p>Recall at k.</p>
 <dl class="py attribute">
-<dt id="deepr.examples.movielens.metrics.recall.RecallAtK.name">
-<code class="sig-name descname"><span class="pre">name</span></code><a class="headerlink" href="#deepr.examples.movielens.metrics.recall.RecallAtK.name" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.examples.movielens.metrics.recall.RecallAtK.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#deepr.examples.movielens.metrics.recall.RecallAtK.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the metric</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -326,8 +329,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.examples.movielens.metrics.recall.RecallAtK.logits">
-<code class="sig-name descname"><span class="pre">logits</span></code><a class="headerlink" href="#deepr.examples.movielens.metrics.recall.RecallAtK.logits" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.examples.movielens.metrics.recall.RecallAtK.logits">
+<span class="sig-name descname"><span class="pre">logits</span></span><a class="headerlink" href="#deepr.examples.movielens.metrics.recall.RecallAtK.logits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tensor with logits, shape = (batch, num_classes)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -337,8 +340,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.examples.movielens.metrics.recall.RecallAtK.targets">
-<code class="sig-name descname"><span class="pre">targets</span></code><a class="headerlink" href="#deepr.examples.movielens.metrics.recall.RecallAtK.targets" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.examples.movielens.metrics.recall.RecallAtK.targets">
+<span class="sig-name descname"><span class="pre">targets</span></span><a class="headerlink" href="#deepr.examples.movielens.metrics.recall.RecallAtK.targets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tensor with indices, shape = (batch, …, num_target)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -348,8 +351,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.examples.movielens.metrics.recall.RecallAtK.k">
-<code class="sig-name descname"><span class="pre">k</span></code><a class="headerlink" href="#deepr.examples.movielens.metrics.recall.RecallAtK.k" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.examples.movielens.metrics.recall.RecallAtK.k">
+<span class="sig-name descname"><span class="pre">k</span></span><a class="headerlink" href="#deepr.examples.movielens.metrics.recall.RecallAtK.k" title="Permalink to this definition">¶</a></dt>
 <dd><p>Top k logits for recall</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -359,8 +362,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.examples.movielens.metrics.recall.RecallAtK.inputs">
-<code class="sig-name descname"><span class="pre">inputs</span></code><a class="headerlink" href="#deepr.examples.movielens.metrics.recall.RecallAtK.inputs" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.examples.movielens.metrics.recall.RecallAtK.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><a class="headerlink" href="#deepr.examples.movielens.metrics.recall.RecallAtK.inputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>One-hot tensor of “masked” classes, shape = (batch, num_casses)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>

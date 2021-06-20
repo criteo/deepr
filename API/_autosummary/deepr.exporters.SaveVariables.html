@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -226,12 +229,12 @@
 <div class="section" id="deepr-exporters-savevariables">
 <h1>deepr.exporters.SaveVariables<a class="headerlink" href="#deepr-exporters-savevariables" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="deepr.exporters.SaveVariables">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.exporters.</span></code><code class="sig-name descname"><span class="pre">SaveVariables</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'snappy'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/exporters/save_variables.html#SaveVariables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.SaveVariables" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.SaveVariables">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.exporters.</span></span><span class="sig-name descname"><span class="pre">SaveVariables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'snappy'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/exporters/save_variables.html#SaveVariables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.SaveVariables" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save Variables as Parquet, supports chunking.</p>
 <dl class="py attribute">
-<dt id="deepr.exporters.SaveVariables.path_variables">
-<code class="sig-name descname"><span class="pre">path_variables</span></code><a class="headerlink" href="#deepr.exporters.SaveVariables.path_variables" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.SaveVariables.path_variables">
+<span class="sig-name descname"><span class="pre">path_variables</span></span><a class="headerlink" href="#deepr.exporters.SaveVariables.path_variables" title="Permalink to this definition">¶</a></dt>
 <dd><p>Path to export directory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -241,8 +244,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.exporters.SaveVariables.variable_names">
-<code class="sig-name descname"><span class="pre">variable_names</span></code><a class="headerlink" href="#deepr.exporters.SaveVariables.variable_names" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.SaveVariables.variable_names">
+<span class="sig-name descname"><span class="pre">variable_names</span></span><a class="headerlink" href="#deepr.exporters.SaveVariables.variable_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of variables from the Tensorflow Graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -252,8 +255,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.exporters.SaveVariables.chunk_size">
-<code class="sig-name descname"><span class="pre">chunk_size</span></code><a class="headerlink" href="#deepr.exporters.SaveVariables.chunk_size" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.SaveVariables.chunk_size">
+<span class="sig-name descname"><span class="pre">chunk_size</span></span><a class="headerlink" href="#deepr.exporters.SaveVariables.chunk_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of elements per checkpoint</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -263,8 +266,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.exporters.SaveVariables.compression">
-<code class="sig-name descname"><span class="pre">compression</span></code><a class="headerlink" href="#deepr.exporters.SaveVariables.compression" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.SaveVariables.compression">
+<span class="sig-name descname"><span class="pre">compression</span></span><a class="headerlink" href="#deepr.exporters.SaveVariables.compression" title="Permalink to this definition">¶</a></dt>
 <dd><p>Type of compression, default to “snappy”</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -274,8 +277,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.exporters.SaveVariables.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'snappy'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/exporters/save_variables.html#SaveVariables.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.SaveVariables.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.SaveVariables.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'snappy'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/exporters/save_variables.html#SaveVariables.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.SaveVariables.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 

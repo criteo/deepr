@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -230,13 +233,13 @@
 <div class="section" id="deepr-hooks-loggingtensorhookfactory">
 <h1>deepr.hooks.LoggingTensorHookFactory<a class="headerlink" href="#deepr-hooks-loggingtensorhookfactory" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="deepr.hooks.LoggingTensorHookFactory">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.hooks.</span></code><code class="sig-name descname"><span class="pre">LoggingTensorHookFactory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tensors=None</span></em>, <em class="sig-param"><span class="pre">functions=None</span></em>, <em class="sig-param"><span class="pre">name=None</span></em>, <em class="sig-param"><span class="pre">use_mlflow=False</span></em>, <em class="sig-param"><span class="pre">use_graphite=False</span></em>, <em class="sig-param"><span class="pre">skip_after_step=None</span></em>, <em class="sig-param"><span class="pre">every_n_iter=None</span></em>, <em class="sig-param"><span class="pre">every_n_secs=None</span></em>, <em class="sig-param"><span class="pre">at_end=False</span></em>, <em class="sig-param"><span class="pre">formatter=&lt;function</span> <span class="pre">_default_formatter&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/hooks/logging_tensor.html#LoggingTensorHookFactory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.LoggingTensorHookFactory">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.</span></span><span class="sig-name descname"><span class="pre">LoggingTensorHookFactory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tensors=None</span></em>, <em class="sig-param"><span class="pre">functions=None</span></em>, <em class="sig-param"><span class="pre">name=None</span></em>, <em class="sig-param"><span class="pre">use_mlflow=False</span></em>, <em class="sig-param"><span class="pre">use_graphite=False</span></em>, <em class="sig-param"><span class="pre">skip_after_step=None</span></em>, <em class="sig-param"><span class="pre">every_n_iter=None</span></em>, <em class="sig-param"><span class="pre">every_n_secs=None</span></em>, <em class="sig-param"><span class="pre">at_end=False</span></em>, <em class="sig-param"><span class="pre">formatter=&lt;function</span> <span class="pre">_default_formatter&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/hooks/logging_tensor.html#LoggingTensorHookFactory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parametrize the creation of a LoggingTensorHook factory.</p>
 <p>Arguments for instantiation should be provided as keyword arguments.</p>
 <dl class="py attribute">
-<dt id="deepr.hooks.LoggingTensorHookFactory.tensors">
-<code class="sig-name descname"><span class="pre">tensors</span></code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.tensors" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.LoggingTensorHookFactory.tensors">
+<span class="sig-name descname"><span class="pre">tensors</span></span><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.tensors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the tensors to use at runtime. If None (default), log
 all scalars.</p>
 <dl class="field-list simple">
@@ -247,8 +250,8 @@ all scalars.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.hooks.LoggingTensorHookFactory.functions">
-<code class="sig-name descname"><span class="pre">functions</span></code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.functions" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.LoggingTensorHookFactory.functions">
+<span class="sig-name descname"><span class="pre">functions</span></span><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.functions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Additional “python” metrics. Each function should return a float</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -258,8 +261,8 @@ all scalars.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.hooks.LoggingTensorHookFactory.name">
-<code class="sig-name descname"><span class="pre">name</span></code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.name" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.LoggingTensorHookFactory.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name used as prefix of tags when sending to MLFlow / Graphite</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -269,8 +272,8 @@ all scalars.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.hooks.LoggingTensorHookFactory.use_mlflow">
-<code class="sig-name descname"><span class="pre">use_mlflow</span></code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.use_mlflow" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.LoggingTensorHookFactory.use_mlflow">
+<span class="sig-name descname"><span class="pre">use_mlflow</span></span><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.use_mlflow" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True, send metrics to MLFlow. Default is False.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -280,8 +283,8 @@ all scalars.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.hooks.LoggingTensorHookFactory.use_graphite">
-<code class="sig-name descname"><span class="pre">use_graphite</span></code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.use_graphite" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.LoggingTensorHookFactory.use_graphite">
+<span class="sig-name descname"><span class="pre">use_graphite</span></span><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.use_graphite" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True, send metrics to Graphite. Default is False.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -291,8 +294,8 @@ all scalars.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.hooks.LoggingTensorHookFactory.skip_after_step">
-<code class="sig-name descname"><span class="pre">skip_after_step</span></code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.skip_after_step" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.LoggingTensorHookFactory.skip_after_step">
+<span class="sig-name descname"><span class="pre">skip_after_step</span></span><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.skip_after_step" title="Permalink to this definition">¶</a></dt>
 <dd><p>If not None, do not run the hooks after this step.</p>
 <p>Prevents outliers when used in conjunction with an early
 stopping hook that overrides the global_step.</p>
@@ -304,8 +307,8 @@ stopping hook that overrides the global_step.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.hooks.LoggingTensorHookFactory.formatter">
-<code class="sig-name descname"><span class="pre">formatter</span></code><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.formatter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.LoggingTensorHookFactory.formatter">
+<span class="sig-name descname"><span class="pre">formatter</span></span><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.formatter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Formatter for logging, default uses 7 digits precision.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -315,8 +318,8 @@ stopping hook that overrides the global_step.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.hooks.LoggingTensorHookFactory.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tensors=None</span></em>, <em class="sig-param"><span class="pre">functions=None</span></em>, <em class="sig-param"><span class="pre">name=None</span></em>, <em class="sig-param"><span class="pre">use_mlflow=False</span></em>, <em class="sig-param"><span class="pre">use_graphite=False</span></em>, <em class="sig-param"><span class="pre">skip_after_step=None</span></em>, <em class="sig-param"><span class="pre">every_n_iter=None</span></em>, <em class="sig-param"><span class="pre">every_n_secs=None</span></em>, <em class="sig-param"><span class="pre">at_end=False</span></em>, <em class="sig-param"><span class="pre">formatter=&lt;function</span> <span class="pre">_default_formatter&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/hooks/logging_tensor.html#LoggingTensorHookFactory.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.LoggingTensorHookFactory.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tensors=None</span></em>, <em class="sig-param"><span class="pre">functions=None</span></em>, <em class="sig-param"><span class="pre">name=None</span></em>, <em class="sig-param"><span class="pre">use_mlflow=False</span></em>, <em class="sig-param"><span class="pre">use_graphite=False</span></em>, <em class="sig-param"><span class="pre">skip_after_step=None</span></em>, <em class="sig-param"><span class="pre">every_n_iter=None</span></em>, <em class="sig-param"><span class="pre">every_n_secs=None</span></em>, <em class="sig-param"><span class="pre">at_end=False</span></em>, <em class="sig-param"><span class="pre">formatter=&lt;function</span> <span class="pre">_default_formatter&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/hooks/logging_tensor.html#LoggingTensorHookFactory.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.LoggingTensorHookFactory.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 

@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -244,28 +247,28 @@
 <span id="deepr-examples-movielens-readers-csv-module"></span><h2>deepr.examples.movielens.readers.csv module<a class="headerlink" href="#module-deepr.examples.movielens.readers.csv" title="Permalink to this headline">¶</a></h2>
 <p>CSV Reader for MovieLens.</p>
 <dl class="py class">
-<dt id="deepr.examples.movielens.readers.csv.TestCSVReader">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.examples.movielens.readers.csv.</span></code><code class="sig-name descname"><span class="pre">TestCSVReader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_csv_tr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_csv_te</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vocab_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/readers/csv.html#TestCSVReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.examples.movielens.readers.csv.TestCSVReader" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.examples.movielens.readers.csv.TestCSVReader">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.examples.movielens.readers.csv.</span></span><span class="sig-name descname"><span class="pre">TestCSVReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_csv_tr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_csv_te</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vocab_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/readers/csv.html#TestCSVReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.examples.movielens.readers.csv.TestCSVReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="deepr.readers.html#deepr.readers.base.Reader" title="deepr.readers.base.Reader"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.readers.base.Reader</span></code></a></p>
 <p>Reader of MovieLens test CSV files of the Multi-VAE paper.</p>
 <p>See <a class="reference external" href="https://github.com/dawenl/vae_cf">https://github.com/dawenl/vae_cf</a></p>
 <dl class="py method">
-<dt id="deepr.examples.movielens.readers.csv.TestCSVReader.as_dataset">
-<code class="sig-name descname"><span class="pre">as_dataset</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/readers/csv.html#TestCSVReader.as_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.examples.movielens.readers.csv.TestCSVReader.as_dataset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.examples.movielens.readers.csv.TestCSVReader.as_dataset">
+<span class="sig-name descname"><span class="pre">as_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/readers/csv.html#TestCSVReader.as_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.examples.movielens.readers.csv.TestCSVReader.as_dataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build a tf.data.Dataset</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt id="deepr.examples.movielens.readers.csv.TrainCSVReader">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.examples.movielens.readers.csv.</span></code><code class="sig-name descname"><span class="pre">TrainCSVReader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_csv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vocab_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bucket_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">take_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/readers/csv.html#TrainCSVReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.examples.movielens.readers.csv.TrainCSVReader" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.examples.movielens.readers.csv.TrainCSVReader">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.examples.movielens.readers.csv.</span></span><span class="sig-name descname"><span class="pre">TrainCSVReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_csv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vocab_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bucket_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">take_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/readers/csv.html#TrainCSVReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.examples.movielens.readers.csv.TrainCSVReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="deepr.readers.html#deepr.readers.base.Reader" title="deepr.readers.base.Reader"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.readers.base.Reader</span></code></a></p>
 <p>Reader of MovieLens CSV files of the Multi-VAE paper.</p>
 <p>See <a class="reference external" href="https://github.com/dawenl/vae_cf">https://github.com/dawenl/vae_cf</a></p>
 <dl class="py method">
-<dt id="deepr.examples.movielens.readers.csv.TrainCSVReader.as_dataset">
-<code class="sig-name descname"><span class="pre">as_dataset</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/readers/csv.html#TrainCSVReader.as_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.examples.movielens.readers.csv.TrainCSVReader.as_dataset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.examples.movielens.readers.csv.TrainCSVReader.as_dataset">
+<span class="sig-name descname"><span class="pre">as_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/examples/movielens/readers/csv.html#TrainCSVReader.as_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.examples.movielens.readers.csv.TrainCSVReader.as_dataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build a tf.data.Dataset</p>
 </dd></dl>
 

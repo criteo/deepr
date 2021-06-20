@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -240,13 +243,13 @@
 <span id="deepr-exporters-base-module"></span><h2>deepr.exporters.base module<a class="headerlink" href="#module-deepr.exporters.base" title="Permalink to this headline">¶</a></h2>
 <p>Base class for Exporters</p>
 <dl class="py class">
-<dt id="deepr.exporters.base.Exporter">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.exporters.base.</span></code><code class="sig-name descname"><span class="pre">Exporter</span></code><a class="reference internal" href="../_modules/deepr/exporters/base.html#Exporter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.base.Exporter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.base.Exporter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.exporters.base.</span></span><span class="sig-name descname"><span class="pre">Exporter</span></span><a class="reference internal" href="../_modules/deepr/exporters/base.html#Exporter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.base.Exporter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
 <p>Base class for Exporters</p>
 <dl class="py method">
-<dt id="deepr.exporters.base.Exporter.export">
-<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">export</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/base.html#Exporter.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.base.Exporter.export" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.base.Exporter.export">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/base.html#Exporter.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.base.Exporter.export" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -256,16 +259,16 @@
 <span id="deepr-exporters-best-checkpoint-module"></span><h2>deepr.exporters.best_checkpoint module<a class="headerlink" href="#module-deepr.exporters.best_checkpoint" title="Permalink to this headline">¶</a></h2>
 <p>Best Checkpoint Exporter</p>
 <dl class="py class">
-<dt id="deepr.exporters.best_checkpoint.BestCheckpoint">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.exporters.best_checkpoint.</span></code><code class="sig-name descname"><span class="pre">BestCheckpoint</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">metric</span></em>, <em class="sig-param"><span class="pre">mode=&lt;BestMode.DECREASE:</span> <span class="pre">'decrease'&gt;</span></em>, <em class="sig-param"><span class="pre">use_mlflow=False</span></em>, <em class="sig-param"><span class="pre">tag='training_best_step'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/best_checkpoint.html#BestCheckpoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestCheckpoint" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.best_checkpoint.BestCheckpoint">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.exporters.best_checkpoint.</span></span><span class="sig-name descname"><span class="pre">BestCheckpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">metric</span></em>, <em class="sig-param"><span class="pre">mode=&lt;BestMode.DECREASE:</span> <span class="pre">'decrease'&gt;</span></em>, <em class="sig-param"><span class="pre">use_mlflow=False</span></em>, <em class="sig-param"><span class="pre">tag='training_best_step'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/best_checkpoint.html#BestCheckpoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestCheckpoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.exporters.base.Exporter" title="deepr.exporters.base.Exporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.exporters.base.Exporter</span></code></a></p>
 <p>Overrides Checkpoint Information to point to the best checkpoint.</p>
 <p>The best checkpoint is the one whose step is closest to the step of
 the best evaluation metric. The evaluation metrics are retrieved
 from the evaluation summaries (located in <cite>eval</cite>).</p>
 <dl class="py attribute">
-<dt id="deepr.exporters.best_checkpoint.BestCheckpoint.metric">
-<code class="sig-name descname"><span class="pre">metric</span></code><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestCheckpoint.metric" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.best_checkpoint.BestCheckpoint.metric">
+<span class="sig-name descname"><span class="pre">metric</span></span><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestCheckpoint.metric" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the metric used to select the best checkpoint</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -275,8 +278,8 @@ from the evaluation summaries (located in <cite>eval</cite>).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.exporters.best_checkpoint.BestCheckpoint.mode">
-<code class="sig-name descname"><span class="pre">mode</span></code><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestCheckpoint.mode" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.best_checkpoint.BestCheckpoint.mode">
+<span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestCheckpoint.mode" title="Permalink to this definition">¶</a></dt>
 <dd><p>If ‘decrease’, means lower is better.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -286,8 +289,8 @@ from the evaluation summaries (located in <cite>eval</cite>).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.exporters.best_checkpoint.BestCheckpoint.tag">
-<code class="sig-name descname"><span class="pre">tag</span></code><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestCheckpoint.tag" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.best_checkpoint.BestCheckpoint.tag">
+<span class="sig-name descname"><span class="pre">tag</span></span><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestCheckpoint.tag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tag for MLFlow</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -297,8 +300,8 @@ from the evaluation summaries (located in <cite>eval</cite>).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.exporters.best_checkpoint.BestCheckpoint.use_mlflow">
-<code class="sig-name descname"><span class="pre">use_mlflow</span></code><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestCheckpoint.use_mlflow" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.best_checkpoint.BestCheckpoint.use_mlflow">
+<span class="sig-name descname"><span class="pre">use_mlflow</span></span><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestCheckpoint.use_mlflow" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True, will log the best checkpoint step as tag to MLFlow</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -308,32 +311,32 @@ from the evaluation summaries (located in <cite>eval</cite>).</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.exporters.best_checkpoint.BestCheckpoint.export">
-<code class="sig-name descname"><span class="pre">export</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/best_checkpoint.html#BestCheckpoint.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestCheckpoint.export" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.best_checkpoint.BestCheckpoint.export">
+<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/best_checkpoint.html#BestCheckpoint.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestCheckpoint.export" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt id="deepr.exporters.best_checkpoint.BestMode">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.exporters.best_checkpoint.</span></code><code class="sig-name descname"><span class="pre">BestMode</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/best_checkpoint.html#BestMode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestMode" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.best_checkpoint.BestMode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.exporters.best_checkpoint.</span></span><span class="sig-name descname"><span class="pre">BestMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/best_checkpoint.html#BestMode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestMode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>Modes for early stopping</p>
 <dl class="py attribute">
-<dt id="deepr.exporters.best_checkpoint.BestMode.DECREASE">
-<code class="sig-name descname"><span class="pre">DECREASE</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'decrease'</span></em><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestMode.DECREASE" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.best_checkpoint.BestMode.DECREASE">
+<span class="sig-name descname"><span class="pre">DECREASE</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'decrease'</span></em><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestMode.DECREASE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.exporters.best_checkpoint.BestMode.INCREASE">
-<code class="sig-name descname"><span class="pre">INCREASE</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'increase'</span></em><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestMode.INCREASE" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.best_checkpoint.BestMode.INCREASE">
+<span class="sig-name descname"><span class="pre">INCREASE</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'increase'</span></em><a class="headerlink" href="#deepr.exporters.best_checkpoint.BestMode.INCREASE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
-<dt id="deepr.exporters.best_checkpoint.read_eval_metrics">
-<code class="sig-prename descclassname"><span class="pre">deepr.exporters.best_checkpoint.</span></code><code class="sig-name descname"><span class="pre">read_eval_metrics</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eval_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/best_checkpoint.html#read_eval_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.best_checkpoint.read_eval_metrics" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.best_checkpoint.read_eval_metrics">
+<span class="sig-prename descclassname"><span class="pre">deepr.exporters.best_checkpoint.</span></span><span class="sig-name descname"><span class="pre">read_eval_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eval_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/best_checkpoint.html#read_eval_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.best_checkpoint.read_eval_metrics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reload summaries from model_dir</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -347,13 +350,13 @@ from the evaluation summaries (located in <cite>eval</cite>).</p>
 <span id="deepr-exporters-save-variables-module"></span><h2>deepr.exporters.save_variables module<a class="headerlink" href="#module-deepr.exporters.save_variables" title="Permalink to this headline">¶</a></h2>
 <p>Save Variables Exporter</p>
 <dl class="py class">
-<dt id="deepr.exporters.save_variables.SaveVariables">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.exporters.save_variables.</span></code><code class="sig-name descname"><span class="pre">SaveVariables</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'snappy'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/save_variables.html#SaveVariables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.save_variables.SaveVariables" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.save_variables.SaveVariables">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.exporters.save_variables.</span></span><span class="sig-name descname"><span class="pre">SaveVariables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'snappy'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/save_variables.html#SaveVariables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.save_variables.SaveVariables" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.exporters.base.Exporter" title="deepr.exporters.base.Exporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.exporters.base.Exporter</span></code></a></p>
 <p>Save Variables as Parquet, supports chunking.</p>
 <dl class="py attribute">
-<dt id="deepr.exporters.save_variables.SaveVariables.path_variables">
-<code class="sig-name descname"><span class="pre">path_variables</span></code><a class="headerlink" href="#deepr.exporters.save_variables.SaveVariables.path_variables" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.save_variables.SaveVariables.path_variables">
+<span class="sig-name descname"><span class="pre">path_variables</span></span><a class="headerlink" href="#deepr.exporters.save_variables.SaveVariables.path_variables" title="Permalink to this definition">¶</a></dt>
 <dd><p>Path to export directory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -363,8 +366,8 @@ from the evaluation summaries (located in <cite>eval</cite>).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.exporters.save_variables.SaveVariables.variable_names">
-<code class="sig-name descname"><span class="pre">variable_names</span></code><a class="headerlink" href="#deepr.exporters.save_variables.SaveVariables.variable_names" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.save_variables.SaveVariables.variable_names">
+<span class="sig-name descname"><span class="pre">variable_names</span></span><a class="headerlink" href="#deepr.exporters.save_variables.SaveVariables.variable_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of variables from the Tensorflow Graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -374,8 +377,8 @@ from the evaluation summaries (located in <cite>eval</cite>).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.exporters.save_variables.SaveVariables.chunk_size">
-<code class="sig-name descname"><span class="pre">chunk_size</span></code><a class="headerlink" href="#deepr.exporters.save_variables.SaveVariables.chunk_size" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.save_variables.SaveVariables.chunk_size">
+<span class="sig-name descname"><span class="pre">chunk_size</span></span><a class="headerlink" href="#deepr.exporters.save_variables.SaveVariables.chunk_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of elements per checkpoint</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -385,8 +388,8 @@ from the evaluation summaries (located in <cite>eval</cite>).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.exporters.save_variables.SaveVariables.compression">
-<code class="sig-name descname"><span class="pre">compression</span></code><a class="headerlink" href="#deepr.exporters.save_variables.SaveVariables.compression" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.save_variables.SaveVariables.compression">
+<span class="sig-name descname"><span class="pre">compression</span></span><a class="headerlink" href="#deepr.exporters.save_variables.SaveVariables.compression" title="Permalink to this definition">¶</a></dt>
 <dd><p>Type of compression, default to “snappy”</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -396,8 +399,8 @@ from the evaluation summaries (located in <cite>eval</cite>).</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.exporters.save_variables.SaveVariables.export">
-<code class="sig-name descname"><span class="pre">export</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/save_variables.html#SaveVariables.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.save_variables.SaveVariables.export" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.save_variables.SaveVariables.export">
+<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/save_variables.html#SaveVariables.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.save_variables.SaveVariables.export" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -407,13 +410,13 @@ from the evaluation summaries (located in <cite>eval</cite>).</p>
 <span id="deepr-exporters-saved-model-module"></span><h2>deepr.exporters.saved_model module<a class="headerlink" href="#module-deepr.exporters.saved_model" title="Permalink to this headline">¶</a></h2>
 <p>Saved Model Exporter</p>
 <dl class="py class">
-<dt id="deepr.exporters.saved_model.SavedModel">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.exporters.saved_model.</span></code><code class="sig-name descname"><span class="pre">SavedModel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_saved_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/saved_model.html#SavedModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.saved_model.SavedModel" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.saved_model.SavedModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.exporters.saved_model.</span></span><span class="sig-name descname"><span class="pre">SavedModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_saved_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/saved_model.html#SavedModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.saved_model.SavedModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.exporters.base.Exporter" title="deepr.exporters.base.Exporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.exporters.base.Exporter</span></code></a></p>
 <p>Saved Model Exporter</p>
 <dl class="py attribute">
-<dt id="deepr.exporters.saved_model.SavedModel.path_saved_model">
-<code class="sig-name descname"><span class="pre">path_saved_model</span></code><a class="headerlink" href="#deepr.exporters.saved_model.SavedModel.path_saved_model" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.saved_model.SavedModel.path_saved_model">
+<span class="sig-name descname"><span class="pre">path_saved_model</span></span><a class="headerlink" href="#deepr.exporters.saved_model.SavedModel.path_saved_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Path to saved_model directory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -423,8 +426,8 @@ from the evaluation summaries (located in <cite>eval</cite>).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.exporters.saved_model.SavedModel.fields">
-<code class="sig-name descname"><span class="pre">fields</span></code><a class="headerlink" href="#deepr.exporters.saved_model.SavedModel.fields" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.saved_model.SavedModel.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><a class="headerlink" href="#deepr.exporters.saved_model.SavedModel.fields" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of field to build the input_receiver_fn.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -434,8 +437,8 @@ from the evaluation summaries (located in <cite>eval</cite>).</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.exporters.saved_model.SavedModel.export">
-<code class="sig-name descname"><span class="pre">export</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/saved_model.html#SavedModel.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.saved_model.SavedModel.export" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.exporters.saved_model.SavedModel.export">
+<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/exporters/saved_model.html#SavedModel.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.exporters.saved_model.SavedModel.export" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

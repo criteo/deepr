@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -230,12 +233,12 @@
 <div class="section" id="deepr-hooks-stepspersechook">
 <h1>deepr.hooks.StepsPerSecHook<a class="headerlink" href="#deepr-hooks-stepspersechook" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="deepr.hooks.StepsPerSecHook">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.hooks.</span></code><code class="sig-name descname"><span class="pre">StepsPerSecHook</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_mlflow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_graphite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_after_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_secs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary_writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/hooks/steps_per_sec.html#StepsPerSecHook"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.StepsPerSecHook" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.StepsPerSecHook">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.</span></span><span class="sig-name descname"><span class="pre">StepsPerSecHook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_mlflow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_graphite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_after_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_secs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary_writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/hooks/steps_per_sec.html#StepsPerSecHook"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.StepsPerSecHook" title="Permalink to this definition">¶</a></dt>
 <dd><p>Logs steps per seconds and num_examples_per_sec.</p>
 <dl class="py attribute">
-<dt id="deepr.hooks.StepsPerSecHook.batch_size">
-<code class="sig-name descname"><span class="pre">batch_size</span></code><a class="headerlink" href="#deepr.hooks.StepsPerSecHook.batch_size" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.StepsPerSecHook.batch_size">
+<span class="sig-name descname"><span class="pre">batch_size</span></span><a class="headerlink" href="#deepr.hooks.StepsPerSecHook.batch_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Batch Size</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -245,8 +248,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.hooks.StepsPerSecHook.prefix">
-<code class="sig-name descname"><span class="pre">prefix</span></code><a class="headerlink" href="#deepr.hooks.StepsPerSecHook.prefix" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.StepsPerSecHook.prefix">
+<span class="sig-name descname"><span class="pre">prefix</span></span><a class="headerlink" href="#deepr.hooks.StepsPerSecHook.prefix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prefix of tags when sending to MLFlow / Graphite</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -256,8 +259,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.hooks.StepsPerSecHook.use_mlflow">
-<code class="sig-name descname"><span class="pre">use_mlflow</span></code><a class="headerlink" href="#deepr.hooks.StepsPerSecHook.use_mlflow" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.StepsPerSecHook.use_mlflow">
+<span class="sig-name descname"><span class="pre">use_mlflow</span></span><a class="headerlink" href="#deepr.hooks.StepsPerSecHook.use_mlflow" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True, send metrics to MLFlow. Default is False.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -267,8 +270,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.hooks.StepsPerSecHook.use_graphite">
-<code class="sig-name descname"><span class="pre">use_graphite</span></code><a class="headerlink" href="#deepr.hooks.StepsPerSecHook.use_graphite" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.StepsPerSecHook.use_graphite">
+<span class="sig-name descname"><span class="pre">use_graphite</span></span><a class="headerlink" href="#deepr.hooks.StepsPerSecHook.use_graphite" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True, send metrics to Graphite. Default is False.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -278,8 +281,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.hooks.StepsPerSecHook.skip_after_step">
-<code class="sig-name descname"><span class="pre">skip_after_step</span></code><a class="headerlink" href="#deepr.hooks.StepsPerSecHook.skip_after_step" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.StepsPerSecHook.skip_after_step">
+<span class="sig-name descname"><span class="pre">skip_after_step</span></span><a class="headerlink" href="#deepr.hooks.StepsPerSecHook.skip_after_step" title="Permalink to this definition">¶</a></dt>
 <dd><p>If not None, do not run the hooks after this step.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -289,8 +292,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.hooks.StepsPerSecHook.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_mlflow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_graphite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_after_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_secs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary_writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/hooks/steps_per_sec.html#StepsPerSecHook.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.StepsPerSecHook.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.hooks.StepsPerSecHook.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_mlflow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_graphite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_after_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_secs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary_writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/hooks/steps_per_sec.html#StepsPerSecHook.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.StepsPerSecHook.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 

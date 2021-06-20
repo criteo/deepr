@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -257,8 +260,8 @@
 <div class="section" id="deepr-layers-layer">
 <h1>deepr.layers.Layer<a class="headerlink" href="#deepr-layers-layer" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="deepr.layers.Layer">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.layers.</span></code><code class="sig-name descname"><span class="pre">Layer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_in</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/base.html#Layer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.layers.Layer" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.layers.Layer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.layers.</span></span><span class="sig-name descname"><span class="pre">Layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_in</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/base.html#Layer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.layers.Layer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base class for composable layers in a deep learning network.</p>
 <p>Heavily inspired by TRAX layers, adapted for TF1.X and tf.estimator.</p>
 <p>Layers are the basic building block of models. A <a class="reference internal" href="#deepr.layers.Layer" title="deepr.layers.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> is a
@@ -355,8 +358,8 @@ TF1.X variable management into a <code class="xref py py-meth docutils literal n
 <p>Good examples on how to implement parametrized layers are deepr.Dense
 and embedding.Embedding.</p>
 <dl class="py attribute">
-<dt id="deepr.layers.Layer.n_in">
-<code class="sig-name descname"><span class="pre">n_in</span></code><a class="headerlink" href="#deepr.layers.Layer.n_in" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.layers.Layer.n_in">
+<span class="sig-name descname"><span class="pre">n_in</span></span><a class="headerlink" href="#deepr.layers.Layer.n_in" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of expected inputs, &gt;= 1</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -366,8 +369,8 @@ and embedding.Embedding.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.layers.Layer.n_out">
-<code class="sig-name descname"><span class="pre">n_out</span></code><a class="headerlink" href="#deepr.layers.Layer.n_out" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.layers.Layer.n_out">
+<span class="sig-name descname"><span class="pre">n_out</span></span><a class="headerlink" href="#deepr.layers.Layer.n_out" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of expected outputs, &gt;= 1</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -377,32 +380,32 @@ and embedding.Embedding.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.layers.Layer.inputs">
-<code class="sig-name descname"><span class="pre">inputs</span></code><a class="headerlink" href="#deepr.layers.Layer.inputs" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.layers.Layer.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><a class="headerlink" href="#deepr.layers.Layer.inputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Names of the n_in inputs keys in a dictionary.
 Tuple if n_in &gt; 1, else string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, Tuple[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, ..]], Optional</p>
+<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, Tuple[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, …]], Optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.layers.Layer.outputs">
-<code class="sig-name descname"><span class="pre">outputs</span></code><a class="headerlink" href="#deepr.layers.Layer.outputs" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.layers.Layer.outputs">
+<span class="sig-name descname"><span class="pre">outputs</span></span><a class="headerlink" href="#deepr.layers.Layer.outputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Names of the n_out outputs keys in a dictionary.
 Tuple if n_out &gt; 1, else string</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, Tuple[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, ..]], Optional</p>
+<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, Tuple[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, …]], Optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.layers.Layer.name">
-<code class="sig-name descname"><span class="pre">name</span></code><a class="headerlink" href="#deepr.layers.Layer.name" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.layers.Layer.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#deepr.layers.Layer.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the layer</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -412,8 +415,8 @@ Tuple if n_out &gt; 1, else string</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.layers.Layer.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_in</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/base.html#Layer.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.layers.Layer.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.layers.Layer.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_in</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/base.html#Layer.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.layers.Layer.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 

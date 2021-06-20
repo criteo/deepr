@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -240,8 +243,8 @@
 <span id="deepr-optimizers-base-module"></span><h2>deepr.optimizers.base module<a class="headerlink" href="#module-deepr.optimizers.base" title="Permalink to this headline">¶</a></h2>
 <p>Interface for Optimizers</p>
 <dl class="py class">
-<dt id="deepr.optimizers.base.Optimizer">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.optimizers.base.</span></code><code class="sig-name descname"><span class="pre">Optimizer</span></code><a class="reference internal" href="../_modules/deepr/optimizers/base.html#Optimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.optimizers.base.Optimizer" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.optimizers.base.Optimizer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.optimizers.base.</span></span><span class="sig-name descname"><span class="pre">Optimizer</span></span><a class="reference internal" href="../_modules/deepr/optimizers/base.html#Optimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.optimizers.base.Optimizer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
 <p>Interface for Optimizers</p>
 </dd></dl>
@@ -251,13 +254,13 @@
 <span id="deepr-optimizers-core-module"></span><h2>deepr.optimizers.core module<a class="headerlink" href="#module-deepr.optimizers.core" title="Permalink to this headline">¶</a></h2>
 <p>Tensorflow Optimizers</p>
 <dl class="py class">
-<dt id="deepr.optimizers.core.TensorflowOptimizer">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.optimizers.core.</span></code><code class="sig-name descname"><span class="pre">TensorflowOptimizer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optimizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'loss'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad_norms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/optimizers/core.html#TensorflowOptimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.optimizers.core.TensorflowOptimizer" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.optimizers.core.TensorflowOptimizer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.optimizers.core.</span></span><span class="sig-name descname"><span class="pre">TensorflowOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optimizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'loss'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad_norms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/optimizers/core.html#TensorflowOptimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.optimizers.core.TensorflowOptimizer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.optimizers.base.Optimizer" title="deepr.optimizers.base.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.optimizers.base.Optimizer</span></code></a></p>
 <p>Default Tensorflow Optimizers</p>
 <dl class="py attribute">
-<dt id="deepr.optimizers.core.TensorflowOptimizer.learning_rate">
-<code class="sig-name descname"><span class="pre">learning_rate</span></code><a class="headerlink" href="#deepr.optimizers.core.TensorflowOptimizer.learning_rate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.optimizers.core.TensorflowOptimizer.learning_rate">
+<span class="sig-name descname"><span class="pre">learning_rate</span></span><a class="headerlink" href="#deepr.optimizers.core.TensorflowOptimizer.learning_rate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Learning rate</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -267,8 +270,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.optimizers.core.TensorflowOptimizer.optimizer">
-<code class="sig-name descname"><span class="pre">optimizer</span></code><a class="headerlink" href="#deepr.optimizers.core.TensorflowOptimizer.optimizer" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.optimizers.core.TensorflowOptimizer.optimizer">
+<span class="sig-name descname"><span class="pre">optimizer</span></span><a class="headerlink" href="#deepr.optimizers.core.TensorflowOptimizer.optimizer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the optimizer. See <cite>TensorflowOptimizer.OPTIMIZERS</cite> for
 a description of available Tensorflow optimizers.</p>
 <dl class="field-list simple">
@@ -279,14 +282,14 @@ a description of available Tensorflow optimizers.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.optimizers.core.TensorflowOptimizer.kwargs">
-<code class="sig-name descname"><span class="pre">kwargs</span></code><a class="headerlink" href="#deepr.optimizers.core.TensorflowOptimizer.kwargs" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.optimizers.core.TensorflowOptimizer.kwargs">
+<span class="sig-name descname"><span class="pre">kwargs</span></span><a class="headerlink" href="#deepr.optimizers.core.TensorflowOptimizer.kwargs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Optional arguments for the Tensorflow optimizer.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.optimizers.core.TensorflowOptimizer.OPTIMIZERS">
-<code class="sig-name descname"><span class="pre">OPTIMIZERS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'adagrad':</span> <span class="pre">&lt;class</span> <span class="pre">'tensorflow.python.training.adagrad.AdagradOptimizer'&gt;,</span> <span class="pre">'adam':</span> <span class="pre">&lt;class</span> <span class="pre">'tensorflow.python.training.adam.AdamOptimizer'&gt;,</span> <span class="pre">'lazyadam':</span> <span class="pre">&lt;class</span> <span class="pre">'tensorflow.contrib.opt.python.training.lazy_adam_optimizer.LazyAdamOptimizer'&gt;,</span> <span class="pre">'momentum':</span> <span class="pre">&lt;class</span> <span class="pre">'tensorflow.python.training.momentum.MomentumOptimizer'&gt;,</span> <span class="pre">'sgd':</span> <span class="pre">&lt;class</span> <span class="pre">'tensorflow.python.training.gradient_descent.GradientDescentOptimizer'&gt;}</span></em><a class="headerlink" href="#deepr.optimizers.core.TensorflowOptimizer.OPTIMIZERS" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.optimizers.core.TensorflowOptimizer.OPTIMIZERS">
+<span class="sig-name descname"><span class="pre">OPTIMIZERS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">{'adagrad':</span> <span class="pre">&lt;class</span> <span class="pre">'tensorflow.python.training.adagrad.AdagradOptimizer'&gt;,</span> <span class="pre">'adam':</span> <span class="pre">&lt;class</span> <span class="pre">'tensorflow.python.training.adam.AdamOptimizer'&gt;,</span> <span class="pre">'lazyadam':</span> <span class="pre">&lt;class</span> <span class="pre">'tensorflow.contrib.opt.python.training.lazy_adam_optimizer.LazyAdamOptimizer'&gt;,</span> <span class="pre">'momentum':</span> <span class="pre">&lt;class</span> <span class="pre">'tensorflow.python.training.momentum.MomentumOptimizer'&gt;,</span> <span class="pre">'sgd':</span> <span class="pre">&lt;class</span> <span class="pre">'tensorflow.python.training.gradient_descent.GradientDescentOptimizer'&gt;}</span></em><a class="headerlink" href="#deepr.optimizers.core.TensorflowOptimizer.OPTIMIZERS" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

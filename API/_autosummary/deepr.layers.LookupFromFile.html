@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -257,14 +260,14 @@
 <div class="section" id="deepr-layers-lookupfromfile">
 <h1>deepr.layers.LookupFromFile<a class="headerlink" href="#deepr-layers-lookupfromfile" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="deepr.layers.LookupFromFile">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.layers.</span></code><code class="sig-name descname"><span class="pre">LookupFromFile</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reuse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/lookup.html#LookupFromFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.layers.LookupFromFile" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.layers.LookupFromFile">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.layers.</span></span><span class="sig-name descname"><span class="pre">LookupFromFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reuse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/lookup.html#LookupFromFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.layers.LookupFromFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lookup From File Layer.</p>
 <p>Creates a table at runtime from a mapping file. The table will map
 each key to its corresponding line index as an tf.int64.</p>
 <dl class="py attribute">
-<dt id="deepr.layers.LookupFromFile.key_dtype">
-<code class="sig-name descname"><span class="pre">key_dtype</span></code><a class="headerlink" href="#deepr.layers.LookupFromFile.key_dtype" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.layers.LookupFromFile.key_dtype">
+<span class="sig-name descname"><span class="pre">key_dtype</span></span><a class="headerlink" href="#deepr.layers.LookupFromFile.key_dtype" title="Permalink to this definition">¶</a></dt>
 <dd><p>Keys type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -274,8 +277,8 @@ each key to its corresponding line index as an tf.int64.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.layers.LookupFromFile.path">
-<code class="sig-name descname"><span class="pre">path</span></code><a class="headerlink" href="#deepr.layers.LookupFromFile.path" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.layers.LookupFromFile.path">
+<span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#deepr.layers.LookupFromFile.path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Path to mapping file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -285,8 +288,8 @@ each key to its corresponding line index as an tf.int64.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.layers.LookupFromFile.reuse">
-<code class="sig-name descname"><span class="pre">reuse</span></code><a class="headerlink" href="#deepr.layers.LookupFromFile.reuse" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.layers.LookupFromFile.reuse">
+<span class="sig-name descname"><span class="pre">reuse</span></span><a class="headerlink" href="#deepr.layers.LookupFromFile.reuse" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True, reuse table with the same name</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -296,8 +299,8 @@ each key to its corresponding line index as an tf.int64.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.layers.LookupFromFile.table_name">
-<code class="sig-name descname"><span class="pre">table_name</span></code><a class="headerlink" href="#deepr.layers.LookupFromFile.table_name" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.layers.LookupFromFile.table_name">
+<span class="sig-name descname"><span class="pre">table_name</span></span><a class="headerlink" href="#deepr.layers.LookupFromFile.table_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the HashTable</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -307,8 +310,8 @@ each key to its corresponding line index as an tf.int64.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.layers.LookupFromFile.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reuse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/lookup.html#LookupFromFile.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.layers.LookupFromFile.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.layers.LookupFromFile.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reuse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/layers/lookup.html#LookupFromFile.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.layers.LookupFromFile.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 

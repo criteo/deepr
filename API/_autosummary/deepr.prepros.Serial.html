@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -236,8 +239,8 @@
 <div class="section" id="deepr-prepros-serial">
 <h1>deepr.prepros.Serial<a class="headerlink" href="#deepr-prepros-serial" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="deepr.prepros.Serial">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.prepros.</span></code><code class="sig-name descname"><span class="pre">Serial</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">preprocessors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fuse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/prepros/combinators.html#Serial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.Serial" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.prepros.Serial">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.prepros.</span></span><span class="sig-name descname"><span class="pre">Serial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">preprocessors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fuse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/prepros/combinators.html#Serial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.Serial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Chain preprocessors to define complex preprocessing pipelines.</p>
 <p>It will apply each preprocessing step one after the other on each
 element. For performance reasons, it fuses <a class="reference internal" href="deepr.prepros.Map.html#deepr.prepros.Map" title="deepr.prepros.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code></a> and <a class="reference internal" href="deepr.prepros.Filter.html#deepr.prepros.Filter" title="deepr.prepros.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a>
@@ -262,8 +265,8 @@ operations into single <cite>tf.data</cite> calls.</p>
 </pre></div>
 </div>
 <dl class="py attribute">
-<dt id="deepr.prepros.Serial.fuse">
-<code class="sig-name descname"><span class="pre">fuse</span></code><a class="headerlink" href="#deepr.prepros.Serial.fuse" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.prepros.Serial.fuse">
+<span class="sig-name descname"><span class="pre">fuse</span></span><a class="headerlink" href="#deepr.prepros.Serial.fuse" title="Permalink to this definition">¶</a></dt>
 <dd><p>If True (default), will fuse <a class="reference internal" href="deepr.prepros.Map.html#deepr.prepros.Map" title="deepr.prepros.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code></a> and <a class="reference internal" href="deepr.prepros.Filter.html#deepr.prepros.Filter" title="deepr.prepros.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -273,8 +276,8 @@ operations into single <cite>tf.data</cite> calls.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.prepros.Serial.preprocessors">
-<code class="sig-name descname"><span class="pre">preprocessors</span></code><a class="headerlink" href="#deepr.prepros.Serial.preprocessors" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.prepros.Serial.preprocessors">
+<span class="sig-name descname"><span class="pre">preprocessors</span></span><a class="headerlink" href="#deepr.prepros.Serial.preprocessors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Positional arguments of <a class="reference internal" href="deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a> instance or Tuple / List /
 Generator of prepro instances</p>
 <dl class="field-list simple">
@@ -285,8 +288,8 @@ Generator of prepro instances</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.prepros.Serial.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">preprocessors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fuse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/prepros/combinators.html#Serial.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.Serial.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.prepros.Serial.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">preprocessors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fuse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/prepros/combinators.html#Serial.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.prepros.Serial.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 

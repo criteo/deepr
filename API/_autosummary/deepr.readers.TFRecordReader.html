@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -225,12 +228,12 @@
 <div class="section" id="deepr-readers-tfrecordreader">
 <h1>deepr.readers.TFRecordReader<a class="headerlink" href="#deepr-readers-tfrecordreader" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="deepr.readers.TFRecordReader">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.readers.</span></code><code class="sig-name descname"><span class="pre">TFRecordReader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_reads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/readers/record.html#TFRecordReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.TFRecordReader" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.TFRecordReader">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.readers.</span></span><span class="sig-name descname"><span class="pre">TFRecordReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_reads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/readers/record.html#TFRecordReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.TFRecordReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for TFRecord Reader of tf.train.Example.</p>
 <dl class="py attribute">
-<dt id="deepr.readers.TFRecordReader.num_parallel_calls">
-<code class="sig-name descname"><span class="pre">num_parallel_calls</span></code><a class="headerlink" href="#deepr.readers.TFRecordReader.num_parallel_calls" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.TFRecordReader.num_parallel_calls">
+<span class="sig-name descname"><span class="pre">num_parallel_calls</span></span><a class="headerlink" href="#deepr.readers.TFRecordReader.num_parallel_calls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Description</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -240,8 +243,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.readers.TFRecordReader.num_parallel_reads">
-<code class="sig-name descname"><span class="pre">num_parallel_reads</span></code><a class="headerlink" href="#deepr.readers.TFRecordReader.num_parallel_reads" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.TFRecordReader.num_parallel_reads">
+<span class="sig-name descname"><span class="pre">num_parallel_reads</span></span><a class="headerlink" href="#deepr.readers.TFRecordReader.num_parallel_reads" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of parallel reads</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -251,8 +254,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.readers.TFRecordReader.path">
-<code class="sig-name descname"><span class="pre">path</span></code><a class="headerlink" href="#deepr.readers.TFRecordReader.path" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.TFRecordReader.path">
+<span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#deepr.readers.TFRecordReader.path" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of filenames or path to directory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -262,8 +265,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.readers.TFRecordReader.shuffle">
-<code class="sig-name descname"><span class="pre">shuffle</span></code><a class="headerlink" href="#deepr.readers.TFRecordReader.shuffle" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.TFRecordReader.shuffle">
+<span class="sig-name descname"><span class="pre">shuffle</span></span><a class="headerlink" href="#deepr.readers.TFRecordReader.shuffle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shuffle files if True before reading.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -273,8 +276,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.readers.TFRecordReader.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_reads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/readers/record.html#TFRecordReader.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.TFRecordReader.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.TFRecordReader.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_reads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/readers/record.html#TFRecordReader.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.TFRecordReader.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 

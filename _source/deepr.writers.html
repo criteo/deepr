@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -239,13 +242,13 @@
 <span id="deepr-writers-base-module"></span><h2>deepr.writers.base module<a class="headerlink" href="#module-deepr.writers.base" title="Permalink to this headline">¶</a></h2>
 <p>Base class for writers.</p>
 <dl class="py class">
-<dt id="deepr.writers.base.Writer">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.writers.base.</span></code><code class="sig-name descname"><span class="pre">Writer</span></code><a class="reference internal" href="../_modules/deepr/writers/base.html#Writer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.writers.base.Writer" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.writers.base.Writer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.writers.base.</span></span><span class="sig-name descname"><span class="pre">Writer</span></span><a class="reference internal" href="../_modules/deepr/writers/base.html#Writer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.writers.base.Writer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
 <p>Base class for writers.</p>
 <dl class="py method">
-<dt id="deepr.writers.base.Writer.write">
-<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">write</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/writers/base.html#Writer.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.writers.base.Writer.write" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.writers.base.Writer.write">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/writers/base.html#Writer.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.writers.base.Writer.write" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -255,13 +258,13 @@
 <span id="deepr-writers-record-module"></span><h2>deepr.writers.record module<a class="headerlink" href="#module-deepr.writers.record" title="Permalink to this headline">¶</a></h2>
 <p>TFRecords writer.</p>
 <dl class="py class">
-<dt id="deepr.writers.record.TFRecordWriter">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.writers.record.</span></code><code class="sig-name descname"><span class="pre">TFRecordWriter</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GZIP'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/writers/record.html#TFRecordWriter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.writers.record.TFRecordWriter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.writers.record.TFRecordWriter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.writers.record.</span></span><span class="sig-name descname"><span class="pre">TFRecordWriter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GZIP'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/writers/record.html#TFRecordWriter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.writers.record.TFRecordWriter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.writers.base.Writer" title="deepr.writers.base.Writer"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.writers.base.Writer</span></code></a></p>
 <p>TFRecords writer.</p>
 <dl class="py method">
-<dt id="deepr.writers.record.TFRecordWriter.write">
-<code class="sig-name descname"><span class="pre">write</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/writers/record.html#TFRecordWriter.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.writers.record.TFRecordWriter.write" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.writers.record.TFRecordWriter.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/writers/record.html#TFRecordWriter.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.writers.record.TFRecordWriter.write" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -240,13 +243,13 @@
 <span id="deepr-readers-base-module"></span><h2>deepr.readers.base module<a class="headerlink" href="#module-deepr.readers.base" title="Permalink to this headline">¶</a></h2>
 <p>Abstract base class for reader</p>
 <dl class="py class">
-<dt id="deepr.readers.base.DatasetReader">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.readers.base.</span></code><code class="sig-name descname"><span class="pre">DatasetReader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/base.html#DatasetReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.base.DatasetReader" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.base.DatasetReader">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.readers.base.</span></span><span class="sig-name descname"><span class="pre">DatasetReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/base.html#DatasetReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.base.DatasetReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.readers.base.Reader" title="deepr.readers.base.Reader"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.readers.base.Reader</span></code></a></p>
 <p>Dummy dataset reader initialized with a tf.data.Dataset</p>
 <dl class="py method">
-<dt id="deepr.readers.base.DatasetReader.as_dataset">
-<code class="sig-name descname"><span class="pre">as_dataset</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/base.html#DatasetReader.as_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.base.DatasetReader.as_dataset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.base.DatasetReader.as_dataset">
+<span class="sig-name descname"><span class="pre">as_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/base.html#DatasetReader.as_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.base.DatasetReader.as_dataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build a tf.data.Dataset</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -258,13 +261,13 @@
 </dd></dl>
 
 <dl class="py class">
-<dt id="deepr.readers.base.Reader">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.readers.base.</span></code><code class="sig-name descname"><span class="pre">Reader</span></code><a class="reference internal" href="../_modules/deepr/readers/base.html#Reader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.base.Reader" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.base.Reader">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.readers.base.</span></span><span class="sig-name descname"><span class="pre">Reader</span></span><a class="reference internal" href="../_modules/deepr/readers/base.html#Reader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.base.Reader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
 <p>Interface for readers, similar to tensorflow_datasets</p>
 <dl class="py method">
-<dt id="deepr.readers.base.Reader.as_dataset">
-<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">as_dataset</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/base.html#Reader.as_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.base.Reader.as_dataset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.base.Reader.as_dataset">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">as_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/base.html#Reader.as_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.base.Reader.as_dataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build a tf.data.Dataset</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -276,8 +279,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="deepr.readers.base.from_dataset">
-<code class="sig-prename descclassname"><span class="pre">deepr.readers.base.</span></code><code class="sig-name descname"><span class="pre">from_dataset</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/base.html#from_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.base.from_dataset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.base.from_dataset">
+<span class="sig-prename descclassname"><span class="pre">deepr.readers.base.</span></span><span class="sig-name descname"><span class="pre">from_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/base.html#from_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.base.from_dataset" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#deepr.readers.base.DatasetReader" title="deepr.readers.base.DatasetReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">DatasetReader</span></code></a></p>
@@ -290,13 +293,13 @@
 <span id="deepr-readers-generator-module"></span><h2>deepr.readers.generator module<a class="headerlink" href="#module-deepr.readers.generator" title="Permalink to this headline">¶</a></h2>
 <p>Reader Class for datasets using generator functions</p>
 <dl class="py class">
-<dt id="deepr.readers.generator.GeneratorReader">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.readers.generator.</span></code><code class="sig-name descname"><span class="pre">GeneratorReader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">generator_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_shapes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/generator.html#GeneratorReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.generator.GeneratorReader" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.generator.GeneratorReader">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.readers.generator.</span></span><span class="sig-name descname"><span class="pre">GeneratorReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">generator_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_shapes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/generator.html#GeneratorReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.generator.GeneratorReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.readers.base.Reader" title="deepr.readers.base.Reader"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.readers.base.Reader</span></code></a></p>
 <p>Reader Class for datasets using generator functions</p>
 <dl class="py attribute">
-<dt id="deepr.readers.generator.GeneratorReader.generator_fn">
-<code class="sig-name descname"><span class="pre">generator_fn</span></code><a class="headerlink" href="#deepr.readers.generator.GeneratorReader.generator_fn" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.generator.GeneratorReader.generator_fn">
+<span class="sig-name descname"><span class="pre">generator_fn</span></span><a class="headerlink" href="#deepr.readers.generator.GeneratorReader.generator_fn" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generator function, yields features, labels</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -306,8 +309,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.readers.generator.GeneratorReader.output_types">
-<code class="sig-name descname"><span class="pre">output_types</span></code><a class="headerlink" href="#deepr.readers.generator.GeneratorReader.output_types" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.generator.GeneratorReader.output_types">
+<span class="sig-name descname"><span class="pre">output_types</span></span><a class="headerlink" href="#deepr.readers.generator.GeneratorReader.output_types" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generator outputs dtypes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -317,8 +320,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.readers.generator.GeneratorReader.output_shapes">
-<code class="sig-name descname"><span class="pre">output_shapes</span></code><a class="headerlink" href="#deepr.readers.generator.GeneratorReader.output_shapes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.generator.GeneratorReader.output_shapes">
+<span class="sig-name descname"><span class="pre">output_shapes</span></span><a class="headerlink" href="#deepr.readers.generator.GeneratorReader.output_shapes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generator outputs shapes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -328,8 +331,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.readers.generator.GeneratorReader.as_dataset">
-<code class="sig-name descname"><span class="pre">as_dataset</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/generator.html#GeneratorReader.as_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.generator.GeneratorReader.as_dataset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.generator.GeneratorReader.as_dataset">
+<span class="sig-name descname"><span class="pre">as_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/generator.html#GeneratorReader.as_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.generator.GeneratorReader.as_dataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build a tf.data.Dataset</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -345,13 +348,13 @@
 <span id="deepr-readers-record-module"></span><h2>deepr.readers.record module<a class="headerlink" href="#module-deepr.readers.record" title="Permalink to this headline">¶</a></h2>
 <p>Class for TFRecord Reader of tf.train.Example</p>
 <dl class="py class">
-<dt id="deepr.readers.record.TFRecordReader">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.readers.record.</span></code><code class="sig-name descname"><span class="pre">TFRecordReader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_reads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/record.html#TFRecordReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.record.TFRecordReader" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.record.TFRecordReader">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.readers.record.</span></span><span class="sig-name descname"><span class="pre">TFRecordReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_reads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_calls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/record.html#TFRecordReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.record.TFRecordReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.readers.base.Reader" title="deepr.readers.base.Reader"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.readers.base.Reader</span></code></a></p>
 <p>Class for TFRecord Reader of tf.train.Example.</p>
 <dl class="py attribute">
-<dt id="deepr.readers.record.TFRecordReader.num_parallel_calls">
-<code class="sig-name descname"><span class="pre">num_parallel_calls</span></code><a class="headerlink" href="#deepr.readers.record.TFRecordReader.num_parallel_calls" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.record.TFRecordReader.num_parallel_calls">
+<span class="sig-name descname"><span class="pre">num_parallel_calls</span></span><a class="headerlink" href="#deepr.readers.record.TFRecordReader.num_parallel_calls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Description</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -361,8 +364,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.readers.record.TFRecordReader.num_parallel_reads">
-<code class="sig-name descname"><span class="pre">num_parallel_reads</span></code><a class="headerlink" href="#deepr.readers.record.TFRecordReader.num_parallel_reads" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.record.TFRecordReader.num_parallel_reads">
+<span class="sig-name descname"><span class="pre">num_parallel_reads</span></span><a class="headerlink" href="#deepr.readers.record.TFRecordReader.num_parallel_reads" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of parallel reads</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -372,8 +375,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.readers.record.TFRecordReader.path">
-<code class="sig-name descname"><span class="pre">path</span></code><a class="headerlink" href="#deepr.readers.record.TFRecordReader.path" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.record.TFRecordReader.path">
+<span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#deepr.readers.record.TFRecordReader.path" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of filenames or path to directory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -383,8 +386,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.readers.record.TFRecordReader.shuffle">
-<code class="sig-name descname"><span class="pre">shuffle</span></code><a class="headerlink" href="#deepr.readers.record.TFRecordReader.shuffle" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.record.TFRecordReader.shuffle">
+<span class="sig-name descname"><span class="pre">shuffle</span></span><a class="headerlink" href="#deepr.readers.record.TFRecordReader.shuffle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shuffle files if True before reading.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -394,8 +397,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="deepr.readers.record.TFRecordReader.as_dataset">
-<code class="sig-name descname"><span class="pre">as_dataset</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/record.html#TFRecordReader.as_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.record.TFRecordReader.as_dataset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.record.TFRecordReader.as_dataset">
+<span class="sig-name descname"><span class="pre">as_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/record.html#TFRecordReader.as_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.record.TFRecordReader.as_dataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build a tf.data.Dataset</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -404,40 +407,40 @@
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="deepr.readers.record.TFRecordReader.compression_type">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">compression_type</span></code><a class="headerlink" href="#deepr.readers.record.TFRecordReader.compression_type" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="deepr.readers.record.TFRecordReader.compression_type">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">compression_type</span></span><a class="headerlink" href="#deepr.readers.record.TFRecordReader.compression_type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
-<dt id="deepr.readers.record.TFRecordReader.filenames">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">filenames</span></code><a class="headerlink" href="#deepr.readers.record.TFRecordReader.filenames" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="deepr.readers.record.TFRecordReader.filenames">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">filenames</span></span><a class="headerlink" href="#deepr.readers.record.TFRecordReader.filenames" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get filenames in path.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
-<dt id="deepr.readers.record.bytes_feature">
-<code class="sig-prename descclassname"><span class="pre">deepr.readers.record.</span></code><code class="sig-name descname"><span class="pre">bytes_feature</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/record.html#bytes_feature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.record.bytes_feature" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.record.bytes_feature">
+<span class="sig-prename descclassname"><span class="pre">deepr.readers.record.</span></span><span class="sig-name descname"><span class="pre">bytes_feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/record.html#bytes_feature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.record.bytes_feature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a bytes_list from a string / byte.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="deepr.readers.record.float_feature">
-<code class="sig-prename descclassname"><span class="pre">deepr.readers.record.</span></code><code class="sig-name descname"><span class="pre">float_feature</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/record.html#float_feature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.record.float_feature" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.record.float_feature">
+<span class="sig-prename descclassname"><span class="pre">deepr.readers.record.</span></span><span class="sig-name descname"><span class="pre">float_feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/record.html#float_feature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.record.float_feature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns an float_list from a float</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="deepr.readers.record.int64_feature">
-<code class="sig-prename descclassname"><span class="pre">deepr.readers.record.</span></code><code class="sig-name descname"><span class="pre">int64_feature</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/record.html#int64_feature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.record.int64_feature" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.record.int64_feature">
+<span class="sig-prename descclassname"><span class="pre">deepr.readers.record.</span></span><span class="sig-name descname"><span class="pre">int64_feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/record.html#int64_feature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.record.int64_feature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns an int64_list from an int</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="deepr.readers.record.int64_feature_list">
-<code class="sig-prename descclassname"><span class="pre">deepr.readers.record.</span></code><code class="sig-name descname"><span class="pre">int64_feature_list</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/record.html#int64_feature_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.record.int64_feature_list" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.readers.record.int64_feature_list">
+<span class="sig-prename descclassname"><span class="pre">deepr.readers.record.</span></span><span class="sig-name descname"><span class="pre">int64_feature_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/readers/record.html#int64_feature_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.readers.record.int64_feature_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a FeatureList from a list of int</p>
 </dd></dl>
 

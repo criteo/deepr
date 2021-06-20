@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -240,13 +243,13 @@
 <span id="deepr-predictors-base-module"></span><h2>deepr.predictors.base module<a class="headerlink" href="#module-deepr.predictors.base" title="Permalink to this headline">¶</a></h2>
 <p>Base Class for Predictor.</p>
 <dl class="py class">
-<dt id="deepr.predictors.base.Predictor">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.predictors.base.</span></code><code class="sig-name descname"><span class="pre">Predictor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feed_tensors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fetch_tensors</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/predictors/base.html#Predictor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.predictors.base.Predictor" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.predictors.base.Predictor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.predictors.base.</span></span><span class="sig-name descname"><span class="pre">Predictor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feed_tensors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fetch_tensors</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/predictors/base.html#Predictor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.predictors.base.Predictor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
 <p>Base Class for Predictor.</p>
 <dl class="py attribute">
-<dt id="deepr.predictors.base.Predictor.feed_tensors">
-<code class="sig-name descname"><span class="pre">feed_tensors</span></code><a class="headerlink" href="#deepr.predictors.base.Predictor.feed_tensors" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.predictors.base.Predictor.feed_tensors">
+<span class="sig-name descname"><span class="pre">feed_tensors</span></span><a class="headerlink" href="#deepr.predictors.base.Predictor.feed_tensors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Input tensors</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -256,8 +259,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.predictors.base.Predictor.fetch_tensors">
-<code class="sig-name descname"><span class="pre">fetch_tensors</span></code><a class="headerlink" href="#deepr.predictors.base.Predictor.fetch_tensors" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.predictors.base.Predictor.fetch_tensors">
+<span class="sig-name descname"><span class="pre">fetch_tensors</span></span><a class="headerlink" href="#deepr.predictors.base.Predictor.fetch_tensors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Output tensors</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -267,8 +270,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.predictors.base.Predictor.session">
-<code class="sig-name descname"><span class="pre">session</span></code><a class="headerlink" href="#deepr.predictors.base.Predictor.session" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.predictors.base.Predictor.session">
+<span class="sig-name descname"><span class="pre">session</span></span><a class="headerlink" href="#deepr.predictors.base.Predictor.session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tensorflow session</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -284,13 +287,13 @@
 <span id="deepr-predictors-proto-module"></span><h2>deepr.predictors.proto module<a class="headerlink" href="#module-deepr.predictors.proto" title="Permalink to this headline">¶</a></h2>
 <p>Proto Predictor.</p>
 <dl class="py class">
-<dt id="deepr.predictors.proto.ProtoPredictor">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.predictors.proto.</span></code><code class="sig-name descname"><span class="pre">ProtoPredictor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feeds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fetches</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/predictors/proto.html#ProtoPredictor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.predictors.proto.ProtoPredictor" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.predictors.proto.ProtoPredictor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.predictors.proto.</span></span><span class="sig-name descname"><span class="pre">ProtoPredictor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feeds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fetches</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/predictors/proto.html#ProtoPredictor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.predictors.proto.ProtoPredictor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.predictors.base.Predictor" title="deepr.predictors.base.Predictor"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.predictors.base.Predictor</span></code></a></p>
 <p>Proto Predictor.</p>
 <dl class="py attribute">
-<dt id="deepr.predictors.proto.ProtoPredictor.path">
-<code class="sig-name descname"><span class="pre">path</span></code><a class="headerlink" href="#deepr.predictors.proto.ProtoPredictor.path" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.predictors.proto.ProtoPredictor.path">
+<span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#deepr.predictors.proto.ProtoPredictor.path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Path to .pb file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -300,8 +303,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.predictors.proto.ProtoPredictor.feeds">
-<code class="sig-name descname"><span class="pre">feeds</span></code><a class="headerlink" href="#deepr.predictors.proto.ProtoPredictor.feeds" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.predictors.proto.ProtoPredictor.feeds">
+<span class="sig-name descname"><span class="pre">feeds</span></span><a class="headerlink" href="#deepr.predictors.proto.ProtoPredictor.feeds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of feed tensors or operations (inputs)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -311,8 +314,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.predictors.proto.ProtoPredictor.fetches">
-<code class="sig-name descname"><span class="pre">fetches</span></code><a class="headerlink" href="#deepr.predictors.proto.ProtoPredictor.fetches" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.predictors.proto.ProtoPredictor.fetches">
+<span class="sig-name descname"><span class="pre">fetches</span></span><a class="headerlink" href="#deepr.predictors.proto.ProtoPredictor.fetches" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of fetch tensors or operations (outputs)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -328,13 +331,13 @@
 <span id="deepr-predictors-saved-model-module"></span><h2>deepr.predictors.saved_model module<a class="headerlink" href="#module-deepr.predictors.saved_model" title="Permalink to this headline">¶</a></h2>
 <p>SavedModel Predictor.</p>
 <dl class="py class">
-<dt id="deepr.predictors.saved_model.SavedModelPredictor">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">deepr.predictors.saved_model.</span></code><code class="sig-name descname"><span class="pre">SavedModelPredictor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feeds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fetches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/predictors/saved_model.html#SavedModelPredictor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.predictors.saved_model.SavedModelPredictor" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.predictors.saved_model.SavedModelPredictor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.predictors.saved_model.</span></span><span class="sig-name descname"><span class="pre">SavedModelPredictor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feeds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fetches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/predictors/saved_model.html#SavedModelPredictor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.predictors.saved_model.SavedModelPredictor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#deepr.predictors.base.Predictor" title="deepr.predictors.base.Predictor"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.predictors.base.Predictor</span></code></a></p>
 <p>SavedModel Predictor.</p>
 <dl class="py attribute">
-<dt id="deepr.predictors.saved_model.SavedModelPredictor.path">
-<code class="sig-name descname"><span class="pre">path</span></code><a class="headerlink" href="#deepr.predictors.saved_model.SavedModelPredictor.path" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.predictors.saved_model.SavedModelPredictor.path">
+<span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#deepr.predictors.saved_model.SavedModelPredictor.path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Path to SavedModel directory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -344,8 +347,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.predictors.saved_model.SavedModelPredictor.feeds">
-<code class="sig-name descname"><span class="pre">feeds</span></code><a class="headerlink" href="#deepr.predictors.saved_model.SavedModelPredictor.feeds" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.predictors.saved_model.SavedModelPredictor.feeds">
+<span class="sig-name descname"><span class="pre">feeds</span></span><a class="headerlink" href="#deepr.predictors.saved_model.SavedModelPredictor.feeds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of feed tensors or operations (inputs)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -355,8 +358,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="deepr.predictors.saved_model.SavedModelPredictor.fetches">
-<code class="sig-name descname"><span class="pre">fetches</span></code><a class="headerlink" href="#deepr.predictors.saved_model.SavedModelPredictor.fetches" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.predictors.saved_model.SavedModelPredictor.fetches">
+<span class="sig-name descname"><span class="pre">fetches</span></span><a class="headerlink" href="#deepr.predictors.saved_model.SavedModelPredictor.fetches" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of fetch tensors or operations (outputs)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -368,8 +371,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="deepr.predictors.saved_model.get_latest_saved_model">
-<code class="sig-prename descclassname"><span class="pre">deepr.predictors.saved_model.</span></code><code class="sig-name descname"><span class="pre">get_latest_saved_model</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">saved_model_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/predictors/saved_model.html#get_latest_saved_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.predictors.saved_model.get_latest_saved_model" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="deepr.predictors.saved_model.get_latest_saved_model">
+<span class="sig-prename descclassname"><span class="pre">deepr.predictors.saved_model.</span></span><span class="sig-name descname"><span class="pre">get_latest_saved_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">saved_model_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/predictors/saved_model.html#get_latest_saved_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.predictors.saved_model.get_latest_saved_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get latest sub directory in saved_model_dir.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
