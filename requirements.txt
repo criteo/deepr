@@ -3,7 +3,7 @@ dataclasses
 fire==0.4.0
 graphyte==1.6.0
 jsonnet==0.17.0
-mlflow==1.14.1
+mlflow==1.18.0
 numpy==1.19.4
 psutil==5.8.0
 pyarrow==3.0.0
