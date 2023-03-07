@@ -20,4 +20,12 @@
 
    
    
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ParamsTuner.job
+      ~ParamsTuner.macros
+      ~ParamsTuner.sampler
+   
    

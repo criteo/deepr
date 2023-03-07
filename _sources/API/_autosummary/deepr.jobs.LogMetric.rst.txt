@@ -25,5 +25,7 @@
    .. autosummary::
    
       ~LogMetric.use_mlflow
+      ~LogMetric.key
+      ~LogMetric.value
    
    

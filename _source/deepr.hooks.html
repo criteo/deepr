@@ -1,94 +1,50 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>deepr.hooks package &mdash; deepr 2.11.0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="deepr.initializers package" href="deepr.initializers.html" />
     <link rel="prev" title="deepr.exporters package" href="deepr.exporters.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../index.html" class="icon icon-home"> deepr
           
-
-          
+          <a href="../index.html" class="icon icon-home">
+            deepr
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Getting started</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/pipeline.html">Pipeline</a></li>
@@ -96,17 +52,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/advanced.html">Advanced</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Examples</span></p>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../movielens/movielens.html">MovieLens Example</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">Developper documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../README.html">DeepR: Build and Train Deep Learning Pipelines for Production</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../API/core.html">DeepR</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">deepr</a><ul class="current">
@@ -141,75 +97,32 @@
 </li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">deepr</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="modules.html">deepr</a> &raquo;</li>
-        
-          <li><a href="deepr.html">deepr package</a> &raquo;</li>
-        
-      <li>deepr.hooks package</li>
-    
-    
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">deepr</a></li>
+          <li class="breadcrumb-item"><a href="deepr.html">deepr package</a></li>
+      <li class="breadcrumb-item active">deepr.hooks package</li>
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/_source/deepr.hooks.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   
 <style>
 /* CSS overrides for sphinx_rtd_theme */
@@ -234,13 +147,13 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="deepr-hooks-package">
-<h1>deepr.hooks package<a class="headerlink" href="#deepr-hooks-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-deepr.hooks.base">
-<span id="deepr-hooks-base-module"></span><h2>deepr.hooks.base module<a class="headerlink" href="#module-deepr.hooks.base" title="Permalink to this headline">¶</a></h2>
+<section id="deepr-hooks-package">
+<h1>deepr.hooks package<a class="headerlink" href="#deepr-hooks-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-deepr.hooks.base">
+<span id="deepr-hooks-base-module"></span><h2>deepr.hooks.base module<a class="headerlink" href="#module-deepr.hooks.base" title="Permalink to this heading"></a></h2>
 <p>Base Hooks Factories</p>
 <p>Some TensorFlow hooks cannot be defined before runtime. For example, a
 <code class="xref py py-class docutils literal notranslate"><span class="pre">TensorLoggingHook</span></code> requires <cite>tensors</cite> to be initialized.</p>
@@ -250,66 +163,66 @@ runtime.</p>
 <p>See the <code class="xref py py-class docutils literal notranslate"><span class="pre">LoggingTensorHookFactory</span></code> for instance.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="deepr.hooks.base.EstimatorHookFactory">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.base.</span></span><span class="sig-name descname"><span class="pre">EstimatorHookFactory</span></span><a class="reference internal" href="../_modules/deepr/hooks/base.html#EstimatorHookFactory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.base.EstimatorHookFactory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.base.</span></span><span class="sig-name descname"><span class="pre">EstimatorHookFactory</span></span><a class="reference internal" href="../_modules/deepr/hooks/base.html#EstimatorHookFactory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.base.EstimatorHookFactory" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
 <p>Estimator Hook Factory</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="deepr.hooks.base.TensorHookFactory">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.base.</span></span><span class="sig-name descname"><span class="pre">TensorHookFactory</span></span><a class="reference internal" href="../_modules/deepr/hooks/base.html#TensorHookFactory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.base.TensorHookFactory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.base.</span></span><span class="sig-name descname"><span class="pre">TensorHookFactory</span></span><a class="reference internal" href="../_modules/deepr/hooks/base.html#TensorHookFactory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.base.TensorHookFactory" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
 <p>Tensor Hook Factory</p>
 </dd></dl>
 
-</div>
-<div class="section" id="module-deepr.hooks.early_stopping">
-<span id="deepr-hooks-early-stopping-module"></span><h2>deepr.hooks.early_stopping module<a class="headerlink" href="#module-deepr.hooks.early_stopping" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-deepr.hooks.early_stopping">
+<span id="deepr-hooks-early-stopping-module"></span><h2>deepr.hooks.early_stopping module<a class="headerlink" href="#module-deepr.hooks.early_stopping" title="Permalink to this heading"></a></h2>
 <p>Early Stopping Hook</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="deepr.hooks.early_stopping.EarlyStoppingHookFactory">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.early_stopping.</span></span><span class="sig-name descname"><span class="pre">EarlyStoppingHookFactory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">metric</span></em>, <em class="sig-param"><span class="pre">max_steps_without_improvement</span></em>, <em class="sig-param"><span class="pre">min_steps=0</span></em>, <em class="sig-param"><span class="pre">mode=&lt;BestMode.DECREASE:</span> <span class="pre">'decrease'&gt;</span></em>, <em class="sig-param"><span class="pre">run_every_secs=None</span></em>, <em class="sig-param"><span class="pre">run_every_steps=None</span></em>, <em class="sig-param"><span class="pre">final_step=None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/early_stopping.html#EarlyStoppingHookFactory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.early_stopping.EarlyStoppingHookFactory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#deepr.hooks.base.EstimatorHookFactory" title="deepr.hooks.base.EstimatorHookFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.hooks.base.EstimatorHookFactory</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.early_stopping.</span></span><span class="sig-name descname"><span class="pre">EarlyStoppingHookFactory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_steps_without_improvement</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">BestMode.DECREASE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_every_secs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_every_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/early_stopping.html#EarlyStoppingHookFactory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.early_stopping.EarlyStoppingHookFactory" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.hooks.base.EstimatorHookFactory" title="deepr.hooks.base.EstimatorHookFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">EstimatorHookFactory</span></code></a></p>
 <p>Early Stopping Hook Factory</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.early_stopping.EarlyStoppingHookFactory.metric">
-<span class="sig-name descname"><span class="pre">metric</span></span><a class="headerlink" href="#deepr.hooks.early_stopping.EarlyStoppingHookFactory.metric" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">metric</span></span><a class="headerlink" href="#deepr.hooks.early_stopping.EarlyStoppingHookFactory.metric" title="Permalink to this definition"></a></dt>
 <dd><p>Name of the metric to read from evaluation checkpoints.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.early_stopping.EarlyStoppingHookFactory.max_steps_without_improvement">
-<span class="sig-name descname"><span class="pre">max_steps_without_improvement</span></span><a class="headerlink" href="#deepr.hooks.early_stopping.EarlyStoppingHookFactory.max_steps_without_improvement" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">max_steps_without_improvement</span></span><a class="headerlink" href="#deepr.hooks.early_stopping.EarlyStoppingHookFactory.max_steps_without_improvement" title="Permalink to this definition"></a></dt>
 <dd><p>If no improvement in metric for this many step, stop.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.early_stopping.EarlyStoppingHookFactory.min_steps">
-<span class="sig-name descname"><span class="pre">min_steps</span></span><a class="headerlink" href="#deepr.hooks.early_stopping.EarlyStoppingHookFactory.min_steps" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">min_steps</span></span><a class="headerlink" href="#deepr.hooks.early_stopping.EarlyStoppingHookFactory.min_steps" title="Permalink to this definition"></a></dt>
 <dd><p>Do not attempt to early stop for this many steps.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.early_stopping.EarlyStoppingHookFactory.mode">
-<span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#deepr.hooks.early_stopping.EarlyStoppingHookFactory.mode" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#deepr.hooks.early_stopping.EarlyStoppingHookFactory.mode" title="Permalink to this definition"></a></dt>
 <dd><p>INCREASE or DECREASE. If DECREASE, lower metric is better.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="deepr.exporters.html#deepr.exporters.best_checkpoint.BestMode" title="deepr.exporters.best_checkpoint.BestMode">BestMode</a></p>
 </dd>
 </dl>
@@ -317,154 +230,154 @@ runtime.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.early_stopping.EarlyStoppingHookFactory.run_every_secs">
-<span class="sig-name descname"><span class="pre">run_every_secs</span></span><a class="headerlink" href="#deepr.hooks.early_stopping.EarlyStoppingHookFactory.run_every_secs" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">run_every_secs</span></span><a class="headerlink" href="#deepr.hooks.early_stopping.EarlyStoppingHookFactory.run_every_secs" title="Permalink to this definition"></a></dt>
 <dd><p>If given, run early stopping hook every given seconds.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>, Optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.early_stopping.EarlyStoppingHookFactory.run_every_steps">
-<span class="sig-name descname"><span class="pre">run_every_steps</span></span><a class="headerlink" href="#deepr.hooks.early_stopping.EarlyStoppingHookFactory.run_every_steps" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">run_every_steps</span></span><a class="headerlink" href="#deepr.hooks.early_stopping.EarlyStoppingHookFactory.run_every_steps" title="Permalink to this definition"></a></dt>
 <dd><p>If given, run early stopping hook every given steps.</p>
 <p>Either <cite>run_every_secs</cite> or <cite>run_every_step</cite> should be given.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>, Optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.early_stopping.EarlyStoppingHookFactory.final_step">
-<span class="sig-name descname"><span class="pre">final_step</span></span><a class="headerlink" href="#deepr.hooks.early_stopping.EarlyStoppingHookFactory.final_step" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">final_step</span></span><a class="headerlink" href="#deepr.hooks.early_stopping.EarlyStoppingHookFactory.final_step" title="Permalink to this definition"></a></dt>
 <dd><p>If given, will set the global_step to this value when early
 stopping.</p>
 <p>This is a useful way to signal the end of training to the
 evaluator in the case of distributed training (early stopping
 causes issues with <cite>train_and_evaluate</cite>).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>, Optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-deepr.hooks.log_variables_init">
-<span id="deepr-hooks-log-variables-init-module"></span><h2>deepr.hooks.log_variables_init module<a class="headerlink" href="#module-deepr.hooks.log_variables_init" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-deepr.hooks.log_variables_init">
+<span id="deepr-hooks-log-variables-init-module"></span><h2>deepr.hooks.log_variables_init module<a class="headerlink" href="#module-deepr.hooks.log_variables_init" title="Permalink to this heading"></a></h2>
 <p>Log Variables Statistics after initialization.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="deepr.hooks.log_variables_init.LogVariablesInitHook">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.log_variables_init.</span></span><span class="sig-name descname"><span class="pre">LogVariablesInitHook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_mlflow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">whitelist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blacklist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('adam',</span> <span class="pre">'beta',</span> <span class="pre">'stopping',</span> <span class="pre">'step')</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/log_variables_init.html#LogVariablesInitHook"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.log_variables_init.LogVariablesInitHook" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tensorflow.python.training.session_run_hook.SessionRunHook</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.log_variables_init.</span></span><span class="sig-name descname"><span class="pre">LogVariablesInitHook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_mlflow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">whitelist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blacklist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('adam',</span> <span class="pre">'beta',</span> <span class="pre">'stopping',</span> <span class="pre">'step')</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/log_variables_init.html#LogVariablesInitHook"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.log_variables_init.LogVariablesInitHook" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">SessionRunHook</span></code></p>
 <p>Log Variables Statistics after initialization.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="deepr.hooks.log_variables_init.LogVariablesInitHook.after_create_session">
-<span class="sig-name descname"><span class="pre">after_create_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coord</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/log_variables_init.html#LogVariablesInitHook.after_create_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.log_variables_init.LogVariablesInitHook.after_create_session" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">after_create_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coord</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/log_variables_init.html#LogVariablesInitHook.after_create_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.log_variables_init.LogVariablesInitHook.after_create_session" title="Permalink to this definition"></a></dt>
 <dd><p>Log average norm and number of zeros of variables values.</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-deepr.hooks.logging_tensor">
-<span id="deepr-hooks-logging-tensor-module"></span><h2>deepr.hooks.logging_tensor module<a class="headerlink" href="#module-deepr.hooks.logging_tensor" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-deepr.hooks.logging_tensor">
+<span id="deepr-hooks-logging-tensor-module"></span><h2>deepr.hooks.logging_tensor module<a class="headerlink" href="#module-deepr.hooks.logging_tensor" title="Permalink to this heading"></a></h2>
 <p>MLFlow Metrics Hook</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="deepr.hooks.logging_tensor.LoggingTensorHook">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.logging_tensor.</span></span><span class="sig-name descname"><span class="pre">LoggingTensorHook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tensors</span></em>, <em class="sig-param"><span class="pre">functions=None</span></em>, <em class="sig-param"><span class="pre">name=None</span></em>, <em class="sig-param"><span class="pre">use_mlflow=False</span></em>, <em class="sig-param"><span class="pre">use_graphite=False</span></em>, <em class="sig-param"><span class="pre">skip_after_step=None</span></em>, <em class="sig-param"><span class="pre">every_n_iter=None</span></em>, <em class="sig-param"><span class="pre">every_n_secs=None</span></em>, <em class="sig-param"><span class="pre">at_end=False</span></em>, <em class="sig-param"><span class="pre">formatter=&lt;function</span> <span class="pre">_default_formatter&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/logging_tensor.html#LoggingTensorHook"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.logging_tensor.LoggingTensorHook" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tensorflow.python.training.basic_session_run_hooks.LoggingTensorHook</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.logging_tensor.</span></span><span class="sig-name descname"><span class="pre">LoggingTensorHook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">functions=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_mlflow=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_graphite=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_after_step=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_iter=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_secs=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">at_end=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formatter=&lt;function</span> <span class="pre">_default_formatter&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/logging_tensor.html#LoggingTensorHook"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.logging_tensor.LoggingTensorHook" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LoggingTensorHook</span></code></p>
 <p>Logging Hook (tensors and custom metrics as functions)</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="deepr.hooks.logging_tensor.LoggingTensorHookFactory">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.logging_tensor.</span></span><span class="sig-name descname"><span class="pre">LoggingTensorHookFactory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tensors=None</span></em>, <em class="sig-param"><span class="pre">functions=None</span></em>, <em class="sig-param"><span class="pre">name=None</span></em>, <em class="sig-param"><span class="pre">use_mlflow=False</span></em>, <em class="sig-param"><span class="pre">use_graphite=False</span></em>, <em class="sig-param"><span class="pre">skip_after_step=None</span></em>, <em class="sig-param"><span class="pre">every_n_iter=None</span></em>, <em class="sig-param"><span class="pre">every_n_secs=None</span></em>, <em class="sig-param"><span class="pre">at_end=False</span></em>, <em class="sig-param"><span class="pre">formatter=&lt;function</span> <span class="pre">_default_formatter&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/logging_tensor.html#LoggingTensorHookFactory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.logging_tensor.LoggingTensorHookFactory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#deepr.hooks.base.TensorHookFactory" title="deepr.hooks.base.TensorHookFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.hooks.base.TensorHookFactory</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.logging_tensor.</span></span><span class="sig-name descname"><span class="pre">LoggingTensorHookFactory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensors=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">functions=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_mlflow=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_graphite=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_after_step=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_iter=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_secs=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">at_end=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formatter=&lt;function</span> <span class="pre">_default_formatter&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/logging_tensor.html#LoggingTensorHookFactory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.logging_tensor.LoggingTensorHookFactory" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.hooks.base.TensorHookFactory" title="deepr.hooks.base.TensorHookFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">TensorHookFactory</span></code></a></p>
 <p>Parametrize the creation of a LoggingTensorHook factory.</p>
 <p>Arguments for instantiation should be provided as keyword arguments.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.logging_tensor.LoggingTensorHookFactory.tensors">
-<span class="sig-name descname"><span class="pre">tensors</span></span><a class="headerlink" href="#deepr.hooks.logging_tensor.LoggingTensorHookFactory.tensors" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">tensors</span></span><a class="headerlink" href="#deepr.hooks.logging_tensor.LoggingTensorHookFactory.tensors" title="Permalink to this definition"></a></dt>
 <dd><p>Name of the tensors to use at runtime. If None (default), log
 all scalars.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>], Optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>], Optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.logging_tensor.LoggingTensorHookFactory.functions">
-<span class="sig-name descname"><span class="pre">functions</span></span><a class="headerlink" href="#deepr.hooks.logging_tensor.LoggingTensorHookFactory.functions" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">functions</span></span><a class="headerlink" href="#deepr.hooks.logging_tensor.LoggingTensorHookFactory.functions" title="Permalink to this definition"></a></dt>
 <dd><p>Additional “python” metrics. Each function should return a float</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, Callable[[], <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a>]], Optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>, Callable[[], <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a>]], Optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.logging_tensor.LoggingTensorHookFactory.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#deepr.hooks.logging_tensor.LoggingTensorHookFactory.name" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#deepr.hooks.logging_tensor.LoggingTensorHookFactory.name" title="Permalink to this definition"></a></dt>
 <dd><p>Name used as prefix of tags when sending to MLFlow / Graphite</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, Optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.logging_tensor.LoggingTensorHookFactory.use_mlflow">
-<span class="sig-name descname"><span class="pre">use_mlflow</span></span><a class="headerlink" href="#deepr.hooks.logging_tensor.LoggingTensorHookFactory.use_mlflow" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">use_mlflow</span></span><a class="headerlink" href="#deepr.hooks.logging_tensor.LoggingTensorHookFactory.use_mlflow" title="Permalink to this definition"></a></dt>
 <dd><p>If True, send metrics to MLFlow. Default is False.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a>, Optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.logging_tensor.LoggingTensorHookFactory.use_graphite">
-<span class="sig-name descname"><span class="pre">use_graphite</span></span><a class="headerlink" href="#deepr.hooks.logging_tensor.LoggingTensorHookFactory.use_graphite" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">use_graphite</span></span><a class="headerlink" href="#deepr.hooks.logging_tensor.LoggingTensorHookFactory.use_graphite" title="Permalink to this definition"></a></dt>
 <dd><p>If True, send metrics to Graphite. Default is False.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a>, Optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.logging_tensor.LoggingTensorHookFactory.skip_after_step">
-<span class="sig-name descname"><span class="pre">skip_after_step</span></span><a class="headerlink" href="#deepr.hooks.logging_tensor.LoggingTensorHookFactory.skip_after_step" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">skip_after_step</span></span><a class="headerlink" href="#deepr.hooks.logging_tensor.LoggingTensorHookFactory.skip_after_step" title="Permalink to this definition"></a></dt>
 <dd><p>If not None, do not run the hooks after this step.</p>
 <p>Prevents outliers when used in conjunction with an early
 stopping hook that overrides the global_step.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>, Optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.logging_tensor.LoggingTensorHookFactory.formatter">
-<span class="sig-name descname"><span class="pre">formatter</span></span><a class="headerlink" href="#deepr.hooks.logging_tensor.LoggingTensorHookFactory.formatter" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">formatter</span></span><a class="headerlink" href="#deepr.hooks.logging_tensor.LoggingTensorHookFactory.formatter" title="Permalink to this definition"></a></dt>
 <dd><p>Formatter for logging, default uses 7 digits precision.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Callable[[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, Any], <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>], Optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>, Any], <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>], Optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -473,30 +386,30 @@ stopping hook that overrides the global_step.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="deepr.hooks.logging_tensor.MaxResidentMemory">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.logging_tensor.</span></span><span class="sig-name descname"><span class="pre">MaxResidentMemory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gb'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/logging_tensor.html#MaxResidentMemory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.logging_tensor.MaxResidentMemory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#deepr.hooks.logging_tensor.ResidentMemory" title="deepr.hooks.logging_tensor.ResidentMemory"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.hooks.logging_tensor.ResidentMemory</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.logging_tensor.</span></span><span class="sig-name descname"><span class="pre">MaxResidentMemory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gb'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/logging_tensor.html#MaxResidentMemory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.logging_tensor.MaxResidentMemory" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.hooks.logging_tensor.ResidentMemory" title="deepr.hooks.logging_tensor.ResidentMemory"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResidentMemory</span></code></a></p>
 <p>Measure maximum resident memory of the current process</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="deepr.hooks.logging_tensor.ResidentMemory">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.logging_tensor.</span></span><span class="sig-name descname"><span class="pre">ResidentMemory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gb'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/logging_tensor.html#ResidentMemory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.logging_tensor.ResidentMemory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.logging_tensor.</span></span><span class="sig-name descname"><span class="pre">ResidentMemory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gb'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/logging_tensor.html#ResidentMemory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.logging_tensor.ResidentMemory" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Measure resident memory of the current process</p>
 </dd></dl>
 
-</div>
-<div class="section" id="module-deepr.hooks.num_params">
-<span id="deepr-hooks-num-params-module"></span><h2>deepr.hooks.num_params module<a class="headerlink" href="#module-deepr.hooks.num_params" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-deepr.hooks.num_params">
+<span id="deepr-hooks-num-params-module"></span><h2>deepr.hooks.num_params module<a class="headerlink" href="#module-deepr.hooks.num_params" title="Permalink to this heading"></a></h2>
 <p>Log Number of Parameters after session creation</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="deepr.hooks.num_params.NumParamsHook">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.num_params.</span></span><span class="sig-name descname"><span class="pre">NumParamsHook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_mlflow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/num_params.html#NumParamsHook"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.num_params.NumParamsHook" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tensorflow.python.training.session_run_hook.SessionRunHook</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.num_params.</span></span><span class="sig-name descname"><span class="pre">NumParamsHook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_mlflow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/num_params.html#NumParamsHook"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.num_params.NumParamsHook" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">SessionRunHook</span></code></p>
 <p>Log Number of Parameters after session creation</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="deepr.hooks.num_params.NumParamsHook.after_create_session">
-<span class="sig-name descname"><span class="pre">after_create_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coord</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/num_params.html#NumParamsHook.after_create_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.num_params.NumParamsHook.after_create_session" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">after_create_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coord</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/num_params.html#NumParamsHook.after_create_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.num_params.NumParamsHook.after_create_session" title="Permalink to this definition"></a></dt>
 <dd><p>Called when new TensorFlow session is created.</p>
 <p>This is called to signal the hooks that a new session has been created. This
 has two essential differences with the situation in which <cite>begin</cite> is called:</p>
@@ -513,7 +426,7 @@ has two essential differences with the situation in which <cite>begin</cite> is 
 </li>
 </ul>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>session</strong> – A TensorFlow Session that has been created.</p></li>
 <li><p><strong>coord</strong> – A Coordinator object which keeps track of all threads.</p></li>
@@ -526,147 +439,130 @@ has two essential differences with the situation in which <cite>begin</cite> is 
 
 <dl class="py function">
 <dt class="sig sig-object py" id="deepr.hooks.num_params.get_num_params">
-<span class="sig-prename descclassname"><span class="pre">deepr.hooks.num_params.</span></span><span class="sig-name descname"><span class="pre">get_num_params</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/num_params.html#get_num_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.num_params.get_num_params" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">deepr.hooks.num_params.</span></span><span class="sig-name descname"><span class="pre">get_num_params</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/num_params.html#get_num_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.num_params.get_num_params" title="Permalink to this definition"></a></dt>
 <dd><p>Get number of global and trainable parameters</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>num_global, num_trainable</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>Tuple[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>]</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tuple[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="module-deepr.hooks.steps_per_sec">
-<span id="deepr-hooks-steps-per-sec-module"></span><h2>deepr.hooks.steps_per_sec module<a class="headerlink" href="#module-deepr.hooks.steps_per_sec" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-deepr.hooks.steps_per_sec">
+<span id="deepr-hooks-steps-per-sec-module"></span><h2>deepr.hooks.steps_per_sec module<a class="headerlink" href="#module-deepr.hooks.steps_per_sec" title="Permalink to this heading"></a></h2>
 <p>Steps Per Second Hook</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="deepr.hooks.steps_per_sec.StepsPerSecHook">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.steps_per_sec.</span></span><span class="sig-name descname"><span class="pre">StepsPerSecHook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_mlflow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_graphite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_after_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_secs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary_writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/steps_per_sec.html#StepsPerSecHook"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.steps_per_sec.StepsPerSecHook" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tensorflow.python.training.basic_session_run_hooks.StepCounterHook</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.steps_per_sec.</span></span><span class="sig-name descname"><span class="pre">StepsPerSecHook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_mlflow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_graphite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_after_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_secs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary_writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/steps_per_sec.html#StepsPerSecHook"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.steps_per_sec.StepsPerSecHook" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">StepCounterHook</span></code></p>
 <p>Logs steps per seconds and num_examples_per_sec.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.steps_per_sec.StepsPerSecHook.batch_size">
-<span class="sig-name descname"><span class="pre">batch_size</span></span><a class="headerlink" href="#deepr.hooks.steps_per_sec.StepsPerSecHook.batch_size" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">batch_size</span></span><a class="headerlink" href="#deepr.hooks.steps_per_sec.StepsPerSecHook.batch_size" title="Permalink to this definition"></a></dt>
 <dd><p>Batch Size</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.steps_per_sec.StepsPerSecHook.prefix">
-<span class="sig-name descname"><span class="pre">prefix</span></span><a class="headerlink" href="#deepr.hooks.steps_per_sec.StepsPerSecHook.prefix" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">prefix</span></span><a class="headerlink" href="#deepr.hooks.steps_per_sec.StepsPerSecHook.prefix" title="Permalink to this definition"></a></dt>
 <dd><p>Prefix of tags when sending to MLFlow / Graphite</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, Optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.steps_per_sec.StepsPerSecHook.use_mlflow">
-<span class="sig-name descname"><span class="pre">use_mlflow</span></span><a class="headerlink" href="#deepr.hooks.steps_per_sec.StepsPerSecHook.use_mlflow" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">use_mlflow</span></span><a class="headerlink" href="#deepr.hooks.steps_per_sec.StepsPerSecHook.use_mlflow" title="Permalink to this definition"></a></dt>
 <dd><p>If True, send metrics to MLFlow. Default is False.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a>, Optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.steps_per_sec.StepsPerSecHook.use_graphite">
-<span class="sig-name descname"><span class="pre">use_graphite</span></span><a class="headerlink" href="#deepr.hooks.steps_per_sec.StepsPerSecHook.use_graphite" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">use_graphite</span></span><a class="headerlink" href="#deepr.hooks.steps_per_sec.StepsPerSecHook.use_graphite" title="Permalink to this definition"></a></dt>
 <dd><p>If True, send metrics to Graphite. Default is False.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a>, Optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.hooks.steps_per_sec.StepsPerSecHook.skip_after_step">
-<span class="sig-name descname"><span class="pre">skip_after_step</span></span><a class="headerlink" href="#deepr.hooks.steps_per_sec.StepsPerSecHook.skip_after_step" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">skip_after_step</span></span><a class="headerlink" href="#deepr.hooks.steps_per_sec.StepsPerSecHook.skip_after_step" title="Permalink to this definition"></a></dt>
 <dd><p>If not None, do not run the hooks after this step.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>, Optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a>, Optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-deepr.hooks.summary">
-<span id="deepr-hooks-summary-module"></span><h2>deepr.hooks.summary module<a class="headerlink" href="#module-deepr.hooks.summary" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-deepr.hooks.summary">
+<span id="deepr-hooks-summary-module"></span><h2>deepr.hooks.summary module<a class="headerlink" href="#module-deepr.hooks.summary" title="Permalink to this heading"></a></h2>
 <p>Summary Saver Hook</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="deepr.hooks.summary.SummarySaverHookFactory">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.summary.</span></span><span class="sig-name descname"><span class="pre">SummarySaverHookFactory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_secs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary_writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaffold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/summary.html#SummarySaverHookFactory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.summary.SummarySaverHookFactory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#deepr.hooks.base.TensorHookFactory" title="deepr.hooks.base.TensorHookFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">deepr.hooks.base.TensorHookFactory</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">deepr.hooks.summary.</span></span><span class="sig-name descname"><span class="pre">SummarySaverHookFactory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_secs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary_writer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaffold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/deepr/hooks/summary.html#SummarySaverHookFactory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.hooks.summary.SummarySaverHookFactory" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#deepr.hooks.base.TensorHookFactory" title="deepr.hooks.base.TensorHookFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">TensorHookFactory</span></code></a></p>
 <p>Summary Saver Hook</p>
 </dd></dl>
 
-</div>
-<div class="section" id="module-deepr.hooks">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-deepr.hooks" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+</section>
+<section id="module-deepr.hooks">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-deepr.hooks" title="Permalink to this heading"></a></h2>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="deepr.initializers.html" class="btn btn-neutral float-right" title="deepr.initializers package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="deepr.exporters.html" class="btn btn-neutral float-left" title="deepr.exporters package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="deepr.initializers.html" class="btn btn-neutral float-right" title="deepr.initializers package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020, Criteo.
-
-    </p>
+    <p>&#169; Copyright 2020, Criteo.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

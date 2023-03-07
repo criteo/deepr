@@ -25,5 +25,7 @@
    .. autosummary::
    
       ~YarnTrainer.train_on_yarn
+      ~YarnTrainer.trainer
+      ~YarnTrainer.config
    
    

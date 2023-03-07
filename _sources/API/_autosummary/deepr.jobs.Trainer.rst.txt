@@ -29,5 +29,24 @@
    .. autosummary::
    
       ~Trainer.random_seed
+      ~Trainer.path_model
+      ~Trainer.pred_fn
+      ~Trainer.loss_fn
+      ~Trainer.optimizer_fn
+      ~Trainer.train_input_fn
+      ~Trainer.eval_input_fn
+      ~Trainer.exporters
+      ~Trainer.train_metrics
+      ~Trainer.eval_metrics
+      ~Trainer.final_metrics
+      ~Trainer.train_hooks
+      ~Trainer.eval_hooks
+      ~Trainer.final_hooks
+      ~Trainer.train_spec
+      ~Trainer.eval_spec
+      ~Trainer.final_spec
+      ~Trainer.run_config
+      ~Trainer.config_proto
+      ~Trainer.preds
    
    

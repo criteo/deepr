@@ -30,5 +30,8 @@
       ~SaveDataset.mode
       ~SaveDataset.num_parallel_calls
       ~SaveDataset.secs
+      ~SaveDataset.input_fn
+      ~SaveDataset.path
+      ~SaveDataset.fields
    
    

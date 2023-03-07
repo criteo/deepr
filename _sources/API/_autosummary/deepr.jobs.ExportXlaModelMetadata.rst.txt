@@ -20,4 +20,15 @@
 
    
    
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ExportXlaModelMetadata.path_optimized_model
+      ~ExportXlaModelMetadata.path_metadata
+      ~ExportXlaModelMetadata.graph_name
+      ~ExportXlaModelMetadata.metadata_name
+      ~ExportXlaModelMetadata.feed_shapes
+      ~ExportXlaModelMetadata.fetch_shapes
+   
    

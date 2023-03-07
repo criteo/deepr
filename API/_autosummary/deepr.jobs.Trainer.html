@@ -1,94 +1,50 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>deepr.jobs.Trainer &mdash; deepr 2.11.0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="deepr.jobs.YarnLauncher" href="deepr.jobs.YarnLauncher.html" />
     <link rel="prev" title="deepr.jobs.SaveDataset" href="deepr.jobs.SaveDataset.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../index.html" class="icon icon-home"> deepr
           
-
-          
+          <a href="../../index.html" class="icon icon-home">
+            deepr
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Getting started</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/pipeline.html">Pipeline</a></li>
@@ -96,17 +52,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/advanced.html">Advanced</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Examples</span></p>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../movielens/movielens.html">MovieLens Example</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">Developper documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../README.html">DeepR: Build and Train Deep Learning Pipelines for Production</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../core.html">DeepR</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../core.html#config">Config</a></li>
@@ -129,7 +85,10 @@
 <li class="toctree-l3"><a class="reference internal" href="deepr.jobs.Pipeline.html">deepr.jobs.Pipeline</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.jobs.Sampler.html">deepr.jobs.Sampler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.jobs.SaveDataset.html">deepr.jobs.SaveDataset</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">deepr.jobs.Trainer</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">deepr.jobs.Trainer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#deepr.jobs.Trainer"><code class="docutils literal notranslate"><span class="pre">Trainer</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.jobs.YarnLauncher.html">deepr.jobs.YarnLauncher</a></li>
 <li class="toctree-l3"><a class="reference internal" href="deepr.jobs.YarnTrainer.html">deepr.jobs.YarnTrainer</a></li>
 </ul>
@@ -148,73 +107,31 @@
 <li class="toctree-l1"><a class="reference internal" href="../../_source/modules.html">deepr</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">deepr</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../core.html">DeepR</a> &raquo;</li>
-        
-      <li>deepr.jobs.Trainer</li>
-    
-    
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../core.html">DeepR</a></li>
+      <li class="breadcrumb-item active">deepr.jobs.Trainer</li>
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../../_sources/API/_autosummary/deepr.jobs.Trainer.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   
 <style>
 /* CSS overrides for sphinx_rtd_theme */
@@ -239,26 +156,26 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="deepr-jobs-trainer">
-<h1>deepr.jobs.Trainer<a class="headerlink" href="#deepr-jobs-trainer" title="Permalink to this headline">¶</a></h1>
+<section id="deepr-jobs-trainer">
+<h1>deepr.jobs.Trainer<a class="headerlink" href="#deepr-jobs-trainer" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepr.jobs.</span></span><span class="sig-name descname"><span class="pre">Trainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">path_model</span></em>, <em class="sig-param"><span class="pre">pred_fn</span></em>, <em class="sig-param"><span class="pre">loss_fn</span></em>, <em class="sig-param"><span class="pre">optimizer_fn</span></em>, <em class="sig-param"><span class="pre">train_input_fn</span></em>, <em class="sig-param"><span class="pre">eval_input_fn</span></em>, <em class="sig-param"><span class="pre">prepro_fn=&lt;function</span> <span class="pre">Trainer.&lt;lambda&gt;&gt;</span></em>, <em class="sig-param"><span class="pre">initializer_fn=&lt;function</span> <span class="pre">Trainer.&lt;lambda&gt;&gt;</span></em>, <em class="sig-param"><span class="pre">exporters=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">train_metrics=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">eval_metrics=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">final_metrics=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">train_hooks=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">eval_hooks=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">final_hooks=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">train_spec=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">eval_spec=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">final_spec=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">run_config=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">config_proto=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">random_seed=42</span></em>, <em class="sig-param"><span class="pre">preds=&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/jobs/trainer.html#Trainer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.jobs.Trainer" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">deepr.jobs.</span></span><span class="sig-name descname"><span class="pre">Trainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pred_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_input_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_input_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepro_fn=&lt;function</span> <span class="pre">Trainer.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initializer_fn=&lt;function</span> <span class="pre">Trainer.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exporters=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_metrics=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_metrics=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_metrics=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_hooks=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_hooks=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_hooks=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_spec=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_spec=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_spec=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_config=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_proto=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed=42</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preds=&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/deepr/jobs/trainer.html#Trainer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#deepr.jobs.Trainer" title="Permalink to this definition"></a></dt>
 <dd><p>Train and evaluate a tf.Estimator on the current machine.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer.path_model">
-<span class="sig-name descname"><span class="pre">path_model</span></span><a class="headerlink" href="#deepr.jobs.Trainer.path_model" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">path_model</span></span><a class="headerlink" href="#deepr.jobs.Trainer.path_model" title="Permalink to this definition"></a></dt>
 <dd><p>Path to the model directory. Can be either local or HDFS.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer.pred_fn">
-<span class="sig-name descname"><span class="pre">pred_fn</span></span><a class="headerlink" href="#deepr.jobs.Trainer.pred_fn" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">pred_fn</span></span><a class="headerlink" href="#deepr.jobs.Trainer.pred_fn" title="Permalink to this definition"></a></dt>
 <dd><p>Typically a <a class="reference internal" href="deepr.layers.Layer.html#deepr.layers.Layer" title="deepr.layers.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> instance, but in general, any callable.</p>
 <dl class="simple">
 <dt>Its signature is the following:</dt><dd><ul class="simple">
@@ -276,15 +193,15 @@
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Callable[[Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, tf.Tensor], <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>], Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, tf.Tensor]]</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>, tf.Tensor], <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>], Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>, tf.Tensor]]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer.loss_fn">
-<span class="sig-name descname"><span class="pre">loss_fn</span></span><a class="headerlink" href="#deepr.jobs.Trainer.loss_fn" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">loss_fn</span></span><a class="headerlink" href="#deepr.jobs.Trainer.loss_fn" title="Permalink to this definition"></a></dt>
 <dd><p>Typically a <a class="reference internal" href="deepr.layers.Layer.html#deepr.layers.Layer" title="deepr.layers.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> instance, but in general, any callable.</p>
 <dl class="simple">
 <dt>Its signature is the following:</dt><dd><ul class="simple">
@@ -304,15 +221,15 @@
 <p>The value for key “loss” from the output dictionary is then fed
 to the <cite>optimizer_fn</cite>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Callable[[Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, tf.Tensor], <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>], Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, tf.Tensor]]</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>, tf.Tensor], <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>], Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>, tf.Tensor]]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer.optimizer_fn">
-<span class="sig-name descname"><span class="pre">optimizer_fn</span></span><a class="headerlink" href="#deepr.jobs.Trainer.optimizer_fn" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">optimizer_fn</span></span><a class="headerlink" href="#deepr.jobs.Trainer.optimizer_fn" title="Permalink to this definition"></a></dt>
 <dd><p>Typically an <a class="reference internal" href="deepr.optimizers.Optimizer.html#deepr.optimizers.Optimizer" title="deepr.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Optimizer</span></code></a> instance, but in general, any callable.</p>
 <dl class="simple">
 <dt>Its signature is the following:</dt><dd><ul class="simple">
@@ -330,15 +247,15 @@ to the <cite>optimizer_fn</cite>.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Callable[[Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, tf.Tensor]], Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>, tf.Tensor]]</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>, tf.Tensor]], Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>, tf.Tensor]]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer.train_input_fn">
-<span class="sig-name descname"><span class="pre">train_input_fn</span></span><a class="headerlink" href="#deepr.jobs.Trainer.train_input_fn" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">train_input_fn</span></span><a class="headerlink" href="#deepr.jobs.Trainer.train_input_fn" title="Permalink to this definition"></a></dt>
 <dd><p>Typically a <a class="reference internal" href="deepr.readers.Reader.html#deepr.readers.Reader" title="deepr.readers.Reader"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reader</span></code></a> instance, but in general, any callable.</p>
 <p>Used for training.</p>
 <dl class="simple">
@@ -353,7 +270,7 @@ should create a new dataset and a new graph.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Callable[[], tf.data.Dataset]</p>
 </dd>
 </dl>
@@ -361,7 +278,7 @@ should create a new dataset and a new graph.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer.eval_input_fn">
-<span class="sig-name descname"><span class="pre">eval_input_fn</span></span><a class="headerlink" href="#deepr.jobs.Trainer.eval_input_fn" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">eval_input_fn</span></span><a class="headerlink" href="#deepr.jobs.Trainer.eval_input_fn" title="Permalink to this definition"></a></dt>
 <dd><p>Typically a <a class="reference internal" href="deepr.readers.Reader.html#deepr.readers.Reader" title="deepr.readers.Reader"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reader</span></code></a> instance, but in general, any callable.</p>
 <p>Used for evaluation.</p>
 <dl class="simple">
@@ -376,7 +293,7 @@ should create a new dataset and a new graph.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Callable[[], tf.data.Dataset]</p>
 </dd>
 </dl>
@@ -384,7 +301,7 @@ should create a new dataset and a new graph.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer.prepro_fn">
-<span class="sig-name descname"><span class="pre">prepro_fn</span></span><a class="headerlink" href="#deepr.jobs.Trainer.prepro_fn" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">prepro_fn</span></span><a class="headerlink" href="#deepr.jobs.Trainer.prepro_fn" title="Permalink to this definition"></a></dt>
 <dd><p>Typically a <a class="reference internal" href="deepr.prepros.Prepro.html#deepr.prepros.Prepro" title="deepr.prepros.Prepro"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prepro</span></code></a> instance, but in general, any callable.</p>
 <dl class="simple">
 <dt>Its signature is the following:</dt><dd><ul class="simple">
@@ -407,27 +324,27 @@ should create a new dataset and a new graph.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Callable[[tf.data.Dataset, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>], tf.data.Dataset], Optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[tf.data.Dataset, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>], tf.data.Dataset], Optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer.initializer_fn">
-<span class="sig-name descname"><span class="pre">initializer_fn</span></span><a class="headerlink" href="#deepr.jobs.Trainer.initializer_fn" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">initializer_fn</span></span><a class="headerlink" href="#deepr.jobs.Trainer.initializer_fn" title="Permalink to this definition"></a></dt>
 <dd><p>Any Callable that sets up initialization by adding an op to the
 default Graph.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Callable[[], <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a>], Optional</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[], None], Optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer.train_metrics">
-<span class="sig-name descname"><span class="pre">train_metrics</span></span><a class="headerlink" href="#deepr.jobs.Trainer.train_metrics" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">train_metrics</span></span><a class="headerlink" href="#deepr.jobs.Trainer.train_metrics" title="Permalink to this definition"></a></dt>
 <dd><p>Typically, <a class="reference internal" href="deepr.metrics.Metric.html#deepr.metrics.Metric" title="deepr.metrics.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code></a> instances, but in general, any callables.</p>
 <p>Used for training.</p>
 <dl class="simple">
@@ -446,7 +363,7 @@ default Graph.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[Callable], Optional</p>
 </dd>
 </dl>
@@ -454,7 +371,7 @@ default Graph.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer.eval_metrics">
-<span class="sig-name descname"><span class="pre">eval_metrics</span></span><a class="headerlink" href="#deepr.jobs.Trainer.eval_metrics" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">eval_metrics</span></span><a class="headerlink" href="#deepr.jobs.Trainer.eval_metrics" title="Permalink to this definition"></a></dt>
 <dd><p>Typically, <a class="reference internal" href="deepr.metrics.Metric.html#deepr.metrics.Metric" title="deepr.metrics.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code></a> instances, but in general, any callables.</p>
 <p>Used for evaluation.</p>
 <dl class="simple">
@@ -473,7 +390,7 @@ default Graph.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[Callable], Optional</p>
 </dd>
 </dl>
@@ -481,7 +398,7 @@ default Graph.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer.exporters">
-<span class="sig-name descname"><span class="pre">exporters</span></span><a class="headerlink" href="#deepr.jobs.Trainer.exporters" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">exporters</span></span><a class="headerlink" href="#deepr.jobs.Trainer.exporters" title="Permalink to this definition"></a></dt>
 <dd><p>Typically, <a class="reference internal" href="deepr.exporters.Exporter.html#deepr.exporters.Exporter" title="deepr.exporters.Exporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exporter</span></code></a> instances, but in general, any callables.</p>
 <p>Used at the end of training on the trained <code class="xref py py-mod docutils literal notranslate"><span class="pre">Estimator</span></code>.</p>
 <dl class="simple">
@@ -495,7 +412,7 @@ default Graph.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[Callable], Optional</p>
 </dd>
 </dl>
@@ -503,7 +420,7 @@ default Graph.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer.train_hooks">
-<span class="sig-name descname"><span class="pre">train_hooks</span></span><a class="headerlink" href="#deepr.jobs.Trainer.train_hooks" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">train_hooks</span></span><a class="headerlink" href="#deepr.jobs.Trainer.train_hooks" title="Permalink to this definition"></a></dt>
 <dd><p>List of <cite>Hooks</cite> or <cite>HookFactories</cite>.</p>
 <p>Used for training.</p>
 <p>Some hook can be fully defined during instantiation of Trainer,
@@ -512,7 +429,7 @@ objects to be instantiated that will only be created after
 running the <a class="reference internal" href="#deepr.jobs.Trainer" title="deepr.jobs.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trainer</span></code></a>.</p>
 <p>The <cite>hooks</cite> module defines factories for more complicated hooks.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List, Optional</p>
 </dd>
 </dl>
@@ -520,7 +437,7 @@ running the <a class="reference internal" href="#deepr.jobs.Trainer" title="deep
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer.eval_hooks">
-<span class="sig-name descname"><span class="pre">eval_hooks</span></span><a class="headerlink" href="#deepr.jobs.Trainer.eval_hooks" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">eval_hooks</span></span><a class="headerlink" href="#deepr.jobs.Trainer.eval_hooks" title="Permalink to this definition"></a></dt>
 <dd><p>List of <cite>Hooks</cite> or <cite>HookFactories</cite>.</p>
 <p>Used for evaluation.</p>
 <p>Some hook can be fully defined during instantiation of Trainer,
@@ -529,7 +446,7 @@ objects to be instantiated that will only be created after
 running the <a class="reference internal" href="#deepr.jobs.Trainer" title="deepr.jobs.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trainer</span></code></a>.</p>
 <p>The <cite>hooks</cite> module defines factories for more complicated hooks.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List, Optional</p>
 </dd>
 </dl>
@@ -537,10 +454,10 @@ running the <a class="reference internal" href="#deepr.jobs.Trainer" title="deep
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer.eval_spec">
-<span class="sig-name descname"><span class="pre">eval_spec</span></span><a class="headerlink" href="#deepr.jobs.Trainer.eval_spec" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">eval_spec</span></span><a class="headerlink" href="#deepr.jobs.Trainer.eval_spec" title="Permalink to this definition"></a></dt>
 <dd><p>Optional parameters for <code class="xref py py-class docutils literal notranslate"><span class="pre">EvalSpec</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Dict, Optional</p>
 </dd>
 </dl>
@@ -548,10 +465,10 @@ running the <a class="reference internal" href="#deepr.jobs.Trainer" title="deep
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer.train_spec">
-<span class="sig-name descname"><span class="pre">train_spec</span></span><a class="headerlink" href="#deepr.jobs.Trainer.train_spec" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">train_spec</span></span><a class="headerlink" href="#deepr.jobs.Trainer.train_spec" title="Permalink to this definition"></a></dt>
 <dd><p>Optional parameters for <code class="xref py py-class docutils literal notranslate"><span class="pre">TrainSpec</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Dict, Optional</p>
 </dd>
 </dl>
@@ -559,10 +476,10 @@ running the <a class="reference internal" href="#deepr.jobs.Trainer" title="deep
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer.run_config">
-<span class="sig-name descname"><span class="pre">run_config</span></span><a class="headerlink" href="#deepr.jobs.Trainer.run_config" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">run_config</span></span><a class="headerlink" href="#deepr.jobs.Trainer.run_config" title="Permalink to this definition"></a></dt>
 <dd><p>Optional parameters for <code class="xref py py-class docutils literal notranslate"><span class="pre">RunConfig</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Dict, Optional</p>
 </dd>
 </dl>
@@ -570,10 +487,10 @@ running the <a class="reference internal" href="#deepr.jobs.Trainer" title="deep
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer.config_proto">
-<span class="sig-name descname"><span class="pre">config_proto</span></span><a class="headerlink" href="#deepr.jobs.Trainer.config_proto" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">config_proto</span></span><a class="headerlink" href="#deepr.jobs.Trainer.config_proto" title="Permalink to this definition"></a></dt>
 <dd><p>Optional parameters for <code class="xref py py-class docutils literal notranslate"><span class="pre">RunConfig</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Dict, Optional</p>
 </dd>
 </dl>
@@ -581,19 +498,14 @@ running the <a class="reference internal" href="#deepr.jobs.Trainer" title="deep
 
 <dl class="py method">
 <dt class="sig sig-object py" id="deepr.jobs.Trainer.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">path_model</span></em>, <em class="sig-param"><span class="pre">pred_fn</span></em>, <em class="sig-param"><span class="pre">loss_fn</span></em>, <em class="sig-param"><span class="pre">optimizer_fn</span></em>, <em class="sig-param"><span class="pre">train_input_fn</span></em>, <em class="sig-param"><span class="pre">eval_input_fn</span></em>, <em class="sig-param"><span class="pre">prepro_fn=&lt;function</span> <span class="pre">Trainer.&lt;lambda&gt;&gt;</span></em>, <em class="sig-param"><span class="pre">initializer_fn=&lt;function</span> <span class="pre">Trainer.&lt;lambda&gt;&gt;</span></em>, <em class="sig-param"><span class="pre">exporters=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">train_metrics=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">eval_metrics=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">final_metrics=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">train_hooks=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">eval_hooks=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">final_hooks=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">train_spec=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">eval_spec=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">final_spec=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">run_config=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">config_proto=&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">random_seed=42</span></em>, <em class="sig-param"><span class="pre">preds=&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.jobs.Trainer.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
-</dd></dl>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pred_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_input_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_input_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepro_fn=&lt;function</span> <span class="pre">Trainer.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initializer_fn=&lt;function</span> <span class="pre">Trainer.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exporters=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_metrics=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_metrics=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_metrics=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_hooks=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_hooks=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_hooks=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_spec=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_spec=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_spec=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_config=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_proto=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed=42</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preds=&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepr.jobs.Trainer.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 <p class="rubric">Methods</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.jobs.Trainer.__init__" title="deepr.jobs.Trainer.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(path_model, pred_fn, loss_fn, …)</p></td>
-<td><p>Initialize self.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.jobs.Trainer.__init__" title="deepr.jobs.Trainer.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(path_model, pred_fn, loss_fn, ...)</p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_experiment</span></code>()</p></td>
 <td><p>Create an Experiment object packaging Estimator and Specs.</p></td>
@@ -613,67 +525,103 @@ running the <a class="reference internal" href="#deepr.jobs.Trainer" title="deep
 </tbody>
 </table>
 <p class="rubric">Attributes</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_seed</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#deepr.jobs.Trainer.path_model" title="deepr.jobs.Trainer.path_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">path_model</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.jobs.Trainer.pred_fn" title="deepr.jobs.Trainer.pred_fn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pred_fn</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#deepr.jobs.Trainer.loss_fn" title="deepr.jobs.Trainer.loss_fn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">loss_fn</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.jobs.Trainer.optimizer_fn" title="deepr.jobs.Trainer.optimizer_fn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimizer_fn</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#deepr.jobs.Trainer.train_input_fn" title="deepr.jobs.Trainer.train_input_fn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train_input_fn</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.jobs.Trainer.eval_input_fn" title="deepr.jobs.Trainer.eval_input_fn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval_input_fn</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#deepr.jobs.Trainer.exporters" title="deepr.jobs.Trainer.exporters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exporters</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.jobs.Trainer.train_metrics" title="deepr.jobs.Trainer.train_metrics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train_metrics</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#deepr.jobs.Trainer.eval_metrics" title="deepr.jobs.Trainer.eval_metrics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval_metrics</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">final_metrics</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#deepr.jobs.Trainer.train_hooks" title="deepr.jobs.Trainer.train_hooks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train_hooks</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.jobs.Trainer.eval_hooks" title="deepr.jobs.Trainer.eval_hooks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval_hooks</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">final_hooks</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.jobs.Trainer.train_spec" title="deepr.jobs.Trainer.train_spec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train_spec</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#deepr.jobs.Trainer.eval_spec" title="deepr.jobs.Trainer.eval_spec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval_spec</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">final_spec</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#deepr.jobs.Trainer.run_config" title="deepr.jobs.Trainer.run_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_config</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#deepr.jobs.Trainer.config_proto" title="deepr.jobs.Trainer.config_proto"><code class="xref py py-obj docutils literal notranslate"><span class="pre">config_proto</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">preds</span></code></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
-</div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="deepr.jobs.YarnLauncher.html" class="btn btn-neutral float-right" title="deepr.jobs.YarnLauncher" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="deepr.jobs.SaveDataset.html" class="btn btn-neutral float-left" title="deepr.jobs.SaveDataset" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="deepr.jobs.YarnLauncher.html" class="btn btn-neutral float-right" title="deepr.jobs.YarnLauncher" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020, Criteo.
-
-    </p>
+    <p>&#169; Copyright 2020, Criteo.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

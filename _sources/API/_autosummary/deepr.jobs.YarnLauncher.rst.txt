@@ -26,5 +26,7 @@
    
       ~YarnLauncher.run_on_yarn
       ~YarnLauncher.use_mlflow
+      ~YarnLauncher.job
+      ~YarnLauncher.config
    
    

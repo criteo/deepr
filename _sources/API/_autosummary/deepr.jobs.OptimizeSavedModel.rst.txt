@@ -20,4 +20,16 @@
 
    
    
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~OptimizeSavedModel.path_saved_model
+      ~OptimizeSavedModel.path_optimized_model
+      ~OptimizeSavedModel.graph_name
+      ~OptimizeSavedModel.feeds
+      ~OptimizeSavedModel.fetch
+      ~OptimizeSavedModel.new_names
+      ~OptimizeSavedModel.blacklisted_variables
+   
    

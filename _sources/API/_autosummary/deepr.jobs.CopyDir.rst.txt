@@ -26,5 +26,7 @@
    
       ~CopyDir.overwrite
       ~CopyDir.skip_copy
+      ~CopyDir.source
+      ~CopyDir.target
    
    

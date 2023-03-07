@@ -1,94 +1,50 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>deepr.examples.movielens package &mdash; deepr 2.11.0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="deepr.examples.movielens.jobs package" href="deepr.examples.movielens.jobs.html" />
     <link rel="prev" title="deepr.examples package" href="deepr.examples.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../index.html" class="icon icon-home"> deepr
           
-
-          
+          <a href="../index.html" class="icon icon-home">
+            deepr
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Getting started</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/pipeline.html">Pipeline</a></li>
@@ -96,17 +52,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/tuning.html">Hyper Parameter Tuning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/advanced.html">Advanced</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Examples</span></p>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../movielens/movielens.html">MovieLens Example</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Developper documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">Developper documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../README.html">DeepR: Build and Train Deep Learning Pipelines for Production</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../API/core.html">DeepR</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">deepr</a><ul class="current">
@@ -141,77 +97,33 @@
 </li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">deepr</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="modules.html">deepr</a> &raquo;</li>
-        
-          <li><a href="deepr.html">deepr package</a> &raquo;</li>
-        
-          <li><a href="deepr.examples.html">deepr.examples package</a> &raquo;</li>
-        
-      <li>deepr.examples.movielens package</li>
-    
-    
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">deepr</a></li>
+          <li class="breadcrumb-item"><a href="deepr.html">deepr package</a></li>
+          <li class="breadcrumb-item"><a href="deepr.examples.html">deepr.examples package</a></li>
+      <li class="breadcrumb-item active">deepr.examples.movielens package</li>
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/_source/deepr.examples.movielens.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   
 <style>
 /* CSS overrides for sphinx_rtd_theme */
@@ -236,120 +148,305 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="deepr-examples-movielens-package">
-<h1>deepr.examples.movielens package<a class="headerlink" href="#deepr-examples-movielens-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<section id="deepr-examples-movielens-package">
+<h1>deepr.examples.movielens package<a class="headerlink" href="#deepr-examples-movielens-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="deepr.examples.movielens.jobs.html">deepr.examples.movielens.jobs package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.jobs.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.build_records">deepr.examples.movielens.jobs.build_records module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.evaluate">deepr.examples.movielens.jobs.evaluate module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.init">deepr.examples.movielens.jobs.init module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.predict">deepr.examples.movielens.jobs.predict module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.svd">deepr.examples.movielens.jobs.svd module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.build_records">deepr.examples.movielens.jobs.build_records module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords"><code class="docutils literal notranslate"><span class="pre">BuildRecords</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.min_length"><code class="docutils literal notranslate"><span class="pre">BuildRecords.min_length</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.min_rating"><code class="docutils literal notranslate"><span class="pre">BuildRecords.min_rating</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.num_negatives"><code class="docutils literal notranslate"><span class="pre">BuildRecords.num_negatives</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.path_eval"><code class="docutils literal notranslate"><span class="pre">BuildRecords.path_eval</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.path_mapping"><code class="docutils literal notranslate"><span class="pre">BuildRecords.path_mapping</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.path_ratings"><code class="docutils literal notranslate"><span class="pre">BuildRecords.path_ratings</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.path_test"><code class="docutils literal notranslate"><span class="pre">BuildRecords.path_test</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.path_train"><code class="docutils literal notranslate"><span class="pre">BuildRecords.path_train</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.run"><code class="docutils literal notranslate"><span class="pre">BuildRecords.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.seed"><code class="docutils literal notranslate"><span class="pre">BuildRecords.seed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.shuffle_timelines"><code class="docutils literal notranslate"><span class="pre">BuildRecords.shuffle_timelines</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.size_eval"><code class="docutils literal notranslate"><span class="pre">BuildRecords.size_eval</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.size_test"><code class="docutils literal notranslate"><span class="pre">BuildRecords.size_test</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.BuildRecords.target_ratio"><code class="docutils literal notranslate"><span class="pre">BuildRecords.target_ratio</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.get_timelines"><code class="docutils literal notranslate"><span class="pre">get_timelines()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.records_generator"><code class="docutils literal notranslate"><span class="pre">records_generator()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.build_records.write_records"><code class="docutils literal notranslate"><span class="pre">write_records()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.evaluate">deepr.examples.movielens.jobs.evaluate module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate"><code class="docutils literal notranslate"><span class="pre">Evaluate</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate.k"><code class="docutils literal notranslate"><span class="pre">Evaluate.k</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate.num_queries"><code class="docutils literal notranslate"><span class="pre">Evaluate.num_queries</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate.path_biases"><code class="docutils literal notranslate"><span class="pre">Evaluate.path_biases</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate.path_embeddings"><code class="docutils literal notranslate"><span class="pre">Evaluate.path_embeddings</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate.path_predictions"><code class="docutils literal notranslate"><span class="pre">Evaluate.path_predictions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate.run"><code class="docutils literal notranslate"><span class="pre">Evaluate.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.Evaluate.use_mlflow"><code class="docutils literal notranslate"><span class="pre">Evaluate.use_mlflow</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.compute_metrics"><code class="docutils literal notranslate"><span class="pre">compute_metrics()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.ndcg_score"><code class="docutils literal notranslate"><span class="pre">ndcg_score()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.evaluate.precision_recall_f1"><code class="docutils literal notranslate"><span class="pre">precision_recall_f1()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.init">deepr.examples.movielens.jobs.init module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.init.InitCheckpoint"><code class="docutils literal notranslate"><span class="pre">InitCheckpoint</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.init.InitCheckpoint.normalize"><code class="docutils literal notranslate"><span class="pre">InitCheckpoint.normalize</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.init.InitCheckpoint.normalize_counts"><code class="docutils literal notranslate"><span class="pre">InitCheckpoint.normalize_counts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.init.InitCheckpoint.path_counts"><code class="docutils literal notranslate"><span class="pre">InitCheckpoint.path_counts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.init.InitCheckpoint.path_embeddings"><code class="docutils literal notranslate"><span class="pre">InitCheckpoint.path_embeddings</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.init.InitCheckpoint.path_init_ckpt"><code class="docutils literal notranslate"><span class="pre">InitCheckpoint.path_init_ckpt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.init.InitCheckpoint.run"><code class="docutils literal notranslate"><span class="pre">InitCheckpoint.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.init.InitCheckpoint.use_log_counts"><code class="docutils literal notranslate"><span class="pre">InitCheckpoint.use_log_counts</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.predict">deepr.examples.movielens.jobs.predict module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.predict.Predict"><code class="docutils literal notranslate"><span class="pre">Predict</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.predict.Predict.input_fn"><code class="docutils literal notranslate"><span class="pre">Predict.input_fn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.predict.Predict.path_predictions"><code class="docutils literal notranslate"><span class="pre">Predict.path_predictions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.predict.Predict.path_saved_model"><code class="docutils literal notranslate"><span class="pre">Predict.path_saved_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.predict.Predict.prepro_fn"><code class="docutils literal notranslate"><span class="pre">Predict.prepro_fn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.predict.Predict.run"><code class="docutils literal notranslate"><span class="pre">Predict.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs.svd">deepr.examples.movielens.jobs.svd module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.svd.SVD"><code class="docutils literal notranslate"><span class="pre">SVD</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.svd.SVD.dim"><code class="docutils literal notranslate"><span class="pre">SVD.dim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.svd.SVD.min_count"><code class="docutils literal notranslate"><span class="pre">SVD.min_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.svd.SVD.path_counts"><code class="docutils literal notranslate"><span class="pre">SVD.path_counts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.svd.SVD.path_csv"><code class="docutils literal notranslate"><span class="pre">SVD.path_csv</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.svd.SVD.path_embeddings"><code class="docutils literal notranslate"><span class="pre">SVD.path_embeddings</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.svd.SVD.run"><code class="docutils literal notranslate"><span class="pre">SVD.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.svd.SVD.vocab_size"><code class="docutils literal notranslate"><span class="pre">SVD.vocab_size</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.svd.compute_coocurrence"><code class="docutils literal notranslate"><span class="pre">compute_coocurrence()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.jobs.html#deepr.examples.movielens.jobs.svd.compute_pmi"><code class="docutils literal notranslate"><span class="pre">compute_pmi()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.jobs.html#module-deepr.examples.movielens.jobs">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="deepr.examples.movielens.layers.html">deepr.examples.movielens.layers package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.layers.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.average">deepr.examples.movielens.layers.average module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.bpr">deepr.examples.movielens.layers.bpr module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.losses">deepr.examples.movielens.layers.losses module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.multi">deepr.examples.movielens.layers.multi module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.ns">deepr.examples.movielens.layers.ns module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.transformer">deepr.examples.movielens.layers.transformer module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.vae">deepr.examples.movielens.layers.vae module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.average">deepr.examples.movielens.layers.average module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.average.AddBias"><code class="docutils literal notranslate"><span class="pre">AddBias</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.average.AddBias.forward"><code class="docutils literal notranslate"><span class="pre">AddBias.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.average.AverageModel"><code class="docutils literal notranslate"><span class="pre">AverageModel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.average.Logits"><code class="docutils literal notranslate"><span class="pre">Logits</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.average.Logits.forward"><code class="docutils literal notranslate"><span class="pre">Logits.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.average.Projection"><code class="docutils literal notranslate"><span class="pre">Projection</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.average.Projection.forward"><code class="docutils literal notranslate"><span class="pre">Projection.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.average.UserEmbedding"><code class="docutils literal notranslate"><span class="pre">UserEmbedding</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.average.UserEmbedding.forward"><code class="docutils literal notranslate"><span class="pre">UserEmbedding.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.bpr">deepr.examples.movielens.layers.bpr module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.bpr.BPRLoss"><code class="docutils literal notranslate"><span class="pre">BPRLoss()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.losses">deepr.examples.movielens.layers.losses module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.losses.L2Loss"><code class="docutils literal notranslate"><span class="pre">L2Loss</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.losses.L2Loss.forward"><code class="docutils literal notranslate"><span class="pre">L2Loss.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.losses.Loss"><code class="docutils literal notranslate"><span class="pre">Loss()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.losses.VAELoss"><code class="docutils literal notranslate"><span class="pre">VAELoss()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.multi">deepr.examples.movielens.layers.multi module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.multi.MultiLogLikelihoodCSS"><code class="docutils literal notranslate"><span class="pre">MultiLogLikelihoodCSS()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.ns">deepr.examples.movielens.layers.ns module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.ns.NegativeSampling"><code class="docutils literal notranslate"><span class="pre">NegativeSampling()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.transformer">deepr.examples.movielens.layers.transformer module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.transformer.Logits"><code class="docutils literal notranslate"><span class="pre">Logits</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.transformer.Logits.forward"><code class="docutils literal notranslate"><span class="pre">Logits.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.transformer.TransformerModel"><code class="docutils literal notranslate"><span class="pre">TransformerModel()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers.vae">deepr.examples.movielens.layers.vae module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.vae.AddBias"><code class="docutils literal notranslate"><span class="pre">AddBias</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.vae.AddBias.forward"><code class="docutils literal notranslate"><span class="pre">AddBias.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.vae.Decode"><code class="docutils literal notranslate"><span class="pre">Decode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.vae.Decode.forward"><code class="docutils literal notranslate"><span class="pre">Decode.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.vae.Encode"><code class="docutils literal notranslate"><span class="pre">Encode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.vae.Encode.forward"><code class="docutils literal notranslate"><span class="pre">Encode.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.vae.GaussianNoise"><code class="docutils literal notranslate"><span class="pre">GaussianNoise</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.vae.GaussianNoise.forward"><code class="docutils literal notranslate"><span class="pre">GaussianNoise.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.vae.Logits"><code class="docutils literal notranslate"><span class="pre">Logits</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.vae.Logits.forward"><code class="docutils literal notranslate"><span class="pre">Logits.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.vae.Projection"><code class="docutils literal notranslate"><span class="pre">Projection</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.vae.Projection.forward"><code class="docutils literal notranslate"><span class="pre">Projection.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.vae.VAEModel"><code class="docutils literal notranslate"><span class="pre">VAEModel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.vae.WeightedSum"><code class="docutils literal notranslate"><span class="pre">WeightedSum</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.layers.html#deepr.examples.movielens.layers.vae.WeightedSum.forward"><code class="docutils literal notranslate"><span class="pre">WeightedSum.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.layers.html#module-deepr.examples.movielens.layers">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="deepr.examples.movielens.macros.html">deepr.examples.movielens.macros package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.macros.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.macros.html#module-deepr.examples.movielens.macros.paths">deepr.examples.movielens.macros.paths module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.macros.html#module-deepr.examples.movielens.macros.paths">deepr.examples.movielens.macros.paths module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.macros.html#deepr.examples.movielens.macros.paths.Paths"><code class="docutils literal notranslate"><span class="pre">Paths</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.macros.html#module-deepr.examples.movielens.macros">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="deepr.examples.movielens.metrics.html">deepr.examples.movielens.metrics package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.metrics.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.metrics.html#module-deepr.examples.movielens.metrics.ndcg">deepr.examples.movielens.metrics.ndcg module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.metrics.html#module-deepr.examples.movielens.metrics.recall">deepr.examples.movielens.metrics.recall module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.metrics.html#module-deepr.examples.movielens.metrics.ndcg">deepr.examples.movielens.metrics.ndcg module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.metrics.html#deepr.examples.movielens.metrics.ndcg.NDCGAtK"><code class="docutils literal notranslate"><span class="pre">NDCGAtK</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.metrics.html#deepr.examples.movielens.metrics.ndcg.NDCGAtK.name"><code class="docutils literal notranslate"><span class="pre">NDCGAtK.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.metrics.html#deepr.examples.movielens.metrics.ndcg.NDCGAtK.logits"><code class="docutils literal notranslate"><span class="pre">NDCGAtK.logits</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.metrics.html#deepr.examples.movielens.metrics.ndcg.NDCGAtK.targets"><code class="docutils literal notranslate"><span class="pre">NDCGAtK.targets</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.metrics.html#deepr.examples.movielens.metrics.ndcg.NDCGAtK.k"><code class="docutils literal notranslate"><span class="pre">NDCGAtK.k</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.metrics.html#deepr.examples.movielens.metrics.ndcg.NDCGAtK.inputs"><code class="docutils literal notranslate"><span class="pre">NDCGAtK.inputs</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.metrics.html#module-deepr.examples.movielens.metrics.recall">deepr.examples.movielens.metrics.recall module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.metrics.html#deepr.examples.movielens.metrics.recall.RecallAtK"><code class="docutils literal notranslate"><span class="pre">RecallAtK</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.metrics.html#deepr.examples.movielens.metrics.recall.RecallAtK.name"><code class="docutils literal notranslate"><span class="pre">RecallAtK.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.metrics.html#deepr.examples.movielens.metrics.recall.RecallAtK.logits"><code class="docutils literal notranslate"><span class="pre">RecallAtK.logits</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.metrics.html#deepr.examples.movielens.metrics.recall.RecallAtK.targets"><code class="docutils literal notranslate"><span class="pre">RecallAtK.targets</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.metrics.html#deepr.examples.movielens.metrics.recall.RecallAtK.k"><code class="docutils literal notranslate"><span class="pre">RecallAtK.k</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.metrics.html#deepr.examples.movielens.metrics.recall.RecallAtK.inputs"><code class="docutils literal notranslate"><span class="pre">RecallAtK.inputs</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.metrics.html#module-deepr.examples.movielens.metrics">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="deepr.examples.movielens.prepros.html">deepr.examples.movielens.prepros package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.prepros.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.prepros.html#module-deepr.examples.movielens.prepros.csv">deepr.examples.movielens.prepros.csv module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.prepros.html#module-deepr.examples.movielens.prepros.record">deepr.examples.movielens.prepros.record module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.prepros.html#module-deepr.examples.movielens.prepros.csv">deepr.examples.movielens.prepros.csv module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.prepros.html#deepr.examples.movielens.prepros.csv.CSVPrepro"><code class="docutils literal notranslate"><span class="pre">CSVPrepro()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.prepros.html#deepr.examples.movielens.prepros.csv.RandomNegatives"><code class="docutils literal notranslate"><span class="pre">RandomNegatives</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.prepros.html#deepr.examples.movielens.prepros.csv.RandomNegatives.forward"><code class="docutils literal notranslate"><span class="pre">RandomNegatives.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.prepros.html#deepr.examples.movielens.prepros.csv.SequenceMask"><code class="docutils literal notranslate"><span class="pre">SequenceMask</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.prepros.html#deepr.examples.movielens.prepros.csv.SequenceMask.forward"><code class="docutils literal notranslate"><span class="pre">SequenceMask.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.prepros.html#module-deepr.examples.movielens.prepros.record">deepr.examples.movielens.prepros.record module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.prepros.html#deepr.examples.movielens.prepros.record.RecordPrepro"><code class="docutils literal notranslate"><span class="pre">RecordPrepro()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.prepros.html#deepr.examples.movielens.prepros.record.SequenceMask"><code class="docutils literal notranslate"><span class="pre">SequenceMask</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.prepros.html#deepr.examples.movielens.prepros.record.SequenceMask.forward"><code class="docutils literal notranslate"><span class="pre">SequenceMask.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.prepros.html#module-deepr.examples.movielens.prepros">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="deepr.examples.movielens.readers.html">deepr.examples.movielens.readers package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.readers.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.readers.html#module-deepr.examples.movielens.readers.csv">deepr.examples.movielens.readers.csv module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.readers.html#module-deepr.examples.movielens.readers.csv">deepr.examples.movielens.readers.csv module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.readers.html#deepr.examples.movielens.readers.csv.TestCSVReader"><code class="docutils literal notranslate"><span class="pre">TestCSVReader</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.readers.html#deepr.examples.movielens.readers.csv.TestCSVReader.as_dataset"><code class="docutils literal notranslate"><span class="pre">TestCSVReader.as_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.readers.html#deepr.examples.movielens.readers.csv.TrainCSVReader"><code class="docutils literal notranslate"><span class="pre">TrainCSVReader</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="deepr.examples.movielens.readers.html#deepr.examples.movielens.readers.csv.TrainCSVReader.as_dataset"><code class="docutils literal notranslate"><span class="pre">TrainCSVReader.as_dataset()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.readers.html#module-deepr.examples.movielens.readers">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="deepr.examples.movielens.utils.html">deepr.examples.movielens.utils package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.utils.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.utils.html#module-deepr.examples.movielens.utils.fields">deepr.examples.movielens.utils.fields module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.utils.html#module-deepr.examples.movielens.utils.fields">deepr.examples.movielens.utils.fields module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.utils.html#deepr.examples.movielens.utils.fields.INPUT_POSITIVES_ONE_HOT"><code class="docutils literal notranslate"><span class="pre">INPUT_POSITIVES_ONE_HOT()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepr.examples.movielens.utils.html#deepr.examples.movielens.utils.fields.TARGET_POSITIVES_ONE_HOT"><code class="docutils literal notranslate"><span class="pre">TARGET_POSITIVES_ONE_HOT()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="deepr.examples.movielens.utils.html#module-deepr.examples.movielens.utils">Module contents</a></li>
 </ul>
 </li>
 </ul>
 </div>
-</div>
-<div class="section" id="module-deepr.examples.movielens">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-deepr.examples.movielens" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+</section>
+<section id="module-deepr.examples.movielens">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-deepr.examples.movielens" title="Permalink to this heading"></a></h2>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="deepr.examples.movielens.jobs.html" class="btn btn-neutral float-right" title="deepr.examples.movielens.jobs package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="deepr.examples.html" class="btn btn-neutral float-left" title="deepr.examples package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="deepr.examples.movielens.jobs.html" class="btn btn-neutral float-right" title="deepr.examples.movielens.jobs package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020, Criteo.
-
-    </p>
+    <p>&#169; Copyright 2020, Criteo.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
