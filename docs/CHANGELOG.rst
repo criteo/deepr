@@ -7,6 +7,25 @@ The format is based on `Keep a Changelog <http://keepachangelog.com/>`_
 and this project adheres to `Semantic Versioning <http://semver.org/>`_.
 
 
+[2.13.0] - 2023-01-07
+---------------------
+
+Added
+~~~~~
+Changed
+~~~~~~~
+Deprecated
+~~~~~~~~~~
+Removed
+~~~~~~~
+Fixed
+~~~~~
+- Fixed CI to make it keep passing on Python 3.6
+- Fix mlflow compatibility with mlflow server 1.30.0
+Security
+~~~~~~~~
+
+
 [2.12.0] - 2021-04-29
 ---------------------
 
