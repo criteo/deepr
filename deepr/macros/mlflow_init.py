@@ -4,6 +4,8 @@ import logging
 import os
 from typing import Callable
 
+from mlflow.utils.mlflow_tags import MLFLOW_RUN_NAME
+
 from deepr.utils import mlflow
 
 
@@ -47,7 +49,16 @@ class MLFlowInit(dict):
             # Start MLFlow run
             mlflow.set_tracking_uri(tracking_uri)
             mlflow.set_or_create_experiment(experiment_name, artifact_location)
-            run = mlflow.start_run(run_id=run_id, run_name=run_name)
+            # With mlflow server 1.30.0 and mlflow client <= 1.23, the following command sends
+            # two requests (one with an empty run_name and another with the filled run_name)
+            # that collide.
+            # >>> run = mlflow.start_run(run_id=run_id, run_name=run_name)
+            # We thus start the run first, and then set the run_name to maximize compatibility.
+            run = mlflow.start_run(run_id=run_id)
+            if run_name is not None:
+                tags = {}
+                tags[MLFLOW_RUN_NAME] = run_name
+                mlflow.set_tags(tags)
 
             # Define new parameters
             run_id = run.info.run_id
