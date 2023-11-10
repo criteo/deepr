@@ -36,6 +36,7 @@ class YarnConfig:
         env_vars = {
             "LIBHDFS_OPTS": f"-Xms{self.jvm_memory_in_gb}g -Xmx{self.jvm_memory_in_gb}g",
             "MALLOC_ARENA_MAX": "0",
+            "HADOOP_CONF_DIR": os.environ.get("HADOOP_CONF_DIR"),
         }
         # GPU Environment Variables
         if self.gpu_to_use is not None:
